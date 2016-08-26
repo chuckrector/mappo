@@ -10,5 +10,8 @@
     "mappo"
   ],
   "author": "Charles Rector <choosetheforce@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^1.3.4"
+  }
 }
