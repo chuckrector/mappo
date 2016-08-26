@@ -1,0 +1,14 @@
+{
+  "name": "mappo",
+  "version": "1.0.0",
+  "description": "mappo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mappo"
+  ],
+  "author": "Charles Rector <choosetheforce@gmail.com>",
+  "license": "MIT"
+}
