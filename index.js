@@ -1,5 +1,8 @@
 "use strict"
 
+// This is the Electron entry point. The chain of command is:
+// Electron binary -> index.js -> index.html -> mappo.js
+
 const {app, BrowserWindow} = require('electron')
 
 let win

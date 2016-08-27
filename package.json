@@ -4,7 +4,7 @@
   "description": "mappo",
   "main": "index.js",
   "scripts": {
-    "start": "npm run test && ./node_modules/.bin/electron .",
+    "start": "npm run test && ./node_modules/.bin/electron index.js",
     "test": "node createDataReader.test.js"
   },
   "keywords": [
