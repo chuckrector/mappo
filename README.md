@@ -1,3 +1,7 @@
+# Requirements
+
+- Node >= 5.10.0
+
 # Installation
 
 1. npm install
