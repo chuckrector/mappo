@@ -3,7 +3,7 @@
 console.log('running tests:', __filename)
 
 const expect = require('expect')
-const createDataReader = require('./createDataReader.js');
+const createDataReader = require('./createDataReader.js')
 
 {
   // can read bytes
