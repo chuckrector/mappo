@@ -16,6 +16,13 @@ module.exports = (args) => {
     const levelname = reader.readString(30)
     const showname = reader.readByte()
     const saveflag = reader.readByte()
+    const startx = reader.readWord()
+    const starty = reader.readWord()
+    const hide = reader.readByte()
+    const warp = reader.readByte()
+    const xsize = reader.readWord()
+    const ysize = reader.readWord()
+    const b = reader.readByte()
 
     return {
       version,
@@ -27,6 +34,13 @@ module.exports = (args) => {
       levelname,
       showname,
       saveflag,
+      startx,
+      starty,
+      hide,
+      warp,
+      xsize,
+      ysize,
+      b,
     }
   }
 

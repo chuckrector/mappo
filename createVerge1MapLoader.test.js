@@ -16,6 +16,10 @@ const padEnd = require('lodash/padEnd')
       Buffer.from([0, 1, 1]),
       Buffer.from(padEnd('Village - Past', 30, '\0')),
       Buffer.from([1, 0]),
+      Buffer.from(new Uint16Array([21, 1]).buffer),
+      Buffer.from([1, 1]),
+      Buffer.from(new Uint16Array([100, 200]).buffer),
+      Buffer.from([0]),
     ])
   })
 
@@ -30,4 +34,11 @@ const padEnd = require('lodash/padEnd')
   expect(data.levelname).toBe('Village - Past')
   expect(data.showname).toBe(1)
   expect(data.saveflag).toBe(0)
+  expect(data.startx).toBe(21)
+  expect(data.starty).toBe(1)
+  expect(data.hide).toBe(1)
+  expect(data.warp).toBe(1)
+  expect(data.xsize).toBe(100)
+  expect(data.ysize).toBe(200)
+  expect(data.b).toBe(0)
 }
