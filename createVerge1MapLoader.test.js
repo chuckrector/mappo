@@ -51,10 +51,15 @@ const mapZones = Buffer.concat(
   fill(Array(128), zone)
 )
 
+const chrList = Buffer.concat(
+  fill(Array(100), Buffer.from(padEnd('DARIN.CHR', 13, '\0')))
+)
+
 const map = Buffer.concat([
   mapHeader,
   mapLayers,
   mapZones,
+  chrList,
 ])
 
 {
@@ -113,5 +118,19 @@ const map = Buffer.concat([
     expect(zone.delay).toBe(0)
     expect(zone.aaa).toBe(1)
     expect(zone.savedesc).toBe('Rodne')
+  })
+}
+
+{
+  // can load chr list
+  const loader = createVerge1MapLoader({
+    data: map
+  })
+
+  const data = loader.load()
+
+  expect(data.chrlist.length).toBe(100)
+  data.chrlist.forEach((chr) => {
+    expect(chr).toBe('DARIN.CHR')
   })
 }

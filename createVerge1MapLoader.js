@@ -52,7 +52,12 @@ module.exports = (args) => {
 
     let zone = []
     for (let i = 0; i < 128; i++) {
-      zone[i] = loadZone()
+      zone.push(loadZone())
+    }
+
+    let chrlist = []
+    for (let i = 0; i < 100; i++) {
+      chrlist.push(reader.readString(13))
     }
 
     return {
@@ -77,6 +82,7 @@ module.exports = (args) => {
       map1,
       mapp,
       zone,
+      chrlist,
     }
   }
 

@@ -8,7 +8,7 @@ $('body').resizable()
 
 const os = require('os')
 const fs = require('fs')
-const mapFilename = 'data/OLDVILLE.MAP';
+const mapFilename = 'data/ISLAND.MAP';
 fs.readFile(mapFilename, (err, data) => {
   const createVerge1MapLoader = require('./createVerge1MapLoader')
   const loader = createVerge1MapLoader({data})
