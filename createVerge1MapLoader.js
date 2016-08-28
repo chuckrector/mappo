@@ -157,6 +157,11 @@ module.exports = (args) => {
       party.push(loadEntity())
     }
 
+    const nummovescripts = reader.readByte()
+    const msbufsize = reader.readQuad()
+    const msofstbl = reader.readQuadArray(nummovescripts)
+    const msbuf = reader.readByteArray(msbufsize)
+
     return {
       version,
       vsp0name,
@@ -182,6 +187,10 @@ module.exports = (args) => {
       chrlist,
       entities,
       party,
+      nummovescripts,
+      msbufsize,
+      msofstbl,
+      msbuf,
     }
   }
 

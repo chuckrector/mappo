@@ -8,13 +8,14 @@ $('body').resizable()
 
 const os = require('os')
 const fs = require('fs')
-const mapFilename = 'data/SHACK.MAP';
+const mapFilename = 'data/BUMVILLE.MAP';
 fs.readFile(mapFilename, (err, data) => {
   const createVerge1MapLoader = require('./createVerge1MapLoader')
   const loader = createVerge1MapLoader({data})
   const mapData = loader.load()
   console.log(mapFilename, mapData)
-  mapData.zone.forEach((zone) => console.log(JSON.stringify(zone)))
-  console.log('# entities', mapData.entities)
-  mapData.party.forEach((entity) => console.log(JSON.stringify(entity).replace(/,/g, ',\n')))
+  console.log('nummovescripts', mapData.nummovescripts)
+  console.log('msbufsize', mapData.msbufsize)
+  console.log('msofstbl', JSON.stringify(mapData.msofstbl))
+  console.log('msbuf', JSON.stringify(mapData.msbuf))
 })

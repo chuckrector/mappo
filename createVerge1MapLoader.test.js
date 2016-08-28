@@ -59,7 +59,7 @@ const entity = Buffer.concat([
   // x, y
   Buffer.from(new Uint16Array([2, 1]).buffer),
   // facing, moving, movcnt, framectr, specframe, chrindex, movecode, activmode, obsmode
-  Buffer.from([9, 8, 7, 6, 5, 4, 3, 2, 1]),
+  Buffer.from([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0]),
   // actscript, movescript
   Buffer.from(new Uint32Array([2, 1]).buffer),
   // speed, speedct
@@ -85,6 +85,17 @@ const mapEntities = Buffer.concat(
   fill(Array(numEntities), entity)
 )
 
+const scripts = Buffer.concat([
+  // nummovescripts
+  Buffer.from([5]),
+  // msbufsize
+  Buffer.from(new Uint32Array([50]).buffer),
+  // msofstbl
+  Buffer.from(new Uint32Array([0, 10, 20, 30, 40]).buffer),
+  // msbuf
+  Buffer.from(fill(Array(50), 99)),
+])
+
 const map = Buffer.concat([
   mapHeader,
   mapLayers,
@@ -92,6 +103,7 @@ const map = Buffer.concat([
   chrList,
   Buffer.from(new Uint32Array([numEntities]).buffer),
   mapEntities,
+  scripts,
 ])
 
 {
@@ -177,4 +189,18 @@ const map = Buffer.concat([
 
   expect(data.entities).toBe(3)
   expect(data.party.length).toBe(data.entities)
+}
+
+{
+  // can load scripts
+  const loader = createVerge1MapLoader({
+    data: map
+  })
+
+  const data = loader.load()
+
+  expect(data.nummovescripts).toBe(5)
+  expect(data.msbufsize).toBe(50)
+  expect(data.msofstbl).toEqual([0, 10, 20, 30, 40])
+  expect(data.msbuf).toEqual(fill(Array(50), 99))
 }
