@@ -94,6 +94,10 @@ const scripts = Buffer.concat([
   Buffer.from(new Uint32Array([0, 10, 20, 30, 40]).buffer),
   // msbuf
   Buffer.from(fill(Array(50), 99)),
+  // numscripts, scriptofstb,
+  Buffer.from(new Uint32Array([3, 0, 10, 20]).buffer),
+  // mapvc
+  Buffer.from(fill(Array(30), 88)),
 ])
 
 const map = Buffer.concat([
@@ -203,4 +207,7 @@ const map = Buffer.concat([
   expect(data.msbufsize).toBe(50)
   expect(data.msofstbl).toEqual([0, 10, 20, 30, 40])
   expect(data.msbuf).toEqual(fill(Array(50), 99))
+  expect(data.numscripts).toBe(3)
+  expect(data.scriptofstbl).toEqual([0, 10, 20])
+  expect(data.mapvc).toEqual(fill(Array(30), 88))
 }

@@ -4,6 +4,7 @@ console.log('running tests:', __filename)
 
 const expect = require('expect')
 const createDataReader = require('./createDataReader.js')
+const fill = require('lodash/fill')
 
 {
   // can read bytes
@@ -87,4 +88,13 @@ const quadArray = [90000, 1, 65536]
   })
 
   expect(reader.readString(13)).toBe('HAHN01.VSP')
+}
+
+{
+  // can get length
+  const reader = createDataReader({
+    data: Buffer.from(fill(Array(13), 0))
+  })
+
+  expect(reader.length).toBe(13)
 }

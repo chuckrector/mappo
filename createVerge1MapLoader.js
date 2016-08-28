@@ -162,6 +162,10 @@ module.exports = (args) => {
     const msofstbl = reader.readQuadArray(nummovescripts)
     const msbuf = reader.readByteArray(msbufsize)
 
+    const numscripts = reader.readQuad()
+    const scriptofstbl = reader.readQuadArray(numscripts)
+    const mapvc = reader.readByteArray(reader.length - reader.position)
+
     return {
       version,
       vsp0name,
@@ -191,6 +195,9 @@ module.exports = (args) => {
       msbufsize,
       msofstbl,
       msbuf,
+      numscripts,
+      scriptofstbl,
+      mapvc,
     }
   }
 

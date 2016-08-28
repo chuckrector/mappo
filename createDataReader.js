@@ -74,6 +74,9 @@ module.exports = (args) => {
     readString,
     get position() {
       return position
-    }
+    },
+    get length() {
+      return buffer.length
+    },
   }
 }

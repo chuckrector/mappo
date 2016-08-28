@@ -18,4 +18,7 @@ fs.readFile(mapFilename, (err, data) => {
   console.log('msbufsize', mapData.msbufsize)
   console.log('msofstbl', JSON.stringify(mapData.msofstbl))
   console.log('msbuf', JSON.stringify(mapData.msbuf))
+  console.log('numscripts', mapData.numscripts)
+  console.log('scriptofstbl', JSON.stringify(mapData.scriptofstbl))
+  console.log('mapvcs', mapData.mapvc.length)
 })
