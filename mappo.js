@@ -21,4 +21,13 @@ fs.readFile(mapFilename, (err, data) => {
   console.log('numscripts', mapData.numscripts)
   console.log('scriptofstbl', JSON.stringify(mapData.scriptofstbl))
   console.log('mapvcs', mapData.mapvc.length)
+
+  var vspPath = 'data/' + mapData.vsp0name
+  fs.readFile(vspPath, (err, vspData) => {
+    console.log('err', err, 'vspData', vspData)
+    const createVerge1VspLoader = require('./createVerge1VspLoader')
+    const vspLoader = createVerge1VspLoader({data: vspData})
+    const vspObj = vspLoader.load()
+    console.log(vspPath, vspObj)
+  })
 })
