@@ -23,6 +23,7 @@ module.exports = (args) => {
     const xsize = reader.readWord()
     const ysize = reader.readWord()
     const b = reader.readByte()
+    const padding = reader.readByteArray(27)
 
     return {
       version,
@@ -41,6 +42,7 @@ module.exports = (args) => {
       xsize,
       ysize,
       b,
+      padding,
     }
   }
 

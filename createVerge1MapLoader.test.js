@@ -5,6 +5,7 @@ console.log('running tests:', __filename)
 const expect = require('expect')
 const createVerge1MapLoader = require('./createVerge1MapLoader.js')
 const padEnd = require('lodash/padEnd')
+const fill = require('lodash/fill')
 
 {
   // can load header
@@ -20,6 +21,7 @@ const padEnd = require('lodash/padEnd')
       Buffer.from([1, 1]),
       Buffer.from(new Uint16Array([100, 200]).buffer),
       Buffer.from([0]),
+      Buffer.from(fill(Array(27), 0))
     ])
   })
 
@@ -41,4 +43,5 @@ const padEnd = require('lodash/padEnd')
   expect(data.xsize).toBe(100)
   expect(data.ysize).toBe(200)
   expect(data.b).toBe(0)
+  expect(data.padding).toEqual(fill(Array(27), 0))
 }
