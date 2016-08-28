@@ -22,8 +22,15 @@ module.exports = (args) => {
     return s
   }
 
+  const readWord = () => {
+    const value = buffer.readUInt16LE(position)
+    position += 2
+    return value
+  }
+
   return {
     readByte,
+    readWord,
     readString,
   }
 }

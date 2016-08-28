@@ -17,6 +17,17 @@ const createDataReader = require('./createDataReader.js')
 }
 
 {
+  // can read words
+  const reader = createDataReader({
+    data: new Uint16Array([65535, 1, 256]).buffer
+  })
+
+  expect(reader.readWord()).toBe(65535)
+  expect(reader.readWord()).toBe(1)
+  expect(reader.readWord()).toBe(256)
+}
+
+{
   // can read strings
   const reader = createDataReader({
     data: Buffer.from('tic tac toe')
