@@ -6,6 +6,28 @@ const createDataReader = require('./createDataReader')
 module.exports = (args) => {
   const reader = createDataReader(args)
 
+  const loadZone = () => {
+    const zonename = reader.readString(15)
+    const zonenamePadding = reader.readByte()
+    const callevent = reader.readWord()
+    const percent = reader.readByte()
+    const delay = reader.readByte()
+    const aaa = reader.readByte()
+    const savedesc = reader.readString(30)
+    const savedescPadding = reader.readByte()
+
+    return {
+      zonename,
+      zonenamePadding,
+      callevent,
+      percent,
+      delay,
+      aaa,
+      savedesc,
+      savedescPadding,
+    }
+  }
+
   const load = () => {
     const version = reader.readByte()
     const vsp0name = reader.readString(13)
@@ -24,6 +46,14 @@ module.exports = (args) => {
     const ysize = reader.readWord()
     const b = reader.readByte()
     const padding = reader.readByteArray(27)
+    const map0 = reader.readWordArray(xsize * ysize)
+    const map1 = reader.readWordArray(xsize * ysize)
+    const mapp = reader.readByteArray(xsize * ysize)
+
+    let zone = []
+    for (let i = 0; i < 128; i++) {
+      zone[i] = loadZone()
+    }
 
     return {
       version,
@@ -43,6 +73,10 @@ module.exports = (args) => {
       ysize,
       b,
       padding,
+      map0,
+      map1,
+      mapp,
+      zone,
     }
   }
 
