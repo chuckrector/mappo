@@ -8,6 +8,16 @@ module.exports = (args) => {
 
   const readByte = () => buffer.readUInt8(position++)
 
+  const readByteArray = (length) => {
+    let result = []
+
+    while (length-- > 0) {
+      result.push(readByte())
+    }
+
+    return result
+  }
+
   const readString = (length) => {
     let s = buffer.toString('utf-8', position, position + length)
 
@@ -30,6 +40,7 @@ module.exports = (args) => {
 
   return {
     readByte,
+    readByteArray,
     readWord,
     readString,
   }

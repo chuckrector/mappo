@@ -17,6 +17,15 @@ const createDataReader = require('./createDataReader.js')
 }
 
 {
+  // can read byte array
+  const reader = createDataReader({
+    data: Buffer.from([3, 2, 1])
+  })
+
+  expect(reader.readByteArray(3)).toEqual([3, 2, 1])
+}
+
+{
   // can read words
   const reader = createDataReader({
     data: new Uint16Array([65535, 1, 256]).buffer
