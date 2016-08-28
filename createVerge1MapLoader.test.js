@@ -55,11 +55,43 @@ const chrList = Buffer.concat(
   fill(Array(100), Buffer.from(padEnd('DARIN.CHR', 13, '\0')))
 )
 
+const entity = Buffer.concat([
+  // x, y
+  Buffer.from(new Uint16Array([2, 1]).buffer),
+  // facing, moving, movcnt, framectr, specframe, chrindex, movecode, activmode, obsmode
+  Buffer.from([9, 8, 7, 6, 5, 4, 3, 2, 1]),
+  // actscript, movescript
+  Buffer.from(new Uint32Array([2, 1]).buffer),
+  // speed, speedct
+  Buffer.from([2, 1]),
+  // step..y2
+  Buffer.from(new Uint16Array([12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]).buffer),
+  // curcmd, cmdarg
+  Buffer.from([2, 1]),
+  // scriptofs
+  Buffer.from(new Uint32Array([1]).buffer),
+  // face, chasing, chasespeed, chasedist
+  Buffer.from([4, 3, 2, 1]),
+  // cx, cy
+  Buffer.from(new Uint16Array([2, 1]).buffer),
+  // expand
+  Buffer.from(new Uint32Array([1]).buffer),
+  // entitydesc
+  Buffer.from(padEnd('Description', 20, '\0')),
+])
+
+const numEntities = 3
+const mapEntities = Buffer.concat(
+  fill(Array(numEntities), entity)
+)
+
 const map = Buffer.concat([
   mapHeader,
   mapLayers,
   mapZones,
   chrList,
+  Buffer.from(new Uint32Array([numEntities]).buffer),
+  mapEntities,
 ])
 
 {
@@ -133,4 +165,16 @@ const map = Buffer.concat([
   data.chrlist.forEach((chr) => {
     expect(chr).toBe('DARIN.CHR')
   })
+}
+
+{
+  // can load entities
+  const loader = createVerge1MapLoader({
+    data: map
+  })
+
+  const data = loader.load()
+
+  expect(data.entities).toBe(3)
+  expect(data.party.length).toBe(data.entities)
 }

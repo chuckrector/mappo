@@ -47,6 +47,28 @@ const wordArray = [65535, 1, 256]
   expect(reader.readWordArray(3)).toEqual(wordArray)
 }
 
+const quadArray = [90000, 1, 65536]
+
+{
+  // can read quads
+  const reader = createDataReader({
+    data: new Uint32Array(quadArray).buffer
+  })
+
+  expect(reader.readQuad()).toBe(90000)
+  expect(reader.readQuad()).toBe(1)
+  expect(reader.readQuad()).toBe(65536)
+}
+
+{
+  // can read quad array
+  const reader = createDataReader({
+    data: new Uint32Array(quadArray).buffer
+  })
+
+  expect(reader.readQuadArray(3)).toEqual(quadArray)
+}
+
 {
   // can read strings
   const reader = createDataReader({

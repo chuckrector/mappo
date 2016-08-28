@@ -48,11 +48,32 @@ module.exports = (args) => {
     return result
   }
 
+  const readQuad = () => {
+    const value = buffer.readUInt32LE(position)
+    position += 4
+    return value
+  }
+
+  const readQuadArray = (length) => {
+    let result = []
+
+    while (length-- > 0) {
+      result.push(readQuad())
+    }
+
+    return result
+  }
+
   return {
     readByte,
     readByteArray,
     readWord,
     readWordArray,
+    readQuad,
+    readQuadArray,
     readString,
+    get position() {
+      return position
+    }
   }
 }

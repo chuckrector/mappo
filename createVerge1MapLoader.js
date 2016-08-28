@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const createDataReader = require('./createDataReader')
+const assert = require('assert')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
@@ -25,6 +26,95 @@ module.exports = (args) => {
       aaa,
       savedesc,
       savedescPadding,
+    }
+  }
+
+  const loadEntity = () => {
+    const startPosition = reader.position
+
+    const x = reader.readWord()
+    const y = reader.readWord() // 4
+    const facing = reader.readByte()
+    const moving = reader.readByte()
+    const movcnt = reader.readByte()
+    const framectr = reader.readByte()
+    const specframe = reader.readByte()
+    const chrindex = reader.readByte()
+    const movecode = reader.readByte()
+    const activmode = reader.readByte()
+    const obsmode = reader.readByte() // 13 (#9)
+    const padding = reader.readByteArray(3)
+    const actscript = reader.readQuad()
+    const movescript = reader.readQuad() // 22
+    const speed = reader.readByte()
+    const speedct = reader.readByte() // 24
+    const step = reader.readWord()
+    const delay = reader.readWord()
+    const data1 = reader.readWord()
+    const data2 = reader.readWord()
+    const data3 = reader.readWord()
+    const data4 = reader.readWord()
+    const delayct = reader.readWord()
+    const adjactv = reader.readWord()
+    const x1 = reader.readWord()
+    const y1 = reader.readWord()
+    const x2 = reader.readWord()
+    const y2 = reader.readWord() // 48
+    const curcmd = reader.readByte()
+    const cmdarg = reader.readByte() // 50
+    const scriptofs = reader.readQuad() // 54
+    const face = reader.readByte()
+    const chasing = reader.readByte()
+    const chasespeed = reader.readByte()
+    const chasedist = reader.readByte() // 58
+    const cx = reader.readWord()
+    const cy = reader.readWord() // 62
+    const expand = reader.readQuad() // 66
+    const entitydesc = reader.readString(20) // 86
+
+    const bytesRead = reader.position - startPosition;
+    assert.equal(bytesRead, 88, 'expected 88 bytes but read ' + bytesRead)
+
+    return {
+      x,
+      y,
+      facing,
+      moving,
+      movcnt,
+      framectr,
+      specframe,
+      chrindex,
+      movecode,
+      activmode,
+      obsmode,
+      padding,
+      actscript,
+      movescript,
+      speed,
+      speedct,
+      step,
+      delay,
+      data1,
+      data2,
+      data3,
+      data4,
+      delayct,
+      adjactv,
+      x1,
+      y1,
+      x2,
+      y2,
+      curcmd,
+      cmdarg,
+      scriptofs,
+      face,
+      chasing,
+      chasespeed,
+      chasedist,
+      cx,
+      cy,
+      expand,
+      entitydesc,
     }
   }
 
@@ -60,6 +150,13 @@ module.exports = (args) => {
       chrlist.push(reader.readString(13))
     }
 
+    const entities = reader.readQuad()
+
+    let party = []
+    for (let i = 0; i < entities; i++) {
+      party.push(loadEntity())
+    }
+
     return {
       version,
       vsp0name,
@@ -83,6 +180,8 @@ module.exports = (args) => {
       mapp,
       zone,
       chrlist,
+      entities,
+      party,
     }
   }
 
