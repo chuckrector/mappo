@@ -15,7 +15,7 @@ const padEnd = require('lodash/padEnd')
       Buffer.from(padEnd('VANGELIS.MOD', 13, '\0')),
       Buffer.from([0, 1, 1]),
       Buffer.from(padEnd('Village - Past', 30, '\0')),
-      Buffer.from([0, 0]),
+      Buffer.from([1, 0]),
     ])
   })
 
@@ -24,4 +24,10 @@ const padEnd = require('lodash/padEnd')
   expect(data.version).toBe(4)
   expect(data.vsp0name).toBe('HAHN01.VSP')
   expect(data.musname).toBe('VANGELIS.MOD')
+  expect(data.layerc).toBe(0)
+  expect(data.pmultx).toBe(1)
+  expect(data.pdivx).toBe(1)
+  expect(data.levelname).toBe('Village - Past')
+  expect(data.showname).toBe(1)
+  expect(data.saveflag).toBe(0)
 }
