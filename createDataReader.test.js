@@ -25,15 +25,26 @@ const createDataReader = require('./createDataReader.js')
   expect(reader.readByteArray(3)).toEqual([3, 2, 1])
 }
 
+const wordArray = [65535, 1, 256]
+
 {
   // can read words
   const reader = createDataReader({
-    data: new Uint16Array([65535, 1, 256]).buffer
+    data: new Uint16Array(wordArray).buffer
   })
 
   expect(reader.readWord()).toBe(65535)
   expect(reader.readWord()).toBe(1)
   expect(reader.readWord()).toBe(256)
+}
+
+{
+  // can read word array
+  const reader = createDataReader({
+    data: new Uint16Array(wordArray).buffer
+  })
+
+  expect(reader.readWordArray(3)).toEqual(wordArray)
 }
 
 {

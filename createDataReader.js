@@ -38,10 +38,21 @@ module.exports = (args) => {
     return value
   }
 
+  const readWordArray = (length) => {
+    let result = []
+
+    while (length-- > 0) {
+      result.push(readWord())
+    }
+
+    return result
+  }
+
   return {
     readByte,
     readByteArray,
     readWord,
+    readWordArray,
     readString,
   }
 }
