@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run test && ./node_modules/.bin/electron index.js",
-    "test": "time node createDataReader.test.js && time node createVerge1MapLoader.test.js && time node createVerge1VspLoader.test.js"
+    "test": "time node createDataReader.test.js && time node createVerge1MapLoader.test.js && time node createVerge1VspLoader.test.js && time node createVerge1VspConverter.test.js"
   },
   "keywords": [
     "mappo"
@@ -15,7 +15,9 @@
   "dependencies": {
     "electron": "^1.3.4",
     "jquery": "^3.1.0",
-    "lodash": "^4.15.0"
+    "lodash": "^4.15.0",
+    "pngjs": "^3.0.0",
+    "stream-buffers": "^3.0.1"
   },
   "devDependencies": {
     "expect": "^1.20.2"
