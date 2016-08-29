@@ -7,9 +7,11 @@ module.exports = (args) => {
 
   const load = () => {
     const version = reader.readWord()
+    const palette = reader.readByteArray(256 * 3)
 
     return {
       version,
+      palette,
     }
   }
 

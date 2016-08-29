@@ -2,9 +2,11 @@
 
 const expect = require('expect')
 const createVerge1VspLoader = require('./createVerge1VspLoader')
+const fill = require('lodash/fill')
 
 const vspHeader = Buffer.concat([
-  Buffer.from(new Uint16Array([2]).buffer)
+  Buffer.from(new Uint16Array([2]).buffer),
+  Buffer.from(fill(Array(256 * 3), 77)),
 ])
 
 const vsp = Buffer.concat([
@@ -20,4 +22,5 @@ const vsp = Buffer.concat([
   const data = loader.load()
 
   expect(data.version).toBe(2)
+  expect(data.palette).toEqual(fill(Array(256 * 3), 77))
 }
