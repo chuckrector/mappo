@@ -43,10 +43,10 @@ const fs = require('fs')
     numtiles,
     vsp0,
   })
-
   const png = converter.convertToPng()
   const width = 16 * 20
   const height = 16 * 2
+
   expect(png.width).toBe(width)
   expect(png.height).toBe(height)
 
@@ -57,6 +57,7 @@ const fs = require('fs')
         const absoluteY = (tileRow * 16) + y
         const paletteIndex = vsp0[offset++]
         const pngDataIndex = (absoluteY * width  * 4) + (absoluteX * 4)
+
         callback({paletteIndex, pngDataIndex})
       }
     }
@@ -95,12 +96,14 @@ const fs = require('fs')
   for (let tileIndex = 0; tileIndex < numtiles; tileIndex++) {
     const tileColumn = tileIndex % 20
     const tileRow = Math.floor(tileIndex / 20)
+
     expectFilledTile(tileColumn, tileRow)
   }
 
   for (let tileIndex = numtiles; tileIndex < 20 * 2; tileIndex++) {
     const tileColumn = tileIndex % 20
     const tileRow = Math.floor(tileIndex / 20)
+
     expectEmptyTile(tileColumn, tileRow)
   }
 }
