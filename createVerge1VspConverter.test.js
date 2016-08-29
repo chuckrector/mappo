@@ -10,10 +10,11 @@ const fs = require('fs')
 
   let palette = []
   for (let i = 0; i < 256; i++) {
-    palette.push(...[i, i, i])
+    const ii = Math.floor(i / 4)
+    palette.push(...[ii, ii, ii])
   }
 
-  palette[(1 * 3) + 0] = 255
+  palette[(1 * 3) + 0] = Math.floor(255 / 4)
   palette[(1 * 3) + 1] = 0
   palette[(1 * 3) + 2] = 0
 
@@ -66,9 +67,9 @@ const fs = require('fs')
   const expectFilledTile = (tileColumn, tileRow) => {
     forEachTilePixel(tileColumn, tileRow, ({paletteIndex, pngDataIndex}) => {
       if (paletteIndex) {
-        const r = palette[(paletteIndex * 3) + 0]
-        const g = palette[(paletteIndex * 3) + 1]
-        const b = palette[(paletteIndex * 3) + 2]
+        const r = palette[(paletteIndex * 3) + 0] * 4
+        const g = palette[(paletteIndex * 3) + 1] * 4
+        const b = palette[(paletteIndex * 3) + 2] * 4
 
         expect(png.data[pngDataIndex + 0]).toBe(r)
         expect(png.data[pngDataIndex + 1]).toBe(g)

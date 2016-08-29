@@ -26,9 +26,9 @@ module.exports = ({palette, numtiles, vsp0}) => {
           const pngDataIndex = (absoluteY * width  * 4) + (absoluteX * 4)
 
           if (paletteIndex) {
-            const r = palette[(paletteIndex * 3) + 0]
-            const g = palette[(paletteIndex * 3) + 1]
-            const b = palette[(paletteIndex * 3) + 2]
+            const r = palette[(paletteIndex * 3) + 0] * 4
+            const g = palette[(paletteIndex * 3) + 1] * 4
+            const b = palette[(paletteIndex * 3) + 2] * 4
 
             png.data[pngDataIndex + 0] = r
             png.data[pngDataIndex + 1] = g
