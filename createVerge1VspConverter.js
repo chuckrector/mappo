@@ -7,7 +7,7 @@ module.exports = ({palette, numtiles, vsp0}) => {
     const columns = 20
     const width = columns * 16
     const height = Math.floor((numtiles + (columns - 1)) / columns) * 16
-    const png = new PNG({width, height, filterType: -1})
+    const png = new PNG({width, height})
 
     let offset = 0
     for (let tileIndex = 0; tileIndex < width * height; tileIndex++) {
