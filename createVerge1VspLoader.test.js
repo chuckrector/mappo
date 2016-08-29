@@ -7,6 +7,7 @@ const fill = require('lodash/fill')
 const vspHeader = Buffer.concat([
   Buffer.from(new Uint16Array([2]).buffer),
   Buffer.from(fill(Array(256 * 3), 77)),
+  Buffer.from(new Uint16Array([3]).buffer),
 ])
 
 const vsp = Buffer.concat([
@@ -23,4 +24,5 @@ const vsp = Buffer.concat([
 
   expect(data.version).toBe(2)
   expect(data.palette).toEqual(fill(Array(256 * 3), 77))
+  expect(data.numtiles).toBe(3)
 }
