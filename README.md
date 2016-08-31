@@ -6,3 +6,23 @@
 
 1. npm install
 2. npm start
+
+# chr2png
+
+Usage:
+
+- node chr2png.js data/VERGE.PAL data/DARIN.CHR
+
+Output:
+
+- data/DARIN.CHR.png
+
+# vsp2png
+
+Usage:
+
+- node vsp2png.js data/HAHN01.VSP
+
+Output:
+
+- data/HAHN01.VSP.png
