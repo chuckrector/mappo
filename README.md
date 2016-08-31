@@ -9,9 +9,9 @@
 
 # chr2png
 
-Usage:
-
 **Support:** VERGE1 only
+
+Usage:
 
 - node chr2png.js data/VERGE.PAL data/DARIN.CHR
 
