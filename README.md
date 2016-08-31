@@ -17,6 +17,8 @@ Output:
 
 - data/DARIN.CHR.png
 
+![alt text](chr2png-example.png?raw=true "a sample of chr2png cli output")
+
 # vsp2png
 
 Usage:
@@ -26,3 +28,5 @@ Usage:
 Output:
 
 - data/HAHN01.VSP.png
+ 
+![alt text](vsp2png-example.png?raw=true "a sample of vsp2png cli output")
