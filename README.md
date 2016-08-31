@@ -38,3 +38,16 @@ Output:
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
+- more VERGE1-related formats
+  - fonts
+  - SPEECH.SPC
+  - ITEMICON.DAT
+  - ITEMS.DAT
+  - MISCICON.DAT
+  - EQUIP.DAT
+  - PARTY.DAT
+  - STARTUP.SCR
+  - TRANS.TBL
+  - compiled scripts: EFFECTS.VCS, STARTUP.VCS, etc.
+  - save games
+  - PCX
