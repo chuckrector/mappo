@@ -34,3 +34,7 @@ Output:
 - data/HAHN01.VSP.png
 
 ![alt text](vsp2png-example.png?raw=true "a sample of vsp2png cli output")
+
+# TODO
+
+- kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
