@@ -38,4 +38,3 @@ Output:
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
-- @aen | i should also... extract png conversion stuff into a generic imagedata-to-grid thingy
