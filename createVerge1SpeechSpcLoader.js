@@ -9,9 +9,11 @@ module.exports = (args) => {
     const tileWidth = 32
     const tileHeight = 32
 
-    const speech = reader.readByteArray(tileWidth * tileHeight)
+    const numtiles = reader.readByte()
+    const speech = reader.readByteArray(tileWidth * tileHeight * numtiles)
 
     return {
+      numtiles,
       speech
     }
   }
