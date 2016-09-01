@@ -81,6 +81,20 @@ Output:
 
 ![alt text](boxraw2png-example.png?raw=true "a sample of boxraw2png cli output")
 
+# boxraw2png
+
+**Support:** VERGE1 only (32x32, N tiles)
+
+Usage:
+
+- node speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
+
+Output:
+
+- data/SPEECH.SPC.png
+
+![alt text](speechspc2png-example.png?raw=true "a sample of speechspc2png cli output")
+
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
