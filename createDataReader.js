@@ -75,6 +75,9 @@ module.exports = (args) => {
     get position() {
       return position
     },
+    set position(value) {
+      position = value
+    },
     get length() {
       return buffer.length
     },

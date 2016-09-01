@@ -98,3 +98,16 @@ const quadArray = [90000, 1, 65536]
 
   expect(reader.length).toBe(13)
 }
+
+{
+  let data = fill(Array(13), 99)
+  data[data.length - 1] = 88
+
+  // can set position
+  const reader = createDataReader({
+    data: Buffer.from(data)
+  })
+
+  reader.position = data.length - 1
+  expect(reader.readByte()).toBe(88)
+}
