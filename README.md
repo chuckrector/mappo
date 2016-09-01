@@ -37,7 +37,7 @@ Output:
 
 # smallfnt2png
 
-**Support:** VERGE1 only
+**Support:** VERGE1 only (7x9, 95 tiles, 19 columns)
 
 Usage:
 
@@ -51,7 +51,7 @@ Output:
 
 # mainfnt2png
 
-**Support:** VERGE1 only
+**Support:** VERGE1 only (9x16, 95 tiles, 19 columns)
 
 Usage:
 
@@ -65,7 +65,7 @@ Output:
 
 # boxraw2png
 
-**Support:** VERGE1 only
+**Support:** VERGE1 only (320x66)
 
 Usage:
 
