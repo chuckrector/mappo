@@ -95,6 +95,20 @@ Output:
 
 ![alt text](speechspc2png-example.png?raw=true "a sample of speechspc2png cli output")
 
+# pcx2png
+
+Usage:
+
+- node pcx2png.js data/STAN.PCX
+
+Output:
+
+- data/STAND.PCX.png
+
+![alt text](pcx2png-example1.png?raw=true "a sample of pcx2png cli output")
+![alt text](pcx2png-example2.png?raw=true "a sample of pcx2png cli output")
+![alt text](pcx2png-example3.png?raw=true "a sample of pcx2png cli output")
+
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
