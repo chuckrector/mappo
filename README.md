@@ -99,7 +99,6 @@ Output:
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
 - more VERGE1-related formats
-  - SPEECH.SPC
   - ITEMICON.DAT
   - ITEMS.DAT
   - MISCICON.DAT
