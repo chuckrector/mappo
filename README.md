@@ -122,4 +122,3 @@ Output:
   - TRANS.TBL
   - compiled scripts: EFFECTS.VCS, STARTUP.VCS, etc.
   - save games
-  - PCX
