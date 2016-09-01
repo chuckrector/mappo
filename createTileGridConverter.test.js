@@ -6,19 +6,7 @@ const expect = require('expect')
 const createTileGridConverter = require('./createTileGridConverter')
 const fill = require('lodash/fill')
 const fs = require('fs')
-
-{
-  // can convert a tile list to a png grid
-
-  let palette = []
-  for (let i = 0; i < 256; i++) {
-    const ii = Math.floor(i / 4)
-    palette.push(...[ii, ii, ii])
-  }
-
-  palette[(1 * 3) + 0] = Math.floor(255 / 4)
-  palette[(1 * 3) + 1] = 0
-  palette[(1 * 3) + 2] = 0
+const palette = require('./dummyPalette')
 
   const oneTile = [
     128, 128, 128, 128, 128,
@@ -33,6 +21,10 @@ const fs = require('fs')
   const tileHeight = 5
   const columns = 2
   const raw8bitData = Array.prototype.concat(...fill(Array(numtiles), oneTile))
+
+{
+  // can convert a tile list to a png grid
+
   const converter = createTileGridConverter({
     palette,
     tileWidth,
@@ -104,4 +96,23 @@ const fs = require('fs')
 
     expectEmptyTile(tileColumn, tileRow)
   }
+}
+
+{
+  // process only row * columns tile indexes
+  const converter = createTileGridConverter({
+    palette,
+    tileWidth,
+    tileHeight,
+    columns,
+    numtiles,
+    raw8bitData,
+  })
+
+  let numTilesProcessed = 0
+  converter.tileProcessor = () => numTilesProcessed++
+
+  const png = converter.convertToPng()
+
+  expect(numTilesProcessed).toBe(columns * 2)
 }

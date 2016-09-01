@@ -10,21 +10,22 @@ module.exports = ({
   numtiles,
   raw8bitData,
 }) => {
-  const convertToPng = () => {
     const rows = Math.floor((numtiles + (columns - 1)) / columns)
     const width = columns * tileWidth
     const height = rows * tileHeight
-    const png = new PNG({width, height})
 
-    let offset = 0
+  const api = {}
 
-    for (let tileIndex = 0; tileIndex < width * height; tileIndex++) {
-      const tileColumn = tileIndex % columns
-      const tileRow = Math.floor(tileIndex / columns)
-      const tileX = tileColumn * tileWidth
-      const tileY = tileRow * tileHeight
-      const isBlank = tileIndex >= numtiles
-
+  const tileProcessor = ({
+    png,
+    tileColumn,
+    tileRow,
+    tileX,
+    tileY,
+    isBlank,
+    raw8bitData,
+    offset,
+  }) => {
       for (let y = 0; y < tileHeight; y++) {
         for (let x = 0; x < tileWidth; x++) {
           const absoluteX = tileX + x
@@ -49,12 +50,39 @@ module.exports = ({
           }
         }
       }
+
+    return offset
+  }
+
+  const convertToPng = () => {
+    const png = new PNG({width, height})
+
+    let offset = 0
+
+    for (let tileIndex = 0; tileIndex < rows * columns; tileIndex++) {
+      const tileColumn = tileIndex % columns
+      const tileRow = Math.floor(tileIndex / columns)
+      const tileX = tileColumn * tileWidth
+      const tileY = tileRow * tileHeight
+      const isBlank = tileIndex >= numtiles
+
+      offset = api.tileProcessor({
+        png,
+        tileColumn,
+        tileRow,
+        tileX,
+        tileY,
+        isBlank,
+        raw8bitData,
+        offset,
+      })
     }
 
     return png
   }
 
-  return {
-    convertToPng
-  }
+  api.tileProcessor = tileProcessor
+  api.convertToPng = convertToPng
+
+  return api
 }
