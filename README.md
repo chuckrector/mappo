@@ -103,7 +103,7 @@ Usage:
 
 Output:
 
-- data/STAND.PCX.png
+- data/STAN.PCX.png
 
 ![alt text](pcx2png-example1.png?raw=true "a sample of pcx2png cli output")
 ![alt text](pcx2png-example2.png?raw=true "a sample of pcx2png cli output")
