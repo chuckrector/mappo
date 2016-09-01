@@ -1,5 +1,7 @@
 "use strict"
 
+console.log('running tests:', __filename)
+
 const expect = require('expect')
 const createVerge1SmallFntLoader = require('./createVerge1SmallFntLoader')
 const fill = require('lodash/fill')
@@ -17,5 +19,5 @@ const fnt = fill(Array(tileWidth * tileHeight * numtiles), 99)
 
   const data = loader.load()
 
-  expect(data.fnt).toEqual(fnt) 
+  expect(data.fnt).toEqual(fnt)
 }

@@ -1,7 +1,7 @@
 "use strict"
 
 const fs = require('fs')
-const createDataReader = require('./createDataReader')
+const createDataReader = require('../createDataReader')
 const assert = require('assert')
 
 module.exports = (args) => {

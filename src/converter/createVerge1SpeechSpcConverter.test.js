@@ -1,9 +1,11 @@
 "use strict"
 
+console.log('running tests:', __filename)
+
 const expect = require('expect')
 const createVerge1SpeechSpcConverter = require('./createVerge1SpeechSpcConverter')
 const fill = require('lodash/fill')
-const palette = require('./dummyPalette')
+const palette = require('../dummyPalette')
 
 {
   // can convert SPEECH.SPC character portrait to png

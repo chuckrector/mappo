@@ -1,12 +1,12 @@
 "use strict"
 
-"use strict"
+console.log('running tests:', __filename)
 
 const expect = require('expect')
 const createTileGridConverter = require('./createTileGridConverter')
 const fill = require('lodash/fill')
 const fs = require('fs')
-const palette = require('./dummyPalette')
+const palette = require('../dummyPalette')
 
   const oneTile = [
     128, 128, 128, 128, 128,

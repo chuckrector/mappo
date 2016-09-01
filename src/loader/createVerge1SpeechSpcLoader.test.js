@@ -1,5 +1,7 @@
 "use strict"
 
+console.log('running tests:', __filename)
+
 const expect = require('expect')
 const createVerge1SpeechSpcLoader = require('./createVerge1SpeechSpcLoader')
 const fill = require('lodash/fill')

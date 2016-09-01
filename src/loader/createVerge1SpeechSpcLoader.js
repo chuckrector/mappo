@@ -1,6 +1,6 @@
 "use strict"
 
-const createDataReader = require('./createDataReader')
+const createDataReader = require('../createDataReader')
 
 module.exports = (args) => {
   const reader = createDataReader(args)

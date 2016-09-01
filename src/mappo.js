@@ -10,7 +10,7 @@ const os = require('os')
 const fs = require('fs')
 const mapFilename = 'data/BUMVILLE.MAP';
 fs.readFile(mapFilename, (err, data) => {
-  const createVerge1MapLoader = require('./createVerge1MapLoader')
+  const createVerge1MapLoader = require('./loader/createVerge1MapLoader')
   const loader = createVerge1MapLoader({data})
   const mapData = loader.load()
   console.log(mapFilename, mapData)
@@ -25,7 +25,7 @@ fs.readFile(mapFilename, (err, data) => {
   var vspPath = 'data/' + mapData.vsp0name
   fs.readFile(vspPath, (err, vspData) => {
     console.log('err', err, 'vspData', vspData)
-    const createVerge1VspLoader = require('./createVerge1VspLoader')
+    const createVerge1VspLoader = require('./loader/createVerge1VspLoader')
     const vspLoader = createVerge1VspLoader({data: vspData})
     const vspObj = vspLoader.load()
     console.log(vspPath, vspObj)

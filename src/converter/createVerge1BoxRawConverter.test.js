@@ -1,9 +1,11 @@
 "use strict"
 
+console.log('running tests:', __filename)
+
 const expect = require('expect')
 const createVerge1BoxRawConverter = require('./createVerge1BoxRawConverter')
 const fill = require('lodash/fill')
-const palette = require('./dummyPalette')
+const palette = require('../dummyPalette')
 
 {
   // can convert BOX.RAW text box to png

@@ -1,9 +1,11 @@
 "use strict"
 
+console.log('running tests:', __filename)
+
 const expect = require('expect')
 const createPcxLoader = require('./createPcxLoader')
 const fill = require('lodash/fill')
-const palette = require('./dummyPalette')
+const palette = require('../dummyPalette')
 
 const tileWidth = 4
 const tileHeight = 4

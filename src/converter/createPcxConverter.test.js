@@ -1,9 +1,11 @@
 "use strict"
 
+console.log('running tests:', __filename)
+
 const expect = require('expect')
 const createPcxConverter = require('./createPcxConverter')
 const fill = require('lodash/fill')
-const palette = require('./dummyPalette')
+const palette = require('../dummyPalette')
 
 {
   // can convert PCX to PNG
