@@ -107,7 +107,7 @@ Output:
 
 ![alt text](pcx2png-example1.png?raw=true "a sample of pcx2png cli output")
 ![alt text](pcx2png-example2.png?raw=true "a sample of pcx2png cli output")
-![alt text](pcx2png-example3.png?raw=true "a sample of pcx2png cli output")
+![alt text](pcx2png-example4.png?raw=true "a sample of pcx2png cli output")
 
 # TODO
 
