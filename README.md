@@ -20,6 +20,12 @@ Output:
 - data/DARIN.CHR.png
 
 ![alt text](chr2png-example.png?raw=true "a sample of chr2png cli output")
+![alt text](chr2png-example2.png?raw=true "a sample of chr2png cli output")
+![alt text](chr2png-example3.png?raw=true "a sample of chr2png cli output")
+![alt text](chr2png-example4.png?raw=true "a sample of chr2png cli output")
+![alt text](chr2png-example5.png?raw=true "a sample of chr2png cli output")
+![alt text](chr2png-example6.png?raw=true "a sample of chr2png cli output")
+![alt text](chr2png-example7.png?raw=true "a sample of chr2png cli output")
 
 # vsp2png
 
