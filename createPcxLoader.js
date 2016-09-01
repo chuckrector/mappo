@@ -66,10 +66,13 @@ module.exports = (args) => {
 
     const raw8bitData = readImage()
 
+    const palette = reader.readByteArray(256 * 3)
+
     return {
       width,
       height,
       raw8bitData,
+      palette,
     }
   }
 

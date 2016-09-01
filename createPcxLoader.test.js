@@ -36,7 +36,8 @@ const filler = fill(Array(58), 88)
       Buffer.from([reserved, colorPlanes]),
       Buffer.from(new Uint16Array([bytesPerLine, paletteType]).buffer),
       Buffer.from(filler),
-      Buffer.from([0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99])
+      Buffer.from([0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99]),
+      Buffer.from(palette),
     ])
   })
 
@@ -45,4 +46,5 @@ const filler = fill(Array(58), 88)
   expect(data.width).toEqual(tileWidth)
   expect(data.height).toEqual(tileHeight)
   expect(data.raw8bitData).toEqual(pcx)
+  expect(data.palette).toEqual(palette)
 }
