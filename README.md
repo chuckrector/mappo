@@ -81,7 +81,7 @@ Output:
 
 ![alt text](boxraw2png-example.png?raw=true "a sample of boxraw2png cli output")
 
-# boxraw2png
+# speechspc2png
 
 **Support:** VERGE1 only (32x32, N tiles)
 
