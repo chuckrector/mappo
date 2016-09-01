@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run test && ./node_modules/.bin/electron index.js",
-    "test": "time node createDataReader.test.js && time node createVerge1MapLoader.test.js && time node createVerge1VspLoader.test.js && time node createVerge1VspConverter.test.js && time node createVerge1PalLoader.test.js && time node createVerge1ChrLoader.test.js && time node createVerge1ChrConverter.test.js && time node createTileGridConverter.test.js"
+    "test": "time node createDataReader.test.js && time node createVerge1MapLoader.test.js && time node createVerge1VspLoader.test.js && time node createVerge1VspConverter.test.js && time node createVerge1PalLoader.test.js && time node createVerge1ChrLoader.test.js && time node createVerge1ChrConverter.test.js && time node createTileGridConverter.test.js && time node createVerge1SmallFntLoader.test.js"
   },
   "keywords": [
     "mappo"
