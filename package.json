@@ -19,7 +19,8 @@
     "pngjs": "^3.0.0"
   },
   "devDependencies": {
-    "expect": "^1.20.2"
+    "expect": "^1.20.2",
+    "glob": "^7.0.6"
   },
   "//": "node 5.10.0 is required for the new Buffer API (Buffer.from, etc.)",
   "engines": {
