@@ -124,7 +124,7 @@ Output:
   - MISCICON.DAT
   - EQUIP.DAT
   - PARTY.DAT
-  - STARTUP.SCR
+  - *.CR2
   - TRANS.TBL
   - compiled scripts: EFFECTS.VCS, STARTUP.VCS, etc.
   - save games
