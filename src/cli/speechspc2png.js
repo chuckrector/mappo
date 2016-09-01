@@ -1,9 +1,9 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('./createVerge1PalLoader')
-const createVerge1SpeechSpcLoader = require('./createVerge1SpeechSpcLoader')
-const createVerge1SpeechSpcConverter = require('./createVerge1SpeechSpcConverter')
+const createVerge1PalLoader = require('../createVerge1PalLoader')
+const createVerge1SpeechSpcLoader = require('../createVerge1SpeechSpcLoader')
+const createVerge1SpeechSpcConverter = require('../createVerge1SpeechSpcConverter')
 
 const palFilename = process.argv[2]
 const speechSpcFilename = process.argv[3]

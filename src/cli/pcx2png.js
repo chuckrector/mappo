@@ -1,8 +1,8 @@
 const process = require('process')
 
 const fs = require('fs')
-const createPcxLoader = require('./createPcxLoader')
-const createPcxConverter = require('./createPcxConverter')
+const createPcxLoader = require('../createPcxLoader')
+const createPcxConverter = require('../createPcxConverter')
 
 const pcxFilename = process.argv[2]
 

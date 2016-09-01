@@ -1,9 +1,9 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('./createVerge1PalLoader')
-const createVerge1ChrLoader = require('./createVerge1ChrLoader')
-const createVerge1ChrConverter = require('./createVerge1ChrConverter')
+const createVerge1PalLoader = require('../createVerge1PalLoader')
+const createVerge1ChrLoader = require('../createVerge1ChrLoader')
+const createVerge1ChrConverter = require('../createVerge1ChrConverter')
 
 const palFilename = process.argv[2]
 const chrFilename = process.argv[3]

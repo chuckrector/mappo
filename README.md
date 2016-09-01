@@ -13,7 +13,7 @@
 
 Usage:
 
-- node chr2png.js data/VERGE.PAL data/DARIN.CHR
+- node src/cli/chr2png.js data/VERGE.PAL data/DARIN.CHR
 
 Output:
 
@@ -33,7 +33,7 @@ Output:
 
 Usage:
 
-- node src/vsp2png.js data/HAHN01.VSP
+- node src/cli/vsp2png.js data/HAHN01.VSP
 
 Output:
 
@@ -47,7 +47,7 @@ Output:
 
 Usage:
 
-- node src/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT
+- node src/cli/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT
 
 Output:
 
@@ -63,7 +63,7 @@ Output:
 
 Usage:
 
-- node src/mainfnt2png.js data/VERGE.PAL data/MAIN.FNT
+- node src/cli/mainfnt2png.js data/VERGE.PAL data/MAIN.FNT
 
 Output:
 
@@ -79,7 +79,7 @@ Output:
 
 Usage:
 
-- node src/boxraw2png.js data/VERGE.PAL data/BOX.RAW
+- node src/cli/boxraw2png.js data/VERGE.PAL data/BOX.RAW
 
 Output:
 
@@ -93,7 +93,7 @@ Output:
 
 Usage:
 
-- node src/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
+- node src/cli/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
 
 Output:
 
@@ -105,7 +105,7 @@ Output:
 
 Usage:
 
-- node src/pcx2png.js data/STAN.PCX
+- node src/cli/pcx2png.js data/STAN.PCX
 
 Output:
 
