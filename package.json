@@ -2,10 +2,10 @@
   "name": "mappo",
   "version": "1.0.0",
   "description": "mappo",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "npm run test && ./node_modules/.bin/electron index.js",
-    "test": "time node createDataReader.test.js && time node createVerge1MapLoader.test.js && time node createVerge1VspLoader.test.js && time node createVerge1VspConverter.test.js && time node createVerge1PalLoader.test.js && time node createVerge1ChrLoader.test.js && time node createVerge1ChrConverter.test.js && time node createTileGridConverter.test.js && time node createVerge1SmallFntLoader.test.js && time node createVerge1MainFntLoader.test.js && time node createVerge1BoxRawLoader.test.js && time node createVerge1SmallFntConverter.test.js && time node createVerge1MainFntConverter.test.js && time node createVerge1BoxRawConverter.test.js && time node createVerge1SpeechSpcLoader.test.js && time node createVerge1SpeechSpcConverter.test.js && time node createPcxLoader.test.js && time node createPcxConverter.test.js"
+    "start": "npm run test && ./node_modules/.bin/electron .",
+    "test": "time node src/createDataReader.test.js && time node src/createVerge1MapLoader.test.js && time node src/createVerge1VspLoader.test.js && time node src/createVerge1VspConverter.test.js && time node src/createVerge1PalLoader.test.js && time node src/createVerge1ChrLoader.test.js && time node src/createVerge1ChrConverter.test.js && time node src/createTileGridConverter.test.js && time node src/createVerge1SmallFntLoader.test.js && time node src/createVerge1MainFntLoader.test.js && time node src/createVerge1BoxRawLoader.test.js && time node src/createVerge1SmallFntConverter.test.js && time node src/createVerge1MainFntConverter.test.js && time node src/createVerge1BoxRawConverter.test.js && time node src/createVerge1SpeechSpcLoader.test.js && time node src/createVerge1SpeechSpcConverter.test.js && time node src/createPcxLoader.test.js && time node src/createPcxConverter.test.js"
   },
   "keywords": [
     "mappo"

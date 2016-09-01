@@ -19,13 +19,13 @@ Output:
 
 - data/DARIN.CHR.png
 
-![alt text](chr2png-example.png?raw=true "a sample of chr2png cli output")
-![alt text](chr2png-example6.png?raw=true "a sample of chr2png cli output")
-![alt text](chr2png-example3.png?raw=true "a sample of chr2png cli output")
-![alt text](chr2png-example4.png?raw=true "a sample of chr2png cli output")
-![alt text](chr2png-example5.png?raw=true "a sample of chr2png cli output")
-![alt text](chr2png-example2.png?raw=true "a sample of chr2png cli output")
-![alt text](chr2png-example7.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example6.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example3.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example4.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example5.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example2.png?raw=true "a sample of chr2png cli output")
+![alt text](img/chr2png-example7.png?raw=true "a sample of chr2png cli output")
 
 # vsp2png
 
@@ -33,13 +33,13 @@ Output:
 
 Usage:
 
-- node vsp2png.js data/HAHN01.VSP
+- node src/vsp2png.js data/HAHN01.VSP
 
 Output:
 
 - data/HAHN01.VSP.png
 
-![alt text](vsp2png-example.png?raw=true "a sample of vsp2png cli output")
+![alt text](img/vsp2png-example.png?raw=true "a sample of vsp2png cli output")
 
 # smallfnt2png
 
@@ -47,7 +47,7 @@ Output:
 
 Usage:
 
-- node smallfnt2png.js data/VERGE.PAL data/SMALL.FNT
+- node src/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT
 
 Output:
 
@@ -55,7 +55,7 @@ Output:
 
 **Note:** Gray background added here for legibility. Actual output has a transparent background.
 
-![alt text](smallfnt2png-example.png?raw=true "a sample of smallfnt2png cli output")
+![alt text](img/smallfnt2png-example.png?raw=true "a sample of smallfnt2png cli output")
 
 # mainfnt2png
 
@@ -63,7 +63,7 @@ Output:
 
 Usage:
 
-- node mainfnt2png.js data/VERGE.PAL data/MAIN.FNT
+- node src/mainfnt2png.js data/VERGE.PAL data/MAIN.FNT
 
 Output:
 
@@ -71,7 +71,7 @@ Output:
 
 **Note:** Gray background added here for legibility. Actual output has a transparent background.
 
-![alt text](mainfnt2png-example.png?raw=true "a sample of mainfnt2png cli output")
+![alt text](img/mainfnt2png-example.png?raw=true "a sample of mainfnt2png cli output")
 
 # boxraw2png
 
@@ -79,13 +79,13 @@ Output:
 
 Usage:
 
-- node boxraw2png.js data/VERGE.PAL data/BOX.RAW
+- node src/boxraw2png.js data/VERGE.PAL data/BOX.RAW
 
 Output:
 
 - data/BOX.RAW.png
 
-![alt text](boxraw2png-example.png?raw=true "a sample of boxraw2png cli output")
+![alt text](img/boxraw2png-example.png?raw=true "a sample of boxraw2png cli output")
 
 # speechspc2png
 
@@ -93,27 +93,27 @@ Output:
 
 Usage:
 
-- node speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
+- node src/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
 
 Output:
 
 - data/SPEECH.SPC.png
 
-![alt text](speechspc2png-example.png?raw=true "a sample of speechspc2png cli output")
+![alt text](img/speechspc2png-example.png?raw=true "a sample of speechspc2png cli output")
 
 # pcx2png
 
 Usage:
 
-- node pcx2png.js data/STAN.PCX
+- node src/pcx2png.js data/STAN.PCX
 
 Output:
 
 - data/STAN.PCX.png
 
-![alt text](pcx2png-example1.png?raw=true "a sample of pcx2png cli output")
-![alt text](pcx2png-example2.png?raw=true "a sample of pcx2png cli output")
-![alt text](pcx2png-example5.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/pcx2png-example1.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/pcx2png-example2.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/pcx2png-example5.png?raw=true "a sample of pcx2png cli output")
 
 # TODO
 
