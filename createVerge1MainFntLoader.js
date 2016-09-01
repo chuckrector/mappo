@@ -10,10 +10,10 @@ module.exports = (args) => {
     const tileHeight = 16
     const numtiles = 95
 
-    const fnt = reader.readByteArray(tileWidth * tileHeight * numtiles)
+    const fnt2 = reader.readByteArray(tileWidth * tileHeight * numtiles)
 
     return {
-      fnt
+      fnt2
     }
   }
 
