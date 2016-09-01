@@ -1,0 +1,27 @@
+const process = require('process')
+
+const fs = require('fs')
+const createVerge1PalLoader = require('./createVerge1PalLoader')
+const createVerge1BoxRawLoader = require('./createVerge1BoxRawLoader')
+const createVerge1BoxRawConverter = require('./createVerge1BoxRawConverter')
+
+const palFilename = process.argv[2]
+const boxRawFilename = process.argv[3]
+
+fs.readFile(palFilename, (err, diskPalData) => {
+  const palLoader = createVerge1PalLoader({data: diskPalData})
+  const palData = palLoader.load()
+
+  fs.readFile(boxRawFilename, (err, diskBoxRawData) => {
+    const boxRawLoader = createVerge1BoxRawLoader({data: diskBoxRawData})
+    const boxRawData = boxRawLoader.load()
+    const boxRawConverter = createVerge1BoxRawConverter({
+      palette: palData.pal,
+      tbox: boxRawData.tbox,
+    })
+
+    const png = boxRawConverter.convertToPng()
+
+    png.pack().pipe(fs.createWriteStream(boxRawFilename + '.png'))
+  })
+})
