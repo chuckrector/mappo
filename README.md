@@ -47,6 +47,8 @@ Output:
 
 - data/SMALL.FNT.png
 
+**Note:** Gray background added here for legibility. Actual output has a transparent background.
+
 ![alt text](smallfnt2png-example.png?raw=true "a sample of smallfnt2png cli output")
 
 # mainfnt2png
@@ -60,6 +62,8 @@ Usage:
 Output:
 
 - data/MAIN.FNT.png
+
+**Note:** Gray background added here for legibility. Actual output has a transparent background.
 
 ![alt text](mainfnt2png-example.png?raw=true "a sample of mainfnt2png cli output")
 
