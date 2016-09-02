@@ -211,7 +211,6 @@ Output:
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
 - more VERGE1-related formats
-  - ITEMS.DAT
   - EQUIP.DAT
   - PARTY.DAT
   - TRANS.TBL
