@@ -133,6 +133,20 @@ Output:
 
 ![alt text](img/ITEMICON.DAT.png?raw=true "a sample of itemicondat2png cli output")
 
+# miscicondat2png
+
+**Support:** VERGE1 only (16x16, 24x24, 24x40)
+
+Usage:
+
+- node src/cli/miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT
+
+Output:
+
+- data/MISCICON.DAT.png
+
+![alt text](img/MISCICON.DAT.png?raw=true "a sample of miscicondat2png cli output")
+
 # pcx2png
 
 Usage:
