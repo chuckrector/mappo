@@ -10,3 +10,4 @@ node src/cli/pcx2png.js data/STAN.PCX
 node src/cli/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT
 node src/cli/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
 node src/cli/vsp2png.js data/HAHN01.VSP
+node src/cli/itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT
