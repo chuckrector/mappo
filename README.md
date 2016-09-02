@@ -171,3 +171,5 @@ Output:
   - TRANS.TBL
   - compiled scripts: EFFECTS.VCS, STARTUP.VCS, etc.
   - save games
+- VERGE2 formats
+- VERGE3 formats
