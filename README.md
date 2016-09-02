@@ -175,7 +175,8 @@ Output:
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
-`{
+```json
+{
   "numitems": 48,
   "items": [
     {
@@ -191,7 +192,8 @@ Output:
       "price": 300
     },
     ...
-  ]`
+  ]
+```
 
 # TODO
 
