@@ -16,11 +16,23 @@ const palette = require('../dummyPalette')
     128, 128, 128, 128, 128,
   ]
 
+  const twoTile = [
+    99, 99, 99, 99, 99,
+    99, 77, 0, 77, 99,
+    99, 0, 77, 0, 99,
+    99, 77, 0, 77, 99,
+    99, 99, 99, 99, 99,
+  ]
+
   const numtiles = 3
   const tileWidth = 5
   const tileHeight = 5
   const columns = 2
-  const raw8bitData = Array.prototype.concat(...fill(Array(numtiles), oneTile))
+  const raw8bitData = Array.prototype.concat(
+    oneTile,
+    twoTile,
+    oneTile
+  )
 
 {
   // can convert a tile list to a png grid
