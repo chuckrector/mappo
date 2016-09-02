@@ -21,7 +21,10 @@ fs.readFile(palFilename, (err, diskPalData) => {
     })
 
     const png = boxRawConverter.convertToPng()
+    const targetFilename = boxRawFilename + '.png'
 
-    png.pack().pipe(fs.createWriteStream(boxRawFilename + '.png'))
+    png.pack().pipe(fs.createWriteStream(targetFilename))
+
+    console.log('converted', boxRawFilename, 'to', targetFilename)
   })
 })

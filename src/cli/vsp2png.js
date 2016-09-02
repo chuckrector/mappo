@@ -10,6 +10,9 @@ fs.readFile(vspFilename, (err, data) => {
   const vsp = loader.load()
   const converter = createVerge1VspConverter(vsp)
   const png = converter.convertToPng()
+  const targetFilename = vspFilename + '.png'
 
-  png.pack().pipe(fs.createWriteStream(vspFilename + '.png'))
+  png.pack().pipe(fs.createWriteStream(targetFilename))
+
+  console.log('converted', vspFilename, 'to', targetFilename)
 })

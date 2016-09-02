@@ -21,7 +21,10 @@ fs.readFile(palFilename, (err, diskPalData) => {
     })
 
     const png = chrConverter.convertToPng()
+    const targetFilename = chrFilename + '.png'
 
-    png.pack().pipe(fs.createWriteStream(chrFilename + '.png'))
+    png.pack().pipe(fs.createWriteStream(targetFilename))
+
+    console.log('converted', chrFilename, 'to', targetFilename)
   })
 })

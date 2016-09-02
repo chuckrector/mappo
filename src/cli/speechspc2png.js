@@ -22,7 +22,10 @@ fs.readFile(palFilename, (err, diskPalData) => {
     })
 
     const png = speechSpcConverter.convertToPng()
+    const targetFilename = speechSpcFilename + '.png'
 
-    png.pack().pipe(fs.createWriteStream(speechSpcFilename + '.png'))
+    png.pack().pipe(fs.createWriteStream(targetFilename))
+
+    console.log('converted', speechSpcFilename, 'to', targetFilename)
   })
 })
