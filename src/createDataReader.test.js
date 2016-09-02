@@ -7,6 +7,37 @@ const createDataReader = require('./createDataReader.js')
 const fill = require('lodash/fill')
 
 {
+  // empty buffer is at end
+  const reader = createDataReader({
+    data: Buffer.from('')
+  })
+
+  expect(reader.atEnd()).toBe(true)
+}
+
+{
+  // at end after whitespace
+  const reader = createDataReader({
+    data: Buffer.from(' ')
+  })
+
+  expect(reader.atEnd()).toBe(false)
+  reader.readWhitespace()
+  expect(reader.atEnd()).toBe(true)
+}
+
+{
+  // at end after string
+  const reader = createDataReader({
+    data: Buffer.from('This')
+  })
+
+  expect(reader.atEnd()).toBe(false)
+  reader.readStringVar()
+  expect(reader.atEnd()).toBe(true)
+}
+
+{
   // can read bytes
   const reader = createDataReader({
     data: Buffer.from([3, 2, 1])
@@ -110,4 +141,81 @@ const quadArray = [90000, 1, 65536]
 
   reader.position = data.length - 1
   expect(reader.readByte()).toBe(88)
+}
+
+{
+  // can read whitespace
+  const reader = createDataReader({
+    data: Buffer.from(' \n\r\tThis n that')
+  })
+
+  expect(reader.readWhitespace()).toBe(' \n\r\t')
+}
+
+{
+  // can read whitespace at end of data
+  const reader = createDataReader({
+    data: Buffer.from(' \n\r\t')
+  })
+
+  expect(reader.readWhitespace()).toBe(' \n\r\t')
+}
+
+{
+  // can read variable length string up to space
+  const reader = createDataReader({
+    data: Buffer.from('This n that')
+  })
+
+  expect(reader.readStringVar()).toBe('This')
+  reader.readWhitespace()
+  expect(reader.readStringVar()).toBe('n')
+  reader.readWhitespace()
+  expect(reader.readStringVar()).toBe('that')
+}
+
+{
+  // can read variable length string as byte
+  const doubleNegMax = -256 * 2
+  const reader = createDataReader({
+    data: Buffer.from('255 256 -1 ' + doubleNegMax)
+  })
+
+  expect(reader.readStringAsByte()).toBe(255)
+  reader.readWhitespace()
+  expect(reader.readStringAsByte()).toBe(0)
+  reader.readWhitespace()
+  expect(reader.readStringAsByte()).toBe(255)
+  reader.readWhitespace()
+  expect(reader.readStringAsByte()).toBe(0)
+}
+
+{
+  // can read variable length string as word
+  const doubleNegMax = -65536 * 2
+  const reader = createDataReader({
+    data: Buffer.from('65535 65536 -1 ' + doubleNegMax)
+  })
+
+  expect(reader.readStringAsWord()).toBe(65535)
+  reader.readWhitespace()
+  expect(reader.readStringAsWord()).toBe(0)
+  reader.readWhitespace()
+  expect(reader.readStringAsWord()).toBe(65535)
+}
+
+{
+  // can read variable length string as quad
+  const doubleNegMax = -4294967296 * 2
+  const reader = createDataReader({
+    data: Buffer.from('4294967295 4294967296 -1 ' + doubleNegMax)
+  })
+
+  expect(reader.readStringAsQuad()).toBe(4294967295)
+  reader.readWhitespace()
+  expect(reader.readStringAsQuad()).toBe(0)
+  reader.readWhitespace()
+  expect(reader.readStringAsQuad()).toBe(4294967295)
+  reader.readWhitespace()
+  expect(reader.readStringAsQuad()).toBe(0)
 }

@@ -4,8 +4,10 @@ const fs = require('fs')
 
 module.exports = (args) => {
   const buffer = Buffer.from(args.data)
+  const END_OF_DATA = null
   let position = 0
 
+  const atEnd = () => position >= buffer.length
   const readByte = () => buffer.readUInt8(position++)
 
   const readByteArray = (length) => {
@@ -30,6 +32,53 @@ module.exports = (args) => {
     position += length
 
     return s
+  }
+
+  const peekByte = () => {
+    if (atEnd()) {
+      return END_OF_DATA
+    }
+
+    const c = String.fromCharCode(buffer[position])
+    return c
+  }
+
+  const isWhitespace = (c) => /\s/.test(c)
+  const readWhitespace = () => {
+    let b
+    let s = ''
+
+    while (!atEnd() && isWhitespace(peekByte())) {
+      s += String.fromCharCode(readByte())
+    }
+
+    return s
+  }
+
+  const readStringVar = () => {
+    let s = ''
+
+    while (!atEnd() && !isWhitespace(peekByte())) {
+      s += String.fromCharCode(readByte())
+    }
+
+    return s
+  }
+
+  const readStringAsByte = () => parseInt(readStringVar(), 10) & 0xff
+  const readStringAsWord = () => parseInt(readStringVar(), 10) & 0xffff
+  const readStringAsQuad = () => {
+    let result = parseInt(readStringVar(), 10)
+
+    while (result < 0) {
+      result += 4294967296
+    }
+
+    if (result > 0xffffffff) {
+      result %= 4294967296
+    }
+
+    return result
   }
 
   const readWord = () => {
@@ -65,13 +114,19 @@ module.exports = (args) => {
   }
 
   return {
+    atEnd,
     readByte,
     readByteArray,
     readWord,
     readWordArray,
     readQuad,
     readQuadArray,
+    readWhitespace,
     readString,
+    readStringVar,
+    readStringAsByte,
+    readStringAsWord,
+    readStringAsQuad,
     get position() {
       return position
     },
