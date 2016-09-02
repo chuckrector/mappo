@@ -1,3 +1,15 @@
+# mappo
+
+Currently, a collection of command-line tools which can load and convert various [VERGE](http://verge-rpg.com/) file formats. The skeleton of an Electron app is also included. After I've written loaders and converters for all known VERGE file formats, I'll start building a map editor in the Electron app.
+
+# Why?
+
+Grue showed me his cool [maped4](https://github.com/mcgrue/maped4) project. It exploded when I tried to use it, so I created this project to isolate the issues and understand why. Node and Electron and VERGE are cool, so I kept going. It's a fun way to probe unfamiliar territory (Node and Electron) with a familiar face (VERGE).
+
+# Learnings
+
+- The `jquery-ui` npm package sucks. If you want jQuery UI in Node, directly package it.
+
 # Requirements
 
 - Node >= 5.10.0
