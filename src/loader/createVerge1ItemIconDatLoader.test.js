@@ -12,7 +12,7 @@ const numtiles = 21
 const itemicons = fill(Array(tileWidth * tileHeight * numtiles), 99)
 
 {
-  // can read SPEECH.SPC
+  // can read ITEMICON.DAT
   const loader = createVerge1ItemIconDatLoader({
     data: Buffer.concat([
       Buffer.from([21]),
