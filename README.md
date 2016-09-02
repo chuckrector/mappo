@@ -113,11 +113,11 @@ Output:
 
 - data/CRYSTAL.CR2.png
 
-![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of cr22png cli output")
 ![alt text](img/DARIN.CR2.png?raw=true "a sample of cr22png cli output")
-![alt text](img/DEXTER.CR2.png?raw=true "a sample of cr22png cli output")
-![alt text](img/GALFREY.CR2.png?raw=true "a sample of cr22png cli output")
 ![alt text](img/SARA.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/DEXTER.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/GALFREY.CR2.png?raw=true "a sample of cr22png cli output")
 
 # pcx2png
 
