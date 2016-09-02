@@ -1,9 +1,9 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('../createVerge1PalLoader')
-const createVerge1SmallFntLoader = require('../createVerge1SmallFntLoader')
-const createVerge1SmallFntConverter = require('../createVerge1SmallFntConverter')
+const createVerge1PalLoader = require('../loader/createVerge1PalLoader')
+const createVerge1SmallFntLoader = require('../loader/createVerge1SmallFntLoader')
+const createVerge1SmallFntConverter = require('../converter/createVerge1SmallFntConverter')
 
 const palFilename = process.argv[2]
 const smallFntFilename = process.argv[3]
