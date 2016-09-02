@@ -29,7 +29,7 @@ Output:
 
 # vsp2png
 
-**Support:** VERGE1 only
+**Support:** VERGE1 only (16x16, N tiles, 20 columns)
 
 Usage:
 
