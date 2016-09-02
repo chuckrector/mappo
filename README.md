@@ -119,6 +119,20 @@ Output:
 ![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of cr22png cli output")
 ![alt text](img/GALFREY.CR2.png?raw=true "a sample of cr22png cli output")
 
+# itemicondat2png
+
+**Support:** VERGE1 only (16x16, N tiles)
+
+Usage:
+
+- node src/cli/itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT
+
+Output:
+
+- data/ITEMICON.DAT.png
+
+![alt text](img/ITEMICON.DAT.png?raw=true "a sample of itemicondat2png cli output")
+
 # pcx2png
 
 Usage:
