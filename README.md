@@ -101,6 +101,24 @@ Output:
 
 ![alt text](img/speechspc2png-example.png?raw=true "a sample of speechspc2png cli output")
 
+# cr22png
+
+**Support:** VERGE1 only (96x96)
+
+Usage:
+
+- node src/cli/cr22png.js data/VERGE.PAL data/CRYSTAL.CR2
+
+Output:
+
+- data/CRYSTAL.CR2.png
+
+![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/DARIN.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/DEXTER.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/GALFREY.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/SARA.CR2.png?raw=true "a sample of cr22png cli output")
+
 # pcx2png
 
 Usage:
@@ -124,7 +142,6 @@ Output:
   - MISCICON.DAT
   - EQUIP.DAT
   - PARTY.DAT
-  - *.CR2
   - TRANS.TBL
   - compiled scripts: EFFECTS.VCS, STARTUP.VCS, etc.
   - save games
