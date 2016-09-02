@@ -89,7 +89,7 @@ Output:
 
 # speechspc2png
 
-**Support:** VERGE1 only (32x32, N tiles)
+**Support:** VERGE1 only (32x32, N tiles, 10 columns)
 
 Usage:
 
@@ -121,7 +121,7 @@ Output:
 
 # itemicondat2png
 
-**Support:** VERGE1 only (16x16, N tiles)
+**Support:** VERGE1 only (16x16, N tiles, 20 columns)
 
 Usage:
 
