@@ -21,6 +21,31 @@ In ancient times, I worked on my own map editor. http://chuckrector.com/old/ So,
 1. npm install
 2. npm start
 
+# Supported File Formats
+
+ | VERGE1 | VERGE2 | VERGE3
+--- |:---:|:---:|:---:
+PCX          | ✓ | ✗ | ✗
+BOX.RAW      | ✓ | ✗ | ✗
+CHR          | ✓ | ✗ | ✗
+CR2          | ✓ | ✗ | ✗
+EQUIP.DAT    | ✓ | ✗ | ✗
+ITEMICON.DAT | ✓ | ✗ | ✗
+ITEMS.DAT    | ✓ | ✗ | ✗
+MAIN.FNT     | ✓ | ✗ | ✗
+MAP          | ✓ | ✗ | ✗
+MISCICON.DAT | ✓ | ✗ | ✗
+PAL          | ✓ | ✗ | ✗
+PARTY.DAT    | ✓ | ✗ | ✗
+SMALL.FNT    | ✓ | ✗ | ✗
+SPEECH.SPC   | ✓ | ✗ | ✗
+TRANS.TBL    | ✓ | ✗ | ✗
+VSP          | ✓ | ✗ | ✗
+VCS          | ✗ | ✗ | ✗
+save games   | ✗ | ✗ | ✗
+
+# boxraw2png
+
 # boxraw2png
 
 **Support:** VERGE1 only (320x66)
@@ -431,8 +456,3 @@ Output:
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
-- more VERGE1-related formats
-  - compiled scripts: EFFECTS.VCS, STARTUP.VCS, etc.
-  - save games
-- VERGE2 formats
-- VERGE3 formats
