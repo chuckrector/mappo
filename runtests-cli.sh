@@ -16,3 +16,4 @@ node src/cli/itemsdat2json.js data/ITEMS.DAT
 node src/cli/equipdat2json.js data/EQUIP.DAT
 node src/cli/partydat2json.js data/PARTY.DAT
 node src/cli/map2json.js data/ISLAND.MAP
+node src/cli/transtbl2json.js data/TRANS.TBL
