@@ -45,13 +45,13 @@ Output:
 
 - data/DARIN.CHR.png
 
-![alt text](img/chr2png-example.png?raw=true "a sample of chr2png cli output")
-![alt text](img/chr2png-example6.png?raw=true "a sample of chr2png cli output")
-![alt text](img/chr2png-example3.png?raw=true "a sample of chr2png cli output")
-![alt text](img/chr2png-example4.png?raw=true "a sample of chr2png cli output")
-![alt text](img/chr2png-example5.png?raw=true "a sample of chr2png cli output")
-![alt text](img/chr2png-example2.png?raw=true "a sample of chr2png cli output")
-![alt text](img/chr2png-example7.png?raw=true "a sample of chr2png cli output")
+![alt text](img/DARIN.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/SARA.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/CRYSTAL.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/DEXTER.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/GALFREY.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/BUBBA.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/STAN.CHR.png?raw=true "a sample of chr2png cli output")
 
 # cr22png
 
