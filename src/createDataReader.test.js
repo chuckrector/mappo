@@ -219,3 +219,39 @@ const quadArray = [90000, 1, 65536]
   reader.readWhitespace()
   expect(reader.readStringAsQuad()).toBe(0)
 }
+
+{
+  // can read line to end of data
+  const reader = createDataReader({
+    data: Buffer.from('Attention:')
+  })
+
+  expect(reader.readLine()).toBe('Attention:')
+}
+
+{
+  // can read line to newline
+  const reader = createDataReader({
+    data: Buffer.from('Attention:\nBacon')
+  })
+
+  expect(reader.readLine()).toBe('Attention:')
+}
+
+{
+  // can read line to carriage return
+  const reader = createDataReader({
+    data: Buffer.from('Attention:\rBacon')
+  })
+
+  expect(reader.readLine()).toBe('Attention:')
+}
+
+{
+  // can read empty line
+  const reader = createDataReader({
+    data: Buffer.from('\nBacon')
+  })
+
+  expect(reader.readLine()).toBe('')
+}

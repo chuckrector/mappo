@@ -113,6 +113,16 @@ module.exports = (args) => {
     return result
   }
 
+  const readLine = () => {
+    let s = ''
+
+    while (!atEnd() && peekByte() !== '\n' && peekByte() !== '\r') {
+      s += String.fromCharCode(readByte())
+    }
+
+    return s
+  }
+
   return {
     atEnd,
     readByte,
@@ -127,6 +137,7 @@ module.exports = (args) => {
     readStringAsByte,
     readStringAsWord,
     readStringAsQuad,
+    readLine,
     get position() {
       return position
     },
