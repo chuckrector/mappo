@@ -13,3 +13,4 @@ node src/cli/vsp2png.js data/HAHN01.VSP
 node src/cli/itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT
 node src/cli/miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT
 node src/cli/itemsdat2json.js data/ITEMS.DAT
+node src/cli/equipdat2json.js data/EQUIP.DAT
