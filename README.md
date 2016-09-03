@@ -41,6 +41,7 @@ SMALL.FNT    | ✓ | ✗ | ✗
 SPEECH.SPC   | ✓ | ✗ | ✗
 TRANS.TBL    | ✓ | ✗ | ✗
 VSP          | ✓ | ✗ | ✗
+VC           | ✗ | ✗ | ✗
 VCS          | ✗ | ✗ | ✗
 save games   | ✗ | ✗ | ✗
 
