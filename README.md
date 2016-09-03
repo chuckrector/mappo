@@ -188,9 +188,7 @@ Output:
 
 - data/MAIN.FNT.png
 
-**Note:** Gray background added here for legibility. Actual output has a transparent background.
-
-![alt text](img/mainfnt2png-example.png?raw=true "a sample of mainfnt2png cli output")
+![alt text](img/MAIN.FNT.png?raw=true "a sample of mainfnt2png cli output")
 
 # map2json
 
@@ -378,9 +376,7 @@ Output:
 
 - data/SMALL.FNT.png
 
-**Note:** Gray background added here for legibility. Actual output has a transparent background.
-
-![alt text](img/smallfnt2png-example.png?raw=true "a sample of smallfnt2png cli output")
+![alt text](img/SMALL.FNT.png?raw=true "a sample of smallfnt2png cli output")
 
 # speechspc2png
 
