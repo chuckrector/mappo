@@ -1,6 +1,7 @@
 "use strict"
 
 const fs = require('fs')
+const assert = require('assert')
 
 module.exports = (args) => {
   const buffer = Buffer.from(args.data)
@@ -101,6 +102,32 @@ module.exports = (args) => {
     return result
   }
 
+  const readWordArrayCompressed = (length) => {
+    const bufsize = readQuad()
+
+    assert.equal(bufsize % 2, 0, 'expected compressed word array size to be divisible by two but got ' + bufsize)
+
+    const decompressed = []
+
+    do {
+      let w = readWord()
+      if ((w & 0xff00) === 0xff00) {
+        const run = w & 0xff
+        w = readWord()
+        for (let j = 0; j < run; j++) {
+          decompressed.push(w)
+        }
+      } else {
+        decompressed.push(w)
+      }
+    } while (decompressed.length < length)
+
+    return {
+      bufsize,
+      decompressed,
+    }
+  }
+
   const readQuad = () => {
     const value = buffer.readUInt32LE(position)
     position += 4
@@ -134,6 +161,7 @@ module.exports = (args) => {
     readByteArray,
     readWord,
     readWordArray,
+    readWordArrayCompressed,
     readQuad,
     readQuadArray,
     readWhitespace,

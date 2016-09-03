@@ -269,3 +269,22 @@ const quadArray = [90000, 1, 65536]
   expect(reader.atMatch('// Attention: Bacon')).toBe(true)
   expect(reader.atMatch('// Attention: Bacon Bits')).toBe(false)
 }
+
+{
+  // can read compressed word array
+  const buffer = Buffer.concat([
+    Buffer.from(new Uint32Array([4 * 2]).buffer),
+    Buffer.from(new Uint16Array([1, ((16 * 16) - 2) | 0xff00, 2, 3]).buffer),
+  ])
+  const reader = createDataReader({
+    data: buffer
+  })
+
+  let decompressedLayout = fill(Array(16 * 16), 2)
+  decompressedLayout[0] = 1
+  decompressedLayout[255] = 3
+
+  const data = reader.readWordArrayCompressed(16 * 16)
+  expect(data.bufsize).toEqual(4 * 2)
+  expect(data.decompressed).toEqual(decompressedLayout)
+}
