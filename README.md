@@ -422,7 +422,9 @@ Output:
 
 # transtbl2json
 
-**Support:** VERGE1 only (256x256 bytes)
+**Support:** VERGE1, VERGE2 (256x256 bytes)
+
+The format is identical betwteen VERGE1 and VERGE2.
 
 Usage:
 
