@@ -41,10 +41,10 @@ PAL          | ✓ | ✗ | ✗
 PARTY.DAT    | ✓ | n/a | n/a
 SMALL.FNT    | ✓ | n/a | n/a
 SPEECH.SPC   | ✓ | n/a | n/a
-TRANS.TBL    | ✓ | ✓ | ✗
+TRANS.TBL    | ✓ | ✓ | n/a
 VSP          | ✓ | ✗ | ✗
 VC           | ✗ | ✗ | ✗
-VCS          | ✗ | ✗ | ✗
+VCS          | ✗ | ✗ | n/a
 save games   | ✗ | n/a | n/a
 
 # boxraw2png
