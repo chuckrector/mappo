@@ -27,25 +27,25 @@ What does support mean? Currently, at least one loader. Optionally, one or more 
 
  | VERGE1 | VERGE2 | VERGE3
 --- |:---:|:---:|:---:
-PCX          | ✓ | ✗ | ✗
-BOX.RAW      | ✓ | ✗ | ✗
+PCX          | ✓ | ✓ | ✓
+BOX.RAW      | ✓ | n/a | n/a
 CHR          | ✓ | ✗ | ✗
-CR2          | ✓ | ✗ | ✗
-EQUIP.DAT    | ✓ | ✗ | ✗
-ITEMICON.DAT | ✓ | ✗ | ✗
-ITEMS.DAT    | ✓ | ✗ | ✗
-MAIN.FNT     | ✓ | ✗ | ✗
+CR2          | ✓ | n/a | n/a
+EQUIP.DAT    | ✓ | n/a | n/a
+ITEMICON.DAT | ✓ | n/a | n/a
+ITEMS.DAT    | ✓ | n/a | n/a
+MAIN.FNT     | ✓ | n/a | n/a
 MAP          | ✓ | ✗ | ✗
-MISCICON.DAT | ✓ | ✗ | ✗
+MISCICON.DAT | ✓ | n/a | n/a
 PAL          | ✓ | ✗ | ✗
-PARTY.DAT    | ✓ | ✗ | ✗
-SMALL.FNT    | ✓ | ✗ | ✗
-SPEECH.SPC   | ✓ | ✗ | ✗
-TRANS.TBL    | ✓ | ✗ | ✗
+PARTY.DAT    | ✓ | n/a | n/a
+SMALL.FNT    | ✓ | n/a | n/a
+SPEECH.SPC   | ✓ | n/a | n/a
+TRANS.TBL    | ✓ | ✓ | ✗
 VSP          | ✓ | ✗ | ✗
 VC           | ✗ | ✗ | ✗
 VCS          | ✗ | ✗ | ✗
-save games   | ✗ | ✗ | ✗
+save games   | ✗ | n/a | n/a
 
 # boxraw2png
 
