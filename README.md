@@ -25,7 +25,7 @@ In ancient times, I worked on my own map editor. http://chuckrector.com/old/ So,
 
  | VERGE1 | VERGE2 | VERGE3
 --- |:---:|:---:|:---:
-PCX          | ✓ | ✗ | ✗
+PCX          | *✓* | ✗ | ✗
 BOX.RAW      | ✓ | ✗ | ✗
 CHR          | ✓ | ✗ | ✗
 CR2          | ✓ | ✗ | ✗
