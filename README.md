@@ -404,7 +404,7 @@ Output:
 
 - data/HAHN01.VSP.png
 
-![alt text](img/vsp2png-example.png?raw=true "a sample of vsp2png cli output")
+![alt text](img/HAHN01.VSP.png?raw=true "a sample of vsp2png cli output")
 
 # TODO
 
