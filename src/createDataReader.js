@@ -8,6 +8,10 @@ module.exports = (args) => {
   let position = 0
 
   const atEnd = () => position >= buffer.length
+  const atMatch = (match) => {
+    return buffer.toString('utf-8', position, position + match.length) === match
+  }
+
   const readByte = () => buffer.readUInt8(position++)
 
   const readByteArray = (length) => {
@@ -125,6 +129,7 @@ module.exports = (args) => {
 
   return {
     atEnd,
+    atMatch,
     readByte,
     readByteArray,
     readWord,

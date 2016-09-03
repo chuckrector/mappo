@@ -255,3 +255,17 @@ const quadArray = [90000, 1, 65536]
 
   expect(reader.readLine()).toBe('')
 }
+
+{
+  // at match
+  const reader = createDataReader({
+    data: Buffer.from('// Attention: Bacon')
+  })
+
+  expect(reader.atMatch('?')).toBe(false)
+  expect(reader.atMatch('/')).toBe(true)
+  expect(reader.atMatch('//')).toBe(true)
+  expect(reader.atMatch('// Attention:')).toBe(true)
+  expect(reader.atMatch('// Attention: Bacon')).toBe(true)
+  expect(reader.atMatch('// Attention: Bacon Bits')).toBe(false)
+}
