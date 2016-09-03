@@ -392,6 +392,26 @@ Output:
 
 ![alt text](img/SPEECH.SPC.png?raw=true "a sample of speechspc2png cli output")
 
+# transtbl2json
+
+**Support:** VERGE1 only (256x256 bytes)
+
+Usage:
+
+- node src/cli/transtbl2json.js data/TRANS.TBL
+
+Output:
+
+- data/TRANS.TBL.json
+
+**Note:** Output here is abbreviated and pretty-printed for readability.
+
+```json
+{
+  "transparencytbl": [0, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, ...]
+}
+```
+
 # vsp2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
