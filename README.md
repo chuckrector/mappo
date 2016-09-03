@@ -192,7 +192,7 @@ Output:
 
 # map2json
 
-***Support:** VERGE1 only
+**Support:** VERGE1 only
 
 Usage:
 
