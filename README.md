@@ -264,6 +264,53 @@ Output:
 }
 ```
 
+# partydat2json
+
+**Support:** VERGE1 only
+
+Usage:
+
+- node src/cli/partydat2json.js data/PARTY.DAT
+
+Output:
+
+- data/PARTY.DAT.json
+
+**Note:** Output here is pretty-printed for readability.
+
+```json
+{
+  "tchars": 5,
+  "party": [
+    {
+      "chr": "DARIN.CHR",
+      "cr2": "DARIN.CR2",
+      "dat": "DARIN.DAT"
+    },
+    {
+      "chr": "SARA.CHR",
+      "cr2": "SARA.CR2",
+      "dat": "SARA.DAT"
+    },
+    {
+      "chr": "DEXTER.CHR",
+      "cr2": "DEXTER.CR2",
+      "dat": "DEXTER.DAT"
+    },
+    {
+      "chr": "CRYSTAL.CHR",
+      "cr2": "CRYSTAL.CR2",
+      "dat": "CRYSTAL.DAT"
+    },
+    {
+      "chr": "GALFREY.CHR",
+      "cr2": "GALFREY.CR2",
+      "dat": "GALFREY.DAT"
+    }
+  ]
+}
+```
+
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
