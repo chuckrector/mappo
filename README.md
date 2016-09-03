@@ -37,7 +37,7 @@ ITEMS.DAT    | ✓ | n/a | n/a
 MAIN.FNT     | ✓ | n/a | n/a
 MAP          | ✓ | ✗ | ✗
 MISCICON.DAT | ✓ | n/a | n/a
-PAL          | ✓ | ✗ | ✗
+PAL          | ✓ | n/a | n/a
 PARTY.DAT    | ✓ | n/a | n/a
 SMALL.FNT    | ✓ | n/a | n/a
 SPEECH.SPC   | ✓ | n/a | n/a
