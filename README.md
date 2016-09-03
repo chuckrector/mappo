@@ -46,8 +46,6 @@ save games   | ✗ | ✗ | ✗
 
 # boxraw2png
 
-# boxraw2png
-
 **Support:** VERGE1 only (320x66)
 
 Usage:
