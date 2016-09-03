@@ -360,9 +360,9 @@ Output:
 
 - data/STAN.PCX.png
 
-![alt text](img/pcx2png-example1.png?raw=true "a sample of pcx2png cli output")
-![alt text](img/pcx2png-example2.png?raw=true "a sample of pcx2png cli output")
-![alt text](img/pcx2png-example5.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/VERGE320.PCX.png?raw=true "a sample of pcx2png cli output")
 
 # smallfnt2png
 
@@ -390,7 +390,7 @@ Output:
 
 - data/SPEECH.SPC.png
 
-![alt text](img/speechspc2png-example.png?raw=true "a sample of speechspc2png cli output")
+![alt text](img/SPEECH.SPC.png?raw=true "a sample of speechspc2png cli output")
 
 # vsp2png
 
