@@ -207,6 +207,63 @@ Output:
   ]
 ```
 
+# equipdat2json
+
+**Support:** VERGE1 only
+
+Usage:
+
+- node src/cli/equipdat2json.js data/EQUIP.DAT
+
+Output:
+
+- data/EQUIP.DAT.json
+
+**Note:** Output here is abbreviated and pretty-printed for readability.
+
+```json
+{
+  "numitems": 33,
+  "equip": [
+    {
+      "comments": [
+        "// Dagger"
+      ],
+      "str": 5,
+      "equipable": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "comments": [
+        "// Short Sword"
+      ],
+      "str": 22,
+      "equipable": [
+        1,
+        5
+      ]
+    },
+    {
+      "comments": [
+        "// Wand"
+      ],
+      "str": 3,
+      "mag": 5,
+      "equipable": [
+        3,
+        4
+      ]
+    },
+    ...
+  ]
+}
+```
+
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
