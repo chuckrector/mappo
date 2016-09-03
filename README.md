@@ -31,7 +31,7 @@ Output:
 
 - data/BOX.RAW.png
 
-![alt text](img/boxraw2png-example.png?raw=true "a sample of boxraw2png cli output")
+![alt text](img/BOX.RAW.png?raw=true "a sample of boxraw2png cli output")
 
 # chr2png
 
