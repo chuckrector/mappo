@@ -6,6 +6,8 @@ Currently, a collection of command-line tools which can load and convert various
 
 Grue showed me his cool [maped4](https://github.com/mcgrue/maped4) project. It exploded when I tried to use it, so I created this project to isolate the issues and understand why. Node and Electron and VERGE are cool, so I kept going. It's a fun way to probe unfamiliar territory (Node and Electron) with a familiar face (VERGE).
 
+In ancient times, I worked on my own map editor. http://chuckrector.com/old/ So, I have a soft spot. Partly, this project is about "Can I do what I once did more easily?" Partly, it's also about "How much more powerful am I now?"
+
 # Learnings
 
 - The `jquery-ui` npm package sucks. If you want jQuery UI in Node, directly package it.
