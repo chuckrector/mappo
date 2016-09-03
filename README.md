@@ -311,6 +311,104 @@ Output:
 }
 ```
 
+# map2json
+
+***Support:** VERGE1 only
+
+Usage:
+
+- node src/cli/map2json.js data/ISLAND.MAP
+
+Output:
+
+- data/ISLAND.MAP.json
+
+**Note:** Output here is abbreviated and pretty-printed for readability.
+
+```json
+{
+  "version": 4,
+  "vsp0name": "HAHN01.VSP",
+  "musname": "MEDIOEVA.MOD",
+  "layerc": 0,
+  "pmultx": 1,
+  "pdivx": 1,
+  "levelname": "Paradise Isle",
+  "showname": 1,
+  "saveflag": 1,
+  "startx": 9,
+  "starty": 1,
+  "hide": 1,
+  "warp": 1,
+  "xsize": 50,
+  "ysize": 50,
+  "b": 0,
+  "padding": [...],
+  "map0": [...],
+  "map1": [...],
+  "mapp": [...],
+  "zone": [{
+    "zonename": "Default",
+    "zonenamePadding": 0,
+    "callevent": 0,
+    "percent": 0,
+    "delay": 0,
+    "aaa": 0,
+    "savedesc": "Paradise Isle",
+    "savedescPadding": 0
+  }, ...],
+  "chrlist": ["Crystal.chr", ...],
+  "entities": 1,
+  "party": [{
+    "x": 46,
+    "y": 26,
+    "facing": 0,
+    "moving": 0,
+    "movcnt": 0,
+    "framectr": 0,
+    "specframe": 0,
+    "chrindex": 5,
+    "movecode": 0,
+    "activmode": 0,
+    "obsmode": 1,
+    "padding": [0, 0, 0],
+    "actscript": 2,
+    "movescript": 0,
+    "speed": 2,
+    "speedct": 0,
+    "step": 0,
+    "delay": 0,
+    "data1": 0,
+    "data2": 0,
+    "data3": 0,
+    "data4": 0,
+    "delayct": 0,
+    "adjactv": 0,
+    "x1": 0,
+    "y1": 0,
+    "x2": 0,
+    "y2": 0,
+    "curcmd": 0,
+    "cmdarg": 0,
+    "scriptofs": 0,
+    "face": 1,
+    "chasing": 0,
+    "chasespeed": 0,
+    "chasedist": 0,
+    "cx": 0,
+    "cy": 0,
+    "expand": 0,
+    "entitydesc": "Crystal"
+  }],
+  "nummovescripts": 1,
+  "msbufsize": 23,
+  "msofstbl": [0],
+  "msbuf": [89, 51, 87, ...],
+  "numscripts": 11,
+  "scriptofstbl": [0, 728, 3118, ...],
+  "mapvc": [3, 0, 1, 151, 0, 0, 0, 255, ...],
+}
+```
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
