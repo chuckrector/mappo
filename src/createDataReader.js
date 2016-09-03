@@ -25,6 +25,29 @@ module.exports = (args) => {
     return result
   }
 
+  const readByteArrayCompressed = (length) => {
+    const bufsize = readQuad()
+    const decompressed = []
+
+    do {
+      let w = readByte()
+      if (w === 0xff) {
+        const run = readByte()
+        w = readByte()
+        for (let j = 0; j < run; j++) {
+          decompressed.push(w)
+        }
+      } else {
+        decompressed.push(w)
+      }
+    } while (decompressed.length < length)
+
+    return {
+      bufsize,
+      decompressed,
+    }
+  }
+
   const readString = (length) => {
     let s = buffer.toString('utf-8', position, position + length)
 
@@ -159,6 +182,7 @@ module.exports = (args) => {
     atMatch,
     readByte,
     readByteArray,
+    readByteArrayCompressed,
     readWord,
     readWordArray,
     readWordArrayCompressed,

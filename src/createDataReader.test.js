@@ -288,3 +288,22 @@ const quadArray = [90000, 1, 65536]
   expect(data.bufsize).toEqual(4 * 2)
   expect(data.decompressed).toEqual(decompressedLayout)
 }
+
+{
+  // can read compressed byte array
+  const buffer = Buffer.concat([
+    Buffer.from(new Uint32Array([5]).buffer),
+    Buffer.from([1, 0xff, ((16 * 16) - 2), 2, 3]),
+  ])
+  const reader = createDataReader({
+    data: buffer
+  })
+
+  let decompressedLayout = fill(Array(16 * 16), 2)
+  decompressedLayout[0] = 1
+  decompressedLayout[255] = 3
+
+  const data = reader.readByteArrayCompressed(16 * 16)
+  expect(data.bufsize).toEqual(5)
+  expect(data.decompressed).toEqual(decompressedLayout)
+}
