@@ -23,6 +23,8 @@ In ancient times, I worked on my own map editor. http://chuckrector.com/old/ So,
 
 # Supported File Formats
 
+What does support mean? Currently, at least one loader. Optionally, one or more converters.
+
  | VERGE1 | VERGE2 | VERGE3
 --- |:---:|:---:|:---:
 PCX          | ✓ | ✗ | ✗
