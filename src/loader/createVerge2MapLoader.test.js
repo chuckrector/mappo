@@ -106,6 +106,7 @@ const dummyMap = require('../dummyVerge2Map')
     movescript: 88,
     ctr: 88,
     mode: 88,
+    modePadding: [88, 88],
     step: 77,
     delay: 77,
     stepctr: 77,

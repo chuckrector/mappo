@@ -56,6 +56,7 @@ module.exports = (args) => {
     const movescript = reader.readByte()
     const ctr = reader.readByte()
     const mode = reader.readByte()
+    const modePadding = reader.readByteArray(2)
 
     const step = reader.readWord()
     const delay = reader.readWord()
@@ -77,7 +78,7 @@ module.exports = (args) => {
     const desc = reader.readString(20)
 
     const bytesRead = reader.position - startPosition;
-    assert.equal(bytesRead, 98, 'expected 256 bytes but read ' + bytesRead)
+    assert.equal(bytesRead, 100, 'expected 100 bytes but read ' + bytesRead)
 
     return {
       x,
@@ -104,6 +105,7 @@ module.exports = (args) => {
       movescript,
       ctr,
       mode,
+      modePadding,
       step,
       delay,
       stepctr,

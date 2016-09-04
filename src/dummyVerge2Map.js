@@ -93,8 +93,8 @@ const entity = Buffer.concat([
   Buffer.from(fill(Array(12), 99)),
   // animofs, scriptofs
   Buffer.from(new Uint32Array([2, 1]).buffer),
-  // face, actm, movecode, movescript, ctr, mode
-  Buffer.from(fill(Array(6), 88)),
+  // face, actm, movecode, movescript, ctr, mode, modePadding (2 bytes)
+  Buffer.from(fill(Array(6 + 2), 88)),
   // step, delay, stepctr, delayctr, data1..data6
   Buffer.from(new Uint16Array(fill(Array(10), 77)).buffer),
   // actscript, expand1..expand4
