@@ -12,11 +12,11 @@ module.exports = (args) => {
 
     let items = []
     for (let i = 0; i < numitems; i++) {
-      const name = reader.readStringVar()
+      const name = reader.readString()
       reader.readWhitespace()
       const icon = reader.readStringAsWord()
       reader.readWhitespace()
-      const desc = reader.readStringVar()
+      const desc = reader.readString()
       reader.readWhitespace()
       const useflag = reader.readStringAsByte()
       reader.readWhitespace()

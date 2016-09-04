@@ -33,7 +33,7 @@ const fill = require('lodash/fill')
   })
 
   expect(reader.atEnd()).toBe(false)
-  reader.readStringVar()
+  reader.readString()
   expect(reader.atEnd()).toBe(true)
 }
 
@@ -167,11 +167,11 @@ const quadArray = [90000, 1, 65536]
     data: Buffer.from('This n that')
   })
 
-  expect(reader.readStringVar()).toBe('This')
+  expect(reader.readString()).toBe('This')
   reader.readWhitespace()
-  expect(reader.readStringVar()).toBe('n')
+  expect(reader.readString()).toBe('n')
   reader.readWhitespace()
-  expect(reader.readStringVar()).toBe('that')
+  expect(reader.readString()).toBe('that')
 }
 
 {

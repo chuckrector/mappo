@@ -88,7 +88,7 @@ createDataReader = (args) => {
     return s
   }
 
-  const readStringVar = () => {
+  const readString = () => {
     let s = ''
 
     while (!atEnd() && !isWhitespace(peekByte())) {
@@ -98,10 +98,10 @@ createDataReader = (args) => {
     return s
   }
 
-  const readStringAsByte = () => parseInt(readStringVar(), 10) & 0xff
-  const readStringAsWord = () => parseInt(readStringVar(), 10) & 0xffff
+  const readStringAsByte = () => parseInt(readString(), 10) & 0xff
+  const readStringAsWord = () => parseInt(readString(), 10) & 0xffff
   const readStringAsQuad = () => {
-    let result = parseInt(readStringVar(), 10)
+    let result = parseInt(readString(), 10)
 
     while (result < 0) {
       result += 4294967296
@@ -198,7 +198,7 @@ createDataReader = (args) => {
     readQuadArray,
     readWhitespace,
     readStringFixed,
-    readStringVar,
+    readString,
     readStringAsByte,
     readStringAsWord,
     readStringAsQuad,

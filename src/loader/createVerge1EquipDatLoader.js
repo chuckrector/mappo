@@ -24,51 +24,51 @@ module.exports = (args) => {
         }
 
         if (reader.atMatch('ATK')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.str = parseInt(reader.readStringVar(), 10)
+          blob.str = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('DEF')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.end = parseInt(reader.readStringVar(), 10)
+          blob.end = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('MAG')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.mag = parseInt(reader.readStringVar(), 10)
+          blob.mag = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('MGR')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.mgr = parseInt(reader.readStringVar(), 10)
+          blob.mgr = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('HIT')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.hit = parseInt(reader.readStringVar(), 10)
+          blob.hit = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('DOD')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.dod = parseInt(reader.readStringVar(), 10)
+          blob.dod = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('MBL')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.mbl = parseInt(reader.readStringVar(), 10)
+          blob.mbl = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('FER')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.fer = parseInt(reader.readStringVar(), 10)
+          blob.fer = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('REA')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.rea = parseInt(reader.readStringVar(), 10)
+          blob.rea = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('ONEQUIP')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.onequip = parseInt(reader.readStringVar(), 10)
+          blob.onequip = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('ONDEEQUIP')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
-          blob.ondeequip = parseInt(reader.readStringVar(), 10)
+          blob.ondeequip = parseInt(reader.readString(), 10)
         } else if (reader.atMatch('EQABLE')) {
-          reader.readStringVar()
+          reader.readString()
           reader.readWhitespace()
           blob.equipable = reader.readLine().split(' ').map((v) => parseInt(v, 10))
         }
