@@ -457,6 +457,12 @@ Output:
 - data/v2/VECNA.CHR.png
 
 ![alt text](img/VECNA.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](img/SHIVARA.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](img/SEREN.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](img/LEPER.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](img/JITORO.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](img/EMIRA.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](img/ELGARD.CHR.png?raw=true "a sample of v2chr2png cli output")
 
 # v2map2json
 
