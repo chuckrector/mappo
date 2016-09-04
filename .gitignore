@@ -2,3 +2,4 @@ node_modules
 *.sublime*
 data/*.png
 data/*.json
+data/v2/*.json
