@@ -29,7 +29,7 @@ What does support mean? Currently, at least one loader. Optionally, one or more 
 --- |:---:|:---:|:---:
 PCX          | ✓ | ✓ | ✓
 BOX.RAW      | ✓ | n/a | n/a
-CHR          | ✓ | ✗ | ✗
+CHR          | ✓ | ✓ | ✗
 CR2          | ✓ | n/a | n/a
 EQUIP.DAT    | ✓ | n/a | n/a
 ITEMICON.DAT | ✓ | n/a | n/a
