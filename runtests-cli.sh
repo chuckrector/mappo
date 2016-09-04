@@ -20,3 +20,4 @@ node src/cli/transtbl2json.js data/TRANS.TBL
 node src/cli/v2map2json.js data/v2/v2world.map
 node src/cli/v2vsp2pal.js data/v2/GRUE0041.VSP
 node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR
+node src/cli/v2vsp2png.js data/v2/GRUE0041.VSP
