@@ -53,11 +53,11 @@ save games   | ✗ | n/a | n/a
 
 Usage:
 
-- node src/cli/boxraw2png.js data/VERGE.PAL data/BOX.RAW
+`node src/cli/boxraw2png.js data/VERGE.PAL data/BOX.RAW`
 
 Output:
 
-- data/BOX.RAW.png
+`data/BOX.RAW.png`
 
 ![alt text](img/BOX.RAW.png?raw=true "a sample of boxraw2png cli output")
 
