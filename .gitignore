@@ -3,3 +3,4 @@ node_modules
 data/*.png
 data/*.json
 data/v2/*.json
+data/v2/*.png

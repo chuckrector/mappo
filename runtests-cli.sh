@@ -18,3 +18,4 @@ node src/cli/partydat2json.js data/PARTY.DAT
 node src/cli/map2json.js data/ISLAND.MAP
 node src/cli/transtbl2json.js data/TRANS.TBL
 node src/cli/v2map2json.js data/v2/v2world.map
+node src/cli/v2vsp2pal.js data/v2/GRUE0041.VSP
