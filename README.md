@@ -424,7 +424,7 @@ Output:
 
 **Support:** VERGE1, VERGE2 (256x256 bytes)
 
-The format is identical betwteen VERGE1 and VERGE2.
+This format is identical between VERGE1 and VERGE2.
 
 Usage:
 
