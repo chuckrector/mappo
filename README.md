@@ -564,7 +564,8 @@ Output:
   "mapvctbl": [0, 4, 40, ...],
   "codesize": 11044,
   "mapvc": [3, 233, 1, ...]
-}```
+}
+```
 
 # vsp2png
 
