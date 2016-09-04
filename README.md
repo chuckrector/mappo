@@ -53,7 +53,7 @@ save games   | ✗ | n/a | n/a
 
 Usage:
 
-`node src/cli/boxraw2png.js data/VERGE.PAL data/BOX.RAW`
+- `node src/cli/boxraw2png.js data/VERGE.PAL data/BOX.RAW`
 
 Output:
 
@@ -67,11 +67,11 @@ Output:
 
 Usage:
 
-- node src/cli/chr2png.js data/VERGE.PAL data/DARIN.CHR
+- `node src/cli/chr2png.js data/VERGE.PAL data/DARIN.CHR`
 
 Output:
 
-- data/DARIN.CHR.png
+- `data/DARIN.CHR.png`
 
 ![alt text](img/DARIN.CHR.png?raw=true "a sample of chr2png cli output")
 ![alt text](img/SARA.CHR.png?raw=true "a sample of chr2png cli output")
@@ -87,11 +87,11 @@ Output:
 
 Usage:
 
-- node src/cli/cr22png.js data/VERGE.PAL data/CRYSTAL.CR2
+- `node src/cli/cr22png.js data/VERGE.PAL data/CRYSTAL.CR2`
 
 Output:
 
-- data/CRYSTAL.CR2.png
+- `data/CRYSTAL.CR2.png`
 
 ![alt text](img/DARIN.CR2.png?raw=true "a sample of cr22png cli output")
 ![alt text](img/SARA.CR2.png?raw=true "a sample of cr22png cli output")
@@ -105,11 +105,11 @@ Output:
 
 Usage:
 
-- node src/cli/equipdat2json.js data/EQUIP.DAT
+- `node src/cli/equipdat2json.js data/EQUIP.DAT`
 
 Output:
 
-- data/EQUIP.DAT.json
+- `data/EQUIP.DAT.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -162,11 +162,11 @@ Output:
 
 Usage:
 
-- node src/cli/itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT
+- `node src/cli/itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT`
 
 Output:
 
-- data/ITEMICON.DAT.png
+- `data/ITEMICON.DAT.png`
 
 ![alt text](img/ITEMICON.DAT.png?raw=true "a sample of itemicondat2png cli output")
 
@@ -176,11 +176,11 @@ Output:
 
 Usage:
 
-- node src/cli/itemsdat2json.js data/ITEMS.DAT
+- `node src/cli/itemsdat2json.js data/ITEMS.DAT`
 
 Output:
 
-- data/ITEMS.DAT.json
+- `data/ITEMS.DAT.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -210,11 +210,11 @@ Output:
 
 Usage:
 
-- node src/cli/mainfnt2png.js data/VERGE.PAL data/MAIN.FNT
+- `node src/cli/mainfnt2png.js data/VERGE.PAL data/MAIN.FNT`
 
 Output:
 
-- data/MAIN.FNT.png
+- `data/MAIN.FNT.png`
 
 ![alt text](img/MAIN.FNT.png?raw=true "a sample of mainfnt2png cli output")
 
@@ -224,11 +224,11 @@ Output:
 
 Usage:
 
-- node src/cli/map2json.js data/ISLAND.MAP
+- `node src/cli/map2json.js data/ISLAND.MAP`
 
 Output:
 
-- data/ISLAND.MAP.json
+- `data/ISLAND.MAP.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -323,11 +323,11 @@ Output:
 
 Usage:
 
-- node src/cli/miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT
+- `node src/cli/miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT`
 
 Output:
 
-- data/MISCICON.DAT.png
+- `data/MISCICON.DAT.png`
 
 ![alt text](img/MISCICON.DAT.png?raw=true "a sample of miscicondat2png cli output")
 
@@ -337,11 +337,11 @@ Output:
 
 Usage:
 
-- node src/cli/partydat2json.js data/PARTY.DAT
+- `node src/cli/partydat2json.js data/PARTY.DAT`
 
 Output:
 
-- data/PARTY.DAT.json
+- `data/PARTY.DAT.json`
 
 **Note:** Output here is pretty-printed for readability.
 
@@ -382,11 +382,11 @@ Output:
 
 Usage:
 
-- node src/cli/pcx2png.js data/STAN.PCX
+- `node src/cli/pcx2png.js data/STAN.PCX`
 
 Output:
 
-- data/STAN.PCX.png
+- `data/STAN.PCX.png`
 
 ![alt text](img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
 ![alt text](img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
@@ -398,11 +398,11 @@ Output:
 
 Usage:
 
-- node src/cli/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT
+- `node src/cli/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT`
 
 Output:
 
-- data/SMALL.FNT.png
+- `data/SMALL.FNT.png`
 
 ![alt text](img/SMALL.FNT.png?raw=true "a sample of smallfnt2png cli output")
 
@@ -412,11 +412,11 @@ Output:
 
 Usage:
 
-- node src/cli/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC
+- `node src/cli/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC`
 
 Output:
 
-- data/SPEECH.SPC.png
+- `data/SPEECH.SPC.png`
 
 ![alt text](img/SPEECH.SPC.png?raw=true "a sample of speechspc2png cli output")
 
@@ -428,11 +428,11 @@ The format is identical betwteen VERGE1 and VERGE2.
 
 Usage:
 
-- node src/cli/transtbl2json.js data/TRANS.TBL
+- `node src/cli/transtbl2json.js data/TRANS.TBL`
 
 Output:
 
-- data/TRANS.TBL.json
+- `data/TRANS.TBL.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -450,11 +450,11 @@ See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
 
 Usage:
 
-- node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR
+- `node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
 
 Output:
 
-- data/v2/VECNA.CHR.png
+- `data/v2/VECNA.CHR.png`
 
 ![alt text](img/VECNA.CHR.png?raw=true "a sample of v2chr2png cli output")
 ![alt text](img/SHIVARA.CHR.png?raw=true "a sample of v2chr2png cli output")
@@ -470,11 +470,11 @@ Output:
 
 Usage:
 
-- node src/cli/v2map2json.js data/v2/town.map
+- `node src/cli/v2map2json.js data/v2/town.map`
 
 Output:
 
-- data/v2/town.map.json
+- `data/v2/town.map.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -597,11 +597,11 @@ This is a temporary helper for `v2chr2png`.
 
 Usage:
 
-- node src/cli/v2vsp2pal.js data/v2/GRUE0041.VSP
+- `node src/cli/v2vsp2pal.js data/v2/GRUE0041.VSP`
 
 Output:
 
-- VERGE2.PAL
+- `VERGE2.PAL`
 
 # vsp2png
 
@@ -609,11 +609,11 @@ Output:
 
 Usage:
 
-- node src/cli/vsp2png.js data/HAHN01.VSP
+- `node src/cli/vsp2png.js data/HAHN01.VSP`
 
 Output:
 
-- data/HAHN01.VSP.png
+- `data/HAHN01.VSP.png`
 
 ![alt text](img/HAHN01.VSP.png?raw=true "a sample of vsp2png cli output")
 
