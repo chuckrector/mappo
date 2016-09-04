@@ -7,7 +7,7 @@ module.exports = ({palette, fxsize, fysize, totalframes, imagedata}) => {
     palette,
     tileWidth: fxsize,
     tileHeight: fysize,
-    columns: totalframes,
+    columns: 5,
     numtiles: totalframes,
     raw8bitData: imagedata,
   })

@@ -24,6 +24,6 @@ const palette = require('../dummyPalette')
 
   const png = converter.convertToPng()
 
-  expect(png.width).toBe(fxsize * totalframes)
+  expect(png.width).toBe(fxsize * 5)
   expect(png.height).toBe(fysize)
 }
