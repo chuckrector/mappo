@@ -609,20 +609,13 @@ Output:
 
 Usage:
 
-- `node src/cli/v2vsp2png.js data/v2/GRUE0040.VSP`
+- `node src/cli/v2vsp2png.js data/v2/RUINS.VSP`
 
 Output:
 
-- `data/v2/GRUE0041.VSP.png`
+- `data/v2/RUINS.VSP.png`
 
-![alt text](img/GRUE0040.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/GRUE0041.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/GRUE0042.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/GRUE0043.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/GRUE0045.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/ICEPALAC.VSP.png?raw=true "a sample of v2vsp2png cli output")
 ![alt text](img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/SULLY2.VSP.png?raw=true "a sample of v2vsp2png cli output")
 ![alt text](img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
 
 # vsp2png
