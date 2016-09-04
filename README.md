@@ -442,6 +442,130 @@ Output:
 }
 ```
 
+# v2map2json
+
+**Support:** VERGE2 only
+
+Usage:
+
+- node src/cli/v2map2json.js data/v2/town.map
+
+Output:
+
+- data/v2/town.map.json
+
+**Note:** Output here is abbreviated and pretty-printed for readability.
+
+```json
+{
+  "version": [77, 65, 80, 249, 53, 0],
+  "mapEventsOffset": 23233,
+  "vspname": "grue0041.vsp",
+  "musname": "",
+  "rstring": "1E2",
+  "xstart": 1,
+  "ystart": 1,
+  "wrap": 0,
+  "padding": [77, 65, 80, ...],
+  "numlayers": 2,
+  "layer": [{
+    "pmultx": 1,
+    "pdivx": 1,
+    "pmulty": 1,
+    "pdivy": 1,
+    "sizex": 200,
+    "sizey": 200,
+    "trans": 0,
+    "hline": 0,
+    "padding": [1, 1]
+  }, ...],
+  "layers": [{
+    "bufsize": 14272,
+    "compressed": [255, 255, 0, ...],
+    "decompressed": [0, 0, 0, ...],
+  }, ...],
+  "obstruct": {
+    "bufsize": 1472,
+    "compressed": [255, 254, 0, ...],
+    "decompressed": [0, 0, 0, ...]
+  },
+  "zone": {
+    "bufsize": 1130,
+    "compressed": [255, 254, 0, ...],
+    "decompressed": [0, 0, 0, ...]
+  },
+  "numzones": 25,
+  "zones": [{
+    "name": "",
+    "script": 0,
+    "percent": 0,
+    "delay": 0,
+    "aaa": 0,
+    "entityscript": 0
+  }, ...],
+  "nmchr": 5,
+  "chrlist": [
+    "DESMAN1.CHR",
+    "DESMAN2.CHR",
+    "DESWOM1.CHR",
+    "deswom2.chr",
+    "LEPER.CHR"
+  ],
+  "entities": 34,
+  "entity": [{
+    "x": 37,
+    "y": 48,
+    "tx": 0,
+    "ty": 0,
+    "facing": 0,
+    "moving": 0,
+    "movcnt": 0,
+    "frame": 0,
+    "specframe": 0,
+    "chrindex": 0,
+    "reset": 0,
+    "obsmode1": 1,
+    "obsmode2": 1,
+    "speed": 0,
+    "speedct": 0,
+    "delayct": 0,
+    "animofs": 0,
+    "scriptofs": 0,
+    "face": 1,
+    "actm": 0,
+    "movecode": 2,
+    "movescript": 0,
+    "ctr": 0,
+    "mode": 0,
+    "modePadding": [1, 0],
+    "step": 100,
+    "delay": 0,
+    "stepctr": 0,
+    "delayctr": 0,
+    "data1": 0,
+    "data2": 0,
+    "data3": 0,
+    "data4": 0,
+    "data5": 0,
+    "data6": 0,
+    "actscript": 25,
+    "expand1": 0,
+    "expand2": 0,
+    "expand3": 0,
+    "expand4": 0,
+    "desc": ""
+  }, ...],
+  "nummovescripts": 2,
+  "msbufsize": 14,
+  "msofstbl": [0, 1],
+  "msbuf": [0, 68, 52, ...],
+  "numthings": 0,
+  "mapevents": 58,
+  "mapvctbl": [0, 4, 40, ...],
+  "codesize": 11044,
+  "mapvc": [3, 233, 1, ...]
+}```
+
 # vsp2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
