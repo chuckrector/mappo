@@ -442,6 +442,22 @@ Output:
 }
 ```
 
+# v2chr2png
+
+See v2vsp2pal for details on how to generate `VERGE2.PAL`.
+
+**Support:** VERGE2 only (WxH, N tiles, 5 columns)
+
+Usage:
+
+- node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR
+
+Output:
+
+- data/v2/VECNA.CHR.png
+
+![alt text](img/VECNA.CHR.png?raw=true "a sample of v2chr2png cli output")
+
 # v2map2json
 
 **Support:** VERGE2 only
@@ -566,6 +582,20 @@ Output:
   "mapvc": [3, 233, 1, ...]
 }
 ```
+
+# v2vsp2pal
+
+This is a temporary helper for v2chr2png.
+
+**Support:** VERGE2 only
+
+Usage:
+
+- node src/cli/v2vsp2pal.js data/v2/GRUE0041.VSP
+
+Output:
+
+- VERGE2.PAL
 
 # vsp2png
 
