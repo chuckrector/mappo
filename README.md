@@ -444,7 +444,7 @@ Output:
 
 # v2chr2png
 
-See v2vsp2pal for details on how to generate `VERGE2.PAL`.
+See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
 
 **Support:** VERGE2 only (WxH, N tiles, 5 columns)
 
@@ -585,7 +585,7 @@ Output:
 
 # v2vsp2pal
 
-This is a temporary helper for v2chr2png.
+This is a temporary helper for `v2chr2png`.
 
 **Support:** VERGE2 only
 
