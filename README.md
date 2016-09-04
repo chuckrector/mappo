@@ -586,3 +586,4 @@ Output:
 - rename readString to readStringFixed and readStringVar to readStringZero
 - new readString that simply parses until whitespace?
 - declarative file format loaders, rather than all this imperative stuff
+- json pretty printer that abbreviates long lists with ellipses
