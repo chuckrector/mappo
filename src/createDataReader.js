@@ -53,7 +53,7 @@ createDataReader = (args) => {
     }
   }
 
-  const readString = (length) => {
+  const readStringFixed = (length) => {
     let s = buffer.toString('utf-8', position, position + length)
 
     // js will happily show everything beyond this point, so truncate it
@@ -197,7 +197,7 @@ createDataReader = (args) => {
     readQuad,
     readQuadArray,
     readWhitespace,
-    readString,
+    readStringFixed,
     readStringVar,
     readStringAsByte,
     readStringAsWord,

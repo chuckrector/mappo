@@ -20,13 +20,13 @@ module.exports = (args) => {
     const uidle = reader.readQuad()
     const didle = reader.readQuad()
     const lanimLength = reader.readQuad()
-    const lanim = reader.readString(lanimLength)
+    const lanim = reader.readStringFixed(lanimLength)
     const ranimLength = reader.readQuad()
-    const ranim = reader.readString(ranimLength)
+    const ranim = reader.readStringFixed(ranimLength)
     const uanimLength = reader.readQuad()
-    const uanim = reader.readString(uanimLength)
+    const uanim = reader.readStringFixed(uanimLength)
     const danimLength = reader.readQuad()
-    const danim = reader.readString(danimLength)
+    const danim = reader.readStringFixed(danimLength)
 
     return {
       version,

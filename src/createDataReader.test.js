@@ -107,9 +107,9 @@ const quadArray = [90000, 1, 65536]
     data: Buffer.from('tic tac toe')
   })
 
-  expect(reader.readString(3)).toBe('tic')
-  expect(reader.readString(5)).toBe(' tac ')
-  expect(reader.readString(3)).toBe('toe')
+  expect(reader.readStringFixed(3)).toBe('tic')
+  expect(reader.readStringFixed(5)).toBe(' tac ')
+  expect(reader.readStringFixed(3)).toBe('toe')
 }
 
 {
@@ -118,7 +118,7 @@ const quadArray = [90000, 1, 65536]
     data: Buffer.from('HAHN01.VSP\0he')
   })
 
-  expect(reader.readString(13)).toBe('HAHN01.VSP')
+  expect(reader.readStringFixed(13)).toBe('HAHN01.VSP')
 }
 
 {

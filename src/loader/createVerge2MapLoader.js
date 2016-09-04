@@ -8,7 +8,7 @@ module.exports = (args) => {
   const reader = createDataReader(args)
 
   const loadZone = () => {
-    const name = reader.readString(40)
+    const name = reader.readStringFixed(40)
     const script = reader.readWord()
     const percent = reader.readWord()
     const delay = reader.readWord()
@@ -75,7 +75,7 @@ module.exports = (args) => {
     const expand3 = reader.readQuad()
     const expand4 = reader.readQuad()
 
-    const desc = reader.readString(20)
+    const desc = reader.readStringFixed(20)
 
     const bytesRead = reader.position - startPosition;
     assert.equal(bytesRead, 100, 'expected 100 bytes but read ' + bytesRead)
@@ -152,9 +152,9 @@ module.exports = (args) => {
   const load = () => {
     const version = reader.readByteArray(6)
     const mapEventsOffset = reader.readQuad()
-    const vspname = reader.readString(60)
-    const musname = reader.readString(60)
-    const rstring = reader.readString(20)
+    const vspname = reader.readStringFixed(60)
+    const musname = reader.readStringFixed(60)
+    const rstring = reader.readStringFixed(20)
     const xstart = reader.readWord()
     const ystart = reader.readWord()
     const wrap = reader.readByte() // TODO: verify not actually used in v2
@@ -187,7 +187,7 @@ module.exports = (args) => {
     const nmchr = reader.readByte()
     const chrlist = []
     for (let i = 0; i < nmchr; i++) {
-      chrlist.push(reader.readString(60))
+      chrlist.push(reader.readStringFixed(60))
     }
 
     const entities = reader.readByte()

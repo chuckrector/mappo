@@ -8,13 +8,13 @@ module.exports = (args) => {
   const reader = createDataReader(args)
 
   const loadZone = () => {
-    const zonename = reader.readString(15)
+    const zonename = reader.readStringFixed(15)
     const zonenamePadding = reader.readByte()
     const callevent = reader.readWord()
     const percent = reader.readByte()
     const delay = reader.readByte()
     const aaa = reader.readByte()
-    const savedesc = reader.readString(30)
+    const savedesc = reader.readStringFixed(30)
     const savedescPadding = reader.readByte()
 
     return {
@@ -70,7 +70,7 @@ module.exports = (args) => {
     const cx = reader.readWord()
     const cy = reader.readWord() // 62
     const expand = reader.readQuad() // 66
-    const entitydesc = reader.readString(20) // 86
+    const entitydesc = reader.readStringFixed(20) // 86
 
     const bytesRead = reader.position - startPosition;
     assert.equal(bytesRead, 88, 'expected 88 bytes but read ' + bytesRead)
@@ -120,12 +120,12 @@ module.exports = (args) => {
 
   const load = () => {
     const version = reader.readByte()
-    const vsp0name = reader.readString(13)
-    const musname = reader.readString(13)
+    const vsp0name = reader.readStringFixed(13)
+    const musname = reader.readStringFixed(13)
     const layerc = reader.readByte()
     const pmultx = reader.readByte()
     const pdivx = reader.readByte()
-    const levelname = reader.readString(30)
+    const levelname = reader.readStringFixed(30)
     const showname = reader.readByte()
     const saveflag = reader.readByte()
     const startx = reader.readWord()
@@ -147,7 +147,7 @@ module.exports = (args) => {
 
     let chrlist = []
     for (let i = 0; i < 100; i++) {
-      chrlist.push(reader.readString(13))
+      chrlist.push(reader.readStringFixed(13))
     }
 
     const entities = reader.readQuad()
