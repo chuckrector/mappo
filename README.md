@@ -459,3 +459,6 @@ Output:
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
+- rename readString to readStringFixed and readStringVar to readStringZero
+- new readString that simply parses until whitespace?
+- declarative file format loaders, rather than all this imperative stuff
