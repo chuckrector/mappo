@@ -3,7 +3,9 @@
 const fs = require('fs')
 const assert = require('assert')
 
-module.exports = (args) => {
+let createDataReader
+
+createDataReader = (args) => {
   const buffer = Buffer.from(args.data)
   const END_OF_DATA = null
   let position = 0
@@ -27,13 +29,15 @@ module.exports = (args) => {
 
   const readByteArrayCompressed = (length) => {
     const bufsize = readQuad()
+    const compressed = readByteArray(bufsize)
+    const compressedReader = createDataReader({data: compressed})
     const decompressed = []
 
     do {
-      let w = readByte()
+      let w = compressedReader.readByte()
       if (w === 0xff) {
-        const run = readByte()
-        w = readByte()
+        const run = compressedReader.readByte()
+        w = compressedReader.readByte()
         for (let j = 0; j < run; j++) {
           decompressed.push(w)
         }
@@ -44,6 +48,7 @@ module.exports = (args) => {
 
     return {
       bufsize,
+      compressed,
       decompressed,
     }
   }
@@ -130,13 +135,15 @@ module.exports = (args) => {
 
     assert.equal(bufsize % 2, 0, 'expected compressed word array size to be divisible by two but got ' + bufsize)
 
+    const compressed = readByteArray(bufsize)
+    const compressedReader = createDataReader({data: compressed})
     const decompressed = []
 
     do {
-      let w = readWord()
+      let w = compressedReader.readWord()
       if ((w & 0xff00) === 0xff00) {
         const run = w & 0xff
-        w = readWord()
+        w = compressedReader.readWord()
         for (let j = 0; j < run; j++) {
           decompressed.push(w)
         }
@@ -147,6 +154,7 @@ module.exports = (args) => {
 
     return {
       bufsize,
+      compressed,
       decompressed,
     }
   }
@@ -206,3 +214,5 @@ module.exports = (args) => {
     },
   }
 }
+
+module.exports = createDataReader
