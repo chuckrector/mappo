@@ -164,21 +164,19 @@ Output:
 ```json
 {
   "numitems": 48,
-  "items": [
-    {
-      "name": "Starlight",
-      "icon": 0,
-      "desc": "Restores_15_MP",
-      "useflag": 1,
-      "useeffect": 1,
-      "itemtype": 1,
-      "equipflag": 0,
-      "equipidx": 0,
-      "itmprv": 0,
-      "price": 300
-    },
-    ...
-  ]
+  "items": [{
+    "name": "Starlight",
+    "icon": 0,
+    "desc": "Restores_15_MP",
+    "useflag": 1,
+    "useeffect": 1,
+    "itemtype": 1,
+    "equipflag": 0,
+    "equipidx": 0,
+    "itmprv": 0,
+    "price": 300
+  }, ...]
+}
 ```
 
 # mainfnt2png
