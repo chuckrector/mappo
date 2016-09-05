@@ -4,6 +4,17 @@ const T = {
   u8: ({reader}) => reader.readByte(),
   u16: ({reader}) => reader.readWord(),
   u32: ({reader}) => reader.readQuad(),
+
+  string: ({reader}) => {
+    const result = reader.readString()
+    reader.readWhitespace()
+    return result
+  },
+  stringFixed: (length) => {
+    return ({reader}) => {
+      return reader.readStringFixed(length)
+    }
+  },
 }
 
 const resolve = (formatOrFunction, {reader, record}) => {

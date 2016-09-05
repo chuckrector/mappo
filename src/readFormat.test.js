@@ -3,6 +3,7 @@
 const expect = require('expect')
 const createDataReader = require('./createDataReader')
 const {readFormat, T} = require('./readFormat')
+const padEnd = require('lodash/padEnd')
 
 {
   // can read unsigned types
@@ -23,6 +24,30 @@ const {readFormat, T} = require('./readFormat')
   })
 
   expect(data).toEqual({a: 0xff, b: 0xffff, c: 0xffffffff})
+}
+
+{
+  // can read string types
+
+  const buffer = Buffer.concat([
+    Buffer.from(padEnd('Cute', 20, '\0')),
+    Buffer.from('Cuddly Kittens')
+  ])
+
+  const data = readFormat({
+    format: {
+      adjective: T.stringFixed(20),
+      type: T.string,
+      animal: T.string,
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
+    adjective: 'Cute',
+    type: 'Cuddly',
+    animal: 'Kittens',
+  })
 }
 
 {
