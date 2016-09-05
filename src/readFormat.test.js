@@ -31,12 +31,14 @@ const fill = require('lodash/fill')
   // can read string types
 
   const buffer = Buffer.concat([
+    Buffer.from(' \n\t\r'),
     Buffer.from(padEnd('Cute', 20, '\0')),
     Buffer.from('Cuddly Kittens 255 65535 4294967295')
   ])
 
   const data = readFormat({
     format: {
+      _: T.whitespace,
       adjective: T.stringFixed(20),
       type: T.string,
       animal: T.string,
@@ -48,6 +50,7 @@ const fill = require('lodash/fill')
   })
 
   expect(data).toEqual({
+    _: ' \n\t\r',
     adjective: 'Cute',
     type: 'Cuddly',
     animal: 'Kittens',
