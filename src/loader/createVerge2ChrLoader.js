@@ -1,59 +1,36 @@
 "use strict"
 
 const createDataReader = require('../createDataReader')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
-  const load = () => {
-    const version = reader.readByte()
-    const fxsize = reader.readWord()
-    const fysize = reader.readWord()
-    const hx = reader.readWord()
-    const hy = reader.readWord()
-    const hw = reader.readWord()
-    const hh = reader.readWord()
-    const totalframes = reader.readWord()
-    const imagedata = reader.readByteArrayCompressed(fxsize * fysize * totalframes)
-    const lidle = reader.readQuad()
-    const ridle = reader.readQuad()
-    const uidle = reader.readQuad()
-    const didle = reader.readQuad()
-    const lanimLength = reader.readQuad()
-    const lanim = reader.readStringFixed(lanimLength)
-    const ranimLength = reader.readQuad()
-    const ranim = reader.readStringFixed(ranimLength)
-    const uanimLength = reader.readQuad()
-    const uanim = reader.readStringFixed(uanimLength)
-    const danimLength = reader.readQuad()
-    const danim = reader.readStringFixed(danimLength)
-
-    return {
-      version,
-      fxsize,
-      fysize,
-      hx,
-      hy,
-      hw,
-      hh,
-      totalframes,
-      imagedata,
-      lidle,
-      ridle,
-      uidle,
-      didle,
-      lanimLength,
-      lanim,
-      ranimLength,
-      ranim,
-      uanimLength,
-      uanim,
-      danimLength,
-      danim,
-    }
+  const V2_CHR = {
+    version: T.u8,
+    fxsize: T.u16,
+    fysize: T.u16,
+    hx: T.u16,
+    hy: T.u16,
+    hw: T.u16,
+    hh: T.u16,
+    totalframes: T.u16,
+    imagedata: T.compressedU8(({record}) => record.fxsize * record.fysize * record.totalframes),
+    lidle: T.u32,
+    ridle: T.u32,
+    uidle: T.u32,
+    didle: T.u32,
+    lanimLength: T.u32,
+    lanim: T.stringFixed(({record}) => record.lanimLength),
+    ranimLength: T.u32,
+    ranim: T.stringFixed(({record}) => record.ranimLength),
+    uanimLength: T.u32,
+    uanim: T.stringFixed(({record}) => record.uanimLength),
+    danimLength: T.u32,
+    danim: T.stringFixed(({record}) => record.danimLength),
   }
 
   return {
-    load
+    load: () => readFormat({format: V2_CHR, reader})
   }
 }
