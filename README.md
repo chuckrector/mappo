@@ -116,43 +116,20 @@ Output:
 ```json
 {
   "numitems": 33,
-  "equip": [
-    {
-      "comments": [
-        "// Dagger"
-      ],
-      "str": 5,
-      "equipable": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    },
-    {
-      "comments": [
-        "// Short Sword"
-      ],
-      "str": 22,
-      "equipable": [
-        1,
-        5
-      ]
-    },
-    {
-      "comments": [
-        "// Wand"
-      ],
-      "str": 3,
-      "mag": 5,
-      "equipable": [
-        3,
-        4
-      ]
-    },
-    ...
-  ]
+  "equip": [{
+    "comments": ["// Dagger"],
+    "str": 5,
+    "equipable": [1, 2, 3, 4, 5]
+  }, {
+    "comments": ["// Short Sword"],
+    "str": 22,
+    "equipable": [1, 5]
+  }, {
+    "comments": ["// Wand"],
+    "str": 3,
+    "mag": 5,
+    "equipable": [3, 4]
+  }, ...]
 }
 ```
 
