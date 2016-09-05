@@ -11,8 +11,26 @@ const T = {
   stringU32: ({reader}) => reader.readStringAsQuad(),
   stringFixed: (length) => ({reader}) => reader.readStringFixed(length),
 
-  compressedU8: (length) => ({reader}) => reader.readByteArrayCompressed(length),
-  compressedU16: (length) => ({reader}) => reader.readWordArrayCompressed(length),
+  compressedU8: (lengthCalculator) => {
+    return ({reader, record}) => {
+      let length = lengthCalculator
+      if (typeof lengthCalculator === 'function') {
+        length = lengthCalculator({reader, record})
+      }
+
+      return reader.readByteArrayCompressed(length)
+    }
+  },
+  compressedU16: (lengthCalculator) => {
+    return ({reader, record}) => {
+      let length = lengthCalculator
+      if (typeof lengthCalculator === 'function') {
+        length = lengthCalculator({reader, record})
+      }
+
+      return reader.readWordArrayCompressed(length)
+    }
+  }
 }
 
 const resolve = (formatOrFunction, {reader, record}) => {
