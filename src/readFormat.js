@@ -70,7 +70,7 @@ T.list = (formatOrFunction, length) => {
   }
 }
 
-const readFormat = ({format, reader, listIndex=null}) => {
+const readFormat = ({format, reader, listIndex}) => {
   const record = {}
 
   Object.keys(format).forEach((key) => {
