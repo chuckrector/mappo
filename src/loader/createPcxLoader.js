@@ -1,13 +1,14 @@
 "use strict"
 
 const createDataReader = require('../createDataReader')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
+  let header
   let width = 0
   let height = 0
-  let bytesPerLine = 0
 
   const readLine = () => {
     let line = []
@@ -27,7 +28,7 @@ module.exports = (args) => {
         line.push(c)
         n++
       }
-    } while (n < bytesPerLine)
+    } while (n < header.bytesPerLine)
 
     return line.slice(0, width) // for aligned rows longer than actual width
   }
@@ -42,27 +43,30 @@ module.exports = (args) => {
   }
 
   const load = () => {
-    const manufacturer = reader.readByte()
-    const version = reader.readByte()
-    const encoding = reader.readByte()
-    const bitsPerPixel = reader.readByte()
-    const xmin = reader.readWord()
-    const ymin = reader.readWord()
-    const xmax = reader.readWord()
-    const ymax = reader.readWord()
-    const hres = reader.readWord()
-    const vres = reader.readWord()
-    const egaPalette = reader.readByteArray(48)
-    const reserved = reader.readByte()
-    const colorPlanes = reader.readByte()
+    header = readFormat({
+      reader,
+      format: {
+        manufacturer: T.u8,
+        version: T.u8,
+        encoding: T.u8,
+        bitsPerPixel: T.u8,
+        xmin: T.u16,
+        ymin: T.u16,
+        xmax: T.u16,
+        ymax: T.u16,
+        hres: T.u16,
+        vres: T.u16,
+        egaPalette: T.list(T.u8, 48),
+        reserved: T.u8,
+        colorPlanes: T.u8,
+        bytesPerLine: T.u16,
+        paletteType: T.u16,
+        filler: T.list(T.u8, 58),
+      }
+    })
 
-    bytesPerLine = reader.readWord()
-
-    const paletteType = reader.readWord()
-    const filler = reader.readByteArray(58)
-
-    width = xmax - xmin + 1
-    height = ymax - ymin + 1
+    width = header.xmax - header.xmin + 1
+    height = header.ymax - header.ymin + 1
 
     const raw8bitData = readImage()
 
