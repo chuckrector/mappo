@@ -9,13 +9,22 @@ const T = {
   stringU8: ({reader}) => reader.readStringAsByte(),
   stringU16: ({reader}) => reader.readStringAsWord(),
   stringU32: ({reader}) => reader.readStringAsQuad(),
-  stringFixed: (length) => ({reader}) => reader.readStringFixed(length),
+  stringFixed: (lengthCalculator) => {
+    return ({reader, record}) => {
+      let length = lengthCalculator
+      if (typeof length === 'function') {
+        length = length({reader, record})
+      }
+
+      return reader.readStringFixed(length)
+    }
+  },
 
   compressedU8: (lengthCalculator) => {
     return ({reader, record}) => {
       let length = lengthCalculator
-      if (typeof lengthCalculator === 'function') {
-        length = lengthCalculator({reader, record})
+      if (typeof length === 'function') {
+        length = length({reader, record})
       }
 
       return reader.readByteArrayCompressed(length)
@@ -24,8 +33,8 @@ const T = {
   compressedU16: (lengthCalculator) => {
     return ({reader, record}) => {
       let length = lengthCalculator
-      if (typeof lengthCalculator === 'function') {
-        length = lengthCalculator({reader, record})
+      if (typeof length === 'function') {
+        length = length({reader, record})
       }
 
       return reader.readWordArrayCompressed(length)

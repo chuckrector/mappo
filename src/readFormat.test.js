@@ -58,6 +58,42 @@ const fill = require('lodash/fill')
 }
 
 {
+  // can read fixed length strings of... dynamic length 🤔
+  //
+  // the verge2 chr loader reads a length for idle animation
+  // strings and then reads a fixed length string of that length.
+  // for a string field of length L at position P, if the null
+  // terminator always lies at P+L-1, that would allow the use
+  // of a function such as readStringNullTerminated. of course,
+  // in that case, the leading L on disk would be ignored. but
+  // it may solve the human readability issue.
+  //
+  // alternatively, perhaps rename readStringFixed to
+  // readStringNullTerminated and pass an optional length
+  // parameter. without a given length, it would read until
+  // finding a null terminator. with a length, it would behave
+  // as readStringFixed currently does.
+
+  const buffer = Buffer.concat([
+    Buffer.from([5]),
+    Buffer.from('Cute\0'),
+  ])
+
+  const data = readFormat({
+    format: {
+      adjectiveLength: T.u8,
+      adjective: T.stringFixed(({record}) => record.adjectiveLength),
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
+    adjectiveLength: 5,
+    adjective: 'Cute',
+  })
+}
+
+{
   // can read lists of lists
 
   const buffer = Buffer.concat([
