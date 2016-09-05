@@ -226,7 +226,7 @@ const zlib = require('zlib')
 {
   // T.list requires a length
 
-  expect(() => T.list(T.u8)).toThrow(Error, 'T.list length must be defined')
+  expect(() => T.list(T.u8)).toThrow('T.list length must be defined')
 }
 
 {
