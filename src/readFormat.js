@@ -22,7 +22,12 @@ const readFormat = ({format, reader}) => {
   const record = {}
 
   Object.keys(format).forEach((key) => {
-    record[key] = format[key](reader)
+    const formatOrFunction = format[key]
+    if (typeof formatOrFunction === 'function') {
+      record[key] = formatOrFunction(reader)
+    } else {
+      record[key] = readFormat({format: formatOrFunction, reader})
+    }
   })
 
   return record

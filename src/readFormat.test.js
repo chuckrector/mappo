@@ -49,3 +49,32 @@ const {readFormat, T} = require('./readFormat')
     c: [0xffffffff, 0xffffffff],
   })
 }
+
+{
+  // can read nested formats
+
+  const buffer = Buffer.concat([
+    Buffer.from([0xff]),
+    Buffer.from(new Uint16Array([0xffff]).buffer),
+    Buffer.from(new Uint32Array([0xffffffff]).buffer),
+  ])
+
+  const data = readFormat({
+    format: {
+      a: T.u8,
+      b: {
+        c: T.u16,
+        d: T.u32,
+      },
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
+    a: 0xff,
+    b: {
+      c: 0xffff,
+      d: 0xffffffff,
+    }
+  })
+}
