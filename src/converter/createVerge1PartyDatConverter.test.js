@@ -27,6 +27,7 @@ GALFREY.CHR  GALFREY.CR2  GALFREY.DAT
   const js = JSON.parse(json)
 
   expect(js).toEqual({
+    _: '\n',
     tchars: 5,
     party: [
       {chr: 'DARIN.CHR', cr2: 'DARIN.CR2', dat: 'DARIN.DAT'},
