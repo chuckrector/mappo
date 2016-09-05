@@ -31,7 +31,7 @@ const padEnd = require('lodash/padEnd')
 
   const buffer = Buffer.concat([
     Buffer.from(padEnd('Cute', 20, '\0')),
-    Buffer.from('Cuddly Kittens')
+    Buffer.from('Cuddly Kittens 255 65535 4294967295')
   ])
 
   const data = readFormat({
@@ -39,6 +39,9 @@ const padEnd = require('lodash/padEnd')
       adjective: T.stringFixed(20),
       type: T.string,
       animal: T.string,
+      a: T.stringU8,
+      b: T.stringU16,
+      c: T.stringU32,
     },
     reader: createDataReader({data: buffer})
   })
@@ -47,6 +50,9 @@ const padEnd = require('lodash/padEnd')
     adjective: 'Cute',
     type: 'Cuddly',
     animal: 'Kittens',
+    a: 255,
+    b: 65535,
+    c: 4294967295,
   })
 }
 

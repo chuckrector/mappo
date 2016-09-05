@@ -10,6 +10,9 @@ const T = {
     reader.readWhitespace()
     return result
   },
+  stringU8: ({reader}) => reader.readStringAsByte(),
+  stringU16: ({reader}) => reader.readStringAsWord(),
+  stringU32: ({reader}) => reader.readStringAsQuad(),
   stringFixed: (length) => {
     return ({reader}) => {
       return reader.readStringFixed(length)
