@@ -1,45 +1,27 @@
 "use strict"
 
 const createDataReader = require('../createDataReader')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
-  const loadAnim = () => {
-    const start = reader.readWord()
-    const finish = reader.readWord()
-    const delay = reader.readWord()
-    const mode = reader.readWord()
-
-    return {
-      start,
-      finish,
-      delay,
-      mode,
-    }
+  const V1_VSPANIM = {
+    start: T.u16,
+    finish: T.u16,
+    delay: T.u16,
+    mode: T.u16,
   }
 
-  const load = () => {
-    const version = reader.readWord()
-    const palette = reader.readByteArray(256 * 3)
-    const numtiles = reader.readWord()
-    const vsp0 = reader.readByteArray(numtiles * 16 * 16)
-
-    let va0 = []
-    for (let i = 0; i < 100; i++) {
-      va0.push(loadAnim())
-    }
-
-    return {
-      version,
-      palette,
-      numtiles,
-      vsp0,
-      va0,
-    }
+  const V1_VSP = {
+    version: T.u16,
+    palette: T.list(T.u8, 256 * 3),
+    numtiles: T.u16,
+    vsp0: T.list(T.u8, ({record}) => record.numtiles * 16 * 16),
+    va0: T.list(V1_VSPANIM, 100),
   }
 
   return {
-    load
+    load: () => readFormat({format: V1_VSP, reader})
   }
 }
