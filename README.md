@@ -8,6 +8,13 @@ Grue showed me his cool [maped4](https://github.com/mcgrue/maped4) project. It e
 
 In ancient times, I worked on my own map editor. http://chuckrector.com/old/ So, I have a soft spot. Partly, this project is about "Can I do what I once did more easily?" Partly, it's also about "How much more powerful am I now?"
 
+```
+Triplefox | what is the plan for the loaders? just to have everything in json?
+     @aen | binary formats can be viewed as a bit of a barrier
+     @aen | conversion to json/png/whatever simply lowers that barrier
+     @aen | and allows us all to stripmine everything
+```
+
 # Learnings
 
 - The `jquery-ui` npm package sucks. If you want jQuery UI in Node, directly package it.
