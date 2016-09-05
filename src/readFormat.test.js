@@ -107,3 +107,26 @@ const {readFormat, T} = require('./readFormat')
     ]
   })
 }
+
+{
+  // can read list of dynamic length
+
+  const buffer = Buffer.concat([
+    Buffer.from([2, 3, 44, 55, 66, 77, 88, 99]),
+  ])
+
+  const data = readFormat({
+    format: {
+      w: T.u8,
+      h: T.u8,
+      grid: T.list(T.u8, (record) => record.w * record.h),
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
+    w: 2,
+    h: 3,
+    grid: [44, 55, 66, 77, 88, 99],
+  })
+}
