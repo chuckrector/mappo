@@ -3,205 +3,99 @@
 const fs = require('fs')
 const createDataReader = require('../createDataReader')
 const assert = require('assert')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
-  const loadZone = () => {
-    const zonename = reader.readStringFixed(15)
-    const zonenamePadding = reader.readByte()
-    const callevent = reader.readWord()
-    const percent = reader.readByte()
-    const delay = reader.readByte()
-    const aaa = reader.readByte()
-    const savedesc = reader.readStringFixed(30)
-    const savedescPadding = reader.readByte()
-
-    return {
-      zonename,
-      zonenamePadding,
-      callevent,
-      percent,
-      delay,
-      aaa,
-      savedesc,
-      savedescPadding,
-    }
+  const V1_ZONE = {
+    zonename: T.stringFixed(15),
+    zonenamePadding: T.u8,
+    callevent: T.u16,
+    percent: T.u8,
+    delay: T.u8,
+    aaa: T.u8,
+    savedesc: T.stringFixed(30),
+    savedescPadding: T.u8,
   }
 
-  const loadEntity = () => {
-    const startPosition = reader.position
-
-    const x = reader.readWord()
-    const y = reader.readWord() // 4
-    const facing = reader.readByte()
-    const moving = reader.readByte()
-    const movcnt = reader.readByte()
-    const framectr = reader.readByte()
-    const specframe = reader.readByte()
-    const chrindex = reader.readByte()
-    const movecode = reader.readByte()
-    const activmode = reader.readByte()
-    const obsmode = reader.readByte() // 13 (#9)
-    const padding = reader.readByteArray(3)
-    const actscript = reader.readQuad()
-    const movescript = reader.readQuad() // 22
-    const speed = reader.readByte()
-    const speedct = reader.readByte() // 24
-    const step = reader.readWord()
-    const delay = reader.readWord()
-    const data1 = reader.readWord()
-    const data2 = reader.readWord()
-    const data3 = reader.readWord()
-    const data4 = reader.readWord()
-    const delayct = reader.readWord()
-    const adjactv = reader.readWord()
-    const x1 = reader.readWord()
-    const y1 = reader.readWord()
-    const x2 = reader.readWord()
-    const y2 = reader.readWord() // 48
-    const curcmd = reader.readByte()
-    const cmdarg = reader.readByte() // 50
-    const scriptofs = reader.readQuad() // 54
-    const face = reader.readByte()
-    const chasing = reader.readByte()
-    const chasespeed = reader.readByte()
-    const chasedist = reader.readByte() // 58
-    const cx = reader.readWord()
-    const cy = reader.readWord() // 62
-    const expand = reader.readQuad() // 66
-    const entitydesc = reader.readStringFixed(20) // 86
-
-    const bytesRead = reader.position - startPosition;
-    assert.equal(bytesRead, 88, 'expected 88 bytes but read ' + bytesRead)
-
-    return {
-      x,
-      y,
-      facing,
-      moving,
-      movcnt,
-      framectr,
-      specframe,
-      chrindex,
-      movecode,
-      activmode,
-      obsmode,
-      padding,
-      actscript,
-      movescript,
-      speed,
-      speedct,
-      step,
-      delay,
-      data1,
-      data2,
-      data3,
-      data4,
-      delayct,
-      adjactv,
-      x1,
-      y1,
-      x2,
-      y2,
-      curcmd,
-      cmdarg,
-      scriptofs,
-      face,
-      chasing,
-      chasespeed,
-      chasedist,
-      cx,
-      cy,
-      expand,
-      entitydesc,
-    }
+  const V1_ENTITY = {
+    x: T.u16,
+    y: T.u16,
+    facing: T.u8,
+    moving: T.u8,
+    movcnt: T.u8,
+    framectr: T.u8,
+    specframe: T.u8,
+    chrindex: T.u8,
+    movecode: T.u8,
+    activmode: T.u8,
+    obsmode: T.u8,
+    padding: T.list(T.u8, 3),
+    actscript: T.u32,
+    movescript: T.u32,
+    speed: T.u8,
+    speedct: T.u8,
+    step: T.u16,
+    delay: T.u16,
+    data1: T.u16,
+    data2: T.u16,
+    data3: T.u16,
+    data4: T.u16,
+    delayct: T.u16,
+    adjactv: T.u16,
+    x1: T.u16,
+    y1: T.u16,
+    x2: T.u16,
+    y2: T.u16,
+    curcmd: T.u8,
+    cmdarg: T.u8,
+    scriptofs: T.u32,
+    face: T.u8,
+    chasing: T.u8,
+    chasespeed: T.u8,
+    chasedist: T.u8,
+    cx: T.u16,
+    cy: T.u16,
+    expand: T.u32,
+    entitydesc: T.stringFixed(20),
   }
 
-  const load = () => {
-    const version = reader.readByte()
-    const vsp0name = reader.readStringFixed(13)
-    const musname = reader.readStringFixed(13)
-    const layerc = reader.readByte()
-    const pmultx = reader.readByte()
-    const pdivx = reader.readByte()
-    const levelname = reader.readStringFixed(30)
-    const showname = reader.readByte()
-    const saveflag = reader.readByte()
-    const startx = reader.readWord()
-    const starty = reader.readWord()
-    const hide = reader.readByte()
-    const warp = reader.readByte()
-    const xsize = reader.readWord()
-    const ysize = reader.readWord()
-    const b = reader.readByte()
-    const padding = reader.readByteArray(27)
-    const map0 = reader.readWordArray(xsize * ysize)
-    const map1 = reader.readWordArray(xsize * ysize)
-    const mapp = reader.readByteArray(xsize * ysize)
-
-    let zone = []
-    for (let i = 0; i < 128; i++) {
-      zone.push(loadZone())
-    }
-
-    let chrlist = []
-    for (let i = 0; i < 100; i++) {
-      chrlist.push(reader.readStringFixed(13))
-    }
-
-    const entities = reader.readQuad()
-
-    let party = []
-    for (let i = 0; i < entities; i++) {
-      party.push(loadEntity())
-    }
-
-    const nummovescripts = reader.readByte()
-    const msbufsize = reader.readQuad()
-    const msofstbl = reader.readQuadArray(nummovescripts)
-    const msbuf = reader.readByteArray(msbufsize)
-
-    const numscripts = reader.readQuad()
-    const scriptofstbl = reader.readQuadArray(numscripts)
-    const mapvc = reader.readByteArray(reader.length - reader.position)
-
-    return {
-      version,
-      vsp0name,
-      musname,
-      layerc,
-      pmultx,
-      pdivx,
-      levelname,
-      showname,
-      saveflag,
-      startx,
-      starty,
-      hide,
-      warp,
-      xsize,
-      ysize,
-      b,
-      padding,
-      map0,
-      map1,
-      mapp,
-      zone,
-      chrlist,
-      entities,
-      party,
-      nummovescripts,
-      msbufsize,
-      msofstbl,
-      msbuf,
-      numscripts,
-      scriptofstbl,
-      mapvc,
-    }
+  const V1_MAP = {
+    version: T.u8,
+    vsp0name: T.stringFixed(13),
+    musname: T.stringFixed(13),
+    layerc: T.u8,
+    pmultx: T.u8,
+    pdivx: T.u8,
+    levelname: T.stringFixed(30),
+    showname: T.u8,
+    saveflag: T.u8,
+    startx: T.u16,
+    starty: T.u16,
+    hide: T.u8,
+    warp: T.u8,
+    xsize: T.u16,
+    ysize: T.u16,
+    b: T.u8,
+    padding: T.list(T.u8, 27),
+    map0: T.list(T.u16, ({record}) => record.xsize * record.ysize),
+    map1: T.list(T.u16, ({record}) => record.xsize * record.ysize),
+    mapp: T.list(T.u8, ({record}) => record.xsize * record.ysize),
+    zone: T.list(V1_ZONE, 128),
+    chrlist: T.list(T.stringFixed(13), 100),
+    entities: T.u32,
+    party: T.list(V1_ENTITY, ({record}) => record.entities),
+    nummovescripts: T.u8,
+    msbufsize: T.u32,
+    msofstbl: T.list(T.u32, ({record}) => record.nummovescripts),
+    msbuf: T.list(T.u8, ({record}) => record.msbufsize),
+    numscripts: T.u32,
+    scriptofstbl: T.list(T.u32, ({record}) => record.numscripts),
+    mapvc: T.list(T.u8, ({reader}) => reader.length - reader.position),
   }
 
   return {
-    load
+    load: () => readFormat({format: V1_MAP, reader})
   }
 }
