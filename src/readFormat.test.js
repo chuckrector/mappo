@@ -58,6 +58,31 @@ const fill = require('lodash/fill')
 }
 
 {
+  // can read lists of lists
+
+  const buffer = Buffer.concat([
+    Buffer.from([1, 2, 3]),
+    Buffer.from([4, 5, 6]),
+  ])
+
+  const data = readFormat({
+    format: {
+      a: T.list({
+        b: T.list(T.u8, 3),
+      }, 2)
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
+    a: [
+      {b: [1, 2, 3]},
+      {b: [4, 5, 6]},
+    ]
+  })
+}
+
+{
   // can read compressed buffers
 
   const buffer = Buffer.concat([

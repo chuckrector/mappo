@@ -23,10 +23,11 @@ const resolve = (formatOrFunction, {reader, record}) => {
   }
 }
 
-T.list = (formatOrFunction, length) => {
+T.list = (formatOrFunction, lengthCalculator) => {
   return ({reader, record}) => {
     const recordList = []
 
+    let length = lengthCalculator
     if (typeof length === 'function') {
       length = length(record)
     }
