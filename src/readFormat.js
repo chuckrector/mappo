@@ -18,6 +18,9 @@ const T = {
       return reader.readStringFixed(length)
     }
   },
+
+  compressedU8: (length) => ({reader}) => reader.readByteArrayCompressed(length),
+  compressedU16: (length) => ({reader}) => reader.readWordArrayCompressed(length),
 }
 
 const resolve = (formatOrFunction, {reader, record}) => {

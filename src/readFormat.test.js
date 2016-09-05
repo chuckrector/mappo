@@ -4,6 +4,7 @@ const expect = require('expect')
 const createDataReader = require('./createDataReader')
 const {readFormat, T} = require('./readFormat')
 const padEnd = require('lodash/padEnd')
+const fill = require('lodash/fill')
 
 {
   // can read unsigned types
@@ -54,6 +55,32 @@ const padEnd = require('lodash/padEnd')
     b: 65535,
     c: 4294967295,
   })
+}
+
+{
+  // can read compressed buffers
+
+  const buffer = Buffer.concat([
+    Buffer.from(new Uint32Array([5]).buffer),
+    Buffer.from([1, 0xff, (16 * 16) - 2, 2, 3]),
+    Buffer.from(new Uint32Array([4 * 2]).buffer),
+    Buffer.from(new Uint16Array([1111, ((16 * 16) - 2) | 0xff00, 2222, 3333]).buffer),
+  ])
+
+  const data = readFormat({
+    format: {
+      a: T.compressedU8(16 * 16),
+      b: T.compressedU16(16 * 16),
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  const expandedA = fill(Array(16 * 16), 2)
+  expandedA[0] = 1
+  expandedA[255] = 3
+
+  expect(data.a.decompressed).toEqual(expandedA)
+  expect(data.b.decompressed).toEqual(expandedA.map(v => v * 1111))
 }
 
 {
