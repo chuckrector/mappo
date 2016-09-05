@@ -1,19 +1,15 @@
 "use strict"
 
 const createDataReader = require('../createDataReader')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
-  const load = () => {
-    const chrs = reader.readByteArray(16 * 32 * 30)
-
-    return {
-      chrs
-    }
-  }
-
   return {
-    load
+    load: () => readFormat({
+      format: {chrs: T.list(T.u8, 16 * 32 * 30)},
+      reader
+    })
   }
 }
