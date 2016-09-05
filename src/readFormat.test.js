@@ -24,3 +24,28 @@ const {readFormat, T} = require('./readFormat')
 
   expect(data).toEqual({a: 0xff, b: 0xffff, c: 0xffffffff})
 }
+
+{
+  // can read list of types
+
+  const buffer = Buffer.concat([
+    Buffer.from([0xff, 0xff]),
+    Buffer.from(new Uint16Array([0xffff, 0xffff]).buffer),
+    Buffer.from(new Uint32Array([0xffffffff, 0xffffffff]).buffer),
+  ])
+
+  const data = readFormat({
+    format: {
+      a: T.list(T.u8, 2),
+      b: T.list(T.u16, 2),
+      c: T.list(T.u32, 2),
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
+    a: [0xff, 0xff],
+    b: [0xffff, 0xffff],
+    c: [0xffffffff, 0xffffffff],
+  })
+}
