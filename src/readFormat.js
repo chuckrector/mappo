@@ -6,12 +6,16 @@ const T = {
   u32: (reader) => reader.readQuad(),
 }
 
-T.list = (format, length) => {
+T.list = (formatOrFunction, length) => {
   return (reader) => {
     const recordList = []
 
     while (length-- > 0) {
-      recordList.push(format(reader))
+      if (typeof formatOrFunction === 'function') {
+        recordList.push(formatOrFunction(reader))
+      } else {
+        recordList.push(readFormat({format: formatOrFunction, reader}))
+      }
     }
 
     return recordList
