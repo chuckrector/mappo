@@ -3,6 +3,7 @@
 const expect = require('expect')
 const createDataReader = require('./createDataReader.js')
 const fill = require('lodash/fill')
+const zlib = require('zlib')
 
 {
   // empty buffer is at end
@@ -307,4 +308,21 @@ const quadArray = [90000, 1, 65536]
   expect(reader.remaining).toBe(1)
   reader.readByte()
   expect(reader.remaining).toBe(0)
+}
+
+{
+  // can read zlib compressed buffers
+  const raw = fill(Array(16 * 16), 99)
+  const compressedBuffer = zlib.deflateRawSync(Buffer.from(raw))
+  const buffer = Buffer.concat([
+    Buffer.from(new Uint32Array([raw.length, compressedBuffer.length]).buffer),
+    compressedBuffer
+  ])
+  const reader = createDataReader({data: buffer})
+  const data = reader.readZlib(16 * 16)
+
+  expect(data.mysize).toBe(raw.length)
+  expect(data.comprLen).toBe(compressedBuffer.length)
+  expect(data.decompressed.length).toBe(raw.length)
+  expect(data.decompressed).toEqual(raw)
 }

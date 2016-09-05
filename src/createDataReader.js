@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const assert = require('assert')
+const zlib =  require('zlib')
 
 const createDataReader = (args) => {
   const buffer = Buffer.from(args.data)
@@ -185,6 +186,24 @@ const createDataReader = (args) => {
     return s
   }
 
+  const readZlib = (length) => {
+    const mysize = readQuad()
+    if (mysize !== length) {
+      throw new Error('block sizes do not match')
+    }
+
+    const comprLen = readQuad()
+    const compressed = readByteArray(comprLen)
+    const decompressed = [...zlib.inflateRawSync(Buffer.from(compressed))] // perf?
+
+    return {
+      mysize,
+      comprLen,
+      compressed,
+      decompressed,
+    }
+  }
+
   return {
     atEnd,
     atMatch,
@@ -203,6 +222,7 @@ const createDataReader = (args) => {
     readStringAsWord,
     readStringAsQuad,
     readLine,
+    readZlib,
     get position() {
       return position
     },
