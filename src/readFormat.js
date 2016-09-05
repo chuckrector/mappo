@@ -5,19 +5,11 @@ const T = {
   u16: ({reader}) => reader.readWord(),
   u32: ({reader}) => reader.readQuad(),
 
-  string: ({reader}) => {
-    const result = reader.readString()
-    reader.readWhitespace()
-    return result
-  },
+  string: ({reader}) => reader.readString(),
   stringU8: ({reader}) => reader.readStringAsByte(),
   stringU16: ({reader}) => reader.readStringAsWord(),
   stringU32: ({reader}) => reader.readStringAsQuad(),
-  stringFixed: (length) => {
-    return ({reader}) => {
-      return reader.readStringFixed(length)
-    }
-  },
+  stringFixed: (length) => ({reader}) => reader.readStringFixed(length),
 
   compressedU8: (length) => ({reader}) => reader.readByteArrayCompressed(length),
   compressedU16: (length) => ({reader}) => reader.readWordArrayCompressed(length),
