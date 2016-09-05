@@ -351,7 +351,7 @@ const fill = require('lodash/fill')
 
   const data = readFormat({
     format: {
-      grid: T.list(T.u8, ({reader}) => reader.length - reader.position),
+      grid: T.list(T.u8, ({reader}) => reader.remaining),
     },
     reader: createDataReader({data: buffer})
   })

@@ -92,7 +92,7 @@ module.exports = (args) => {
     msbuf: T.list(T.u8, ({record}) => record.msbufsize),
     numscripts: T.u32,
     scriptofstbl: T.list(T.u32, ({record}) => record.numscripts),
-    mapvc: T.list(T.u8, ({reader}) => reader.length - reader.position),
+    mapvc: T.list(T.u8, ({reader}) => reader.remaining),
   }
 
   return {
