@@ -25,6 +25,7 @@ Speed_Boots 2 +3_REA,_+1_MBL        0 0 0 5 0 0 300
   const js = JSON.parse(json)
 
   expect(js).toEqual({
+    _: '\n',
     numitems: 3,
     items: [{
       name: 'Starlight',

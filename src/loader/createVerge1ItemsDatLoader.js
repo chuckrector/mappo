@@ -1,48 +1,31 @@
 "use strict"
 
 const createDataReader = require('../createDataReader')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
-  const load = () => {
-    reader.readWhitespace()
-    const numitems = reader.readStringAsByte()
+  const V1_ITEM = {
+    name: T.string,
+    icon: T.stringU16,
+    desc: T.string,
+    useflag: T.stringU8,
+    useeffect: T.stringU16,
+    itemtype: T.stringU8,
+    equipflag: T.stringU8,
+    equipidx: T.stringU8,
+    itmprv: T.stringU8,
+    price: T.stringU32,
+  }
 
-    let items = []
-    for (let i = 0; i < numitems; i++) {
-      const name = reader.readString()
-      const icon = reader.readStringAsWord()
-      const desc = reader.readString()
-      const useflag = reader.readStringAsByte()
-      const useeffect = reader.readStringAsWord()
-      const itemtype = reader.readStringAsByte()
-      const equipflag = reader.readStringAsByte()
-      const equipidx = reader.readStringAsByte()
-      const itmprv = reader.readStringAsByte()
-      const price = reader.readStringAsQuad()
-
-      items.push({
-        name,
-        icon,
-        desc,
-        useflag,
-        useeffect,
-        itemtype,
-        equipflag,
-        equipidx,
-        itmprv,
-        price,
-      })
-    }
-
-    return {
-      numitems,
-      items
-    }
+  const V1_ITEMS_DAT = {
+    _: T.whitespace,
+    numitems: T.stringU8,
+    items: T.list(V1_ITEM, ({record}) => record.numitems),
   }
 
   return {
-    load
+    load: () => readFormat({format: V1_ITEMS_DAT, reader})
   }
 }
