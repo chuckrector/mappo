@@ -1,24 +1,18 @@
 "use strict"
 
 const createDataReader = require('../createDataReader')
+const {readFormat, T} = require('../readFormat')
 
 module.exports = (args) => {
   const reader = createDataReader(args)
 
-  const load = () => {
-    const tileWidth = 32
-    const tileHeight = 32
-
-    const numtiles = reader.readByte()
-    const speech = reader.readByteArray(tileWidth * tileHeight * numtiles)
-
-    return {
-      numtiles,
-      speech
-    }
-  }
-
   return {
-    load
+    load: () => readFormat({
+      format: {
+        numtiles: T.u8,
+        speech: T.list(T.u8, ({record}) => 32 * 32 * record.numtiles)
+      },
+      reader
+    })
   }
 }
