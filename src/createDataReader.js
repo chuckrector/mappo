@@ -189,7 +189,7 @@ const createDataReader = (args) => {
   const readZlib = (length) => {
     const mysize = readQuad()
     if (mysize !== length) {
-      throw new Error('block sizes do not match')
+      throw {message: 'expected an uncompressed byte length of ' + length + ' but got ' + mysize}
     }
 
     const comprLen = readQuad()

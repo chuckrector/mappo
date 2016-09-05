@@ -326,3 +326,14 @@ const quadArray = [90000, 1, 65536]
   expect(data.decompressed.length).toBe(raw.length)
   expect(data.decompressed).toEqual(raw)
 }
+
+{
+  // throw on zlib uncompressed size mismatch
+  const reader = createDataReader({
+    data: Buffer.from(new Uint32Array([16 * 16 * 3]).buffer),
+  })
+
+  expect(() => {
+    reader.readZlib(16 * 16)
+  }).toThrow('expected an uncompressed byte length of 256 but got 768')
+}
