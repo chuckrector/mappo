@@ -29,7 +29,7 @@ T.list = (formatOrFunction, lengthCalculator) => {
 
     let length = lengthCalculator
     if (typeof length === 'function') {
-      length = length(record)
+      length = length({reader, record})
     }
 
     while (length-- > 0) {

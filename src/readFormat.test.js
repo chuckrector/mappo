@@ -202,7 +202,7 @@ const fill = require('lodash/fill')
     format: {
       w: T.u8,
       h: T.u8,
-      grid: T.list(T.u8, (record) => record.w * record.h),
+      grid: T.list(T.u8, ({record}) => record.w * record.h),
     },
     reader: createDataReader({data: buffer})
   })
@@ -210,6 +210,25 @@ const fill = require('lodash/fill')
   expect(data).toEqual({
     w: 2,
     h: 3,
+    grid: [44, 55, 66, 77, 88, 99],
+  })
+}
+
+{
+  // can read list of all remaining bytes
+
+  const buffer = Buffer.concat([
+    Buffer.from([44, 55, 66, 77, 88, 99]),
+  ])
+
+  const data = readFormat({
+    format: {
+      grid: T.list(T.u8, ({reader}) => reader.length - reader.position),
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({
     grid: [44, 55, 66, 77, 88, 99],
   })
 }
