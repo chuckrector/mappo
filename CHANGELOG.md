@@ -1,4 +1,13 @@
 
+## 0.13.0 (Sep 4, 2016)
+
+- VERGE2 .CHR loader and PNG converter
+- v2vsp2pal cli
+- v2chr2png cli
+- VERGE2 .VSP loader and PNG converter
+- v2vsp2png cli
+- declarative file format loader
+
 ## 0.12.0 (Sep 3, 2016)
 
 - VERGE1 TRANS.TBL loader and JSON converter
