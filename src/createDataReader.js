@@ -214,6 +214,9 @@ createDataReader = (args) => {
     get length() {
       return buffer.length
     },
+    get remaining() {
+      return buffer.length - position
+    }
   }
 }
 

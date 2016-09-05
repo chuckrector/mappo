@@ -297,3 +297,16 @@ const quadArray = [90000, 1, 65536]
   expect(data.bufsize).toEqual(5)
   expect(data.decompressed).toEqual(decompressedLayout)
 }
+
+{
+  // can get remaining # bytes
+  const reader = createDataReader({
+    data: Buffer.from([1, 2])
+  })
+
+  expect(reader.remaining).toBe(2)
+  reader.readByte()
+  expect(reader.remaining).toBe(1)
+  reader.readByte()
+  expect(reader.remaining).toBe(0)
+}
