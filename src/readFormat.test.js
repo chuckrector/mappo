@@ -280,6 +280,66 @@ const fill = require('lodash/fill')
 }
 
 {
+  // can read current T.list index in dynamic length calculators
+
+  const firstLayerWidth = 3
+  const firstLayerHeight = 4
+  const firstLayerFill = 77
+  const secondLayerWidth = 5
+  const secondLayerHeight = 6
+  const secondLayerFill = 88
+  const buffer = Buffer.concat([
+    Buffer.from([
+      2,
+      firstLayerWidth, firstLayerHeight,
+      secondLayerWidth, secondLayerHeight,
+    ]),
+    Buffer.concat([
+      Buffer.from(new Uint32Array([2 * 2]).buffer),
+      Buffer.from(new Uint16Array([
+        (firstLayerWidth * firstLayerHeight) | 0xff00,
+        firstLayerFill,
+      ]).buffer),
+      Buffer.from(new Uint32Array([2 * 2]).buffer),
+      Buffer.from(new Uint16Array([
+        (secondLayerWidth * secondLayerHeight) | 0xff00,
+        secondLayerFill
+      ]).buffer),
+    ])
+  ])
+
+  const data = readFormat({
+    format: {
+      numlayers: T.u8,
+      layer: T.list({
+        sizex: T.u8,
+        sizey: T.u8,
+      }, ({record}) => record.numlayers),
+      layers: T.list(
+        T.compressedU16(({record, listIndex}) => {
+          const sizex = record.layer[listIndex].sizex
+          const sizey = record.layer[listIndex].sizey
+          const size = sizex * sizey
+          return size
+        }),
+        ({record}) => record.numlayers
+      )
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data.numlayers).toBe(2)
+  expect(data.layer.length).toBe(2)
+  expect(data.layers.length).toBe(2)
+  expect(data.layers[0].decompressed).toEqual(
+    fill(Array(firstLayerWidth * firstLayerHeight), firstLayerFill)
+  )
+  expect(data.layers[1].decompressed).toEqual(
+    fill(Array(secondLayerWidth * secondLayerHeight), secondLayerFill)
+  )
+}
+
+{
   // can read list of all remaining bytes
 
   const buffer = Buffer.concat([
