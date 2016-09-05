@@ -79,7 +79,7 @@ const fill = require('lodash/fill')
 
   const buffer = Buffer.concat([
     Buffer.from([5]),
-    Buffer.from('Cute\0'),
+    Buffer.from('Cute\0Cuddly Kittens'),
   ])
 
   const data = readFormat({
