@@ -3,9 +3,7 @@
 const fs = require('fs')
 const assert = require('assert')
 
-let createDataReader
-
-createDataReader = (args) => {
+const createDataReader = (args) => {
   const buffer = Buffer.from(args.data)
   const END_OF_DATA = null
   let position = 0
