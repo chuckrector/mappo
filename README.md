@@ -592,5 +592,5 @@ Output:
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
 - json pretty printer that abbreviates long lists with ellipses
 - i frequently forget to do `new Uint16Array([1, 2, 3])` and instead do `new Uint16Array(1, 2, 3)`, esp. when formatting across multiple lines. it fails in a very confusing way. need to put an abstraction on top of it that explodes usefully
-- optimization pass. cli tests take 1.5s now and there are still at least three more intensive VERGE3 PNG converter cli left to be written
+- optimization pass. all tests take ~3s now and there are still at least three more intensive VERGE3 PNG converter cli left to be written
 - support for conditional blocks in declarative parser (e.g. EQUIP.DAT)
