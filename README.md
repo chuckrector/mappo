@@ -599,6 +599,7 @@ Output:
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
 - json pretty printer that abbreviates long lists with ellipses
 - i frequently forget to do `new Uint16Array([1, 2, 3])` and instead do `new Uint16Array(1, 2, 3)`, esp. when formatting across multiple lines. it fails in a very confusing way. need to put an abstraction on top of it that explodes usefully
+- i frequently also forget to do `new Uint16Array([1, 2, 3]).buffer`! super super confusing. abstract dat 💩!
 - optimization pass. all tests take ~3s now and there are still at least three more intensive VERGE3 PNG converter cli left to be written
 - support for conditional blocks in declarative parser (e.g. EQUIP.DAT)
 - automatically run all cli as part of tests, rather than manually adding to shell script every time i make a new one. how? maybe default params in each cli and let normal js test runner drive everything
