@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge1ItemIconDatConverter = require('./createVerge1ItemIconDatConverter')
 const fill = require('lodash/fill')

@@ -1,5 +1,8 @@
 var glob = require('glob')
 
 glob('src/**/*.test.js', (err, files) => {
-  files.forEach((testJs) => require('./' + testJs))
+  files.forEach((testJs) => {
+    console.log('running tests:', testJs)
+    require('./' + testJs)
+  })
 })

@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge2MapLoader = require('./createVerge2MapLoader.js')
 const padEnd = require('lodash/padEnd')

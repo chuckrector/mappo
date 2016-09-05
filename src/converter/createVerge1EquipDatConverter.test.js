@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge1EquipDatLoader = require('../loader/createVerge1EquipDatLoader')
 const createVerge1EquipDatConverter = require('./createVerge1EquipDatConverter')

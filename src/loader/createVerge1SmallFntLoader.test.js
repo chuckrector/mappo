@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge1SmallFntLoader = require('./createVerge1SmallFntLoader')
 const fill = require('lodash/fill')

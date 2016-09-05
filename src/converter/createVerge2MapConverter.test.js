@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge2MapLoader = require('../loader/createVerge2MapLoader')
 const createVerge2MapConverter = require('./createVerge2MapConverter')

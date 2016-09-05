@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createDataReader = require('./createDataReader.js')
 const fill = require('lodash/fill')

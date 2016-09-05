@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge2ChrLoader = require('./createVerge2ChrLoader')
 const fill = require('lodash/fill')

@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createPcxConverter = require('./createPcxConverter')
 const fill = require('lodash/fill')

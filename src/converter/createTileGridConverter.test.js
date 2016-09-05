@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createTileGridConverter = require('./createTileGridConverter')
 const fill = require('lodash/fill')

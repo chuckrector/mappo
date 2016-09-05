@@ -1,7 +1,5 @@
 "use strict"
 
-console.log('running tests:', __filename)
-
 const expect = require('expect')
 const createVerge1BoxRawConverter = require('./createVerge1BoxRawConverter')
 const fill = require('lodash/fill')
