@@ -635,5 +635,4 @@ Output:
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
-- declarative file format loaders, rather than all this imperative stuff
 - json pretty printer that abbreviates long lists with ellipses
