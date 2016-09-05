@@ -1,5 +1,7 @@
 "use strict"
 
+const zlib = require('zlib')
+
 const lengthCalculator = (length, {reader, record, listIndex}) => {
   if (typeof length === 'function') {
     return length({reader, record, listIndex})
@@ -32,6 +34,12 @@ const T = {
   compressedU16: (length) => {
     return ({reader, record, listIndex}) => {
       return reader.readWordArrayCompressed(lengthCalculator(length, {reader, record, listIndex}))
+    }
+  },
+
+  zlib: (length) => {
+    return ({reader, record, listIndex}) => {
+      return reader.readZlib(lengthCalculator(length, {reader, record, listIndex}))
     }
   }
 }

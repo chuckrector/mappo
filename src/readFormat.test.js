@@ -5,6 +5,7 @@ const createDataReader = require('./createDataReader')
 const {readFormat, T} = require('./readFormat')
 const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
+const zlib = require('zlib')
 
 {
   // can read unsigned types
@@ -145,6 +146,27 @@ const fill = require('lodash/fill')
 
   expect(data.a.decompressed).toEqual(expandedA)
   expect(data.b.decompressed).toEqual(expandedA.map(v => v * 1111))
+}
+
+{
+  // can read zlib compressed buffers
+
+  const raw = fill(Array(16 * 16), 99)
+  const compressedBuffer = [...zlib.deflateRawSync(Buffer.from(raw))]
+  const buffer = Buffer.concat([
+    Buffer.from(new Uint32Array([raw.length, compressedBuffer.length]).buffer),
+    Buffer.from(compressedBuffer)
+  ])
+
+  const data = readFormat({
+    format: {tiledatabuf: T.zlib(16 * 16)},
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data.tiledatabuf.mysize).toBe(raw.length)
+  expect(data.tiledatabuf.comprLen).toBe(compressedBuffer.length)
+  expect(data.tiledatabuf.decompressed.length).toBe(raw.length)
+  expect(data.tiledatabuf.decompressed).toEqual(raw)
 }
 
 {
