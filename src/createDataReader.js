@@ -95,6 +95,8 @@ createDataReader = (args) => {
       s += String.fromCharCode(readByte())
     }
 
+    readWhitespace()
+
     return s
   }
 

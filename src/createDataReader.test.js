@@ -168,9 +168,7 @@ const quadArray = [90000, 1, 65536]
   })
 
   expect(reader.readString()).toBe('This')
-  reader.readWhitespace()
   expect(reader.readString()).toBe('n')
-  reader.readWhitespace()
   expect(reader.readString()).toBe('that')
 }
 
@@ -182,11 +180,8 @@ const quadArray = [90000, 1, 65536]
   })
 
   expect(reader.readStringAsByte()).toBe(255)
-  reader.readWhitespace()
   expect(reader.readStringAsByte()).toBe(0)
-  reader.readWhitespace()
   expect(reader.readStringAsByte()).toBe(255)
-  reader.readWhitespace()
   expect(reader.readStringAsByte()).toBe(0)
 }
 
@@ -198,9 +193,7 @@ const quadArray = [90000, 1, 65536]
   })
 
   expect(reader.readStringAsWord()).toBe(65535)
-  reader.readWhitespace()
   expect(reader.readStringAsWord()).toBe(0)
-  reader.readWhitespace()
   expect(reader.readStringAsWord()).toBe(65535)
 }
 
@@ -212,11 +205,8 @@ const quadArray = [90000, 1, 65536]
   })
 
   expect(reader.readStringAsQuad()).toBe(4294967295)
-  reader.readWhitespace()
   expect(reader.readStringAsQuad()).toBe(0)
-  reader.readWhitespace()
   expect(reader.readStringAsQuad()).toBe(4294967295)
-  reader.readWhitespace()
   expect(reader.readStringAsQuad()).toBe(0)
 }
 
