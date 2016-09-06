@@ -66,6 +66,18 @@ const createDataReader = (args) => {
     return s
   }
 
+  const readStringNullTerminated = () => {
+    let s = ''
+
+    while (!atEnd() && peekByte() !== '\0') {
+      s += String.fromCharCode(readByte())
+    }
+
+    readByte()
+
+    return s
+  }
+
   const peekByte = () => {
     if (atEnd()) {
       return END_OF_DATA
@@ -217,6 +229,7 @@ const createDataReader = (args) => {
     readQuadArray,
     readWhitespace,
     readStringFixed,
+    readStringNullTerminated,
     readString,
     readStringAsByte,
     readStringAsWord,

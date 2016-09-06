@@ -112,6 +112,17 @@ const quadArray = [90000, 1, 65536]
 }
 
 {
+  // can read null terminated strings
+  const reader = createDataReader({
+    data: Buffer.from('Cute\0Cuddly\0Kittens')
+  })
+
+  expect(reader.readStringNullTerminated()).toBe('Cute')
+  expect(reader.readStringNullTerminated()).toBe('Cuddly')
+  expect(() => reader.readStringNullTerminated()).toThrow(RangeError)
+}
+
+{
   // reading a string should ignore garbage after null terminator
   const reader = createDataReader({
     data: Buffer.from('HAHN01.VSP\0he')
