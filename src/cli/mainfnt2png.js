@@ -8,23 +8,21 @@ const createVerge1MainFntConverter = require('../converter/createVerge1MainFntCo
 const palFilename = process.argv[2]
 const mainFntFilename = process.argv[3]
 
-fs.readFile(palFilename, (err, diskPalData) => {
-  const palLoader = createVerge1PalLoader({data: diskPalData})
-  const palData = palLoader.load()
+const diskPalData = fs.readFileSync(palFilename)
+const palLoader = createVerge1PalLoader({data: diskPalData})
+const palData = palLoader.load()
 
-  fs.readFile(mainFntFilename, (err, diskMainFntData) => {
-    const mainFntLoader = createVerge1MainFntLoader({data: diskMainFntData})
-    const mainFntData = mainFntLoader.load()
-    const mainFntConverter = createVerge1MainFntConverter({
-      palette: palData.pal,
-      fnt2: mainFntData.fnt2,
-    })
-
-    const png = mainFntConverter.convertToPng()
-    const targetFilename = mainFntFilename + '.png'
-
-    png.pack().pipe(fs.createWriteStream(targetFilename))
-
-    console.log('converted', mainFntFilename, 'to', targetFilename)
-  })
+const diskMainFntData = fs.readFileSync(mainFntFilename)
+const mainFntLoader = createVerge1MainFntLoader({data: diskMainFntData})
+const mainFntData = mainFntLoader.load()
+const mainFntConverter = createVerge1MainFntConverter({
+  palette: palData.pal,
+  fnt2: mainFntData.fnt2,
 })
+
+const png = mainFntConverter.convertToPng()
+const targetFilename = mainFntFilename + '.png'
+
+png.pack().pipe(fs.createWriteStream(targetFilename))
+
+console.log('converted', mainFntFilename, 'to', targetFilename)
