@@ -3,11 +3,6 @@
 const {PNG} = require('pngJS')
 const colorDepth = require('./colorDepth')
 
-// raw8bitData is expected to contain tileWidth*tileHeight*numtiles bytes.
-// raw8bitData is treated like an image of the format:
-// - tileWidth bytes wide
-// - tileHeight*numtiles bytes tall
-//
 module.exports = ({
   tileWidth,
   tileHeight,
@@ -15,9 +10,9 @@ module.exports = ({
   numtiles,
   raw32bitData,
 }) => {
-    const rows = Math.floor((numtiles + (columns - 1)) / columns)
-    const pngWidth = columns * tileWidth
-    const pngHeight = rows * tileHeight
+  const rows = Math.floor((numtiles + (columns - 1)) / columns)
+  const pngWidth = columns * tileWidth
+  const pngHeight = rows * tileHeight
 
   // api:
   // - tileProcessor
