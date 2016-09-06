@@ -17,3 +17,22 @@ const colorDepth = require('./colorDepth')
 
   expect(colorDepth.convert8to32({palette, raw8bitData})).toEqual(raw32bitData)
 }
+
+{
+  // can convert 24-bit image data to 32-bit
+  const r = [0xff, 0, 0]
+  const g = [0, 0xff, 0]
+  const b = [0, 0, 0xff]
+  const magenta = [0xff, 0, 0xff]
+
+  const raw24bitData = [
+    ...r, ...g,
+    ...b, ...magenta,
+  ]
+  const raw32bitData = [
+    ...r, 0xff, ...g, 0xff,
+    ...b, 0xff, ...magenta, 0x00,
+  ]
+
+  expect(colorDepth.convert24to32({raw24bitData})).toEqual(raw32bitData)
+}
