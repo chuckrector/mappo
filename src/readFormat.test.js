@@ -6,6 +6,7 @@ const {readFormat, T} = require('./readFormat')
 const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
 const zlib = require('zlib')
+const range = require('lodash/range')
 
 {
   // can read unsigned types
@@ -386,5 +387,32 @@ const zlib = require('zlib')
 
   expect(data).toEqual({
     grid: [44, 55, 66, 77, 88, 99],
+  })
+}
+
+{
+  // can read 6-bit palette
+  const palette = fill(Array(256)).map((v, i) => {
+    const quantized = Math.floor(i / 4) * 4
+    return [quantized, quantized, quantized]
+  })
+  const _8bit = []
+  for (let i = 0; i < 256; i++) {
+    _8bit.push(...palette[i])
+  }
+  const _6bit = _8bit.map(v => Math.floor(v / 4))
+
+  const data = readFormat({
+    format: {
+      palette: T.palette6bit
+    },
+    reader: createDataReader({data: Buffer.from(_6bit)})
+  })
+
+  expect(data).toEqual({
+    palette: {
+      _6bit,
+      _8bit,
+    }
   })
 }

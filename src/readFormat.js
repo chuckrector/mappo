@@ -41,6 +41,16 @@ const T = {
     return ({reader, record, listIndex}) => {
       return reader.readZlib(lengthCalculator(length, {reader, record, listIndex}))
     }
+  },
+
+  palette6bit: ({reader}) => {
+    const _6bit = reader.readByteArray(256 * 3)
+    const _8bit = _6bit.map(v => v * 4)
+
+    return {
+      _6bit,
+      _8bit,
+    }
   }
 }
 
