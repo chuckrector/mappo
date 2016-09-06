@@ -1,4 +1,16 @@
 
+## 0.14.0 (Sep 5, 2016)
+
+- VERGE3 .VSP loader and converter
+- v3vsp2png cli
+- v3vspob2png cli
+- VERGE3 .CHR loader and converter
+- v3chr2png cli
+
+## 0.13.1 (Sep 5, 2016)
+
+- Fix v2vsp2pal cli VERGE2.PAL output path
+
 ## 0.13.0 (Sep 4, 2016)
 
 - VERGE2 .CHR loader and PNG converter
