@@ -596,6 +596,20 @@ Output:
 
 ![alt text](img/v3/HAHN01.VSP.png?raw=true "a sample of v3vsp2png cli output")
 
+# v3vsp2png
+
+**Support:** VERGE3 only
+
+Usage:
+
+- `node src/cli/v3vspob2png.js data/v3/HAHN01.VSP`
+
+Output:
+
+- `data/v3/HAHN01.VSP-obstructions.png`
+
+![alt text](img/v3/HAHN01.VSP-obstructions.png?raw=true "a sample of v3vspob2png cli output")
+
 # vsp2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
