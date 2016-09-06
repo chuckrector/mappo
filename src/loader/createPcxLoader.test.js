@@ -43,11 +43,6 @@ const filler = fill(Array(58), 88)
 
   const data = loader.load()
 
-  let shiftedPalette = palette
-  for (let i = 0; i < 256 * 3; i++) {
-    shiftedPalette[i] = shiftedPalette[i] >> 2
-  }
-
   expect(data.width).toEqual(tileWidth)
   expect(data.height).toEqual(tileHeight)
   expect(data.raw8bitData).toEqual(pcx)
