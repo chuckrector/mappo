@@ -194,7 +194,7 @@ const createDataReader = (args) => {
 
     const comprLen = readQuad()
     const compressed = readByteArray(comprLen)
-    const decompressed = [...zlib.inflateRawSync(Buffer.from(compressed))] // perf?
+    const decompressed = [...zlib.inflateSync(Buffer.from(compressed))] // perf?
 
     return {
       mysize,

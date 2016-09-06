@@ -13,7 +13,7 @@ const format = 1
 const numtiles = 2
 const compression = 1
 const tiledatabuf = fill(Array(tilesize * tilesize * 3 * numtiles), 99)
-const tiledatabufCompressed = [...zlib.deflateRawSync(Buffer.from(tiledatabuf))]
+const tiledatabufCompressed = [...zlib.deflateSync(Buffer.from(tiledatabuf))]
 const numanims = 2
 const anims = [
   {name: 'First', start: 0, finish: 1, delay: 2, mode: 3},
@@ -21,7 +21,7 @@ const anims = [
 ]
 const numobs = 2
 const obs = fill(Array(tilesize * tilesize * numobs), 88)
-const obsCompressed = [...zlib.deflateRawSync(Buffer.from(obs))]
+const obsCompressed = [...zlib.deflateSync(Buffer.from(obs))]
 
 const chrs = Buffer.concat([
   Buffer.from(new Uint32Array([signature, version, tilesize, format, numtiles, compression]).buffer),

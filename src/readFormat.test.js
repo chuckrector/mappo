@@ -153,7 +153,7 @@ const range = require('lodash/range')
   // can read zlib compressed buffers
 
   const raw = fill(Array(16 * 16), 99)
-  const compressedBuffer = [...zlib.deflateRawSync(Buffer.from(raw))]
+  const compressedBuffer = [...zlib.deflateSync(Buffer.from(raw))]
   const buffer = Buffer.concat([
     Buffer.from(new Uint32Array([raw.length, compressedBuffer.length]).buffer),
     Buffer.from(compressedBuffer)
