@@ -580,6 +580,43 @@ Output:
 ![alt text](img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
 ![alt text](img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
 
+# v3chr2png
+
+**Support:** VERGE3 only (WxH, N frames, 5 columns)
+
+Usage:
+
+- `node src/cli/v3chr2png.js data/v3/sully.chr`
+
+Output:
+
+- `data/v3/sully.chr.png`
+
+![alt text](img/v3/sully.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/bubba.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/crystal.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin2.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin3.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin4.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin5.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin6.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin7.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin8.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/darin9.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/dexter.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/galfrey.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/kadan.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/lil_stan.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/sara.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/stan.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/vorn.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/walker01.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/walker02.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/walker03.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](img/v3/walker04.chr.png?raw=true "a sample of v3chr2png cli output")
+
+
 # v3vsp2png
 
 **Support:** VERGE3 only (16x16, N tiles, 20 columns)
