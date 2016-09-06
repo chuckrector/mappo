@@ -567,7 +567,7 @@ Output:
 
 # v2vsp2png
 
-**Support:** VERGE2 only
+**Support:** VERGE2 only (16x16, N tiles, 20 columns)
 
 Usage:
 
@@ -582,7 +582,7 @@ Output:
 
 # v3vsp2png
 
-**Support:** VERGE3 only
+**Support:** VERGE3 only (16x16, N tiles, 20 columns)
 
 Usage:
 
@@ -596,7 +596,9 @@ Output:
 
 ![alt text](img/v3/HAHN01.VSP.png?raw=true "a sample of v3vsp2png cli output")
 
-# v3vsp2png
+# v3vspob2png (16x16, N tiles, 20 columns)
+
+This cli outputs the tile obstruction data inside VERGE3 VSP files. It follows the same layout as `v3vsp2png`.
 
 **Support:** VERGE3 only
 
