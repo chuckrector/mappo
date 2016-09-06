@@ -580,6 +580,21 @@ Output:
 ![alt text](img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
 ![alt text](img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
 
+# v3vsp2png
+
+**Support:** VERGE3 only
+
+Usage:
+
+- `node src/cli/v3vsp2png.js data/v3/intro.vsp`
+
+Output:
+
+- `data/v3/intro.vsp.png`
+
+![alt text](img/v3/intro.vsp.png?raw=true "a sample of v3vsp2png cli output")
+![alt text](img/v3/HAHN01.VSP.png?raw=true "a sample of v3vsp2png cli output")
+
 # vsp2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
