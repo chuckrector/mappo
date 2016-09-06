@@ -6,14 +6,13 @@ const createVerge1TransTblConverter = require('../converter/createVerge1TransTbl
 
 const transTblFilename = process.argv[2]
 
-fs.readFile(transTblFilename, (err, diskTransTblData) => {
-  const transTblLoader = createVerge1TransTblLoader({data: diskTransTblData})
-  const transTblData = transTblLoader.load()
-  const transTblConverter = createVerge1TransTblConverter(transTblData)
-  const json = transTblConverter.convertToJson()
-  const targetFilename = transTblFilename + '.json'
+const diskTransTblData = fs.readFileSync(transTblFilename)
+const transTblLoader = createVerge1TransTblLoader({data: diskTransTblData})
+const transTblData = transTblLoader.load()
+const transTblConverter = createVerge1TransTblConverter(transTblData)
+const json = transTblConverter.convertToJson()
+const targetFilename = transTblFilename + '.json'
 
-  fs.writeFileSync(targetFilename, json)
+fs.writeFileSync(targetFilename, json)
 
-  console.log('converted', transTblFilename, 'to', targetFilename)
-})
+console.log('converted', transTblFilename, 'to', targetFilename)
