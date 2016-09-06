@@ -8,24 +8,22 @@ const createVerge1SpeechSpcConverter = require('../converter/createVerge1SpeechS
 const palFilename = process.argv[2]
 const speechSpcFilename = process.argv[3]
 
-fs.readFile(palFilename, (err, diskPalData) => {
-  const palLoader = createVerge1PalLoader({data: diskPalData})
-  const palData = palLoader.load()
+const diskPalData = fs.readFileSync(palFilename)
+const palLoader = createVerge1PalLoader({data: diskPalData})
+const palData = palLoader.load()
 
-  fs.readFile(speechSpcFilename, (err, diskSpeechSpcData) => {
-    const speechSpcLoader = createVerge1SpeechSpcLoader({data: diskSpeechSpcData})
-    const speechSpcData = speechSpcLoader.load()
-    const speechSpcConverter = createVerge1SpeechSpcConverter({
-      palette: palData.pal,
-      numtiles: speechSpcData.numtiles,
-      speech: speechSpcData.speech,
-    })
-
-    const png = speechSpcConverter.convertToPng()
-    const targetFilename = speechSpcFilename + '.png'
-
-    png.pack().pipe(fs.createWriteStream(targetFilename))
-
-    console.log('converted', speechSpcFilename, 'to', targetFilename)
-  })
+const diskSpeechSpcData = fs.readFileSync(speechSpcFilename)
+const speechSpcLoader = createVerge1SpeechSpcLoader({data: diskSpeechSpcData})
+const speechSpcData = speechSpcLoader.load()
+const speechSpcConverter = createVerge1SpeechSpcConverter({
+  palette: palData.pal,
+  numtiles: speechSpcData.numtiles,
+  speech: speechSpcData.speech,
 })
+
+const png = speechSpcConverter.convertToPng()
+const targetFilename = speechSpcFilename + '.png'
+
+png.pack().pipe(fs.createWriteStream(targetFilename))
+
+console.log('converted', speechSpcFilename, 'to', targetFilename)
