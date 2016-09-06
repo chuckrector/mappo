@@ -6,14 +6,13 @@ const createVerge1MapConverter = require('../converter/createVerge1MapConverter'
 
 const mapFilename = process.argv[2]
 
-fs.readFile(mapFilename, (err, diskMapData) => {
-  const mapLoader = createVerge1MapLoader({data: diskMapData})
-  const mapData = mapLoader.load()
-  const mapConverter = createVerge1MapConverter(mapData)
-  const json = mapConverter.convertToJson()
-  const targetFilename = mapFilename + '.json'
+const diskMapData = fs.readFileSync(mapFilename)
+const mapLoader = createVerge1MapLoader({data: diskMapData})
+const mapData = mapLoader.load()
+const mapConverter = createVerge1MapConverter(mapData)
+const json = mapConverter.convertToJson()
+const targetFilename = mapFilename + '.json'
 
-  fs.writeFileSync(targetFilename, json)
+fs.writeFileSync(targetFilename, json)
 
-  console.log('converted', mapFilename, 'to', targetFilename)
-})
+console.log('converted', mapFilename, 'to', targetFilename)
