@@ -8,26 +8,24 @@ const createVerge1MiscIconDatConverter = require('../converter/createVerge1MiscI
 const palFilename = process.argv[2]
 const miscIconDatFilename = process.argv[3]
 
-fs.readFile(palFilename, (err, diskPalData) => {
-  const palLoader = createVerge1PalLoader({data: diskPalData})
-  const palData = palLoader.load()
+const diskPalData = fs.readFileSync(palFilename)
+const palLoader = createVerge1PalLoader({data: diskPalData})
+const palData = palLoader.load()
 
-  fs.readFile(miscIconDatFilename, (err, diskMiscIconDatData) => {
-    const miscIconDatLoader = createVerge1MiscIconDatLoader({data: diskMiscIconDatData})
-    const miscIconDatData = miscIconDatLoader.load()
-    const miscIconDatConverter = createVerge1MiscIconDatConverter({
-      palette: palData.pal,
-      numtiles: miscIconDatData.numtiles,
-      menuptr: miscIconDatData.menuptr,
-      itmptr: miscIconDatData.itmptr,
-      charptr: miscIconDatData.charptr,
-    })
-
-    const png = miscIconDatConverter.convertToPng()
-    const targetFilename = miscIconDatFilename + '.png'
-
-    png.pack().pipe(fs.createWriteStream(targetFilename))
-
-    console.log('converted', miscIconDatFilename, 'to', targetFilename)
-  })
+const diskMiscIconDatData = fs.readFileSync(miscIconDatFilename)
+const miscIconDatLoader = createVerge1MiscIconDatLoader({data: diskMiscIconDatData})
+const miscIconDatData = miscIconDatLoader.load()
+const miscIconDatConverter = createVerge1MiscIconDatConverter({
+  palette: palData.pal,
+  numtiles: miscIconDatData.numtiles,
+  menuptr: miscIconDatData.menuptr,
+  itmptr: miscIconDatData.itmptr,
+  charptr: miscIconDatData.charptr,
 })
+
+const png = miscIconDatConverter.convertToPng()
+const targetFilename = miscIconDatFilename + '.png'
+
+png.pack().pipe(fs.createWriteStream(targetFilename))
+
+console.log('converted', miscIconDatFilename, 'to', targetFilename)
