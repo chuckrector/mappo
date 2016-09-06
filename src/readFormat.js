@@ -25,6 +25,7 @@ const T = {
       return reader.readStringFixed(lengthCalculator(length, {reader, record, listIndex}))
     }
   },
+  stringNullTerminated: ({reader}) => reader.readStringNullTerminated(),
 
   compressedU8: (length) => {
     return ({reader, record, listIndex}) => {

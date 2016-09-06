@@ -35,14 +35,14 @@ const range = require('lodash/range')
   const buffer = Buffer.concat([
     Buffer.from(' \n\t\r'),
     Buffer.from(padEnd('Cute', 20, '\0')),
-    Buffer.from('Cuddly Kittens 255 65535 4294967295')
+    Buffer.from('Cuddly\0Kittens 255 65535 4294967295')
   ])
 
   const data = readFormat({
     format: {
       _: T.whitespace,
       adjective: T.stringFixed(20),
-      type: T.string,
+      type: T.stringNullTerminated,
       animal: T.string,
       a: T.stringU8,
       b: T.stringU16,
