@@ -14,7 +14,7 @@ const palette = require('../dummyPalette')
     palette,
     tileWidth,
     tileHeight,
-    raw8bitData: Buffer.from(raw8bitData)
+    raw8bitData,
   })
 
   const png = converter.convertToPng()

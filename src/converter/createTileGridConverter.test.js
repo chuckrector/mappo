@@ -5,6 +5,7 @@ const createTileGridConverter = require('./createTileGridConverter')
 const fill = require('lodash/fill')
 const fs = require('fs')
 const palette = require('../dummyPalette')
+const colorDepth = require('./colorDepth')
 
   const oneTile = [
     128, 128, 128, 128, 128,
@@ -26,22 +27,18 @@ const palette = require('../dummyPalette')
   const tileWidth = 5
   const tileHeight = 5
   const columns = 2
-  const raw8bitData = Array.prototype.concat(
-    oneTile,
-    twoTile,
-    oneTile
-  )
-
+  const oneTile32 = colorDepth.convert8to32({palette, raw8bitData: oneTile})
+  const twoTile32 = colorDepth.convert8to32({palette, raw8bitData: twoTile})
+  const raw32bitData = [...oneTile32, ...twoTile32, ...oneTile32]
 {
   // can convert a tile list to a png grid
 
   const converter = createTileGridConverter({
-    palette,
     tileWidth,
     tileHeight,
     columns,
     numtiles,
-    raw8bitData,
+    raw32bitData,
   })
   const png = converter.convertToPng()
   const width = columns * tileWidth
@@ -50,41 +47,30 @@ const palette = require('../dummyPalette')
   expect(png.width).toBe(width)
   expect(png.height).toBe(height)
 
-  const forEachTilePixel = (tileColumn, tileRow, callback) => {
+  const forEachTilePixel = (tileIndex, tileColumn, tileRow, callback) => {
     for (let y = 0; y < tileHeight; y++) {
       for (let x = 0; x < tileWidth; x++) {
         const absoluteX = (tileColumn * tileWidth) + x
         const absoluteY = (tileRow * tileHeight) + y
-        const paletteIndex = raw8bitData[offset++]
-        const pngDataIndex = (absoluteY * width  * 4) + (absoluteX * 4)
+        const pngDataIndex = ((absoluteY * width) + absoluteX) * 4
+        const offset32 = ((tileIndex * tileWidth * tileHeight) + (y * tileWidth) + x) * 4
 
-        callback({paletteIndex, pngDataIndex})
+        callback({offset32, pngDataIndex})
       }
     }
   }
 
-  const expectFilledTile = (tileColumn, tileRow) => {
-    forEachTilePixel(tileColumn, tileRow, ({paletteIndex, pngDataIndex}) => {
-      if (paletteIndex) {
-        const r = palette[(paletteIndex * 3) + 0] * 4
-        const g = palette[(paletteIndex * 3) + 1] * 4
-        const b = palette[(paletteIndex * 3) + 2] * 4
-
-        expect(png.data[pngDataIndex + 0]).toBe(r)
-        expect(png.data[pngDataIndex + 1]).toBe(g)
-        expect(png.data[pngDataIndex + 2]).toBe(b)
-        expect(png.data[pngDataIndex + 3]).toBe(0xff)
-      } else {
-        expect(png.data[pngDataIndex + 0]).toBe(0xff)
-        expect(png.data[pngDataIndex + 1]).toBe(0)
-        expect(png.data[pngDataIndex + 2]).toBe(0xff)
-        expect(png.data[pngDataIndex + 3]).toBe(0)
-      }
+  const expectFilledTile = (tileIndex, tileColumn, tileRow) => {
+    forEachTilePixel(tileIndex, tileColumn, tileRow, ({offset32, pngDataIndex}) => {
+      expect(png.data[pngDataIndex + 0]).toBe(raw32bitData[offset32 + 0])
+      expect(png.data[pngDataIndex + 1]).toBe(raw32bitData[offset32 + 1])
+      expect(png.data[pngDataIndex + 2]).toBe(raw32bitData[offset32 + 2])
+      expect(png.data[pngDataIndex + 3]).toBe(raw32bitData[offset32 + 3])
     })
   }
 
-  const expectEmptyTile = (tileColumn, tileRow) => {
-    forEachTilePixel(tileColumn, tileRow, ({paletteIndex, pngDataIndex}) => {
+  const expectEmptyTile = (tileIndex, tileColumn, tileRow) => {
+    forEachTilePixel(tileIndex, tileColumn, tileRow, ({offset32, pngDataIndex}) => {
       expect(png.data[pngDataIndex + 0]).toBe(0xff)
       expect(png.data[pngDataIndex + 1]).toBe(0)
       expect(png.data[pngDataIndex + 2]).toBe(0xff)
@@ -92,31 +78,20 @@ const palette = require('../dummyPalette')
     })
   }
 
-  let offset = 0
-  for (let tileIndex = 0; tileIndex < numtiles; tileIndex++) {
-    const tileColumn = tileIndex % columns
-    const tileRow = Math.floor(tileIndex / columns)
-
-    expectFilledTile(tileColumn, tileRow)
-  }
-
-  for (let tileIndex = numtiles; tileIndex < columns * 2; tileIndex++) {
-    const tileColumn = tileIndex % columns
-    const tileRow = Math.floor(tileIndex / columns)
-
-    expectEmptyTile(tileColumn, tileRow)
-  }
+  expectFilledTile(0, 0, 0)
+  expectFilledTile(1, 1, 0)
+  expectFilledTile(2, 0, 1)
+  expectEmptyTile(3, 1, 1)
 }
 
 {
   // process only row * columns tile indexes
   const converter = createTileGridConverter({
-    palette,
     tileWidth,
     tileHeight,
     columns,
     numtiles,
-    raw8bitData,
+    raw32bitData,
   })
 
   let numTilesProcessed = 0

@@ -1,6 +1,7 @@
 "use strict"
 
 const createTileGridConverter = require('./createTileGridConverter')
+const colorDepth = require('./colorDepth')
 
 module.exports = ({palette, chr2}) => {
   const converter = createTileGridConverter({
@@ -9,7 +10,7 @@ module.exports = ({palette, chr2}) => {
     tileHeight: 96,
     columns: 1,
     numtiles: 1,
-    raw8bitData: chr2,
+    raw32bitData: colorDepth.convert8to32({palette, raw8bitData: chr2}),
   })
 
   return {

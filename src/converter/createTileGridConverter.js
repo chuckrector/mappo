@@ -1,6 +1,7 @@
 "use strict"
 
 const {PNG} = require('pngJS')
+const colorDepth = require('./colorDepth')
 
 // raw8bitData is expected to contain tileWidth*tileHeight*numtiles bytes.
 // raw8bitData is treated like an image of the format:
@@ -8,12 +9,11 @@ const {PNG} = require('pngJS')
 // - tileHeight*numtiles bytes tall
 //
 module.exports = ({
-  palette,
   tileWidth,
   tileHeight,
   columns,
   numtiles,
-  raw8bitData,
+  raw32bitData,
 }) => {
     const rows = Math.floor((numtiles + (columns - 1)) / columns)
     const pngWidth = columns * tileWidth
@@ -50,6 +50,7 @@ module.exports = ({
   // PNG is expected to be RGBA, i.e. pngRect.width*pngRect.height*4 bytes.
   //
   const blitRawToPng = ({
+    // expected to be 32-bit RGBA
     rawData,
     // width,height only; x,y ignored
     rawRect,
@@ -64,26 +65,20 @@ module.exports = ({
       for (let x = 0; x < rawTileRect.width; x++) {
         const rawX = rawTileRect.x + x
         const rawY = rawTileRect.y + y
-        const rawOffset = (rawY * rawRect.width) + rawX
+        const rawOffset = ((rawY * rawRect.width) + rawX) * 4
         const pngX = pngDestRect.x + x
         const pngY = pngDestRect.y + y
-        const pngOffset = (pngY * pngRect.width * 4) + (pngX * 4)
+        const pngOffset = ((pngY * pngRect.width) + pngX) * 4
 
         if (pngOffset >= pngData.length) {
           break;
         }
 
-        const rawOutOfBounds = rawOffset >= rawData.length
-        const paletteIndex = rawOutOfBounds ? 0 : rawData[rawOffset]
-        if (paletteIndex) {
-          const r = palette[(paletteIndex * 3) + 0] * 4
-          const g = palette[(paletteIndex * 3) + 1] * 4
-          const b = palette[(paletteIndex * 3) + 2] * 4
-
-          pngData[pngOffset + 0] = r
-          pngData[pngOffset + 1] = g
-          pngData[pngOffset + 2] = b
-          pngData[pngOffset + 3] = 0xff
+        if (rawOffset < rawData.length) {
+          pngData[pngOffset + 0] = rawData[rawOffset + 0]
+          pngData[pngOffset + 1] = rawData[rawOffset + 1]
+          pngData[pngOffset + 2] = rawData[rawOffset + 2]
+          pngData[pngOffset + 3] = rawData[rawOffset + 3]
         } else {
           pngData[pngOffset + 0] = 0xff
           pngData[pngOffset + 1] = 0
@@ -122,7 +117,7 @@ module.exports = ({
   }
 
   const convertToPng = () => {
-    const rawData = raw8bitData
+    const rawData = raw32bitData
     const rawRect = {
       width: tileWidth,
       height: tileHeight * numtiles,

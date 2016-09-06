@@ -2,6 +2,7 @@
 
 const createTileGridConverter = require('./createTileGridConverter')
 const fill = require('lodash/fill')
+const colorDepth = require('./colorDepth')
 
 module.exports = ({
   palette,
@@ -21,12 +22,11 @@ module.exports = ({
   const raw8bitData = fill(Array(pngWidth * pngHeight))
 
   const converter = createTileGridConverter({
-    palette,
     tileWidth: pngWidth,
     tileHeight: pngHeight,
     columns: 1,
     numtiles: 1,
-    raw8bitData,
+    raw32bitData: colorDepth.convert8to32({palette, raw8bitData}),
   })
 
   const convertToPng = () => {
