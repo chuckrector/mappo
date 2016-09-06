@@ -6,14 +6,13 @@ const createVerge1EquipDatConverter = require('../converter/createVerge1EquipDat
 
 const equipDatFilename = process.argv[2]
 
-fs.readFile(equipDatFilename, (err, diskEquipDatData) => {
-  const equipDatLoader = createVerge1EquipDatLoader({data: diskEquipDatData})
-  const equipDatData = equipDatLoader.load()
-  const equipDatConverter = createVerge1EquipDatConverter(equipDatData)
-  const json = equipDatConverter.convertToJson()
-  const targetFilename = equipDatFilename + '.json'
+const diskEquipDatData = fs.readFileSync(equipDatFilename)
+const equipDatLoader = createVerge1EquipDatLoader({data: diskEquipDatData})
+const equipDatData = equipDatLoader.load()
+const equipDatConverter = createVerge1EquipDatConverter(equipDatData)
+const json = equipDatConverter.convertToJson()
+const targetFilename = equipDatFilename + '.json'
 
-  fs.writeFileSync(targetFilename, json)
+fs.writeFileSync(targetFilename, json)
 
-  console.log('converted', equipDatFilename, 'to', targetFilename)
-})
+console.log('converted', equipDatFilename, 'to', targetFilename)
