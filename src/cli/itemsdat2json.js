@@ -6,14 +6,13 @@ const createVerge1ItemsDatConverter = require('../converter/createVerge1ItemsDat
 
 const itemsDatFilename = process.argv[2]
 
-fs.readFile(itemsDatFilename, (err, diskItemsDatData) => {
-  const itemsDatLoader = createVerge1ItemsDatLoader({data: diskItemsDatData})
-  const itemsDatData = itemsDatLoader.load()
-  const itemsDatConverter = createVerge1ItemsDatConverter(itemsDatData)
-  const json = itemsDatConverter.convertToJson()
-  const targetFilename = itemsDatFilename + '.json'
+const diskItemsDatData = fs.readFileSync(itemsDatFilename)
+const itemsDatLoader = createVerge1ItemsDatLoader({data: diskItemsDatData})
+const itemsDatData = itemsDatLoader.load()
+const itemsDatConverter = createVerge1ItemsDatConverter(itemsDatData)
+const json = itemsDatConverter.convertToJson()
+const targetFilename = itemsDatFilename + '.json'
 
-  fs.writeFileSync(targetFilename, json)
+fs.writeFileSync(targetFilename, json)
 
-  console.log('converted', itemsDatFilename, 'to', targetFilename)
-})
+console.log('converted', itemsDatFilename, 'to', targetFilename)
