@@ -22,3 +22,4 @@ node src/cli/v2vsp2pal.js data/v2/GRUE0041.VSP
 node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR
 node src/cli/v2vsp2png.js data/v2/GRUE0041.VSP
 node src/cli/v3vsp2png.js data/v3/intro.vsp
+node src/cli/v3vspob2png.js data/v3/HAHN01.VSP

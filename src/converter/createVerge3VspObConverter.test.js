@@ -9,6 +9,7 @@ const palette = require('../dummyPalette')
 {
   // can convert vsp obstruction tile data to png
   const converter = createVerge3VspObConverter({
+    palette,
     numtiles: 21,
     obs: fill(Array(16 * 16 * 3 * 12)),
   })
