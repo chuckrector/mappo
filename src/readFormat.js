@@ -69,7 +69,6 @@ T.list = (formatOrFunction, length) => {
     throw {message: 'T.list length must be defined'}
   }
 
-  // TODO: verify this "outer" listIndex can be safely ignored
   return ({reader, record, listIndex}) => {
     const recordList = []
 
