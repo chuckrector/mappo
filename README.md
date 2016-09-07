@@ -25,8 +25,10 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 # Installation
 
-1. npm install
-2. npm start
+1. git clone https://github.com/chuckrector/mappo.git
+2. cd mappo
+3. npm install
+4. npm start
 
 # Supported File Formats
 
