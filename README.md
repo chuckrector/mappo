@@ -616,6 +616,92 @@ Output:
 ![alt text](img/v3/walker03.chr.png?raw=true "a sample of v3chr2png cli output")
 ![alt text](img/v3/walker04.chr.png?raw=true "a sample of v3chr2png cli output")
 
+# v3map2json
+
+**Support:** VERGE3 only
+
+Usage:
+
+- `node src/cli/v3map2json.js data/v3/undersea.map`
+
+Output:
+
+- `data/v3/undersea.map.json`
+
+**Note:** Output here is abbreviated and pretty-printed for readability.
+
+```json
+{
+  "signature": "V3MAP",
+  "version": 2,
+  "scriptoffset": 11864,
+  "mapname": "Undersea",
+  "vspname": "HAHN01.VSP",
+  "musicname": "",
+  "renderstring": "1,E,2,R",
+  "startupscript": "start",
+  "startx": 13,
+  "starty": 2,
+  "numlayers": 2,
+  "layers": [{
+    "layername": "Layer 0",
+    "parallax_x": 1,
+    "parallax_y": 1,
+    "width": 58,
+    "height": 36,
+    "lucent": 0,
+    "tiledata": {
+      "mysize": 4176,
+      "comprLen": 394,
+      "compressed": [120, 156, 237, ...],
+      "decompressed": [48, 0, 48, ...],
+    }
+  }, ...],
+  "obslayer": {
+    "mysize": 2088,
+    "comprLen": 284,
+    "compressed": [120, 156, 237, ...],
+    "decompressed": [2, 2, 2, ...],
+  },
+  "zonelayer": {
+    "mysize": 4176,
+    "comprLen": 102,
+    "compressed": [120, 156, 237, ...],
+    "decompressed": [0, 0, 0, ...],
+  },
+  "numzones": 17,
+  "zones": [{
+    "name": "Default",
+    "script": "",
+    "percent": 20,
+    "delay": 8,
+    "method": 0
+  }, ...],
+  "mapentities": 0,
+  "entity": [{
+    "x1": 23,
+    "y1": 11,
+    "face": 2,
+    "obstructable": 1,
+    "obstruction": 1,
+    "autoface": 1,
+    "speed": 100,
+    "speedct": 0,
+    "delayct": 0,
+    "wx1": 0,
+    "wy1": 0,
+    "wx2": 0,
+    "wy2": 0,
+    "wdelay": 0,
+    "maybeOffset": 0,
+    "movescript": "",
+    "chrname": "res\\chrs\\Vorn.chr",
+    "description": "Villager A",
+    "script": "ent0"
+  }, ...],
+  "script": [0, 0, 0, ...],
+}
+```
 
 # v3vsp2png
 
