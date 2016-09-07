@@ -100,10 +100,12 @@ const quadArray = [90000, 1, 65536]
   expect(reader.readQuadArray(3)).toEqual(quadArray)
 }
 
+const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
+
 {
   // can read doubles
   const reader = createDataReader({
-    data: new Float64Array([1, 1.5, -1, -1.5, 0.003, 0]).buffer
+    data: new Float64Array(doubleArray).buffer
   })
 
   expect(reader.readDouble()).toBe(1)
@@ -112,6 +114,15 @@ const quadArray = [90000, 1, 65536]
   expect(reader.readDouble()).toBe(-1.5)
   expect(reader.readDouble()).toBe(0.003)
   expect(reader.readDouble()).toBe(0)
+}
+
+{
+  // can read double array
+  const reader = createDataReader({
+    data: new Float64Array([1, 1.5, -1, -1.5, 0.003, 0]).buffer
+  })
+
+  expect(reader.readDoubleArray(doubleArray.length)).toEqual(doubleArray)
 }
 
 {

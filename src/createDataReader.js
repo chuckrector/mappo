@@ -194,6 +194,16 @@ const createDataReader = (args) => {
     return value
   }
 
+  const readDoubleArray = (length) => {
+    let result = []
+
+    while (length-- > 0) {
+      result.push(readDouble())
+    }
+
+    return result
+  }
+
   const readLine = () => {
     let s = ''
 
@@ -234,6 +244,7 @@ const createDataReader = (args) => {
     readQuad,
     readQuadArray,
     readDouble,
+    readDoubleArray,
     readWhitespace,
     readStringFixed,
     readStringNullTerminated,
