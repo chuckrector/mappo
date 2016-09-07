@@ -101,6 +101,20 @@ const quadArray = [90000, 1, 65536]
 }
 
 {
+  // can read doubles
+  const reader = createDataReader({
+    data: new Float64Array([1, 1.5, -1, -1.5, 0.003, 0]).buffer
+  })
+
+  expect(reader.readDouble()).toBe(1)
+  expect(reader.readDouble()).toBe(1.5)
+  expect(reader.readDouble()).toBe(-1)
+  expect(reader.readDouble()).toBe(-1.5)
+  expect(reader.readDouble()).toBe(0.003)
+  expect(reader.readDouble()).toBe(0)
+}
+
+{
   // can read strings
   const reader = createDataReader({
     data: Buffer.from('tic tac toe')

@@ -188,6 +188,12 @@ const createDataReader = (args) => {
     return result
   }
 
+  const readDouble = () => {
+    const value = buffer.readDoubleLE(position)
+    position += 8
+    return value
+  }
+
   const readLine = () => {
     let s = ''
 
@@ -227,6 +233,7 @@ const createDataReader = (args) => {
     readWordArrayCompressed,
     readQuad,
     readQuadArray,
+    readDouble,
     readWhitespace,
     readStringFixed,
     readStringNullTerminated,
