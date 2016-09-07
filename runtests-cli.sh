@@ -24,3 +24,4 @@ node src/cli/v2vsp2png.js data/v2/GRUE0041.VSP
 node src/cli/v3vsp2png.js data/v3/intro.vsp
 node src/cli/v3vspob2png.js data/v3/HAHN01.VSP
 node src/cli/v3chr2png.js data/v3/sully.chr
+node src/cli/v3map2json.js data/v3/undersea.map

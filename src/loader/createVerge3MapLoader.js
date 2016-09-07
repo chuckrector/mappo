@@ -51,6 +51,7 @@ module.exports = (args) => {
   const V3_MAP = {
     signature: T.stringFixed(6),
     version: T.u32,
+    scriptoffset: T.u32,
     mapname: T.stringFixed(256),
     vspname: T.stringFixed(256),
     musicname: T.stringFixed(256),
@@ -66,8 +67,8 @@ module.exports = (args) => {
     zones: T.list(V3_ZONE, ({record}) => record.numzones),
     mapentities: T.u32,
     entity: T.list(V3_ENTITY, ({record}) => record.mapentities),
-    scriptsize: T.u32,
-    script: T.stringFixed(({record}) => record.scriptsize),
+    // scriptsize: T.u32, // lua stuff? seems to get huge-normous values
+    script: T.list(T.u8, ({reader}) => reader.remaining),//record.scriptsize),
   }
 
   return {

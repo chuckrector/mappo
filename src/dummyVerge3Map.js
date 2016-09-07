@@ -8,6 +8,7 @@ const mapWidth = 2
 const mapHeight = 3
 const signature = 'V3MAP\0'
 const version = 2
+const scriptoffset = 66
 const mapname = 'My Map Name'
 const vspname = 'intro.vsp'
 const musicname = 'VANGELIS.MOD'
@@ -78,7 +79,7 @@ const entity = {
   script: 'script',
 }
 
-const mapScript = 'ye olde map script'
+const mapScript = [1, 2, 3]//'ye olde map script'
 const mapScriptsize = mapScript.length
 const mapentities = 2
 const mapEntity = Buffer.concat([
@@ -107,7 +108,7 @@ const mapEntity = Buffer.concat([
 
 const map = Buffer.concat([
   Buffer.from(signature.split('').map(c => c.charCodeAt(0))),
-  Buffer.from(new Uint32Array([version]).buffer),
+  Buffer.from(new Uint32Array([version, scriptoffset]).buffer),
   Buffer.from(padEnd(mapname, 256, '\0')),
   Buffer.from(padEnd(vspname, 256, '\0')),
   Buffer.from(padEnd(musicname, 256, '\0')),
@@ -124,8 +125,8 @@ const map = Buffer.concat([
   Buffer.concat([mapZone, mapZone]),
   Buffer.from(new Uint32Array([mapentities]).buffer),
   Buffer.concat([mapEntity, mapEntity]),
-  Buffer.from(new Uint32Array([mapScriptsize]).buffer),
-  Buffer.from(padEnd(mapScript)),
+  // Buffer.from(new Uint32Array([mapScriptsize]).buffer),
+  Buffer.from(mapScript),
 ])
 
 module.exports = {
@@ -133,6 +134,7 @@ module.exports = {
   mapHeight,
   signature,
   version,
+  scriptoffset,
   mapname,
   vspname,
   musicname,
