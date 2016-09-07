@@ -14,6 +14,7 @@ const T = {
   u8: ({reader}) => reader.readByte(),
   u16: ({reader}) => reader.readWord(),
   u32: ({reader}) => reader.readQuad(),
+  f64: ({reader}) => reader.readDouble(),
 
   whitespace: ({reader}) => reader.readWhitespace(),
   string: ({reader}) => reader.readString(),

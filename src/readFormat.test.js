@@ -30,6 +30,25 @@ const range = require('lodash/range')
 }
 
 {
+  // can read floating point types
+
+  const buffer = Buffer.concat([
+    Buffer.from(new Float64Array([1, 1.5, -1, -1.5, 0.003, 0]).buffer),
+  ])
+
+  const data = readFormat({
+    format: {
+      a: T.f64,
+      b: T.list(T.f64, 2),
+      c: T.list(T.f64, () => 3),
+    },
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data).toEqual({a: 1, b: [1.5, -1], c: [-1.5, 0.003, 0]})
+}
+
+{
   // can read string types
 
   const buffer = Buffer.concat([
