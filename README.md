@@ -42,7 +42,7 @@ EQUIP.DAT    | ✓ | n/a | n/a
 ITEMICON.DAT | ✓ | n/a | n/a
 ITEMS.DAT    | ✓ | n/a | n/a
 MAIN.FNT     | ✓ | n/a | n/a
-MAP          | ✓ | ✓ | ✗
+MAP          | ✓ | ✓ | ✓
 MISCICON.DAT | ✓ | n/a | n/a
 PAL          | ✓ | n/a | n/a
 PARTY.DAT    | ✓ | n/a | n/a
