@@ -2,7 +2,6 @@
 
 const expect = require('expect')
 const createTileGridConverter = require('./createTileGridConverter')
-const fs = require('fs')
 const palette = require('../dummyPalette')
 const colorDepth = require('./colorDepth')
 

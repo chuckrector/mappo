@@ -1,6 +1,5 @@
 "use strict"
 
-const fs = require('fs')
 const createDataReader = require('../createDataReader')
 const assert = require('assert')
 const {readFormat, T} = require('../readFormat')

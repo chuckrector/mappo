@@ -3,7 +3,6 @@
 const expect = require('expect')
 const createVerge2VspConverter = require('./createVerge2VspConverter')
 const fill = require('lodash/fill')
-const fs = require('fs')
 const palette = require('../dummyPalette')
 
 {
