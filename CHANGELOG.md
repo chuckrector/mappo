@@ -1,4 +1,9 @@
 
+## 0.15.0 (Sep 7, 2016)
+
+- VERGE 3 .MAP loader and converter
+- v3map2json cli
+
 ## 0.14.0 (Sep 5, 2016)
 
 - VERGE3 .VSP loader and converter
