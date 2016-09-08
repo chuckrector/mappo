@@ -760,5 +760,4 @@ Output:
 - optimization pass. all tests take ~4s now 😰 would like to keep this <1s
 - support for conditional blocks in declarative parser (e.g. EQUIP.DAT)
 - automatically run all cli as part of tests, rather than manually adding to shell script every time i make a new one. how? maybe default params in each cli and let normal js test runner drive everything
-- fix signature/version comments in v2 map header
 - proper npm package?

@@ -6,8 +6,10 @@ const fill = require('lodash/fill')
 const mapWidth = 2
 const mapHeight = 3
 const mapHeader = Buffer.concat([
-  // version (6 + 4 bytes)
-  Buffer.from([77, 65, 80, 249, 53, 0, 209, 36, 0, 0]),
+  // version
+  Buffer.from([77, 65, 80, 249, 53, 0]),
+  // mapEventsOffset
+  Buffer.from(new Uint32Array([12345]).buffer),
   // vspname
   Buffer.from(padEnd('grue0040.vsp', 60, '\0')),
   // musname

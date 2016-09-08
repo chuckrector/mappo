@@ -15,6 +15,7 @@ const dummyMap = require('../dummyVerge2Map')
   const data = loader.load()
 
   expect(data.version).toEqual([77, 65, 80, 249, 53, 0])
+  expect(data.mapEventsOffset).toBe(12345)
   expect(data.vspname).toBe('grue0040.vsp')
   expect(data.musname).toBe('VANGELIS.MOD')
   expect(data.rstring).toBe('12E')
