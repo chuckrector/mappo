@@ -9,7 +9,7 @@ const vspFilename = process.argv[2]
 const data = fs.readFileSync(vspFilename)
 const loader = createVerge3VspLoader({data})
 const vsp = loader.load()
-const palette = fill(Array(256)).map(() => [128, 128, 128]).reduce((p, c) => p.concat(...c))
+const palette = fill(Array(256 * 3), 128)
 const converter = createVerge3VspObConverter({
   palette,
   numtiles: vsp.numtiles,
