@@ -2,7 +2,6 @@
 
 const expect = require('expect')
 const createVerge1ItemsDatLoader = require('./createVerge1ItemsDatLoader')
-const fill = require('lodash/fill')
 
 const itemsDat = `
 3

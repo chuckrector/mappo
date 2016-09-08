@@ -1,7 +1,6 @@
 "use strict"
 
 const expect = require('expect')
-const fill = require('lodash/fill')
 const colorDepth = require('./colorDepth')
 
 {
