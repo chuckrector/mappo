@@ -36,3 +36,8 @@ const colorDepth = require('./colorDepth')
 
   expect(colorDepth.convert24to32({raw24bitData})).toEqual(raw32bitData)
 }
+
+{
+  // 24- to 32-bit conversion must be multiples of 3
+  expect(() => colorDepth.convert24to32({raw24bitData: [1]})).toThrow('expected raw 24-bit data length to be divisible by three but got 1')
+}
