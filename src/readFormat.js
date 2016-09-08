@@ -66,7 +66,7 @@ const resolve = (formatOrFunction, {reader, record, listIndex}) => {
 
 T.list = (formatOrFunction, length) => {
   if (typeof length === 'undefined') {
-    throw {message: 'T.list length must be defined'}
+    throw new Error('T.list length must be defined')
   }
 
   return ({reader, record, listIndex}) => {

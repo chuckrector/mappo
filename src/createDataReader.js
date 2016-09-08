@@ -217,7 +217,7 @@ const createDataReader = (args) => {
   const readZlib = (length) => {
     const mysize = readQuad()
     if (mysize !== length) {
-      throw {message: 'expected an uncompressed byte length of ' + length + ' but got ' + mysize}
+      throw new Error('expected an uncompressed byte length of ' + length + ' but got ' + mysize)
     }
 
     const comprLen = readQuad()
