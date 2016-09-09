@@ -2,6 +2,7 @@
 
 const expect = require('expect')
 const createDataReader = require('./createDataReader')
+const {makeBuffer, B} = require('./makeBuffer')
 const {readFormat, T} = require('./readFormat')
 const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
@@ -169,17 +170,17 @@ const range = require('lodash/range')
 }
 
 {
-  // can read zlib compressed buffers
+  // can read zlibU8 buffers
 
   const raw = fill(Array(16 * 16), 99)
-  const compressedBuffer = [...zlib.deflateSync(Buffer.from(raw))]
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint32Array([raw.length, compressedBuffer.length]).buffer),
-    Buffer.from(compressedBuffer)
+  const compressedBuffer = [...zlib.deflateSync(B.u8(raw))]
+  const buffer = makeBuffer([
+    B.u32([raw.length, compressedBuffer.length]),
+    B.u8(compressedBuffer)
   ])
 
   const data = readFormat({
-    format: {tiledatabuf: T.zlib(16 * 16)},
+    format: {tiledatabuf: T.zlibU8(16 * 16)},
     reader: createDataReader({data: buffer})
   })
 
@@ -187,6 +188,27 @@ const range = require('lodash/range')
   expect(data.tiledatabuf.comprLen).toBe(compressedBuffer.length)
   expect(data.tiledatabuf.decompressed.length).toBe(raw.length)
   expect(data.tiledatabuf.decompressed).toEqual(raw)
+}
+
+{
+  // can read zlibU16 buffers
+
+  const raw = fill(Array(16 * 16), 0xbeef)
+  const compressedBuffer = [...zlib.deflateSync(B.u16(raw))]
+  const buffer = makeBuffer([
+    B.u32([raw.length * 2, compressedBuffer.length]),
+    B.u8(compressedBuffer)
+  ])
+
+  const data = readFormat({
+    format: {zonelayer: T.zlibU16(16 * 16)},
+    reader: createDataReader({data: buffer})
+  })
+
+  expect(data.zonelayer.mysize).toBe(raw.length * 2)
+  expect(data.zonelayer.comprLen).toBe(compressedBuffer.length)
+  expect(data.zonelayer.decompressed.length).toBe(raw.length)
+  expect(data.zonelayer.decompressed).toEqual(raw)
 }
 
 {

@@ -32,11 +32,19 @@ T.compressedU16 = (length) => {
   }
 }
 
-T.zlib = (length) => {
+T.zlibU8 = (length) => {
   return ({reader, record, listIndex}) => {
-    return reader.readZlib(lengthCalculator(length, {reader, record, listIndex}))
+    return reader.readZlibU8(lengthCalculator(length, {reader, record, listIndex}))
   }
 }
+
+T.zlibU16 = (length) => {
+  return ({reader, record, listIndex}) => {
+    return reader.readZlibU16(lengthCalculator(length, {reader, record, listIndex}))
+  }
+}
+
+T.zlib = T.zlibU8
 
 T.palette6bit = ({reader}) => {
   const _6bit = reader.readByteArray(256 * 3)
