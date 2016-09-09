@@ -28,23 +28,23 @@ B.stringFixed = (length, value) => {
 
 B.compressedU8 = (valueList) => {
   const compressed = compressU8(valueList)
-  return Buffer.concat([
+  return makeBuffer([
     B.u32(compressed.length),
-    Buffer.from(compressed),
+    B.u8(compressed),
   ])
 }
 
 B.compressedU16 = (valueList) => {
   const compressed = compressU16(valueList)
-  return Buffer.concat([
+  return makeBuffer([
     B.u32(compressed.length * 2),
-    Buffer.from(new Uint16Array(compressed).buffer),
+    B.u16(compressed),
   ])
 }
 
 B.zlibU8 = (valueList) => {
   const compressed = zlib.deflateSync(B.u8(valueList))
-  return Buffer.concat([
+  return makeBuffer([
     B.u32(valueList.length),
     B.u32(compressed.length),
     compressed,
@@ -53,7 +53,7 @@ B.zlibU8 = (valueList) => {
 
 B.zlibU16 = (valueList) => {
   const compressed = zlib.deflateSync(B.u16(valueList))
-  return Buffer.concat([
+  return makeBuffer([
     B.u32(valueList.length * 2),
     B.u32(compressed.length),
     compressed,
@@ -67,12 +67,14 @@ B.list = (bufferMaker, valueList) => {
     throw new Error('B.list valueList must be defined')
   }
 
-  return Buffer.concat(valueList.map((currentValue) => (
+  return makeBuffer(valueList.map((currentValue) => (
     bufferMaker(currentValue)
   )))
 }
 
+const makeBuffer = (bufferList) => Buffer.concat(bufferList)
+
 module.exports = {
-  makeBuffer: (bufferList) => Buffer.concat(bufferList),
+  makeBuffer,
   B
 }
