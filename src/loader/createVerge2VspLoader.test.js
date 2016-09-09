@@ -3,6 +3,7 @@
 const expect = require('expect')
 const createVerge2VspLoader = require('./createVerge2VspLoader')
 const fill = require('lodash/fill')
+const {makeBuffer, B} = require('../makeBuffer')
 
 const vspVersion = 3
 const vspPalette = fill(Array(256 * 3), 77)
@@ -23,24 +24,24 @@ const vspAnimationList = fill(Array(100), {
 {
   // can read vsp
   const loader = createVerge2VspLoader({
-    data: Buffer.concat([
-      Buffer.from(new Uint16Array([vspVersion]).buffer),
-      Buffer.from(vspPalette),
-      Buffer.from(new Uint16Array([vspNumTiles]).buffer),
+    data: makeBuffer([
+      B.u16(vspVersion),
+      B.u8(vspPalette),
+      B.u16(vspNumTiles),
       // compressed image data
-      Buffer.from(new Uint32Array([6 * 3]).buffer),
-      Buffer.from([
+      B.u32(6 * 3),
+      B.u8([
         0xff, 128, 44, 0xff, 128, 55,
         0xff, 128, 66, 0xff, 128, 77,
         0xff, 128, 88, 0xff, 128, 99
       ]),
       ...vspAnimationList.map((vspAnimation) => {
-        return Buffer.from(new Uint16Array([
+        return B.u16([
           vspAnimation.start,
           vspAnimation.finish,
           vspAnimation.delay,
           vspAnimation.mode,
-        ]).buffer)
+        ])
       }),
     ])
   })
