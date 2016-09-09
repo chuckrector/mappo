@@ -62,7 +62,7 @@ const wordArray = [65535, 1, 256]
 {
   // can read words
   const reader = createDataReader({
-    data: new Uint16Array(wordArray).buffer
+    data: B.u16(wordArray)
   })
 
   expect(reader.readWord()).toBe(65535)
@@ -73,7 +73,7 @@ const wordArray = [65535, 1, 256]
 {
   // can read word array
   const reader = createDataReader({
-    data: new Uint16Array(wordArray).buffer
+    data: B.u16(wordArray)
   })
 
   expect(reader.readWordArray(3)).toEqual(wordArray)
@@ -84,7 +84,7 @@ const quadArray = [90000, 1, 65536]
 {
   // can read quads
   const reader = createDataReader({
-    data: new Uint32Array(quadArray).buffer
+    data: B.u32(quadArray)
   })
 
   expect(reader.readQuad()).toBe(90000)
@@ -95,7 +95,7 @@ const quadArray = [90000, 1, 65536]
 {
   // can read quad array
   const reader = createDataReader({
-    data: new Uint32Array(quadArray).buffer
+    data: B.u32(quadArray)
   })
 
   expect(reader.readQuadArray(3)).toEqual(quadArray)
@@ -106,7 +106,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read doubles
   const reader = createDataReader({
-    data: new Float64Array(doubleArray).buffer
+    data: B.f64(doubleArray)
   })
 
   expect(reader.readDouble()).toBe(1)
@@ -120,7 +120,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read double array
   const reader = createDataReader({
-    data: new Float64Array([1, 1.5, -1, -1.5, 0.003, 0]).buffer
+    data: B.f64([1, 1.5, -1, -1.5, 0.003, 0])
   })
 
   expect(reader.readDoubleArray(doubleArray.length)).toEqual(doubleArray)
@@ -298,9 +298,9 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read compressed word array
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint32Array([4 * 2]).buffer),
-    Buffer.from(new Uint16Array([1, ((16 * 16) - 2) | 0xff00, 2, 3]).buffer),
+  const buffer = makeBuffer([
+    B.u32([4 * 2]),
+    B.u16([1, ((16 * 16) - 2) | 0xff00, 2, 3]),
   ])
   const reader = createDataReader({
     data: buffer
@@ -317,9 +317,9 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read compressed byte array
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint32Array([5]).buffer),
-    Buffer.from([1, 0xff, ((16 * 16) - 2), 2, 3]),
+  const buffer = makeBuffer([
+    B.u32(5),
+    B.u8([1, 0xff, ((16 * 16) - 2), 2, 3]),
   ])
   const reader = createDataReader({
     data: buffer
@@ -351,8 +351,8 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
   // can read zlibU8 buffers
   const raw = fill(Array(16 * 16), 99)
   const compressedBuffer = zlib.deflateSync(B.u8(raw))
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint32Array([raw.length, compressedBuffer.length]).buffer),
+  const buffer = makeBuffer([
+    B.u32([raw.length, compressedBuffer.length]),
     compressedBuffer
   ])
   const reader = createDataReader({data: buffer})
@@ -370,8 +370,8 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
   // can read zlibU16 buffers
   const raw = fill(Array(16 * 16), 0xbeef)
   const compressedBuffer = zlib.deflateSync(B.u16(raw))
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint32Array([raw.length * 2, compressedBuffer.length]).buffer),
+  const buffer = makeBuffer([
+    B.u32([raw.length * 2, compressedBuffer.length]),
     compressedBuffer
   ])
   const reader = createDataReader({data: buffer})
