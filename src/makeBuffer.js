@@ -7,13 +7,24 @@ const compressU16 = require('./compressU16')
 
 const B = {}
 
-B.u8 = (value) => Buffer.from([value])
-B.u16 = (value) => Buffer.from(new Uint16Array([value]).buffer)
-B.u32 = (value) => Buffer.from(new Uint32Array([value]).buffer)
-B.f64 = (value) => Buffer.from(new Float64Array([value]).buffer)
-B.string = (value) => Buffer.from(value)
-B.stringNullTerminated = (value) => B.string(value + '\0')
-B.stringFixed = (length, value) => B.string(padEnd(value, length, '\0'))
+const arrMatey = (value) => Array.isArray(value) ? value : [value]
+const arrToBuffer = (value, arrayType) => {
+  const arr = new arrayType(arrMatey(value))
+  return Buffer.from(arr.buffer)
+}
+
+B.u8 = (value) => arrToBuffer(value, Uint8Array)
+B.u16 = (value) => arrToBuffer(value, Uint16Array)
+B.u32 = (value) => arrToBuffer(value, Uint32Array)
+B.f64 = (value) => arrToBuffer(value, Float64Array)
+
+B.string = (value) => Buffer.from(arrMatey(value).join(''))
+B.stringNullTerminated = (value) => {
+  return B.string(arrMatey(value).map(v => v + '\0'))
+}
+B.stringFixed = (length, value) => {
+  return B.string(arrMatey(value).map(v => padEnd(v, length, '\0')))
+}
 
 B.compressedU8 = (valueList) => {
   const compressed = compressU8(valueList)

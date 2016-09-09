@@ -35,8 +35,8 @@ const range = require('lodash/range')
 
   const buffer = makeBuffer([
     B.f64(1),
-    B.list(B.f64, [1.5, -1]),
-    B.list(B.f64, [-1.5, 0.003, 0]),
+    B.f64([1.5, -1]),
+    B.f64([-1.5, 0.003, 0]),
   ])
 
   const data = readFormat({
@@ -133,9 +133,16 @@ const range = require('lodash/range')
   // can make buffer of lists of types
 
   const buffer = makeBuffer([
-    B.list(B.u8, [0xff, 0xff]),
-    B.list(B.u16, [0xffff, 0xffff]),
-    B.list(B.u32, [0xffffffff, 0xffffffff]),
+    B.u8([0xff, 0xff]),
+    B.u16([0xffff, 0xffff]),
+    B.u32([0xffffffff, 0xffffffff]),
+    // Note: createDataReader.readString always reads whitespace after.
+    // Without the whitespace after "Kittens", readString will read
+    // "KittensBacon" due to the null-terminated strings which
+    // immediately follow. 🐱🔥
+    B.string(['Cuddly ', 'Kittens ']),
+    B.stringNullTerminated(['Bacon', 'Bits']),
+    B.stringFixed(20, ['Cool', 'Cucumbers']),
   ])
 
   const data = readFormat({
@@ -143,6 +150,9 @@ const range = require('lodash/range')
       a: T.list(T.u8, 2),
       b: T.list(T.u16, 2),
       c: T.list(T.u32, 2),
+      d: T.list(T.string, 2),
+      e: T.list(T.stringNullTerminated, 2),
+      f: T.list(T.stringFixed(20), 2),
     },
     reader: createDataReader({data: buffer})
   })
@@ -151,6 +161,9 @@ const range = require('lodash/range')
     a: [0xff, 0xff],
     b: [0xffff, 0xffff],
     c: [0xffffffff, 0xffffffff],
+    d: ['Cuddly', 'Kittens'],
+    e: ['Bacon', 'Bits'],
+    f: ['Cool', 'Cucumbers'],
   })
 }
 
