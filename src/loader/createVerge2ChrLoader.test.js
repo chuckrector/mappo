@@ -3,6 +3,7 @@
 const expect = require('expect')
 const createVerge2ChrLoader = require('./createVerge2ChrLoader')
 const fill = require('lodash/fill')
+const {makeBuffer, B} = require('../makeBuffer')
 
 const version = 2
 const fxsize = 2
@@ -14,29 +15,25 @@ const hh = fysize - 1
 const totalframes = 2
 const frameData = fill(Array(fxsize * fysize * 2), 99)
 
-const chrs = Buffer.concat([
-  Buffer.from([version]),
-  Buffer.from(new Uint16Array([fxsize, fysize, hx, hy, hw, hh, totalframes]).buffer),
+const chrs = makeBuffer([
+  B.u8(version),
+  B.u16([fxsize, fysize, hx, hy, hw, hh, totalframes]),
   // compressed image data
-  Buffer.from(new Uint32Array([3]).buffer),
-  Buffer.from([0xff, fxsize * fysize * totalframes, 99]),
+  B.u32(3),
+  B.u8([0xff, fxsize * fysize * totalframes, 99]),
   // lidle, ridle, uidle, didle
-  Buffer.from(new Uint32Array([4, 3, 2, 1]).buffer),
+  B.u32([4, 3, 2, 1]),
   // animations
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F1'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F2'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F3'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F4'),
+  B.u32(2), B.string('F1'),
+  B.u32(2), B.string('F2'),
+  B.u32(2), B.string('F3'),
+  B.u32(2), B.string('F4'),
 ])
 
 {
   // can read chrs
   const loader = createVerge2ChrLoader({
-    data: Buffer.from(chrs)
+    data: chrs
   })
 
   const data = loader.load()
