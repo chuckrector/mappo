@@ -42,14 +42,25 @@ B.compressedU16 = (valueList) => {
   ])
 }
 
-B.zlib = (valueList) => {
-  const compressed = zlib.deflateSync(Buffer.from(valueList))
+B.zlibU8 = (valueList) => {
+  const compressed = [...zlib.deflateSync(B.u8(valueList))]
   return Buffer.concat([
     B.u32(valueList.length),
     B.u32(compressed.length),
-    Buffer.from(compressed),
+    B.u8(compressed),
   ])
 }
+
+B.zlibU16 = (valueList) => {
+  const compressed = [...zlib.deflateSync(B.u16(valueList))]
+  return Buffer.concat([
+    B.u32(valueList.length),
+    B.u32(compressed.length),
+    B.u8(compressed),
+  ])
+}
+
+B.zlib = B.zlibU8
 
 B.list = (bufferMaker, valueList) => {
   if (typeof valueList === 'undefined') {

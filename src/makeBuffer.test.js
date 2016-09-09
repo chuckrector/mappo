@@ -111,23 +111,28 @@ const range = require('lodash/range')
 }
 
 {
-  // can make zlib compressed buffers
+  // can make zlib buffers
 
-  const raw = fill(Array(16 * 16), 99)
-  const compressedBuffer = [...zlib.deflateSync(Buffer.from(raw))]
-  const buffer = makeBuffer([B.zlib(raw)])
+  const rawU8 = fill(Array(16 * 16), 99)
+  const rawU16 = fill(Array(16 * 16), 0xbeef)
+  const buffer = makeBuffer([
+    B.zlibU8(rawU8),
+    B.zlibU16(rawU16),
+  ])
 
   const data = readFormat({
-    format: {tiledatabuf: T.zlib(16 * 16)},
+    format: {
+      tiledatabuf: T.zlib(16 * 16),
+      zonelayer: T.zlib(16 * 16),
+    },
     reader: createDataReader({data: buffer})
   })
 
-  expect(data.tiledatabuf.mysize).toBe(raw.length)
-  expect(data.tiledatabuf.comprLen).toBe(compressedBuffer.length)
-  expect(data.tiledatabuf.decompressed.length).toBe(raw.length)
-  expect(data.tiledatabuf.decompressed).toEqual(raw)
+  expect(data.tiledatabuf.decompressed.length).toBe(rawU8.length)
+  expect(data.tiledatabuf.decompressed).toEqual(rawU8)
+  expect(data.zonelayer.decompressed.length).toBe(rawU8.length * 2)
+  // expect(data.zonelayer.decompressed).toEqual(rawU16)
 }
-
 
 {
   // can make buffer of lists of types
