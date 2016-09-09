@@ -3,6 +3,7 @@
 const expect = require('expect')
 const createVerge1MiscIconDatLoader = require('./createVerge1MiscIconDatLoader')
 const fill = require('lodash/fill')
+const {makeBuffer, B} = require('../makeBuffer')
 
 const menuptrTileWidth = 16
 const menuptrTileHeight = 16
@@ -18,11 +19,9 @@ const charptr = fill(Array(charptrTileWidth * charptrTileHeight), 99)
 {
   // can read SPEECH.SPC
   const loader = createVerge1MiscIconDatLoader({
-    data: Buffer.concat([
-      Buffer.from([numtiles]),
-      Buffer.from(menuptr),
-      Buffer.from(itmptr),
-      Buffer.from(charptr),
+    data: makeBuffer([
+      B.u8(numtiles),
+      B.list(B.u8, [menuptr, itmptr, charptr]),
     ])
   })
 
