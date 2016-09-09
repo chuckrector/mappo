@@ -44,7 +44,7 @@ module.exports = (args) => {
     width: T.u16,
     height: T.u16,
     lucent: T.u8,
-    tiledata: T.zlib(({record}) => record.width * record.height * 2),
+    tiledata: T.zlibU16(({record}) => record.width * record.height),
   }
 
   const V3_MAP = {
@@ -60,8 +60,8 @@ module.exports = (args) => {
     starty: T.u16,
     numlayers: T.u32,
     layers: T.list(V3_LAYER, ({record}) => record.numlayers),
-    obslayer: T.zlib(({record}) => record.layers[0].width * record.layers[0].height),
-    zonelayer: T.zlib(({record}) => record.layers[0].width * record.layers[0].height * 2),
+    obslayer: T.zlibU8(({record}) => record.layers[0].width * record.layers[0].height),
+    zonelayer: T.zlibU16(({record}) => record.layers[0].width * record.layers[0].height),
     numzones: T.u32,
     zones: T.list(V3_ZONE, ({record}) => record.numzones),
     mapentities: T.u32,

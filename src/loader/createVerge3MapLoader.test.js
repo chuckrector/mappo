@@ -2,7 +2,6 @@
 
 const expect = require('expect')
 const createVerge3MapLoader = require('./createVerge3MapLoader.js')
-const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
 const dummyMap = require('../dummyVerge3Map')
 
@@ -25,6 +24,7 @@ const dummyMap = require('../dummyVerge3Map')
   expect(data.startx).toBe(dummyMap.startx)
   expect(data.starty).toBe(dummyMap.starty)
   expect(data.numlayers).toBe(dummyMap.numlayers)
+
   expect(data.layers).toEqual(
     fill(Array(dummyMap.numlayers), {
       layername: dummyMap.layerName,
@@ -36,15 +36,13 @@ const dummyMap = require('../dummyVerge3Map')
       tiledata: {
         mysize: dummyMap.layerWidth * dummyMap.layerHeight * 2,
         comprLen: dummyMap.layerDataCompressed.length,
-        compressed: Array.from(dummyMap.layerDataCompressed),
-        decompressed: Array.from(Buffer.from(new Uint16Array(dummyMap.layerData).buffer)),
+        compressed: dummyMap.layerDataCompressed,
+        decompressed: dummyMap.layerData,
       }
     })
   )
   expect(data.obslayer.decompressed).toEqual(dummyMap.obsData)
-  expect(data.zonelayer.decompressed).toEqual(
-    Array.from(Buffer.from(new Uint16Array(dummyMap.zonelayerData).buffer))
-  )
+  expect(data.zonelayer.decompressed).toEqual(dummyMap.zonelayerData)
   expect(data.numzones).toBe(dummyMap.numzones)
   expect(data.zones).toEqual(fill(Array(dummyMap.numzones), {
     name: dummyMap.zoneName,
