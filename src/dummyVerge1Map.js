@@ -2,98 +2,99 @@
 
 const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
+const {makeBuffer, B} = require('./makeBuffer')
 
 const mapWidth = 2
 const mapHeight = 3
-const mapHeader = Buffer.concat([
-  Buffer.from([4]),
-  Buffer.from(padEnd('HAHN01.VSP', 13, '\0')),
-  Buffer.from(padEnd('VANGELIS.MOD', 13, '\0')),
-  Buffer.from([0, 1, 1]),
-  Buffer.from(padEnd('Village - Past', 30, '\0')),
-  Buffer.from([1, 0]),
-  Buffer.from(new Uint16Array([21, 1]).buffer),
-  Buffer.from([1, 1]),
-  Buffer.from(new Uint16Array([mapWidth, mapHeight]).buffer),
-  Buffer.from([0]),
-  Buffer.from(fill(Array(27), 0))
+const mapHeader = makeBuffer([
+  B.u8(4),
+  B.stringFixed(13, 'HAHN01.VSP'),
+  B.stringFixed(13, 'VANGELIS.MOD'),
+  B.list(B.u8, [0, 1, 1]),
+  B.stringFixed(30, 'Village - Past'),
+  B.list(B.u8, [1, 0]),
+  B.list(B.u16, [21, 1]),
+  B.list(B.u8, [1, 1]),
+  B.list(B.u16, [mapWidth, mapHeight]),
+  B.u8(0),
+  B.list(B.u8, fill(Array(27), 0))
 ])
 
 const mapBackgroundLayerData = fill(Array(mapWidth * mapHeight), 33)
 const mapForegroundLayerData = fill(Array(mapWidth * mapHeight), 44)
 const mapObstructionLayerData = fill(Array(mapWidth * mapHeight), 55)
-const mapLayers = Buffer.concat([
-  Buffer.from(new Uint16Array(mapBackgroundLayerData).buffer),
-  Buffer.from(new Uint16Array(mapForegroundLayerData).buffer),
-  Buffer.from(mapObstructionLayerData)
+const mapLayers = makeBuffer([
+  B.list(B.u16, mapBackgroundLayerData),
+  B.list(B.u16, mapForegroundLayerData),
+  B.list(B.u8, mapObstructionLayerData),
 ])
 
-const zone = Buffer.concat([
+const zone = makeBuffer([
   // zonename
-  Buffer.from(padEnd('Default', 15, '\0')),
+  B.stringFixed(15, 'Default'),
   // padding
-  Buffer.from('\0'),
+  B.u8(0),
   // callevent
-  Buffer.from(new Uint16Array([1]).buffer),
+  B.u16(1),
   // percent, delay, aaa
-  Buffer.from([255, 0, 1]),
+  B.list(B.u8, [255, 0, 1]),
   // savedesc
-  Buffer.from(padEnd('Rodne', 30, '\0')),
+  B.stringFixed(30, 'Rodne'),
   // padding
-  Buffer.from('\0'),
+  B.u8(0),
 ])
 
-const mapZones = Buffer.concat(
+const mapZones = makeBuffer(
   fill(Array(128), zone)
 )
 
-const chrList = Buffer.concat(
-  fill(Array(100), Buffer.from(padEnd('DARIN.CHR', 13, '\0')))
+const chrList = makeBuffer(
+  fill(Array(100), B.stringFixed(13, 'DARIN.CHR'))
 )
 
-const entity = Buffer.concat([
+const entity = makeBuffer([
   // x, y
-  Buffer.from(new Uint16Array([2, 1]).buffer),
+  B.list(B.u16, [2, 1]),
   // facing, moving, movcnt, framectr, specframe, chrindex, movecode, activmode, obsmode
-  Buffer.from([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0]),
+  B.list(B.u8, [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0]),
   // actscript, movescript
-  Buffer.from(new Uint32Array([2, 1]).buffer),
+  B.list(B.u32, [2, 1]),
   // speed, speedct
-  Buffer.from([2, 1]),
+  B.list(B.u8, [2, 1]),
   // step..y2
-  Buffer.from(new Uint16Array([12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]).buffer),
+  B.list(B.u16, [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),
   // curcmd, cmdarg
-  Buffer.from([2, 1]),
+  B.list(B.u8, [2, 1]),
   // scriptofs
-  Buffer.from(new Uint32Array([1]).buffer),
+  B.u32(1),
   // face, chasing, chasespeed, chasedist
-  Buffer.from([4, 3, 2, 1]),
+  B.list(B.u8, [4, 3, 2, 1]),
   // cx, cy
-  Buffer.from(new Uint16Array([2, 1]).buffer),
+  B.list(B.u16, [2, 1]),
   // expand
-  Buffer.from(new Uint32Array([1]).buffer),
+  B.u32(1),
   // entitydesc
-  Buffer.from(padEnd('Description', 20, '\0')),
+  B.stringFixed(20, 'Description'),
 ])
 
 const numEntities = 3
-const mapEntities = Buffer.concat(
+const mapEntities = makeBuffer(
   fill(Array(numEntities), entity)
 )
 
-const scripts = Buffer.concat([
+const scripts = makeBuffer([
   // nummovescripts
-  Buffer.from([5]),
+  B.u8(5),
   // msbufsize
-  Buffer.from(new Uint32Array([50]).buffer),
+  B.u32(50),
   // msofstbl
-  Buffer.from(new Uint32Array([0, 10, 20, 30, 40]).buffer),
+  B.list(B.u32, [0, 10, 20, 30, 40]),
   // msbuf
-  Buffer.from(fill(Array(50), 99)),
+  B.list(B.u8, fill(Array(50), 99)),
   // numscripts, scriptofstb,
-  Buffer.from(new Uint32Array([3, 0, 10, 20]).buffer),
+  B.list(B.u32, [3, 0, 10, 20]),
   // mapvc
-  Buffer.from(fill(Array(30), 88)),
+  B.list(B.u8, fill(Array(30), 88)),
 ])
 
 const map = Buffer.concat([
@@ -101,7 +102,7 @@ const map = Buffer.concat([
   mapLayers,
   mapZones,
   chrList,
-  Buffer.from(new Uint32Array([numEntities]).buffer),
+  B.u32(numEntities),
   mapEntities,
   scripts,
 ])
