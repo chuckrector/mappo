@@ -4,6 +4,7 @@ const expect = require('expect')
 const createVerge3ChrLoader = require('./createVerge3ChrLoader')
 const fill = require('lodash/fill')
 const zlib = require('zlib')
+const {makeBuffer, B} = require('../makeBuffer')
 
 const signature = 5392451
 const version = 5
@@ -25,8 +26,8 @@ const compression = 15
 const imagedata = fill(Array(fxsize * fysize * 4 * totalframes), 99)
 const imagedataCompressed = [...zlib.deflateSync(Buffer.from(imagedata))]
 
-const chrs = Buffer.concat([
-  Buffer.from(new Uint32Array([
+const chrs = makeBuffer([
+  B.u32([
     signature,
     version,
     32, // bpp
@@ -36,32 +37,24 @@ const chrs = Buffer.concat([
     fxsize, fysize,
     totalframes,
     didle, uidle, lidle, ridle,
-  ]).buffer),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F0\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F1\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F2\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F3\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F4\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F5\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F6\0'),
-  Buffer.from(new Uint32Array([2]).buffer),
-  Buffer.from('F7\0'),
-  Buffer.from(new Uint32Array([customscripts, compression]).buffer),
-  Buffer.from(new Uint32Array([imagedata.length, imagedataCompressed.length]).buffer),
-  Buffer.from(imagedataCompressed),
+  ]),
+  B.u32(2), B.string('F0\0'),
+  B.u32(2), B.string('F1\0'),
+  B.u32(2), B.string('F2\0'),
+  B.u32(2), B.string('F3\0'),
+  B.u32(2), B.string('F4\0'),
+  B.u32(2), B.string('F5\0'),
+  B.u32(2), B.string('F6\0'),
+  B.u32(2), B.string('F7\0'),
+  B.u32([customscripts, compression]),
+  B.u32([imagedata.length, imagedataCompressed.length]),
+  B.u8(imagedataCompressed),
 ])
 
 {
   // can read chrs
   const loader = createVerge3ChrLoader({
-    data: Buffer.from(chrs)
+    data: chrs
   })
 
   const data = loader.load()
