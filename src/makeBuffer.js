@@ -43,20 +43,20 @@ B.compressedU16 = (valueList) => {
 }
 
 B.zlibU8 = (valueList) => {
-  const compressed = [...zlib.deflateSync(B.u8(valueList))]
+  const compressed = zlib.deflateSync(B.u8(valueList))
   return Buffer.concat([
     B.u32(valueList.length),
     B.u32(compressed.length),
-    B.u8(compressed),
+    compressed,
   ])
 }
 
 B.zlibU16 = (valueList) => {
-  const compressed = [...zlib.deflateSync(B.u16(valueList))]
+  const compressed = zlib.deflateSync(B.u16(valueList))
   return Buffer.concat([
-    B.u32(valueList.length),
+    B.u32(valueList.length * 2),
     B.u32(compressed.length),
-    B.u8(compressed),
+    compressed,
   ])
 }
 
