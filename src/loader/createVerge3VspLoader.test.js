@@ -5,6 +5,7 @@ const createVerge3VspLoader = require('./createVerge3VspLoader')
 const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
 const zlib = require('zlib')
+const {makeBuffer, B} = require('../makeBuffer')
 
 const signature = 5264214
 const version = 6
@@ -13,7 +14,7 @@ const format = 1
 const numtiles = 2
 const compression = 1
 const tiledatabuf = fill(Array(tilesize * tilesize * 3 * numtiles), 99)
-const tiledatabufCompressed = [...zlib.deflateSync(Buffer.from(tiledatabuf))]
+const tiledatabufCompressed = [...zlib.deflateSync(B.u8(tiledatabuf))]
 const numanims = 2
 const anims = [
   {name: 'First', start: 0, finish: 1, delay: 2, mode: 3},
@@ -21,26 +22,26 @@ const anims = [
 ]
 const numobs = 2
 const obs = fill(Array(tilesize * tilesize * numobs), 88)
-const obsCompressed = [...zlib.deflateSync(Buffer.from(obs))]
+const obsCompressed = [...zlib.deflateSync(B.u8(obs))]
 
 const chrs = Buffer.concat([
-  Buffer.from(new Uint32Array([signature, version, tilesize, format, numtiles, compression]).buffer),
-  Buffer.from(new Uint32Array([tiledatabuf.length, tiledatabufCompressed.length]).buffer),
-  Buffer.from(tiledatabufCompressed),
-  Buffer.from(new Uint32Array([numanims]).buffer),
-  Buffer.from(padEnd('First', 256, '\0')),
-  Buffer.from(new Uint32Array([anims[0].start, anims[0].finish, anims[0].delay, anims[0].mode]).buffer),
-  Buffer.from(padEnd('Second', 256, '\0')),
-  Buffer.from(new Uint32Array([anims[1].start, anims[1].finish, anims[1].delay, anims[1].mode]).buffer),
-  Buffer.from(new Uint32Array([numobs]).buffer),
-  Buffer.from(new Uint32Array([obs.length, obsCompressed.length]).buffer),
-  Buffer.from(obsCompressed),
+  B.u32([signature, version, tilesize, format, numtiles, compression]),
+  B.u32([tiledatabuf.length, tiledatabufCompressed.length]),
+  B.u8(tiledatabufCompressed),
+  B.u32([numanims]),
+  B.stringFixed(256, 'First'),
+  B.u32([anims[0].start, anims[0].finish, anims[0].delay, anims[0].mode]),
+  B.stringFixed(256, 'Second'),
+  B.u32([anims[1].start, anims[1].finish, anims[1].delay, anims[1].mode]),
+  B.u32(numobs),
+  B.u32([obs.length, obsCompressed.length]),
+  B.u8(obsCompressed),
 ])
 
 {
   // can read chrs
   const loader = createVerge3VspLoader({
-    data: Buffer.from(chrs)
+    data: chrs
   })
 
   const data = loader.load()
