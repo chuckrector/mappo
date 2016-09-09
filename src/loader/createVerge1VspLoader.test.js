@@ -3,22 +3,23 @@
 const expect = require('expect')
 const createVerge1VspLoader = require('./createVerge1VspLoader')
 const fill = require('lodash/fill')
+const {makeBuffer, B} = require('../makeBuffer')
 
-const vspAnim = Buffer.concat([
+const vspAnim = makeBuffer([
   // start, finish, delay, mode
-  Buffer.from(new Uint16Array([4, 3, 2, 1]).buffer),
+  B.u16([4, 3, 2, 1]),
 ])
 
-const vsp = Buffer.concat([
+const vsp = makeBuffer([
   // version
-  Buffer.from(new Uint16Array([2]).buffer),
+  B.u16(2),
   // palette
-  Buffer.from(fill(Array(256 * 3), 77)),
+  B.u8(fill(Array(256 * 3), 77)),
   // numtiles
-  Buffer.from(new Uint16Array([3]).buffer),
+  B.u16(3),
   // tile image data
-  Buffer.from(fill(Array(3 * 16 * 16), 66)),
-  Buffer.concat(fill(Array(100), vspAnim)),
+  B.u8(fill(Array(3 * 16 * 16), 66)),
+  makeBuffer(fill(Array(100), vspAnim)),
 ])
 
 {
