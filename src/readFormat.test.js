@@ -12,10 +12,10 @@ const range = require('lodash/range')
 {
   // can read unsigned types
 
-  const buffer = Buffer.concat([
-    Buffer.from([0xff]),
-    Buffer.from(new Uint16Array([0xffff]).buffer),
-    Buffer.from(new Uint32Array([0xffffffff]).buffer),
+  const buffer = makeBuffer([
+    B.u8(0xff),
+    B.u16(0xffff),
+    B.u32(0xffffffff),
   ])
 
   const data = readFormat({
@@ -33,8 +33,8 @@ const range = require('lodash/range')
 {
   // can read floating point types
 
-  const buffer = Buffer.concat([
-    Buffer.from(new Float64Array([1, 1.5, -1, -1.5, 0.003, 0]).buffer),
+  const buffer = makeBuffer([
+    B.f64([1, 1.5, -1, -1.5, 0.003, 0]),
   ])
 
   const data = readFormat({
@@ -52,10 +52,10 @@ const range = require('lodash/range')
 {
   // can read string types
 
-  const buffer = Buffer.concat([
-    Buffer.from(' \n\t\r'),
-    Buffer.from(padEnd('Cute', 20, '\0')),
-    Buffer.from('Cuddly\0Kittens 255 65535 4294967295')
+  const buffer = makeBuffer([
+    B.string(' \n\t\r'),
+    B.stringFixed(20, 'Cute'),
+    B.string('Cuddly\0Kittens 255 65535 4294967295'),
   ])
 
   const data = readFormat({
@@ -99,9 +99,9 @@ const range = require('lodash/range')
   // finding a null terminator. with a length, it would behave
   // as readStringFixed currently does.
 
-  const buffer = Buffer.concat([
-    Buffer.from([5]),
-    Buffer.from('Cute\0Cuddly Kittens'),
+  const buffer = makeBuffer([
+    B.u8(5),
+    B.string('Cute\0Cuddly Kittens'),
   ])
 
   const data = readFormat({
@@ -121,9 +121,8 @@ const range = require('lodash/range')
 {
   // can read lists of lists
 
-  const buffer = Buffer.concat([
-    Buffer.from([1, 2, 3]),
-    Buffer.from([4, 5, 6]),
+  const buffer = makeBuffer([
+    B.u8([1, 2, 3, 4, 5, 6]),
   ])
 
   const data = readFormat({
@@ -146,11 +145,11 @@ const range = require('lodash/range')
 {
   // can read compressed buffers
 
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint32Array([5]).buffer),
-    Buffer.from([1, 0xff, (16 * 16) - 2, 2, 3]),
-    Buffer.from(new Uint32Array([4 * 2]).buffer),
-    Buffer.from(new Uint16Array([1111, ((16 * 16) - 2) | 0xff00, 2222, 3333]).buffer),
+  const buffer = makeBuffer([
+    B.u32(5),
+    B.u8([1, 0xff, (16 * 16) - 2, 2, 3]),
+    B.u32(4 * 2),
+    B.u16([1111, ((16 * 16) - 2) | 0xff00, 2222, 3333]),
   ])
 
   const data = readFormat({
@@ -214,12 +213,12 @@ const range = require('lodash/range')
 {
   // can read dynamic length compressed buffers
 
-  const buffer = Buffer.concat([
-    Buffer.from(new Uint16Array([16 * 16, 16 * 16]).buffer),
-    Buffer.from(new Uint32Array([5]).buffer),
-    Buffer.from([1, 0xff, (16 * 16) - 2, 2, 3]),
-    Buffer.from(new Uint32Array([4 * 2]).buffer),
-    Buffer.from(new Uint16Array([1111, ((16 * 16) - 2) | 0xff00, 2222, 3333]).buffer),
+  const buffer = makeBuffer([
+    B.u16([16 * 16, 16 * 16]),
+    B.u32(5),
+    B.u8([1, 0xff, (16 * 16) - 2, 2, 3]),
+    B.u32(4 * 2),
+    B.u16([1111, ((16 * 16) - 2) | 0xff00, 2222, 3333]),
   ])
 
   const data = readFormat({
@@ -243,10 +242,10 @@ const range = require('lodash/range')
 {
   // can read list of types
 
-  const buffer = Buffer.concat([
-    Buffer.from([0xff, 0xff]),
-    Buffer.from(new Uint16Array([0xffff, 0xffff]).buffer),
-    Buffer.from(new Uint32Array([0xffffffff, 0xffffffff]).buffer),
+  const buffer = makeBuffer([
+    B.u8([0xff, 0xff]),
+    B.u16([0xffff, 0xffff]),
+    B.u32([0xffffffff, 0xffffffff]),
   ])
 
   const data = readFormat({
@@ -274,10 +273,10 @@ const range = require('lodash/range')
 {
   // can read nested formats
 
-  const buffer = Buffer.concat([
-    Buffer.from([0xff]),
-    Buffer.from(new Uint16Array([0xffff]).buffer),
-    Buffer.from(new Uint32Array([0xffffffff]).buffer),
+  const buffer = makeBuffer([
+    B.u8(0xff),
+    B.u16(0xffff),
+    B.u32(0xffffffff),
   ])
 
   const data = readFormat({
@@ -303,12 +302,12 @@ const range = require('lodash/range')
 {
   // can read list of formats
 
-  const buffer = Buffer.concat([
-    Buffer.from([0xff]),
-    Buffer.from(new Uint16Array([0xffff]).buffer),
-    Buffer.from(new Uint32Array([0xffffffff]).buffer),
-    Buffer.from(new Uint16Array([0xffff]).buffer),
-    Buffer.from(new Uint32Array([0xffffffff]).buffer),
+  const buffer = makeBuffer([
+    B.u8(0xff),
+    B.u16(0xffff),
+    B.u32(0xffffffff),
+    B.u16(0xffff),
+    B.u32(0xffffffff),
   ])
 
   const data = readFormat({
@@ -332,8 +331,8 @@ const range = require('lodash/range')
 {
   // can read list of dynamic length
 
-  const buffer = Buffer.concat([
-    Buffer.from([2, 3, 44, 55, 66, 77, 88, 99]),
+  const buffer = makeBuffer([
+    B.u8([2, 3, 44, 55, 66, 77, 88, 99]),
   ])
 
   const data = readFormat({
@@ -361,23 +360,23 @@ const range = require('lodash/range')
   const secondLayerWidth = 5
   const secondLayerHeight = 6
   const secondLayerFill = 88
-  const buffer = Buffer.concat([
-    Buffer.from([
+  const buffer = makeBuffer([
+    B.u8([
       2,
       firstLayerWidth, firstLayerHeight,
       secondLayerWidth, secondLayerHeight,
     ]),
-    Buffer.concat([
-      Buffer.from(new Uint32Array([2 * 2]).buffer),
-      Buffer.from(new Uint16Array([
+    makeBuffer([
+      B.u32(2 * 2),
+      B.u16([
         (firstLayerWidth * firstLayerHeight) | 0xff00,
         firstLayerFill,
-      ]).buffer),
-      Buffer.from(new Uint32Array([2 * 2]).buffer),
-      Buffer.from(new Uint16Array([
+      ]),
+      B.u32(2 * 2),
+      B.u16([
         (secondLayerWidth * secondLayerHeight) | 0xff00,
         secondLayerFill
-      ]).buffer),
+      ])
     ])
   ])
 
@@ -415,8 +414,8 @@ const range = require('lodash/range')
 {
   // can read list of all remaining bytes
 
-  const buffer = Buffer.concat([
-    Buffer.from([44, 55, 66, 77, 88, 99]),
+  const buffer = makeBuffer([
+    B.u8([44, 55, 66, 77, 88, 99]),
   ])
 
   const data = readFormat({
