@@ -360,6 +360,8 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
   expect(data.mysize).toBe(raw.length)
   expect(data.comprLen).toBe(compressedBuffer.length)
+  expect(data.compressed.length).toBe(compressedBuffer.length)
+  expect(data.compressed).toEqual(Array.from(compressedBuffer))
   expect(data.decompressed.length).toBe(raw.length)
   expect(data.decompressed).toEqual(raw)
 }
@@ -377,17 +379,31 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
   expect(data.mysize).toBe(raw.length * 2)
   expect(data.comprLen).toBe(compressedBuffer.length)
+  expect(data.compressed.length).toBe(compressedBuffer.length)
+  expect(data.compressed).toEqual(Array.from(compressedBuffer))
   expect(data.decompressed.length).toBe(raw.length)
   expect(data.decompressed).toEqual(raw)
 }
 
 {
-  // throw on zlib uncompressed size mismatch
+  // throw on zlibU8 size mismatch
   const reader = createDataReader({
-    data: Buffer.from(new Uint32Array([16 * 16 * 3]).buffer),
+    data: B.u32(16 * 16 * 3),
   })
 
   expect(() => {
     reader.readZlibU8(16 * 16)
   }).toThrow('expected an uncompressed byte length of 256 but got 768')
+}
+
+{
+  // throw on zlibU16 size mismatch
+  const howManyWords = 3
+  const reader = createDataReader({
+    data: B.u32((howManyWords * 2) + 1),
+  })
+
+  expect(() => {
+    reader.readZlibU16(howManyWords)
+  }).toThrow('expected an uncompressed byte length of 6 but got 7')
 }

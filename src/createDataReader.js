@@ -223,7 +223,7 @@ const createDataReader = (args) => {
 
     const comprLen = readQuad()
     const compressed = readByteArray(comprLen)
-    const decompressed = [...zlib.inflateSync(Buffer.from(compressed))] // perf?
+    const decompressed = [...zlib.inflateSync(B.u8(compressed))] // perf?
 
     return {
       mysize,
@@ -236,12 +236,12 @@ const createDataReader = (args) => {
   const readZlibU16 = (length) => {
     const mysize = readQuad()
     if (mysize !== (length * 2)) {
-      throw new Error('expected an uncompressed byte length of ' + length + ' but got ' + mysize)
+      throw new Error('expected an uncompressed byte length of ' + (length * 2) + ' but got ' + mysize)
     }
 
     const comprLen = readQuad()
-    const compressed = B.u8(readByteArray(comprLen))
-    const decompressedU8 = B.u8([...zlib.inflateSync(compressed)]) // perf?
+    const compressed = readByteArray(comprLen)
+    const decompressedU8 = B.u8([...zlib.inflateSync(B.u8(compressed))]) // perf?
     const reader = createDataReader({data: decompressedU8})
     const decompressed = reader.readWordArray(length)
 
