@@ -4,6 +4,7 @@ const expect = require('expect')
 const createDataReader = require('./createDataReader.js')
 const fill = require('lodash/fill')
 const zlib = require('zlib')
+const {makeBuffer, B} = require('./makeBuffer')
 
 {
   // empty buffer is at end
@@ -347,17 +348,34 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 }
 
 {
-  // can read zlib compressed buffers
+  // can read zlibU8 buffers
   const raw = fill(Array(16 * 16), 99)
-  const compressedBuffer = zlib.deflateSync(Buffer.from(raw))
+  const compressedBuffer = zlib.deflateSync(B.u8(raw))
   const buffer = Buffer.concat([
     Buffer.from(new Uint32Array([raw.length, compressedBuffer.length]).buffer),
     compressedBuffer
   ])
   const reader = createDataReader({data: buffer})
-  const data = reader.readZlib(16 * 16)
+  const data = reader.readZlibU8(16 * 16)
 
   expect(data.mysize).toBe(raw.length)
+  expect(data.comprLen).toBe(compressedBuffer.length)
+  expect(data.decompressed.length).toBe(raw.length)
+  expect(data.decompressed).toEqual(raw)
+}
+
+{
+  // can read zlibU16 buffers
+  const raw = fill(Array(16 * 16), 0xbeef)
+  const compressedBuffer = zlib.deflateSync(B.u16(raw))
+  const buffer = Buffer.concat([
+    Buffer.from(new Uint32Array([raw.length * 2, compressedBuffer.length]).buffer),
+    compressedBuffer
+  ])
+  const reader = createDataReader({data: buffer})
+  const data = reader.readZlibU16(16 * 16)
+
+  expect(data.mysize).toBe(raw.length * 2)
   expect(data.comprLen).toBe(compressedBuffer.length)
   expect(data.decompressed.length).toBe(raw.length)
   expect(data.decompressed).toEqual(raw)
@@ -370,6 +388,6 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
   })
 
   expect(() => {
-    reader.readZlib(16 * 16)
+    reader.readZlibU8(16 * 16)
   }).toThrow('expected an uncompressed byte length of 256 but got 768')
 }

@@ -3,6 +3,7 @@
 const fs = require('fs')
 const assert = require('assert')
 const zlib =  require('zlib')
+const {makeBuffer, B} = require('./makeBuffer')
 
 const createDataReader = (args) => {
   const buffer = Buffer.from(args.data)
@@ -214,7 +215,7 @@ const createDataReader = (args) => {
     return s
   }
 
-  const readZlib = (length) => {
+  const readZlibU8 = (length) => {
     const mysize = readQuad()
     if (mysize !== length) {
       throw new Error('expected an uncompressed byte length of ' + length + ' but got ' + mysize)
@@ -223,6 +224,26 @@ const createDataReader = (args) => {
     const comprLen = readQuad()
     const compressed = readByteArray(comprLen)
     const decompressed = [...zlib.inflateSync(Buffer.from(compressed))] // perf?
+
+    return {
+      mysize,
+      comprLen,
+      compressed,
+      decompressed,
+    }
+  }
+
+  const readZlibU16 = (length) => {
+    const mysize = readQuad()
+    if (mysize !== (length * 2)) {
+      throw new Error('expected an uncompressed byte length of ' + length + ' but got ' + mysize)
+    }
+
+    const comprLen = readQuad()
+    const compressed = B.u8(readByteArray(comprLen))
+    const decompressedU8 = B.u8([...zlib.inflateSync(compressed)]) // perf?
+    const reader = createDataReader({data: decompressedU8})
+    const decompressed = reader.readWordArray(length)
 
     return {
       mysize,
@@ -253,7 +274,9 @@ const createDataReader = (args) => {
     readStringAsWord,
     readStringAsQuad,
     readLine,
-    readZlib,
+    readZlib: readZlibU8,
+    readZlibU8,
+    readZlibU16,
     get position() {
       return position
     },
