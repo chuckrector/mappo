@@ -24,7 +24,7 @@ const numobs = 2
 const obs = fill(Array(tilesize * tilesize * numobs), 88)
 const obsCompressed = [...zlib.deflateSync(B.u8(obs))]
 
-const chrs = Buffer.concat([
+const chrs = makeBuffer([
   B.u32([signature, version, tilesize, format, numtiles, compression]),
   B.u32([tiledatabuf.length, tiledatabufCompressed.length]),
   B.u8(tiledatabufCompressed),
