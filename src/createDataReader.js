@@ -1,6 +1,5 @@
 "use strict"
 
-const fs = require('fs')
 const assert = require('assert')
 const zlib =  require('zlib')
 const {makeBuffer, B} = require('./makeBuffer')
