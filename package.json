@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npm run test && ./node_modules/.bin/electron .",
-    "test": "time node runtests.js && time ./runtests-cli.sh"
+    "test": "./node_modules/.bin/concurrently --raw --kill-others 'node runtests.js' './runtests-cli.sh'"
   },
   "keywords": [
     "mappo"

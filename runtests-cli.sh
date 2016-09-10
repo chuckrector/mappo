@@ -2,7 +2,7 @@
 
 set -e
 
-./node_modules/.bin/concurrently \
+./node_modules/.bin/concurrently --raw --kill-others \
 "node src/cli/pcx2png.js data/v1/STAN.PCX" \
 "node src/cli/v1boxraw2png.js data/v1/VERGE.PAL data/v1/BOX.RAW" \
 "node src/cli/v1chr2json.js data/v1/VERGE.PAL data/v1/DARIN.CHR" \
