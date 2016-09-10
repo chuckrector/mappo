@@ -5,7 +5,7 @@ const {readFormatData} = require('./readFormat')
 
 const fromDisk = (filename, format) => {
   const buffer = fs.readFileSync(filename)
-  const data = readFormatData({format, data: buffer})
+  return readFormatData({format, data: buffer})
 }
 
 module.exports = {
@@ -13,4 +13,5 @@ module.exports = {
   v1zone: require('./formats/v1zone'),
   v1entity: require('./formats/v1entity'),
   v1map: require('./formats/v1map'),
+  v1chr: require('./formats/v1chr'),
 }
