@@ -21,6 +21,7 @@ module.exports = {
   v1boxraw: require('./formats/v1boxraw'),
   v1mainfnt: require('./formats/v1mainfnt'),
   v1smallfnt: require('./formats/v1smallfnt'),
+  v1miscicondat: require('./formats/v1miscicondat'),
   v1itemicondat: require('./formats/v1itemicondat'),
   v1item: require('./formats/v1item'),
   v1itemsdat: require('./formats/v1itemsdat'),
