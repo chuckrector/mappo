@@ -645,6 +645,57 @@ Output:
 ![alt text](img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
 ![alt text](img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
 
+# v3chr2json
+
+**Support:** VERGE3 only
+
+Usage:
+
+- `node src/cli/v3chr2json.js data/v3/sully.chr`
+
+Output:
+
+- `data/v3/sully.chr.json`
+
+```json
+{
+  "signature": 5392451,
+  "version": 5,
+  "bpp": 24,
+  "flags": 0,
+  "tcol": 16711935,
+  "hx": 0,
+  "hy": 7,
+  "hw": 15,
+  "hh": 10,
+  "fxsize": 16,
+  "fysize": 16,
+  "totalframes": 8,
+  "didle": 1,
+  "uidle": 6,
+  "lidle": 0,
+  "ridle": 2,
+  "anims": [{
+    "length": 32,
+    "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
+  }, {
+    "length": 32,
+    "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
+  }, {
+    "length": 32,
+    "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
+  }, ...],
+  "customscripts": 0,
+  "compression": 1,
+  "imagedata": {
+    "mysize": 6144,
+    "comprLen": 425,
+    "compressed": [120, 156, 237, ...],
+    "decompressed": [255, 0, 255, ...],
+  }
+}
+```
+
 # v3chr2png
 
 **Support:** VERGE3 only (WxH, N frames, 5 columns)
