@@ -406,6 +406,25 @@ Output:
 }
 ```
 
+# v1chr2json
+
+**Support:** VERGE1 only
+
+Usage:
+
+- `node src/cli/v1chr2json.js data/VERGE.PAL data/DARIN.CHR`
+
+Output:
+
+- `data/DARIN.CHR.json`
+
+```json
+{
+  "chrs": [0, 0, 0, 0, 0, 0, 0, 0, 0, ...],
+  "palette": [0, 0, 0, 2, 2, 2, 3, 3, 3, ...]
+}
+```
+
 # v2chr2png
 
 See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
