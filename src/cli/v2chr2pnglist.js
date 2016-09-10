@@ -1,7 +1,6 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge2ChrLoader = require('../loader/createVerge2ChrLoader')
 const colorDepth = require('../converter/colorDepth')
 const ripTiles = require('../ripTiles')
 const {PNG} = require('pngJS')
@@ -11,10 +10,7 @@ const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
 
 const palData = asset.fromDisk(palFilename, asset.v1pal)
-
-const diskChrData = fs.readFileSync(chrFilename)
-const chrLoader = createVerge2ChrLoader({data: diskChrData})
-const chrData = chrLoader.load()
+const chrData = asset.fromDisk(chrFilename, asset.v2chr)
 
 const raw32BitData = colorDepth.convert8to32({
   palette: palData.pal.map(v => v * 4),
