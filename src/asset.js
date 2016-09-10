@@ -25,4 +25,5 @@ module.exports = {
   v1itemsdat: require('./formats/v1itemsdat'),
   v1partydat: require('./formats/v1partydat'),
   v1transtbl: require('./formats/v1transtbl'),
+  v1speechspc: require('./formats/v1speechspc'),
 }

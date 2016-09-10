@@ -1,7 +1,6 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1SpeechSpcLoader = require('../loader/createVerge1SpeechSpcLoader')
 const createVerge1SpeechSpcConverter = require('../converter/createVerge1SpeechSpcConverter')
 const asset = require('../asset')
 
@@ -9,10 +8,7 @@ const palFilename = process.argv[2]
 const speechSpcFilename = process.argv[3]
 
 const palData = asset.fromDisk(palFilename, asset.v1pal)
-
-const diskSpeechSpcData = fs.readFileSync(speechSpcFilename)
-const speechSpcLoader = createVerge1SpeechSpcLoader({data: diskSpeechSpcData})
-const speechSpcData = speechSpcLoader.load()
+const speechSpcData = asset.fromDisk(speechSpcFilename, asset.v1speechspc)
 const speechSpcConverter = createVerge1SpeechSpcConverter({
   palette: palData.pal,
   numtiles: speechSpcData.numtiles,
