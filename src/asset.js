@@ -23,4 +23,5 @@ module.exports = {
   v1smallfnt: require('./formats/v1smallfnt'),
   v1item: require('./formats/v1item'),
   v1itemsdat: require('./formats/v1itemsdat'),
+  v1partydat: require('./formats/v1partydat'),
 }
