@@ -1,13 +1,10 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1TransTblLoader = require('../loader/createVerge1TransTblLoader')
+const asset = require('../asset')
 
 const transTblFilename = process.argv[2]
-
-const diskTransTblData = fs.readFileSync(transTblFilename)
-const transTblLoader = createVerge1TransTblLoader({data: diskTransTblData})
-const transTblData = transTblLoader.load()
+const transTblData = asset.fromDisk(transTblFilename, asset.v1transtbl)
 const targetFilename = transTblFilename + '.json'
 
 fs.writeFileSync(targetFilename, JSON.stringify(transTblData))
