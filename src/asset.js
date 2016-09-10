@@ -19,4 +19,5 @@ module.exports = {
   v1vspanim: require('./formats/v1vspanim'),
   v1vsp: require('./formats/v1vsp'),
   v1boxraw: require('./formats/v1boxraw'),
+  v1mainfnt: require('./formats/v1mainfnt'),
 }
