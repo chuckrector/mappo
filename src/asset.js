@@ -28,4 +28,8 @@ module.exports = {
   v1speechspc: require('./formats/v1speechspc'),
   v2chr: require('./formats/v2chr'),
   v2vsp: require('./formats/v2vsp'),
+  v2zone: require('./formats/v2zone'),
+  v2entity: require('./formats/v2entity'),
+  v2layerinfo: require('./formats/v2layerinfo'),
+  v2map: require('./formats/v2map'),
 }

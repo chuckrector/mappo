@@ -1,13 +1,10 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge2MapLoader = require('../loader/createVerge2MapLoader')
+const asset = require('../asset')
 
 const mapFilename = process.argv[2]
-
-const diskMapData = fs.readFileSync(mapFilename)
-const mapLoader = createVerge2MapLoader({data: diskMapData})
-const mapData = mapLoader.load()
+const mapData = asset.fromDisk(mapFilename, asset.v2map)
 const targetFilename = mapFilename + '.json'
 
 fs.writeFileSync(targetFilename, JSON.stringify(mapData))
