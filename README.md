@@ -549,6 +549,51 @@ Output:
 ![alt text](img/EMIRA.CHR.png?raw=true "a sample of v2chr2png cli output")
 ![alt text](img/ELGARD.CHR.png?raw=true "a sample of v2chr2png cli output")
 
+# v2chr2pnglist
+
+See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
+
+**Support:** VERGE2 only (WxH, N tiles, 5 columns)
+
+Usage:
+
+- `node src/cli/v2chr2pnglist.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
+
+Output:
+
+- `data/v2/VECNA.CHR-0.png` .. `data/v2/VECNA.CHR-` (N - 1) `.png`
+
+![alt text](img/v2/VECNA.CHR-0.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-1.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-2.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-3.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-4.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-5.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-6.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-7.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-8.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-9.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-10.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-11.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-12.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-13.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-14.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-15.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-16.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-17.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-18.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-19.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-20.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-21.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-22.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-23.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-24.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-25.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-26.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-27.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-28.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](img/v2/VECNA.CHR-29.png?raw=true "a sample of v2chr2pnglist cli output")
+
 # v2map2json
 
 **Support:** VERGE2 only
