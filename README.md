@@ -984,5 +984,4 @@ Output:
 - automatically run all cli as part of tests, rather than manually adding to shell script every time i make a new one. how? maybe default params in each cli and let normal js test runner drive everything
 - proper npm package?
 - shorthand for `fill(Array(N), v)`, e.g. `filler(N, v)`
-- pull all declarative file formats out of loader boilerplate. simplify into one loader
 - `v*vsp2pnglist`? maybe overkill?
