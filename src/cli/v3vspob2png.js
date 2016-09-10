@@ -12,7 +12,7 @@ const vsp = loader.load()
 const palette = fill(Array(256 * 3), 128)
 const converter = createVerge3VspObConverter({
   palette,
-  numtiles: vsp.numtiles,
+  numobs: vsp.numobs,
   obs: vsp.obs.decompressed,
 })
 const png = converter.convertToPng()
