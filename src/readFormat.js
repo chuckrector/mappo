@@ -1,7 +1,5 @@
 "use strict"
 
-const zlib = require('zlib')
-
 const T = {}
 
 T.u8 = ({reader}) => reader.readByte()
