@@ -1,7 +1,6 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1SmallFntLoader = require('../loader/createVerge1SmallFntLoader')
 const createVerge1SmallFntConverter = require('../converter/createVerge1SmallFntConverter')
 const asset = require('../asset')
 
@@ -9,10 +8,7 @@ const palFilename = process.argv[2]
 const smallFntFilename = process.argv[3]
 
 const palData = asset.fromDisk(palFilename, asset.v1pal)
-
-const diskSmallFntData = fs.readFileSync(smallFntFilename)
-const smallFntLoader = createVerge1SmallFntLoader({data: diskSmallFntData})
-const smallFntData = smallFntLoader.load()
+const smallFntData = asset.fromDisk(smallFntFilename, asset.v1smallfnt)
 const smallFntConverter = createVerge1SmallFntConverter({
   palette: palData.pal,
   fnt: smallFntData.fnt,
