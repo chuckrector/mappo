@@ -2,7 +2,6 @@
 
 const expect = require('expect')
 const createVerge3VspLoader = require('./createVerge3VspLoader')
-const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
 const zlib = require('zlib')
 const {makeBuffer, B} = require('../makeBuffer')

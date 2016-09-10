@@ -1,6 +1,5 @@
 "use strict"
 
-const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
 const {makeBuffer, B} = require('./makeBuffer')
 

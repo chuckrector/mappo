@@ -2,7 +2,6 @@
 
 const expect = require('expect')
 const createVerge2MapLoader = require('./createVerge2MapLoader.js')
-const padEnd = require('lodash/padEnd')
 const fill = require('lodash/fill')
 const dummyMap = require('../dummyVerge2Map')
 
