@@ -3,10 +3,31 @@
 const expect = require('expect')
 const createDataReader = require('./createDataReader')
 const {makeBuffer, B} = require('./makeBuffer')
-const {readFormat, T} = require('./readFormat')
+const {readFormat, readFormatData, T} = require('./readFormat')
 const fill = require('lodash/fill')
 const zlib = require('zlib')
 const range = require('lodash/range')
+
+{
+  // can read unsigned types from data
+
+  const buffer = makeBuffer([
+    B.u8(0xff),
+    B.u16(0xffff),
+    B.u32(0xffffffff),
+  ])
+
+  const data = readFormatData({
+    format: {
+      a: T.u8,
+      b: T.u16,
+      c: T.u32,
+    },
+    data: buffer
+  })
+
+  expect(data).toEqual({a: 0xff, b: 0xffff, c: 0xffffffff})
+}
 
 {
   // can read unsigned types

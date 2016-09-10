@@ -1,5 +1,7 @@
 "use strict"
 
+const createDataReader = require('./createDataReader')
+
 const T = {}
 
 T.u8 = ({reader}) => reader.readByte()
@@ -97,7 +99,14 @@ const readFormat = ({format, reader, listIndex}) => {
   return record
 }
 
+const readFormatData = ({format, data}) => {
+  const reader = createDataReader({data})
+
+  return readFormat({format, reader})
+}
+
 module.exports = {
   readFormat,
+  readFormatData,
   T
 }
