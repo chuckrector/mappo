@@ -76,11 +76,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1boxraw2png.js data/VERGE.PAL data/BOX.RAW`
+- `node src/cli/v1boxraw2png.js data/v1/VERGE.PAL data/v1/BOX.RAW`
 
 Output:
 
-`data/BOX.RAW.png`
+`data/v1/BOX.RAW.png`
 
 ![alt text](img/BOX.RAW.png?raw=true "a sample of v1boxraw2png cli output")
 
@@ -90,11 +90,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1chr2json.js data/VERGE.PAL data/DARIN.CHR`
+- `node src/cli/v1chr2json.js data/v1/VERGE.PAL data/v1/DARIN.CHR`
 
 Output:
 
-- `data/DARIN.CHR.json`
+- `data/v1/DARIN.CHR.json`
 
 ```json
 {
@@ -109,11 +109,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1chr2png.js data/VERGE.PAL data/DARIN.CHR`
+- `node src/cli/v1chr2png.js data/v1/VERGE.PAL data/v1/DARIN.CHR`
 
 Output:
 
-- `data/DARIN.CHR.png`
+- `data/v1/DARIN.CHR.png`
 
 ![alt text](img/DARIN.CHR.png?raw=true "a sample of v1chr2png cli output")
 ![alt text](img/SARA.CHR.png?raw=true "a sample of v1chr2png cli output")
@@ -173,11 +173,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1cr22png.js data/VERGE.PAL data/CRYSTAL.CR2`
+- `node src/cli/v1cr22png.js data/v1/VERGE.PAL data/v1/CRYSTAL.CR2`
 
 Output:
 
-- `data/CRYSTAL.CR2.png`
+- `data/v1/CRYSTAL.CR2.png`
 
 ![alt text](img/DARIN.CR2.png?raw=true "a sample of v1cr22png cli output")
 ![alt text](img/SARA.CR2.png?raw=true "a sample of v1cr22png cli output")
@@ -191,11 +191,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1equipdat2json.js data/EQUIP.DAT`
+- `node src/cli/v1equipdat2json.js data/v1/EQUIP.DAT`
 
 Output:
 
-- `data/EQUIP.DAT.json`
+- `data/v1/EQUIP.DAT.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -271,11 +271,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1mainfnt2png.js data/VERGE.PAL data/MAIN.FNT`
+- `node src/cli/v1mainfnt2png.js data/v1/VERGE.PAL data/v1/MAIN.FNT`
 
 Output:
 
-- `data/MAIN.FNT.png`
+- `data/v1/MAIN.FNT.png`
 
 ![alt text](img/MAIN.FNT.png?raw=true "a sample of v1mainfnt2png cli output")
 
@@ -285,11 +285,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1map2json.js data/ISLAND.MAP`
+- `node src/cli/v1map2json.js data/v1/ISLAND.MAP`
 
 Output:
 
-- `data/ISLAND.MAP.json`
+- `data/v1/ISLAND.MAP.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -384,11 +384,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT`
+- `node src/cli/v1miscicondat2png.js data/v1/VERGE.PAL data/v1/MISCICON.DAT`
 
 Output:
 
-- `data/MISCICON.DAT.png`
+- `data/v1/MISCICON.DAT.png`
 
 ![alt text](img/MISCICON.DAT.png?raw=true "a sample of v1miscicondat2png cli output")
 
@@ -398,11 +398,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1partydat2json.js data/PARTY.DAT`
+- `node src/cli/v1partydat2json.js data/v1/PARTY.DAT`
 
 Output:
 
-- `data/PARTY.DAT.json`
+- `data/v1/PARTY.DAT.json`
 
 **Note:** Output here is pretty-printed for readability.
 
@@ -425,11 +425,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1smallfnt2png.js data/VERGE.PAL data/SMALL.FNT`
+- `node src/cli/v1smallfnt2png.js data/v1/VERGE.PAL data/v1/SMALL.FNT`
 
 Output:
 
-- `data/SMALL.FNT.png`
+- `data/v1/SMALL.FNT.png`
 
 ![alt text](img/SMALL.FNT.png?raw=true "a sample of v1smallfnt2png cli output")
 
@@ -439,11 +439,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1speechspc2png.js data/VERGE.PAL data/SPEECH.SPC`
+- `node src/cli/v1speechspc2png.js data/v1/VERGE.PAL data/v1/SPEECH.SPC`
 
 Output:
 
-- `data/SPEECH.SPC.png`
+- `data/v1/SPEECH.SPC.png`
 
 ![alt text](img/SPEECH.SPC.png?raw=true "a sample of v1speechspc2png cli output")
 
@@ -455,11 +455,11 @@ This format is identical between VERGE1 and VERGE2.
 
 Usage:
 
-- `node src/cli/v1transtbl2json.js data/TRANS.TBL`
+- `node src/cli/v1transtbl2json.js data/v1/TRANS.TBL`
 
 Output:
 
-- `data/TRANS.TBL.json`
+- `data/v1/TRANS.TBL.json`
 
 **Note:** Output here is abbreviated and pretty-printed for readability.
 
@@ -475,11 +475,11 @@ Output:
 
 Usage:
 
-- `node src/cli/v1vsp2png.js data/HAHN01.VSP`
+- `node src/cli/v1vsp2png.js data/v1/HAHN01.VSP`
 
 Output:
 
-- `data/HAHN01.VSP.png`
+- `data/v1/HAHN01.VSP.png`
 
 ![alt text](img/HAHN01.VSP.png?raw=true "a sample of v1vsp2png cli output")
 
