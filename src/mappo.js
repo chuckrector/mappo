@@ -3,6 +3,8 @@
 const $ = require('jquery')
 const jQuery = $
 require('./jquery-ui-1.12.0.custom.le-frog/jquery-ui.min.js')
+const V1_MAP = require('./formats/v1map')
+const {readFormatData} = require('./readFormat')
 
 $('body').resizable()
 
@@ -10,9 +12,7 @@ const os = require('os')
 const fs = require('fs')
 const mapFilename = 'data/v1/BUMVILLE.MAP';
 fs.readFile(mapFilename, (err, data) => {
-  const createVerge1MapLoader = require('./loader/createVerge1MapLoader')
-  const loader = createVerge1MapLoader({data})
-  const mapData = loader.load()
+  const mapData = readFormatData({format: V1_MAP, data})
   console.log(mapFilename, mapData)
   console.log('nummovescripts', mapData.nummovescripts)
   console.log('msbufsize', mapData.msbufsize)
