@@ -14,4 +14,5 @@ module.exports = {
   v1entity: require('./formats/v1entity'),
   v1map: require('./formats/v1map'),
   v1chr: require('./formats/v1chr'),
+  v1cr2: require('./formats/v1cr2'),
 }
