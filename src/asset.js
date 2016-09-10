@@ -16,4 +16,6 @@ module.exports = {
   v1chr: require('./formats/v1chr'),
   v1cr2: require('./formats/v1cr2'),
   v1pal: require('./formats/v1pal'),
+  v1vspanim: require('./formats/v1vspanim'),
+  v1vsp: require('./formats/v1vsp'),
 }
