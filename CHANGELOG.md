@@ -1,4 +1,18 @@
 
+## 0.16.0 (Sep 9, 2016)
+
+- v1chr2json cli
+- v2chr2json cli
+- v3chr2json cli
+
+## 0.15.2 (Sep 9, 2016)
+
+- fix bug in v3vspob2png which used # tiles instead of # obs
+
+## 0.15.1 (Sep 8, 2016)
+
+- fix various zlib buffer bugs
+
 ## 0.15.0 (Sep 7, 2016)
 
 - VERGE3 .MAP loader and converter

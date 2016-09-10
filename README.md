@@ -1,4 +1,4 @@
-# mappo v0.15.0
+# mappo v0.16.0
 
 Currently, a collection of command-line tools which can load and convert various [VERGE](http://verge-rpg.com/) file formats. The skeleton of an Electron app is also included. After I've written loaders and converters for all known VERGE file formats, I'll start building a map editor in the Electron app.
 
