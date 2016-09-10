@@ -835,6 +835,27 @@ Output:
 ![alt text](img/v3/walker03.chr.png?raw=true "a sample of v3chr2png cli output")
 ![alt text](img/v3/walker04.chr.png?raw=true "a sample of v3chr2png cli output")
 
+# v3chr2pnglist
+
+**Support:** VERGE3 only (WxH, N frames, 5 columns)
+
+Usage:
+
+- `node src/cli/v3chr2pnglist.js data/v3/sully.chr`
+
+Output:
+
+- `data/v3/sully.chr-0.png` .. `data/v3/sully.chr-` (N - 1) `.png`
+
+![alt text](img/v3/sully.chr-0.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-1.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-2.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-3.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-4.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-5.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-6.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](img/v3/sully.chr-7.png?raw=true "a sample of v3chr2pnglist cli output")
+
 # v3map2json
 
 **Support:** VERGE3 only
