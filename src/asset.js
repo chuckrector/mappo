@@ -36,4 +36,8 @@ module.exports = {
   v3chr: require('./formats/v3chr'),
   v3vspanim: require('./formats/v3vspanim'),
   v3vsp: require('./formats/v3vsp'),
+  v3zone: require('./formats/v3zone'),
+  v3entity: require('./formats/v3entity'),
+  v3layerinfo: require('./formats/v3layerinfo'),
+  v3map: require('./formats/v3map'),
 }
