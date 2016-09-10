@@ -27,4 +27,5 @@ module.exports = {
   v1transtbl: require('./formats/v1transtbl'),
   v1speechspc: require('./formats/v1speechspc'),
   v2chr: require('./formats/v2chr'),
+  v2vsp: require('./formats/v2vsp'),
 }

@@ -2,18 +2,15 @@ const process = require('process')
 
 const fs = require('fs')
 const path = require('path')
-const createDataReader = require('../createDataReader')
+const asset = require('../asset')
 
 const vspFilename = process.argv[2]
-
-const vspData = fs.readFileSync(vspFilename)
-const reader = createDataReader({data: vspData})
-reader.readWord()
-const palette = reader.readByteArray(256 * 3)
+const vspData = asset.fromDisk(vspFilename, asset.v2vsp)
 const targetFilename = path.format({
   dir: path.dirname(vspFilename),
   base: 'VERGE2.PAL',
 })
-fs.writeFileSync(targetFilename, Buffer.from(palette))
+
+fs.writeFileSync(targetFilename, Buffer.from(vspData.palette))
 
 console.log('converted', vspFilename, 'to', targetFilename)

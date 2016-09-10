@@ -1,13 +1,11 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge2VspLoader = require('../loader/createVerge2VspLoader')
 const createVerge2VspConverter = require('../converter/createVerge2VspConverter')
+const asset = require('../asset')
 
 const vspFilename = process.argv[2]
-const data = fs.readFileSync(vspFilename)
-const loader = createVerge2VspLoader({data})
-const vsp = loader.load()
+const vsp = asset.fromDisk(vspFilename, asset.v2vsp)
 const converter = createVerge2VspConverter({
   palette: vsp.palette,
   numtiles: vsp.numtiles,
