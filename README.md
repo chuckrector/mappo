@@ -123,6 +123,50 @@ Output:
 ![alt text](img/BUBBA.CHR.png?raw=true "a sample of v1chr2png cli output")
 ![alt text](img/STAN.CHR.png?raw=true "a sample of v1chr2png cli output")
 
+# v1chr2pnglist
+
+**Support:** VERGE1 only
+
+Usage:
+
+- `node src/cli/v1chr2png.js data/v1/VERGE.PAL data/v1/DARIN.CHR`
+
+Output:
+
+- `data/v1/DARIN.CHR-0.png` .. `data/v1/DARIN.CHR-29.png`
+
+![alt text](img/v1/DARIN.CHR-0.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-1.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-2.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-3.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-4.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-5.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-6.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-7.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-8.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-9.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-10.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-11.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-12.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-13.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-14.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-15.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-16.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-17.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-18.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-19.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-20.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-21.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-22.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-23.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-24.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-25.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-26.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-27.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-28.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](img/v1/DARIN.CHR-29.png?raw=true "a sample of v1chr2pnglist cli output")
+
+
 # v1cr22png
 
 **Support:** VERGE1 only (96x96)
