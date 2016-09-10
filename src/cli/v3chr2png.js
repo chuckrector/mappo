@@ -1,14 +1,11 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge3ChrLoader = require('../loader/createVerge3ChrLoader')
 const createVerge3ChrConverter = require('../converter/createVerge3ChrConverter')
+const asset = require('../asset')
 
 const chrFilename = process.argv[2]
-
-const diskChrData = fs.readFileSync(chrFilename)
-const chrLoader = createVerge3ChrLoader({data: diskChrData})
-const chrData = chrLoader.load()
+const chrData = asset.fromDisk(chrFilename, asset.v3chr)
 const chrConverter = createVerge3ChrConverter({
   bpp: chrData.bpp,
   fxsize: chrData.fxsize,

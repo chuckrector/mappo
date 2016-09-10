@@ -32,4 +32,6 @@ module.exports = {
   v2entity: require('./formats/v2entity'),
   v2layerinfo: require('./formats/v2layerinfo'),
   v2map: require('./formats/v2map'),
+  v3chranim: require('./formats/v3chranim'),
+  v3chr: require('./formats/v3chr'),
 }
