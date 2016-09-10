@@ -6,6 +6,7 @@ node src/cli/pcx2png.js data/v1/STAN.PCX
 node src/cli/v1boxraw2png.js data/v1/VERGE.PAL data/v1/BOX.RAW
 node src/cli/v1chr2json.js data/v1/VERGE.PAL data/v1/DARIN.CHR
 node src/cli/v1chr2png.js data/v1/VERGE.PAL data/v1/DARIN.CHR
+node src/cli/v1chr2pnglist.js data/v1/VERGE.PAL data/v1/DARIN.CHR
 node src/cli/v1cr22png.js data/v1/VERGE.PAL data/v1/DARIN.CR2
 node src/cli/v1equipdat2json.js data/v1/EQUIP.DAT
 node src/cli/v1itemicondat2png.js data/v1/VERGE.PAL data/v1/ITEMICON.DAT
