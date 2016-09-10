@@ -56,65 +56,98 @@ VC           | ✗ | ✗ | ✗
 VCS          | ✗ | ✗ | n/a
 save games   | ✗ | n/a | n/a
 
-# boxraw2png
+# pcx2png
+
+Usage:
+
+- `node src/cli/pcx2png.js data/STAN.PCX`
+
+Output:
+
+- `data/STAN.PCX.png`
+
+![alt text](img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](img/VERGE320.PCX.png?raw=true "a sample of pcx2png cli output")
+
+# v1boxraw2png
 
 **Support:** VERGE1 only (320x66)
 
 Usage:
 
-- `node src/cli/boxraw2png.js data/VERGE.PAL data/BOX.RAW`
+- `node src/cli/v1boxraw2png.js data/VERGE.PAL data/BOX.RAW`
 
 Output:
 
 `data/BOX.RAW.png`
 
-![alt text](img/BOX.RAW.png?raw=true "a sample of boxraw2png cli output")
+![alt text](img/BOX.RAW.png?raw=true "a sample of v1boxraw2png cli output")
 
-# chr2png
+# v1chr2json
 
 **Support:** VERGE1 only
 
 Usage:
 
-- `node src/cli/chr2png.js data/VERGE.PAL data/DARIN.CHR`
+- `node src/cli/v1chr2json.js data/VERGE.PAL data/DARIN.CHR`
+
+Output:
+
+- `data/DARIN.CHR.json`
+
+```json
+{
+  "chrs": [0, 0, 0, 0, 0, 0, 0, 0, 0, ...],
+  "palette": [0, 0, 0, 2, 2, 2, 3, 3, 3, ...]
+}
+```
+
+# v1chr2png
+
+**Support:** VERGE1 only
+
+Usage:
+
+- `node src/cli/v1chr2png.js data/VERGE.PAL data/DARIN.CHR`
 
 Output:
 
 - `data/DARIN.CHR.png`
 
-![alt text](img/DARIN.CHR.png?raw=true "a sample of chr2png cli output")
-![alt text](img/SARA.CHR.png?raw=true "a sample of chr2png cli output")
-![alt text](img/CRYSTAL.CHR.png?raw=true "a sample of chr2png cli output")
-![alt text](img/DEXTER.CHR.png?raw=true "a sample of chr2png cli output")
-![alt text](img/GALFREY.CHR.png?raw=true "a sample of chr2png cli output")
-![alt text](img/BUBBA.CHR.png?raw=true "a sample of chr2png cli output")
-![alt text](img/STAN.CHR.png?raw=true "a sample of chr2png cli output")
+![alt text](img/DARIN.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](img/SARA.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](img/CRYSTAL.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](img/DEXTER.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](img/GALFREY.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](img/BUBBA.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](img/STAN.CHR.png?raw=true "a sample of v1chr2png cli output")
 
-# cr22png
+# v1cr22png
 
 **Support:** VERGE1 only (96x96)
 
 Usage:
 
-- `node src/cli/cr22png.js data/VERGE.PAL data/CRYSTAL.CR2`
+- `node src/cli/v1cr22png.js data/VERGE.PAL data/CRYSTAL.CR2`
 
 Output:
 
 - `data/CRYSTAL.CR2.png`
 
-![alt text](img/DARIN.CR2.png?raw=true "a sample of cr22png cli output")
-![alt text](img/SARA.CR2.png?raw=true "a sample of cr22png cli output")
-![alt text](img/DEXTER.CR2.png?raw=true "a sample of cr22png cli output")
-![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of cr22png cli output")
-![alt text](img/GALFREY.CR2.png?raw=true "a sample of cr22png cli output")
+![alt text](img/DARIN.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](img/SARA.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](img/DEXTER.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](img/GALFREY.CR2.png?raw=true "a sample of v1cr22png cli output")
 
-# equipdat2json
+# v1equipdat2json
 
 **Support:** VERGE1 only
 
 Usage:
 
-- `node src/cli/equipdat2json.js data/EQUIP.DAT`
+- `node src/cli/v1equipdat2json.js data/EQUIP.DAT`
 
 Output:
 
@@ -142,27 +175,27 @@ Output:
 }
 ```
 
-# itemicondat2png
+# v1itemicondat2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
 
 Usage:
 
-- `node src/cli/itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT`
+- `node src/cli/v1itemicondat2png.js data/VERGE.PAL data/ITEMICON.DAT`
 
 Output:
 
 - `data/ITEMICON.DAT.png`
 
-![alt text](img/ITEMICON.DAT.png?raw=true "a sample of itemicondat2png cli output")
+![alt text](img/ITEMICON.DAT.png?raw=true "a sample of v1itemicondat2png cli output")
 
-# itemsdat2json
+# v1itemsdat2json
 
 **Support:** VERGE1 only
 
 Usage:
 
-- `node src/cli/itemsdat2json.js data/ITEMS.DAT`
+- `node src/cli/v1itemsdat2json.js data/ITEMS.DAT`
 
 Output:
 
@@ -188,27 +221,27 @@ Output:
 }
 ```
 
-# mainfnt2png
+# v1mainfnt2png
 
 **Support:** VERGE1 only (9x16, 95 tiles, 19 columns)
 
 Usage:
 
-- `node src/cli/mainfnt2png.js data/VERGE.PAL data/MAIN.FNT`
+- `node src/cli/v1mainfnt2png.js data/VERGE.PAL data/MAIN.FNT`
 
 Output:
 
 - `data/MAIN.FNT.png`
 
-![alt text](img/MAIN.FNT.png?raw=true "a sample of mainfnt2png cli output")
+![alt text](img/MAIN.FNT.png?raw=true "a sample of v1mainfnt2png cli output")
 
-# map2json
+# v1map2json
 
 **Support:** VERGE1 only
 
 Usage:
 
-- `node src/cli/map2json.js data/ISLAND.MAP`
+- `node src/cli/v1map2json.js data/ISLAND.MAP`
 
 Output:
 
@@ -301,27 +334,27 @@ Output:
 }
 ```
 
-# miscicondat2png
+# v1miscicondat2png
 
 **Support:** VERGE1 only (16x16, 24x24, 24x40)
 
 Usage:
 
-- `node src/cli/miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT`
+- `node src/cli/v1miscicondat2png.js data/VERGE.PAL data/MISCICON.DAT`
 
 Output:
 
 - `data/MISCICON.DAT.png`
 
-![alt text](img/MISCICON.DAT.png?raw=true "a sample of miscicondat2png cli output")
+![alt text](img/MISCICON.DAT.png?raw=true "a sample of v1miscicondat2png cli output")
 
-# partydat2json
+# v1partydat2json
 
 **Support:** VERGE1 only
 
 Usage:
 
-- `node src/cli/partydat2json.js data/PARTY.DAT`
+- `node src/cli/v1partydat2json.js data/PARTY.DAT`
 
 Output:
 
@@ -342,49 +375,35 @@ Output:
 }
 ```
 
-# pcx2png
-
-Usage:
-
-- `node src/cli/pcx2png.js data/STAN.PCX`
-
-Output:
-
-- `data/STAN.PCX.png`
-
-![alt text](img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
-![alt text](img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
-![alt text](img/VERGE320.PCX.png?raw=true "a sample of pcx2png cli output")
-
-# smallfnt2png
+# v1smallfnt2png
 
 **Support:** VERGE1 only (7x9, 95 tiles, 19 columns)
 
 Usage:
 
-- `node src/cli/smallfnt2png.js data/VERGE.PAL data/SMALL.FNT`
+- `node src/cli/v1smallfnt2png.js data/VERGE.PAL data/SMALL.FNT`
 
 Output:
 
 - `data/SMALL.FNT.png`
 
-![alt text](img/SMALL.FNT.png?raw=true "a sample of smallfnt2png cli output")
+![alt text](img/SMALL.FNT.png?raw=true "a sample of v1smallfnt2png cli output")
 
-# speechspc2png
+# v1speechspc2png
 
 **Support:** VERGE1 only (32x32, N tiles, 10 columns)
 
 Usage:
 
-- `node src/cli/speechspc2png.js data/VERGE.PAL data/SPEECH.SPC`
+- `node src/cli/v1speechspc2png.js data/VERGE.PAL data/SPEECH.SPC`
 
 Output:
 
 - `data/SPEECH.SPC.png`
 
-![alt text](img/SPEECH.SPC.png?raw=true "a sample of speechspc2png cli output")
+![alt text](img/SPEECH.SPC.png?raw=true "a sample of v1speechspc2png cli output")
 
-# transtbl2json
+# v1transtbl2json
 
 **Support:** VERGE1, VERGE2 (256x256 bytes)
 
@@ -392,7 +411,7 @@ This format is identical between VERGE1 and VERGE2.
 
 Usage:
 
-- `node src/cli/transtbl2json.js data/TRANS.TBL`
+- `node src/cli/v1transtbl2json.js data/TRANS.TBL`
 
 Output:
 
@@ -406,24 +425,19 @@ Output:
 }
 ```
 
-# v1chr2json
+# v1vsp2png
 
-**Support:** VERGE1 only
+**Support:** VERGE1 only (16x16, N tiles, 20 columns)
 
 Usage:
 
-- `node src/cli/v1chr2json.js data/VERGE.PAL data/DARIN.CHR`
+- `node src/cli/v1vsp2png.js data/HAHN01.VSP`
 
 Output:
 
-- `data/DARIN.CHR.json`
+- `data/HAHN01.VSP.png`
 
-```json
-{
-  "chrs": [0, 0, 0, 0, 0, 0, 0, 0, 0, ...],
-  "palette": [0, 0, 0, 2, 2, 2, 3, 3, 3, ...]
-}
-```
+![alt text](img/HAHN01.VSP.png?raw=true "a sample of v1vsp2png cli output")
 
 # v2chr2json
 
@@ -850,20 +864,6 @@ Output:
 - `data/v3/HAHN01.VSP-obstructions.png`
 
 ![alt text](img/v3/HAHN01.VSP-obstructions.png?raw=true "a sample of v3vspob2png cli output")
-
-# vsp2png
-
-**Support:** VERGE1 only (16x16, N tiles, 20 columns)
-
-Usage:
-
-- `node src/cli/vsp2png.js data/HAHN01.VSP`
-
-Output:
-
-- `data/HAHN01.VSP.png`
-
-![alt text](img/HAHN01.VSP.png?raw=true "a sample of vsp2png cli output")
 
 # TODO
 
