@@ -1,14 +1,12 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge3VspLoader = require('../loader/createVerge3VspLoader')
 const createVerge3VspObConverter = require('../converter/createVerge3VspObConverter')
 const fill = require('lodash/fill')
+const asset = require('../asset')
 
 const vspFilename = process.argv[2]
-const data = fs.readFileSync(vspFilename)
-const loader = createVerge3VspLoader({data})
-const vsp = loader.load()
+const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
 const palette = fill(Array(256 * 3), 128)
 const converter = createVerge3VspObConverter({
   palette,

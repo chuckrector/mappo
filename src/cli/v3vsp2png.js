@@ -1,13 +1,11 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge3VspLoader = require('../loader/createVerge3VspLoader')
 const createVerge3VspConverter = require('../converter/createVerge3VspConverter')
+const asset = require('../asset')
 
 const vspFilename = process.argv[2]
-const data = fs.readFileSync(vspFilename)
-const loader = createVerge3VspLoader({data})
-const vsp = loader.load()
+const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
 const converter = createVerge3VspConverter({
   numtiles: vsp.numtiles,
   tiledatabuf: vsp.tiledatabuf.decompressed,

@@ -34,4 +34,6 @@ module.exports = {
   v2map: require('./formats/v2map'),
   v3chranim: require('./formats/v3chranim'),
   v3chr: require('./formats/v3chr'),
+  v3vspanim: require('./formats/v3vspanim'),
+  v3vsp: require('./formats/v3vsp'),
 }
