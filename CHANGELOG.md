@@ -1,4 +1,11 @@
 
+## 0.17.0 (Sep 10, 2016)
+
+- tile ripper
+- v1chr2pnglist cli
+- v2chr2pnglist cli
+- v3chr2pnglist cli
+
 ## 0.16.0 (Sep 9, 2016)
 
 - v1chr2json cli
