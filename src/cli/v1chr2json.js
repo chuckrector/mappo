@@ -1,16 +1,12 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('../loader/createVerge1PalLoader')
 const asset = require('../asset')
 
 const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
 
-const diskPalData = fs.readFileSync(palFilename)
-const palLoader = createVerge1PalLoader({data: diskPalData})
-const palData = palLoader.load()
-
+const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v1chr)
 chrData.palette = palData.pal
 

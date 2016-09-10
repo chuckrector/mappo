@@ -1,7 +1,6 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('../loader/createVerge1PalLoader')
 const colorDepth = require('../converter/colorDepth')
 const ripTiles = require('../ripTiles')
 const {PNG} = require('pngJS')
@@ -10,10 +9,7 @@ const asset = require('../asset')
 const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
 
-const diskPalData = fs.readFileSync(palFilename)
-const palLoader = createVerge1PalLoader({data: diskPalData})
-const palData = palLoader.load()
-
+const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v1chr)
 
 const raw32BitData = colorDepth.convert8to32({

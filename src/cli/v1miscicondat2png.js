@@ -1,16 +1,14 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('../loader/createVerge1PalLoader')
 const createVerge1MiscIconDatLoader = require('../loader/createVerge1MiscIconDatLoader')
 const createVerge1MiscIconDatConverter = require('../converter/createVerge1MiscIconDatConverter')
+const asset = require('../asset')
 
 const palFilename = process.argv[2]
 const miscIconDatFilename = process.argv[3]
 
-const diskPalData = fs.readFileSync(palFilename)
-const palLoader = createVerge1PalLoader({data: diskPalData})
-const palData = palLoader.load()
+const palData = asset.fromDisk(palFilename, asset.v1pal)
 
 const diskMiscIconDatData = fs.readFileSync(miscIconDatFilename)
 const miscIconDatLoader = createVerge1MiscIconDatLoader({data: diskMiscIconDatData})

@@ -1,16 +1,14 @@
 const process = require('process')
 
 const fs = require('fs')
-const createVerge1PalLoader = require('../loader/createVerge1PalLoader')
 const createVerge1MainFntLoader = require('../loader/createVerge1MainFntLoader')
 const createVerge1MainFntConverter = require('../converter/createVerge1MainFntConverter')
+const asset = require('../asset')
 
 const palFilename = process.argv[2]
 const mainFntFilename = process.argv[3]
 
-const diskPalData = fs.readFileSync(palFilename)
-const palLoader = createVerge1PalLoader({data: diskPalData})
-const palData = palLoader.load()
+const palData = asset.fromDisk(palFilename, asset.v1pal)
 
 const diskMainFntData = fs.readFileSync(mainFntFilename)
 const mainFntLoader = createVerge1MainFntLoader({data: diskMainFntData})
