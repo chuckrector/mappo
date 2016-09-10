@@ -876,4 +876,3 @@ Output:
 - proper npm package?
 - shorthand for `fill(Array(N), v)`, e.g. `filler(N, v)`
 - pull all declarative file formats out of loader boilerplate. simplify into one loader
-- move v1 stuff into its own folder
