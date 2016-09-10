@@ -754,6 +754,7 @@ Output:
 # TODO
 
 - kildorf | aen: if you could output a json file describing the animation data (etc.) that'd be pretty sweet
+- kildorf | you could even output actual animated gifs
 - json pretty printer that abbreviates long lists with ellipses
 - optimization pass. all tests take ~4s now 😰 would like to keep this <1s
 - support for conditional blocks in declarative parser (e.g. EQUIP.DAT)
