@@ -1,0 +1,44 @@
+const process = require('process')
+
+const fs = require('fs')
+const createVerge3ChrLoader = require('../loader/createVerge3ChrLoader')
+const createVerge3ChrConverter = require('../converter/createVerge3ChrConverter')
+const colorDepth = require('../converter/colorDepth')
+const ripTiles = require('../ripTiles')
+const {PNG} = require('pngJS')
+
+const chrFilename = process.argv[2]
+
+const diskChrData = fs.readFileSync(chrFilename)
+const chrLoader = createVerge3ChrLoader({data: diskChrData})
+const chrData = chrLoader.load()
+
+let raw32BitData = chrData.imagedata.decompressed
+if (chrData.bpp === 24) {
+    raw32BitData = colorDepth.convert24to32({raw24bitData: chrData.imagedata.decompressed})
+}
+
+const tileWidth = chrData.fxsize
+const tileHeight = chrData.fysize
+const tileList = ripTiles({
+  raw32BitData,
+  raw32BitDataWidth: tileWidth,
+  raw32BitDataHeight: tileHeight * chrData.totalframes,
+  ripFromX: 0,
+  ripFromY: 0,
+  tileWidth: tileWidth,
+  tileHeight: tileHeight,
+  numTiles: chrData.totalframes,
+  numColumns: 1,
+})
+
+console.log('converting', chrFilename)
+tileList.forEach((tile, tileIndex) => {
+  const targetFilename = chrFilename + '-' + tileIndex + '.png'
+  const png = new PNG({width: tileWidth, height: tileHeight})
+  for (let p = 0; p < tileWidth * tileHeight * 4; p++) {
+    png.data[p] = tile[p]
+  }
+  png.pack().pipe(fs.createWriteStream(targetFilename))
+  console.log('generated', targetFilename)
+})
