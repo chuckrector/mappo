@@ -8,7 +8,7 @@ $('body').resizable()
 
 const os = require('os')
 const fs = require('fs')
-const mapFilename = 'data/BUMVILLE.MAP';
+const mapFilename = 'data/v1/BUMVILLE.MAP';
 fs.readFile(mapFilename, (err, data) => {
   const createVerge1MapLoader = require('./loader/createVerge1MapLoader')
   const loader = createVerge1MapLoader({data})
@@ -22,7 +22,7 @@ fs.readFile(mapFilename, (err, data) => {
   console.log('scriptofstbl', JSON.stringify(mapData.scriptofstbl))
   console.log('mapvcs', mapData.mapvc.length)
 
-  var vspPath = 'data/' + mapData.vsp0name
+  var vspPath = 'data/v1/' + mapData.vsp0name
   fs.readFile(vspPath, (err, vspData) => {
     console.log('err', err, 'vspData', vspData)
     const createVerge1VspLoader = require('./loader/createVerge1VspLoader')
