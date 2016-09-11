@@ -985,3 +985,4 @@ Output:
 - proper npm package?
 - shorthand for `fill(Array(N), v)`, e.g. `filler(N, v)`
 - `v*vsp2pnglist`? maybe overkill?
+- recursive version detection & inspection of all formats
