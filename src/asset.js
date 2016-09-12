@@ -3,13 +3,35 @@
 const fs = require('fs')
 const {readFormatData} = require('./readFormat')
 
-const fromDisk = (filename, format) => {
+const fromDisk = (filename, formatMetadata) => {
   const buffer = fs.readFileSync(filename)
-  return readFormatData({format, data: buffer})
+  const {format, formatName} = formatMetadata
+
+  let diskData
+  try {
+    console.log('reading', filename, 'as', formatName)
+    diskData = readFormatData({
+      format,
+      data: buffer,
+    })
+  } catch (e) {
+    const engineVersion = parseInt(formatName.substr(1, 2), 10)
+    const formatType = formatName.substr(2)
+
+    console.log('-- error:', e.name + ':', e.message)
+
+    if (engineVersion > 1) {
+      console.log(`-- possibly v${engineVersion - 1}${formatType}?`)
+    }
+
+    console.log('-- ignoring')
+    process.exit(0)
+  }
+
+  return diskData
 }
 
-module.exports = {
-  fromDisk,
+const allFormats = {
   v1zone: require('./formats/v1zone'),
   v1entity: require('./formats/v1entity'),
   v1map: require('./formats/v1map'),
@@ -43,3 +65,17 @@ module.exports = {
   v3layerinfo: require('./formats/v3layerinfo'),
   v3map: require('./formats/v3map'),
 }
+
+const exportMe = {
+  fromDisk,
+}
+
+// build format metadata, mostly to have access to loader names when loaders fail
+Object.keys(allFormats).forEach((formatName) => {
+  exportMe[formatName] = {
+    formatName,
+    format: allFormats[formatName],
+  }
+})
+
+module.exports = exportMe
