@@ -2,14 +2,14 @@
 
 const expect = require('expect')
 const createVerge3ChrConverter = require('./createVerge3ChrConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 
 {
   // can convert 24-bit chr image data to png
   const fxsize = 2
   const fysize = 3
   const totalframes = 2
-  const imagedata = fill(Array(fxsize * fysize * totalframes * 3), 99)
+  const imagedata = filler(fxsize * fysize * totalframes * 3, 99)
 
   const converter = createVerge3ChrConverter({
     bpp: 24,
@@ -30,7 +30,7 @@ const fill = require('lodash/fill')
   const fxsize = 2
   const fysize = 3
   const totalframes = 2
-  const imagedata = fill(Array(fxsize * fysize * totalframes * 4), 99)
+  const imagedata = filler(fxsize * fysize * totalframes * 4, 99)
 
   const converter = createVerge3ChrConverter({
     bpp: 32,

@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createVerge1ItemIconDatConverter = require('./createVerge1ItemIconDatConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 
 {
@@ -10,7 +10,7 @@ const palette = require('../dummyPalette')
   const tileWidth = 16
   const tileHeight = 16
   const numtiles = 21
-  const itemicons = fill(Array(tileWidth * tileHeight * numtiles), 99)
+  const itemicons = filler(tileWidth * tileHeight * numtiles, 99)
   const converter = createVerge1ItemIconDatConverter({
     palette,
     numtiles,

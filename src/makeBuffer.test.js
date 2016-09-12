@@ -4,7 +4,7 @@ const expect = require('expect')
 const createDataReader = require('./createDataReader')
 const {readFormat, T} = require('./readFormat')
 const {makeBuffer, B} = require('./makeBuffer')
-const fill = require('lodash/fill')
+const filler = require('./filler')
 const zlib = require('zlib')
 const range = require('lodash/range')
 
@@ -87,7 +87,7 @@ const range = require('lodash/range')
 {
   // can make compressed buffers
 
-  const expandedA = fill(Array(16 * 16), 2)
+  const expandedA = filler(16 * 16, 2)
   expandedA[0] = 1
   expandedA[255] = 3
   const expandedB = expandedA.map(v => v * 1111)
@@ -112,8 +112,8 @@ const range = require('lodash/range')
 {
   // can make zlib buffers
 
-  const rawU8 = fill(Array(16 * 16), 99)
-  const rawU16 = fill(Array(16 * 16), 0xbeef)
+  const rawU8 = filler(16 * 16, 99)
+  const rawU16 = filler(16 * 16, 0xbeef)
   const compressedU8 = Array.from([...zlib.deflateSync(B.u8(rawU8))])
   const compressedU16 = Array.from([...zlib.deflateSync(B.u16(rawU16))])
 

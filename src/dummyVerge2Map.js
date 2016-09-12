@@ -1,6 +1,6 @@
 "use strict"
 
-const fill = require('lodash/fill')
+const filler = require('./filler')
 const {makeBuffer, B} = require('./makeBuffer')
 
 const mapWidth = 2
@@ -21,10 +21,10 @@ const mapHeader = makeBuffer([
   // wrap
   B.u8(1),
   // padding
-  B.u8(fill(Array(50), 99)),
+  B.u8(filler(50, 99)),
 ])
 
-const rawLayer = [1, ...fill(Array((2 * 3) - 2), 2), 3]
+const rawLayer = [1, ...filler((2 * 3) - 2, 2), 3]
 const mapLayers = makeBuffer([
   // numlayers
   B.u8(2),
@@ -74,13 +74,13 @@ const zone = makeBuffer([
 const mapZones = makeBuffer([
   // numzones
   B.u32(2),
-  makeBuffer(fill(Array(2), zone)),
+  makeBuffer(filler(2, zone)),
 ])
 
 const chrList = makeBuffer([
   // nmchr
   B.u8(3),
-  makeBuffer(fill(Array(3), B.stringFixed(60, 'DARIN.CHR'))),
+  makeBuffer(filler(3, B.stringFixed(60, 'DARIN.CHR'))),
 ])
 
 const entity = makeBuffer([
@@ -89,15 +89,15 @@ const entity = makeBuffer([
   // tx, ty
   B.u16([4, 3]),
   // facing, moving, movcnt, frame, specframe, chrindex, reset, obsmode1, obsmode2, speed, speedct, delayct
-  B.u8(fill(Array(12), 99)),
+  B.u8(filler(12, 99)),
   // animofs, scriptofs
   B.u32([2, 1]),
   // face, actm, movecode, movescript, ctr, mode, modePadding (2 bytes)
-  B.u8(fill(Array(6 + 2), 88)),
+  B.u8(filler(6 + 2, 88)),
   // step, delay, stepctr, delayctr, data1..data6
-  B.u16(fill(Array(10), 77)),
+  B.u16(filler(10, 77)),
   // actscript, expand1..expand4
-  B.u32(fill(Array(5), 66)),
+  B.u32(filler(5, 66)),
   // desc
   B.stringFixed(20, 'Description'),
 ])
@@ -105,7 +105,7 @@ const entity = makeBuffer([
 const numEntities = 3
 const mapEntities = makeBuffer([
   Buffer.from([numEntities]),
-  makeBuffer(fill(Array(numEntities), entity))
+  makeBuffer(filler(numEntities, entity))
 ])
 
 const scripts = makeBuffer([
@@ -116,7 +116,7 @@ const scripts = makeBuffer([
   // msofstbl
   B.u32([0, 10, 20, 30, 40]),
   // msbuf
-  B.u8(fill(Array(50), 99)),
+  B.u8(filler(50, 99)),
 
   // numthings
   B.u32(0),
@@ -128,7 +128,7 @@ const scripts = makeBuffer([
   // codesize
   B.u32(20),
   // mapvc
-  B.u8(fill(Array(20), 88)),
+  B.u8(filler(20, 88)),
 ])
 
 const map = makeBuffer([

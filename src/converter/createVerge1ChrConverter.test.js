@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createVerge1ChrConverter = require('./createVerge1ChrConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 
 {
@@ -44,7 +44,7 @@ const palette = require('../dummyPalette')
 
   const converter = createVerge1ChrConverter({
     palette,
-    chrs: Array.prototype.concat(...fill(Array(30), oneChr)),
+    chrs: Array.prototype.concat(...filler(30, oneChr)),
   })
 
   const png = converter.convertToPng()

@@ -1,6 +1,6 @@
 "use strict"
 
-const fill = require('lodash/fill')
+const filler = require('./filler')
 const {makeBuffer, B} = require('./makeBuffer')
 
 const mapWidth = 2
@@ -16,12 +16,12 @@ const mapHeader = makeBuffer([
   B.u8([1, 1]),
   B.u16([mapWidth, mapHeight]),
   B.u8(0),
-  B.u8(fill(Array(27), 0))
+  B.u8(fill(27, 0))
 ])
 
-const mapBackgroundLayerData = fill(Array(mapWidth * mapHeight), 33)
-const mapForegroundLayerData = fill(Array(mapWidth * mapHeight), 44)
-const mapObstructionLayerData = fill(Array(mapWidth * mapHeight), 55)
+const mapBackgroundLayerData = filler(mapWidth * mapHeight, 33)
+const mapForegroundLayerData = filler(mapWidth * mapHeight, 44)
+const mapObstructionLayerData = filler(mapWidth * mapHeight, 55)
 const mapLayers = makeBuffer([
   B.u16(mapBackgroundLayerData),
   B.u16(mapForegroundLayerData),
@@ -44,11 +44,11 @@ const zone = makeBuffer([
 ])
 
 const mapZones = makeBuffer(
-  fill(Array(128), zone)
+  filler(128, zone)
 )
 
 const chrList = makeBuffer(
-  fill(Array(100), B.stringFixed(13, 'DARIN.CHR'))
+  filler(100, B.stringFixed(13, 'DARIN.CHR'))
 )
 
 const entity = makeBuffer([
@@ -78,7 +78,7 @@ const entity = makeBuffer([
 
 const numEntities = 3
 const mapEntities = makeBuffer(
-  fill(Array(numEntities), entity)
+  filler(numEntities, entity)
 )
 
 const scripts = makeBuffer([
@@ -89,11 +89,11 @@ const scripts = makeBuffer([
   // msofstbl
   B.u32([0, 10, 20, 30, 40]),
   // msbuf
-  B.u8(fill(Array(50), 99)),
+  B.u8(filler(50, 99)),
   // numscripts, scriptofstb,
   B.u32([3, 0, 10, 20]),
   // mapvc
-  B.u8(fill(Array(30), 88)),
+  B.u8(filler(30, 88)),
 ])
 
 const map = makeBuffer([

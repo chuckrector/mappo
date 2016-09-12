@@ -1,7 +1,7 @@
 "use strict"
 
 const createTileGridConverter = require('./createTileGridConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const colorDepth = require('./colorDepth')
 
 module.exports = ({
@@ -19,7 +19,7 @@ module.exports = ({
   const charptrTileHeight = 40
   const pngWidth = menuptrTileWidth + itmptrTileWidth + charptrTileWidth
   const pngHeight = charptrTileHeight
-  const raw8bitData = fill(Array(pngWidth * pngHeight))
+  const raw8bitData = filler(pngWidth * pngHeight)
 
   const converter = createTileGridConverter({
     tileWidth: pngWidth,

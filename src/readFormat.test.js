@@ -4,7 +4,7 @@ const expect = require('expect')
 const createDataReader = require('./createDataReader')
 const {makeBuffer, B} = require('./makeBuffer')
 const {readFormat, readFormatData, T} = require('./readFormat')
-const fill = require('lodash/fill')
+const filler = require('./filler')
 const zlib = require('zlib')
 const range = require('lodash/range')
 
@@ -180,7 +180,7 @@ const range = require('lodash/range')
     reader: createDataReader({data: buffer})
   })
 
-  const expandedA = fill(Array(16 * 16), 2)
+  const expandedA = filler(16 * 16, 2)
   expandedA[0] = 1
   expandedA[255] = 3
 
@@ -191,7 +191,7 @@ const range = require('lodash/range')
 {
   // can read zlibU8 buffers
 
-  const raw = fill(Array(16 * 16), 99)
+  const raw = filler(16 * 16, 99)
   const compressedBuffer = [...zlib.deflateSync(B.u8(raw))]
   const buffer = makeBuffer([
     B.u32([raw.length, compressedBuffer.length]),
@@ -212,7 +212,7 @@ const range = require('lodash/range')
 {
   // can read zlibU16 buffers
 
-  const raw = fill(Array(16 * 16), 0xbeef)
+  const raw = filler(16 * 16, 0xbeef)
   const compressedBuffer = [...zlib.deflateSync(B.u16(raw))]
   const buffer = makeBuffer([
     B.u32([raw.length * 2, compressedBuffer.length]),
@@ -251,7 +251,7 @@ const range = require('lodash/range')
     reader: createDataReader({data: buffer})
   })
 
-  const expandedA = fill(Array(16 * 16), 2)
+  const expandedA = filler(16 * 16, 2)
   expandedA[0] = 1
   expandedA[255] = 3
 
@@ -424,10 +424,10 @@ const range = require('lodash/range')
   expect(data.layer.length).toBe(2)
   expect(data.layers.length).toBe(2)
   expect(data.layers[0].decompressed).toEqual(
-    fill(Array(firstLayerWidth * firstLayerHeight), firstLayerFill)
+    filler(firstLayerWidth * firstLayerHeight, firstLayerFill)
   )
   expect(data.layers[1].decompressed).toEqual(
-    fill(Array(secondLayerWidth * secondLayerHeight), secondLayerFill)
+    filler(secondLayerWidth * secondLayerHeight, secondLayerFill)
   )
 }
 
@@ -452,7 +452,7 @@ const range = require('lodash/range')
 
 {
   // can read 6-bit palette
-  const palette = fill(Array(256)).map((v, i) => {
+  const palette = filler(256).map((v, i) => {
     const quantized = Math.floor(i / 4) * 4
     return [quantized, quantized, quantized]
   })

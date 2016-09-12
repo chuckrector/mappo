@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createVerge3VspObConverter = require('./createVerge3VspObConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const colorDepth = require('./colorDepth')
 const palette = require('../dummyPalette')
 
@@ -11,7 +11,7 @@ const palette = require('../dummyPalette')
   const converter = createVerge3VspObConverter({
     palette,
     numobs: 21,
-    obs: fill(Array(16 * 16 * 3 * 12)),
+    obs: filler(16 * 16 * 3 * 12),
   })
 
   const png = converter.convertToPng()

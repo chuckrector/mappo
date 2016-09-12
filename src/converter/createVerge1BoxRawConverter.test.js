@@ -2,14 +2,14 @@
 
 const expect = require('expect')
 const createVerge1BoxRawConverter = require('./createVerge1BoxRawConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 
 {
   // can convert BOX.RAW text box to png
   const tileWidth = 320
   const tileHeight = 66
-  const tbox = fill(Array(tileWidth * tileHeight), 99)
+  const tbox = filler(tileWidth * tileHeight, 99)
   const converter = createVerge1BoxRawConverter({
     palette,
     tbox: Buffer.from(tbox)

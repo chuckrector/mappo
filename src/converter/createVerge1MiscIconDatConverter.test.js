@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createVerge1MiscIconDatConverter = require('./createVerge1MiscIconDatConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 
 {
@@ -14,9 +14,9 @@ const palette = require('../dummyPalette')
   const charptrTileWidth = 24
   const charptrTileHeight = 40
   const numtiles = 3
-  const menuptr = fill(Array(menuptrTileWidth * menuptrTileHeight), 77)
-  const itmptr = fill(Array(itmptrTileWidth * itmptrTileHeight), 88)
-  const charptr = fill(Array(charptrTileWidth * charptrTileHeight), 99)
+  const menuptr = filler(menuptrTileWidth * menuptrTileHeight, 77)
+  const itmptr = filler(itmptrTileWidth * itmptrTileHeight, 88)
+  const charptr = filler(charptrTileWidth * charptrTileHeight, 99)
   const converter = createVerge1MiscIconDatConverter({
     palette,
     numtiles,

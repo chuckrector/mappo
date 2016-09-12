@@ -2,13 +2,13 @@
 
 const expect = require('expect')
 const createPcxLoader = require('./createPcxLoader')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 const {makeBuffer, B} = require('../makeBuffer')
 
 const tileWidth = 4
 const tileHeight = 4
-const pcx = fill(Array(tileWidth * tileHeight), 99)
+const pcx = filler(tileWidth * tileHeight, 99)
 
 const manufacturer = 1
 const version = 2
@@ -20,12 +20,12 @@ const xmax = tileWidth - 1
 const ymax = tileHeight - 1
 const hres = tileWidth
 const vres = tileHeight
-const egaPalette = fill(Array(48), 99)
+const egaPalette = filler(48, 99)
 const reserved = 4
 const colorPlanes = 5
 const bytesPerLine = 4
 const paletteType = 7
-const filler = fill(Array(58), 88)
+const fill = filler(58, 88)
 
 {
   // can read PCX
@@ -36,7 +36,7 @@ const filler = fill(Array(58), 88)
       B.list(B.u8, egaPalette),
       B.list(B.u8, [reserved, colorPlanes]),
       B.list(B.u16, [bytesPerLine, paletteType]),
-      B.list(B.u8, filler),
+      B.list(B.u8, fill),
       B.list(B.u8, [0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99]),
       B.list(B.u8, palette),
     ])

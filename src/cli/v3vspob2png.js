@@ -2,12 +2,12 @@ const process = require('process')
 
 const fs = require('fs')
 const createVerge3VspObConverter = require('../converter/createVerge3VspObConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const asset = require('../asset')
 
 const vspFilename = process.argv[2]
 const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
-const palette = fill(Array(256 * 3), 128)
+const palette = filler(256 * 3, 128)
 const converter = createVerge3VspObConverter({
   palette,
   numobs: vsp.numobs,

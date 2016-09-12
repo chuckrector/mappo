@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createVerge1VspConverter = require('./createVerge1VspConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 
 {
@@ -29,7 +29,7 @@ const palette = require('../dummyPalette')
   const converter = createVerge1VspConverter({
     palette,
     numtiles: 21,
-    vsp0: Array.prototype.concat(...fill(Array(21), oneTile)),
+    vsp0: Array.prototype.concat(...filler(21, oneTile)),
   })
 
   const png = converter.convertToPng()

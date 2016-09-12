@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createVerge2ChrConverter = require('./createVerge2ChrConverter')
-const fill = require('lodash/fill')
+const filler = require('../filler')
 const palette = require('../dummyPalette')
 
 {
@@ -10,7 +10,7 @@ const palette = require('../dummyPalette')
   const fxsize = 2
   const fysize = 3
   const totalframes = 2
-  const imagedata = fill(Array(fxsize * fysize * 2), 99)
+  const imagedata = filler(fxsize * fysize * 2, 99)
 
   const converter = createVerge2ChrConverter({
     palette,

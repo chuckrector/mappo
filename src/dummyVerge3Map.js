@@ -1,6 +1,6 @@
 "use strict"
 
-const fill = require('lodash/fill')
+const filler = require('./filler')
 const zlib = require('zlib')
 const {makeBuffer, B} = require('./makeBuffer')
 
@@ -24,11 +24,11 @@ const parallaxY = 1.5
 const layerWidth = 4
 const layerHeight = 5
 const layerLucent = 1
-const layerData = fill(Array(layerWidth * layerHeight), 0xdead)
+const layerData = filler(layerWidth * layerHeight, 0xdead)
 const layerDataCompressed = [...zlib.deflateSync(B.u16(layerData))]
-const obsData = fill(Array(layerWidth * layerHeight), 88)
+const obsData = filler(layerWidth * layerHeight, 88)
 const obsDataCompressed = [...zlib.deflateSync(B.u8(obsData))]
-const zonelayerData = fill(Array(layerWidth * layerHeight), 0xbeef)
+const zonelayerData = filler(layerWidth * layerHeight, 0xbeef)
 const zonelayerDataCompressed = [...zlib.deflateSync(B.u16(zonelayerData))]
 
 const numzones = 2
@@ -111,11 +111,11 @@ const map = makeBuffer([
   B.stringFixed(256, startupscript),
   B.u16([startx, starty]),
   B.u32(numlayers),
-  makeBuffer(fill(Array(numlayers), mapLayer)),
+  makeBuffer(filler(numlayers, mapLayer)),
   B.zlibU8(obsData),
   B.zlibU16(zonelayerData),
   B.u32(numzones),
-  makeBuffer(fill(Array(numzones), mapZone)),
+  makeBuffer(filler(numzones, mapZone)),
   B.u32(mapentities),
   makeBuffer([mapEntity, mapEntity]),
   // Buffer.from(new Uint32Array([mapScriptsize]).buffer),
