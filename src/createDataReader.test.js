@@ -2,7 +2,7 @@
 
 const expect = require('expect')
 const createDataReader = require('./createDataReader.js')
-const fill = require('lodash/fill')
+const filler = require('./filler')
 const zlib = require('zlib')
 const {makeBuffer, B} = require('./makeBuffer')
 
@@ -160,14 +160,14 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can get length
   const reader = createDataReader({
-    data: Buffer.from(fill(Array(13), 0))
+    data: Buffer.from(filler(13, 0))
   })
 
   expect(reader.length).toBe(13)
 }
 
 {
-  let data = fill(Array(13), 99)
+  let data = filler(13, 99)
   data[data.length - 1] = 88
 
   // can set position
@@ -306,7 +306,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
     data: buffer
   })
 
-  let decompressedLayout = fill(Array(16 * 16), 2)
+  let decompressedLayout = filler(16 * 16, 2)
   decompressedLayout[0] = 1
   decompressedLayout[255] = 3
 
@@ -325,7 +325,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
     data: buffer
   })
 
-  let decompressedLayout = fill(Array(16 * 16), 2)
+  let decompressedLayout = filler(16 * 16, 2)
   decompressedLayout[0] = 1
   decompressedLayout[255] = 3
 
@@ -349,7 +349,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read zlibU8 buffers
-  const raw = fill(Array(16 * 16), 99)
+  const raw = filler(16 * 16, 99)
   const compressedBuffer = zlib.deflateSync(B.u8(raw))
   const buffer = makeBuffer([
     B.u32([raw.length, compressedBuffer.length]),
@@ -368,7 +368,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read zlibU16 buffers
-  const raw = fill(Array(16 * 16), 0xbeef)
+  const raw = filler(16 * 16, 0xbeef)
   const compressedBuffer = zlib.deflateSync(B.u16(raw))
   const buffer = makeBuffer([
     B.u32([raw.length * 2, compressedBuffer.length]),
