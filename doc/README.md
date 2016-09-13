@@ -8,9 +8,9 @@ Output:
 
 - `data/STAN.PCX.png`
 
-![alt text](img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
-![alt text](img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
-![alt text](img/VERGE320.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](/img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](/img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
+![alt text](/img/VERGE320.PCX.png?raw=true "a sample of pcx2png cli output")
 
 # v1boxraw2png
 
@@ -24,7 +24,7 @@ Output:
 
 `data/v1/BOX.RAW.png`
 
-![alt text](img/BOX.RAW.png?raw=true "a sample of v1boxraw2png cli output")
+![alt text](/img/BOX.RAW.png?raw=true "a sample of v1boxraw2png cli output")
 
 # v1chr2json
 
@@ -57,13 +57,13 @@ Output:
 
 - `data/v1/DARIN.CHR.png`
 
-![alt text](img/DARIN.CHR.png?raw=true "a sample of v1chr2png cli output")
-![alt text](img/SARA.CHR.png?raw=true "a sample of v1chr2png cli output")
-![alt text](img/CRYSTAL.CHR.png?raw=true "a sample of v1chr2png cli output")
-![alt text](img/DEXTER.CHR.png?raw=true "a sample of v1chr2png cli output")
-![alt text](img/GALFREY.CHR.png?raw=true "a sample of v1chr2png cli output")
-![alt text](img/BUBBA.CHR.png?raw=true "a sample of v1chr2png cli output")
-![alt text](img/STAN.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/DARIN.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/SARA.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/CRYSTAL.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/DEXTER.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/GALFREY.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/BUBBA.CHR.png?raw=true "a sample of v1chr2png cli output")
+![alt text](/img/STAN.CHR.png?raw=true "a sample of v1chr2png cli output")
 
 # v1chr2pnglist
 
@@ -77,36 +77,36 @@ Output:
 
 - `data/v1/DARIN.CHR-0.png` .. `data/v1/DARIN.CHR-29.png`
 
-![alt text](img/v1/DARIN.CHR-0.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-1.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-2.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-3.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-4.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-5.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-6.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-7.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-8.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-9.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-10.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-11.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-12.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-13.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-14.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-15.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-16.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-17.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-18.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-19.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-20.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-21.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-22.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-23.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-24.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-25.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-26.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-27.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-28.png?raw=true "a sample of v1chr2pnglist cli output")
-![alt text](img/v1/DARIN.CHR-29.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-0.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-1.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-2.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-3.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-4.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-5.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-6.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-7.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-8.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-9.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-10.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-11.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-12.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-13.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-14.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-15.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-16.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-17.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-18.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-19.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-20.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-21.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-22.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-23.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-24.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-25.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-26.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-27.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-28.png?raw=true "a sample of v1chr2pnglist cli output")
+![alt text](/img/v1/DARIN.CHR-29.png?raw=true "a sample of v1chr2pnglist cli output")
 
 
 # v1cr22png
@@ -121,11 +121,11 @@ Output:
 
 - `data/v1/CRYSTAL.CR2.png`
 
-![alt text](img/DARIN.CR2.png?raw=true "a sample of v1cr22png cli output")
-![alt text](img/SARA.CR2.png?raw=true "a sample of v1cr22png cli output")
-![alt text](img/DEXTER.CR2.png?raw=true "a sample of v1cr22png cli output")
-![alt text](img/CRYSTAL.CR2.png?raw=true "a sample of v1cr22png cli output")
-![alt text](img/GALFREY.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](/img/DARIN.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](/img/SARA.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](/img/DEXTER.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](/img/CRYSTAL.CR2.png?raw=true "a sample of v1cr22png cli output")
+![alt text](/img/GALFREY.CR2.png?raw=true "a sample of v1cr22png cli output")
 
 # v1equipdat2json
 
@@ -173,7 +173,7 @@ Output:
 
 - `data/ITEMICON.DAT.png`
 
-![alt text](img/ITEMICON.DAT.png?raw=true "a sample of v1itemicondat2png cli output")
+![alt text](/img/ITEMICON.DAT.png?raw=true "a sample of v1itemicondat2png cli output")
 
 # v1itemsdat2json
 
@@ -219,7 +219,7 @@ Output:
 
 - `data/v1/MAIN.FNT.png`
 
-![alt text](img/MAIN.FNT.png?raw=true "a sample of v1mainfnt2png cli output")
+![alt text](/img/MAIN.FNT.png?raw=true "a sample of v1mainfnt2png cli output")
 
 # v1map2json
 
@@ -332,7 +332,7 @@ Output:
 
 - `data/v1/MISCICON.DAT.png`
 
-![alt text](img/MISCICON.DAT.png?raw=true "a sample of v1miscicondat2png cli output")
+![alt text](/img/MISCICON.DAT.png?raw=true "a sample of v1miscicondat2png cli output")
 
 # v1partydat2json
 
@@ -373,7 +373,7 @@ Output:
 
 - `data/v1/SMALL.FNT.png`
 
-![alt text](img/SMALL.FNT.png?raw=true "a sample of v1smallfnt2png cli output")
+![alt text](/img/SMALL.FNT.png?raw=true "a sample of v1smallfnt2png cli output")
 
 # v1speechspc2png
 
@@ -387,7 +387,7 @@ Output:
 
 - `data/v1/SPEECH.SPC.png`
 
-![alt text](img/SPEECH.SPC.png?raw=true "a sample of v1speechspc2png cli output")
+![alt text](/img/SPEECH.SPC.png?raw=true "a sample of v1speechspc2png cli output")
 
 # v1transtbl2json
 
@@ -423,7 +423,7 @@ Output:
 
 - `data/v1/HAHN01.VSP.png`
 
-![alt text](img/HAHN01.VSP.png?raw=true "a sample of v1vsp2png cli output")
+![alt text](/img/HAHN01.VSP.png?raw=true "a sample of v1vsp2png cli output")
 
 # v2chr2json
 
@@ -483,13 +483,13 @@ Output:
 
 - `data/v2/VECNA.CHR.png`
 
-![alt text](img/VECNA.CHR.png?raw=true "a sample of v2chr2png cli output")
-![alt text](img/SHIVARA.CHR.png?raw=true "a sample of v2chr2png cli output")
-![alt text](img/SEREN.CHR.png?raw=true "a sample of v2chr2png cli output")
-![alt text](img/LEPER.CHR.png?raw=true "a sample of v2chr2png cli output")
-![alt text](img/JITORO.CHR.png?raw=true "a sample of v2chr2png cli output")
-![alt text](img/EMIRA.CHR.png?raw=true "a sample of v2chr2png cli output")
-![alt text](img/ELGARD.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/VECNA.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/SHIVARA.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/SEREN.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/LEPER.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/JITORO.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/EMIRA.CHR.png?raw=true "a sample of v2chr2png cli output")
+![alt text](/img/ELGARD.CHR.png?raw=true "a sample of v2chr2png cli output")
 
 # v2chr2pnglist
 
@@ -505,36 +505,36 @@ Output:
 
 - `data/v2/VECNA.CHR-0.png` .. `data/v2/VECNA.CHR-` (N - 1) `.png`
 
-![alt text](img/v2/VECNA.CHR-0.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-1.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-2.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-3.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-4.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-5.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-6.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-7.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-8.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-9.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-10.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-11.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-12.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-13.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-14.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-15.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-16.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-17.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-18.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-19.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-20.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-21.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-22.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-23.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-24.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-25.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-26.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-27.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-28.png?raw=true "a sample of v2chr2pnglist cli output")
-![alt text](img/v2/VECNA.CHR-29.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-0.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-1.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-2.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-3.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-4.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-5.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-6.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-7.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-8.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-9.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-10.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-11.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-12.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-13.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-14.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-15.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-16.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-17.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-18.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-19.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-20.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-21.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-22.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-23.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-24.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-25.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-26.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-27.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-28.png?raw=true "a sample of v2chr2pnglist cli output")
+![alt text](/img/v2/VECNA.CHR-29.png?raw=true "a sample of v2chr2pnglist cli output")
 
 # v2map2json
 
@@ -687,8 +687,8 @@ Output:
 
 - `data/v2/RUINS.VSP.png`
 
-![alt text](img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
-![alt text](img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
+![alt text](/img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
+![alt text](/img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
 
 # v3chr2json
 
@@ -753,29 +753,29 @@ Output:
 
 - `data/v3/sully.chr.png`
 
-![alt text](img/v3/sully.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/bubba.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/crystal.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin2.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin3.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin4.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin5.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin6.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin7.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin8.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/darin9.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/dexter.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/galfrey.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/kadan.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/lil_stan.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/sara.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/stan.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/vorn.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/walker01.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/walker02.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/walker03.chr.png?raw=true "a sample of v3chr2png cli output")
-![alt text](img/v3/walker04.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/sully.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/bubba.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/crystal.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin2.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin3.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin4.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin5.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin6.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin7.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin8.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/darin9.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/dexter.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/galfrey.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/kadan.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/lil_stan.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/sara.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/stan.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/vorn.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/walker01.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/walker02.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/walker03.chr.png?raw=true "a sample of v3chr2png cli output")
+![alt text](/img/v3/walker04.chr.png?raw=true "a sample of v3chr2png cli output")
 
 # v3chr2pnglist
 
@@ -789,14 +789,14 @@ Output:
 
 - `data/v3/sully.chr-0.png` .. `data/v3/sully.chr-` (N - 1) `.png`
 
-![alt text](img/v3/sully.chr-0.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-1.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-2.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-3.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-4.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-5.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-6.png?raw=true "a sample of v3chr2pnglist cli output")
-![alt text](img/v3/sully.chr-7.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-0.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-1.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-2.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-3.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-4.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-5.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-6.png?raw=true "a sample of v3chr2pnglist cli output")
+![alt text](/img/v3/sully.chr-7.png?raw=true "a sample of v3chr2pnglist cli output")
 
 # v3map2json
 
@@ -897,9 +897,9 @@ Output:
 
 - `data/v3/intro.vsp.png`
 
-![alt text](img/v3/intro.vsp.png?raw=true "a sample of v3vsp2png cli output")
+![alt text](/img/v3/intro.vsp.png?raw=true "a sample of v3vsp2png cli output")
 
-![alt text](img/v3/HAHN01.VSP.png?raw=true "a sample of v3vsp2png cli output")
+![alt text](/img/v3/HAHN01.VSP.png?raw=true "a sample of v3vsp2png cli output")
 
 # v3vspob2png (16x16, N tiles, 20 columns)
 
@@ -915,5 +915,5 @@ Output:
 
 - `data/v3/HAHN01.VSP-obstructions.png`
 
-![alt text](img/v3/HAHN01.VSP-obstructions.png?raw=true "a sample of v3vspob2png cli output")
+![alt text](/img/v3/HAHN01.VSP-obstructions.png?raw=true "a sample of v3vspob2png cli output")
 
