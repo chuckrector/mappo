@@ -16,7 +16,7 @@ const mapHeader = makeBuffer([
   B.u8([1, 1]),
   B.u16([mapWidth, mapHeight]),
   B.u8(0),
-  B.u8(fill(27, 0))
+  B.u8(filler(27, 0))
 ])
 
 const mapBackgroundLayerData = filler(mapWidth * mapHeight, 33)
