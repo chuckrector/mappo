@@ -15,10 +15,6 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
      @aen | and allows us all to stripmine everything
 ```
 
-# Learnings
-
-- The `jquery-ui` npm package sucks. If you want jQuery UI in Node, directly package it.
-
 # Requirements
 
 - Node >= 5.10.0
