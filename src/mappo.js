@@ -7,8 +7,6 @@ const asset = require('./asset')
 
 $('body').resizable()
 
-const os = require('os')
-const fs = require('fs')
 const mapFilename = 'data/v1/BUMVILLE.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
 
