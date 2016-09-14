@@ -31,14 +31,14 @@ const fill = filler(58, 88)
   // can read PCX
   const loader = createPcxLoader({
     data: makeBuffer([
-      B.list(B.u8, [manufacturer, version, encoding, bitsPerPixel]),
-      B.list(B.u16, [xmin, ymin, xmax, ymax, hres, vres]),
-      B.list(B.u8, egaPalette),
-      B.list(B.u8, [reserved, colorPlanes]),
-      B.list(B.u16, [bytesPerLine, paletteType]),
-      B.list(B.u8, fill),
-      B.list(B.u8, [0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99]),
-      B.list(B.u8, palette),
+      B.u8([manufacturer, version, encoding, bitsPerPixel]),
+      B.u16([xmin, ymin, xmax, ymax, hres, vres]),
+      B.u8(egaPalette),
+      B.u8([reserved, colorPlanes]),
+      B.u16([bytesPerLine, paletteType]),
+      B.u8(fill),
+      B.u8([0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99, 0xc0 | 4, 99]),
+      B.u8(palette),
     ])
   })
 
