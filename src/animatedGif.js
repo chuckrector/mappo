@@ -2,9 +2,6 @@
 
 const lzw = require('./lzw')
 
-const delayMilliseconds = 100
-
-// assumes 0 is always transparency index
 const animatedGif = ({
   palette,
   raw8bitFrames,
@@ -14,6 +11,7 @@ const animatedGif = ({
   transparentIndex=0,
   isTransparent=true,
   disposalCode=2,
+  delayMilliseconds=100,
 }) => {
   let output = new Buffer(768 + (width * height * raw8bitFrames.length))
   let outputOffset = 0
