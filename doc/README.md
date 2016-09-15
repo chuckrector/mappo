@@ -36,7 +36,10 @@ Usage:
 
 Output:
 
-- `data/v1/DARIN.CHR.gif`
+- `data/v1/DARIN.CHR-down.gif`
+- `data/v1/DARIN.CHR-up.gif`
+- `data/v1/DARIN.CHR-right.gif`
+- `data/v1/DARIN.CHR-left.gif`
 
 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v1chr2gif cli output")
 ![alt text](/img/v1/DARIN.CHR-up.gif?raw=true "a sample of v1chr2gif cli output")
