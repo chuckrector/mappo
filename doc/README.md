@@ -26,6 +26,23 @@ Output:
 
 ![alt text](/img/BOX.RAW.png?raw=true "a sample of v1boxraw2png cli output")
 
+# v1chr2gif
+
+**Support:** VERGE1 only
+
+Usage:
+
+- `node src/cli/v1chr2gif.js data/v1/VERGE.PAL data/v1/DARIN.CHR`
+
+Output:
+
+- `data/v1/DARIN.CHR.gif`
+
+![alt text](/img/DARIN.CHR-down.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/DARIN.CHR-up.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/DARIN.CHR-right.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/DARIN.CHR-left.gif?raw=true "a sample of v1chr2gif cli output")
+
 # v1chr2json
 
 **Support:** VERGE1 only
