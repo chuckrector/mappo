@@ -876,6 +876,15 @@ Output:
 ![alt text](/img/v3/sully.chr-anim6.gif?raw=true "a sample of v3chr2gif cli output")
 ![alt text](/img/v3/sully.chr-anim7.gif?raw=true "a sample of v3chr2gif cli output")
 
+![alt text](/img/v3/lil_stan.chr-anim0.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim1.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim2.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim3.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim4.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim5.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim6.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/lil_stan.chr-anim7.gif?raw=true "a sample of v3chr2gif cli output")
+
 # v3chr2json
 
 **Support:** VERGE3 only
