@@ -3,6 +3,7 @@
 ./node_modules/.bin/concurrently --raw --kill-others \
 "src/cli/cli-all-x.sh data/v1 *.pcx src/cli/pcx2png.js " \
 "src/cli/cli-all-x.sh data/v1 *.raw src/cli/v1boxraw2png.js data/v1/VERGE.PAL " \
+"src/cli/cli-all-x.sh data/v1 *.chr src/cli/v1chr2gif.js data/v1/VERGE.PAL " \
 "src/cli/cli-all-x.sh data/v1 *.chr src/cli/v1chr2json.js data/v1/VERGE.PAL " \
 "src/cli/cli-all-x.sh data/v1 *.chr src/cli/v1chr2png.js data/v1/VERGE.PAL " \
 "src/cli/cli-all-x.sh data/v1 *.chr src/cli/v1chr2pnglist.js data/v1/VERGE.PAL " \
