@@ -848,6 +848,34 @@ Output:
 ![alt text](/img/RUINS.VSP.png?raw=true "a sample of v2vsp2png cli output")
 ![alt text](/img/SULLY2A.VSP.png?raw=true "a sample of v2vsp2png cli output")
 
+# v3chr2gif
+
+**Support:** VERGE3 only (WxH, N frames)
+
+Usage:
+
+- `node src/cli/v3chr2gif.js data/v3/sully.chr`
+
+Output:
+
+- `data/v3/sully.chr-anim0.png`
+- `data/v3/sully.chr-anim1.png`
+- `data/v3/sully.chr-anim2.png`
+- `data/v3/sully.chr-anim3.png`
+- `data/v3/sully.chr-anim4.png`
+- `data/v3/sully.chr-anim5.png`
+- `data/v3/sully.chr-anim6.png`
+- `data/v3/sully.chr-anim7.png`
+
+![alt text](/img/v3/sully.chr-anim0.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim1.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim2.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim3.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim4.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim5.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim6.gif?raw=true "a sample of v3chr2gif cli output")
+![alt text](/img/v3/sully.chr-anim7.gif?raw=true "a sample of v3chr2gif cli output")
+
 # v3chr2json
 
 **Support:** VERGE3 only
