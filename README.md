@@ -1,4 +1,4 @@
-# mappo v0.17.0
+# mappo v0.18.0
 
 [Docs](https://github.com/chuckrector/mappo/tree/master/doc)
 
