@@ -488,6 +488,98 @@ Output:
 
 ![alt text](/img/HAHN01.VSP.png?raw=true "a sample of v1vsp2png cli output")
 
+# v2chr2gif
+
+**Support:** VERGE2 only (WxH, N tiles)
+
+Usage:
+
+- `node src/cli/v2chr2gif.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
+
+Output:
+
+- `data/v2/VECNA.CHR-down.png`
+- `data/v2/VECNA.CHR-up.png`
+- `data/v2/VECNA.CHR-right.png`
+- `data/v2/VECNA.CHR-left.png`
+
+![alt text](/img/v2/VECNA.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/VECNA.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/VECNA.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/VECNA.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CHRIS.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CHRIS.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CHRIS.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CHRIS.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CLAUDIUS.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CLAUDIUS.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CLAUDIUS.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/CLAUDIUS.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/ELGARD.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/ELGARD.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/ELGARD.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/ELGARD.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+
+![alt text](/img/v2/DESMAN1.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN1.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN1.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN1.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN2.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN2.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN2.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESMAN2.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM1.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM1.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM1.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM1.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM2.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM2.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM2.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/DESWOM2.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+
+![alt text](/img/v2/EMIRA.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/EMIRA.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/EMIRA.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/EMIRA.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/FALIAN.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/FALIAN.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/FALIAN.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/FALIAN.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/JITORO.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/JITORO.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/JITORO.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/JITORO.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/LEPER.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/LEPER.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/LEPER.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/LEPER.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+
+![alt text](/img/v2/P2DORVAN.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2DORVAN.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2DORVAN.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2DORVAN.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2FEM.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2FEM.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2FEM.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2FEM.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2PEON.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2PEON.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2PEON.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2PEON.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2THARN.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2THARN.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2THARN.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/P2THARN.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+
+![alt text](/img/v2/SEREN.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SEREN.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SEREN.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SEREN.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SHIVARA.CHR-down.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SHIVARA.CHR-up.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SHIVARA.CHR-right.png?raw=true "a sample of v2chr2gif cli output")
+![alt text](/img/v2/SHIVARA.CHR-left.png?raw=true "a sample of v2chr2gif cli output")
+
 # v2chr2json
 
 **Support:** VERGE2 only
