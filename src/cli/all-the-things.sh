@@ -26,7 +26,7 @@
 "src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2pnglist.js data/v2/VERGE2.PAL " \
 "src/cli/cli-all-x.sh data/v2 *.map src/cli/v2map2json.js " \
 "src/cli/cli-all-x.sh data/v2 *.vsp src/cli/v2vsp2png.js " \
-"src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2gif.js " \
+"src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2gif.js data/v1/VERGE.PAL " \
 "src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2json.js " \
 "src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2png.js " \
 "src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2pnglist.js " \

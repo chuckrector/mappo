@@ -8,8 +8,10 @@ const RgbQuant = require('rgbquant')
 const colorDepth = require('../converter/colorDepth')
 const flatten = require('lodash/flatten')
 
-const chrFilename = process.argv[2]
+const palFilename = process.argv[2]
+const chrFilename = process.argv[3]
 
+const palData = asset.fromDisk(chrFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v3chr)
 
 const convertAnimToFrameDescriptorList = anim => {
@@ -39,11 +41,13 @@ const writeAnimatedGif = (anim, index) => {
     raw32bitData = colorDepth.convert24to32({raw24bitData: raw32bitData})
   }
 
-  const rgbQuant = new RgbQuant({colors: 256})
+  const palette = palData.pal
+  const paletteTriplets = chunk(palette, 3)
+  console.log('paletteTriplets', JSON.stringify(paletteTriplets))
+  const rgbQuant = new RgbQuant({palette: paletteTriplets})
 
   rgbQuant.sample(raw32bitData, chrData.fxsize)
 
-  const palette = flatten(rgbQuant.palette(true))
   const raw8bitData = rgbQuant.reduce(raw32bitData, 2/*indexed*/)
   const frameSize = chrData.fxsize * chrData.fysize
   const frameList = chunk(raw8bitData, chrData.fxsize * chrData.fysize)
