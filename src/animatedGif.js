@@ -11,7 +11,10 @@ const animatedGif = ({
   transparentIndex=0,
   isTransparent=true,
   disposalCode=2,
-  delayMilliseconds=100,
+  frameDescriptorList=raw8bitFrames.map((data, frameIndex) => ({
+    frameIndex,
+    delayMilliseconds: 100,
+  })),
 }) => {
   let output = new Buffer(768 + (width * height * raw8bitFrames.length))
   let outputOffset = 0
@@ -31,15 +34,18 @@ const animatedGif = ({
   writeString('NETSCAPE2.0')
   writeByteArray([3, 1, loopCount, 0, 0])
 
-  raw8bitFrames.forEach(data => {
+  frameDescriptorList.forEach(frameDescriptor => {
+    const data = raw8bitFrames[frameDescriptor.frameIndex]
+
     writeByteArray([0x21, 0xf9, 4])
     writeByte((disposalCode << 2) | ~~isTransparent)
-    writeWord(Math.round(delayMilliseconds / 10))
+    writeWord(Math.round(frameDescriptor.delayMilliseconds / 10))
     writeByteArray([transparentIndex, 0])
     writeByteArray([0x2c, 0, 0, 0, 0])
     writeWord(width)
     writeWord(height)
     writeByte(0)
+
     lzw({data, writeByte, writeByteArray})
   })
 

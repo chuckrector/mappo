@@ -21,6 +21,7 @@ set -e
 "node src/cli/v1speechspc2png.js data/v1/VERGE.PAL data/v1/SPEECH.SPC" \
 "node src/cli/v1transtbl2json.js data/v1/TRANS.TBL" \
 "node src/cli/v1vsp2png.js data/v1/HAHN01.VSP" \
+"node src/cli/v2chr2gif.js data/v2/VERGE2.PAL data/v2/VECNA.CHR" \
 "node src/cli/v2chr2json.js data/v2/VERGE2.PAL data/v2/VECNA.CHR" \
 "node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR" \
 "node src/cli/v2chr2pnglist.js data/v2/VERGE2.PAL data/v2/VECNA.CHR" \
