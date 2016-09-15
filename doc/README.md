@@ -38,10 +38,10 @@ Output:
 
 - `data/v1/DARIN.CHR.gif`
 
-![alt text](/img/DARIN.CHR-down.gif?raw=true "a sample of v1chr2gif cli output")
-![alt text](/img/DARIN.CHR-up.gif?raw=true "a sample of v1chr2gif cli output")
-![alt text](/img/DARIN.CHR-right.gif?raw=true "a sample of v1chr2gif cli output")
-![alt text](/img/DARIN.CHR-left.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/v1/DARIN.CHR-up.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/v1/DARIN.CHR-right.gif?raw=true "a sample of v1chr2gif cli output")
+![alt text](/img/v1/DARIN.CHR-left.gif?raw=true "a sample of v1chr2gif cli output")
 
 # v1chr2json
 
