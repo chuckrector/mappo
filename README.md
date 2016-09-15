@@ -1,6 +1,6 @@
 # mappo v0.18.0
 
-[Docs](https://github.com/chuckrector/mappo/tree/master/doc)
+[Docs](https://github.com/chuckrector/mappo/tree/master/doc) ![alt text](/img/v2/JITORO.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
 
 Currently, a collection of command-line tools which can load and convert various [VERGE](http://verge-rpg.com/) file formats. The skeleton of an Electron app is also included. After I've written loaders and converters for all known VERGE file formats, I'll start building a map editor in the Electron app.
 
