@@ -1,6 +1,7 @@
 ## 0.18.0 (Sep 14, 2016)
 
 - v1chr2gif cli
+- v2chr2gif cli
 
 ## 0.17.0 (Sep 10, 2016)
 
