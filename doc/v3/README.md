@@ -1,4 +1,6 @@
-# v3chr2gif
+# VERGE3 Command-Line Tools
+
+## v3chr2gif
 
 **Support:** VERGE3 only (WxH, N frames)
 
@@ -53,7 +55,7 @@ Output:
 ![alt text](/img/v3/sprite_kiel1.chr-anim6.gif?raw=true "a sample of v3chr2gif cli output")
 ![alt text](/img/v3/sprite_kiel1.chr-anim7.gif?raw=true "a sample of v3chr2gif cli output")
 
-# v3chr2json
+## v3chr2json
 
 **Support:** VERGE3 only
 
@@ -104,7 +106,7 @@ Output:
 }
 ```
 
-# v3chr2png
+## v3chr2png
 
 **Support:** VERGE3 only (WxH, N frames, 5 columns)
 
@@ -140,7 +142,7 @@ Output:
 ![alt text](/img/v3/walker03.chr.png?raw=true "a sample of v3chr2png cli output")
 ![alt text](/img/v3/walker04.chr.png?raw=true "a sample of v3chr2png cli output")
 
-# v3chr2pnglist
+## v3chr2pnglist
 
 **Support:** VERGE3 only (WxH, N frames, 5 columns)
 
@@ -161,7 +163,7 @@ Output:
 ![alt text](/img/v3/sully.chr-6.png?raw=true "a sample of v3chr2pnglist cli output")
 ![alt text](/img/v3/sully.chr-7.png?raw=true "a sample of v3chr2pnglist cli output")
 
-# v3map2json
+## v3map2json
 
 **Support:** VERGE3 only
 
@@ -248,7 +250,7 @@ Output:
 }
 ```
 
-# v3vsp2png
+## v3vsp2png
 
 **Support:** VERGE3 only (16x16, N tiles, 20 columns)
 
@@ -264,7 +266,7 @@ Output:
 
 ![alt text](/img/v3/HAHN01.VSP.png?raw=true "a sample of v3vsp2png cli output")
 
-# v3vspob2png (16x16, N tiles, 20 columns)
+## v3vspob2png (16x16, N tiles, 20 columns)
 
 This cli outputs the tile obstruction data inside VERGE3 VSP files. It follows the same layout as `v3vsp2png`.
 
