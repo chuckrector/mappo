@@ -6,31 +6,13 @@ const animatedGif = require('../animatedGif')
 const RgbQuant = require('rgbquant')
 const colorDepth = require('../converter/colorDepth')
 const flatten = require('lodash/flatten')
+const parseChrAnim = require('../parseChrAnim')
 
 const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
 
 const palData = asset.fromDisk(chrFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v3chr)
-
-const convertAnimToFrameDescriptorList = anim => {
-  const parts = anim.toLowerCase().split(/(\S\d+)/).filter(p => !!p)
-  const frameDescriptorList = []
-
-  let currentFrameDescriptor = {}
-
-  parts.forEach(part => {
-      if (part.startsWith('f')) {
-          currentFrameDescriptor.frameIndex = parseInt(part.substr(1), 10)
-      } else if (part.startsWith('w')) {
-          currentFrameDescriptor.delayMilliseconds = parseInt(part.substr(1) * 10)
-          frameDescriptorList.push(currentFrameDescriptor)
-          currentFrameDescriptor = {}
-      }
-  })
-
-  return frameDescriptorList
-}
 
 const writeAnimatedGif = (anim, index) => {
   const targetFilename = `${chrFilename}-anim${index}.gif`
@@ -48,7 +30,7 @@ const writeAnimatedGif = (anim, index) => {
 
   const raw8bitData = rgbQuant.reduce(raw32bitData, 2/*indexed*/)
   const frameList = chunk(raw8bitData, chrData.fxsize * chrData.fysize)
-  const frameDescriptorList = convertAnimToFrameDescriptorList(anim)
+  const frameDescriptorList = parseChrAnim(anim)
 
   fs.writeFileSync(targetFilename, animatedGif({
     palette,
