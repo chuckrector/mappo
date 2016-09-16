@@ -12,3 +12,4 @@
 - figure out what, if anything, to generate for non-walking animation `v1chr2gif` frames
 - move src/cli/ to cli/
 - option for `v3chr2gif` to generate reduced palette rather than requiring one
+- export json/gif/png to the binary formats
