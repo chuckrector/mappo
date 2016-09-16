@@ -1,4 +1,6 @@
-# v1boxraw2png
+# VERGE1 Command-Line Tools
+
+## v1boxraw2png
 
 **Support:** VERGE1 only (320x66)
 
@@ -12,7 +14,7 @@ Output:
 
 ![alt text](/img/BOX.RAW.png?raw=true "a sample of v1boxraw2png cli output")
 
-# v1chr2gif
+## v1chr2gif
 
 **Support:** VERGE1 only
 
@@ -78,7 +80,7 @@ Output:
 ![alt text](/img/v1/WALKER04.CHR-right.gif?raw=true "a sample of v1chr2gif cli output")
 ![alt text](/img/v1/WALKER04.CHR-left.gif?raw=true "a sample of v1chr2gif cli output")
 
-# v1chr2json
+## v1chr2json
 
 **Support:** VERGE1 only
 
@@ -97,7 +99,7 @@ Output:
 }
 ```
 
-# v1chr2png
+## v1chr2png
 
 **Support:** VERGE1 only
 
@@ -117,7 +119,7 @@ Output:
 ![alt text](/img/BUBBA.CHR.png?raw=true "a sample of v1chr2png cli output")
 ![alt text](/img/STAN.CHR.png?raw=true "a sample of v1chr2png cli output")
 
-# v1chr2pnglist
+## v1chr2pnglist
 
 **Support:** VERGE1 only
 
@@ -160,8 +162,7 @@ Output:
 ![alt text](/img/v1/DARIN.CHR-28.png?raw=true "a sample of v1chr2pnglist cli output")
 ![alt text](/img/v1/DARIN.CHR-29.png?raw=true "a sample of v1chr2pnglist cli output")
 
-
-# v1cr22png
+## v1cr22png
 
 **Support:** VERGE1 only (96x96)
 
@@ -179,7 +180,7 @@ Output:
 ![alt text](/img/CRYSTAL.CR2.png?raw=true "a sample of v1cr22png cli output")
 ![alt text](/img/GALFREY.CR2.png?raw=true "a sample of v1cr22png cli output")
 
-# v1equipdat2json
+## v1equipdat2json
 
 **Support:** VERGE1 only
 
@@ -213,7 +214,7 @@ Output:
 }
 ```
 
-# v1itemicondat2png
+## v1itemicondat2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
 
@@ -227,7 +228,7 @@ Output:
 
 ![alt text](/img/ITEMICON.DAT.png?raw=true "a sample of v1itemicondat2png cli output")
 
-# v1itemsdat2json
+## v1itemsdat2json
 
 **Support:** VERGE1 only
 
@@ -259,7 +260,7 @@ Output:
 }
 ```
 
-# v1mainfnt2png
+## v1mainfnt2png
 
 **Support:** VERGE1 only (9x16, 95 tiles, 19 columns)
 
@@ -273,7 +274,7 @@ Output:
 
 ![alt text](/img/MAIN.FNT.png?raw=true "a sample of v1mainfnt2png cli output")
 
-# v1map2json
+## v1map2json
 
 **Support:** VERGE1 only
 
@@ -372,7 +373,7 @@ Output:
 }
 ```
 
-# v1miscicondat2png
+## v1miscicondat2png
 
 **Support:** VERGE1 only (16x16, 24x24, 24x40)
 
@@ -386,7 +387,7 @@ Output:
 
 ![alt text](/img/MISCICON.DAT.png?raw=true "a sample of v1miscicondat2png cli output")
 
-# v1partydat2json
+## v1partydat2json
 
 **Support:** VERGE1 only
 
@@ -413,7 +414,7 @@ Output:
 }
 ```
 
-# v1smallfnt2png
+## v1smallfnt2png
 
 **Support:** VERGE1 only (7x9, 95 tiles, 19 columns)
 
@@ -427,7 +428,7 @@ Output:
 
 ![alt text](/img/SMALL.FNT.png?raw=true "a sample of v1smallfnt2png cli output")
 
-# v1speechspc2png
+## v1speechspc2png
 
 **Support:** VERGE1 only (32x32, N tiles, 10 columns)
 
@@ -441,7 +442,7 @@ Output:
 
 ![alt text](/img/SPEECH.SPC.png?raw=true "a sample of v1speechspc2png cli output")
 
-# v1transtbl2json
+## v1transtbl2json
 
 **Support:** VERGE1, VERGE2 (256x256 bytes)
 
@@ -463,7 +464,7 @@ Output:
 }
 ```
 
-# v1vsp2png
+## v1vsp2png
 
 **Support:** VERGE1 only (16x16, N tiles, 20 columns)
 
