@@ -43,7 +43,6 @@ const writeAnimatedGif = (anim, index) => {
 
   const palette = palData.pal
   const paletteTriplets = chunk(palette, 3)
-  console.log('paletteTriplets', JSON.stringify(paletteTriplets))
   const rgbQuant = new RgbQuant({palette: paletteTriplets})
 
   rgbQuant.sample(raw32bitData, chrData.fxsize)
