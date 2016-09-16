@@ -2,9 +2,11 @@
 
 [VERGE1](https://github.com/chuckrector/mappo/tree/master/doc/v1) | [VERGE2](https://github.com/chuckrector/mappo/tree/master/doc/v2) | [VERGE3](https://github.com/chuckrector/mappo/tree/master/doc/v3)
 
-# General
+# General Command-Line Tools
 
 ## pcx2png
+
+Converts a PCX image into a PNG image.
 
 Usage:
 
