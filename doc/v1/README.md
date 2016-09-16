@@ -2,7 +2,11 @@
 
 ## v1boxraw2png
 
-**Support:** VERGE1 only (320x66)
+`BOX.RAW` is raw 8-bit image data which typically contains only the border of
+the textbox displayed during dialogue. The middle region is filled by VERGE with
+a translucent blue color by default.
+
+The image data is 320x66 pixels.
 
 Usage:
 
@@ -16,7 +20,20 @@ Output:
 
 ## v1chr2gif
 
-**Support:** VERGE1 only
+Converts a VERGE1 `.CHR` file into a set of 4 animated GIF files, one per
+cardinal direction. The delay between each frame is 100 milliseconds.
+
+VERGE1 `.CHR` files contain raw 8-bit image data with up to 30 frames of
+character animations. There are 5 frames per walking direction, in the order:
+
+- down
+- up
+- right
+- left
+
+This leaves an additional 10 frames for scripted states.
+
+The image data is 16x32 pixels per frame.
 
 Usage:
 
