@@ -854,7 +854,7 @@ Output:
 
 Usage:
 
-- `node src/cli/v3chr2gif.js data/v3/sully.chr`
+- `node src/cli/v3chr2gif.js data/v1/VERGE.PAL data/v3/sully.chr`
 
 Output:
 
