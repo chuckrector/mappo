@@ -1,4 +1,6 @@
-# v2chr2gif
+# VERGE2 Command-Line Tools
+
+## v2chr2gif
 
 **Support:** VERGE2 only (WxH, N tiles)
 
@@ -90,7 +92,7 @@ Output:
 ![alt text](/img/v2/SHIVARA.CHR-right.gif?raw=true "a sample of v2chr2gif cli output")
 ![alt text](/img/v2/SHIVARA.CHR-left.gif?raw=true "a sample of v2chr2gif cli output")
 
-# v2chr2json
+## v2chr2json
 
 **Support:** VERGE2 only
 
@@ -134,7 +136,7 @@ Output:
 }
 ```
 
-# v2chr2png
+## v2chr2png
 
 See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
 
@@ -156,7 +158,7 @@ Output:
 ![alt text](/img/EMIRA.CHR.png?raw=true "a sample of v2chr2png cli output")
 ![alt text](/img/ELGARD.CHR.png?raw=true "a sample of v2chr2png cli output")
 
-# v2chr2pnglist
+## v2chr2pnglist
 
 See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
 
@@ -201,7 +203,7 @@ Output:
 ![alt text](/img/v2/VECNA.CHR-28.png?raw=true "a sample of v2chr2pnglist cli output")
 ![alt text](/img/v2/VECNA.CHR-29.png?raw=true "a sample of v2chr2pnglist cli output")
 
-# v2map2json
+## v2map2json
 
 **Support:** VERGE2 only
 
@@ -326,7 +328,7 @@ Output:
 }
 ```
 
-# v2vsp2pal
+## v2vsp2pal
 
 This is a temporary helper for `v2chr2png`.
 
@@ -340,7 +342,7 @@ Output:
 
 - `VERGE2.PAL`
 
-# v2vsp2png
+## v2vsp2png
 
 **Support:** VERGE2 only (16x16, N tiles, 20 columns)
 
