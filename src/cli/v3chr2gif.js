@@ -1,5 +1,4 @@
 const process = require('process')
-
 const fs = require('fs')
 const asset = require('../asset')
 const chunk = require('lodash/chunk')
@@ -48,7 +47,6 @@ const writeAnimatedGif = (anim, index) => {
   rgbQuant.sample(raw32bitData, chrData.fxsize)
 
   const raw8bitData = rgbQuant.reduce(raw32bitData, 2/*indexed*/)
-  const frameSize = chrData.fxsize * chrData.fysize
   const frameList = chunk(raw8bitData, chrData.fxsize * chrData.fysize)
   const frameDescriptorList = convertAnimToFrameDescriptorList(anim)
 
