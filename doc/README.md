@@ -1,6 +1,10 @@
+# Engines
+
 [VERGE1](https://github.com/chuckrector/mappo/tree/master/doc/v1) | [VERGE2](https://github.com/chuckrector/mappo/tree/master/doc/v2) | [VERGE3](https://github.com/chuckrector/mappo/tree/master/doc/v3)
 
-# pcx2png
+# General
+
+## pcx2png
 
 Usage:
 
