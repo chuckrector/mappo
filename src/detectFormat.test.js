@@ -50,3 +50,11 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isNotMainFnt)).toBe('unknown')
 }
 
+{
+  // can detect v1 SMALL.FNT
+  const isSmallFnt = {length: 7 * 9 * 95}
+  const isNotSmallFnt = {length: 1}
+
+  expect(detectFormat(isSmallFnt)).toBe('v1smallfnt')
+  expect(detectFormat(isNotSmallFnt)).toBe('unknown')
+}
