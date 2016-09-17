@@ -56,6 +56,8 @@ module.exports = (buffer) => {
     const version = buffer.readUInt8(0)
     if (version === 4) {
       return 'v1map'
+    } else if (version === 2) {
+      return 'v2chr'
     }
   }
 

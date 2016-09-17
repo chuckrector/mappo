@@ -117,3 +117,9 @@ const dummyBuffer = totes => B.u8(filler(totes))
   // can detect v1 MAP
   expect(detectFormat(B.u8(4))).toBe('v1map')
 }
+
+{
+  // can detect v2 CHR
+  expect(detectFormat(B.u8(2))).toBe('v2chr')
+}
+
