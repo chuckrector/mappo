@@ -22,3 +22,12 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isAlsoV1Chr)).toBe('v1chr')
   expect(detectFormat(isNotV1Chr)).toBe('unknown')
 }
+
+{
+  // can detect v1 VERGE.PAL
+  const isPalette = {length: 3 * 256}
+  const isNotPalette = {length: 1}
+
+  expect(detectFormat(isPalette)).toBe('v1pal')
+  expect(detectFormat(isNotPalette)).toBe('unknown')
+}

@@ -5,6 +5,8 @@ module.exports = (buffer) => {
     return 'v1boxraw'
   } else if (buffer.length === 16 * 32 * 20 || buffer.length === 16 * 32 * 30) {
     return 'v1chr'
+  } else if (buffer.length === 3 * 256) {
+    return 'v1pal'
   }
 
   return 'unknown'
