@@ -52,5 +52,12 @@ module.exports = (buffer) => {
     }
   }
 
+  if (buffer.length > 0) {
+    const version = buffer.readUInt8(0)
+    if (version === 4) {
+      return 'v1map'
+    }
+  }
+
   return 'unknown'
 }
