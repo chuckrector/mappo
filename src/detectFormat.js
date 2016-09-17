@@ -9,6 +9,8 @@ module.exports = (buffer) => {
     return 'v1pal'
   } else if (buffer.length === 96 * 96) {
     return 'v1cr2'
+  } else if (buffer.length === 9 * 16 * 95) {
+    return 'v1mainfnt'
   }
 
   return 'unknown'

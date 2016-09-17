@@ -40,3 +40,13 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isCr2)).toBe('v1cr2')
   expect(detectFormat(isNotCr2)).toBe('unknown')
 }
+
+{
+  // can detect v1 MAIN.FNT
+  const isMainFnt = {length: 9 * 16 * 95}
+  const isNotMainFnt = {length: 1}
+
+  expect(detectFormat(isMainFnt)).toBe('v1mainfnt')
+  expect(detectFormat(isNotMainFnt)).toBe('unknown')
+}
+
