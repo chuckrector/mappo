@@ -19,5 +19,9 @@ module.exports = (buffer) => {
     return 'v1transtbl'
   }
 
+  if (buffer.length % (32 * 32) === 0) {
+    return 'v1speechspc'
+  }
+
   return 'unknown'
 }

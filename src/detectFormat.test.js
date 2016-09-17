@@ -67,3 +67,12 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isTransTbl)).toBe('v1transtbl')
   expect(detectFormat(isNotTransTbl)).toBe('unknown')
 }
+
+{
+  // can detect v1 SPEECH.SPC
+  expect(detectFormat({length: 32 * 32})).toBe('v1speechspc')
+  expect(detectFormat({length: 32 * 32 * 2})).toBe('v1speechspc')
+  expect(detectFormat({length: 32 * 32 * 3})).toBe('v1speechspc')
+  expect(detectFormat({length: 32 * 32 * 4})).toBe('v1speechspc')
+  expect(detectFormat({length: 32 * 32 * 5})).toBe('v1speechspc')
+}
