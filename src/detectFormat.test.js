@@ -58,3 +58,12 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isSmallFnt)).toBe('v1smallfnt')
   expect(detectFormat(isNotSmallFnt)).toBe('unknown')
 }
+
+{
+  // can detect v1 TRANS.TBL
+  const isTransTbl = {length: 256 * 256}
+  const isNotTransTbl = {length: 1}
+
+  expect(detectFormat(isTransTbl)).toBe('v1transtbl')
+  expect(detectFormat(isNotTransTbl)).toBe('unknown')
+}

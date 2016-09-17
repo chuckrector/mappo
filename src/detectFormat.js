@@ -15,6 +15,8 @@ module.exports = (buffer) => {
     return 'v1mainfnt'
   case 7 * 9 * 95:
     return 'v1smallfnt'
+  case 256 * 256:
+    return 'v1transtbl'
   }
 
   return 'unknown'
