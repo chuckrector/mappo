@@ -99,12 +99,6 @@ const dummyBuffer = totes => B.u8(filler(totes))
   expect(detectFormat(isNotMiscIconDat)).toBe('unknown')
 }
 
-  // version: T.u16,
-  // palette: T.list(T.u8, 256 * 3),
-  // numtiles: T.u16,
-  // vsp0: T.list(T.u8, ({record}) => record.numtiles * 16 * 16),
-  // va0: T.list(V1_VSPANIM, 100),
-
 {
   // can detect v1 VSP
   const numtiles = 3
