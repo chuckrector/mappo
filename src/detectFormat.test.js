@@ -85,3 +85,12 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isItemIconDat)).toBe('v1itemicondat')
   expect(detectFormat(isNotItemIconDat)).toBe('unknown')
 }
+
+{
+  // can detect v1 MISCICON.DAT
+  const isMiscIconDat = {length: 1 + (16 * 16) + (24 * 24) + (24 * 40)}
+  const isNotMiscIconDat = {length: 16 * 16 * 7}
+
+  expect(detectFormat(isMiscIconDat)).toBe('v1miscicondat')
+  expect(detectFormat(isNotMiscIconDat)).toBe('unknown')
+}

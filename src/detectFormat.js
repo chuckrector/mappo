@@ -26,6 +26,9 @@ module.exports = (buffer) => {
   // 5985
   case 7 * 9 * 95:
     return 'v1smallfnt'
+  // 1793
+  case 1 + (16 * 16) + (24 * 24) + (24 * 40):
+    return 'v1miscicondat'
   // 768
   case 3 * 256:
     return 'v1pal'
