@@ -31,3 +31,12 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat(isPalette)).toBe('v1pal')
   expect(detectFormat(isNotPalette)).toBe('unknown')
 }
+
+{
+  // can detect v1 CR2
+  const isCr2 = {length: 96 * 96}
+  const isNotCr2 = {length: 1}
+
+  expect(detectFormat(isCr2)).toBe('v1cr2')
+  expect(detectFormat(isNotCr2)).toBe('unknown')
+}

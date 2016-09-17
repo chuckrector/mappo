@@ -7,6 +7,8 @@ module.exports = (buffer) => {
     return 'v1chr'
   } else if (buffer.length === 3 * 256) {
     return 'v1pal'
+  } else if (buffer.length === 96 * 96) {
+    return 'v1cr2'
   }
 
   return 'unknown'
