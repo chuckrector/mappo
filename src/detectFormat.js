@@ -35,5 +35,9 @@ module.exports = (buffer) => {
     return 'v1speechspc'
   }
 
+  if (buffer.length > 1 && buffer.length % (16 * 16) === 1) {
+    return 'v1itemicondat'
+  }
+
   return 'unknown'
 }

@@ -76,3 +76,12 @@ const detectFormat = require('./detectFormat')
   expect(detectFormat({length: 32 * 32 * 4})).toBe('v1speechspc')
   expect(detectFormat({length: 32 * 32 * 5})).toBe('v1speechspc')
 }
+
+{
+  // can detect v1 ITEMICON.DAT
+  const isItemIconDat = {length: 1 + (16 * 16 * 5)}
+  const isNotItemIconDat = {length: 16 * 16 * 5}
+
+  expect(detectFormat(isItemIconDat)).toBe('v1itemicondat')
+  expect(detectFormat(isNotItemIconDat)).toBe('unknown')
+}
