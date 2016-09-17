@@ -15,7 +15,7 @@ const detectFormat = require('./detectFormat')
 {
     // can detect v1 CHR
     const isV1Chr = {length: 16 * 32 * 30}
-    const isAlsoV1Chr {length: 16 * 32 * 20}
+    const isAlsoV1Chr = {length: 16 * 32 * 20}
     const isNotV1Chr = {length: 1}
 
     expect(detectFormat(isV1Chr)).toBe('v1chr')
