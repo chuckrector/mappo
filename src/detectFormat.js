@@ -42,5 +42,15 @@ module.exports = (buffer) => {
     return 'v1itemicondat'
   }
 
+  if (buffer.length >= 2 + (3 * 256) + 2 + 16 * 16) {
+    const numtilesOffset = 2 + (3 * 256)
+    const numtiles = buffer.readUInt16LE(numtilesOffset)
+    const animsize = 2 * 4 * 100
+    const tilesize = buffer.length - (numtilesOffset + 2) - animsize
+    if (tilesize % (16 * 16) === 0) {
+      return 'v1vsp'
+    }
+  }
+
   return 'unknown'
 }

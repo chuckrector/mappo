@@ -2,6 +2,10 @@
 
 const expect = require('expect')
 const detectFormat = require('./detectFormat')
+const {makeBuffer, B} = require('./makeBuffer')
+const filler = require('./filler')
+
+const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v1 BOX.RAW
@@ -80,7 +84,7 @@ const detectFormat = require('./detectFormat')
 {
   // can detect v1 ITEMICON.DAT
   const isItemIconDat = {length: 1 + (16 * 16 * 5)}
-  const isNotItemIconDat = {length: 16 * 16 * 5}
+  const isNotItemIconDat = dummyBuffer(16 * 16 * 5)
 
   expect(detectFormat(isItemIconDat)).toBe('v1itemicondat')
   expect(detectFormat(isNotItemIconDat)).toBe('unknown')
@@ -89,8 +93,28 @@ const detectFormat = require('./detectFormat')
 {
   // can detect v1 MISCICON.DAT
   const isMiscIconDat = {length: 1 + (16 * 16) + (24 * 24) + (24 * 40)}
-  const isNotMiscIconDat = {length: 16 * 16 * 7}
+  const isNotMiscIconDat = dummyBuffer(16 * 16 * 7)
 
   expect(detectFormat(isMiscIconDat)).toBe('v1miscicondat')
   expect(detectFormat(isNotMiscIconDat)).toBe('unknown')
+}
+
+  // version: T.u16,
+  // palette: T.list(T.u8, 256 * 3),
+  // numtiles: T.u16,
+  // vsp0: T.list(T.u8, ({record}) => record.numtiles * 16 * 16),
+  // va0: T.list(V1_VSPANIM, 100),
+
+{
+  // can detect v1 VSP
+  const numtiles = 3
+  const isVsp = makeBuffer([
+    B.u16(0), // version is ignored by v1
+    B.u8(filler(3 * 256, 0)),
+    B.u16(numtiles),
+    B.u8(filler(16 * 16 * numtiles)),
+    B.u16(filler(4 * 100, 0)),
+  ])
+
+  expect(detectFormat(isVsp)).toBe('v1vsp')
 }
