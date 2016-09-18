@@ -53,3 +53,36 @@ Output:
 - `data/v2kj/bob.chr.png`
 
 ![alt text](/img/v2kj/bob.chr.png?raw=true "a sample of v2kjchr2png cli output")
+
+## v2chr2pnglist
+
+**Support:** VERGE2k+j only (WxH, N tiles, 5 columns)
+
+Usage:
+
+- `node src/cli/v2kjchr2pnglist.js data/v2kj/bob.chr`
+
+Output:
+
+- `data/v2kj/bob.chr-0.png` .. `data/v2kj/bob.chr-` (N - 1) `.png`
+
+![alt text](/img/v2/bob.chr-0.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-1.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-2.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-3.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-4.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-5.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-6.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-7.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-8.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-9.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-10.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-11.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-12.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-13.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-14.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-15.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-16.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-17.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-18.png?raw=true "a sample of v2kjchr2pnglist cli output")
+![alt text](/img/v2/bob.chr-19.png?raw=true "a sample of v2kjchr2pnglist cli output")
