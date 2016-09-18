@@ -28,6 +28,7 @@ const fromBuffer = (buffer, formatMetadata, rethrow=false) => {
     }
 
     console.log('-- ignoring')
+    process.exit(0)
   }
 
   return diskData
