@@ -129,6 +129,19 @@ const dummyBuffer = totes => B.u8(filler(totes))
 }
 
 {
+  // can detect v2 VSP
+  const isVsp = makeBuffer([
+    B.u16(4),
+    B.u8(filler(3 * 256)),
+    B.u16(1),
+    B.compressedU8(filler(16 * 16)),
+    B.u16(2 * 4 * 100),
+  ])
+
+  expect(detectFormat(isVsp)).toBe('v2vsp')
+}
+
+{
   // can detect v2kj CHR
   expect(detectFormat(B.u8(4))).toBe('v2kjchr')
 }

@@ -1,6 +1,7 @@
 "use strict"
 
 const createDataReader = require('./createDataReader')
+const asset = require('./asset')
 
 module.exports = (buffer) => {
   switch (buffer.length) {
@@ -54,17 +55,24 @@ module.exports = (buffer) => {
     }
   }
 
-  const reader = createDataReader({data: buffer})
-  const version = reader.readByte()
-  if (version === 4) {
-    const chrName = reader.readStringFixed(13)
-    if (chrName.toLowerCase().includes('.chr')) {
-      return 'v1map'
-    } else {
-      return 'v2kjchr'
+  if (buffer.length > 0) {
+    const reader = createDataReader({data: buffer})
+    const version = reader.readByte()
+    if (version === 4) {
+      const chrName = reader.readStringFixed(13)
+      if (chrName.toLowerCase().includes('.chr')) {
+        return 'v1map'
+      } else if (buffer.length >= 2 + (3 * 256) + 2) {
+        try {
+          asset.fromBuffer(buffer, asset.v2vsp)
+          return 'v2vsp'
+        } catch (e) {
+          return 'v2kjchr'
+        }
+      }
+    } else if (version === 2) {
+      return 'v2chr'
     }
-  } else if (version === 2) {
-    return 'v2chr'
   }
 
   return 'unknown'

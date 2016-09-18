@@ -3,13 +3,12 @@
 const fs = require('fs')
 const {readFormatData} = require('./readFormat')
 
-const fromDisk = (filename, formatMetadata) => {
-  const buffer = fs.readFileSync(filename)
+const fromBuffer = (buffer, formatMetadata) => {
   const {format, formatName} = formatMetadata
 
   let diskData
   try {
-    console.log('reading', filename, 'as', formatName)
+    console.log('reading as', formatName)
     diskData = readFormatData({
       format,
       data: buffer,
@@ -29,6 +28,13 @@ const fromDisk = (filename, formatMetadata) => {
   }
 
   return diskData
+}
+
+const fromDisk = (filename, formatMetadata) => {
+  console.log('reading', filename, 'from disk')
+  const buffer = fs.readFileSync(filename)
+
+  return fromBuffer(buffer, formatMetadata)
 }
 
 const allFormats = {
@@ -68,6 +74,7 @@ const allFormats = {
 }
 
 const exportMe = {
+  fromBuffer,
   fromDisk,
 }
 
