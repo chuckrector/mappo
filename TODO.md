@@ -14,3 +14,4 @@
 - option for `v3chr2gif` to generate reduced palette rather than requiring one
 - export json/gif/png to the binary formats
 - all cli accepting palettes as inputs should accept JSON palettes too
+- `process.exit(0)` in asset loader only when invoked from cli; important not to do so normally, such as when `detectFormat()` is using it to probe formats
