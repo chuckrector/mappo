@@ -14,4 +14,3 @@
 - option for `v3chr2gif` to generate reduced palette rather than requiring one
 - export json/gif/png to the binary formats
 - all cli accepting palettes as inputs should accept JSON palettes too
-- asset loader outputs error messages when format cannot be loaded, but don't want those to display when running `detectFormat()` cz it's an intentional probe where failure directs the logic
