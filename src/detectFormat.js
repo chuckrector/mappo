@@ -92,5 +92,13 @@ module.exports = (buffer) => {
     }
   }
 
+  if (buffer.length >= 6) {
+    const reader = createDataReader({data: buffer})
+    const signature = reader.readStringFixed(6)
+    if (signature === 'V3MAP') {
+      return 'v3map'
+    }
+  }
+
   return 'unknown'
 }
