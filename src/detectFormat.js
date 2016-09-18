@@ -83,5 +83,9 @@ module.exports = (buffer) => {
     }
   }
 
+  if (buffer.length >= 4 && buffer.readUInt32LE(0) === 5392451) {
+    return 'v3chr'
+  }
+
   return 'unknown'
 }

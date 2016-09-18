@@ -169,3 +169,8 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
   expect(detectFormat(isChr)).toBe('v2kjchr')
 }
+
+{
+  // can detect v3 CHR
+  expect(detectFormat(B.u32(5392451))).toBe('v3chr')
+}
