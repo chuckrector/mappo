@@ -83,8 +83,13 @@ module.exports = (buffer) => {
     }
   }
 
-  if (buffer.length >= 4 && buffer.readUInt32LE(0) === 5392451) {
-    return 'v3chr'
+  if (buffer.length >= 4) {
+    const signature = buffer.readUInt32LE(0)
+    if (signature === 5392451) {
+      return 'v3chr'
+    } else if (signature === 5264214) {
+      return 'v3vsp'
+    }
   }
 
   return 'unknown'

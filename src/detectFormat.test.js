@@ -174,3 +174,8 @@ const dummyBuffer = totes => B.u8(filler(totes))
   // can detect v3 CHR
   expect(detectFormat(B.u32(5392451))).toBe('v3chr')
 }
+
+{
+  // can detect v3 VSP
+  expect(detectFormat(B.u32(5264214))).toBe('v3vsp')
+}
