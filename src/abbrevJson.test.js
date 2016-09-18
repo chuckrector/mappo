@@ -65,3 +65,8 @@ const abbrevJson = require('./abbrevJson')
   ]
 }`)
 }
+
+{
+  // empty lists
+  expect(abbrevJson([])).toBe('[]')
+}
