@@ -48,7 +48,7 @@ PAL          | ✓ | n/a | n/a | n/a
 PARTY.DAT    | ✓ | n/a | n/a | n/a
 SMALL.FNT    | ✓ | n/a | n/a | n/a
 SPEECH.SPC   | ✓ | n/a | n/a | n/a
-TRANS.TBL    | ✓ | ✓ | n/a | n/a
+TRANS.TBL    | ✓ | ✓ | ✓ | n/a
 VSP          | ✓ | ✓ | ✗ | ✓
 VC           | ✗ | ✗ | ✗ | ✗
 VCS          | ✗ | ✗ | ✗ | n/a
