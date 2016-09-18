@@ -48,12 +48,12 @@ const colorDepth = require('./colorDepth')
   const b16 = 0x001f
   const black16 = 0x0000
 
-  const r24 = [0xff, 0, 0]
-  const g24 = [0, 0xff, 0]
-  const b24 = [0, 0, 0xff]
+  const r24 = [248, 0, 0]
+  const g24 = [0, 252, 0]
+  const b24 = [0, 0, 248]
   const black24 = [0, 0, 0]
 
-  const raw16bitData = [r16, g16, b16, magenta16]
+  const raw16bitData = [r16, g16, b16, black16]
   const raw32bitData = [
     ...r24, 0xff, ...g24, 0xff,
     ...b24, 0xff, ...black24, 0x00,
