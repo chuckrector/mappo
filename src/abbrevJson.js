@@ -38,7 +38,7 @@ const valueReplacer = (k, v) => {
   return v
 }
 
-const normalizeEllipses = (s) => (
+const normalizeEllipsisTailsInAbbreviatedLists = (s) => (
   // non-numeric lists will have normal ellipsis string tails
   s.split('"..."').join('...')
 )
@@ -53,7 +53,7 @@ const pullOpeningCurliesUpToPreviousLine = (s) => (
 module.exports = (data) => {
   let s = JSON.stringify(data, valueReplacer, '  ')
 
-  s = normalizeEllipses(s)
+  s = normalizeEllipsisTailsInAbbreviatedLists(s)
   s = pullOpeningCurliesUpToPreviousLine(s)
   s = decodeNumLists(s)
 
