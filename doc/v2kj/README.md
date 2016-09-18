@@ -40,3 +40,16 @@ Output:
   }
 }
 ```
+## v2kjchr2png
+
+**Support:** VERGE2k+j only (WxH, N tiles, 5 columns)
+
+Usage:
+
+- `node src/cli/v2kjchr2png.js data/v2kj/bob.chr`
+
+Output:
+
+- `data/v2kj/bob.chr.png`
+
+![alt text](/img/v2kj/bob.chr.png?raw=true "a sample of v2kjchr2png cli output")
