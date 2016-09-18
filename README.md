@@ -43,11 +43,11 @@ ITEMICON.DAT | ✓ | n/a | n/a | n/a
 ITEMS.DAT    | ✓ | n/a | n/a | n/a
 MAIN.FNT     | ✓ | n/a | n/a | n/a
 MAP          | ✓ | ✓ | ✗ | ✓
-MISCICON.DAT | ✓ | n/a | ✓ | n/a
-PAL          | ✓ | n/a | ✓ | n/a
-PARTY.DAT    | ✓ | n/a | ✓ | n/a
-SMALL.FNT    | ✓ | n/a | ✓ | n/a
-SPEECH.SPC   | ✓ | n/a | ✓ | n/a
+MISCICON.DAT | ✓ | n/a | n/a | n/a
+PAL          | ✓ | n/a | n/a | n/a
+PARTY.DAT    | ✓ | n/a | n/a | n/a
+SMALL.FNT    | ✓ | n/a | n/a | n/a
+SPEECH.SPC   | ✓ | n/a | n/a | n/a
 TRANS.TBL    | ✓ | ✓ | n/a | n/a
 VSP          | ✓ | ✓ | ✗ | ✓
 VC           | ✗ | ✗ | ✗ | ✗
