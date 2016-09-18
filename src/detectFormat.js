@@ -2,6 +2,7 @@
 
 const createDataReader = require('./createDataReader')
 const asset = require('./asset')
+const isEqual = require('lodash/isequal')
 
 module.exports = (buffer) => {
   switch (buffer.length) {
@@ -55,6 +56,13 @@ module.exports = (buffer) => {
     }
   }
 
+  if (buffer.length >= 6) {
+    const reader = createDataReader({data: buffer})
+    if (isEqual(reader.readByteArray(6), [77, 65, 80, 249, 53, 0])) {
+      return 'v2map'
+    }
+  }
+
   if (buffer.length > 0) {
     const reader = createDataReader({data: buffer})
     const version = reader.readByte()
@@ -62,9 +70,9 @@ module.exports = (buffer) => {
       const chrName = reader.readStringFixed(13)
       if (chrName.toLowerCase().includes('.chr')) {
         return 'v1map'
-      } else if (buffer.length >= 2 + (3 * 256) + 2) {
+      } else if (buffer.length >= 1 + (11 * 2) + (4 * 4) + (2 * 4)) { // rough min
         try {
-          asset.fromBuffer(buffer, asset.v2vsp)
+          asset.fromBuffer(buffer, asset.v2vsp, true/*rethrow*/)
           return 'v2vsp'
         } catch (e) {
           return 'v2kjchr'

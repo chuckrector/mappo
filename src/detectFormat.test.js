@@ -132,16 +132,40 @@ const dummyBuffer = totes => B.u8(filler(totes))
   // can detect v2 VSP
   const isVsp = makeBuffer([
     B.u16(4),
-    B.u8(filler(3 * 256)),
+    B.u8(filler(3 * 256, 99)),
     B.u16(1),
-    B.compressedU8(filler(16 * 16)),
-    B.u16(2 * 4 * 100),
+    B.compressedU8(filler(16 * 16, 88)),
+    B.u16(filler(2 * 4 * 100)),
   ])
 
   expect(detectFormat(isVsp)).toBe('v2vsp')
 }
 
 {
+  // can detect v2 MAP
+  const isMap = B.u8([77, 65, 80, 249, 53, 0])
+
+  expect(detectFormat(isMap)).toBe('v2map')
+}
+
+{
   // can detect v2kj CHR
-  expect(detectFormat(B.u8(4))).toBe('v2kjchr')
+  const totalframes = 1
+  const isChr = makeBuffer([
+    B.u8(4),
+    B.u16([16, 32]),
+    B.u16(filler(8)),
+    B.u16(totalframes),
+    B.u32(2),
+    B.string('F0'),
+    B.u32(2),
+    B.string('F0'),
+    B.u32(2),
+    B.string('F0'),
+    B.u32(2),
+    B.string('F0'),
+    B.compressedU16(filler(16 * 32 * totalframes))
+  ])
+
+  expect(detectFormat(isChr)).toBe('v2kjchr')
 }

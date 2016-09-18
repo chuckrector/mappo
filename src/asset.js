@@ -3,7 +3,7 @@
 const fs = require('fs')
 const {readFormatData} = require('./readFormat')
 
-const fromBuffer = (buffer, formatMetadata) => {
+const fromBuffer = (buffer, formatMetadata, rethrow=false) => {
   const {format, formatName} = formatMetadata
 
   let diskData
@@ -14,6 +14,10 @@ const fromBuffer = (buffer, formatMetadata) => {
       data: buffer,
     })
   } catch (e) {
+    if (rethrow) {
+      throw e
+    }
+
     const engineVersion = parseInt(formatName.substr(1, 2), 10)
     const formatType = formatName.substr(2)
 
@@ -24,7 +28,6 @@ const fromBuffer = (buffer, formatMetadata) => {
     }
 
     console.log('-- ignoring')
-    process.exit(0)
   }
 
   return diskData
