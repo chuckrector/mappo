@@ -1,5 +1,25 @@
 # VERGE2k+j (a.k.a. VERGE 2.5+j) Command-Line Tools
 
+## v2kjchr2gif
+
+**Support:** VERGE2k+j only (WxH, N tiles)
+
+Usage:
+
+- `node src/cli/v2kjchr2gif.js data/v1/VERGE.PAL data/v2kj/bob.chr`
+
+Output:
+
+- `data/v2kj/bob.chr-down.gif`
+- `data/v2kj/bob.chr-up.gif`
+- `data/v2kj/bob.chr-right.gif`
+- `data/v2kj/bob.chr-left.gif`
+
+![alt text](/img/v2kj/bob.chr-down.gif?raw=true "a sample of v2kjchr2gif cli output")
+![alt text](/img/v2kj/bob.chr-up.gif?raw=true "a sample of v2kjchr2gif cli output")
+![alt text](/img/v2kj/bob.chr-right.gif?raw=true "a sample of v2kjchr2gif cli output")
+![alt text](/img/v2kj/bob.chr-left.gif?raw=true "a sample of v2kjchr2gif cli output")
+
 ## v2kjchr2json
 
 Usage:
