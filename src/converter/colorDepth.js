@@ -24,6 +24,7 @@ const convert8to32 = ({palette, raw8bitData}) => {
 }
 
 // math lifted from http://stackoverflow.com/questions/38557734/how-to-convert-16-bit-hex-color-to-rgb888-values-in-c
+// note: this currently assumes v2kj convention of 0,0,0 as transparent
 const convert16to32 = ({raw16bitData}) => {
   const raw32bitData = []
 
@@ -40,7 +41,7 @@ const convert16to32 = ({raw16bitData}) => {
     raw32bitData[offset32 + 0] = r
     raw32bitData[offset32 + 1] = g
     raw32bitData[offset32 + 2] = b
-    raw32bitData[offset32 + 3] = (rgb !== 0xf81f) ? 0xff : 0
+    raw32bitData[offset32 + 3] = rgb ? 0xff : 0
 
     offset32 += 4
   }
