@@ -1,5 +1,7 @@
 "use strict"
 
+const createDataReader = require('./createDataReader')
+
 module.exports = (buffer) => {
   switch (buffer.length) {
   // could be a CHR with 64 frames; CHR usually <=5
@@ -53,9 +55,15 @@ module.exports = (buffer) => {
   }
 
   if (buffer.length > 0) {
-    const version = buffer.readUInt8(0)
+    const reader = createDataReader({data: buffer})
+    const version = reader.readByte()
     if (version === 4) {
-      return 'v1map'
+      const chrName = reader.readStringFixed(13)
+      if (chrName.toLowerCase().includes('.chr')) {
+        return 'v1map'
+      } else {
+        return 'v2kjchr'
+      }
     } else if (version === 2) {
       return 'v2chr'
     }
