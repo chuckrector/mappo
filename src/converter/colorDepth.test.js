@@ -40,3 +40,25 @@ const colorDepth = require('./colorDepth')
   // 24- to 32-bit conversion must be multiples of 3
   expect(() => colorDepth.convert24to32({raw24bitData: [1]})).toThrow('expected raw 24-bit data length to be divisible by three but got 1')
 }
+
+{
+  // can convert 16-bit image data to 32-bit
+  const r16 = 0xf800
+  const g16 = 0x07e0
+  const b16 = 0x001f
+  const magenta16 = 0xf81f
+
+  // the conversion loses a little precision
+  const r24 = [248, 0, 0]
+  const g24 = [0, 252, 0]
+  const b24 = [0, 0, 248]
+  const magenta24 = [248, 0, 248]
+
+  const raw16bitData = [r16, g16, b16, magenta16]
+  const raw32bitData = [
+    ...r24, 0xff, ...g24, 0xff,
+    ...b24, 0xff, ...magenta24, 0x00,
+  ]
+
+  expect(colorDepth.convert16to32({raw16bitData})).toEqual(raw32bitData)
+}
