@@ -38,8 +38,8 @@ const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = $canvas[0].getContext('2d')
 const image = context.createImageData(16, 16 * vspData.numtiles)
 
-$canvas.attr('width', 16 * tileColumns)
-$canvas.attr('height', 16 * tileRows)
+$canvas.attr('width', 320)
+$canvas.attr('height', 240)
 
 image.data.set(raw32bitData)
 
@@ -49,10 +49,23 @@ const renderTile = (tileIndex, x, y) => {
   context.putImageData(image, x, y - dirtyY, 0, dirtyY, 16, 16)
 }
 
-for (let tileIndex = 0; tileIndex < vspData.numtiles; tileIndex++) {
-  const tileX = tileIndex % 20
-  const tileY = ~~(tileIndex / 20)
-  const dirtyY = tileIndex * 16
-
-  renderTile(tileIndex, tileX * 16, tileY * 16)
+const getTileIndex = (layer, tileX, tileY) => {
+  return layer[(tileY * mapData.xsize) + tileX]
 }
+
+const renderLayer = (layer, x, y, transparent=false) => {
+  for (let tileY = 0; tileY < 240/16; tileY++) {
+    for (let tileX = 0; tileX < 320/16; tileX++) {
+      const tileIndex = getTileIndex(layer, tileX, tileY)
+
+      if (transparent && !tileIndex) {
+        continue
+      }
+
+      renderTile(tileIndex, tileX * 16, tileY * 16)
+    }
+  }
+}
+
+renderLayer(mapData.map0, 0, 0)
+renderLayer(mapData.map1, 0, 0, true)
