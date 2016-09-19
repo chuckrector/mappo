@@ -36,17 +36,22 @@ const $canvas = $('.mappo-viewport')
 const tileColumns = 20
 const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = $canvas[0].getContext('2d')
-const image = context.createImageData(16, 16 * vspData.numtiles)
+const imageData = context.createImageData(16, 16 * vspData.numtiles)
+const image = document.createElement('canvas')
 
 $canvas.attr('width', 320)
 $canvas.attr('height', 240)
 
-image.data.set(raw32bitData)
+imageData.data.set(raw32bitData)
+
+// huh. putImageData carries alpha but always overwrites the destination.
+// http://weblogs.asp.net/bleroy/drawing-transparent-glyphs-on-the-html-canvas
+image.width = 16
+image.height = 16 * vspData.numtiles
+image.getContext('2d').putImageData(imageData, 0, 0)
 
 const renderTile = (tileIndex, x, y) => {
-  const dirtyY = tileIndex * 16
-
-  context.putImageData(image, x, y - dirtyY, 0, dirtyY, 16, 16)
+  context.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
