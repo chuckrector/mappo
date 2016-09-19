@@ -36,8 +36,6 @@ const $canvas = $('.mappo-viewport')
 const context = $canvas[0].getContext('2d')
 
 const image = context.createImageData(16, 16)
-for (let i = 0; i < 16 * 16 * 4; i++) {
-  image.data[i] = raw32bitData[i]
-}
+image.data.set(raw32bitData.slice(0, 16 * 16 * 4))
 
 context.putImageData(image, 0, 0)
