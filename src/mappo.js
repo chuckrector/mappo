@@ -92,7 +92,7 @@ document.addEventListener('keydown', event => keyPressed[event.keyCode] = true)
 document.addEventListener('keyup', event => keyPressed[event.keyCode] = false)
 
 const tick = () => {
-  context.filleStyle = 'red'
+  context.fillStyle = 'red'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
   renderLayer(mapData.map0, cameraX, cameraY)
   renderLayer(
