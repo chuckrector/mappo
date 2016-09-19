@@ -35,15 +35,11 @@ const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = $canvas[0].getContext('2d')
 const imageData = context.createImageData(16, 16 * vspData.numtiles)
 const image = document.createElement('canvas')
-const doubleBuffer = document.createElement('canvas')
-const doubleBufferContext = doubleBuffer.getContext('2d')
 const viewportWidth = 320
 const viewportHeight = 240
 
 $canvas.attr('width', viewportWidth)
 $canvas.attr('height', viewportHeight)
-doubleBuffer.width = viewportWidth
-doubleBuffer.height = viewportHeight
 
 imageData.data.set(raw32bitData)
 
@@ -54,7 +50,7 @@ image.height = 16 * vspData.numtiles
 image.getContext('2d').putImageData(imageData, 0, 0)
 
 const renderTile = (tileIndex, x, y) => {
-  doubleBufferContext.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
+  context.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
@@ -90,8 +86,8 @@ let cameraVelocityX = 1
 let cameraVelocityY = 1
 
 const tick = () => {
-  doubleBufferContext.filleStyle = 'red'
-  doubleBufferContext.fillRect(0, 0, viewportWidth, viewportHeight)
+  context.filleStyle = 'red'
+  context.fillRect(0, 0, viewportWidth, viewportHeight)
   renderLayer(mapData.map0, cameraX, cameraY)
   renderLayer(
     mapData.map1,
@@ -99,7 +95,6 @@ const tick = () => {
     cameraY * mapData.pmultx / mapData.pdivx,
     true
   )
-  context.drawImage(doubleBuffer, 0, 0)
 
   cameraX += cameraVelocityX
   cameraY += cameraVelocityY
