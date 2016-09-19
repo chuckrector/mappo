@@ -15,6 +15,7 @@ const createWindow = () => {
 
   win.loadURL(`file://${__dirname}/index.html`)
 
+  win.webContents.on('devtools-opened', win.webContents.focus)
   win.webContents.openDevTools()
 
   win.on('closed', () => {

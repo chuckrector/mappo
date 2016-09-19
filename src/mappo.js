@@ -1,9 +1,8 @@
 "use strict"
 
-const $ = require('jquery')
-const jQuery = $
 const asset = require('./asset')
 const colorDepth = require('./converter/colorDepth')
+const clamp = require('lodash/clamp')
 
 const mapFilename = 'data/v1/TEST.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
@@ -29,17 +28,17 @@ const raw32bitData = colorDepth.convert8to32({
   raw8bitData: vspData.vsp0,
 })
 
-const $canvas = $('.mappo-viewport')
+const canvas = document.querySelector('.mappo-viewport')
 const tileColumns = 20
 const tileRows = ~~((vspData.numtiles + 19) / 20)
-const context = $canvas[0].getContext('2d')
+const context = canvas.getContext('2d')
 const imageData = context.createImageData(16, 16 * vspData.numtiles)
 const image = document.createElement('canvas')
 const viewportWidth = 320
 const viewportHeight = 240
 
-$canvas.attr('width', viewportWidth)
-$canvas.attr('height', viewportHeight)
+canvas.width = viewportWidth
+canvas.height = viewportHeight
 
 imageData.data.set(raw32bitData)
 
@@ -82,8 +81,15 @@ const renderLayer = (layer, x, y, transparent=false) => {
 
 let cameraX = 0
 let cameraY = 0
-let cameraVelocityX = 1
-let cameraVelocityY = 1
+
+const KEYCODE_UP = 38
+const KEYCODE_DOWN = 40
+const KEYCODE_LEFT = 37
+const KEYCODE_RIGHT = 39
+const keyPressed = {}
+
+document.addEventListener('keydown', event => keyPressed[event.keyCode] = true)
+document.addEventListener('keyup', event => keyPressed[event.keyCode] = false)
 
 const tick = () => {
   context.filleStyle = 'red'
@@ -96,16 +102,13 @@ const tick = () => {
     true
   )
 
-  cameraX += cameraVelocityX
-  cameraY += cameraVelocityY
+  keyPressed[KEYCODE_UP] && cameraY--
+  keyPressed[KEYCODE_DOWN] && cameraY++
+  keyPressed[KEYCODE_LEFT] && cameraX--
+  keyPressed[KEYCODE_RIGHT] && cameraX++
 
-  if (cameraX <= 0 || cameraX >= 100 * 16) {
-    cameraVelocityX *= -1
-  }
-
-  if (cameraY <= 0 || cameraY >= 80 * 16) {
-    cameraVelocityY *= -1
-  }
+  cameraX = clamp(cameraX, 0, (mapData.xsize * 16) - viewportWidth)
+  cameraY = clamp(cameraY, 0, (mapData.ysize * 16) - viewportHeight)
 
   window.requestAnimationFrame(tick)
 }
