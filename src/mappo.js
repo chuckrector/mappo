@@ -2,11 +2,8 @@
 
 const $ = require('jquery')
 const jQuery = $
-require('./jquery-ui-1.12.0.custom.le-frog/jquery-ui.min.js')
 const asset = require('./asset')
 const colorDepth = require('./converter/colorDepth')
-
-$('body').resizable()
 
 const mapFilename = 'data/v1/UNDERSEA.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
