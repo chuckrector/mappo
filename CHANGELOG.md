@@ -1,3 +1,38 @@
+## 0.21.0 (Sep 18, 2016)
+
+- json abbreviator
+
+## 0.20.0 (Sep 17, 2016)
+
+- format detection
+  - v1boxraw
+  - v1chr
+  - v1pal
+  - v1cr2
+  - v1mainfnt
+  - v1smallfnt
+  - v1transtbl
+  - v1speechspc
+  - v1itemicondat
+  - v1miscicondat
+  - v1vsp
+  - v1map
+  - v2chr
+  - v2vsp
+  - v2kjchr
+  - v2map
+  - v3chr
+  - v3vsp
+  - v3map
+- v2kjchr2json cli
+- v2kjchr2png cli
+- v2kjchr2pnglist cli
+- v2kjchr2gif cli
+
+## 0.19.0 (Sep 15, 2016)
+
+- v3chr2gif cli
+
 ## 0.18.0 (Sep 14, 2016)
 
 - v1chr2gif cli
