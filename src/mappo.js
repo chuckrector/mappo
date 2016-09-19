@@ -8,7 +8,7 @@ const colorDepth = require('./converter/colorDepth')
 
 $('body').resizable()
 
-const mapFilename = 'data/v1/BUMVILLE.MAP';
+const mapFilename = 'data/v1/UNDERSEA.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
 
 console.log(mapFilename, mapData)
@@ -65,10 +65,10 @@ const getTileIndex = (layer, tileX, tileY) => {
 }
 
 const renderLayer = (layer, x, y, transparent=false) => {
-  const topLeftTileX = cameraX >> 4
-  const topLeftTileY = cameraY >> 4
-  const subTileX = cameraX % 16
-  const subTileY = cameraY % 16
+  const topLeftTileX = x >> 4
+  const topLeftTileY = y >> 4
+  const subTileX = x % 16
+  const subTileY = y % 16
 
   for (let tileY = 0; tileY < (viewportHeight + 31) >> 4; tileY++) {
     for (let tileX = 0; tileX < (viewportWidth + 31) >> 4; tileX++) {
@@ -96,17 +96,22 @@ const tick = () => {
   doubleBufferContext.filleStyle = 'red'
   doubleBufferContext.fillRect(0, 0, viewportWidth, viewportHeight)
   renderLayer(mapData.map0, cameraX, cameraY)
-  renderLayer(mapData.map1, cameraX, cameraY, true)
+  renderLayer(
+    mapData.map1,
+    cameraX * mapData.pmultx / mapData.pdivx,
+    cameraY * mapData.pmultx / mapData.pdivx,
+    true
+  )
   context.drawImage(doubleBuffer, 0, 0)
 
   cameraX += cameraVelocityX
   cameraY += cameraVelocityY
 
-  if (cameraX <= 0 || cameraX >= (mapData.xsize * 16) - viewportWidth) {
+  if (cameraX <= 0 || cameraX >= 40 * 16) {
     cameraVelocityX *= -1
   }
 
-  if (cameraY <= 0 || cameraY >= (mapData.ysize * 16) - viewportHeight) {
+  if (cameraY <= 0 || cameraY >= 18 * 16) {
     cameraVelocityY *= -1
   }
 
