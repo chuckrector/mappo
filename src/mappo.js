@@ -5,7 +5,7 @@ const jQuery = $
 const asset = require('./asset')
 const colorDepth = require('./converter/colorDepth')
 
-const mapFilename = 'data/v1/UNDERSEA.MAP';
+const mapFilename = 'data/v1/TEST.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
 
 console.log(mapFilename, mapData)
@@ -99,11 +99,11 @@ const tick = () => {
   cameraX += cameraVelocityX
   cameraY += cameraVelocityY
 
-  if (cameraX <= 0 || cameraX >= 40 * 16) {
+  if (cameraX <= 0 || cameraX >= 100 * 16) {
     cameraVelocityX *= -1
   }
 
-  if (cameraY <= 0 || cameraY >= 18 * 16) {
+  if (cameraY <= 0 || cameraY >= 80 * 16) {
     cameraVelocityY *= -1
   }
 
