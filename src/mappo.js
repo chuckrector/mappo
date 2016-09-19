@@ -33,9 +33,28 @@ const raw32bitData = colorDepth.convert8to32({
 })
 
 const $canvas = $('.mappo-viewport')
+const tileColumns = 20
+const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = $canvas[0].getContext('2d')
+const image = context.createImageData(16, 16 * vspData.numtiles)
 
-const image = context.createImageData(16, 16)
-image.data.set(raw32bitData.slice(0, 16 * 16 * 4))
+$canvas.attr('width', 16 * tileColumns)
+$canvas.attr('height', 16 * tileRows)
 
-context.putImageData(image, 0, 0)
+image.data.set(raw32bitData)
+
+for (let tileIndex = 0; tileIndex < vspData.numtiles; tileIndex++) {
+  const tileX = tileIndex % 20
+  const tileY = ~~(tileIndex / 20)
+  const dirtyY = tileIndex * 16
+
+  context.putImageData(
+    image,
+    tileX * 16,
+    (tileY * 16) - dirtyY,
+    0,
+    dirtyY,
+    16,
+    16
+  )
+}
