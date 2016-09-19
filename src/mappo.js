@@ -38,9 +38,15 @@ const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = $canvas[0].getContext('2d')
 const imageData = context.createImageData(16, 16 * vspData.numtiles)
 const image = document.createElement('canvas')
+const doubleBuffer = document.createElement('canvas')
+const doubleBufferContext = doubleBuffer.getContext('2d')
+const viewportWidth = 320
+const viewportHeight = 240
 
-$canvas.attr('width', 320)
-$canvas.attr('height', 240)
+$canvas.attr('width', viewportWidth)
+$canvas.attr('height', viewportHeight)
+doubleBuffer.width = viewportWidth
+doubleBuffer.height = viewportHeight
 
 imageData.data.set(raw32bitData)
 
@@ -51,7 +57,7 @@ image.height = 16 * vspData.numtiles
 image.getContext('2d').putImageData(imageData, 0, 0)
 
 const renderTile = (tileIndex, x, y) => {
-  context.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
+  doubleBufferContext.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
@@ -59,18 +65,52 @@ const getTileIndex = (layer, tileX, tileY) => {
 }
 
 const renderLayer = (layer, x, y, transparent=false) => {
-  for (let tileY = 0; tileY < 240/16; tileY++) {
-    for (let tileX = 0; tileX < 320/16; tileX++) {
-      const tileIndex = getTileIndex(layer, tileX, tileY)
+  const topLeftTileX = cameraX >> 4
+  const topLeftTileY = cameraY >> 4
+  const subTileX = cameraX % 16
+  const subTileY = cameraY % 16
+
+  for (let tileY = 0; tileY < (viewportHeight + 31) >> 4; tileY++) {
+    for (let tileX = 0; tileX < (viewportWidth + 31) >> 4; tileX++) {
+      const tileIndex = getTileIndex(
+        layer,
+        topLeftTileX + tileX,
+        topLeftTileY + tileY
+      )
 
       if (transparent && !tileIndex) {
         continue
       }
 
-      renderTile(tileIndex, tileX * 16, tileY * 16)
+      renderTile(tileIndex, (tileX * 16) - subTileX, (tileY * 16) - subTileY)
     }
   }
 }
 
-renderLayer(mapData.map0, 0, 0)
-renderLayer(mapData.map1, 0, 0, true)
+let cameraX = 0
+let cameraY = 0
+let cameraVelocityX = 1
+let cameraVelocityY = 1
+
+const tick = () => {
+  doubleBufferContext.filleStyle = 'red'
+  doubleBufferContext.fillRect(0, 0, viewportWidth, viewportHeight)
+  renderLayer(mapData.map0, cameraX, cameraY)
+  renderLayer(mapData.map1, cameraX, cameraY, true)
+  context.drawImage(doubleBuffer, 0, 0)
+
+  cameraX += cameraVelocityX
+  cameraY += cameraVelocityY
+
+  if (cameraX <= 0 || cameraX >= (mapData.xsize * 16) - viewportWidth) {
+    cameraVelocityX *= -1
+  }
+
+  if (cameraY <= 0 || cameraY >= (mapData.ysize * 16) - viewportHeight) {
+    cameraVelocityY *= -1
+  }
+
+  window.requestAnimationFrame(tick)
+}
+
+tick()
