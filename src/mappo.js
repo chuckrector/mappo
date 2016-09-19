@@ -43,18 +43,16 @@ $canvas.attr('height', 16 * tileRows)
 
 image.data.set(raw32bitData)
 
+const renderTile = (tileIndex, x, y) => {
+  const dirtyY = tileIndex * 16
+
+  context.putImageData(image, x, y - dirtyY, 0, dirtyY, 16, 16)
+}
+
 for (let tileIndex = 0; tileIndex < vspData.numtiles; tileIndex++) {
   const tileX = tileIndex % 20
   const tileY = ~~(tileIndex / 20)
   const dirtyY = tileIndex * 16
 
-  context.putImageData(
-    image,
-    tileX * 16,
-    (tileY * 16) - dirtyY,
-    0,
-    dirtyY,
-    16,
-    16
-  )
+  renderTile(tileIndex, tileX * 16, tileY * 16)
 }
