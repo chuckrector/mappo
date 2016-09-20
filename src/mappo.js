@@ -4,7 +4,7 @@ const asset = require('./asset')
 const colorDepth = require('./converter/colorDepth')
 const clamp = require('lodash/clamp')
 
-const mapFilename = 'data/v1/TEST.MAP';
+const mapFilename = 'data/v1/LAB.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
 
 console.log(mapFilename, mapData)
@@ -92,13 +92,13 @@ document.addEventListener('keydown', event => keyPressed[event.keyCode] = true)
 document.addEventListener('keyup', event => keyPressed[event.keyCode] = false)
 
 const tick = () => {
-  context.fillStyle = 'red'
+  context.fillStyle = 'black'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
   renderLayer(mapData.map0, cameraX, cameraY)
   renderLayer(
     mapData.map1,
-    cameraX * mapData.pmultx / mapData.pdivx,
-    cameraY * mapData.pmultx / mapData.pdivx,
+    ~~(cameraX * mapData.pmultx / mapData.pdivx),
+    ~~(cameraY * mapData.pmultx / mapData.pdivx),
     true
   )
 
