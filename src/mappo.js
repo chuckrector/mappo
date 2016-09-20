@@ -4,7 +4,7 @@ const asset = require('./asset')
 const colorDepth = require('./converter/colorDepth')
 const clamp = require('lodash/clamp')
 
-const mapFilename = 'data/v1/LAB.MAP';
+const mapFilename = 'data/v1/TEST.MAP';
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
 
 console.log(mapFilename, mapData)
@@ -91,6 +91,29 @@ const keyPressed = {}
 document.addEventListener('keydown', event => keyPressed[event.keyCode] = true)
 document.addEventListener('keyup', event => keyPressed[event.keyCode] = false)
 
+let mousedown = false
+canvas.addEventListener('mousedown', event => {
+  mousedown = true
+})
+
+canvas.addEventListener('mousemove', event => {
+  if (mousedown) {
+    moveCamera(
+      ~~(-event.movementX / 3),
+      ~~(-event.movementY / 3)
+    )
+  }
+})
+
+canvas.addEventListener('mouseup', event => {
+  mousedown = false
+})
+
+const moveCamera = (moveX, moveY) => {
+  cameraX = clamp(cameraX + moveX, 0, (mapData.xsize * 16) - viewportWidth)
+  cameraY = clamp(cameraY + moveY, 0, (mapData.ysize * 16) - viewportHeight)
+}
+
 const tick = () => {
   context.fillStyle = 'black'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
@@ -102,13 +125,13 @@ const tick = () => {
     true
   )
 
-  keyPressed[KEYCODE_UP] && cameraY--
-  keyPressed[KEYCODE_DOWN] && cameraY++
-  keyPressed[KEYCODE_LEFT] && cameraX--
-  keyPressed[KEYCODE_RIGHT] && cameraX++
-
-  cameraX = clamp(cameraX, 0, (mapData.xsize * 16) - viewportWidth)
-  cameraY = clamp(cameraY, 0, (mapData.ysize * 16) - viewportHeight)
+  let moveX = 0
+  let moveY = 0
+  keyPressed[KEYCODE_UP] && moveY--
+  keyPressed[KEYCODE_DOWN] && moveY++
+  keyPressed[KEYCODE_LEFT] && moveX--
+  keyPressed[KEYCODE_RIGHT] && moveX++
+  moveCamera(moveX, moveY)
 
   window.requestAnimationFrame(tick)
 }
