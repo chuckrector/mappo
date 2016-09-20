@@ -87,6 +87,7 @@ let cameraX = 0
 let cameraY = 0
 let cameraMoveX = 0
 let cameraMoveY = 0
+const cameraScrollAmount = 1
 
 const KEYCODE_UP = 38
 const KEYCODE_DOWN = 40
@@ -102,6 +103,8 @@ canvas.addEventListener('mousedown', event => {
   mousedown = true
 })
 
+let autoScrollX = 0
+let autoScrollY = 0
 canvas.addEventListener('mousemove', event => {
   if (mousedown) {
     moveCamera(
@@ -110,14 +113,13 @@ canvas.addEventListener('mousemove', event => {
     )
   }
 
-  cameraMoveX = 0
-  cameraMoveY = 0;
+  autoScrollX = 0
+  autoScrollY = 0;
   const autoScrollThreshold = 16;
-  const autoScrollBy = 2;
-  (event.clientX < autoScrollThreshold * scale) && (cameraMoveX = -autoScrollBy);
-  (event.clientX >= (viewportWidth - autoScrollThreshold) * scale) && (cameraMoveX = +autoScrollBy);
-  (event.clientY < autoScrollThreshold * scale) && (cameraMoveY = -autoScrollBy);
-  (event.clientY >= (viewportHeight - autoScrollThreshold) * scale) && (cameraMoveY = +autoScrollBy);
+  (event.clientX < autoScrollThreshold * scale) && (autoScrollX = -1);
+  (event.clientX >= (viewportWidth - autoScrollThreshold) * scale) && (autoScrollX = +1);
+  (event.clientY < autoScrollThreshold * scale) && (autoScrollY = -1);
+  (event.clientY >= (viewportHeight - autoScrollThreshold) * scale) && (autoScrollY = +1);
 })
 
 canvas.addEventListener('mouseup', event => {
@@ -146,10 +148,12 @@ const tick = () => {
     true
   )
 
-  keyPressed[KEYCODE_UP] && (cameraMoveY = -1)
-  keyPressed[KEYCODE_DOWN] && (cameraMoveY = +1)
-  keyPressed[KEYCODE_LEFT] && (cameraMoveX = -1)
-  keyPressed[KEYCODE_RIGHT] && (cameraMoveX = +1)
+  cameraMoveX = 0
+  cameraMoveY = 0;
+  (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (cameraMoveY = -cameraScrollAmount);
+  (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (cameraMoveY = +cameraScrollAmount);
+  (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (cameraMoveX = -cameraScrollAmount);
+  (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (cameraMoveX = +cameraScrollAmount);
   moveCamera(cameraMoveX, cameraMoveY)
 
   window.requestAnimationFrame(tick)
