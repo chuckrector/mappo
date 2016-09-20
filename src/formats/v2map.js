@@ -41,7 +41,7 @@ module.exports = {
   msbuf: T.list(T.u8, ({record}) => record.msbufsize),
   numthings: T.u32,
   mapevents: T.u32,
-  mapvctbl: T.list(T.u32, ({record}) => record.mapevents),
+  mapvctbl: T.list(T.u32, ({record}) => record.mapevents), // event offsets
   codesize: T.u32,
   mapvc: T.list(T.u8, ({record}) => record.codesize),
 }
