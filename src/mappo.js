@@ -36,6 +36,7 @@ const imageData = context.createImageData(16, 16 * vspData.numtiles)
 const image = document.createElement('canvas')
 const viewportWidth = 320
 const viewportHeight = 240
+const scale = 3
 
 canvas.width = viewportWidth
 canvas.height = viewportHeight
@@ -57,6 +58,9 @@ const getTileIndex = (layer, tileX, tileY) => {
 }
 
 const renderLayer = (layer, x, y, transparent=false) => {
+  x = ~~x
+  y = ~~y
+
   const topLeftTileX = x >> 4
   const topLeftTileY = y >> 4
   const subTileX = x % 16
@@ -81,6 +85,8 @@ const renderLayer = (layer, x, y, transparent=false) => {
 
 let cameraX = 0
 let cameraY = 0
+let cameraMoveX = 0
+let cameraMoveY = 0
 
 const KEYCODE_UP = 38
 const KEYCODE_DOWN = 40
@@ -99,14 +105,29 @@ canvas.addEventListener('mousedown', event => {
 canvas.addEventListener('mousemove', event => {
   if (mousedown) {
     moveCamera(
-      ~~(-event.movementX / 3),
-      ~~(-event.movementY / 3)
+      -event.movementX / scale,
+      -event.movementY / scale
     )
   }
+
+  cameraMoveX = 0
+  cameraMoveY = 0;
+  const autoScrollThreshold = 16;
+  const autoScrollBy = 2;
+  (event.clientX < autoScrollThreshold * scale) && (cameraMoveX = -autoScrollBy);
+  (event.clientX >= (viewportWidth - autoScrollThreshold) * scale) && (cameraMoveX = +autoScrollBy);
+  (event.clientY < autoScrollThreshold * scale) && (cameraMoveY = -autoScrollBy);
+  (event.clientY >= (viewportHeight - autoScrollThreshold) * scale) && (cameraMoveY = +autoScrollBy);
 })
 
 canvas.addEventListener('mouseup', event => {
   mousedown = false
+})
+
+canvas.addEventListener('mouseout', event => {
+  mousedown = false
+  cameraMoveX = 0
+  cameraMoveY = 0
 })
 
 const moveCamera = (moveX, moveY) => {
@@ -120,18 +141,16 @@ const tick = () => {
   renderLayer(mapData.map0, cameraX, cameraY)
   renderLayer(
     mapData.map1,
-    ~~(cameraX * mapData.pmultx / mapData.pdivx),
-    ~~(cameraY * mapData.pmultx / mapData.pdivx),
+    cameraX * mapData.pmultx / mapData.pdivx,
+    cameraY * mapData.pmultx / mapData.pdivx,
     true
   )
 
-  let moveX = 0
-  let moveY = 0
-  keyPressed[KEYCODE_UP] && moveY--
-  keyPressed[KEYCODE_DOWN] && moveY++
-  keyPressed[KEYCODE_LEFT] && moveX--
-  keyPressed[KEYCODE_RIGHT] && moveX++
-  moveCamera(moveX, moveY)
+  keyPressed[KEYCODE_UP] && (cameraMoveY = -1)
+  keyPressed[KEYCODE_DOWN] && (cameraMoveY = +1)
+  keyPressed[KEYCODE_LEFT] && (cameraMoveX = -1)
+  keyPressed[KEYCODE_RIGHT] && (cameraMoveX = +1)
+  moveCamera(cameraMoveX, cameraMoveY)
 
   window.requestAnimationFrame(tick)
 }
