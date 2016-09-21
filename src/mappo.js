@@ -53,7 +53,7 @@ const renderTileHighlight = ({x, y, width=16, height=16}) => {
   context.strokeStyle = 'white'
   context.globalCompositeOperation = 'exclusion'
   context.lineWidth = 2
-  context.strokeRect(x, y, 16, 16)
+  context.strokeRect(~~x, ~~y, 16, 16)
 }
 
 const renderTile = (tileIndex, x, y) => {
@@ -149,8 +149,8 @@ canvas.addEventListener('mouseout', event => {
 })
 
 const moveCamera = (moveX, moveY) => {
-  cameraX = ~~clamp(cameraX + moveX, 0, (mapData.xsize * 16) - viewportWidth)
-  cameraY = ~~clamp(cameraY + moveY, 0, (mapData.ysize * 16) - viewportHeight)
+  cameraX = clamp(cameraX + moveX, 0, (mapData.xsize * 16) - viewportWidth)
+  cameraY = clamp(cameraY + moveY, 0, (mapData.ysize * 16) - viewportHeight)
 }
 
 const tick = () => {
