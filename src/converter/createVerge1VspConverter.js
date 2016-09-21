@@ -9,7 +9,10 @@ module.exports = ({palette, numtiles, vsp0}) => {
     tileHeight: 16,
     columns: 20,
     numtiles,
-    raw32bitData: colorDepth.convert8to32({palette, raw8bitData: vsp0}),
+    raw32bitData: colorDepth.convert8to32({
+      palette: palette.map(v => v * 4),
+      raw8bitData: vsp0,
+    }),
   })
 
   return {
