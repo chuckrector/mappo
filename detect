@@ -1,0 +1,6 @@
+#!/bin/bash
+if [ "$#" -ne 1 ]; then
+  echo "usage: ./detect <filename>"
+  exit
+fi
+node src/detect.js $@

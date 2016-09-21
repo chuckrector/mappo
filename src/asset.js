@@ -6,9 +6,12 @@ const {readFormatData} = require('./readFormat')
 const fromBuffer = (buffer, formatMetadata, rethrow=false) => {
   const {format, formatName} = formatMetadata
 
+  if (!rethrow) {
+    console.log('reading as', formatName)
+  }
+
   let diskData
   try {
-    console.log('reading as', formatName)
     diskData = readFormatData({
       format,
       data: buffer,
