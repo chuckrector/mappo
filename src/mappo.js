@@ -167,8 +167,8 @@ const tick = () => {
 
   if (hoverCanvasCoord) {
     renderTileHighlight({
-      x: hoverCanvasCoord.x - ((cameraX + hoverCanvasCoord.x) % 16),
-      y: hoverCanvasCoord.y - ((cameraY + hoverCanvasCoord.y) % 16),
+      x: hoverCanvasCoord.x - ((~~cameraX + hoverCanvasCoord.x) % 16),
+      y: hoverCanvasCoord.y - ((~~cameraY + hoverCanvasCoord.y) % 16),
     })
   }
 
