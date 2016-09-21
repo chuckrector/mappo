@@ -51,6 +51,8 @@ image.getContext('2d').putImageData(imageData, 0, 0)
 
 const renderTileHighlight = ({x, y, width=16, height=16}) => {
   context.strokeStyle = 'white'
+  context.globalCompositeOperation = 'exclusion'
+  context.lineWidth = 2
   context.strokeRect(x, y, 16, 16)
 }
 
@@ -152,6 +154,7 @@ const moveCamera = (moveX, moveY) => {
 }
 
 const tick = () => {
+  context.globalCompositeOperation = 'source-over'
   context.fillStyle = 'black'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
   renderLayer(mapData.map0, cameraX, cameraY)
