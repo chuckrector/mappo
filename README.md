@@ -19,7 +19,7 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 # Requirements
 
-- Node >= 5.10.0
+- Node >= 5.10.0 (`Buffer.from`)
 
 # Installation
 
