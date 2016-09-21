@@ -49,6 +49,11 @@ image.width = 16
 image.height = 16 * vspData.numtiles
 image.getContext('2d').putImageData(imageData, 0, 0)
 
+const renderTileHighlight = ({x, y, width=16, height=16}) => {
+  context.strokeStyle = 'white'
+  context.strokeRect(x, y, 16, 16)
+}
+
 const renderTile = (tileIndex, x, y) => {
   context.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
 }
@@ -103,6 +108,7 @@ canvas.addEventListener('mousedown', event => {
   mousedown = true
 })
 
+let hoverCanvasCoord = null
 let autoScrollX = 0
 let autoScrollY = 0
 canvas.addEventListener('mousemove', event => {
@@ -120,6 +126,11 @@ canvas.addEventListener('mousemove', event => {
   (event.clientX >= (viewportWidth - autoScrollThreshold) * scale) && (autoScrollX = +1);
   (event.clientY < autoScrollThreshold * scale) && (autoScrollY = -1);
   (event.clientY >= (viewportHeight - autoScrollThreshold) * scale) && (autoScrollY = +1);
+
+  hoverCanvasCoord = {
+    x: ~~(event.clientX / scale),
+    y: ~~(event.clientY / scale),
+  }
 })
 
 canvas.addEventListener('mouseup', event => {
@@ -130,6 +141,7 @@ canvas.addEventListener('mouseout', event => {
   mousedown = false
   cameraMoveX = 0
   cameraMoveY = 0
+  hoverCanvasCoord = null
 })
 
 const moveCamera = (moveX, moveY) => {
@@ -147,6 +159,13 @@ const tick = () => {
     cameraY * mapData.pmultx / mapData.pdivx,
     true
   )
+
+  if (hoverCanvasCoord) {
+    renderTileHighlight({
+      x: hoverCanvasCoord.x - ((cameraX + hoverCanvasCoord.x) % 16),
+      y: hoverCanvasCoord.y - ((cameraY + hoverCanvasCoord.y) % 16),
+    })
+  }
 
   cameraMoveX = 0
   cameraMoveY = 0;
