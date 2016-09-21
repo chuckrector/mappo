@@ -141,12 +141,14 @@ canvas.addEventListener('mouseout', event => {
   mousedown = false
   cameraMoveX = 0
   cameraMoveY = 0
+  autoScrollX = 0
+  autoScrollY = 0
   hoverCanvasCoord = null
 })
 
 const moveCamera = (moveX, moveY) => {
-  cameraX = clamp(cameraX + moveX, 0, (mapData.xsize * 16) - viewportWidth)
-  cameraY = clamp(cameraY + moveY, 0, (mapData.ysize * 16) - viewportHeight)
+  cameraX = ~~clamp(cameraX + moveX, 0, (mapData.xsize * 16) - viewportWidth)
+  cameraY = ~~clamp(cameraY + moveY, 0, (mapData.ysize * 16) - viewportHeight)
 }
 
 const tick = () => {
