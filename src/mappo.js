@@ -120,12 +120,12 @@ canvas.addEventListener('mousemove', event => {
   }
 
   autoScrollX = 0
-  autoScrollY = 0;
-  const autoScrollThreshold = 16;
-  (event.clientX < autoScrollThreshold * scale) && (autoScrollX = -1);
-  (event.clientX >= (viewportWidth - autoScrollThreshold) * scale) && (autoScrollX = +1);
-  (event.clientY < autoScrollThreshold * scale) && (autoScrollY = -1);
-  (event.clientY >= (viewportHeight - autoScrollThreshold) * scale) && (autoScrollY = +1);
+  autoScrollY = 0
+  const autoScrollThreshold = 16
+  event.clientX < autoScrollThreshold * scale && (autoScrollX = -1);
+  event.clientX >= (viewportWidth - autoScrollThreshold) * scale && (autoScrollX = +1);
+  event.clientY < autoScrollThreshold * scale && (autoScrollY = -1);
+  event.clientY >= (viewportHeight - autoScrollThreshold) * scale && (autoScrollY = +1);
 
   hoverCanvasCoord = {
     x: ~~(event.clientX / scale),
@@ -168,11 +168,11 @@ const tick = () => {
   }
 
   cameraMoveX = 0
-  cameraMoveY = 0;
-  (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (cameraMoveY = -cameraScrollAmount);
-  (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (cameraMoveY = +cameraScrollAmount);
-  (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (cameraMoveX = -cameraScrollAmount);
-  (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (cameraMoveX = +cameraScrollAmount);
+  cameraMoveY = 0
+  keyPressed[KEYCODE_UP] || autoScrollY < 0 && (cameraMoveY = -cameraScrollAmount);
+  keyPressed[KEYCODE_DOWN] || autoScrollY > 0 && (cameraMoveY = +cameraScrollAmount);
+  keyPressed[KEYCODE_LEFT] || autoScrollX < 0 && (cameraMoveX = -cameraScrollAmount);
+  keyPressed[KEYCODE_RIGHT] || autoScrollX > 0 && (cameraMoveX = +cameraScrollAmount);
   moveCamera(cameraMoveX, cameraMoveY)
 
   window.requestAnimationFrame(tick)
