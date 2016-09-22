@@ -3,8 +3,20 @@
 const asset = require('./asset')
 const colorDepth = require('./converter/colorDepth')
 const clamp = require('lodash/clamp')
+const glob = require('glob')
+const createMappoSession = require('./createMappoSession')
 
-const mapFilename = 'data/v1/TEST.MAP';
+const mappoSession = createMappoSession({
+  fileSystem: {
+    files: glob.sync(process.cwd() + '/**/*.map', {nocase: true}),
+  },
+  launchFolder: process.cwd(),
+})
+
+console.log('launchFolder', process.cwd())
+console.log('all maps', mappoSession.getMapFilenames())
+
+const mapFilename = 'data/v1/TEST.MAP'
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
 
 console.log(mapFilename, mapData)
