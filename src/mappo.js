@@ -118,6 +118,7 @@ document.addEventListener('keydown', event => keyPressed[event.keyCode] = true)
 document.addEventListener('keyup', event => keyPressed[event.keyCode] = false)
 
 let mousedown = false
+let mousein = false
 canvas.addEventListener('mousedown', event => {
   mousedown = true
 })
@@ -136,10 +137,12 @@ canvas.addEventListener('mousemove', event => {
   autoScrollX = 0
   autoScrollY = 0
   const autoScrollThreshold = 16;
-  event.clientX < autoScrollThreshold * scale && (autoScrollX = -1);
-  event.clientX >= (viewportWidth - autoScrollThreshold) * scale && (autoScrollX = +1);
-  event.clientY < autoScrollThreshold * scale && (autoScrollY = -1);
-  event.clientY >= (viewportHeight - autoScrollThreshold) * scale && (autoScrollY = +1);
+  if (mousein) {
+    event.clientX < autoScrollThreshold * scale && (autoScrollX = -1);
+    event.clientX >= (viewportWidth - autoScrollThreshold) * scale && (autoScrollX = +1);
+    event.clientY < autoScrollThreshold * scale && (autoScrollY = -1);
+    event.clientY >= (viewportHeight - autoScrollThreshold) * scale && (autoScrollY = +1);
+  }
 
   hoverCanvasCoord = {
     x: ~~(event.clientX / scale),
@@ -151,8 +154,12 @@ canvas.addEventListener('mouseup', event => {
   mousedown = false
 })
 
+canvas.addEventListener('mouseenter', event => {
+  mousein = true
+})
+
 canvas.addEventListener('mouseout', event => {
-  mousedown = false
+  mousein = false
   cameraMoveX = 0
   cameraMoveY = 0
   autoScrollX = 0
