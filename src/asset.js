@@ -16,6 +16,7 @@ const fromBuffer = (buffer, formatMetadata, rethrow=false) => {
       format,
       data: buffer,
     })
+    diskData.formatName = formatName
   } catch (e) {
     if (rethrow) {
       throw e
