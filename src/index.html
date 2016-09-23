@@ -8,6 +8,28 @@
         margin: 0;
         overflow: hidden;
       }
+      #mappo {
+        display: flex;
+      }
+      .left-side {
+        overflow: hidden;
+        overflow-y: auto;
+        width: 250px;
+        min-width: 250px;
+        height: 100vh;
+      }
+      .map-list {
+        margin: 0;
+        padding: 5px;
+      }
+      .map-list li {
+        cursor: pointer;
+        display: block;
+        padding: 2px 10px;
+      }
+      .map-list li:hover {
+        background: silver;
+      }
       .mappo-viewport {
         width: 960px;
         height: 720px;
@@ -16,7 +38,14 @@
     </style>
   </head>
   <body>
-    <canvas class="mappo-viewport"></canvas>
+    <div id="mappo">
+      <div class="left-side">
+        <ul class="map-list"></ul>
+      </div>
+      <div class="right-side">
+        <canvas class="mappo-viewport"></canvas>
+      </div>
+    </div>
     <script src="mappo.js"></script>
   </body>
 </html>

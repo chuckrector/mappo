@@ -14,6 +14,18 @@ const mappoSession = createMappoSession({
   launchFolder: process.cwd(),
 })
 
+const mapList = document.querySelector('.map-list')
+mappoSession.getMapFilenames().forEach(mapFilename => {
+  const li = document.createElement('li')
+  li.innerText = mapFilename
+  li.addEventListener('click', event => {
+    console.group()
+    console.log('clicked', mapFilename)
+    console.groupEnd()
+  })
+  mapList.appendChild(li)
+})
+
 console.log('launchFolder', process.cwd())
 console.log('all maps', mappoSession.getMapFilenames())
 
@@ -137,15 +149,15 @@ canvas.addEventListener('mousemove', event => {
   autoScrollY = 0
   const autoScrollThreshold = 16;
   if (mousein) {
-    event.clientX < autoScrollThreshold * scale && (autoScrollX = -1);
-    event.clientX >= (viewportWidth - autoScrollThreshold) * scale && (autoScrollX = +1);
-    event.clientY < autoScrollThreshold * scale && (autoScrollY = -1);
-    event.clientY >= (viewportHeight - autoScrollThreshold) * scale && (autoScrollY = +1);
+    event.offsetX < autoScrollThreshold * scale && (autoScrollX = -1);
+    event.offsetX >= (viewportWidth - autoScrollThreshold) * scale && (autoScrollX = +1);
+    event.offsetY < autoScrollThreshold * scale && (autoScrollY = -1);
+    event.offsetY >= (viewportHeight - autoScrollThreshold) * scale && (autoScrollY = +1);
   }
 
   hoverCanvasCoord = {
-    x: ~~(event.clientX / scale),
-    y: ~~(event.clientY / scale),
+    x: ~~(event.offsetX / scale),
+    y: ~~(event.offsetY / scale),
   }
 })
 
