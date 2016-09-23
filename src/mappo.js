@@ -28,17 +28,19 @@ const mapList = document.querySelector('.map-list')
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement('li')
   li.innerText = mapFilename
-  li.addEventListener('click', event => {
-    console.group()
-    console.log('clicked', mapFilename)
-    console.groupEnd()
-  })
+  li.addEventListener('click', event => loadMap(mapFilename))
   mapList.appendChild(li)
 })
 
 console.log('launchFolder', process.cwd())
 
-mappoState.mapFilename = 'data/v1/TEST.MAP'
+mappoState.palFilename = 'data/v1/VERGE.PAL'
+mappoState.palData = asset.fromDisk(mappoState.palFilename, asset.v1pal)
+
+const loadMap = mapFilename => {
+console.group()
+
+mappoState.mapFilename = mapFilename
 mappoState.mapData = asset.fromDisk(mappoState.mapFilename, asset.v1map)
 
 console.log(mappoState.mapFilename, mappoState.mapData)
@@ -50,9 +52,6 @@ console.log('numscripts', mappoState.mapData.numscripts)
 console.log('scriptofstbl', JSON.stringify(mappoState.mapData.scriptofstbl))
 console.log('mapvcs', mappoState.mapData.mapvc.length)
 
-mappoState.palFilename = 'data/v1/VERGE.PAL'
-mappoState.palData = asset.fromDisk(mappoState.palFilename, asset.v1pal)
-
 mappoState.vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
 mappoState.vspData = asset.fromDisk(mappoState.vspFilename, asset.v1vsp)
 console.log('vsp', mappoState.vspFilename, mappoState.vspData)
@@ -62,9 +61,20 @@ const raw32bitData = colorDepth.convert8to32({
   raw8bitData: mappoState.vspData.vsp0,
 })
 
+convertRaw32bitDataToImageBitmap({
+  context,
+  raw32bitData,
+  width: 16,
+  height: 16,
+  numTiles: mappoState.vspData.numtiles,
+}).then(tilesetBitmap => {
+  mappoState.tilesetBitmap = tilesetBitmap
+})
+
+console.groupEnd()
+}
+
 const canvas = document.querySelector('.mappo-viewport')
-const tileColumns = 20
-const tileRows = ~~((mappoState.vspData.numtiles + 19) / 20)
 const context = canvas.getContext('2d')
 
 const viewportWidth = 320
@@ -219,13 +229,3 @@ const tick = () => {
 }
 
 tick()
-
-convertRaw32bitDataToImageBitmap({
-  context,
-  raw32bitData,
-  width: 16,
-  height: 16,
-  numTiles: mappoState.vspData.numtiles,
-}).then(tilesetBitmap => {
-  mappoState.tilesetBitmap = tilesetBitmap
-})
