@@ -1,3 +1,30 @@
+## 0.24.0 (Sep 22, 2016)
+
+- allow viewport dragging to continue after moving outside and back into the window
+- prevent auto scrolling from triggering while outside the window
+
+## 0.23.0 (Sep 21, 2016)
+
+- inverted color tile highlight
+- file format detection cli
+- fix bug where you couldn't drag viewport in fine increments
+- fix bug with tile highlight jittering due to subpixel camera position
+
+## 0.22.1 (Sep 20, 2016)
+
+- fix bug where arrow keys would keep scrolling viewport after release
+- fix bug with dim palettes in v2vsp2png
+- fix broken arrow key movement
+- fix bug where auto scroll would continue after moving outside viewport
+- fix subpixel tile highlight rendering bug
+
+## 0.22.0 (Sep 19, 2016)
+
+- v1map rendering
+- scroll viewport with arrow keys
+- drag viewport with mouse
+- autoscroll viewport when mouse is near edges
+
 ## 0.21.0 (Sep 18, 2016)
 
 - json abbreviator

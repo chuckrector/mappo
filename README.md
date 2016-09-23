@@ -1,4 +1,4 @@
-# ![alt text](/img/v1/CRYSTAL.CHR-down.gif?raw=true "a sample of v2chr2gif cli output") mappo v0.21.0 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
+# ![alt text](/img/v1/CRYSTAL.CHR-down.gif?raw=true "a sample of v2chr2gif cli output") mappo v0.24.0 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
 
 [Docs](https://github.com/chuckrector/mappo/tree/master/doc)
 
