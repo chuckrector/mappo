@@ -22,3 +22,20 @@ const createMappoTileset = require('./createMappoTileset')
 
   expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numtiles)
 }
+
+{
+  // can create from v2 vsp
+  const numTiles = 3
+  const buffer = makeBuffer([
+    B.u16(0), // version
+    B.u8(filler(3 * 256)),
+    B.u16(numTiles),
+    B.compressedU8(filler(16 * 16 * numTiles, 99)),
+    B.u8(filler(2 * 4 * 100, 88)), // 100 vsp anims
+  ])
+
+  const v2vsp = asset.fromBuffer(buffer, asset.v2vsp)
+  const mappoTileset = createMappoTileset({tileset: v2vsp})
+
+  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numTiles)
+}
