@@ -49,11 +49,81 @@ const createMappoMap = require('./createMappoMap')
     map: v1map
   })
 
-  expect(mappoMap.width).toBe(2)
-  expect(mappoMap.height).toBe(3)
   expect(mappoMap.tileLayers.length).toBe(2)
+
   expect(mappoMap.tileLayers[0].description).toBe('Background')
   expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 3, 77))
+  expect(mappoMap.tileLayers[0].width).toBe(2)
+  expect(mappoMap.tileLayers[0].height).toBe(3)
+
   expect(mappoMap.tileLayers[1].description).toBe('Foreground')
   expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(2 * 3, 88))
+  expect(mappoMap.tileLayers[1].width).toBe(2)
+  expect(mappoMap.tileLayers[1].height).toBe(3)
+}
+
+{
+  // can create from v2 map
+  const numlayers = 3
+  const width = 2
+  const height = 3
+  const v2layerinfo = makeBuffer([
+      B.u32(0),
+      B.u16(width),
+      B.u16(height),
+      B.u32(0),
+  ])
+  const buffer = makeBuffer([
+    B.u8(filler(6)),
+    B.u32(1),
+    B.stringFixed(60, 'vsp'),
+    B.stringFixed(60, 'music'),
+    B.stringFixed(20, '12er3'),
+    B.u16([2, 3]), // xstart/ystart
+    B.u8(filler(51, 4)),
+    B.u8(numlayers), // numlayers
+    makeBuffer(filler(3, v2layerinfo)),
+    B.compressedU16(filler(width * height, 77)),
+    B.compressedU16(filler(width * height, 88)),
+    B.compressedU16(filler(width * height, 99)),
+    B.compressedU8(filler(width * height, 66)),
+    B.compressedU8(filler(width * height, 55)),
+    B.u32(1), // numzones
+    B.stringFixed(40, 'zone'),
+    B.u16(filler(5, 6)),
+    B.u8(1), // nmchr
+    B.stringFixed(60, 'chr'),
+    B.u8(1), // entities
+    B.u8(filler(80)),
+    B.stringFixed(20, 'the entity'),
+    B.u8(1), // nummovescripts
+    B.u32(0), // msofstbl
+    B.u32(0), // # things
+    B.u32(1), // map events
+    B.u32(0), // mapvctbl
+    B.u32(1), // codesize
+    B.u8(0), // mapvc
+  ])
+
+  const v2map = asset.fromBuffer(buffer, asset.v2map)
+  const mappoMap = createMappoMap({
+    map: v2map
+  })
+
+  expect(mappoMap.tileLayers.length).toBe(numlayers)
+
+  expect(mappoMap.tileLayers[0].width).toBe(width)
+  expect(mappoMap.tileLayers[0].height).toBe(height)
+  expect(mappoMap.tileLayers[0].description).toBe('Layer #0')
+  expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(width * height, 77))
+
+  expect(mappoMap.tileLayers[1].width).toBe(width)
+  expect(mappoMap.tileLayers[1].height).toBe(height)
+  expect(mappoMap.tileLayers[1].description).toBe('Layer #1')
+  expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(width * height, 88))
+
+  expect(mappoMap.tileLayers[2].width).toBe(width)
+  expect(mappoMap.tileLayers[2].height).toBe(height)
+  expect(mappoMap.tileLayers[2].description).toBe('Layer #2')
+  expect(mappoMap.tileLayers[2].tileIndexGrid).toEqual(filler(width * height, 99))
 }
