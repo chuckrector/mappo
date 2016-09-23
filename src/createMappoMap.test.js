@@ -17,11 +17,13 @@ const createMappoMap = require('./createMappoMap')
     B.u8(0),
   ])
 
+  const mul = 2
+  const div = 3
   const buffer = makeBuffer([
     B.u8(0),
     B.stringFixed(13, 'test.vsp'),
     B.stringFixed(13, 'music.mod'),
-    B.u8([0, 1, 1]),
+    B.u8([1, mul, div]),
     B.stringFixed(30, 'level name'),
     B.u8([0, 0]),
     B.u16([0, 0]), // startx/starty
@@ -55,11 +57,13 @@ const createMappoMap = require('./createMappoMap')
   expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 3, 77))
   expect(mappoMap.tileLayers[0].width).toBe(2)
   expect(mappoMap.tileLayers[0].height).toBe(3)
+  expect(mappoMap.tileLayers[0].parallax).toEqual({x: 1.0, y: 1.0})
 
   expect(mappoMap.tileLayers[1].description).toBe('Foreground')
   expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(2 * 3, 88))
   expect(mappoMap.tileLayers[1].width).toBe(2)
   expect(mappoMap.tileLayers[1].height).toBe(3)
+  expect(mappoMap.tileLayers[1].parallax).toEqual({x: mul/div, y: mul/div})
 }
 
 {
@@ -68,7 +72,7 @@ const createMappoMap = require('./createMappoMap')
   const width = 2
   const height = 3
   const v2layerinfo = makeBuffer([
-      B.u32(0),
+      B.u8([1, 1, 1, 1]),
       B.u16(width),
       B.u16(height),
       B.u32(0),
@@ -116,16 +120,19 @@ const createMappoMap = require('./createMappoMap')
   expect(mappoMap.tileLayers[0].height).toBe(height)
   expect(mappoMap.tileLayers[0].description).toBe('Layer #0')
   expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(width * height, 77))
+  expect(mappoMap.tileLayers[0].parallax).toEqual({x: 1.0, y: 1.0})
 
   expect(mappoMap.tileLayers[1].width).toBe(width)
   expect(mappoMap.tileLayers[1].height).toBe(height)
   expect(mappoMap.tileLayers[1].description).toBe('Layer #1')
   expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(width * height, 88))
+  expect(mappoMap.tileLayers[1].parallax).toEqual({x: 1.0, y: 1.0})
 
   expect(mappoMap.tileLayers[2].width).toBe(width)
   expect(mappoMap.tileLayers[2].height).toBe(height)
   expect(mappoMap.tileLayers[2].description).toBe('Layer #2')
   expect(mappoMap.tileLayers[2].tileIndexGrid).toEqual(filler(width * height, 99))
+  expect(mappoMap.tileLayers[2].parallax).toEqual({x: 1.0, y: 1.0})
 }
 
 {
@@ -181,14 +188,17 @@ const createMappoMap = require('./createMappoMap')
   expect(mappoMap.tileLayers[0].height).toBe(height)
   expect(mappoMap.tileLayers[0].description).toBe('Back')
   expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(width * height, 77))
+  expect(mappoMap.tileLayers[0].parallax).toEqual({x: 1.0, y: 1.0})
 
   expect(mappoMap.tileLayers[1].width).toBe(width)
   expect(mappoMap.tileLayers[1].height).toBe(height)
   expect(mappoMap.tileLayers[1].description).toBe('Fore')
   expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(width * height, 88))
+  expect(mappoMap.tileLayers[1].parallax).toEqual({x: 1.0, y: 1.0})
 
   expect(mappoMap.tileLayers[2].width).toBe(width)
   expect(mappoMap.tileLayers[2].height).toBe(height)
   expect(mappoMap.tileLayers[2].description).toBe('Clouds')
   expect(mappoMap.tileLayers[2].tileIndexGrid).toEqual(filler(width * height, 99))
+  expect(mappoMap.tileLayers[2].parallax).toEqual({x: 1.0, y: 1.0})
 }
