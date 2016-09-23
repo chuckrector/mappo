@@ -17,6 +17,8 @@ const mappoSession = createMappoSession({
 const mappoState = {
   mapFilename: null,
   mapData: null,
+  palFilename: null,
+  palData: null,
 }
 
 const mapList = document.querySelector('.map-list')
@@ -45,15 +47,15 @@ console.log('numscripts', mappoState.mapData.numscripts)
 console.log('scriptofstbl', JSON.stringify(mappoState.mapData.scriptofstbl))
 console.log('mapvcs', mappoState.mapData.mapvc.length)
 
-const palFilename = 'data/v1/VERGE.PAL'
-const palData = asset.fromDisk(palFilename, asset.v1pal)
+mappoState.palFilename = 'data/v1/VERGE.PAL'
+mappoState.palData = asset.fromDisk(mappoState.palFilename, asset.v1pal)
 
 const vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
 const vspData = asset.fromDisk(vspFilename, asset.v1vsp)
 console.log('vsp', vspFilename, vspData)
 
 const raw32bitData = colorDepth.convert8to32({
-  palette: palData.pal.map(v => v * 4),
+  palette: mappoState.palData.pal.map(v => v * 4),
   raw8bitData: vspData.vsp0,
 })
 
