@@ -66,7 +66,7 @@ module.exports = (buffer) => {
   if (buffer.length > 0) {
     const reader = createDataReader({data: buffer})
     const version = reader.readByte()
-    if (version === 4) {
+    if (version === 3 || version === 4) {
       const vspName = reader.readStringFixed(13)
       if (vspName.toLowerCase().includes('.vsp')) {
         return 'v1map'
