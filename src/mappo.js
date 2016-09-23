@@ -14,6 +14,11 @@ const mappoSession = createMappoSession({
   launchFolder: process.cwd(),
 })
 
+const mappoState = {
+  mapFilename: null,
+  mapData: null,
+}
+
 const mapList = document.querySelector('.map-list')
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement('li')
@@ -28,22 +33,22 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 console.log('launchFolder', process.cwd())
 
-const mapFilename = 'data/v1/TEST.MAP'
-const mapData = asset.fromDisk(mapFilename, asset.v1map)
+mappoState.mapFilename = 'data/v1/TEST.MAP'
+mappoState.mapData = asset.fromDisk(mappoState.mapFilename, asset.v1map)
 
-console.log(mapFilename, mapData)
-console.log('nummovescripts', mapData.nummovescripts)
-console.log('msbufsize', mapData.msbufsize)
-console.log('msofstbl', JSON.stringify(mapData.msofstbl))
-console.log('msbuf', JSON.stringify(mapData.msbuf))
-console.log('numscripts', mapData.numscripts)
-console.log('scriptofstbl', JSON.stringify(mapData.scriptofstbl))
-console.log('mapvcs', mapData.mapvc.length)
+console.log(mappoState.mapFilename, mappoState.mapData)
+console.log('nummovescripts', mappoState.mapData.nummovescripts)
+console.log('msbufsize', mappoState.mapData.msbufsize)
+console.log('msofstbl', JSON.stringify(mappoState.mapData.msofstbl))
+console.log('msbuf', JSON.stringify(mappoState.mapData.msbuf))
+console.log('numscripts', mappoState.mapData.numscripts)
+console.log('scriptofstbl', JSON.stringify(mappoState.mapData.scriptofstbl))
+console.log('mapvcs', mappoState.mapData.mapvc.length)
 
 const palFilename = 'data/v1/VERGE.PAL'
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 
-const vspFilename = 'data/v1/' + mapData.vsp0name
+const vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
 const vspData = asset.fromDisk(vspFilename, asset.v1vsp)
 console.log('vsp', vspFilename, vspData)
 
@@ -83,7 +88,7 @@ const renderTile = (tileIndex, x, y) => {
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
-  return layer[(tileY * mapData.xsize) + tileX]
+  return layer[(tileY * mappoState.mapData.xsize) + tileX]
 }
 
 const renderLayer = (layer, x, y, transparent=false) => {
@@ -178,19 +183,19 @@ canvas.addEventListener('mouseout', event => {
 })
 
 const moveCamera = (moveX, moveY) => {
-  cameraX = clamp(cameraX + moveX, 0, (mapData.xsize * 16) - viewportWidth)
-  cameraY = clamp(cameraY + moveY, 0, (mapData.ysize * 16) - viewportHeight)
+  cameraX = clamp(cameraX + moveX, 0, (mappoState.mapData.xsize * 16) - viewportWidth)
+  cameraY = clamp(cameraY + moveY, 0, (mappoState.mapData.ysize * 16) - viewportHeight)
 }
 
 const tick = () => {
   context.globalCompositeOperation = 'source-over'
   context.fillStyle = 'black'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
-  renderLayer(mapData.map0, cameraX, cameraY)
+  renderLayer(mappoState.mapData.map0, cameraX, cameraY)
   renderLayer(
-    mapData.map1,
-    cameraX * mapData.pmultx / mapData.pdivx,
-    cameraY * mapData.pmultx / mapData.pdivx,
+    mappoState.mapData.map1,
+    cameraX * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
+    cameraY * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
     true
   )
 
