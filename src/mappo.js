@@ -21,6 +21,7 @@ const mappoState = {
   palData: null,
   vspFilename: null,
   vspData: null,
+  tilesetBitmap: null,
 }
 
 const mapList = document.querySelector('.map-list')
@@ -65,13 +66,6 @@ const canvas = document.querySelector('.mappo-viewport')
 const tileColumns = 20
 const tileRows = ~~((mappoState.vspData.numtiles + 19) / 20)
 const context = canvas.getContext('2d')
-convertRaw32bitDataToImageBitmap({
-  context,
-  raw32bitData,
-  width: 16,
-  height: 16,
-  numTiles: mappoState.vspData.numtiles,
-}).then(image => {
 
 const viewportWidth = 320
 const viewportHeight = 240
@@ -88,7 +82,7 @@ const renderTileHighlight = ({x, y, width=16, height=16}) => {
 }
 
 const renderTile = (tileIndex, x, y) => {
-  context.drawImage(image, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
+  context.drawImage(mappoState.tilesetBitmap, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
@@ -195,32 +189,43 @@ const tick = () => {
   context.globalCompositeOperation = 'source-over'
   context.fillStyle = 'black'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
-  renderLayer(mappoState.mapData.map0, cameraX, cameraY)
-  renderLayer(
-    mappoState.mapData.map1,
-    cameraX * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
-    cameraY * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
-    true
-  )
 
-  if (hoverCanvasCoord) {
-    renderTileHighlight({
-      x: hoverCanvasCoord.x - ((~~cameraX + hoverCanvasCoord.x) % 16),
-      y: hoverCanvasCoord.y - ((~~cameraY + hoverCanvasCoord.y) % 16),
-    })
+  if (mappoState.tilesetBitmap) {
+    renderLayer(mappoState.mapData.map0, cameraX, cameraY)
+    renderLayer(
+      mappoState.mapData.map1,
+      cameraX * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
+      cameraY * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
+      true
+    )
+
+    if (hoverCanvasCoord) {
+      renderTileHighlight({
+        x: hoverCanvasCoord.x - ((~~cameraX + hoverCanvasCoord.x) % 16),
+        y: hoverCanvasCoord.y - ((~~cameraY + hoverCanvasCoord.y) % 16),
+      })
+    }
+
+    cameraMoveX = 0
+    cameraMoveY = 0;
+    (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (cameraMoveY = -cameraScrollAmount);
+    (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (cameraMoveY = +cameraScrollAmount);
+    (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (cameraMoveX = -cameraScrollAmount);
+    (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (cameraMoveX = +cameraScrollAmount);
+    moveCamera(cameraMoveX, cameraMoveY)
   }
-
-  cameraMoveX = 0
-  cameraMoveY = 0;
-  (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (cameraMoveY = -cameraScrollAmount);
-  (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (cameraMoveY = +cameraScrollAmount);
-  (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (cameraMoveX = -cameraScrollAmount);
-  (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (cameraMoveX = +cameraScrollAmount);
-  moveCamera(cameraMoveX, cameraMoveY)
 
   window.requestAnimationFrame(tick)
 }
 
 tick()
 
-}) // tileset ImageBitmap promise
+convertRaw32bitDataToImageBitmap({
+  context,
+  raw32bitData,
+  width: 16,
+  height: 16,
+  numTiles: mappoState.vspData.numtiles,
+}).then(tilesetBitmap => {
+  mappoState.tilesetBitmap = tilesetBitmap
+})
