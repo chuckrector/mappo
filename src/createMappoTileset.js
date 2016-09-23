@@ -18,6 +18,11 @@ module.exports = ({tileset}) => {
         raw8bitData: tileset.imagedata.decompressed,
       })
     } break;
+    case 'v3vsp': {
+      mappoTileset.raw32bitData = colorDepth.convert24to32({
+        raw24bitData: tileset.tiledatabuf.decompressed,
+      })
+    } break;
   }
 
   return mappoTileset

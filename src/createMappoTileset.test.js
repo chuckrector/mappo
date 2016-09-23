@@ -39,3 +39,24 @@ const createMappoTileset = require('./createMappoTileset')
 
   expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numTiles)
 }
+
+{
+  // can create from v3 vsp
+  const numTiles = 3
+  const tileSize = 32
+  const buffer = makeBuffer([
+    // sig/version/tilesize/format/#tiles/compression
+    B.u32([0, 0, tileSize, 0, numTiles, 1]),
+    B.zlibU8(filler(tileSize * tileSize * 3 * numTiles)),
+    B.u32(1), // #anims
+    B.stringFixed(256, 'vsp anim name'),
+    B.u32([0, 0, 0, 0]), // start/finish/delay/mode
+    B.u32(1), // #obs
+    B.zlibU8(filler(tileSize * tileSize)),
+  ])
+
+  const v3vsp = asset.fromBuffer(buffer, asset.v3vsp)
+  const mappoTileset = createMappoTileset({tileset: v3vsp})
+
+  expect(mappoTileset.raw32bitData.length).toBe(tileSize * tileSize * 4 * numTiles)
+}
