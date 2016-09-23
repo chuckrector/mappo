@@ -5,7 +5,7 @@ const colorDepth = require('./converter/colorDepth')
 const clamp = require('lodash/clamp')
 const glob = require('glob')
 const createMappoSession = require('./createMappoSession')
-const convertRaw32bitDataToHtmlCanvas = require('./convertRaw32bitDataToHtmlCanvas')
+const convertRaw32bitDataToImageBitmap = require('./convertRaw32bitDataToImageBitmap')
 
 const mappoSession = createMappoSession({
   fileSystem: {
@@ -45,13 +45,13 @@ const canvas = document.querySelector('.mappo-viewport')
 const tileColumns = 20
 const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = canvas.getContext('2d')
-const image = convertRaw32bitDataToHtmlCanvas({
-  document,
+convertRaw32bitDataToImageBitmap({
+  context,
   raw32bitData,
   width: 16,
   height: 16,
   numTiles: vspData.numtiles,
-})
+}).then(image => {
 
 const viewportWidth = 320
 const viewportHeight = 240
@@ -202,3 +202,5 @@ const tick = () => {
 }
 
 tick()
+
+}) // tileset ImageBitmap promise
