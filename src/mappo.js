@@ -27,7 +27,6 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 })
 
 console.log('launchFolder', process.cwd())
-console.log('all maps', mappoSession.getMapFilenames())
 
 const mapFilename = 'data/v1/TEST.MAP'
 const mapData = asset.fromDisk(mapFilename, asset.v1map)
