@@ -127,3 +127,68 @@ const createMappoMap = require('./createMappoMap')
   expect(mappoMap.tileLayers[2].description).toBe('Layer #2')
   expect(mappoMap.tileLayers[2].tileIndexGrid).toEqual(filler(width * height, 99))
 }
+
+{
+  // can create from v3 maps
+  const v3layerinfo = (name, fillWith) => (
+    makeBuffer([
+      B.stringFixed(256, name),
+      B.f64([1, 1]),
+      B.u16([width, height]),
+      B.u8(0),
+      B.zlibU16(filler(width * height, fillWith)),
+    ])
+  )
+
+  const numlayers = 3
+  const width = 2
+  const height = 3
+  const buffer = makeBuffer([
+    B.stringFixed(6, 'V3MAP\0'),
+    B.u32(0),
+    B.u32(0),
+    B.stringFixed(256, 'map name'),
+    B.stringFixed(256, 'vsp name'),
+    B.stringFixed(256, 'music name'),
+    B.stringFixed(256, 'render string'),
+    B.stringFixed(256, 'startup script'),
+    B.u16([0, 0]), // startx,starty
+    B.u32(numlayers),
+    v3layerinfo('Back', 77),
+    v3layerinfo('Fore', 88),
+    v3layerinfo('Clouds', 99),
+    B.zlibU8(filler(width * height, 88)),
+    B.zlibU16(filler(width * height, 77)),
+    B.u32(1), // # zones
+    B.stringFixed(256, 'zone name'),
+    B.stringFixed(256, 'zone script'),
+    B.u8([0, 1, 2]),
+    B.u32(1), // # entities
+    B.u8(filler(26)),
+    B.stringFixed(256, 'entity move script'),
+    B.stringFixed(256, 'entity chr'),
+    B.stringFixed(256, 'entity description'),
+    B.stringFixed(256, 'entity script'),
+    B.u8(0), // script bytes (all remaining)
+  ])
+
+  const v3map = asset.fromBuffer(buffer, asset.v3map)
+  const mappoMap = createMappoMap({map: v3map})
+
+  expect(mappoMap.tileLayers.length).toBe(numlayers)
+
+  expect(mappoMap.tileLayers[0].width).toBe(width)
+  expect(mappoMap.tileLayers[0].height).toBe(height)
+  expect(mappoMap.tileLayers[0].description).toBe('Back')
+  expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(width * height, 77))
+
+  expect(mappoMap.tileLayers[1].width).toBe(width)
+  expect(mappoMap.tileLayers[1].height).toBe(height)
+  expect(mappoMap.tileLayers[1].description).toBe('Fore')
+  expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(width * height, 88))
+
+  expect(mappoMap.tileLayers[2].width).toBe(width)
+  expect(mappoMap.tileLayers[2].height).toBe(height)
+  expect(mappoMap.tileLayers[2].description).toBe('Clouds')
+  expect(mappoMap.tileLayers[2].tileIndexGrid).toEqual(filler(width * height, 99))
+}

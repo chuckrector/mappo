@@ -21,6 +21,14 @@ module.exports = ({map}) => {
         }
       })
     } break;
+    case 'v3map': {
+      mappoMap.tileLayers = map.layers.map(layerInfo => ({
+        description: layerInfo.layername,
+        width: layerInfo.width,
+        height: layerInfo.height,
+        tileIndexGrid: layerInfo.tiledata.decompressed,
+      }))
+    } break;
   }
 
   return mappoMap
