@@ -117,7 +117,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
   // can detect v1 MAP
   const isMap = makeBuffer([
     B.u8(4),
-    B.stringFixed(13, 'DARIN.CHR'),
+    B.stringFixed(13, 'HAHN01.VSP'),
   ])
 
   expect(detectFormat(isMap)).toBe('v1map')

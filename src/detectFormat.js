@@ -67,8 +67,8 @@ module.exports = (buffer) => {
     const reader = createDataReader({data: buffer})
     const version = reader.readByte()
     if (version === 4) {
-      const chrName = reader.readStringFixed(13)
-      if (chrName.toLowerCase().includes('.chr')) {
+      const vspName = reader.readStringFixed(13)
+      if (vspName.toLowerCase().includes('.vsp')) {
         return 'v1map'
       } else if (buffer.length >= 1 + (11 * 2) + (4 * 4) + (2 * 4)) { // rough min
         try {
