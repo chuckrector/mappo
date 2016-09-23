@@ -38,40 +38,40 @@ mappoState.palFilename = 'data/v1/VERGE.PAL'
 mappoState.palData = asset.fromDisk(mappoState.palFilename, asset.v1pal)
 
 const loadMap = mapFilename => {
-console.group()
+  console.group()
 
-mappoState.mapFilename = mapFilename
-mappoState.mapData = asset.fromDisk(mappoState.mapFilename, asset.v1map)
+  mappoState.mapFilename = mapFilename
+  mappoState.mapData = asset.fromDisk(mappoState.mapFilename, asset.v1map)
 
-console.log(mappoState.mapFilename, mappoState.mapData)
-console.log('nummovescripts', mappoState.mapData.nummovescripts)
-console.log('msbufsize', mappoState.mapData.msbufsize)
-console.log('msofstbl', JSON.stringify(mappoState.mapData.msofstbl))
-console.log('msbuf', JSON.stringify(mappoState.mapData.msbuf))
-console.log('numscripts', mappoState.mapData.numscripts)
-console.log('scriptofstbl', JSON.stringify(mappoState.mapData.scriptofstbl))
-console.log('mapvcs', mappoState.mapData.mapvc.length)
+  console.log(mappoState.mapFilename, mappoState.mapData)
+  console.log('nummovescripts', mappoState.mapData.nummovescripts)
+  console.log('msbufsize', mappoState.mapData.msbufsize)
+  console.log('msofstbl', JSON.stringify(mappoState.mapData.msofstbl))
+  console.log('msbuf', JSON.stringify(mappoState.mapData.msbuf))
+  console.log('numscripts', mappoState.mapData.numscripts)
+  console.log('scriptofstbl', JSON.stringify(mappoState.mapData.scriptofstbl))
+  console.log('mapvcs', mappoState.mapData.mapvc.length)
 
-mappoState.vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
-mappoState.vspData = asset.fromDisk(mappoState.vspFilename, asset.v1vsp)
-console.log('vsp', mappoState.vspFilename, mappoState.vspData)
+  mappoState.vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
+  mappoState.vspData = asset.fromDisk(mappoState.vspFilename, asset.v1vsp)
+  console.log('vsp', mappoState.vspFilename, mappoState.vspData)
 
-const raw32bitData = colorDepth.convert8to32({
-  palette: mappoState.palData.pal.map(v => v * 4),
-  raw8bitData: mappoState.vspData.vsp0,
-})
+  const raw32bitData = colorDepth.convert8to32({
+    palette: mappoState.palData.pal.map(v => v * 4),
+    raw8bitData: mappoState.vspData.vsp0,
+  })
 
-convertRaw32bitDataToImageBitmap({
-  context,
-  raw32bitData,
-  width: 16,
-  height: 16,
-  numTiles: mappoState.vspData.numtiles,
-}).then(tilesetBitmap => {
-  mappoState.tilesetBitmap = tilesetBitmap
-})
+  convertRaw32bitDataToImageBitmap({
+    context,
+    raw32bitData,
+    width: 16,
+    height: 16,
+    numTiles: mappoState.vspData.numtiles,
+  }).then(tilesetBitmap => {
+    mappoState.tilesetBitmap = tilesetBitmap
+  })
 
-console.groupEnd()
+  console.groupEnd()
 }
 
 const canvas = document.querySelector('.mappo-viewport')
