@@ -5,6 +5,7 @@ const colorDepth = require('./converter/colorDepth')
 const clamp = require('lodash/clamp')
 const glob = require('glob')
 const createMappoSession = require('./createMappoSession')
+const convertRaw32bitDataToHtmlCanvas = require('./convertRaw32bitDataToHtmlCanvas')
 
 const mappoSession = createMappoSession({
   fileSystem: {
@@ -44,22 +45,20 @@ const canvas = document.querySelector('.mappo-viewport')
 const tileColumns = 20
 const tileRows = ~~((vspData.numtiles + 19) / 20)
 const context = canvas.getContext('2d')
-const imageData = context.createImageData(16, 16 * vspData.numtiles)
-const image = document.createElement('canvas')
+const image = convertRaw32bitDataToHtmlCanvas({
+  document,
+  raw32bitData,
+  width: 16,
+  height: 16,
+  numTiles: vspData.numtiles,
+})
+
 const viewportWidth = 320
 const viewportHeight = 240
 const scale = 3
 
 canvas.width = viewportWidth
 canvas.height = viewportHeight
-
-imageData.data.set(raw32bitData)
-
-// huh. putImageData carries alpha but always overwrites the destination.
-// http://weblogs.asp.net/bleroy/drawing-transparent-glyphs-on-the-html-canvas
-image.width = 16
-image.height = 16 * vspData.numtiles
-image.getContext('2d').putImageData(imageData, 0, 0)
 
 const renderTileHighlight = ({x, y, width=16, height=16}) => {
   context.strokeStyle = 'white'
