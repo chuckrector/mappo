@@ -19,6 +19,8 @@ const mappoState = {
   mapData: null,
   palFilename: null,
   palData: null,
+  vspFilename: null,
+  vspData: null,
 }
 
 const mapList = document.querySelector('.map-list')
@@ -50,25 +52,25 @@ console.log('mapvcs', mappoState.mapData.mapvc.length)
 mappoState.palFilename = 'data/v1/VERGE.PAL'
 mappoState.palData = asset.fromDisk(mappoState.palFilename, asset.v1pal)
 
-const vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
-const vspData = asset.fromDisk(vspFilename, asset.v1vsp)
-console.log('vsp', vspFilename, vspData)
+mappoState.vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
+mappoState.vspData = asset.fromDisk(mappoState.vspFilename, asset.v1vsp)
+console.log('vsp', mappoState.vspFilename, mappoState.vspData)
 
 const raw32bitData = colorDepth.convert8to32({
   palette: mappoState.palData.pal.map(v => v * 4),
-  raw8bitData: vspData.vsp0,
+  raw8bitData: mappoState.vspData.vsp0,
 })
 
 const canvas = document.querySelector('.mappo-viewport')
 const tileColumns = 20
-const tileRows = ~~((vspData.numtiles + 19) / 20)
+const tileRows = ~~((mappoState.vspData.numtiles + 19) / 20)
 const context = canvas.getContext('2d')
 convertRaw32bitDataToImageBitmap({
   context,
   raw32bitData,
   width: 16,
   height: 16,
-  numTiles: vspData.numtiles,
+  numTiles: mappoState.vspData.numtiles,
 }).then(image => {
 
 const viewportWidth = 320
