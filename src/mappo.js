@@ -5,7 +5,12 @@ const colorDepth = require('./converter/colorDepth')
 const clamp = require('lodash/clamp')
 const glob = require('glob')
 const createMappoSession = require('./createMappoSession')
+const createMappoMap = require('./createMappoMap')
+const createMappoTileset = require('./createMappoTileset')
 const convertRaw32bitDataToImageBitmap = require('./convertRaw32bitDataToImageBitmap')
+const detectFormat = require('./detectFormat')
+const path = require('path')
+const fs = require('fs')
 
 const mappoSession = createMappoSession({
   fileSystem: {
@@ -15,13 +20,15 @@ const mappoSession = createMappoSession({
 })
 
 const mappoState = {
-  mapFilename: null,
-  mapData: null,
-  palFilename: null,
-  palData: null,
-  vspFilename: null,
-  vspData: null,
+  isLoading: true,
+  map: null,
+  tileset: null,
   tilesetBitmap: null,
+  cameraX: 0,
+  cameraY: 0,
+  cameraMoveX: 0,
+  cameraMoveY: 0,
+  cameraScrollAmount: 1,
 }
 
 const mapList = document.querySelector('.map-list')
@@ -34,44 +41,63 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 console.log('launchFolder', process.cwd())
 
-mappoState.palFilename = 'data/v1/VERGE.PAL'
-mappoState.palData = asset.fromDisk(mappoState.palFilename, asset.v1pal)
-
 const loadMap = mapFilename => {
   console.group()
+  try {
+    mappoState.isLoading = true
 
-  mappoState.mapFilename = mapFilename
-  mappoState.mapData = asset.fromDisk(mappoState.mapFilename, asset.v1map)
+    mappoState.cameraX = 0
+    mappoState.cameraY = 0
 
-  console.log(mappoState.mapFilename, mappoState.mapData)
-  console.log('nummovescripts', mappoState.mapData.nummovescripts)
-  console.log('msbufsize', mappoState.mapData.msbufsize)
-  console.log('msofstbl', JSON.stringify(mappoState.mapData.msofstbl))
-  console.log('msbuf', JSON.stringify(mappoState.mapData.msbuf))
-  console.log('numscripts', mappoState.mapData.numscripts)
-  console.log('scriptofstbl', JSON.stringify(mappoState.mapData.scriptofstbl))
-  console.log('mapvcs', mappoState.mapData.mapvc.length)
+    const mapBuffer = fs.readFileSync(mapFilename)
+    const mapFormat = detectFormat(mapBuffer)
+    if (!mapFormat.includes('map')) {
+      console.error('expected map but got', mapFormat)
+      return
+    }
+    console.log('mapFormat', mapFormat)
+    let mapData
+    try {
+      mapData = asset.fromBuffer(mapBuffer, asset[mapFormat])
+    } catch (exception) {
+      console.log(exception)
+      return
+    }
+    mappoState.map = createMappoMap({map: mapData})
+    console.log(mapFilename, mapData)
 
-  mappoState.vspFilename = 'data/v1/' + mappoState.mapData.vsp0name
-  mappoState.vspData = asset.fromDisk(mappoState.vspFilename, asset.v1vsp)
-  console.log('vsp', mappoState.vspFilename, mappoState.vspData)
+    const vspFilename = path.join(
+      path.dirname(mapFilename),
+      mappoState.map.tilesetFilename
+    )
+    const vspBuffer = fs.readFileSync(vspFilename)
+    const vspFormat = detectFormat(vspBuffer)
+    console.log('vspFormat', vspFormat)
+    let vspData
+    try {
+      vspData = asset.fromBuffer(vspBuffer, asset[vspFormat])
+    } catch (exception) {
+      console.log(exception)
+      return
+    }
+    mappoState.tileset = createMappoTileset({tileset: vspData})
+    console.log(vspFilename, vspData)
 
-  const raw32bitData = colorDepth.convert8to32({
-    palette: mappoState.palData.pal.map(v => v * 4),
-    raw8bitData: mappoState.vspData.vsp0,
-  })
-
-  convertRaw32bitDataToImageBitmap({
-    context,
-    raw32bitData,
-    width: 16,
-    height: 16,
-    numTiles: mappoState.vspData.numtiles,
-  }).then(tilesetBitmap => {
-    mappoState.tilesetBitmap = tilesetBitmap
-  })
-
-  console.groupEnd()
+    convertRaw32bitDataToImageBitmap({
+      context,
+      raw32bitData: mappoState.tileset.raw32bitData,
+      width: mappoState.tileset.tileWidth,
+      height: mappoState.tileset.tileHeight,
+      numTiles: mappoState.tileset.numTiles,
+    }).then(tilesetBitmap => {
+      mappoState.tilesetBitmap = tilesetBitmap
+      mappoState.isLoading = false
+    })
+  } catch (exception) {
+    console.error('ack!', exception)
+  } finally {
+    console.groupEnd()
+  }
 }
 
 const canvas = document.querySelector('.mappo-viewport')
@@ -96,7 +122,7 @@ const renderTile = (tileIndex, x, y) => {
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
-  return layer[(tileY * mappoState.mapData.xsize) + tileX]
+  return layer.tileIndexGrid[(tileY * layer.width) + tileX]
 }
 
 const renderLayer = (layer, x, y, transparent=false) => {
@@ -124,12 +150,6 @@ const renderLayer = (layer, x, y, transparent=false) => {
     }
   }
 }
-
-let cameraX = 0
-let cameraY = 0
-let cameraMoveX = 0
-let cameraMoveY = 0
-const cameraScrollAmount = 1
 
 const KEYCODE_UP = 38
 const KEYCODE_DOWN = 40
@@ -183,16 +203,16 @@ canvas.addEventListener('mouseenter', event => {
 
 canvas.addEventListener('mouseout', event => {
   mousein = false
-  cameraMoveX = 0
-  cameraMoveY = 0
+  mappoState.cameraMoveX = 0
+  mappoState.cameraMoveY = 0
   autoScrollX = 0
   autoScrollY = 0
   hoverCanvasCoord = null
 })
 
 const moveCamera = (moveX, moveY) => {
-  cameraX = clamp(cameraX + moveX, 0, (mappoState.mapData.xsize * 16) - viewportWidth)
-  cameraY = clamp(cameraY + moveY, 0, (mappoState.mapData.ysize * 16) - viewportHeight)
+  mappoState.cameraX = clamp(mappoState.cameraX + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.tileset.tileWidth) - viewportWidth)
+  mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - viewportHeight)
 }
 
 const tick = () => {
@@ -200,29 +220,30 @@ const tick = () => {
   context.fillStyle = 'black'
   context.fillRect(0, 0, viewportWidth, viewportHeight)
 
-  if (mappoState.tilesetBitmap) {
-    renderLayer(mappoState.mapData.map0, cameraX, cameraY)
-    renderLayer(
-      mappoState.mapData.map1,
-      cameraX * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
-      cameraY * mappoState.mapData.pmultx / mappoState.mapData.pdivx,
-      true
-    )
+  if (!mappoState.isLoading) {
+    mappoState.map.tileLayers.forEach((tileLayer, layerIndex) => {
+      renderLayer(
+        tileLayer,
+        mappoState.cameraX * tileLayer.parallax.x,
+        mappoState.cameraY * tileLayer.parallax.y,
+        layerIndex > 0 // transparent
+      )
+    })
 
     if (hoverCanvasCoord) {
       renderTileHighlight({
-        x: hoverCanvasCoord.x - ((~~cameraX + hoverCanvasCoord.x) % 16),
-        y: hoverCanvasCoord.y - ((~~cameraY + hoverCanvasCoord.y) % 16),
+        x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % 16),
+        y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % 16),
       })
     }
 
-    cameraMoveX = 0
-    cameraMoveY = 0;
-    (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (cameraMoveY = -cameraScrollAmount);
-    (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (cameraMoveY = +cameraScrollAmount);
-    (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (cameraMoveX = -cameraScrollAmount);
-    (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (cameraMoveX = +cameraScrollAmount);
-    moveCamera(cameraMoveX, cameraMoveY)
+    mappoState.cameraMoveX = 0
+    mappoState.cameraMoveY = 0;
+    (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
+    (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
+    (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
+    (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
+    moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
   }
 
   window.requestAnimationFrame(tick)
