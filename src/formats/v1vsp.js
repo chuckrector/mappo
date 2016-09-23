@@ -3,7 +3,7 @@
 const {T} = require('../readFormat')
 const V1_VSPANIM = require('./v1vspanim')
 
-module.exports =  {
+module.exports = {
   version: T.u16,
   palette: T.list(T.u8, 256 * 3),
   numtiles: T.u16,
