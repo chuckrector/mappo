@@ -51,6 +51,7 @@ const createMappoMap = require('./createMappoMap')
     map: v1map
   })
 
+  expect(mappoMap.tilesetFilename).toBe('test.vsp')
   expect(mappoMap.tileLayers.length).toBe(2)
 
   expect(mappoMap.tileLayers[0].description).toBe('Background')
@@ -80,7 +81,7 @@ const createMappoMap = require('./createMappoMap')
   const buffer = makeBuffer([
     B.u8(filler(6)),
     B.u32(1),
-    B.stringFixed(60, 'vsp'),
+    B.stringFixed(60, 'HAHN01.VSP'),
     B.stringFixed(60, 'music'),
     B.stringFixed(20, '12er3'),
     B.u16([2, 3]), // xstart/ystart
@@ -114,6 +115,7 @@ const createMappoMap = require('./createMappoMap')
     map: v2map
   })
 
+  expect(mappoMap.tilesetFilename).toBe('HAHN01.VSP')
   expect(mappoMap.tileLayers.length).toBe(numlayers)
 
   expect(mappoMap.tileLayers[0].width).toBe(width)
@@ -155,7 +157,7 @@ const createMappoMap = require('./createMappoMap')
     B.u32(0),
     B.u32(0),
     B.stringFixed(256, 'map name'),
-    B.stringFixed(256, 'vsp name'),
+    B.stringFixed(256, 'grue0040.vsp'),
     B.stringFixed(256, 'music name'),
     B.stringFixed(256, 'render string'),
     B.stringFixed(256, 'startup script'),
@@ -182,6 +184,7 @@ const createMappoMap = require('./createMappoMap')
   const v3map = asset.fromBuffer(buffer, asset.v3map)
   const mappoMap = createMappoMap({map: v3map})
 
+  expect(mappoMap.tilesetFilename).toBe('grue0040.vsp')
   expect(mappoMap.tileLayers.length).toBe(numlayers)
 
   expect(mappoMap.tileLayers[0].width).toBe(width)

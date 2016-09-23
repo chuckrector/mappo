@@ -5,6 +5,7 @@ module.exports = ({map}) => {
 
   switch (map.formatName) {
     case 'v1map': {
+      mappoMap.tilesetFilename = map.vsp0name
       mappoMap.tileLayers = [{
         description: 'Background',
         width: map.xsize,
@@ -26,6 +27,7 @@ module.exports = ({map}) => {
       }]
     } break;
     case 'v2map': {
+      mappoMap.tilesetFilename = map.vspname
       mappoMap.tileLayers = map.layers.map((tileIndexGrid, index) => {
         const layer = map.layer[index]
         return {
@@ -41,6 +43,7 @@ module.exports = ({map}) => {
       })
     } break;
     case 'v3map': {
+      mappoMap.tilesetFilename = map.vspname
       mappoMap.tileLayers = map.layers.map(layerInfo => ({
         description: layerInfo.layername,
         width: layerInfo.width,
