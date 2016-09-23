@@ -20,6 +20,8 @@ const createMappoTileset = require('./createMappoTileset')
   const v1vsp = asset.fromBuffer(buffer, asset.v1vsp)
   const mappoTileset = createMappoTileset({tileset: v1vsp})
 
+  expect(mappoTileset.tileWidth).toBe(16)
+  expect(mappoTileset.tileHeight).toBe(16)
   expect(mappoTileset.numTiles).toBe(numtiles)
   expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numtiles)
 }
@@ -38,6 +40,8 @@ const createMappoTileset = require('./createMappoTileset')
   const v2vsp = asset.fromBuffer(buffer, asset.v2vsp)
   const mappoTileset = createMappoTileset({tileset: v2vsp})
 
+  expect(mappoTileset.tileWidth).toBe(16)
+  expect(mappoTileset.tileHeight).toBe(16)
   expect(mappoTileset.numTiles).toBe(numTiles)
   expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numTiles)
 }
@@ -60,6 +64,8 @@ const createMappoTileset = require('./createMappoTileset')
   const v3vsp = asset.fromBuffer(buffer, asset.v3vsp)
   const mappoTileset = createMappoTileset({tileset: v3vsp})
 
+  expect(mappoTileset.tileWidth).toBe(tileSize)
+  expect(mappoTileset.tileHeight).toBe(tileSize)
   expect(mappoTileset.numTiles).toBe(numTiles)
   expect(mappoTileset.raw32bitData.length).toBe(tileSize * tileSize * 4 * numTiles)
 }
