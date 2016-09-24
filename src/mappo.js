@@ -19,8 +19,8 @@ const mappoSession = createMappoSession({
   launchFolder: process.cwd(),
 })
 
-const viewportScales = [0.1, 0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-const DEFAULT_SCALE_INDEX = 5
+const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const DEFAULT_SCALE_INDEX = 4
 const mappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
@@ -149,8 +149,20 @@ const renderLayer = (layer, x, y, transparent=false) => {
   const subTileY = y % tileHeight
   const pixelStartX = -subTileX
   const pixelStartY = -subTileY
-  const pixelEndX = canvas.width
-  const pixelEndY = canvas.height
+  let pixelEndX = canvas.width
+  let pixelEndY = canvas.height
+  let tileEndX = Math.floor(pixelEndX / tileWidth)
+  let tileEndY = Math.floor(pixelEndX / tileHeight)
+  if (tileEndX > layer.width) {
+    const tileOverflow = tileEndX - layer.width
+    tileEndX = layer.width
+    pixelEndX -= tileOverflow * tileWidth
+  }
+  if (tileEndY > layer.height) {
+    const tileOverflow = tileEndY - tileHeight
+    tileEndY = layer.height
+    pixelEndY -= tileOverflow * tileHeight
+  }
 
   let pixelY = pixelStartY
   let tileY = tileStartY
