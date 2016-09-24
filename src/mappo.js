@@ -103,22 +103,30 @@ const loadMap = mapFilename => {
 const canvas = document.querySelector('.mappo-viewport')
 const context = canvas.getContext('2d')
 
-const viewportWidth = 320
-const viewportHeight = 240
 const scale = 3
 
-canvas.width = viewportWidth
-canvas.height = viewportHeight
-
-const renderTileHighlight = ({x, y, width=16, height=16}) => {
+const renderTileHighlight = ({
+  x,
+  y,
+  width=mappoState.tileset.tileWidth,
+  height=mappoState.tileset.tileHeight,
+}) => {
   context.strokeStyle = 'white'
   context.globalCompositeOperation = 'exclusion'
   context.lineWidth = 2
-  context.strokeRect(~~x, ~~y, 16, 16)
+  context.strokeRect(~~x, ~~y, width, height)
 }
 
 const renderTile = (tileIndex, x, y) => {
-  context.drawImage(mappoState.tilesetBitmap, 0, tileIndex * 16, 16, 16, x, y, 16, 16)
+  context.drawImage(
+    mappoState.tilesetBitmap,
+    0, tileIndex * mappoState.tileset.tileHeight,
+    mappoState.tileset.tileWidth,
+    mappoState.tileset.tileHeight,
+    x, y,
+    mappoState.tileset.tileWidth,
+    mappoState.tileset.tileHeight
+  )
 }
 
 const getTileIndex = (layer, tileX, tileY) => {
@@ -129,25 +137,35 @@ const renderLayer = (layer, x, y, transparent=false) => {
   x = ~~x
   y = ~~y
 
-  const topLeftTileX = x >> 4
-  const topLeftTileY = y >> 4
-  const subTileX = x % 16
-  const subTileY = y % 16
+  const tileWidth = mappoState.tileset.tileWidth
+  const tileHeight = mappoState.tileset.tileHeight
+  const tileStartX = Math.floor(x / tileWidth)
+  const tileStartY = Math.floor(y / tileHeight)
+  const subTileX = x % tileWidth
+  const subTileY = y % tileHeight
+  const pixelStartX = -subTileX
+  const pixelStartY = -subTileY
+  const pixelEndX = canvas.width
+  const pixelEndY = canvas.height
 
-  for (let tileY = 0; tileY < (viewportHeight + 31) >> 4; tileY++) {
-    for (let tileX = 0; tileX < (viewportWidth + 31) >> 4; tileX++) {
-      const tileIndex = getTileIndex(
-        layer,
-        topLeftTileX + tileX,
-        topLeftTileY + tileY
-      )
+  let pixelY = pixelStartY
+  let tileY = tileStartY
+  while (pixelY < pixelEndY) {
+    let pixelX = pixelStartX
+    let tileX = tileStartX
+    while (pixelX < pixelEndX) {
+      const tileIndex = getTileIndex(layer, tileX, tileY)
 
-      if (transparent && !tileIndex) {
-        continue
+      if (tileIndex || !transparent) {
+        renderTile(tileIndex, pixelX, pixelY)
       }
 
-      renderTile(tileIndex, (tileX * 16) - subTileX, (tileY * 16) - subTileY)
+      pixelX += tileWidth
+      tileX++
     }
+
+    pixelY += tileHeight
+    tileY++
   }
 }
 
@@ -179,12 +197,12 @@ canvas.addEventListener('mousemove', event => {
 
   autoScrollX = 0
   autoScrollY = 0
-  const autoScrollThreshold = 16;
+  const autoScrollThreshold = (mappoState.tileset.tileWidth + mappoState.tileset.tileHeight) / 2;
   if (mousein) {
     event.offsetX < autoScrollThreshold * scale && (autoScrollX = -1);
-    event.offsetX >= (viewportWidth - autoScrollThreshold) * scale && (autoScrollX = +1);
+    event.offsetX >= (canvas.width - autoScrollThreshold) * scale && (autoScrollX = +1);
     event.offsetY < autoScrollThreshold * scale && (autoScrollY = -1);
-    event.offsetY >= (viewportHeight - autoScrollThreshold) * scale && (autoScrollY = +1);
+    event.offsetY >= (canvas.height - autoScrollThreshold) * scale && (autoScrollY = +1);
   }
 
   hoverCanvasCoord = {
@@ -211,14 +229,14 @@ canvas.addEventListener('mouseout', event => {
 })
 
 const moveCamera = (moveX, moveY) => {
-  mappoState.cameraX = clamp(mappoState.cameraX + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.tileset.tileWidth) - viewportWidth)
-  mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - viewportHeight)
+  mappoState.cameraX = clamp(mappoState.cameraX + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.tileset.tileWidth) - canvas.width)
+  mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
 }
 
 const tick = () => {
   context.globalCompositeOperation = 'source-over'
   context.fillStyle = 'black'
-  context.fillRect(0, 0, viewportWidth, viewportHeight)
+  context.fillRect(0, 0, canvas.width, canvas.height)
 
   if (!mappoState.isLoading) {
     mappoState.map.tileLayers.forEach((tileLayer, layerIndex) => {
@@ -232,8 +250,8 @@ const tick = () => {
 
     if (hoverCanvasCoord) {
       renderTileHighlight({
-        x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % 16),
-        y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % 16),
+        x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % mappoState.tileset.tileWidth),
+        y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % mappoState.tileset.tileHeight),
       })
     }
 
@@ -249,4 +267,16 @@ const tick = () => {
   window.requestAnimationFrame(tick)
 }
 
+const rightSide = document.querySelector('.right-side')
+
+const resizeCanvas = () => {
+  canvas.width = ~~((rightSide.offsetWidth + (scale - 1)) / scale)
+  canvas.height = ~~((rightSide.offsetHeight + (scale - 1)) / scale)
+  console.log('resized', canvas.width, canvas.height)
+}
+
+window.addEventListener('resize', resizeCanvas)
+resizeCanvas()
+
 tick()
+
