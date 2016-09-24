@@ -53,6 +53,7 @@ const createMappoMap = require('./createMappoMap')
 
   expect(mappoMap.tilesetFilename).toBe('test.vsp')
   expect(mappoMap.tileLayers.length).toBe(2)
+  expect(mappoMap.mapLayerOrder).toEqual([0, 1])
 
   expect(mappoMap.tileLayers[0].description).toBe('Background')
   expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 3, 77))
@@ -83,7 +84,7 @@ const createMappoMap = require('./createMappoMap')
     B.u32(1),
     B.stringFixed(60, 'HAHN01.VSP'),
     B.stringFixed(60, 'music'),
-    B.stringFixed(20, '12er3'),
+    B.stringFixed(20, '13er2'),
     B.u16([2, 3]), // xstart/ystart
     B.u8(filler(51, 4)),
     B.u8(numlayers), // numlayers
@@ -117,6 +118,7 @@ const createMappoMap = require('./createMappoMap')
 
   expect(mappoMap.tilesetFilename).toBe('HAHN01.VSP')
   expect(mappoMap.tileLayers.length).toBe(numlayers)
+  expect(mappoMap.mapLayerOrder).toEqual([0, 2, 1])
 
   expect(mappoMap.tileLayers[0].width).toBe(width)
   expect(mappoMap.tileLayers[0].height).toBe(height)
@@ -159,7 +161,7 @@ const createMappoMap = require('./createMappoMap')
     B.stringFixed(256, 'map name'),
     B.stringFixed(256, 'grue0040.vsp'),
     B.stringFixed(256, 'music name'),
-    B.stringFixed(256, 'render string'),
+    B.stringFixed(256, '3,E,2,R,1'),
     B.stringFixed(256, 'startup script'),
     B.u16([0, 0]), // startx,starty
     B.u32(numlayers),
@@ -186,6 +188,7 @@ const createMappoMap = require('./createMappoMap')
 
   expect(mappoMap.tilesetFilename).toBe('grue0040.vsp')
   expect(mappoMap.tileLayers.length).toBe(numlayers)
+  expect(mappoMap.mapLayerOrder).toEqual([2, 1, 0])
 
   expect(mappoMap.tileLayers[0].width).toBe(width)
   expect(mappoMap.tileLayers[0].height).toBe(height)
