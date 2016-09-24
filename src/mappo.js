@@ -20,6 +20,7 @@ const mappoSession = createMappoSession({
 })
 
 const mappoState = {
+  scale: 2,
   isLoading: true,
   map: null,
   mapLayerOrder: null,
@@ -103,8 +104,6 @@ const loadMap = mapFilename => {
 
 const canvas = document.querySelector('.mappo-viewport')
 const context = canvas.getContext('2d')
-
-const scale = 3
 
 const renderTileHighlight = ({
   x,
@@ -195,8 +194,8 @@ canvas.addEventListener('mousemove', event => {
 
   if (mousedown) {
     moveCamera(
-      -event.movementX / scale,
-      -event.movementY / scale
+      -event.movementX / mappoState.scale,
+      -event.movementY / mappoState.scale
     )
   }
 
@@ -204,15 +203,15 @@ canvas.addEventListener('mousemove', event => {
   autoScrollY = 0
   const autoScrollThreshold = (mappoState.tileset.tileWidth + mappoState.tileset.tileHeight) / 2;
   if (mousein) {
-    event.offsetX < autoScrollThreshold * scale && (autoScrollX = -1);
-    event.offsetX >= (canvas.width - autoScrollThreshold) * scale && (autoScrollX = +1);
-    event.offsetY < autoScrollThreshold * scale && (autoScrollY = -1);
-    event.offsetY >= (canvas.height - autoScrollThreshold) * scale && (autoScrollY = +1);
+    event.offsetX < autoScrollThreshold * mappoState.scale && (autoScrollX = -1);
+    event.offsetX >= (canvas.width - autoScrollThreshold) * mappoState.scale && (autoScrollX = +1);
+    event.offsetY < autoScrollThreshold * mappoState.scale && (autoScrollY = -1);
+    event.offsetY >= (canvas.height - autoScrollThreshold) * mappoState.scale && (autoScrollY = +1);
   }
 
   hoverCanvasCoord = {
-    x: ~~(event.offsetX / scale),
-    y: ~~(event.offsetY / scale),
+    x: ~~(event.offsetX / mappoState.scale),
+    y: ~~(event.offsetY / mappoState.scale),
   }
 })
 
@@ -277,8 +276,8 @@ const tick = () => {
 const rightSide = document.querySelector('.right-side')
 
 const resizeCanvas = () => {
-  canvas.width = ~~((rightSide.offsetWidth + (scale - 1)) / scale)
-  canvas.height = ~~((rightSide.offsetHeight + (scale - 1)) / scale)
+  canvas.width = ~~((rightSide.offsetWidth + (mappoState.scale - 1)) / mappoState.scale)
+  canvas.height = ~~((rightSide.offsetHeight + (mappoState.scale - 1)) / mappoState.scale)
   console.log('resized', canvas.width, canvas.height)
 }
 
