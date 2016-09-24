@@ -22,6 +22,7 @@ const mappoSession = createMappoSession({
 const mappoState = {
   isLoading: true,
   map: null,
+  mapLayerOrder: null,
   tileset: null,
   tilesetBitmap: null,
   cameraX: 0,
@@ -188,6 +189,10 @@ let hoverCanvasCoord = null
 let autoScrollX = 0
 let autoScrollY = 0
 canvas.addEventListener('mousemove', event => {
+  if (mappoState.isLoading) {
+    return
+  }
+
   if (mousedown) {
     moveCamera(
       -event.movementX / scale,
@@ -239,7 +244,9 @@ const tick = () => {
   context.fillRect(0, 0, canvas.width, canvas.height)
 
   if (!mappoState.isLoading) {
-    mappoState.map.tileLayers.forEach((tileLayer, layerIndex) => {
+    mappoState.map.mapLayerOrder.forEach(layerIndex => {
+      const tileLayer = mappoState.map.tileLayers[layerIndex]
+
       renderLayer(
         tileLayer,
         mappoState.cameraX * tileLayer.parallax.x,
