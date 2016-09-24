@@ -9,8 +9,8 @@ let win
 
 const createWindow = () => {
   win = new BrowserWindow({
-    width: 1400,
-    height: 768,
+    width: 1440,
+    height: 900,
   })
 
   win.loadURL(`file://${__dirname}/index.html`)

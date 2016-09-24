@@ -19,8 +19,10 @@ const mappoSession = createMappoSession({
   launchFolder: process.cwd(),
 })
 
+const viewportScales = [0.1, 0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const DEFAULT_SCALE_INDEX = 5
 const mappoState = {
-  scale: 2,
+  scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
   map: null,
   mapLayerOrder: null,
@@ -32,6 +34,8 @@ const mappoState = {
   cameraMoveY: 0,
   cameraScrollAmount: 1,
 }
+
+const getScale = () => viewportScales[mappoState.scaleIndex]
 
 const mapList = document.querySelector('.map-list')
 mappoSession.getMapFilenames().forEach(mapFilename => {
@@ -173,29 +177,57 @@ const KEYCODE_UP = 38
 const KEYCODE_DOWN = 40
 const KEYCODE_LEFT = 37
 const KEYCODE_RIGHT = 39
+const KEYCODE_PLUS = 187
+const KEYCODE_MINUS = 189
+const KEYCODE_0 = 48
 const keyPressed = {}
 
-document.addEventListener('keydown', event => keyPressed[event.keyCode] = true)
-document.addEventListener('keyup', event => keyPressed[event.keyCode] = false)
+document.addEventListener('keydown', event => {
+  keyPressed[event.keyCode] = true
+  if (event.metaKey) {
+    keyPressed.metaKey = true
+  }
+  if (event.ctrlKey) {
+    keyPressed.ctrlKey = true
+  }
+  if (event.altKey) {
+    keyPressed.altKey = true
+  }
+})
+document.addEventListener('keyup', event => {
+  keyPressed[event.keyCode] = false
+  if (!event.metaKey) {
+    keyPressed.metaKey = false
+  }
+  if (!event.ctrlKey) {
+    keyPressed.ctrlKey = false
+  }
+  if (!event.altKey) {
+    keyPressed.altKey = false
+  }
+})
+
+const rightSide = document.querySelector('.right-side')
 
 let mousedown = false
 let mousein = false
-canvas.addEventListener('mousedown', event => {
+rightSide.addEventListener('mousedown', event => {
   mousedown = true
 })
 
 let hoverCanvasCoord = null
 let autoScrollX = 0
 let autoScrollY = 0
-canvas.addEventListener('mousemove', event => {
+rightSide.addEventListener('mousemove', event => {
   if (mappoState.isLoading) {
     return
   }
 
+  const scale = getScale()
   if (mousedown) {
     moveCamera(
-      -event.movementX / mappoState.scale,
-      -event.movementY / mappoState.scale
+      -event.movementX / scale,
+      -event.movementY / scale
     )
   }
 
@@ -203,27 +235,39 @@ canvas.addEventListener('mousemove', event => {
   autoScrollY = 0
   const autoScrollThreshold = (mappoState.tileset.tileWidth + mappoState.tileset.tileHeight) / 2;
   if (mousein) {
-    event.offsetX < autoScrollThreshold * mappoState.scale && (autoScrollX = -1);
-    event.offsetX >= (canvas.width - autoScrollThreshold) * mappoState.scale && (autoScrollX = +1);
-    event.offsetY < autoScrollThreshold * mappoState.scale && (autoScrollY = -1);
-    event.offsetY >= (canvas.height - autoScrollThreshold) * mappoState.scale && (autoScrollY = +1);
+    const mouseX = event.offsetX
+    const mouseY = event.offsetY
+    const autoScrollRight = rightSide.offsetWidth - autoScrollThreshold * scale
+    const autoScrollDown = rightSide.offsetHeight - autoScrollThreshold * scale
+    if (mouseX < autoScrollThreshold) {
+      autoScrollX = -1
+    }
+    if (mouseX >= autoScrollRight) {
+      autoScrollX = +1
+    }
+    if (mouseY < autoScrollThreshold) {
+      autoScrollY = -1
+    }
+    if (mouseY >= autoScrollDown) {
+      autoScrollY = +1
+    }
   }
 
   hoverCanvasCoord = {
-    x: ~~(event.offsetX / mappoState.scale),
-    y: ~~(event.offsetY / mappoState.scale),
+    x: ~~(event.offsetX / getScale()),
+    y: ~~(event.offsetY / getScale()),
   }
 })
 
-canvas.addEventListener('mouseup', event => {
+rightSide.addEventListener('mouseup', event => {
   mousedown = false
 })
 
-canvas.addEventListener('mouseenter', event => {
+rightSide.addEventListener('mouseenter', event => {
   mousein = true
 })
 
-canvas.addEventListener('mouseout', event => {
+rightSide.addEventListener('mouseout', event => {
   mousein = false
   mappoState.cameraMoveX = 0
   mappoState.cameraMoveY = 0
@@ -268,17 +312,37 @@ const tick = () => {
     (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
     (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
     moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
+
+    // map zooming
+    if (keyPressed.metaKey || keyPressed.ctrlKey) {
+      const prevScaleIndex = mappoState.scaleIndex
+      if (keyPressed[KEYCODE_PLUS]) {
+        keyPressed[KEYCODE_PLUS] = false
+        mappoState.scaleIndex++
+      }
+      if (keyPressed[KEYCODE_MINUS]) {
+        keyPressed[KEYCODE_MINUS] = false
+        mappoState.scaleIndex--
+      }
+      if (keyPressed[KEYCODE_0]) {
+        keyPressed[KEYCODE_0] = false
+        mappoState.scaleIndex = DEFAULT_SCALE_INDEX
+      }
+      mappoState.scaleIndex = clamp(mappoState.scaleIndex, 0, viewportScales.length - 1)
+      if (prevScaleIndex !== mappoState.scaleIndex) {
+        resizeCanvas()
+      }
+    }
   }
 
   window.requestAnimationFrame(tick)
 }
 
-const rightSide = document.querySelector('.right-side')
-
 const resizeCanvas = () => {
-  canvas.width = ~~((rightSide.offsetWidth + (mappoState.scale - 1)) / mappoState.scale)
-  canvas.height = ~~((rightSide.offsetHeight + (mappoState.scale - 1)) / mappoState.scale)
-  console.log('resized', canvas.width, canvas.height)
+  canvas.width = ~~((rightSide.offsetWidth + (getScale() - 1)) / getScale())
+  canvas.height = ~~((rightSide.offsetHeight + (getScale() - 1)) / getScale())
+  canvas.style.width = rightSide.offsetWidth + 'px'
+  canvas.style.height = rightSide.offsetHeight + 'px'
 }
 
 window.addEventListener('resize', resizeCanvas)
