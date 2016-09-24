@@ -40,6 +40,7 @@ const getScale = () => viewportScales[mappoState.scaleIndex]
 const mapList = document.querySelector('.map-list')
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement('li')
+  li.setAttribute('title', mapFilename)
   li.innerText = mapFilename
   li.addEventListener('click', event => loadMap(mapFilename))
   mapList.appendChild(li)
