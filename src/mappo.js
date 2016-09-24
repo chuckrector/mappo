@@ -220,18 +220,18 @@ document.addEventListener('keyup', event => {
   }
 })
 
-const rightSide = document.querySelector('.right-side')
+const middlePanel = document.querySelector('.middle-panel')
 
 let mousedown = false
 let mousein = false
-rightSide.addEventListener('mousedown', event => {
+middlePanel.addEventListener('mousedown', event => {
   mousedown = true
 })
 
 let hoverCanvasCoord = null
 let autoScrollX = 0
 let autoScrollY = 0
-rightSide.addEventListener('mousemove', event => {
+middlePanel.addEventListener('mousemove', event => {
   if (mappoState.isLoading) {
     return
   }
@@ -250,8 +250,8 @@ rightSide.addEventListener('mousemove', event => {
   if (mousein) {
     const mouseX = event.offsetX
     const mouseY = event.offsetY
-    const autoScrollRight = rightSide.offsetWidth - autoScrollThreshold * scale
-    const autoScrollDown = rightSide.offsetHeight - autoScrollThreshold * scale
+    const autoScrollRight = middlePanel.offsetWidth - autoScrollThreshold * scale
+    const autoScrollDown = middlePanel.offsetHeight - autoScrollThreshold * scale
     if (mouseX < autoScrollThreshold) {
       autoScrollX = -1
     }
@@ -272,15 +272,15 @@ rightSide.addEventListener('mousemove', event => {
   }
 })
 
-rightSide.addEventListener('mouseup', event => {
+middlePanel.addEventListener('mouseup', event => {
   mousedown = false
 })
 
-rightSide.addEventListener('mouseenter', event => {
+middlePanel.addEventListener('mouseenter', event => {
   mousein = true
 })
 
-rightSide.addEventListener('mouseout', event => {
+middlePanel.addEventListener('mouseout', event => {
   mousein = false
   mappoState.cameraMoveX = 0
   mappoState.cameraMoveY = 0
@@ -353,10 +353,10 @@ const tick = () => {
 }
 
 const resizeCanvas = () => {
-  canvas.width = ~~((rightSide.offsetWidth + (getScale() - 1)) / getScale())
-  canvas.height = ~~((rightSide.offsetHeight + (getScale() - 1)) / getScale())
-  canvas.style.width = rightSide.offsetWidth + 'px'
-  canvas.style.height = rightSide.offsetHeight + 'px'
+  canvas.width = ~~((middlePanel.offsetWidth + (getScale() - 1)) / getScale())
+  canvas.height = ~~((middlePanel.offsetHeight + (getScale() - 1)) / getScale())
+  canvas.style.width = middlePanel.offsetWidth + 'px'
+  canvas.style.height = middlePanel.offsetHeight + 'px'
 }
 
 window.addEventListener('resize', resizeCanvas)
