@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <title>Mappo</title>
     <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        -webkit-user-select: none;
+      }
       body {
         margin: 0;
         overflow: hidden;
@@ -17,17 +23,15 @@
         height: 100vh;
       }
       .left-panel {
+        flex: 0 0 250px;
         overflow: hidden;
         overflow-y: auto;
-        width: 250px;
-        min-width: 250px;
       }
       .middle-panel {
-        flex-grow: 1;
+        width: calc(100% - 500px);
       }
       .right-panel {
-        width: 250px;
-        min-width: 250px;
+        flex: 0 0 250px;
       }
       .left-panel,
       .right-panel {
@@ -52,6 +56,7 @@
       }
       .mappo-viewport {
         image-rendering: pixelated;
+        cursor: default;
       }
     </style>
   </head>
