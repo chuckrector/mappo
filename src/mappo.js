@@ -342,6 +342,7 @@ const tick = () => {
         mappoState.scaleIndex = DEFAULT_SCALE_INDEX
       }
       mappoState.scaleIndex = clamp(mappoState.scaleIndex, 0, viewportScales.length - 1)
+      // TODO(chuck): redux-ify?
       if (prevScaleIndex !== mappoState.scaleIndex) {
         resizeCanvas()
       }
