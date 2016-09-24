@@ -7,31 +7,47 @@
       body {
         margin: 0;
         overflow: hidden;
+        font: normal 14px / 1.6 sans-serif;
+      }
+      h1,h2,h3,h4,h5,h6 {
+        margin: 0;
       }
       #mappo {
         display: flex;
+        height: 100vh;
       }
-      .left-side {
+      .left-panel {
         overflow: hidden;
         overflow-y: auto;
         width: 250px;
         min-width: 250px;
-        height: 100vh;
       }
       .middle-panel {
         flex-grow: 1;
       }
-      .map-list {
+      .right-panel {
+        width: 250px;
+        min-width: 250px;
+      }
+      .left-panel,
+      .right-panel {
+        padding: 5px;
+      }
+      .padded-list-header {
+        padding: 0 15px;
+      }
+      .padded-list {
+        list-style-type: none;
         margin: 0;
         padding: 5px;
       }
-      .map-list li {
+      .padded-list li {
         cursor: pointer;
         display: block;
-        padding: 2px 10px;
         overflow: hidden;
+        padding: 2px 10px;
       }
-      .map-list li:hover {
+      .padded-list li:hover {
         background: silver;
       }
       .mappo-viewport {
@@ -41,11 +57,16 @@
   </head>
   <body>
     <div id="mappo">
-      <div class="left-side">
-        <ul class="map-list"></ul>
+      <div class="left-panel">
+        <h2 class="padded-list-header">Maps</h2>
+        <ul class="map-list padded-list"></ul>
       </div>
       <div class="middle-panel">
         <canvas class="mappo-viewport"></canvas>
+      </div>
+      <div class="right-panel">
+        <h2 class="padded-list-header">Layers</h2>
+        <ol class="layer-list padded-list"></ol>
       </div>
     </div>
     <script src="mappo.js"></script>

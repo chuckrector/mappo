@@ -48,6 +48,17 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 console.log('launchFolder', process.cwd())
 
+const refreshMapLayerList = () => {
+  const layerList = document.querySelector('.layer-list')
+  layerList.innerHTML = ''
+  mappoState.map.tileLayers.forEach(layer => {
+    const li = document.createElement('li')
+    li.setAttribute('title', layer.description)
+    li.innerText = layer.description
+    layerList.appendChild(li)
+  })
+}
+
 const loadMap = mapFilename => {
   console.group()
   try {
@@ -72,6 +83,7 @@ const loadMap = mapFilename => {
     }
     mappoState.map = createMappoMap({map: mapData})
     console.log(mapFilename, mapData)
+    refreshMapLayerList()
 
     const vspFilename = path.join(
       path.dirname(mapFilename),
