@@ -34,14 +34,14 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 Feature | Implemented?
 --- |:---:
-Show maps in launch folder | 😃
-Load V1/V2/V3 maps | 😃
+Show maps in launch folder | ✅
+Load V1/V2/V3 maps | ✅
 Save maps | 😭
 Auto-save | 😭
 Plot tiles | 😭
 Fill region with tiles | 😭
 Auto-tiling | 😭
-Draw map layers in correct order | 😃
+Draw map layers in correct order | ✅
 Draw tile animations | 😭
 Edit tile animations | 😭
 Draw characters/entities | 😭
@@ -51,12 +51,12 @@ Draw obstructions | 😭
 Edit obstructions | 😭
 Draw zones | 😭
 Edit zones | 😭
-Show all map layers | 😃
-Toggle layer visibility | 😃
-Scroll viewport w/ keys | 😃
-Scroll viewport w/ mouse near edges | 😃
-Scroll viewport w/ mouse dragging | 😃
-Zoom map (ctrl +/-) | 😃
+Show all map layers | ✅
+Toggle layer visibility | ✅
+Scroll viewport w/ keys | ✅
+Scroll viewport w/ mouse near edges | ✅
+Scroll viewport w/ mouse dragging | ✅
+Zoom map (ctrl +/-) | ✅
 Undo/redo | 😭
 Multi-tile brushes | 😭
 Multi-tile templates w/ zones & obstructions | 😭
