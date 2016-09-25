@@ -1,5 +1,10 @@
 /* GLOBAL */
 
+:root {
+  --left-panel-width: 250px;
+  --right-panel-width: 250px;
+}
+
 *,
 *::before,
 *::after {
@@ -25,19 +30,19 @@ h1,h2,h3,h4,h5,h6 {
 /* PANELS */
 
 .left-panel {
-  flex: 0 0 250px;
+  flex: 0 0 var(--left-panel-width);
   overflow: hidden;
   overflow-y: auto;
 }
 
 .middle-panel {
-  width: calc(100% - 500px);
+  width: calc(100% - var(--right-panel-width) - var(--left-panel-width));
 }
 
 .right-panel {
   display: flex;
   flex-direction: column;
-  flex: 0 0 250px;
+  flex: 0 0 var(--right-panel-width);
 }
 
 .left-panel,
@@ -71,14 +76,13 @@ h1,h2,h3,h4,h5,h6 {
 /* VIEWPORT */
 
 .mappo-viewport {
-  image-rendering: pixelated;
   cursor: default;
 }
 
 /* LAYER LIST */
 
 .layer-list-container {
-  flex: 0 0 250px;
+  flex: 0 0 var(--right-panel-width);
 }
 
 .layer-list .layer-list-item {
@@ -107,6 +111,7 @@ h1,h2,h3,h4,h5,h6 {
   display: flex;
   flex-direction: column;
   flex: 1 0;
+  max-width: var(--right-panel-width);
 }
 
 .tileset-header {
