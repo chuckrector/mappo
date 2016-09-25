@@ -32,6 +32,8 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 # Planned Features
 
+[CHANGELOG](https://github.com/chuckrector/mappo/blob/master/CHANGELOG.md)
+
 Feature | Implemented?
 --- |:---:
 Show all maps in launch folder (even subfolders) | ✅
