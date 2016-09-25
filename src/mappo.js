@@ -14,7 +14,7 @@ const fs = require('fs')
 
 const mappoSession = createMappoSession({
   fileSystem: {
-    files: glob.sync(process.cwd() + '/**/*.map', {nocase: true}),
+    files: glob.sync(process.cwd() + path.sep + '**' + path.sep + '*.map', {nocase: true}),
   },
   launchFolder: process.cwd(),
 })
