@@ -22,6 +22,12 @@ const context = canvas.getContext('2d')
 const tilesetCanvasContainer = document.querySelector('.tileset-canvas-container')
 const tilesetCanvas = document.querySelector('.tileset-canvas')
 const tilesetContext = tilesetCanvas.getContext('2d')
+const tilesetSelectedTileCanvas = document.querySelector('.tileset-selected-tile-canvas')
+const tilesetSelectedTileContext = tilesetSelectedTileCanvas.getContext('2d')
+const tilesetSelectedTileIndex = document.querySelector('.tileset-selected-tile-index')
+const tilesetHoveringTileCanvas = document.querySelector('.tileset-hovering-tile-canvas')
+const tilesetHoveringTileContext = tilesetHoveringTileCanvas.getContext('2d')
+const tilesetHoveringTileIndex = document.querySelector('.tileset-hovering-tile-index')
 const middlePanel = document.querySelector('.middle-panel')
 
 // CHECKERBOARD PATTERN
@@ -49,7 +55,7 @@ const mappoSession = createMappoSession({
 
 const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const DEFAULT_SCALE_INDEX = 4
-const mappoState = {
+const defaultMappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
   map: null,
@@ -69,6 +75,7 @@ const mappoState = {
   cameraScrollAmount: 1,
   keyPressed: {},
 }
+let mappoState = Object.assign({}, defaultMappoState)
 
 const getScale = () => viewportScales[mappoState.scaleIndex]
 
@@ -102,6 +109,7 @@ const refreshMapLayerList = () => {
 const loadMap = mapFilename => {
   console.group()
   try {
+    mappoState = Object.assign({}, defaultMappoState)
     mappoState.isLoading = true
 
     mappoState.cameraX = 0
@@ -141,6 +149,10 @@ const loadMap = mapFilename => {
     }
     mappoState.tileset = createMappoTileset({tileset: vspData})
     console.log(vspFilename, vspData)
+    tilesetSelectedTileCanvas.width = mappoState.tileset.tileWidth
+    tilesetSelectedTileCanvas.height = mappoState.tileset.tileHeight
+    tilesetHoveringTileCanvas.width = mappoState.tileset.tileWidth
+    tilesetHoveringTileCanvas.height = mappoState.tileset.tileHeight
 
     convertRaw32bitDataToImageBitmap({
       context,
@@ -201,15 +213,22 @@ const renderTileHighlightWithColor = ({
   context.strokeRect(~~x, ~~y, width, height)
 }
 
-const renderTile = (context, tileIndex, x, y) => {
+const renderTile = ({
+  context,
+  tileIndex,
+  x,
+  y,
+  scaleWidth=mappoState.tileset.tileWidth,
+  scaleHeight=mappoState.tileset.tileHeight,
+}) => {
   context.drawImage(
     mappoState.tilesetBitmap,
     0, tileIndex * mappoState.tileset.tileHeight,
     mappoState.tileset.tileWidth,
     mappoState.tileset.tileHeight,
     x, y,
-    mappoState.tileset.tileWidth,
-    mappoState.tileset.tileHeight
+    scaleWidth,
+    scaleHeight
   )
 }
 
@@ -253,7 +272,7 @@ const renderLayer = (layer, x, y, transparent=false) => {
       const tileIndex = getTileIndex(layer, tileX, tileY)
 
       if (tileIndex || !transparent) {
-        renderTile(context, tileIndex, pixelX, pixelY)
+        renderTile({context, tileIndex, x: pixelX, y: pixelY})
       }
 
       pixelX += tileWidth
@@ -397,18 +416,20 @@ const renderTileset = () => {
     const tileX = tileIndex % tilesetColumns
     const tileY = ~~(tileIndex / tilesetColumns)
 
-    renderTile(
-      tilesetContext,
+    renderTile({
+      context: tilesetContext,
       tileIndex,
-      tileX * mappoState.tileset.tileWidth,
-      tileY * mappoState.tileset.tileHeight
-    )
+      x: tileX * mappoState.tileset.tileWidth,
+      y: tileY * mappoState.tileset.tileHeight,
+    })
   }
 }
 
 const tick = () => {
   clearCanvas(canvas)
   clearCanvas(tilesetCanvas)
+  clearCanvas(tilesetSelectedTileCanvas)
+  clearCanvas(tilesetHoveringTileCanvas)
 
   if (!mappoState.isLoading) {
     mappoState.map.mapLayerOrder.forEach(layerIndex => {
@@ -443,6 +464,21 @@ const tick = () => {
       y: mappoState.tilesetSelectedTileY * mappoState.tileset.tileHeight,
       color: 'white',
     })
+
+    renderTile({
+      context: tilesetSelectedTileContext,
+      tileIndex: mappoState.tilesetSelectedIndex,
+      x: 0,
+      y: 0,
+    })
+    renderTile({
+      context: tilesetHoveringTileContext,
+      tileIndex: mappoState.tilesetHoverIndex,
+      x: 0,
+      y: 0,
+    })
+    tilesetSelectedTileIndex.innerText = mappoState.tilesetSelectedIndex
+    tilesetHoveringTileIndex.innerText = mappoState.tilesetHoverIndex
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;

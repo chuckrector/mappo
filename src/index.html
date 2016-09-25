@@ -21,6 +21,22 @@
         </div>
         <div class="tileset-container">
           <h2 class="tileset-header">Tileset</h2>
+          <div class="tileset-select-hover-panel horz-split">
+            <div class="tileset-select-hover-panel-left">
+              <h3>Selected</h3>
+              <div class="horz-split">
+                <canvas class="tileset-selected-tile-canvas tile-preview" width="64" height="64"></canvas>
+                <div class="tileset-selected-tile-index"></div>
+              </div>
+            </div>
+            <div class="tileset-select-hover-panel-right">
+              <h3>Hovering</h3>
+              <div class="horz-split">
+                <canvas class="tileset-hovering-tile-canvas tile-preview" width="64" height="64"></canvas>
+                <div class="tileset-hovering-tile-index"></div>
+              </div>
+            </div>
+          </div>
           <div class="tileset-canvas-container">
             <canvas class="tileset-canvas"></canvas>
           </div>
