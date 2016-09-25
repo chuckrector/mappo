@@ -137,6 +137,8 @@ const loadMap = mapFilename => {
     }).then(tilesetBitmap => {
       mappoState.tilesetBitmap = tilesetBitmap
       mappoState.isLoading = false
+
+      resizeCanvas()
     })
   } catch (exception) {
     console.error('ack!', exception)
@@ -164,7 +166,7 @@ const renderTileHighlight = ({
   context.strokeRect(~~x, ~~y, width, height)
 }
 
-const renderTile = (tileIndex, x, y) => {
+const renderTile = (context, tileIndex, x, y) => {
   context.drawImage(
     mappoState.tilesetBitmap,
     0, tileIndex * mappoState.tileset.tileHeight,
@@ -216,7 +218,7 @@ const renderLayer = (layer, x, y, transparent=false) => {
       const tileIndex = getTileIndex(layer, tileX, tileY)
 
       if (tileIndex || !transparent) {
-        renderTile(tileIndex, pixelX, pixelY)
+        renderTile(context, tileIndex, pixelX, pixelY)
       }
 
       pixelX += tileWidth
@@ -314,6 +316,29 @@ const clearCanvas = (canvas) => {
   context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
+const getTilesetColumns = () => ~~(tilesetCanvasContainer.offsetWidth / mappoState.tileset.tileWidth)
+const getTilesetRows = () => {
+  const tilesetColumns = getTilesetColumns()
+  const roundedUpRows = ~~((mappoState.tileset.numTiles + (tilesetColumns - 1)) / tilesetColumns)
+  return roundedUpRows
+}
+
+const renderTileset = () => {
+  const tilesetColumns = getTilesetColumns()
+
+  for (let tileIndex = 0; tileIndex < mappoState.tileset.numTiles; tileIndex++) {
+    const tileX = tileIndex % tilesetColumns
+    const tileY = ~~(tileIndex / tilesetColumns)
+
+    renderTile(
+      tilesetContext,
+      tileIndex,
+      tileX * mappoState.tileset.tileWidth,
+      tileY * mappoState.tileset.tileHeight
+    )
+  }
+}
+
 const tick = () => {
   clearCanvas(canvas)
   clearCanvas(tilesetCanvas)
@@ -337,6 +362,8 @@ const tick = () => {
         y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % mappoState.tileset.tileHeight),
       })
     }
+
+    renderTileset()
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;
@@ -378,8 +405,10 @@ const resizeCanvas = () => {
   canvas.style.width = middlePanel.offsetWidth + 'px'
   canvas.style.height = middlePanel.offsetHeight + 'px'
 
-  tilesetCanvas.width = tilesetCanvasContainer.offsetWidth
-  tilesetCanvas.height = tilesetCanvasContainer.offsetHeight
+  if (!mappoState.isLoading) {
+    tilesetCanvas.width = getTilesetColumns() * mappoState.tileset.tileWidth
+    tilesetCanvas.height = getTilesetRows() * mappoState.tileset.tileHeight
+  }
 }
 
 window.addEventListener('resize', resizeCanvas)
