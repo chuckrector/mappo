@@ -2,7 +2,9 @@
 
 [Docs](https://github.com/chuckrector/mappo/tree/master/doc)
 
-Currently, a collection of command-line tools which can load and convert various [VERGE](http://verge-rpg.com/) file formats. The skeleton of an Electron app is also included. After I've written loaders and converters for all known VERGE file formats, I'll start building a map editor in the Electron app.
+![alt text](/img/mappo-wip-layer-visibility.png?raw=true "mappo work-in-progress screenshot of recently implemented layer visibility toggling")
+
+Mappo is a *work in progress* 2D tile map editor for retro games. Currently, only [VERGE](http://verge-rpg.com/) file formats are supported. A comprehensive set of command-line tools for loading and exporting all VERGE file formats (to PNG/GIF/JSON) are included.
 
 # Why?
 
