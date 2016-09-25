@@ -12,11 +12,14 @@ const detectFormat = require('./detectFormat')
 const path = require('path')
 const fs = require('fs')
 
+const launchFolder = 'data' // TODO(chuck): temp hack for windows. empty string dunna work
+const mapGlob = '**/*.map'
+const mapFilenames = glob.sync(mapGlob, {nocase: true})
 const mappoSession = createMappoSession({
   fileSystem: {
-    files: glob.sync(process.cwd() + path.sep + '**' + path.sep + '*.map', {nocase: true}),
+    files: mapFilenames
   },
-  launchFolder: process.cwd(),
+  launchFolder
 })
 
 const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -42,7 +45,8 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement('li')
   li.setAttribute('title', mapFilename)
   li.innerText = mapFilename
-  li.addEventListener('click', event => loadMap(mapFilename))
+  // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
+  li.addEventListener('click', event => loadMap('data/' + mapFilename))
   mapList.appendChild(li)
 })
 

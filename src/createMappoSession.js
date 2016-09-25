@@ -6,10 +6,12 @@ module.exports = ({
   fileSystem,
   launchFolder,
 }) => {
-  const inLaunchFolder = filename => (filename.substr(0, launchFolder.length + 1) === launchFolder + path.sep)
+  const inLaunchFolder = filename => (filename.substr(0, launchFolder.length + 1) === launchFolder + '/')
   const isMap = filename => (path.basename(filename).toLowerCase().endsWith('.map'))
   const getMapFilenames = () => {
-    const mapFilenames = fileSystem.files.filter(filename => inLaunchFolder(filename) && isMap(filename))
+    const mapFilenames = fileSystem.files.filter(filename => {
+      return inLaunchFolder(filename) && isMap(filename)
+    })
     return mapFilenames.map(filename => path.relative(launchFolder, filename))
   }
 
