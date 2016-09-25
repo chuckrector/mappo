@@ -58,6 +58,24 @@
         image-rendering: pixelated;
         cursor: default;
       }
+
+      .layer-list .layer-list-item {
+        position: relative;
+        padding-left: 35px;
+      }
+      .layer-list-item::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        content: '';
+        width: 35px;
+        height: 25px;
+        background: url(icon-eye.svg) 5px center no-repeat;
+      }
+      .is-layer-hidden::before {
+        opacity: .25;
+      }
     </style>
   </head>
   <body>

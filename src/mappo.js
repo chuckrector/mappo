@@ -61,6 +61,11 @@ const refreshMapLayerList = () => {
     const li = document.createElement('li')
     li.setAttribute('title', layer.description)
     li.innerText = layer.description
+    li.classList.add('layer-list-item')
+    li.addEventListener('click', event => {
+      li.classList.toggle('is-layer-hidden')
+      layer.isHidden = !layer.isHidden
+    })
     layerList.appendChild(li)
   })
 }
@@ -291,13 +296,14 @@ const tick = () => {
   if (!mappoState.isLoading) {
     mappoState.map.mapLayerOrder.forEach(layerIndex => {
       const tileLayer = mappoState.map.tileLayers[layerIndex]
-
-      renderLayer(
-        tileLayer,
-        mappoState.cameraX * tileLayer.parallax.x,
-        mappoState.cameraY * tileLayer.parallax.y,
-        layerIndex > 0 // transparent
-      )
+      if (!tileLayer.isHidden) {
+        renderLayer(
+          tileLayer,
+          mappoState.cameraX * tileLayer.parallax.x,
+          mappoState.cameraY * tileLayer.parallax.y,
+          layerIndex > 0 // transparent
+        )
+      }
     })
 
     if (hoverCanvasCoord) {
