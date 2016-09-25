@@ -56,6 +56,12 @@ const mappoState = {
   mapLayerOrder: null,
   tileset: null,
   tilesetBitmap: null,
+  tilesetHoverTileX: 0,
+  tilesetHoverTileY: 0,
+  tilesetHoverIndex: 0,
+  tilesetSelectedTileX: 0,
+  tilesetSelectedTileY: 0,
+  tilesetSelectedIndex: 0,
   cameraX: 0,
   cameraY: 0,
   cameraMoveX: 0,
@@ -156,6 +162,7 @@ const loadMap = mapFilename => {
 }
 
 const renderTileHighlight = ({
+  context,
   x,
   y,
   width=mappoState.tileset.tileWidth,
@@ -286,6 +293,21 @@ middlePanel.addEventListener('mousemove', event => {
   }
 })
 
+tilesetCanvasContainer.addEventListener('mousemove', event => {
+  if (mappoState.isLoading) {
+    return
+  }
+
+  const scale = getScale()
+  const hoverTileX = ~~(event.offsetX / (mappoState.tileset.tileWidth * scale))
+  const hoverTileY = ~~(event.offsetY / (mappoState.tileset.tileHeight * scale))
+  const hoverTileIndex = (hoverTileY * getTilesetColumns()) + hoverTileX
+
+  mappoState.tilesetHoverTileX = hoverTileX
+  mappoState.tilesetHoverTileY = hoverTileY
+  mappoState.tilesetHoverIndex = hoverTileIndex
+})
+
 middlePanel.addEventListener('mouseup', event => {
   mousedown = false
 })
@@ -361,12 +383,18 @@ const tick = () => {
 
     if (hoverCanvasCoord) {
       renderTileHighlight({
+        context,
         x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % mappoState.tileset.tileWidth),
         y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % mappoState.tileset.tileHeight),
       })
     }
 
     renderTileset()
+    renderTileHighlight({
+      context: tilesetContext,
+      x: mappoState.tilesetHoverTileX * mappoState.tileset.tileWidth,
+      y: mappoState.tilesetHoverTileY * mappoState.tileset.tileHeight,
+    })
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;
