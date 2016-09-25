@@ -174,6 +174,33 @@ const renderTileHighlight = ({
   context.strokeRect(~~x, ~~y, width, height)
 }
 
+const renderInvertedSolidTileHighlight = ({
+  context,
+  x,
+  y,
+  width=mappoState.tileset.tileWidth,
+  height=mappoState.tileset.tileHeight,
+}) => {
+  context.strokeStyle = 'white'
+  context.globalCompositeOperation = 'exclusion'
+  context.lineWidth = 2
+  context.fillRect(~~x, ~~y, width, height)
+}
+
+const renderTileHighlightWithColor = ({
+  context,
+  x,
+  y,
+  width=mappoState.tileset.tileWidth,
+  height=mappoState.tileset.tileHeight,
+  color='white',
+}) => {
+  context.strokeStyle = color
+  context.globalCompositeOperation = 'source-over'
+  context.lineWidth = 2
+  context.strokeRect(~~x, ~~y, width, height)
+}
+
 const renderTile = (context, tileIndex, x, y) => {
   context.drawImage(
     mappoState.tilesetBitmap,
@@ -308,6 +335,21 @@ tilesetCanvasContainer.addEventListener('mousemove', event => {
   mappoState.tilesetHoverIndex = hoverTileIndex
 })
 
+tilesetCanvasContainer.addEventListener('click', event => {
+  if (mappoState.isLoading) {
+    return
+  }
+
+  const scale = getScale()
+  const selectedTileX = ~~(event.offsetX / (mappoState.tileset.tileWidth * scale))
+  const selectedTileY = ~~(event.offsetY / (mappoState.tileset.tileHeight * scale))
+  const selectedTileIndex = (selectedTileY * getTilesetColumns()) + selectedTileX
+
+  mappoState.tilesetSelectedTileX = selectedTileX
+  mappoState.tilesetSelectedTileY = selectedTileY
+  mappoState.tilesetSelectedIndex = selectedTileIndex
+})
+
 middlePanel.addEventListener('mouseup', event => {
   mousedown = false
 })
@@ -390,10 +432,16 @@ const tick = () => {
     }
 
     renderTileset()
-    renderTileHighlight({
+    renderInvertedSolidTileHighlight({
       context: tilesetContext,
       x: mappoState.tilesetHoverTileX * mappoState.tileset.tileWidth,
       y: mappoState.tilesetHoverTileY * mappoState.tileset.tileHeight,
+    })
+    renderTileHighlightWithColor({
+      context: tilesetContext,
+      x: mappoState.tilesetSelectedTileX * mappoState.tileset.tileWidth,
+      y: mappoState.tilesetSelectedTileY * mappoState.tileset.tileHeight,
+      color: 'white',
     })
 
     mappoState.cameraMoveX = 0
