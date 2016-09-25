@@ -1,3 +1,10 @@
+## 0.25.0 (Sep 23, 2016)
+
+- show all maps in launch folder (even subfolders)
+- click any V1/V2/V3 map to load it
+- fix bug in v1map format detection (looked for `.chr` instead of `.vsp` in header)
+- fix bug in v2vsp format detection (accept version 3)
+
 ## 0.24.0 (Sep 22, 2016)
 
 - allow viewport dragging to continue after moving outside and back into the window
