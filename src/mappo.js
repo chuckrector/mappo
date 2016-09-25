@@ -36,6 +36,7 @@ const mappoState = {
   cameraMoveX: 0,
   cameraMoveY: 0,
   cameraScrollAmount: 1,
+  keyPressed: {},
 }
 
 const getScale = () => viewportScales[mappoState.scaleIndex]
@@ -209,30 +210,29 @@ const KEYCODE_RIGHT = 39
 const KEYCODE_PLUS = 187
 const KEYCODE_MINUS = 189
 const KEYCODE_0 = 48
-const keyPressed = {}
 
 document.addEventListener('keydown', event => {
-  keyPressed[event.keyCode] = true
+  mappoState.keyPressed[event.keyCode] = true
   if (event.metaKey) {
-    keyPressed.metaKey = true
+    mappoState.keyPressed.metaKey = true
   }
   if (event.ctrlKey) {
-    keyPressed.ctrlKey = true
+    mappoState.keyPressed.ctrlKey = true
   }
   if (event.altKey) {
-    keyPressed.altKey = true
+    mappoState.keyPressed.altKey = true
   }
 })
 document.addEventListener('keyup', event => {
-  keyPressed[event.keyCode] = false
+  mappoState.keyPressed[event.keyCode] = false
   if (!event.metaKey) {
-    keyPressed.metaKey = false
+    mappoState.keyPressed.metaKey = false
   }
   if (!event.ctrlKey) {
-    keyPressed.ctrlKey = false
+    mappoState.keyPressed.ctrlKey = false
   }
   if (!event.altKey) {
-    keyPressed.altKey = false
+    mappoState.keyPressed.altKey = false
   }
 })
 
@@ -336,25 +336,25 @@ const tick = () => {
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;
-    (keyPressed[KEYCODE_UP] || autoScrollY < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
-    (keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
-    (keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
-    (keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
+    (mappoState.keyPressed[KEYCODE_UP] || autoScrollY < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
+    (mappoState.keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
+    (mappoState.keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
+    (mappoState.keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
     moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
 
     // map zooming
-    if (keyPressed.metaKey || keyPressed.ctrlKey) {
+    if (mappoState.keyPressed.metaKey || mappoState.keyPressed.ctrlKey) {
       const prevScaleIndex = mappoState.scaleIndex
-      if (keyPressed[KEYCODE_PLUS]) {
-        keyPressed[KEYCODE_PLUS] = false
+      if (mappoState.keyPressed[KEYCODE_PLUS]) {
+        mappoState.keyPressed[KEYCODE_PLUS] = false
         mappoState.scaleIndex++
       }
-      if (keyPressed[KEYCODE_MINUS]) {
-        keyPressed[KEYCODE_MINUS] = false
+      if (mappoState.keyPressed[KEYCODE_MINUS]) {
+        mappoState.keyPressed[KEYCODE_MINUS] = false
         mappoState.scaleIndex--
       }
-      if (keyPressed[KEYCODE_0]) {
-        keyPressed[KEYCODE_0] = false
+      if (mappoState.keyPressed[KEYCODE_0]) {
+        mappoState.keyPressed[KEYCODE_0] = false
         mappoState.scaleIndex = DEFAULT_SCALE_INDEX
       }
       mappoState.scaleIndex = clamp(mappoState.scaleIndex, 0, viewportScales.length - 1)
