@@ -316,7 +316,11 @@ const clearCanvas = (canvas) => {
   context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-const getTilesetColumns = () => ~~(tilesetCanvasContainer.offsetWidth / mappoState.tileset.tileWidth)
+const getTilesetColumns = () => {
+  const scaledTileWidth = mappoState.tileset.tileWidth * getScale()
+  return ~~(tilesetCanvasContainer.offsetWidth / scaledTileWidth)
+}
+
 const getTilesetRows = () => {
   const tilesetColumns = getTilesetColumns()
   const roundedUpRows = ~~((mappoState.tileset.numTiles + (tilesetColumns - 1)) / tilesetColumns)
@@ -408,6 +412,8 @@ const resizeCanvas = () => {
   if (!mappoState.isLoading) {
     tilesetCanvas.width = getTilesetColumns() * mappoState.tileset.tileWidth
     tilesetCanvas.height = getTilesetRows() * mappoState.tileset.tileHeight
+    tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + 'px'
+    tilesetCanvas.style.height = (tilesetCanvas.height * getScale()) + 'px'
   }
 }
 
