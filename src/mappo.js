@@ -13,16 +13,18 @@ const path = require('path')
 const fs = require('fs')
 const setupKeyboard = require('./setupKeyboard')
 
-const launchFolder = 'data' // TODO(chuck): temp hack for windows. empty string dunna work
-const mapGlob = '**/*.map'
-const mapFilenames = glob.sync(mapGlob, {nocase: true})
-const mappoSession = createMappoSession({
-  fileSystem: {
-    files: mapFilenames
-  },
-  launchFolder
-})
+// DOM REFERENCES
+const pageTitle = document.querySelector('title')
+const mapList = document.querySelector('.map-list')
+const layerList = document.querySelector('.layer-list')
+const canvas = document.querySelector('.mappo-viewport')
+const context = canvas.getContext('2d')
+const tilesetCanvasContainer = document.querySelector('.tileset-canvas-container')
+const tilesetCanvas = document.querySelector('.tileset-canvas')
+const tilesetContext = tilesetCanvas.getContext('2d')
+const middlePanel = document.querySelector('.middle-panel')
 
+// CHECKERBOARD PATTERN
 const checkerboardCanvas = document.createElement('canvas')
 const checkerboardCanvasContext = checkerboardCanvas.getContext('2d')
 checkerboardCanvas.width = 16
@@ -33,6 +35,17 @@ checkerboardCanvasContext.fillStyle = 'silver'
 checkerboardCanvasContext.fillRect(0, 0, 8, 8)
 checkerboardCanvasContext.fillRect(8, 8, 8, 8)
 const checkerboardPattern = checkerboardCanvasContext.createPattern(checkerboardCanvas, 'repeat')
+
+const launchFolder = 'data' // TODO(chuck): temp hack for windows. empty string dunna work
+console.log('launchFolder', launchFolder)
+const mapGlob = '**/*.map'
+const mapFilenames = glob.sync(mapGlob, {nocase: true})
+const mappoSession = createMappoSession({
+  fileSystem: {
+    files: mapFilenames
+  },
+  launchFolder
+})
 
 const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const DEFAULT_SCALE_INDEX = 4
@@ -53,8 +66,6 @@ const mappoState = {
 
 const getScale = () => viewportScales[mappoState.scaleIndex]
 
-const pageTitle = document.querySelector('title')
-const mapList = document.querySelector('.map-list')
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement('li')
   li.setAttribute('title', mapFilename)
@@ -67,10 +78,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   mapList.appendChild(li)
 })
 
-console.log('launchFolder', process.cwd())
-
 const refreshMapLayerList = () => {
-  const layerList = document.querySelector('.layer-list')
   layerList.innerHTML = ''
   mappoState.map.tileLayers.forEach(layer => {
     const li = document.createElement('li')
@@ -146,13 +154,6 @@ const loadMap = mapFilename => {
     console.groupEnd()
   }
 }
-
-const canvas = document.querySelector('.mappo-viewport')
-const context = canvas.getContext('2d')
-
-const tilesetCanvasContainer = document.querySelector('.tileset-canvas-container')
-const tilesetCanvas = document.querySelector('.tileset-canvas')
-const tilesetContext = tilesetCanvas.getContext('2d')
 
 const renderTileHighlight = ({
   x,
@@ -234,8 +235,6 @@ const keyboard = setupKeyboard({
   addEventListener: document.addEventListener,
   keyPressed: mappoState.keyPressed,
 })
-
-const middlePanel = document.querySelector('.middle-panel')
 
 let mousedown = false
 let mousein = false
