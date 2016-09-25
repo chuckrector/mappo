@@ -60,6 +60,7 @@ const defaultMappoState = {
   isLoading: true,
   map: null,
   mapLayerOrder: null,
+  mapLayerSelected: null,
   tileset: null,
   tilesetBitmap: null,
   tilesetHoverTileX: 0,
@@ -93,14 +94,26 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 const refreshMapLayerList = () => {
   layerList.innerHTML = ''
-  mappoState.map.tileLayers.forEach(layer => {
+  mappoState.map.tileLayers.forEach((layer, index) => {
     const li = document.createElement('li')
     li.setAttribute('title', layer.description)
     li.innerText = layer.description
     li.classList.add('layer-list-item')
+    if (mappoState.mapLayerSelected === layer) {
+      li.classList.add('selected')
+    }
     li.addEventListener('click', event => {
-      li.classList.toggle('is-layer-hidden')
-      layer.isHidden = !layer.isHidden
+      // TODO(chuck): use a proper element?
+      if (event.offsetX < 35) {
+        li.classList.toggle('is-layer-hidden')
+        layer.isHidden = !layer.isHidden
+      }
+      mappoState.mapLayerSelected = layer
+      const layerListItems = document.querySelectorAll('.layer-list .layer-list-item')
+      layerListItems.forEach(layerListItem => {
+        layerListItem.classList.remove('selected')
+      })
+      li.classList.add('selected')
     })
     layerList.appendChild(li)
   })
@@ -131,6 +144,7 @@ const loadMap = mapFilename => {
     }
     mappoState.map = createMappoMap({map: mapData})
     console.log(mapFilename, mapData)
+    mappoState.mapLayerSelected = mappoState.map.tileLayers[mappoState.map.mapLayerOrder[0]]
     refreshMapLayerList()
 
     const vspFilename = path.join(

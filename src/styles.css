@@ -74,7 +74,7 @@ canvas {
 }
 
 .padded-list li:hover {
-  background: silver;
+  box-shadow: inset 0 0 8px gray;
 }
 
 /* VIEWPORT */
@@ -92,6 +92,10 @@ canvas {
 .layer-list .layer-list-item {
   position: relative;
   padding-left: 35px;
+}
+
+.layer-list-item.selected {
+  background: silver;
 }
 
 .layer-list-item::before {
