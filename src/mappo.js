@@ -42,13 +42,17 @@ const mappoState = {
 
 const getScale = () => viewportScales[mappoState.scaleIndex]
 
+const pageTitle = document.querySelector('title')
 const mapList = document.querySelector('.map-list')
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement('li')
   li.setAttribute('title', mapFilename)
   li.innerText = mapFilename
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
-  li.addEventListener('click', event => loadMap('data/' + mapFilename))
+  li.addEventListener('click', event => {
+    loadMap('data/' + mapFilename)
+    pageTitle.innerText = 'Mappo - ' + mapFilename
+  })
   mapList.appendChild(li)
 })
 
