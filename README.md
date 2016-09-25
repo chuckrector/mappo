@@ -36,33 +36,33 @@ Feature | Implemented?
 --- |:---:
 Show maps in launch folder | 😃
 Load V1/V2/V3 maps | 😃
-Save maps | 😡
-Auto-save | 😡
-Plot tiles | 😡
-Fill region with tiles | 😡
-Auto-tiling | 😡
+Save maps | 😭
+Auto-save | 😭
+Plot tiles | 😭
+Fill region with tiles | 😭
+Auto-tiling | 😭
 Draw map layers in correct order | 😃
-Draw tile animations | 😡
-Edit tile animations | 😡
-Draw characters/entities | 😡
-Edit characters/entities | 😡
-Edit map layer order | 😡
-Draw obstructions | 😡
-Edit obstructions | 😡
-Draw zones | 😡
-Edit zones | 😡
+Draw tile animations | 😭
+Edit tile animations | 😭
+Draw characters/entities | 😭
+Edit characters/entities | 😭
+Edit map layer order | 😭
+Draw obstructions | 😭
+Edit obstructions | 😭
+Draw zones | 😭
+Edit zones | 😭
 Show all map layers | 😃
 Toggle layer visibility | 😃
 Scroll viewport w/ keys | 😃
 Scroll viewport w/ mouse near edges | 😃
 Scroll viewport w/ mouse dragging | 😃
 Zoom map (ctrl +/-) | 😃
-Undo/redo | 😡
-Multi-tile brushes | 😡
-Multi-tile templates w/ zones & obstructions | 😡
-On launch, load previous map | 😡
-On launch, remember previous window size & position | 😡
-On launch, remember previous session undo history | 😡
+Undo/redo | 😭
+Multi-tile brushes | 😭
+Multi-tile templates w/ zones & obstructions | 😭
+On launch, load previous map | 😭
+On launch, remember previous window size & position | 😭
+On launch, remember previous session undo history | 😭
 
 # Supported File Formats
 
