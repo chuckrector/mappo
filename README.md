@@ -37,8 +37,8 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 Emoji | What does it mean?
 :---:| ---
 ✅ | I did it!
-😭 | I haven't gotten around to this one yet.
-🛠 | I'm actively workin' on it!
+😭 | I didn't do it yet.
+🛠 | I'm working on it!
 
 Feature | Implemented?
 --- |:---:
