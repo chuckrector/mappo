@@ -34,11 +34,11 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 [CHANGELOG](https://github.com/chuckrector/mappo/blob/master/CHANGELOG.md)
 
-✅ = I did it!
-
-😭 = I haven't gotten around to this one yet.
-
-🛠 = I'm actively workin' on it!
+Emoji | What does it mean?
+:---:| ---
+✅ | I did it!
+😭 | I haven't gotten around to this one yet.
+🛠 | I'm actively workin' on it!
 
 Feature | Implemented?
 --- |:---:
