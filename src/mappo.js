@@ -23,6 +23,17 @@ const mappoSession = createMappoSession({
   launchFolder
 })
 
+const checkerboardCanvas = document.createElement('canvas')
+const checkerboardCanvasContext = checkerboardCanvas.getContext('2d')
+checkerboardCanvas.width = 16
+checkerboardCanvas.height = 16
+checkerboardCanvasContext.fillStyle = 'white'
+checkerboardCanvasContext.fillRect(0, 0, 16, 16)
+checkerboardCanvasContext.fillStyle = 'silver'
+checkerboardCanvasContext.fillRect(0, 0, 8, 8)
+checkerboardCanvasContext.fillRect(8, 8, 8, 8)
+const checkerboardPattern = checkerboardCanvasContext.createPattern(checkerboardCanvas, 'repeat')
+
 const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const DEFAULT_SCALE_INDEX = 4
 const mappoState = {
@@ -296,16 +307,16 @@ const moveCamera = (moveX, moveY) => {
   mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
 }
 
-const clearCanvas = ({canvas, color}) => {
+const clearCanvas = (canvas) => {
   const context = canvas.getContext('2d')
   context.globalCompositeOperation = 'source-over'
-  context.fillStyle = 'black'
+  context.fillStyle = checkerboardPattern
   context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
 const tick = () => {
-  clearCanvas({canvas, color: 'black'})
-  clearCanvas({canvas: tilesetCanvas, color: 'black'})
+  clearCanvas(canvas)
+  clearCanvas(tilesetCanvas)
 
   if (!mappoState.isLoading) {
     mappoState.map.mapLayerOrder.forEach(layerIndex => {
