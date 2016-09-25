@@ -6,7 +6,7 @@ module.exports = ({
   fileSystem,
   launchFolder,
 }) => {
-  const inLaunchFolder = filename => (filename.substr(0, launchFolder.length + 1) === launchFolder + '/')
+  const inLaunchFolder = filename => (filename.substr(0, launchFolder.length + 1) === launchFolder + path.sep)
   const isMap = filename => (path.basename(filename).toLowerCase().endsWith('.map'))
   const getMapFilenames = () => {
     const mapFilenames = fileSystem.files.filter(filename => inLaunchFolder(filename) && isMap(filename))
