@@ -33,7 +33,7 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 # Planned Features
 
 Feature | Implemented?
--- |:---:
+--- |:---:
 Show maps in launch folder | ✓
 Load V1/V2/V3 maps | ✓
 Save maps | ✗
@@ -45,7 +45,7 @@ Draw map layers in correct order | ✓
 Draw tile animations | ✗
 Edit tile animations | ✗
 Draw characters/entities | ✗
-Edit characters/entitiets
+Edit characters/entities | ✗
 Edit map layer order | ✗
 Draw obstructions | ✗
 Edit obstructions | ✗
