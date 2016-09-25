@@ -137,6 +137,10 @@ const loadMap = mapFilename => {
 const canvas = document.querySelector('.mappo-viewport')
 const context = canvas.getContext('2d')
 
+const tilesetCanvasContainer = document.querySelector('.tileset-canvas-container')
+const tilesetCanvas = document.querySelector('.tileset-canvas')
+const tilesetContext = tilesetCanvas.getContext('2d')
+
 const renderTileHighlight = ({
   x,
   y,
@@ -292,10 +296,16 @@ const moveCamera = (moveX, moveY) => {
   mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
 }
 
-const tick = () => {
+const clearCanvas = ({canvas, color}) => {
+  const context = canvas.getContext('2d')
   context.globalCompositeOperation = 'source-over'
   context.fillStyle = 'black'
   context.fillRect(0, 0, canvas.width, canvas.height)
+}
+
+const tick = () => {
+  clearCanvas({canvas, color: 'black'})
+  clearCanvas({canvas: tilesetCanvas, color: 'black'})
 
   if (!mappoState.isLoading) {
     mappoState.map.mapLayerOrder.forEach(layerIndex => {
@@ -356,6 +366,9 @@ const resizeCanvas = () => {
   canvas.height = ~~((middlePanel.offsetHeight + (getScale() - 1)) / getScale())
   canvas.style.width = middlePanel.offsetWidth + 'px'
   canvas.style.height = middlePanel.offsetHeight + 'px'
+
+  tilesetCanvas.width = tilesetCanvasContainer.offsetWidth
+  tilesetCanvas.height = tilesetCanvasContainer.offsetHeight
 }
 
 window.addEventListener('resize', resizeCanvas)

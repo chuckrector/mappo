@@ -35,6 +35,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .right-panel {
+  display: flex;
+  flex-direction: column;
   flex: 0 0 250px;
 }
 
@@ -75,6 +77,10 @@ h1,h2,h3,h4,h5,h6 {
 
 /* LAYER LIST */
 
+.layer-list-container {
+  flex: 0 0 250px;
+}
+
 .layer-list .layer-list-item {
   position: relative;
   padding-left: 35px;
@@ -93,4 +99,20 @@ h1,h2,h3,h4,h5,h6 {
 
 .is-layer-hidden::before {
   opacity: .25;
+}
+
+/* TILESET */
+
+.tileset-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0;
+}
+
+.tileset-header {
+  padding: 0 15px;
+}
+
+.tileset-canvas-container {
+  flex: 1 0;
 }
