@@ -35,7 +35,9 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 [CHANGELOG](https://github.com/chuckrector/mappo/blob/master/CHANGELOG.md)
 
 ✅ = I did it!
+
 😭 = I haven't gotten around to this one yet.
+
 🛠 = I'm actively workin' on it!
 
 Feature | Implemented?
@@ -44,7 +46,7 @@ Show all maps in launch folder (even subfolders) | ✅
 Click any V1/V2/V3 map to load it | ✅
 Save maps | 😭
 Auto-save | 😭
-Tile selector | 😭
+Tile selector | 🛠
 Plot tiles | 😭
 Fill region with tiles | 😭
 Auto-tiling | 😭
