@@ -2,6 +2,7 @@
 
 const expect = require('expect')
 const createMappoSession = require('./createMappoSession')
+const path = require('path')
 
 {
   // session finds all maps in launch folder
@@ -26,6 +27,6 @@ const createMappoSession = require('./createMappoSession')
   expect(session.getMapFilenames()).toEqual([
     'foo.map',
     'DOOM.MAP',
-    'subfolder/bar.map',
+    'subfolder' + path.sep + 'bar.map',
   ])
 }
