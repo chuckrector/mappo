@@ -38,6 +38,7 @@ Show all maps in launch folder (even subfolders) | ✅
 Click any V1/V2/V3 map to load it | ✅
 Save maps | 😭
 Auto-save | 😭
+Tile selector | 😭
 Plot tiles | 😭
 Fill region with tiles | 😭
 Auto-tiling | 😭
