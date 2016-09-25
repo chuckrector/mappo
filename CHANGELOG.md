@@ -1,3 +1,13 @@
+## 0.26.0 (Sep 24, 2016)
+
+- draw map layers in correct order
+- limit map zoom to: 0.25x, 0.5x, 0.75x, 1x-10x
+- added map filename tooltips
+- fix bug where right panel shrunk when resizing window bigger/smaller
+- fix mappo not working in Windows (tested Windows 10)
+- show list of map layers by name
+- added ability to toggle layer visibility by clicking layer name
+
 ## 0.25.0 (Sep 23, 2016)
 
 - show all maps in launch folder (even subfolders)
