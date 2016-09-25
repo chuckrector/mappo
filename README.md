@@ -1,10 +1,10 @@
 # ![alt text](/img/v1/CRYSTAL.CHR-down.gif?raw=true "a sample of v2chr2gif cli output") mappo v0.24.0 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
 
-[Docs](https://github.com/chuckrector/mappo/tree/master/doc)
-
 ![alt text](/img/mappo-wip-layer-visibility.png?raw=true "mappo work-in-progress screenshot of recently implemented layer visibility toggling")
 
 Mappo is a *work in progress* 2D tile map editor for retro games. Currently, only [VERGE](http://verge-rpg.com/) file formats are supported. A comprehensive set of command-line tools for loading and exporting all VERGE file formats (to PNG/GIF/JSON) are included.
+
+[Command-Line Documentation](https://github.com/chuckrector/mappo/tree/master/doc)
 
 # Why?
 
