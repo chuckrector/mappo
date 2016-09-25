@@ -11,6 +11,7 @@ const convertRaw32bitDataToImageBitmap = require('./convertRaw32bitDataToImageBi
 const detectFormat = require('./detectFormat')
 const path = require('path')
 const fs = require('fs')
+const setupKeyboard = require('./setupKeyboard')
 
 const launchFolder = 'data' // TODO(chuck): temp hack for windows. empty string dunna work
 const mapGlob = '**/*.map'
@@ -203,37 +204,9 @@ const renderLayer = (layer, x, y, transparent=false) => {
   }
 }
 
-const KEYCODE_UP = 38
-const KEYCODE_DOWN = 40
-const KEYCODE_LEFT = 37
-const KEYCODE_RIGHT = 39
-const KEYCODE_PLUS = 187
-const KEYCODE_MINUS = 189
-const KEYCODE_0 = 48
-
-document.addEventListener('keydown', event => {
-  mappoState.keyPressed[event.keyCode] = true
-  if (event.metaKey) {
-    mappoState.keyPressed.metaKey = true
-  }
-  if (event.ctrlKey) {
-    mappoState.keyPressed.ctrlKey = true
-  }
-  if (event.altKey) {
-    mappoState.keyPressed.altKey = true
-  }
-})
-document.addEventListener('keyup', event => {
-  mappoState.keyPressed[event.keyCode] = false
-  if (!event.metaKey) {
-    mappoState.keyPressed.metaKey = false
-  }
-  if (!event.ctrlKey) {
-    mappoState.keyPressed.ctrlKey = false
-  }
-  if (!event.altKey) {
-    mappoState.keyPressed.altKey = false
-  }
+const keyboard = setupKeyboard({
+  addEventListener: document.addEventListener,
+  keyPressed: mappoState.keyPressed,
 })
 
 const middlePanel = document.querySelector('.middle-panel')
@@ -336,25 +309,25 @@ const tick = () => {
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;
-    (mappoState.keyPressed[KEYCODE_UP] || autoScrollY < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
-    (mappoState.keyPressed[KEYCODE_DOWN] || autoScrollY > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
-    (mappoState.keyPressed[KEYCODE_LEFT] || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
-    (mappoState.keyPressed[KEYCODE_RIGHT] || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
+    (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScrollY < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
+    (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScrollY > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
+    (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
+    (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
     moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
 
     // map zooming
-    if (mappoState.keyPressed.metaKey || mappoState.keyPressed.ctrlKey) {
+    if (keyboard.isPressed('ctrlKey')) {
       const prevScaleIndex = mappoState.scaleIndex
-      if (mappoState.keyPressed[KEYCODE_PLUS]) {
-        mappoState.keyPressed[KEYCODE_PLUS] = false
+      if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
+        keyboard.release(keyboard.KEYCODE_PLUS)
         mappoState.scaleIndex++
       }
-      if (mappoState.keyPressed[KEYCODE_MINUS]) {
-        mappoState.keyPressed[KEYCODE_MINUS] = false
+      if (keyboard.isPressed(keyboard.KEYCODE_MINUS)) {
+        keyboard.release(keyboard.KEYCODE_MINUS)
         mappoState.scaleIndex--
       }
-      if (mappoState.keyPressed[KEYCODE_0]) {
-        mappoState.keyPressed[KEYCODE_0] = false
+      if (keyboard.isPressed(keyboard.KEYCODE_0)) {
+        keyboard.release(keyboard.KEYCODE_0)
         mappoState.scaleIndex = DEFAULT_SCALE_INDEX
       }
       mappoState.scaleIndex = clamp(mappoState.scaleIndex, 0, viewportScales.length - 1)
