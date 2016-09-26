@@ -3,6 +3,7 @@
 const asset = require(`./asset`)
 const colorDepth = require(`./converter/colorDepth`)
 const clamp = require(`lodash/clamp`)
+const cloneDeep = require(`lodash/clonedeep`)
 const glob = require(`glob`)
 const createMappoSession = require(`./createMappoSession`)
 const createMappoMap = require(`./createMappoMap`)
@@ -78,7 +79,7 @@ const defaultMappoState = {
   mouseInViewport: false,
   autoScroll: {},
 }
-let mappoState = Object.assign({}, defaultMappoState)
+let mappoState = cloneDeep(defaultMappoState)
 
 const getScale = () => viewportScales[mappoState.scaleIndex]
 
@@ -88,7 +89,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   li.innerText = mapFilename
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
   li.addEventListener(`click`, event => {
-    mappoState = Object.assign({}, defaultMappoState)
+    mappoState = cloneDeep(defaultMappoState)
     mappoState.isLoading = true
 
     mappoState.map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
