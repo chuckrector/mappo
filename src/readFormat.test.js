@@ -1,12 +1,12 @@
 "use strict"
 
-const expect = require('expect')
-const createDataReader = require('./createDataReader')
-const {makeBuffer, B} = require('./makeBuffer')
-const {readFormat, readFormatData, T} = require('./readFormat')
-const filler = require('./filler')
-const zlib = require('zlib')
-const range = require('lodash/range')
+const expect = require(`expect`)
+const createDataReader = require(`./createDataReader`)
+const {makeBuffer, B} = require(`./makeBuffer`)
+const {readFormat, readFormatData, T} = require(`./readFormat`)
+const filler = require(`./filler`)
+const zlib = require(`zlib`)
+const range = require(`lodash/range`)
 
 {
   // can read unsigned types from data
@@ -73,9 +73,9 @@ const range = require('lodash/range')
   // can read string types
 
   const buffer = makeBuffer([
-    B.string(' \n\t\r'),
-    B.stringFixed(20, 'Cute'),
-    B.string('Cuddly\0Kittens 255 65535 4294967295'),
+    B.string(` \n\t\r`),
+    B.stringFixed(20, `Cute`),
+    B.string(`Cuddly\0Kittens 255 65535 4294967295`),
   ])
 
   const data = readFormat({
@@ -92,10 +92,10 @@ const range = require('lodash/range')
   })
 
   expect(data).toEqual({
-    _: ' \n\t\r',
-    adjective: 'Cute',
-    type: 'Cuddly',
-    animal: 'Kittens',
+    _: ` \n\t\r`,
+    adjective: `Cute`,
+    type: `Cuddly`,
+    animal: `Kittens`,
     a: 255,
     b: 65535,
     c: 4294967295,
@@ -121,7 +121,7 @@ const range = require('lodash/range')
 
   const buffer = makeBuffer([
     B.u8(5),
-    B.string('Cute\0Cuddly Kittens'),
+    B.string(`Cute\0Cuddly Kittens`),
   ])
 
   const data = readFormat({
@@ -134,7 +134,7 @@ const range = require('lodash/range')
 
   expect(data).toEqual({
     adjectiveLength: 5,
-    adjective: 'Cute',
+    adjective: `Cute`,
   })
 }
 
@@ -287,7 +287,7 @@ const range = require('lodash/range')
 {
   // T.list requires a length
 
-  expect(() => T.list(T.u8)).toThrow('T.list length must be defined')
+  expect(() => T.list(T.u8)).toThrow(`T.list length must be defined`)
 }
 
 {

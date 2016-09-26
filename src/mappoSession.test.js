@@ -1,32 +1,32 @@
 "use strict"
 
-const expect = require('expect')
-const createMappoSession = require('./createMappoSession')
-const path = require('path')
+const expect = require(`expect`)
+const createMappoSession = require(`./createMappoSession`)
+const path = require(`path`)
 
 {
   // session finds all maps in launch folder
   const fileSystem = {
     files: [
-      '/root.txt',
-      '/game/foo.map',
-      '/game/DOOM.MAP',
-      '/game/whatever.txt',
-      '/game/subfolder/bar.map',
-      '/game/subfolder/tileset.png',
-      '/game-two/two.map',
-      '/work/important.doc',
+      `/root.txt`,
+      `/game/foo.map`,
+      `/game/DOOM.MAP`,
+      `/game/whatever.txt`,
+      `/game/subfolder/bar.map`,
+      `/game/subfolder/tileset.png`,
+      `/game-two/two.map`,
+      `/work/important.doc`,
     ]
   }
 
   const session = createMappoSession({
     fileSystem,
-    launchFolder: '/game',
+    launchFolder: `/game`,
   })
 
   expect(session.getMapFilenames()).toEqual([
-    'foo.map',
-    'DOOM.MAP',
-    'subfolder' + path.sep + 'bar.map',
+    `foo.map`,
+    `DOOM.MAP`,
+    `subfolder` + path.sep + `bar.map`,
   ])
 }

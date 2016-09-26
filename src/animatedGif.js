@@ -1,7 +1,7 @@
 "use strict"
 
-const lzw = require('./lzw')
-const filler = require('./filler')
+const lzw = require(`./lzw`)
+const filler = require(`./filler`)
 
 const animatedGif = ({
   palette,
@@ -26,14 +26,14 @@ const animatedGif = ({
   const writeByteArray = bytes => bytes.forEach(byte => writeByte(byte))
   const writeWord = word => { output.writeUInt16LE(word, outputOffset), outputOffset += 2 }
 
-  writeString('GIF89a')
+  writeString(`GIF89a`)
   writeWord(width)
   writeWord(height)
   writeByteArray([0xf7, 0, 0])
   writeByteArray(palette)
   writeByteArray(filler(768 - palette.length, 0))
   writeByteArray([0x21, 0xff, 11])
-  writeString('NETSCAPE2.0')
+  writeString(`NETSCAPE2.0`)
   writeByteArray([3, 1, loopCount, 0, 0])
 
   frameDescriptorList.forEach(frameDescriptor => {

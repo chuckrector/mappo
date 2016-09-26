@@ -1,11 +1,11 @@
 "use strict"
 
-const expect = require('expect')
-const abbrevJson = require('./abbrevJson')
+const expect = require(`expect`)
+const abbrevJson = require(`./abbrevJson`)
 
 {
   // can indent
-  expect(abbrevJson({foo: 'bar'})).toBe(`{
+  expect(abbrevJson({foo: `bar`})).toBe(`{
   "foo": "bar"
 }`)
 }
@@ -18,24 +18,24 @@ const abbrevJson = require('./abbrevJson')
 {
   // can keep open curlies on previous line
   const data = {
-    "numitems": 33,
-    "equip": [{
-      "comments": ["// Dagger"],
-      "str": 5,
-      "equipable": [1, 2, 3, 4, 5]
+    numitems: 33,
+    equip: [{
+      comments: [`// Dagger`],
+      str: 5,
+      equipable: [1, 2, 3, 4, 5]
     }, {
-      "comments": ["// Short Sword"],
-      "str": 22,
-      "equipable": [1, 5]
+      comments: [`// Short Sword`],
+      str: 22,
+      equipable: [1, 5]
     }, {
-      "comments": ["// Wand"],
-      "str": 3,
-      "mag": 5,
-      "equipable": [3, 4]
+      comments: [`// Wand`],
+      str: 3,
+      mag: 5,
+      equipable: [3, 4]
     }, {
-      "comments": ["// Poker"],
-      "str": 9,
-      "equipable": [1]
+      comments: [`// Poker`],
+      str: 9,
+      equipable: [1]
     }]
   }
 
@@ -68,5 +68,5 @@ const abbrevJson = require('./abbrevJson')
 
 {
   // empty lists
-  expect(abbrevJson([])).toBe('[]')
+  expect(abbrevJson([])).toBe(`[]`)
 }

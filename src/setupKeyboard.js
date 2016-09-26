@@ -11,7 +11,7 @@ module.exports = ({addEventListener, keyPressed}) => {
     KEYCODE_0: 48,
   }
 
-  addEventListener('keydown', event => {
+  addEventListener(`keydown`, event => {
     keyPressed[event.keyCode] = true
     if (event.metaKey) {
       keyPressed.metaKey = true
@@ -24,7 +24,7 @@ module.exports = ({addEventListener, keyPressed}) => {
     }
   })
 
-  addEventListener('keyup', event => {
+  addEventListener(`keyup`, event => {
     keyPressed[event.keyCode] = false
     if (!event.metaKey) {
       keyPressed.metaKey = false

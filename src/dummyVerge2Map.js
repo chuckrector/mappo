@@ -1,7 +1,7 @@
 "use strict"
 
-const filler = require('./filler')
-const {makeBuffer, B} = require('./makeBuffer')
+const filler = require(`./filler`)
+const {makeBuffer, B} = require(`./makeBuffer`)
 
 const mapWidth = 2
 const mapHeight = 3
@@ -11,11 +11,11 @@ const mapHeader = makeBuffer([
   // mapEventsOffset
   B.u32(12345),
   // vspname
-  B.stringFixed(60, 'grue0040.vsp'),
+  B.stringFixed(60, `grue0040.vsp`),
   // musname
-  B.stringFixed(60, 'VANGELIS.MOD'),
+  B.stringFixed(60, `VANGELIS.MOD`),
   // rstring
-  B.stringFixed(20, '12E'),
+  B.stringFixed(20, `12E`),
   // xstart, ystart
   B.u16([1 ,2]),
   // wrap
@@ -66,7 +66,7 @@ const mapLayers = makeBuffer([
 
 const zone = makeBuffer([
   // zonename
-  B.stringFixed(40, 'Default'),
+  B.stringFixed(40, `Default`),
   // script, percent, delay, aaa, entityscript
   B.u16([5, 4, 3, 2, 1]),
 ])
@@ -80,7 +80,7 @@ const mapZones = makeBuffer([
 const chrList = makeBuffer([
   // nmchr
   B.u8(3),
-  makeBuffer(filler(3, B.stringFixed(60, 'DARIN.CHR'))),
+  makeBuffer(filler(3, B.stringFixed(60, `DARIN.CHR`))),
 ])
 
 const entity = makeBuffer([
@@ -99,7 +99,7 @@ const entity = makeBuffer([
   // actscript, expand1..expand4
   B.u32(filler(5, 66)),
   // desc
-  B.stringFixed(20, 'Description'),
+  B.stringFixed(20, `Description`),
 ])
 
 const numEntities = 3

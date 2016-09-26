@@ -7,9 +7,9 @@ module.exports = anim => {
   let currentFrameDescriptor = {}
 
   parts.forEach(part => {
-      if (part.startsWith('f')) {
+      if (part.startsWith(`f`)) {
           currentFrameDescriptor.frameIndex = parseInt(part.substr(1), 10)
-      } else if (part.startsWith('w')) {
+      } else if (part.startsWith(`w`)) {
           currentFrameDescriptor.delayMilliseconds = parseInt(part.substr(1) * 10)
           frameDescriptorList.push(currentFrameDescriptor)
           currentFrameDescriptor = {}

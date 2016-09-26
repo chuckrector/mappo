@@ -1,15 +1,15 @@
 "use strict"
 
-const expect = require('expect')
-const createDataReader = require('./createDataReader.js')
-const filler = require('./filler')
-const zlib = require('zlib')
-const {makeBuffer, B} = require('./makeBuffer')
+const expect = require(`expect`)
+const createDataReader = require(`./createDataReader.js`)
+const filler = require(`./filler`)
+const zlib = require(`zlib`)
+const {makeBuffer, B} = require(`./makeBuffer`)
 
 {
   // empty buffer is at end
   const reader = createDataReader({
-    data: Buffer.from('')
+    data: Buffer.from(``)
   })
 
   expect(reader.atEnd()).toBe(true)
@@ -18,7 +18,7 @@ const {makeBuffer, B} = require('./makeBuffer')
 {
   // at end after whitespace
   const reader = createDataReader({
-    data: Buffer.from(' ')
+    data: Buffer.from(` `)
   })
 
   expect(reader.atEnd()).toBe(false)
@@ -29,7 +29,7 @@ const {makeBuffer, B} = require('./makeBuffer')
 {
   // at end after string
   const reader = createDataReader({
-    data: Buffer.from('This')
+    data: Buffer.from(`This`)
   })
 
   expect(reader.atEnd()).toBe(false)
@@ -129,32 +129,32 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read strings
   const reader = createDataReader({
-    data: Buffer.from('tic tac toe')
+    data: Buffer.from(`tic tac toe`)
   })
 
-  expect(reader.readStringFixed(3)).toBe('tic')
-  expect(reader.readStringFixed(5)).toBe(' tac ')
-  expect(reader.readStringFixed(3)).toBe('toe')
+  expect(reader.readStringFixed(3)).toBe(`tic`)
+  expect(reader.readStringFixed(5)).toBe(` tac `)
+  expect(reader.readStringFixed(3)).toBe(`toe`)
 }
 
 {
   // can read null terminated strings
   const reader = createDataReader({
-    data: Buffer.from('Cute\0Cuddly\0Kittens')
+    data: Buffer.from(`Cute\0Cuddly\0Kittens`)
   })
 
-  expect(reader.readStringNullTerminated()).toBe('Cute')
-  expect(reader.readStringNullTerminated()).toBe('Cuddly')
+  expect(reader.readStringNullTerminated()).toBe(`Cute`)
+  expect(reader.readStringNullTerminated()).toBe(`Cuddly`)
   expect(() => reader.readStringNullTerminated()).toThrow(RangeError)
 }
 
 {
   // reading a string should ignore garbage after null terminator
   const reader = createDataReader({
-    data: Buffer.from('HAHN01.VSP\0he')
+    data: Buffer.from(`HAHN01.VSP\0he`)
   })
 
-  expect(reader.readStringFixed(13)).toBe('HAHN01.VSP')
+  expect(reader.readStringFixed(13)).toBe(`HAHN01.VSP`)
 }
 
 {
@@ -182,37 +182,37 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read whitespace
   const reader = createDataReader({
-    data: Buffer.from(' \n\r\tThis n that')
+    data: Buffer.from(` \n\r\tThis n that`)
   })
 
-  expect(reader.readWhitespace()).toBe(' \n\r\t')
+  expect(reader.readWhitespace()).toBe(` \n\r\t`)
 }
 
 {
   // can read whitespace at end of data
   const reader = createDataReader({
-    data: Buffer.from(' \n\r\t')
+    data: Buffer.from(` \n\r\t`)
   })
 
-  expect(reader.readWhitespace()).toBe(' \n\r\t')
+  expect(reader.readWhitespace()).toBe(` \n\r\t`)
 }
 
 {
   // can read variable length string up to space
   const reader = createDataReader({
-    data: Buffer.from('This n that')
+    data: Buffer.from(`This n that`)
   })
 
-  expect(reader.readString()).toBe('This')
-  expect(reader.readString()).toBe('n')
-  expect(reader.readString()).toBe('that')
+  expect(reader.readString()).toBe(`This`)
+  expect(reader.readString()).toBe(`n`)
+  expect(reader.readString()).toBe(`that`)
 }
 
 {
   // can read variable length string as byte
   const doubleNegMax = -256 * 2
   const reader = createDataReader({
-    data: Buffer.from('255 256 -1 ' + doubleNegMax)
+    data: Buffer.from(`255 256 -1 ` + doubleNegMax)
   })
 
   expect(reader.readStringAsByte()).toBe(255)
@@ -225,7 +225,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
   // can read variable length string as word
   const doubleNegMax = -65536 * 2
   const reader = createDataReader({
-    data: Buffer.from('65535 65536 -1 ' + doubleNegMax)
+    data: Buffer.from(`65535 65536 -1 ` + doubleNegMax)
   })
 
   expect(reader.readStringAsWord()).toBe(65535)
@@ -237,7 +237,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
   // can read variable length string as quad
   const doubleNegMax = -4294967296 * 2
   const reader = createDataReader({
-    data: Buffer.from('4294967295 4294967296 -1 ' + doubleNegMax)
+    data: Buffer.from(`4294967295 4294967296 -1 ` + doubleNegMax)
   })
 
   expect(reader.readStringAsQuad()).toBe(4294967295)
@@ -249,51 +249,51 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read line to end of data
   const reader = createDataReader({
-    data: Buffer.from('Attention:')
+    data: Buffer.from(`Attention:`)
   })
 
-  expect(reader.readLine()).toBe('Attention:')
+  expect(reader.readLine()).toBe(`Attention:`)
 }
 
 {
   // can read line to newline
   const reader = createDataReader({
-    data: Buffer.from('Attention:\nBacon')
+    data: Buffer.from(`Attention:\nBacon`)
   })
 
-  expect(reader.readLine()).toBe('Attention:')
+  expect(reader.readLine()).toBe(`Attention:`)
 }
 
 {
   // can read line to carriage return
   const reader = createDataReader({
-    data: Buffer.from('Attention:\rBacon')
+    data: Buffer.from(`Attention:\rBacon`)
   })
 
-  expect(reader.readLine()).toBe('Attention:')
+  expect(reader.readLine()).toBe(`Attention:`)
 }
 
 {
   // can read empty line
   const reader = createDataReader({
-    data: Buffer.from('\nBacon')
+    data: Buffer.from(`\nBacon`)
   })
 
-  expect(reader.readLine()).toBe('')
+  expect(reader.readLine()).toBe(``)
 }
 
 {
   // at match
   const reader = createDataReader({
-    data: Buffer.from('// Attention: Bacon')
+    data: Buffer.from(`// Attention: Bacon`)
   })
 
-  expect(reader.atMatch('?')).toBe(false)
-  expect(reader.atMatch('/')).toBe(true)
-  expect(reader.atMatch('//')).toBe(true)
-  expect(reader.atMatch('// Attention:')).toBe(true)
-  expect(reader.atMatch('// Attention: Bacon')).toBe(true)
-  expect(reader.atMatch('// Attention: Bacon Bits')).toBe(false)
+  expect(reader.atMatch(`?`)).toBe(false)
+  expect(reader.atMatch(`/`)).toBe(true)
+  expect(reader.atMatch(`//`)).toBe(true)
+  expect(reader.atMatch(`// Attention:`)).toBe(true)
+  expect(reader.atMatch(`// Attention: Bacon`)).toBe(true)
+  expect(reader.atMatch(`// Attention: Bacon Bits`)).toBe(false)
 }
 
 {
@@ -393,7 +393,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
   expect(() => {
     reader.readZlibU8(16 * 16)
-  }).toThrow('expected an uncompressed byte length of 256 but got 768')
+  }).toThrow(`expected an uncompressed byte length of 256 but got 768`)
 }
 
 {
@@ -405,5 +405,5 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
   expect(() => {
     reader.readZlibU16(howManyWords)
-  }).toThrow('expected an uncompressed byte length of 6 but got 7')
+  }).toThrow(`expected an uncompressed byte length of 6 but got 7`)
 }

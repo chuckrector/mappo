@@ -1,16 +1,16 @@
 "use strict"
 
-const filler = require('./filler')
-const {makeBuffer, B} = require('./makeBuffer')
+const filler = require(`./filler`)
+const {makeBuffer, B} = require(`./makeBuffer`)
 
 const mapWidth = 2
 const mapHeight = 3
 const mapHeader = makeBuffer([
   B.u8(4),
-  B.stringFixed(13, 'HAHN01.VSP'),
-  B.stringFixed(13, 'VANGELIS.MOD'),
+  B.stringFixed(13, `HAHN01.VSP`),
+  B.stringFixed(13, `VANGELIS.MOD`),
   B.u8([0, 1, 1]),
-  B.stringFixed(30, 'Village - Past'),
+  B.stringFixed(30, `Village - Past`),
   B.u8([1, 0]),
   B.u16([21, 1]),
   B.u8([1, 1]),
@@ -30,7 +30,7 @@ const mapLayers = makeBuffer([
 
 const zone = makeBuffer([
   // zonename
-  B.stringFixed(15, 'Default'),
+  B.stringFixed(15, `Default`),
   // padding
   B.u8(0),
   // callevent
@@ -38,7 +38,7 @@ const zone = makeBuffer([
   // percent, delay, aaa
   B.u8([255, 0, 1]),
   // savedesc
-  B.stringFixed(30, 'Rodne'),
+  B.stringFixed(30, `Rodne`),
   // padding
   B.u8(0),
 ])
@@ -48,7 +48,7 @@ const mapZones = makeBuffer(
 )
 
 const chrList = makeBuffer(
-  filler(100, B.stringFixed(13, 'DARIN.CHR'))
+  filler(100, B.stringFixed(13, `DARIN.CHR`))
 )
 
 const entity = makeBuffer([
@@ -73,7 +73,7 @@ const entity = makeBuffer([
   // expand
   B.u32(1),
   // entitydesc
-  B.stringFixed(20, 'Description'),
+  B.stringFixed(20, `Description`),
 ])
 
 const numEntities = 3

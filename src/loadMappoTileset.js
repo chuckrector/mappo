@@ -8,7 +8,7 @@ module.exports = ({
   const vspFilename = path.join(path.dirname(mapFilename), map.tilesetFilename)
   const vspBuffer = fs.readFileSync(vspFilename)
   const vspFormat = detectFormat(vspBuffer)
-  console.log('vspFormat', vspFormat)
+  console.log(`vspFormat`, vspFormat)
 
   let vspData
   try {

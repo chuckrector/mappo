@@ -1,24 +1,24 @@
 "use strict"
 
-const filler = require('./filler')
-const zlib = require('zlib')
-const {makeBuffer, B} = require('./makeBuffer')
+const filler = require(`./filler`)
+const zlib = require(`zlib`)
+const {makeBuffer, B} = require(`./makeBuffer`)
 
 const mapWidth = 2
 const mapHeight = 3
-const signature = 'V3MAP\0'
+const signature = `V3MAP\0`
 const version = 2
 const scriptoffset = 66
-const mapname = 'My Map Name'
-const vspname = 'intro.vsp'
-const musicname = 'VANGELIS.MOD'
-const renderstring = '12E'
-const startupscript = 'startup script'
+const mapname = `My Map Name`
+const vspname = `intro.vsp`
+const musicname = `VANGELIS.MOD`
+const renderstring = `12E`
+const startupscript = `startup script`
 const startx = 1
 const starty = 2
 const numlayers = 3
 
-const layerName = 'My Layer Name'
+const layerName = `My Layer Name`
 const parallaxX = 1.2
 const parallaxY = 1.5
 const layerWidth = 4
@@ -32,8 +32,8 @@ const zonelayerData = filler(layerWidth * layerHeight, 0xbeef)
 const zonelayerDataCompressed = [...zlib.deflateSync(B.u16(zonelayerData))]
 
 const numzones = 2
-const zoneName = 'My Zone Name'
-const zoneScript = 'zone script'
+const zoneName = `My Zone Name`
+const zoneScript = `zone script`
 const zonePercent = 1
 const zoneDelay = 2
 const zoneMethod = 3
@@ -68,13 +68,13 @@ const entity = {
   wy2: 13,
   wdelay: 14,
   maybeOffset: 15, // ignored by v3. what is this?
-  movescript: 'move script',
-  chrname: 'chr name',
-  description: 'description',
-  script: 'script',
+  movescript: `move script`,
+  chrname: `chr name`,
+  description: `description`,
+  script: `script`,
 }
 
-const mapScript = [1, 2, 3]//'ye olde map script'
+const mapScript = [1, 2, 3]
 const mapScriptsize = mapScript.length
 const mapentities = 2
 const mapEntity = makeBuffer([

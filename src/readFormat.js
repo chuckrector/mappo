@@ -1,6 +1,6 @@
 "use strict"
 
-const createDataReader = require('./createDataReader')
+const createDataReader = require(`./createDataReader`)
 
 const T = {}
 
@@ -57,8 +57,8 @@ T.palette6bit = ({reader}) => {
 }
 
 T.list = (formatOrFunction, length) => {
-  if (typeof length === 'undefined') {
-    throw new Error('T.list length must be defined')
+  if (typeof length === `undefined`) {
+    throw new Error(`T.list length must be defined`)
   }
 
   return ({reader, record, listIndex}) => {
@@ -74,7 +74,7 @@ T.list = (formatOrFunction, length) => {
 }
 
 const lengthCalculator = (length, {reader, record, listIndex}) => {
-  if (typeof length === 'function') {
+  if (typeof length === `function`) {
     return length({reader, record, listIndex})
   }
 
@@ -82,7 +82,7 @@ const lengthCalculator = (length, {reader, record, listIndex}) => {
 }
 
 const resolve = (formatOrFunction, {reader, record, listIndex}) => {
-  if (typeof formatOrFunction === 'function') {
+  if (typeof formatOrFunction === `function`) {
     return formatOrFunction({reader, record, listIndex})
   } else {
     return readFormat({format: formatOrFunction, reader, listIndex})

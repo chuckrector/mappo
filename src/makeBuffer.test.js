@@ -1,12 +1,12 @@
 "use strict"
 
-const expect = require('expect')
-const createDataReader = require('./createDataReader')
-const {readFormat, T} = require('./readFormat')
-const {makeBuffer, B} = require('./makeBuffer')
-const filler = require('./filler')
-const zlib = require('zlib')
-const range = require('lodash/range')
+const expect = require(`expect`)
+const createDataReader = require(`./createDataReader`)
+const {readFormat, T} = require(`./readFormat`)
+const {makeBuffer, B} = require(`./makeBuffer`)
+const filler = require(`./filler`)
+const zlib = require(`zlib`)
+const range = require(`lodash/range`)
 
 {
   // can make buffers of unsigned types
@@ -54,10 +54,10 @@ const range = require('lodash/range')
   // can make buffers of string types
 
   const buffer = makeBuffer([
-    B.string(' \n\t\r'),
-    B.stringFixed(20, 'Cute'),
-    B.stringNullTerminated('Cuddly'),
-    B.string('Kittens 255 65535 4294967295'),
+    B.string(` \n\t\r`),
+    B.stringFixed(20, `Cute`),
+    B.stringNullTerminated(`Cuddly`),
+    B.string(`Kittens 255 65535 4294967295`),
   ])
 
   const data = readFormat({
@@ -74,10 +74,10 @@ const range = require('lodash/range')
   })
 
   expect(data).toEqual({
-    _: ' \n\t\r',
-    adjective: 'Cute',
-    type: 'Cuddly',
-    animal: 'Kittens',
+    _: ` \n\t\r`,
+    adjective: `Cute`,
+    type: `Cuddly`,
+    animal: `Kittens`,
     a: 255,
     b: 65535,
     c: 4294967295,
@@ -152,9 +152,9 @@ const range = require('lodash/range')
     // Without the whitespace after "Kittens", readString will read
     // "KittensBacon" due to the null-terminated strings which
     // immediately follow. 🐱🔥
-    B.string(['Cuddly ', 'Kittens ']),
-    B.stringNullTerminated(['Bacon', 'Bits']),
-    B.stringFixed(20, ['Cool', 'Cucumbers']),
+    B.string([`Cuddly `, `Kittens `]),
+    B.stringNullTerminated([`Bacon`, `Bits`]),
+    B.stringFixed(20, [`Cool`, `Cucumbers`]),
   ])
 
   const data = readFormat({
@@ -173,14 +173,14 @@ const range = require('lodash/range')
     a: [0xff, 0xff],
     b: [0xffff, 0xffff],
     c: [0xffffffff, 0xffffffff],
-    d: ['Cuddly', 'Kittens'],
-    e: ['Bacon', 'Bits'],
-    f: ['Cool', 'Cucumbers'],
+    d: [`Cuddly`, `Kittens`],
+    e: [`Bacon`, `Bits`],
+    f: [`Cool`, `Cucumbers`],
   })
 }
 
 {
   // B.list requires a valueList
 
-  expect(() => B.list(B.u8)).toThrow('B.list valueList must be defined')
+  expect(() => B.list(B.u8)).toThrow(`B.list valueList must be defined`)
 }

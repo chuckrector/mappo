@@ -6,10 +6,10 @@ module.exports = ({
   y,
   width,
   height,
-  color='white',
+  color=`white`,
 }) => {
   context.strokeStyle = color
-  context.globalCompositeOperation = 'source-over'
+  context.globalCompositeOperation = `source-over`
   context.lineWidth = 2
   context.strokeRect(~~x, ~~y, width, height)
 }

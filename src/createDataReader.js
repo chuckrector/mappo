@@ -1,8 +1,8 @@
 "use strict"
 
-const assert = require('assert')
-const zlib =  require('zlib')
-const {makeBuffer, B} = require('./makeBuffer')
+const assert = require(`assert`)
+const zlib =  require(`zlib`)
+const {makeBuffer, B} = require(`./makeBuffer`)
 
 const createDataReader = (args) => {
   const buffer = Buffer.from(args.data)
@@ -11,7 +11,7 @@ const createDataReader = (args) => {
 
   const atEnd = () => position >= buffer.length
   const atMatch = (match) => {
-    return buffer.toString('utf-8', position, position + match.length) === match
+    return buffer.toString(`utf-8`, position, position + match.length) === match
   }
 
   const readByte = () => buffer.readUInt8(position++)
@@ -53,10 +53,10 @@ const createDataReader = (args) => {
   }
 
   const readStringFixed = (length) => {
-    let s = buffer.toString('utf-8', position, position + length)
+    let s = buffer.toString(`utf-8`, position, position + length)
 
     // js will happily show everything beyond this point, so truncate it
-    const zero = s.indexOf('\0')
+    const zero = s.indexOf(`\0`)
     if (zero !== -1) {
       s = s.substring(0, zero)
     }
@@ -67,9 +67,9 @@ const createDataReader = (args) => {
   }
 
   const readStringNullTerminated = () => {
-    let s = ''
+    let s = ``
 
-    while (!atEnd() && peekByte() !== '\0') {
+    while (!atEnd() && peekByte() !== `\0`) {
       s += String.fromCharCode(readByte())
     }
 
@@ -90,7 +90,7 @@ const createDataReader = (args) => {
   const isWhitespace = (c) => /\s/.test(c)
   const readWhitespace = () => {
     let b
-    let s = ''
+    let s = ``
 
     while (!atEnd() && isWhitespace(peekByte())) {
       s += String.fromCharCode(readByte())
@@ -100,7 +100,7 @@ const createDataReader = (args) => {
   }
 
   const readString = () => {
-    let s = ''
+    let s = ``
 
     while (!atEnd() && !isWhitespace(peekByte())) {
       s += String.fromCharCode(readByte())
@@ -146,7 +146,7 @@ const createDataReader = (args) => {
   const readWordArrayCompressed = (length) => {
     const bufsize = readQuad()
 
-    assert.equal(bufsize % 2, 0, 'expected compressed word array size to be divisible by two but got ' + bufsize)
+    assert.equal(bufsize % 2, 0, `expected compressed word array size to be divisible by two but got ` + bufsize)
 
     const compressed = readByteArray(bufsize)
     const compressedReader = createDataReader({data: compressed})
@@ -205,9 +205,9 @@ const createDataReader = (args) => {
   }
 
   const readLine = () => {
-    let s = ''
+    let s = ``
 
-    while (!atEnd() && peekByte() !== '\n' && peekByte() !== '\r') {
+    while (!atEnd() && peekByte() !== `\n` && peekByte() !== `\r`) {
       s += String.fromCharCode(readByte())
     }
 
@@ -217,7 +217,7 @@ const createDataReader = (args) => {
   const readZlibU8 = (length) => {
     const mysize = readQuad()
     if (mysize !== length) {
-      throw new Error('expected an uncompressed byte length of ' + length + ' but got ' + mysize)
+      throw new Error(`expected an uncompressed byte length of ` + length + ` but got ` + mysize)
     }
 
     const comprLen = readQuad()
@@ -235,7 +235,7 @@ const createDataReader = (args) => {
   const readZlibU16 = (length) => {
     const mysize = readQuad()
     if (mysize !== (length * 2)) {
-      throw new Error('expected an uncompressed byte length of ' + (length * 2) + ' but got ' + mysize)
+      throw new Error(`expected an uncompressed byte length of ` + (length * 2) + ` but got ` + mysize)
     }
 
     const comprLen = readQuad()

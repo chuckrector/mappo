@@ -1,9 +1,9 @@
 "use strict"
 
-const zlib = require('zlib')
-const padEnd = require('lodash/padEnd')
-const compressU8 = require('./compressU8')
-const compressU16 = require('./compressU16')
+const zlib = require(`zlib`)
+const padEnd = require(`lodash/padEnd`)
+const compressU8 = require(`./compressU8`)
+const compressU16 = require(`./compressU16`)
 
 const B = {}
 
@@ -18,12 +18,12 @@ B.u16 = (value) => arrToBuffer(value, Uint16Array)
 B.u32 = (value) => arrToBuffer(value, Uint32Array)
 B.f64 = (value) => arrToBuffer(value, Float64Array)
 
-B.string = (value) => Buffer.from(arrMatey(value).join(''))
+B.string = (value) => Buffer.from(arrMatey(value).join(``))
 B.stringNullTerminated = (value) => {
-  return B.string(arrMatey(value).map(v => v + '\0'))
+  return B.string(arrMatey(value).map(v => v + `\0`))
 }
 B.stringFixed = (length, value) => {
-  return B.string(arrMatey(value).map(v => padEnd(v, length, '\0')))
+  return B.string(arrMatey(value).map(v => padEnd(v, length, `\0`)))
 }
 
 B.compressedU8 = (valueList) => {
@@ -63,8 +63,8 @@ B.zlibU16 = (valueList) => {
 B.zlib = B.zlibU8
 
 B.list = (bufferMaker, valueList) => {
-  if (typeof valueList === 'undefined') {
-    throw new Error('B.list valueList must be defined')
+  if (typeof valueList === `undefined`) {
+    throw new Error(`B.list valueList must be defined`)
   }
 
   return makeBuffer(valueList.map((currentValue) => (

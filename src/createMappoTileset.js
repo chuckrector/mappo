@@ -1,13 +1,13 @@
 "use strict"
 
-const colorDepth = require('./converter/colorDepth')
-const convertRaw32bitDataToImageBitmap = require('./convertRaw32bitDataToImageBitmap')
+const colorDepth = require(`./converter/colorDepth`)
+const convertRaw32bitDataToImageBitmap = require(`./convertRaw32bitDataToImageBitmap`)
 
 module.exports = ({context, tileset}) => {
   const mappoTileset = {}
 
   switch (tileset.formatName) {
-    case 'v1vsp': {
+    case `v1vsp`: {
       mappoTileset.tileWidth = 16
       mappoTileset.tileHeight = 16
       mappoTileset.numTiles = tileset.numtiles
@@ -16,7 +16,7 @@ module.exports = ({context, tileset}) => {
         raw8bitData: tileset.vsp0,
       })
     } break;
-    case 'v2vsp': {
+    case `v2vsp`: {
       mappoTileset.tileWidth = 16
       mappoTileset.tileHeight = 16
       mappoTileset.numTiles = tileset.numtiles
@@ -25,7 +25,7 @@ module.exports = ({context, tileset}) => {
         raw8bitData: tileset.imagedata.decompressed,
       })
     } break;
-    case 'v3vsp': {
+    case `v3vsp`: {
       mappoTileset.tileWidth = tileset.tilesize
       mappoTileset.tileHeight = tileset.tilesize
       mappoTileset.numTiles = tileset.numtiles

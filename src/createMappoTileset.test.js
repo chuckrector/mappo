@@ -1,10 +1,10 @@
 "use strict"
 
-const expect = require('expect')
-const asset = require('./asset')
-const {makeBuffer, B} = require('./makeBuffer')
-const filler = require('./filler')
-const createMappoTileset = require('./createMappoTileset')
+const expect = require(`expect`)
+const asset = require(`./asset`)
+const {makeBuffer, B} = require(`./makeBuffer`)
+const filler = require(`./filler`)
+const createMappoTileset = require(`./createMappoTileset`)
 
 {
   // can create from v1 vsp
@@ -55,7 +55,7 @@ const createMappoTileset = require('./createMappoTileset')
     B.u32([0, 0, tileSize, 0, numTiles, 1]),
     B.zlibU8(filler(tileSize * tileSize * 3 * numTiles)),
     B.u32(1), // #anims
-    B.stringFixed(256, 'vsp anim name'),
+    B.stringFixed(256, `vsp anim name`),
     B.u32([0, 0, 0, 0]), // start/finish/delay/mode
     B.u32(1), // #obs
     B.zlibU8(filler(tileSize * tileSize)),

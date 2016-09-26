@@ -3,7 +3,7 @@
 module.exports = ({map}) => {
   const mappoMap = {}
 
-  const parseRenderString = (renderString, separator='') => {
+  const parseRenderString = (renderString, separator=``) => {
     const parts = renderString.split(separator)
     const layerReferences = parts.filter(part => /\d/.test(part))
     const layerIndices = layerReferences.map(Number).map(v => v - 1)
@@ -11,11 +11,11 @@ module.exports = ({map}) => {
   }
 
   switch (map.formatName) {
-    case 'v1map': {
+    case `v1map`: {
       mappoMap.mapLayerOrder = [0, 1]
       mappoMap.tilesetFilename = map.vsp0name
       mappoMap.tileLayers = [{
-        description: 'Background',
+        description: `Background`,
         width: map.xsize,
         height: map.ysize,
         tileIndexGrid: map.map0,
@@ -24,7 +24,7 @@ module.exports = ({map}) => {
           y: 1.0,
         },
       }, {
-        description: 'Foreground',
+        description: `Foreground`,
         width: map.xsize,
         height: map.ysize,
         tileIndexGrid: map.map1,
@@ -34,13 +34,13 @@ module.exports = ({map}) => {
         },
       }]
     } break;
-    case 'v2map': {
+    case `v2map`: {
       mappoMap.mapLayerOrder = parseRenderString(map.rstring)
       mappoMap.tilesetFilename = map.vspname
       mappoMap.tileLayers = map.layers.map((tileIndexGrid, index) => {
         const layer = map.layer[index]
         return {
-          description: 'Layer #' + index,
+          description: `Layer #` + index,
           width: layer.sizex,
           height: layer.sizey,
           tileIndexGrid: tileIndexGrid.decompressed,
@@ -51,8 +51,8 @@ module.exports = ({map}) => {
         }
       })
     } break;
-    case 'v3map': {
-      mappoMap.mapLayerOrder = parseRenderString(map.renderstring, ',')
+    case `v3map`: {
+      mappoMap.mapLayerOrder = parseRenderString(map.renderstring, `,`)
       mappoMap.tilesetFilename = map.vspname
       mappoMap.tileLayers = map.layers.map(layerInfo => ({
         description: layerInfo.layername,

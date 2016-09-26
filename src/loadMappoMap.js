@@ -1,17 +1,17 @@
 "use strict"
 
-const loadMappoTileset = require('./loadMappoTileset')
+const loadMappoTileset = require(`./loadMappoTileset`)
 
 module.exports = ({context, mapFilename}) => {
   console.group()
   try {
     const mapBuffer = fs.readFileSync(mapFilename)
     const mapFormat = detectFormat(mapBuffer)
-    if (!mapFormat.includes('map')) {
-      console.error('expected map but got', mapFormat)
+    if (!mapFormat.includes(`map`)) {
+      console.error(`expected map but got`, mapFormat)
       return
     }
-    console.log('mapFormat', mapFormat)
+    console.log(`mapFormat`, mapFormat)
     let mapData
     try {
       mapData = asset.fromBuffer(mapBuffer, asset[mapFormat])
@@ -24,7 +24,7 @@ module.exports = ({context, mapFilename}) => {
     map.tileset = loadMappoTileset({context, mapFilename, map})
     return map
   } catch (exception) {
-    console.error('ack!', exception)
+    console.error(`ack!`, exception)
   } finally {
     console.groupEnd()
   }

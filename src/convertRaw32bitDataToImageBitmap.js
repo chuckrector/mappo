@@ -17,7 +17,7 @@ module.exports = ({
 }) => {
   // TODO(chuck): not sure how i feel about this. appeasing createMappoTileset.test.js
   if (!context) {
-    console.warn('WARNING: no context provided for convertRaw32bitDataToImageBitmap. NOT creating ImageBitmap')
+    console.warn(`WARNING: no context provided for convertRaw32bitDataToImageBitmap. NOT creating ImageBitmap`)
     return
   }
 
