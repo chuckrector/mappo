@@ -1,49 +1,49 @@
 "use strict"
 
-const asset = require('./asset')
-const colorDepth = require('./converter/colorDepth')
-const clamp = require('lodash/clamp')
-const glob = require('glob')
-const createMappoSession = require('./createMappoSession')
-const createMappoMap = require('./createMappoMap')
-const createMappoTileset = require('./createMappoTileset')
-const detectFormat = require('./detectFormat')
-const path = require('path')
-const fs = require('fs')
-const setupKeyboard = require('./setupKeyboard')
-const renderTileHighlightInvertedOutline = require('./renderTileHighlightInvertedOutline')
-const renderTileHighlightInvertedSolid = require('./renderTileHighlightInvertedSolid')
-const renderTileHighlightColorOutline = require('./renderTileHighlightColorOutline')
-const renderTile = require('./renderTile')
-const renderLayer = require('./renderLayer')
-const renderTileset = require('./renderTileset')
-const createCheckerboardPattern = require('./createCheckerboardPattern')
-const calcAutoScroll = require('./calcAutoScroll')
-const clearCanvas = require('./clearCanvas')
-const loadMappoMap = require('./loadMappoMap')
+const asset = require(`./asset`)
+const colorDepth = require(`./converter/colorDepth`)
+const clamp = require(`lodash/clamp`)
+const glob = require(`glob`)
+const createMappoSession = require(`./createMappoSession`)
+const createMappoMap = require(`./createMappoMap`)
+const createMappoTileset = require(`./createMappoTileset`)
+const detectFormat = require(`./detectFormat`)
+const path = require(`path`)
+const fs = require(`fs`)
+const setupKeyboard = require(`./setupKeyboard`)
+const renderTileHighlightInvertedOutline = require(`./renderTileHighlightInvertedOutline`)
+const renderTileHighlightInvertedSolid = require(`./renderTileHighlightInvertedSolid`)
+const renderTileHighlightColorOutline = require(`./renderTileHighlightColorOutline`)
+const renderTile = require(`./renderTile`)
+const renderLayer = require(`./renderLayer`)
+const renderTileset = require(`./renderTileset`)
+const createCheckerboardPattern = require(`./createCheckerboardPattern`)
+const calcAutoScroll = require(`./calcAutoScroll`)
+const clearCanvas = require(`./clearCanvas`)
+const loadMappoMap = require(`./loadMappoMap`)
 
 // DOM REFERENCES
-const pageTitle = document.querySelector('title')
-const mapList = document.querySelector('.map-list')
-const layerList = document.querySelector('.layer-list')
-const canvas = document.querySelector('.mappo-viewport')
-const context = canvas.getContext('2d')
-const tilesetCanvasContainer = document.querySelector('.tileset-canvas-container')
-const tilesetCanvas = document.querySelector('.tileset-canvas')
-const tilesetContext = tilesetCanvas.getContext('2d')
-const tilesetSelectedTileCanvas = document.querySelector('.tileset-selected-tile-canvas')
-const tilesetSelectedTileContext = tilesetSelectedTileCanvas.getContext('2d')
-const tilesetSelectedTileIndex = document.querySelector('.tileset-selected-tile-index')
-const tilesetHoveringTileCanvas = document.querySelector('.tileset-hovering-tile-canvas')
-const tilesetHoveringTileContext = tilesetHoveringTileCanvas.getContext('2d')
-const tilesetHoveringTileIndex = document.querySelector('.tileset-hovering-tile-index')
-const middlePanel = document.querySelector('.middle-panel')
+const pageTitle = document.querySelector(`title`)
+const mapList = document.querySelector(`.map-list`)
+const layerList = document.querySelector(`.layer-list`)
+const canvas = document.querySelector(`.mappo-viewport`)
+const context = canvas.getContext(`2d`)
+const tilesetCanvasContainer = document.querySelector(`.tileset-canvas-container`)
+const tilesetCanvas = document.querySelector(`.tileset-canvas`)
+const tilesetContext = tilesetCanvas.getContext(`2d`)
+const tilesetSelectedTileCanvas = document.querySelector(`.tileset-selected-tile-canvas`)
+const tilesetSelectedTileContext = tilesetSelectedTileCanvas.getContext(`2d`)
+const tilesetSelectedTileIndex = document.querySelector(`.tileset-selected-tile-index`)
+const tilesetHoveringTileCanvas = document.querySelector(`.tileset-hovering-tile-canvas`)
+const tilesetHoveringTileContext = tilesetHoveringTileCanvas.getContext(`2d`)
+const tilesetHoveringTileIndex = document.querySelector(`.tileset-hovering-tile-index`)
+const middlePanel = document.querySelector(`.middle-panel`)
 
 const checkerboardPattern = createCheckerboardPattern({document})
 
-const launchFolder = 'data' // TODO(chuck): temp hack for windows. empty string dunna work
-console.log('launchFolder', launchFolder)
-const mapGlob = '**/*.map'
+const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
+console.log(`launchFolder`, launchFolder)
+const mapGlob = `**/*.map`
 const mapFilenames = glob.sync(mapGlob, {nocase: true})
 const mappoSession = createMappoSession({
   fileSystem: {
@@ -83,15 +83,15 @@ let mappoState = Object.assign({}, defaultMappoState)
 const getScale = () => viewportScales[mappoState.scaleIndex]
 
 mappoSession.getMapFilenames().forEach(mapFilename => {
-  const li = document.createElement('li')
-  li.setAttribute('title', mapFilename)
+  const li = document.createElement(`li`)
+  li.setAttribute(`title`, mapFilename)
   li.innerText = mapFilename
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
-  li.addEventListener('click', event => {
+  li.addEventListener(`click`, event => {
     mappoState = Object.assign({}, defaultMappoState)
     mappoState.isLoading = true
 
-    mappoState.map = loadMappoMap({context, mapFilename: 'data/' + mapFilename})
+    mappoState.map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
 
     mappoState.mapLayerSelected = mappoState.map.tileLayers[mappoState.map.mapLayerOrder[0]]
     refreshMapLayerList()
@@ -107,33 +107,33 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
       resizeCanvas()
     })
 
-    pageTitle.innerText = 'Mappo - ' + mapFilename
+    pageTitle.innerText = `Mappo - ` + mapFilename
   })
   mapList.appendChild(li)
 })
 
 const refreshMapLayerList = () => {
-  layerList.innerHTML = ''
+  layerList.innerHTML = ``
   mappoState.map.tileLayers.forEach((layer, index) => {
-    const li = document.createElement('li')
-    li.setAttribute('title', layer.description)
+    const li = document.createElement(`li`)
+    li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
-    li.classList.add('layer-list-item')
+    li.classList.add(`layer-list-item`)
     if (mappoState.mapLayerSelected === layer) {
-      li.classList.add('selected')
+      li.classList.add(`selected`)
     }
-    li.addEventListener('click', event => {
+    li.addEventListener(`click`, event => {
       // TODO(chuck): use a proper element?
       if (event.offsetX < 35) {
-        li.classList.toggle('is-layer-hidden')
+        li.classList.toggle(`is-layer-hidden`)
         layer.isHidden = !layer.isHidden
       }
       mappoState.mapLayerSelected = layer
-      const layerListItems = document.querySelectorAll('.layer-list .layer-list-item')
+      const layerListItems = document.querySelectorAll(`.layer-list .layer-list-item`)
       layerListItems.forEach(layerListItem => {
-        layerListItem.classList.remove('selected')
+        layerListItem.classList.remove(`selected`)
       })
-      li.classList.add('selected')
+      li.classList.add(`selected`)
     })
     layerList.appendChild(li)
   })
@@ -144,11 +144,11 @@ const keyboard = setupKeyboard({
   keyPressed: mappoState.keyPressed,
 })
 
-middlePanel.addEventListener('mousedown', event => {
+middlePanel.addEventListener(`mousedown`, event => {
   mappoState.mouseDown = true
 })
 
-middlePanel.addEventListener('mousemove', event => {
+middlePanel.addEventListener(`mousemove`, event => {
   if (mappoState.isLoading) {
     return
   }
@@ -207,7 +207,7 @@ const getTileCoordAndIndex = ({
   }
 }
 
-tilesetCanvasContainer.addEventListener('mousemove', event => {
+tilesetCanvasContainer.addEventListener(`mousemove`, event => {
   if (mappoState.isLoading) {
     return
   }
@@ -220,7 +220,7 @@ tilesetCanvasContainer.addEventListener('mousemove', event => {
   })
 })
 
-tilesetCanvasContainer.addEventListener('click', event => {
+tilesetCanvasContainer.addEventListener(`click`, event => {
   if (mappoState.isLoading) {
     return
   }
@@ -233,15 +233,15 @@ tilesetCanvasContainer.addEventListener('click', event => {
   })
 })
 
-middlePanel.addEventListener('mouseup', event => {
+middlePanel.addEventListener(`mouseup`, event => {
   mappoState.mouseDown = false
 })
 
-middlePanel.addEventListener('mouseenter', event => {
+middlePanel.addEventListener(`mouseenter`, event => {
   mappoState.mouseInViewport = true
 })
 
-middlePanel.addEventListener('mouseout', event => {
+middlePanel.addEventListener(`mouseout`, event => {
   mappoState.mouseInViewport = false
   mappoState.camera.move = {x: 0, y: 0}
   mappoState.autoScroll = {}
@@ -329,7 +329,7 @@ const tick = () => {
         context: tilesetContext,
         x: mappoState.tilesetTileSelected.tileX * tileWidth,
         y: mappoState.tilesetTileSelected.tileY * tileHeight,
-        color: 'white',
+        color: `white`,
         width: tileWidth,
         height: tileHeight,
       })
@@ -355,7 +355,7 @@ const tick = () => {
     }
 
     // map zooming
-    if (keyboard.isPressed('ctrlKey')) {
+    if (keyboard.isPressed(`ctrlKey`)) {
       const prevScaleIndex = mappoState.scaleIndex
       if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
         keyboard.release(keyboard.KEYCODE_PLUS)
@@ -383,20 +383,20 @@ const tick = () => {
 const resizeCanvas = () => {
   canvas.width = ~~((middlePanel.offsetWidth + (getScale() - 1)) / getScale())
   canvas.height = ~~((middlePanel.offsetHeight + (getScale() - 1)) / getScale())
-  canvas.style.width = middlePanel.offsetWidth + 'px'
-  canvas.style.height = middlePanel.offsetHeight + 'px'
+  canvas.style.width = middlePanel.offsetWidth + `px`
+  canvas.style.height = middlePanel.offsetHeight + `px`
 
   if (!mappoState.isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
     const tileset = mappoState.map.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
     tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
-    tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + 'px'
-    tilesetCanvas.style.height = (tilesetCanvas.height * getScale()) + 'px'
+    tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + `px`
+    tilesetCanvas.style.height = (tilesetCanvas.height * getScale()) + `px`
   }
 }
 
-window.addEventListener('resize', resizeCanvas)
+window.addEventListener(`resize`, resizeCanvas)
 resizeCanvas()
 
 tick()
