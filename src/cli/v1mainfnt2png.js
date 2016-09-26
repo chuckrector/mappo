@@ -1,8 +1,8 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const createVerge1MainFntConverter = require('../converter/createVerge1MainFntConverter')
-const asset = require('../asset')
+const fs = require(`fs`)
+const createVerge1MainFntConverter = require(`../converter/createVerge1MainFntConverter`)
+const asset = require(`../asset`)
 
 const palFilename = process.argv[2]
 const mainFntFilename = process.argv[3]
@@ -15,8 +15,8 @@ const mainFntConverter = createVerge1MainFntConverter({
 })
 
 const png = mainFntConverter.convertToPng()
-const targetFilename = mainFntFilename + '.png'
+const targetFilename = mainFntFilename + `.png`
 
 png.pack().pipe(fs.createWriteStream(targetFilename))
 
-console.log('converted', mainFntFilename, 'to', targetFilename)
+console.log(`converted`, mainFntFilename, `to`, targetFilename)

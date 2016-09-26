@@ -1,8 +1,8 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const createVerge1SpeechSpcConverter = require('../converter/createVerge1SpeechSpcConverter')
-const asset = require('../asset')
+const fs = require(`fs`)
+const createVerge1SpeechSpcConverter = require(`../converter/createVerge1SpeechSpcConverter`)
+const asset = require(`../asset`)
 
 const palFilename = process.argv[2]
 const speechSpcFilename = process.argv[3]
@@ -16,8 +16,8 @@ const speechSpcConverter = createVerge1SpeechSpcConverter({
 })
 
 const png = speechSpcConverter.convertToPng()
-const targetFilename = speechSpcFilename + '.png'
+const targetFilename = speechSpcFilename + `.png`
 
 png.pack().pipe(fs.createWriteStream(targetFilename))
 
-console.log('converted', speechSpcFilename, 'to', targetFilename)
+console.log(`converted`, speechSpcFilename, `to`, targetFilename)

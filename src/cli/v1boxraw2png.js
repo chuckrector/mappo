@@ -1,8 +1,8 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const createVerge1BoxRawConverter = require('../converter/createVerge1BoxRawConverter')
-const asset = require('../asset')
+const fs = require(`fs`)
+const createVerge1BoxRawConverter = require(`../converter/createVerge1BoxRawConverter`)
+const asset = require(`../asset`)
 
 const palFilename = process.argv[2]
 const boxRawFilename = process.argv[3]
@@ -15,8 +15,8 @@ const boxRawConverter = createVerge1BoxRawConverter({
 })
 
 const png = boxRawConverter.convertToPng()
-const targetFilename = boxRawFilename + '.png'
+const targetFilename = boxRawFilename + `.png`
 
 png.pack().pipe(fs.createWriteStream(targetFilename))
 
-console.log('converted', boxRawFilename, 'to', targetFilename)
+console.log(`converted`, boxRawFilename, `to`, targetFilename)

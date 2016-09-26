@@ -1,8 +1,8 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const createVerge2VspConverter = require('../converter/createVerge2VspConverter')
-const asset = require('../asset')
+const fs = require(`fs`)
+const createVerge2VspConverter = require(`../converter/createVerge2VspConverter`)
+const asset = require(`../asset`)
 
 const vspFilename = process.argv[2]
 const vsp = asset.fromDisk(vspFilename, asset.v2vsp)
@@ -12,8 +12,8 @@ const converter = createVerge2VspConverter({
   imagedata: vsp.imagedata.decompressed,
 })
 const png = converter.convertToPng()
-const targetFilename = vspFilename + '.png'
+const targetFilename = vspFilename + `.png`
 
 png.pack().pipe(fs.createWriteStream(targetFilename))
 
-console.log('converted', vspFilename, 'to', targetFilename)
+console.log(`converted`, vspFilename, `to`, targetFilename)

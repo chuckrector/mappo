@@ -1,8 +1,8 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const createPcxLoader = require('../loader/createPcxLoader')
-const createPcxConverter = require('../converter/createPcxConverter')
+const fs = require(`fs`)
+const createPcxLoader = require(`../loader/createPcxLoader`)
+const createPcxConverter = require(`../converter/createPcxConverter`)
 
 const pcxFilename = process.argv[2]
 
@@ -17,8 +17,8 @@ const pcxConverter = createPcxConverter({
 })
 
 const png = pcxConverter.convertToPng()
-const targetFilename = pcxFilename + '.png'
+const targetFilename = pcxFilename + `.png`
 
 png.pack().pipe(fs.createWriteStream(targetFilename))
 
-console.log('converted', pcxFilename, 'to', targetFilename)
+console.log(`converted`, pcxFilename, `to`, targetFilename)

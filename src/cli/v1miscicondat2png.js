@@ -1,8 +1,8 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const createVerge1MiscIconDatConverter = require('../converter/createVerge1MiscIconDatConverter')
-const asset = require('../asset')
+const fs = require(`fs`)
+const createVerge1MiscIconDatConverter = require(`../converter/createVerge1MiscIconDatConverter`)
+const asset = require(`../asset`)
 
 const palFilename = process.argv[2]
 const miscIconDatFilename = process.argv[3]
@@ -18,8 +18,8 @@ const miscIconDatConverter = createVerge1MiscIconDatConverter({
 })
 
 const png = miscIconDatConverter.convertToPng()
-const targetFilename = miscIconDatFilename + '.png'
+const targetFilename = miscIconDatFilename + `.png`
 
 png.pack().pipe(fs.createWriteStream(targetFilename))
 
-console.log('converted', miscIconDatFilename, 'to', targetFilename)
+console.log(`converted`, miscIconDatFilename, `to`, targetFilename)

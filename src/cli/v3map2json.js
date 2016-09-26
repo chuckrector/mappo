@@ -1,12 +1,12 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const asset = require('../asset')
+const fs = require(`fs`)
+const asset = require(`../asset`)
 
 const mapFilename = process.argv[2]
 const mapData = asset.fromDisk(mapFilename, asset.v3map)
-const targetFilename = mapFilename + '.json'
+const targetFilename = mapFilename + `.json`
 
 fs.writeFileSync(targetFilename, JSON.stringify(mapData))
 
-console.log('converted', mapFilename, 'to', targetFilename)
+console.log(`converted`, mapFilename, `to`, targetFilename)

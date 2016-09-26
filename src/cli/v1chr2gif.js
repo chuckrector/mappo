@@ -1,8 +1,8 @@
-const process = require('process')
-const fs = require('fs')
-const asset = require('../asset')
-const chunk = require('lodash/chunk')
-const animatedGif = require('../animatedGif')
+const process = require(`process`)
+const fs = require(`fs`)
+const asset = require(`../asset`)
+const chunk = require(`lodash/chunk`)
+const animatedGif = require(`../animatedGif`)
 
 const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
@@ -20,10 +20,10 @@ const writeAnimatedGif = (frameOffset, direction) => {
     height: 32,
   }))
 
-  console.log('converted', chrFilename, 'to', targetFilename)
+  console.log(`converted`, chrFilename, `to`, targetFilename)
 }
 
-writeAnimatedGif(5*0, 'down')
-writeAnimatedGif(5*1, 'up')
-writeAnimatedGif(5*2, 'right')
-writeAnimatedGif(5*3, 'left')
+writeAnimatedGif(5*0, `down`)
+writeAnimatedGif(5*1, `up`)
+writeAnimatedGif(5*2, `right`)
+writeAnimatedGif(5*3, `left`)

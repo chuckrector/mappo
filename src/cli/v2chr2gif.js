@@ -1,10 +1,10 @@
-const process = require('process')
+const process = require(`process`)
 
-const fs = require('fs')
-const asset = require('../asset')
-const chunk = require('lodash/chunk')
-const animatedGif = require('../animatedGif')
-const parseChrAnim = require('../parseChrAnim')
+const fs = require(`fs`)
+const asset = require(`../asset`)
+const chunk = require(`lodash/chunk`)
+const animatedGif = require(`../animatedGif`)
+const parseChrAnim = require(`../parseChrAnim`)
 
 const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
@@ -25,10 +25,10 @@ const writeAnimatedGif = (anim, direction) => {
     frameDescriptorList,
   }))
 
-  console.log('converted', chrFilename, 'to', targetFilename)
+  console.log(`converted`, chrFilename, `to`, targetFilename)
 }
 
-writeAnimatedGif(chrData.danim, 'down')
-writeAnimatedGif(chrData.uanim, 'up')
-writeAnimatedGif(chrData.ranim, 'right')
-writeAnimatedGif(chrData.lanim, 'left')
+writeAnimatedGif(chrData.danim, `down`)
+writeAnimatedGif(chrData.uanim, `up`)
+writeAnimatedGif(chrData.ranim, `right`)
+writeAnimatedGif(chrData.lanim, `left`)
