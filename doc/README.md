@@ -38,7 +38,7 @@ Output:
 
 - `data/v3/bumville2.map.tmx`
 
-![alt text](/img/v3/bumville.map.tmx.png?raw=true "a sample of map2tmx cli output loaded into Tiled")
+![alt text](/img/v3/bumville2.map.tmx.png?raw=true "a sample of map2tmx cli output loaded into Tiled")
 
 **Note:** Output here is abbreviated for readability.
 
