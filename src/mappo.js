@@ -184,7 +184,7 @@ middlePanel.addEventListener('mousedown', event => {
   mousedown = true
 })
 
-let hoverCanvasCoord = null
+let mapLayerTileHighlightCoord = null
 middlePanel.addEventListener('mousemove', event => {
   if (mappoState.isLoading) {
     return
@@ -210,9 +210,18 @@ middlePanel.addEventListener('mousemove', event => {
     })
   }
 
-  hoverCanvasCoord = {
-    x: ~~(event.offsetX / getScale()),
-    y: ~~(event.offsetY / getScale()),
+  const mapLayerSelected = mappoState.mapLayerSelected
+  if (mapLayerSelected) {
+    const tileWidth = mappoState.tileset.tileWidth
+    const tileHeight = mappoState.tileset.tileHeight
+    const scaleX = ~~(event.offsetX / scale)
+    const scaleY = ~~(event.offsetY / scale)
+    const parallaxX = ~~(mappoState.cameraX * mapLayerSelected.parallax.x)
+    const parallaxY = ~~(mappoState.cameraY * mapLayerSelected.parallax.y)
+    const x = scaleX - ((parallaxX + scaleX) % tileWidth)
+    const y = scaleY - ((parallaxY + scaleY) % tileHeight)
+
+    mapLayerTileHighlightCoord = {x, y}
   }
 })
 
@@ -274,7 +283,7 @@ middlePanel.addEventListener('mouseout', event => {
   mappoState.cameraMoveX = 0
   mappoState.cameraMoveY = 0
   mappoState.autoScroll = {}
-  hoverCanvasCoord = null
+  mapLayerTileHighlightCoord = null
 })
 
 const moveCamera = (moveX, moveY) => {
@@ -318,11 +327,11 @@ const tick = () => {
       }
     })
 
-    if (hoverCanvasCoord) {
+    if (mapLayerTileHighlightCoord) {
       renderTileHighlightInvertedOutline({
         context,
-        x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % tileWidth),
-        y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % tileHeight),
+        x: mapLayerTileHighlightCoord.x,
+        y: mapLayerTileHighlightCoord.y,
         width: tileWidth,
         height: tileHeight,
       })
