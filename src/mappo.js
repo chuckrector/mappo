@@ -17,6 +17,7 @@ const renderTileHighlightColorOutline = require('./renderTileHighlightColorOutli
 const renderTile = require('./renderTile')
 const renderLayer = require('./renderLayer')
 const renderTileset = require('./renderTileset')
+const createCheckerboardPattern = require('./createCheckerboardPattern')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -35,17 +36,7 @@ const tilesetHoveringTileContext = tilesetHoveringTileCanvas.getContext('2d')
 const tilesetHoveringTileIndex = document.querySelector('.tileset-hovering-tile-index')
 const middlePanel = document.querySelector('.middle-panel')
 
-// CHECKERBOARD PATTERN
-const checkerboardCanvas = document.createElement('canvas')
-const checkerboardCanvasContext = checkerboardCanvas.getContext('2d')
-checkerboardCanvas.width = 16
-checkerboardCanvas.height = 16
-checkerboardCanvasContext.fillStyle = 'white'
-checkerboardCanvasContext.fillRect(0, 0, 16, 16)
-checkerboardCanvasContext.fillStyle = 'silver'
-checkerboardCanvasContext.fillRect(0, 0, 8, 8)
-checkerboardCanvasContext.fillRect(8, 8, 8, 8)
-const checkerboardPattern = checkerboardCanvasContext.createPattern(checkerboardCanvas, 'repeat')
+const checkerboardPattern = createCheckerboardPattern({document})
 
 const launchFolder = 'data' // TODO(chuck): temp hack for windows. empty string dunna work
 console.log('launchFolder', launchFolder)
