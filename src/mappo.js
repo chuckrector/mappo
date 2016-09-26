@@ -225,7 +225,7 @@ tilesetCanvasContainer.addEventListener('click', event => {
     return
   }
 
-  mappoState.map.tilesetTileSelected = getTileCoordAndIndex({
+  mappoState.tilesetTileSelected = getTileCoordAndIndex({
     tileset: mappoState.map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
@@ -324,11 +324,11 @@ const tick = () => {
       tilesetHoveringTileIndex.innerText = mappoState.map.tilesetTileHovering.tileIndex
     }
 
-    if (mappoState.map.tilesetTileSelected) {
+    if (mappoState.tilesetTileSelected) {
       renderTileHighlightColorOutline({
         context: tilesetContext,
-        x: mappoState.map.tilesetTileSelected.tileX * tileWidth,
-        y: mappoState.map.tilesetTileSelected.tileY * tileHeight,
+        x: mappoState.tilesetTileSelected.tileX * tileWidth,
+        y: mappoState.tilesetTileSelected.tileY * tileHeight,
         color: 'white',
         width: tileWidth,
         height: tileHeight,
@@ -336,12 +336,12 @@ const tick = () => {
       renderTile({
         context: tilesetSelectedTileContext,
         tileset: mappoState.map.tileset,
-        tileIndex: mappoState.map.tilesetTileSelected.tileIndex,
+        tileIndex: mappoState.tilesetTileSelected.tileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetSelectedTileIndex.innerText = mappoState.map.tilesetTileSelected.tileIndex
+      tilesetSelectedTileIndex.innerText = mappoState.tilesetTileSelected.tileIndex
     }
 
     mappoState.camera.move = {x: 0, y: 0}
