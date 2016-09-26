@@ -19,6 +19,7 @@ const renderLayer = require('./renderLayer')
 const renderTileset = require('./renderTileset')
 const createCheckerboardPattern = require('./createCheckerboardPattern')
 const calcAutoScroll = require('./calcAutoScroll')
+const clearCanvas = require('./clearCanvas')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -279,13 +280,6 @@ middlePanel.addEventListener('mouseout', event => {
 const moveCamera = (moveX, moveY) => {
   mappoState.cameraX = clamp(mappoState.cameraX + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.tileset.tileWidth) - canvas.width)
   mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
-}
-
-const clearCanvas = ({canvas, pattern}) => {
-  const context = canvas.getContext('2d')
-  context.globalCompositeOperation = 'source-over'
-  context.fillStyle = pattern
-  context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
 const getTilesetColumns = ({tileset, containerWidth}) => {
