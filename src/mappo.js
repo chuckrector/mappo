@@ -18,6 +18,7 @@ const renderTile = require('./renderTile')
 const renderLayer = require('./renderLayer')
 const renderTileset = require('./renderTileset')
 const createCheckerboardPattern = require('./createCheckerboardPattern')
+const calcAutoScroll = require('./calcAutoScroll')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -66,6 +67,7 @@ const defaultMappoState = {
   cameraMoveY: 0,
   cameraScrollAmount: 1,
   keyPressed: {},
+  autoScroll: {},
 }
 let mappoState = Object.assign({}, defaultMappoState)
 
@@ -182,8 +184,6 @@ middlePanel.addEventListener('mousedown', event => {
 })
 
 let hoverCanvasCoord = null
-let autoScrollX = 0
-let autoScrollY = 0
 middlePanel.addEventListener('mousemove', event => {
   if (mappoState.isLoading) {
     return
@@ -197,26 +197,16 @@ middlePanel.addEventListener('mousemove', event => {
     )
   }
 
-  autoScrollX = 0
-  autoScrollY = 0
-  const autoScrollThreshold = (mappoState.tileset.tileWidth + mappoState.tileset.tileHeight) / 2;
+  mappoState.autoScroll = {}
   if (mousein) {
-    const mouseX = event.offsetX
-    const mouseY = event.offsetY
-    const autoScrollRight = middlePanel.offsetWidth - autoScrollThreshold * scale
-    const autoScrollDown = middlePanel.offsetHeight - autoScrollThreshold * scale
-    if (mouseX < autoScrollThreshold) {
-      autoScrollX = -1
-    }
-    if (mouseX >= autoScrollRight) {
-      autoScrollX = +1
-    }
-    if (mouseY < autoScrollThreshold) {
-      autoScrollY = -1
-    }
-    if (mouseY >= autoScrollDown) {
-      autoScrollY = +1
-    }
+    mappoState.autoScroll = calcAutoScroll({
+      scale,
+      threshold: (mappoState.tileset.tileWidth + mappoState.tileset.tileHeight) / 2,
+      cursorX: event.offsetX,
+      cursorY: event.offsetY,
+      viewportWidth: middlePanel.offsetWidth,
+      viewportHeight: middlePanel.offsetHeight,
+    })
   }
 
   hoverCanvasCoord = {
@@ -235,7 +225,7 @@ const getTileCoordAndIndex = ({
   const tilesetColumns = getTilesetColumns({tileset, containerWidth})
   const tileX = ~~(pixelX / (tileset.tileWidth * scale))
   const tileY = ~~(pixelY / (tileset.tileHeight * scale))
-  const tileIndex = (hoverTileY * tilesetColumns) + hoverTileX
+  const tileIndex = (tileY * tilesetColumns) + tileX
 
   return {
     tileX,
@@ -282,8 +272,7 @@ middlePanel.addEventListener('mouseout', event => {
   mousein = false
   mappoState.cameraMoveX = 0
   mappoState.cameraMoveY = 0
-  autoScrollX = 0
-  autoScrollY = 0
+  mappoState.autoScroll = {}
   hoverCanvasCoord = null
 })
 
@@ -392,11 +381,14 @@ const tick = () => {
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;
-    (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScrollY < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
-    (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScrollY > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
-    (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScrollX < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
-    (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScrollX > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
-    moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
+    const autoScroll = mappoState.autoScroll
+    if (autoScroll) {
+      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
+      moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
+    }
 
     // map zooming
     if (keyboard.isPressed('ctrlKey')) {
