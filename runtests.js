@@ -1,3 +1,5 @@
+"use strict"
+
 var glob = require(`glob`)
 
 console.log(`running tests...`)
