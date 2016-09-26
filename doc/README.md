@@ -22,7 +22,9 @@ Output:
 
 ## map2tmx
 
-Converts any VERGE map into a Tiled TMX file. It is assumed that you have already generated a PNG file for the map's VSP (e.g. with `v3vsp2png` or similar).
+Converts any VERGE map into a Tiled TMX file.
+
+**Note:** It is assumed that you have already generated a PNG file for the map's VSP (e.g. with `v3vsp2png` or similar). You will need to copy that PNG file alongside the TMX file in order to successfully open it from Tiled.
 
 Usage:
 
