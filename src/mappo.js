@@ -13,6 +13,7 @@ const fs = require('fs')
 const setupKeyboard = require('./setupKeyboard')
 const renderTileHighlightInvertedOutline = require('./renderTileHighlightInvertedOutline')
 const renderTileHighlightInvertedSolid = require('./renderTileHighlightInvertedSolid')
+const renderTileHighlightColorOutline = require('./renderTileHighlightColorOutline')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -177,20 +178,6 @@ const loadMap = mapFilename => {
   } finally {
     console.groupEnd()
   }
-}
-
-const renderTileHighlightColorOutline = ({
-  context,
-  x,
-  y,
-  width=mappoState.tileset.tileWidth,
-  height=mappoState.tileset.tileHeight,
-  color='white',
-}) => {
-  context.strokeStyle = color
-  context.globalCompositeOperation = 'source-over'
-  context.lineWidth = 2
-  context.strokeRect(~~x, ~~y, width, height)
 }
 
 const renderTile = ({
@@ -447,6 +434,8 @@ const tick = () => {
       x: mappoState.tilesetSelectedTileX * mappoState.tileset.tileWidth,
       y: mappoState.tilesetSelectedTileY * mappoState.tileset.tileHeight,
       color: 'white',
+      width: mappoState.tileset.tileWidth,
+      height: mappoState.tileset.tileHeight,
     })
 
     renderTile({
