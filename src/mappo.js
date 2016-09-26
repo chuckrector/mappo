@@ -117,7 +117,7 @@ const refreshMapLayerList = () => {
   })
 }
 
-const loadTileset = ({
+const loadMappoTileset = ({
   context,
   mapFilename,
   map,
@@ -167,7 +167,7 @@ const loadMap = mapFilename => {
     mappoState.mapLayerSelected = mappoState.map.tileLayers[mappoState.map.mapLayerOrder[0]]
     refreshMapLayerList()
 
-    mappoState.tileset = loadTileset({context, mapFilename, map: mappoState.map})
+    mappoState.tileset = loadMappoTileset({context, mapFilename, map: mappoState.map})
     tilesetSelectedTileCanvas.width = mappoState.tileset.tileWidth
     tilesetSelectedTileCanvas.height = mappoState.tileset.tileHeight
     tilesetHoveringTileCanvas.width = mappoState.tileset.tileWidth
