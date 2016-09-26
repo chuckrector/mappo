@@ -313,7 +313,7 @@ const getTilesetRows = ({tileset, containerWidth}) => {
   return roundedUpRows
 }
 
-const renderTileset = ({tileset, containerWidth}) => {
+const renderTileset = ({context, tileset, containerWidth}) => {
   const tilesetColumns = getTilesetColumns({tileset, containerWidth})
 
   for (let tileIndex = 0; tileIndex < tileset.numTiles; tileIndex++) {
@@ -321,7 +321,7 @@ const renderTileset = ({tileset, containerWidth}) => {
     const tileY = ~~(tileIndex / tilesetColumns)
 
     renderTile({
-      context: tilesetContext,
+      context,
       tileset,
       tileIndex,
       x: tileX * tileset.tileWidth,
@@ -361,6 +361,7 @@ const tick = () => {
     }
 
     renderTileset({
+      context: tilesetContext,
       tileset: mappoState.tileset,
       containerWidth: tilesetCanvasContainer.offsetWidth,
     })
