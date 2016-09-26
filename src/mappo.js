@@ -281,10 +281,10 @@ const moveCamera = (moveX, moveY) => {
   mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
 }
 
-const clearCanvas = (canvas) => {
+const clearCanvas = ({canvas, pattern}) => {
   const context = canvas.getContext('2d')
   context.globalCompositeOperation = 'source-over'
-  context.fillStyle = checkerboardPattern
+  context.fillStyle = pattern
   context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
@@ -300,10 +300,10 @@ const getTilesetRows = ({tileset, containerWidth}) => {
 }
 
 const tick = () => {
-  clearCanvas(canvas)
-  clearCanvas(tilesetCanvas)
-  clearCanvas(tilesetSelectedTileCanvas)
-  clearCanvas(tilesetHoveringTileCanvas)
+  clearCanvas({canvas, pattern: checkerboardPattern})
+  clearCanvas({canvas: tilesetCanvas, pattern: checkerboardPattern})
+  clearCanvas({canvas: tilesetSelectedTileCanvas, pattern: checkerboardPattern})
+  clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
   if (!mappoState.isLoading) {
     const tileset = mappoState.tileset
