@@ -20,6 +20,7 @@ const renderTileset = require('./renderTileset')
 const createCheckerboardPattern = require('./createCheckerboardPattern')
 const calcAutoScroll = require('./calcAutoScroll')
 const clearCanvas = require('./clearCanvas')
+const loadMappoTileset = require('./loadMappoTileset')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -115,31 +116,6 @@ const refreshMapLayerList = () => {
     })
     layerList.appendChild(li)
   })
-}
-
-const loadMappoTileset = ({
-  context,
-  mapFilename,
-  map,
-}) => {
-  const vspFilename = path.join(path.dirname(mapFilename), map.tilesetFilename)
-  const vspBuffer = fs.readFileSync(vspFilename)
-  const vspFormat = detectFormat(vspBuffer)
-  console.log('vspFormat', vspFormat)
-
-  let vspData
-  try {
-    vspData = asset.fromBuffer(vspBuffer, asset[vspFormat])
-  } catch (exception) {
-    console.log(exception)
-    return
-  }
-
-  console.log(vspFilename, vspData)
-
-  const tileset = createMappoTileset({context, tileset: vspData})
-
-  return tileset
 }
 
 const loadMappoMap = mapFilename => {
