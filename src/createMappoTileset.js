@@ -41,9 +41,13 @@ module.exports = ({context, tileset}) => {
     width: mappoTileset.tileWidth,
     height: mappoTileset.tileHeight,
     numTiles: mappoTileset.numTiles,
-  }).then(imageBitmap => {
-    mappoTileset.imageBitmap = imageBitmap
   })
+  // TODO(chuck): not sure how i feel about this. appeasing createMappoTileset.test.js
+  if (mappoTileset.imageBitmapPromise) {
+    mappoTileset.imageBitmapPromise.then(imageBitmap => {
+      mappoTileset.imageBitmap = imageBitmap
+    })
+  }
 
   return mappoTileset
 }

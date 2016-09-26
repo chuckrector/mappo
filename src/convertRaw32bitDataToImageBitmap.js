@@ -13,8 +13,14 @@ module.exports = ({
   raw32bitData,
   width,
   height,
-  numTiles,
+  numTiles, // TODO(chuck): should prolly rename this file to something tileset-specific
 }) => {
+  // TODO(chuck): not sure how i feel about this. appeasing createMappoTileset.test.js
+  if (!context) {
+    console.warn('WARNING: no context provided for convertRaw32bitDataToImageBitmap. NOT creating ImageBitmap')
+    return
+  }
+
   const imageData = context.createImageData(width, height * numTiles)
 
   imageData.data.set(raw32bitData)
