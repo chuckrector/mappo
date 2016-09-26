@@ -20,7 +20,7 @@ const renderTileset = require('./renderTileset')
 const createCheckerboardPattern = require('./createCheckerboardPattern')
 const calcAutoScroll = require('./calcAutoScroll')
 const clearCanvas = require('./clearCanvas')
-const loadMappoTileset = require('./loadMappoTileset')
+const loadMappoMap = require('./loadMappoMap')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -134,34 +134,6 @@ const refreshMapLayerList = () => {
     })
     layerList.appendChild(li)
   })
-}
-
-const loadMappoMap = ({context, mapFilename}) => {
-  console.group()
-  try {
-    const mapBuffer = fs.readFileSync(mapFilename)
-    const mapFormat = detectFormat(mapBuffer)
-    if (!mapFormat.includes('map')) {
-      console.error('expected map but got', mapFormat)
-      return
-    }
-    console.log('mapFormat', mapFormat)
-    let mapData
-    try {
-      mapData = asset.fromBuffer(mapBuffer, asset[mapFormat])
-    } catch (exception) {
-      console.log(exception)
-      return
-    }
-    console.log(mapFilename, mapData)
-    const map = createMappoMap({map: mapData})
-    map.tileset = loadMappoTileset({context, mapFilename, map})
-    return map
-  } catch (exception) {
-    console.error('ack!', exception)
-  } finally {
-    console.groupEnd()
-  }
 }
 
 const keyboard = setupKeyboard({
