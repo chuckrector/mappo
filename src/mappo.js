@@ -84,7 +84,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   li.innerText = mapFilename
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
   li.addEventListener('click', event => {
-    loadMap('data/' + mapFilename)
+    loadMappoMap('data/' + mapFilename)
     pageTitle.innerText = 'Mappo - ' + mapFilename
   })
   mapList.appendChild(li)
@@ -142,7 +142,7 @@ const loadMappoTileset = ({
   return tileset
 }
 
-const loadMap = mapFilename => {
+const loadMappoMap = mapFilename => {
   console.group()
   try {
     mappoState = Object.assign({}, defaultMappoState)
