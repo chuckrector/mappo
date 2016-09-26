@@ -62,8 +62,7 @@ const defaultMappoState = {
   tileset: null,
   tilesetTileHovering: null,
   tilesetTileSelected: null,
-  cameraX: 0,
-  cameraY: 0,
+  camera: {x: 0, y: 0},
   cameraMoveX: 0,
   cameraMoveY: 0,
   cameraScrollAmount: 1,
@@ -118,9 +117,6 @@ const loadMap = mapFilename => {
   try {
     mappoState = Object.assign({}, defaultMappoState)
     mappoState.isLoading = true
-
-    mappoState.cameraX = 0
-    mappoState.cameraY = 0
 
     const mapBuffer = fs.readFileSync(mapFilename)
     const mapFormat = detectFormat(mapBuffer)
@@ -216,8 +212,8 @@ middlePanel.addEventListener('mousemove', event => {
     const tileHeight = mappoState.tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
     const scaleY = ~~(event.offsetY / scale)
-    const parallaxX = ~~(mappoState.cameraX * mapLayerSelected.parallax.x)
-    const parallaxY = ~~(mappoState.cameraY * mapLayerSelected.parallax.y)
+    const parallaxX = ~~(mappoState.camera.x * mapLayerSelected.parallax.x)
+    const parallaxY = ~~(mappoState.camera.y * mapLayerSelected.parallax.y)
     const x = scaleX - ((parallaxX + scaleX) % tileWidth)
     const y = scaleY - ((parallaxY + scaleY) % tileHeight)
 
@@ -287,8 +283,8 @@ middlePanel.addEventListener('mouseout', event => {
 })
 
 const moveCamera = (moveX, moveY) => {
-  mappoState.cameraX = clamp(mappoState.cameraX + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.tileset.tileWidth) - canvas.width)
-  mappoState.cameraY = clamp(mappoState.cameraY + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
+  mappoState.camera.x = clamp(mappoState.camera.x + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.tileset.tileWidth) - canvas.width)
+  mappoState.camera.y = clamp(mappoState.camera.y + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.tileset.tileHeight) - canvas.height)
 }
 
 const getTilesetColumns = ({tileset, containerWidth}) => {
@@ -320,8 +316,8 @@ const tick = () => {
         renderLayer({
           tileset,
           layer: tileLayer,
-          x: mappoState.cameraX * tileLayer.parallax.x,
-          y: mappoState.cameraY * tileLayer.parallax.y,
+          x: mappoState.camera.x * tileLayer.parallax.x,
+          y: mappoState.camera.y * tileLayer.parallax.y,
           transparent: layerIndex > 0,
         })
       }
