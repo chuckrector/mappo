@@ -62,9 +62,14 @@ const defaultMappoState = {
   tileset: null,
   tilesetTileHovering: null,
   tilesetTileSelected: null,
-  camera: {x: 0, y: 0},
-  cameraMoveX: 0,
-  cameraMoveY: 0,
+  camera: {
+    x: 0,
+    y: 0,
+    move: {
+      x: 0,
+      y: 0,
+    },
+  },
   cameraScrollAmount: 1,
   keyPressed: {},
   autoScroll: {},
@@ -276,8 +281,7 @@ middlePanel.addEventListener('mouseenter', event => {
 
 middlePanel.addEventListener('mouseout', event => {
   mousein = false
-  mappoState.cameraMoveX = 0
-  mappoState.cameraMoveY = 0
+  mappoState.camera.move = {x: 0, y: 0}
   mappoState.autoScroll = {}
   mapLayerTileHighlightCoord = null
 })
@@ -378,15 +382,14 @@ const tick = () => {
       tilesetSelectedTileIndex.innerText = mappoState.tilesetTileSelected.tileIndex
     }
 
-    mappoState.cameraMoveX = 0
-    mappoState.cameraMoveY = 0;
+    mappoState.camera.move = {x: 0, y: 0}
     const autoScroll = mappoState.autoScroll
     if (autoScroll) {
-      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (mappoState.cameraMoveY = -mappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (mappoState.cameraMoveY = +mappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (mappoState.cameraMoveX = -mappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (mappoState.cameraMoveX = +mappoState.cameraScrollAmount);
-      moveCamera(mappoState.cameraMoveX, mappoState.cameraMoveY)
+      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (mappoState.camera.move.y = -mappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (mappoState.camera.move.y = +mappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (mappoState.camera.move.x = -mappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (mappoState.camera.move.x = +mappoState.cameraScrollAmount);
+      moveCamera(mappoState.camera.move.x, mappoState.camera.move.y)
     }
 
     // map zooming
