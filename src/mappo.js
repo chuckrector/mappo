@@ -58,12 +58,8 @@ const defaultMappoState = {
   mapLayerOrder: null,
   mapLayerSelected: null,
   tileset: null,
-  tilesetHoverTileX: 0,
-  tilesetHoverTileY: 0,
-  tilesetHoverIndex: 0,
-  tilesetSelectedTileX: 0,
-  tilesetSelectedTileY: 0,
-  tilesetSelectedIndex: 0,
+  tilesetTileHovering: null,
+  tilesetTileSelected: null,
   cameraX: 0,
   cameraY: 0,
   cameraMoveX: 0,
@@ -229,22 +225,36 @@ middlePanel.addEventListener('mousemove', event => {
   }
 })
 
+const getTileCoordAndIndex = ({
+  tileset,
+  containerWidth,
+  pixelX,
+  pixelY,
+}) => {
+  const scale = getScale()
+  const tilesetColumns = getTilesetColumns({tileset, containerWidth})
+  const tileX = ~~(pixelX / (tileset.tileWidth * scale))
+  const tileY = ~~(pixelY / (tileset.tileHeight * scale))
+  const tileIndex = (hoverTileY * tilesetColumns) + hoverTileX
+
+  return {
+    tileX,
+    tileY,
+    tileIndex,
+  }
+}
+
 tilesetCanvasContainer.addEventListener('mousemove', event => {
   if (mappoState.isLoading) {
     return
   }
 
-  const scale = getScale()
-  const tileset = mappoState.tileset
-  const containerWidth = tilesetCanvasContainer.offsetWidth
-  const tilesetColumns = getTilesetColumns({tileset, containerWidth})
-  const hoverTileX = ~~(event.offsetX / (tileset.tileWidth * scale))
-  const hoverTileY = ~~(event.offsetY / (tileset.tileHeight * scale))
-  const hoverTileIndex = (hoverTileY * tilesetColumns) + hoverTileX
-
-  mappoState.tilesetHoverTileX = hoverTileX
-  mappoState.tilesetHoverTileY = hoverTileY
-  mappoState.tilesetHoverIndex = hoverTileIndex
+  mappoState.tilesetTileHovering = getTileCoordAndIndex({
+    tileset: mappoState.tileset,
+    containerWidth: tilesetCanvasContainer.offsetWidth,
+    pixelX: event.offsetX,
+    pixelY: event.offsetY,
+  })
 })
 
 tilesetCanvasContainer.addEventListener('click', event => {
@@ -252,17 +262,12 @@ tilesetCanvasContainer.addEventListener('click', event => {
     return
   }
 
-  const scale = getScale()
-  const tileset = mappoState.tileset
-  const containerWidth = tilesetCanvasContainer.offsetWidth
-  const tilesetColumns = getTilesetColumns({tileset, containerWidth})
-  const selectedTileX = ~~(event.offsetX / (mappoState.tileset.tileWidth * scale))
-  const selectedTileY = ~~(event.offsetY / (mappoState.tileset.tileHeight * scale))
-  const selectedTileIndex = (selectedTileY * tilesetColumns) + selectedTileX
-
-  mappoState.tilesetSelectedTileX = selectedTileX
-  mappoState.tilesetSelectedTileY = selectedTileY
-  mappoState.tilesetSelectedIndex = selectedTileIndex
+  mappoState.tilesetTileSelected = getTileCoordAndIndex({
+    tileset: mappoState.tileset,
+    containerWidth: tilesetCanvasContainer.offsetWidth,
+    pixelX: event.offsetX,
+    pixelY: event.offsetY,
+  })
 })
 
 middlePanel.addEventListener('mouseup', event => {
@@ -345,38 +350,45 @@ const tick = () => {
       tileset: mappoState.tileset,
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
-    renderTileHighlightInvertedSolid({
-      context: tilesetContext,
-      x: mappoState.tilesetHoverTileX * tileWidth,
-      y: mappoState.tilesetHoverTileY * tileHeight,
-      width: tileWidth,
-      height: tileHeight,
-    })
-    renderTileHighlightColorOutline({
-      context: tilesetContext,
-      x: mappoState.tilesetSelectedTileX * tileWidth,
-      y: mappoState.tilesetSelectedTileY * tileHeight,
-      color: 'white',
-      width: tileWidth,
-      height: tileHeight,
-    })
 
-    renderTile({
-      context: tilesetSelectedTileContext,
-      tileset: mappoState.tileset,
-      tileIndex: mappoState.tilesetSelectedIndex,
-      x: 0,
-      y: 0,
-    })
-    renderTile({
-      context: tilesetHoveringTileContext,
-      tileset: mappoState.tileset,
-      tileIndex: mappoState.tilesetHoverIndex,
-      x: 0,
-      y: 0,
-    })
-    tilesetSelectedTileIndex.innerText = mappoState.tilesetSelectedIndex
-    tilesetHoveringTileIndex.innerText = mappoState.tilesetHoverIndex
+    if (mappoState.tilesetTileHovering) {
+      renderTileHighlightInvertedSolid({
+        context: tilesetContext,
+        x: mappoState.tilesetTileHovering.tileX * tileWidth,
+        y: mappoState.tilesetTileHovering.tileY * tileHeight,
+        width: tileWidth,
+        height: tileHeight,
+      })
+      renderTile({
+        context: tilesetHoveringTileContext,
+        tileset: mappoState.tileset,
+        tileIndex: mappoState.tilesetTileHovering.tileIndex,
+        x: 0,
+        y: 0,
+      })
+
+      tilesetHoveringTileIndex.innerText = mappoState.tilesetTileHovering.tileIndex
+    }
+
+    if (mappoState.tilesetTileSelected) {
+      renderTileHighlightColorOutline({
+        context: tilesetContext,
+        x: mappoState.tilesetTileSelected.tileX * tileWidth,
+        y: mappoState.tilesetTileSelected.tileY * tileHeight,
+        color: 'white',
+        width: tileWidth,
+        height: tileHeight,
+      })
+      renderTile({
+        context: tilesetSelectedTileContext,
+        tileset: mappoState.tileset,
+        tileIndex: mappoState.tilesetTileSelected.tileIndex,
+        x: 0,
+        y: 0,
+      })
+
+      tilesetSelectedTileIndex.innerText = mappoState.tilesetTileSelected.tileIndex
+    }
 
     mappoState.cameraMoveX = 0
     mappoState.cameraMoveY = 0;
