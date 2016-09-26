@@ -14,6 +14,7 @@ const setupKeyboard = require('./setupKeyboard')
 const renderTileHighlightInvertedOutline = require('./renderTileHighlightInvertedOutline')
 const renderTileHighlightInvertedSolid = require('./renderTileHighlightInvertedSolid')
 const renderTileHighlightColorOutline = require('./renderTileHighlightColorOutline')
+const renderTile = require('./renderTile')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -180,25 +181,6 @@ const loadMap = mapFilename => {
   }
 }
 
-const renderTile = ({
-  context,
-  tileIndex,
-  x,
-  y,
-  scaleWidth=mappoState.tileset.tileWidth,
-  scaleHeight=mappoState.tileset.tileHeight,
-}) => {
-  context.drawImage(
-    mappoState.tileset.imageBitmap,
-    0, tileIndex * mappoState.tileset.tileHeight,
-    mappoState.tileset.tileWidth,
-    mappoState.tileset.tileHeight,
-    x, y,
-    scaleWidth,
-    scaleHeight
-  )
-}
-
 const getTileIndex = (layer, tileX, tileY) => {
   return layer.tileIndexGrid[(tileY * layer.width) + tileX]
 }
@@ -239,7 +221,13 @@ const renderLayer = (layer, x, y, transparent=false) => {
       const tileIndex = getTileIndex(layer, tileX, tileY)
 
       if (tileIndex || !transparent) {
-        renderTile({context, tileIndex, x: pixelX, y: pixelY})
+        renderTile({
+          context,
+          tileset: mappoState.tileset,
+          tileIndex,
+          x: pixelX,
+          y: pixelY,
+        })
       }
 
       pixelX += tileWidth
@@ -385,6 +373,7 @@ const renderTileset = () => {
 
     renderTile({
       context: tilesetContext,
+      tileset: mappoState.tileset,
       tileIndex,
       x: tileX * mappoState.tileset.tileWidth,
       y: tileY * mappoState.tileset.tileHeight,
@@ -440,12 +429,14 @@ const tick = () => {
 
     renderTile({
       context: tilesetSelectedTileContext,
+      tileset: mappoState.tileset,
       tileIndex: mappoState.tilesetSelectedIndex,
       x: 0,
       y: 0,
     })
     renderTile({
       context: tilesetHoveringTileContext,
+      tileset: mappoState.tileset,
       tileIndex: mappoState.tilesetHoverIndex,
       x: 0,
       y: 0,
