@@ -117,6 +117,31 @@ const refreshMapLayerList = () => {
   })
 }
 
+const loadTileset = ({
+  context,
+  mapFilename,
+  map,
+}) => {
+  const vspFilename = path.join(path.dirname(mapFilename), map.tilesetFilename)
+  const vspBuffer = fs.readFileSync(vspFilename)
+  const vspFormat = detectFormat(vspBuffer)
+  console.log('vspFormat', vspFormat)
+
+  let vspData
+  try {
+    vspData = asset.fromBuffer(vspBuffer, asset[vspFormat])
+  } catch (exception) {
+    console.log(exception)
+    return
+  }
+
+  console.log(vspFilename, vspData)
+
+  const tileset = createMappoTileset({context, tileset: vspData})
+
+  return tileset
+}
+
 const loadMap = mapFilename => {
   console.group()
   try {
@@ -142,22 +167,7 @@ const loadMap = mapFilename => {
     mappoState.mapLayerSelected = mappoState.map.tileLayers[mappoState.map.mapLayerOrder[0]]
     refreshMapLayerList()
 
-    const vspFilename = path.join(
-      path.dirname(mapFilename),
-      mappoState.map.tilesetFilename
-    )
-    const vspBuffer = fs.readFileSync(vspFilename)
-    const vspFormat = detectFormat(vspBuffer)
-    console.log('vspFormat', vspFormat)
-    let vspData
-    try {
-      vspData = asset.fromBuffer(vspBuffer, asset[vspFormat])
-    } catch (exception) {
-      console.log(exception)
-      return
-    }
-    mappoState.tileset = createMappoTileset({context, tileset: vspData})
-    console.log(vspFilename, vspData)
+    mappoState.tileset = loadTileset({context, mapFilename, map: mappoState.map})
     tilesetSelectedTileCanvas.width = mappoState.tileset.tileWidth
     tilesetSelectedTileCanvas.height = mappoState.tileset.tileHeight
     tilesetHoveringTileCanvas.width = mappoState.tileset.tileWidth
