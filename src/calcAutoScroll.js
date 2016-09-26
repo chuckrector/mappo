@@ -28,6 +28,5 @@ module.exports = ({
     autoScroll.y++
   }
 
-  console.log('autoScroll', autoScroll)
   return autoScroll
 }
