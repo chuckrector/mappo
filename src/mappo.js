@@ -7,7 +7,6 @@ const glob = require('glob')
 const createMappoSession = require('./createMappoSession')
 const createMappoMap = require('./createMappoMap')
 const createMappoTileset = require('./createMappoTileset')
-const convertRaw32bitDataToImageBitmap = require('./convertRaw32bitDataToImageBitmap')
 const detectFormat = require('./detectFormat')
 const path = require('path')
 const fs = require('fs')
@@ -62,7 +61,6 @@ const defaultMappoState = {
   mapLayerOrder: null,
   mapLayerSelected: null,
   tileset: null,
-  tilesetBitmap: null,
   tilesetHoverTileX: 0,
   tilesetHoverTileY: 0,
   tilesetHoverIndex: 0,
@@ -161,23 +159,15 @@ const loadMap = mapFilename => {
       console.log(exception)
       return
     }
-    mappoState.tileset = createMappoTileset({tileset: vspData})
+    mappoState.tileset = createMappoTileset({context, tileset: vspData})
     console.log(vspFilename, vspData)
     tilesetSelectedTileCanvas.width = mappoState.tileset.tileWidth
     tilesetSelectedTileCanvas.height = mappoState.tileset.tileHeight
     tilesetHoveringTileCanvas.width = mappoState.tileset.tileWidth
     tilesetHoveringTileCanvas.height = mappoState.tileset.tileHeight
 
-    convertRaw32bitDataToImageBitmap({
-      context,
-      raw32bitData: mappoState.tileset.raw32bitData,
-      width: mappoState.tileset.tileWidth,
-      height: mappoState.tileset.tileHeight,
-      numTiles: mappoState.tileset.numTiles,
-    }).then(tilesetBitmap => {
-      mappoState.tilesetBitmap = tilesetBitmap
+    mappoState.tileset.imageBitmapPromise.then(() => {
       mappoState.isLoading = false
-
       resizeCanvas()
     })
   } catch (exception) {
@@ -236,7 +226,7 @@ const renderTile = ({
   scaleHeight=mappoState.tileset.tileHeight,
 }) => {
   context.drawImage(
-    mappoState.tilesetBitmap,
+    mappoState.tileset.imageBitmap,
     0, tileIndex * mappoState.tileset.tileHeight,
     mappoState.tileset.tileWidth,
     mappoState.tileset.tileHeight,

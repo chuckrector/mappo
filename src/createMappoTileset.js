@@ -1,8 +1,9 @@
 "use strict"
 
 const colorDepth = require('./converter/colorDepth')
+const convertRaw32bitDataToImageBitmap = require('./convertRaw32bitDataToImageBitmap')
 
-module.exports = ({tileset}) => {
+module.exports = ({context, tileset}) => {
   const mappoTileset = {}
 
   switch (tileset.formatName) {
@@ -33,6 +34,16 @@ module.exports = ({tileset}) => {
       })
     } break;
   }
+
+  mappoTileset.imageBitmapPromise = convertRaw32bitDataToImageBitmap({
+    context,
+    raw32bitData: mappoTileset.raw32bitData,
+    width: mappoTileset.tileWidth,
+    height: mappoTileset.tileHeight,
+    numTiles: mappoTileset.numTiles,
+  }).then(imageBitmap => {
+    mappoTileset.imageBitmap = imageBitmap
+  })
 
   return mappoTileset
 }
