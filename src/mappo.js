@@ -12,6 +12,7 @@ const path = require('path')
 const fs = require('fs')
 const setupKeyboard = require('./setupKeyboard')
 const renderTileHighlightInvertedOutline = require('./renderTileHighlightInvertedOutline')
+const renderTileHighlightInvertedSolid = require('./renderTileHighlightInvertedSolid')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -176,19 +177,6 @@ const loadMap = mapFilename => {
   } finally {
     console.groupEnd()
   }
-}
-
-const renderTileHighlightInvertedSolid = ({
-  context,
-  x,
-  y,
-  width=mappoState.tileset.tileWidth,
-  height=mappoState.tileset.tileHeight,
-}) => {
-  context.strokeStyle = 'white'
-  context.globalCompositeOperation = 'exclusion'
-  context.lineWidth = 2
-  context.fillRect(~~x, ~~y, width, height)
 }
 
 const renderTileHighlightColorOutline = ({
@@ -451,6 +439,8 @@ const tick = () => {
       context: tilesetContext,
       x: mappoState.tilesetHoverTileX * mappoState.tileset.tileWidth,
       y: mappoState.tilesetHoverTileY * mappoState.tileset.tileHeight,
+      width: mappoState.tileset.tileWidth,
+      height: mappoState.tileset.tileHeight,
     })
     renderTileHighlightColorOutline({
       context: tilesetContext,
