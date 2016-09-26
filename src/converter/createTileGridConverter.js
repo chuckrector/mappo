@@ -1,7 +1,7 @@
 "use strict"
 
-const {PNG} = require('pngJS')
-const colorDepth = require('./colorDepth')
+const {PNG} = require(`pngJS`)
+const colorDepth = require(`./colorDepth`)
 
 module.exports = ({
   tileWidth,

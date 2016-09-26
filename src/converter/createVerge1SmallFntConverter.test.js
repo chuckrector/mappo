@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge1SmallFntConverter = require('./createVerge1SmallFntConverter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge1SmallFntConverter = require(`./createVerge1SmallFntConverter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert SMALL.FNT font to png

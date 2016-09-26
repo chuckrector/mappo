@@ -1,8 +1,8 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge2kjChrConverter = require('./createVerge2kjChrConverter')
-const filler = require('../filler')
+const expect = require(`expect`)
+const createVerge2kjChrConverter = require(`./createVerge2kjChrConverter`)
+const filler = require(`../filler`)
 
 {
   // can convert chr image data to png

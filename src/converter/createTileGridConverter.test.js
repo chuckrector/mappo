@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createTileGridConverter = require('./createTileGridConverter')
-const palette = require('../dummyPalette')
-const colorDepth = require('./colorDepth')
+const expect = require(`expect`)
+const createTileGridConverter = require(`./createTileGridConverter`)
+const palette = require(`../dummyPalette`)
+const colorDepth = require(`./colorDepth`)
 
   const oneTile = [
     128, 128, 128, 128, 128,

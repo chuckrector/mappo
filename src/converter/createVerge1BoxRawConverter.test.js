@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge1BoxRawConverter = require('./createVerge1BoxRawConverter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge1BoxRawConverter = require(`./createVerge1BoxRawConverter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert BOX.RAW text box to png

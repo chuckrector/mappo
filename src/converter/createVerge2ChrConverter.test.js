@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge2ChrConverter = require('./createVerge2ChrConverter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge2ChrConverter = require(`./createVerge2ChrConverter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert chr image data to png

@@ -1,10 +1,10 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge3VspConverter = require('./createVerge3VspConverter')
-const filler = require('../filler')
-const colorDepth = require('./colorDepth')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge3VspConverter = require(`./createVerge3VspConverter`)
+const filler = require(`../filler`)
+const colorDepth = require(`./colorDepth`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert vsp tile data to png

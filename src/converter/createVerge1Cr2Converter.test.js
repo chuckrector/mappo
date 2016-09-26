@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge1Cr2Converter = require('./createVerge1Cr2Converter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge1Cr2Converter = require(`./createVerge1Cr2Converter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert CR2 character portrait to png

@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createPcxConverter = require('./createPcxConverter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createPcxConverter = require(`./createPcxConverter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert PCX to PNG

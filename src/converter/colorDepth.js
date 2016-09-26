@@ -1,6 +1,6 @@
 "use strict"
 
-const assert = require('assert')
+const assert = require(`assert`)
 
 const convert8to32 = ({palette, raw8bitData}) => {
   const raw32bitData = []
@@ -52,7 +52,7 @@ const convert16to32 = ({raw16bitData}) => {
 const convert24to32 = ({raw24bitData}) => {
   const raw32bitData = []
 
-  assert.equal(raw24bitData.length % 3, 0, 'expected raw 24-bit data length to be divisible by three but got ' + raw24bitData.length)
+  assert.equal(raw24bitData.length % 3, 0, `expected raw 24-bit data length to be divisible by three but got ` + raw24bitData.length)
 
   let L = Math.floor(raw24bitData.length / 3)
   let offset24 = 0

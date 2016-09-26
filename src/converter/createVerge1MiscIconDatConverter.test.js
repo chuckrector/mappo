@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge1MiscIconDatConverter = require('./createVerge1MiscIconDatConverter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge1MiscIconDatConverter = require(`./createVerge1MiscIconDatConverter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert MISCICON.DAT to png

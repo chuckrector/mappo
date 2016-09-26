@@ -1,9 +1,9 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge1SpeechSpcConverter = require('./createVerge1SpeechSpcConverter')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
+const expect = require(`expect`)
+const createVerge1SpeechSpcConverter = require(`./createVerge1SpeechSpcConverter`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
 
 {
   // can convert SPEECH.SPC character portrait to png

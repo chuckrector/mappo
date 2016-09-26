@@ -1,8 +1,8 @@
 "use strict"
 
-const createTileGridConverter = require('./createTileGridConverter')
-const filler = require('../filler')
-const colorDepth = require('./colorDepth')
+const createTileGridConverter = require(`./createTileGridConverter`)
+const filler = require(`../filler`)
+const colorDepth = require(`./colorDepth`)
 
 module.exports = ({
   palette,
