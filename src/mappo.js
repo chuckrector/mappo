@@ -11,6 +11,7 @@ const detectFormat = require('./detectFormat')
 const path = require('path')
 const fs = require('fs')
 const setupKeyboard = require('./setupKeyboard')
+const renderTileHighlightInvertedOutline = require('./renderTileHighlightInvertedOutline')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -177,20 +178,7 @@ const loadMap = mapFilename => {
   }
 }
 
-const renderTileHighlight = ({
-  context,
-  x,
-  y,
-  width=mappoState.tileset.tileWidth,
-  height=mappoState.tileset.tileHeight,
-}) => {
-  context.strokeStyle = 'white'
-  context.globalCompositeOperation = 'exclusion'
-  context.lineWidth = 2
-  context.strokeRect(~~x, ~~y, width, height)
-}
-
-const renderInvertedSolidTileHighlight = ({
+const renderTileHighlightInvertedSolid = ({
   context,
   x,
   y,
@@ -203,7 +191,7 @@ const renderInvertedSolidTileHighlight = ({
   context.fillRect(~~x, ~~y, width, height)
 }
 
-const renderTileHighlightWithColor = ({
+const renderTileHighlightColorOutline = ({
   context,
   x,
   y,
@@ -449,20 +437,22 @@ const tick = () => {
     })
 
     if (hoverCanvasCoord) {
-      renderTileHighlight({
+      renderTileHighlightInvertedOutline({
         context,
         x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % mappoState.tileset.tileWidth),
         y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % mappoState.tileset.tileHeight),
+        width: mappoState.tileset.tileWidth,
+        height: mappoState.tileset.tileHeight,
       })
     }
 
     renderTileset()
-    renderInvertedSolidTileHighlight({
+    renderTileHighlightInvertedSolid({
       context: tilesetContext,
       x: mappoState.tilesetHoverTileX * mappoState.tileset.tileWidth,
       y: mappoState.tilesetHoverTileY * mappoState.tileset.tileHeight,
     })
-    renderTileHighlightWithColor({
+    renderTileHighlightColorOutline({
       context: tilesetContext,
       x: mappoState.tilesetSelectedTileX * mappoState.tileset.tileWidth,
       y: mappoState.tilesetSelectedTileY * mappoState.tileset.tileHeight,
