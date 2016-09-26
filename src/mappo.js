@@ -243,9 +243,12 @@ tilesetCanvasContainer.addEventListener('mousemove', event => {
   }
 
   const scale = getScale()
+  const tilesetColumns = getTilesetColumns({
+    containerWidth: tilesetCanvasContainer.offsetWidth,
+  })
   const hoverTileX = ~~(event.offsetX / (mappoState.tileset.tileWidth * scale))
   const hoverTileY = ~~(event.offsetY / (mappoState.tileset.tileHeight * scale))
-  const hoverTileIndex = (hoverTileY * getTilesetColumns()) + hoverTileX
+  const hoverTileIndex = (hoverTileY * tilesetColumns) + hoverTileX
 
   mappoState.tilesetHoverTileX = hoverTileX
   mappoState.tilesetHoverTileY = hoverTileY
@@ -258,9 +261,12 @@ tilesetCanvasContainer.addEventListener('click', event => {
   }
 
   const scale = getScale()
+  const tilesetColumns = getTilesetColumns({
+    containerWidth: tilesetCanvasContainer.offsetWidth,
+  })
   const selectedTileX = ~~(event.offsetX / (mappoState.tileset.tileWidth * scale))
   const selectedTileY = ~~(event.offsetY / (mappoState.tileset.tileHeight * scale))
-  const selectedTileIndex = (selectedTileY * getTilesetColumns()) + selectedTileX
+  const selectedTileIndex = (selectedTileY * tilesetColumns) + selectedTileX
 
   mappoState.tilesetSelectedTileX = selectedTileX
   mappoState.tilesetSelectedTileY = selectedTileY
@@ -296,19 +302,19 @@ const clearCanvas = (canvas) => {
   context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
-const getTilesetColumns = () => {
+const getTilesetColumns = ({containerWidth}) => {
   const scaledTileWidth = mappoState.tileset.tileWidth * getScale()
-  return ~~(tilesetCanvasContainer.offsetWidth / scaledTileWidth)
+  return ~~(containerWidth / scaledTileWidth)
 }
 
-const getTilesetRows = () => {
-  const tilesetColumns = getTilesetColumns()
+const getTilesetRows = ({containerWidth}) => {
+  const tilesetColumns = getTilesetColumns({containerWidth})
   const roundedUpRows = ~~((mappoState.tileset.numTiles + (tilesetColumns - 1)) / tilesetColumns)
   return roundedUpRows
 }
 
-const renderTileset = () => {
-  const tilesetColumns = getTilesetColumns()
+const renderTileset = ({containerWidth}) => {
+  const tilesetColumns = getTilesetColumns({containerWidth})
 
   for (let tileIndex = 0; tileIndex < mappoState.tileset.numTiles; tileIndex++) {
     const tileX = tileIndex % tilesetColumns
@@ -354,7 +360,7 @@ const tick = () => {
       })
     }
 
-    renderTileset()
+    renderTileset({containerWidth: tilesetCanvasContainer.offsetWidth})
     renderTileHighlightInvertedSolid({
       context: tilesetContext,
       x: mappoState.tilesetHoverTileX * mappoState.tileset.tileWidth,
@@ -429,8 +435,9 @@ const resizeCanvas = () => {
   canvas.style.height = middlePanel.offsetHeight + 'px'
 
   if (!mappoState.isLoading) {
-    tilesetCanvas.width = getTilesetColumns() * mappoState.tileset.tileWidth
-    tilesetCanvas.height = getTilesetRows() * mappoState.tileset.tileHeight
+    const containerWidth = tilesetCanvasContainer.offsetWidth
+    tilesetCanvas.width = getTilesetColumns({containerWidth}) * mappoState.tileset.tileWidth
+    tilesetCanvas.height = getTilesetRows({containerWidth}) * mappoState.tileset.tileHeight
     tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + 'px'
     tilesetCanvas.style.height = (tilesetCanvas.height * getScale()) + 'px'
   }
