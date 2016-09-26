@@ -16,6 +16,7 @@ const renderTileHighlightInvertedSolid = require('./renderTileHighlightInvertedS
 const renderTileHighlightColorOutline = require('./renderTileHighlightColorOutline')
 const renderTile = require('./renderTile')
 const renderLayer = require('./renderLayer')
+const renderTileset = require('./renderTileset')
 
 // DOM REFERENCES
 const pageTitle = document.querySelector('title')
@@ -311,25 +312,6 @@ const getTilesetRows = ({tileset, containerWidth}) => {
   const tilesetColumns = getTilesetColumns({tileset, containerWidth})
   const roundedUpRows = ~~((tileset.numTiles + (tilesetColumns - 1)) / tilesetColumns)
   return roundedUpRows
-}
-
-const renderTileset = ({
-  context,
-  tileset,
-  tilesetColumns,
-}) => {
-  for (let tileIndex = 0; tileIndex < tileset.numTiles; tileIndex++) {
-    const tileX = tileIndex % tilesetColumns
-    const tileY = ~~(tileIndex / tilesetColumns)
-
-    renderTile({
-      context,
-      tileset,
-      tileIndex,
-      x: tileX * tileset.tileWidth,
-      y: tileY * tileset.tileHeight,
-    })
-  }
 }
 
 const tick = () => {
