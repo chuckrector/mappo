@@ -1,6 +1,6 @@
 "use strict"
 
-const {T} = require('../readFormat')
+const {T} = require(`../readFormat`)
 
 module.exports = {
   layername: T.stringFixed(256),

@@ -1,6 +1,6 @@
 "use strict"
 
-const {T} = require('../readFormat')
+const {T} = require(`../readFormat`)
 
 module.exports = {
   name: T.string,

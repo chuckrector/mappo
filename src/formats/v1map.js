@@ -1,8 +1,8 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V1_ZONE = require('./v1zone')
-const V1_ENTITY = require('./v1entity')
+const {T} = require(`../readFormat`)
+const V1_ZONE = require(`./v1zone`)
+const V1_ENTITY = require(`./v1entity`)
 
 module.exports = {
   version: T.u8,

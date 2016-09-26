@@ -1,9 +1,9 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V2_LAYERINFO = require('./v2layerinfo')
-const V2_ZONE = require('./v2zone')
-const V2_ENTITY = require('./v2entity')
+const {T} = require(`../readFormat`)
+const V2_LAYERINFO = require(`./v2layerinfo`)
+const V2_ZONE = require(`./v2zone`)
+const V2_ENTITY = require(`./v2entity`)
 
 module.exports = {
   version: T.list(T.u8, 6),

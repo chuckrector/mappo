@@ -1,7 +1,7 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V3_VSPANIM = require('./v3vspanim')
+const {T} = require(`../readFormat`)
+const V3_VSPANIM = require(`./v3vspanim`)
 
 module.exports = {
   signature: T.u32,

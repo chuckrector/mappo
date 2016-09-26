@@ -1,9 +1,9 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V3_LAYERINFO = require('./v3layerinfo')
-const V3_ZONE = require('./v3zone')
-const V3_ENTITY = require('./v3entity')
+const {T} = require(`../readFormat`)
+const V3_LAYERINFO = require(`./v3layerinfo`)
+const V3_ZONE = require(`./v3zone`)
+const V3_ENTITY = require(`./v3entity`)
 
 module.exports = {
   signature: T.stringFixed(6),

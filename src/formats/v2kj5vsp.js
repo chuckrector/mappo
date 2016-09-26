@@ -1,7 +1,7 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V1_VSPANIM = require('./v1vspanim')
+const {T} = require(`../readFormat`)
+const V1_VSPANIM = require(`./v1vspanim`)
 
 module.exports = {
   version: T.u16,

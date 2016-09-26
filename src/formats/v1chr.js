@@ -1,6 +1,6 @@
 "use strict"
 
-const {T} = require('../readFormat')
+const {T} = require(`../readFormat`)
 
 module.exports = {
   // v1 chrs are 16x32 and can hold up to 30 frames. some contain

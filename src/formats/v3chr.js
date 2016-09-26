@@ -1,7 +1,7 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V3_CHRANIM = require('./v3chranim')
+const {T} = require(`../readFormat`)
+const V3_CHRANIM = require(`./v3chranim`)
 
 module.exports = {
   signature: T.u32,

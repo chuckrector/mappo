@@ -1,7 +1,7 @@
 "use strict"
 
-const {T} = require('../readFormat')
-const V1_ITEM = require('./v1item')
+const {T} = require(`../readFormat`)
+const V1_ITEM = require(`./v1item`)
 
 module.exports = {
   _: T.whitespace,
