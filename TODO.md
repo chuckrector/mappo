@@ -5,7 +5,6 @@
 - all cli accepting palettes as inputs should accept JSON palettes too
 - handle file read errors, e.g. file doesn't exist (`readFileSync`, etc.)
 - time for react/redux? ui updates getting complex. undo/redo may be easiest with redux
-- export to TMX so i can test-drive Tiled features more easily
 
 # TASKS
 
