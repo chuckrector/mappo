@@ -313,9 +313,11 @@ const getTilesetRows = ({tileset, containerWidth}) => {
   return roundedUpRows
 }
 
-const renderTileset = ({context, tileset, containerWidth}) => {
-  const tilesetColumns = getTilesetColumns({tileset, containerWidth})
-
+const renderTileset = ({
+  context,
+  tileset,
+  tilesetColumns,
+}) => {
   for (let tileIndex = 0; tileIndex < tileset.numTiles; tileIndex++) {
     const tileX = tileIndex % tilesetColumns
     const tileY = ~~(tileIndex / tilesetColumns)
@@ -337,11 +339,16 @@ const tick = () => {
   clearCanvas(tilesetHoveringTileCanvas)
 
   if (!mappoState.isLoading) {
+    const tileset = mappoState.tileset
+    const tileWidth = tileset.tileWidth
+    const tileHeight = tileset.tileHeight
+    const containerWidth = tilesetCanvasContainer.offsetWidth
+
     mappoState.map.mapLayerOrder.forEach(layerIndex => {
       const tileLayer = mappoState.map.tileLayers[layerIndex]
       if (!tileLayer.isHidden) {
         renderLayer({
-          tileset: mappoState.tileset,
+          tileset,
           layer: tileLayer,
           x: mappoState.cameraX * tileLayer.parallax.x,
           y: mappoState.cameraY * tileLayer.parallax.y,
@@ -353,32 +360,32 @@ const tick = () => {
     if (hoverCanvasCoord) {
       renderTileHighlightInvertedOutline({
         context,
-        x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % mappoState.tileset.tileWidth),
-        y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % mappoState.tileset.tileHeight),
-        width: mappoState.tileset.tileWidth,
-        height: mappoState.tileset.tileHeight,
+        x: hoverCanvasCoord.x - ((~~mappoState.cameraX + hoverCanvasCoord.x) % tileWidth),
+        y: hoverCanvasCoord.y - ((~~mappoState.cameraY + hoverCanvasCoord.y) % tileHeight),
+        width: tileWidth,
+        height: tileHeight,
       })
     }
 
     renderTileset({
       context: tilesetContext,
       tileset: mappoState.tileset,
-      containerWidth: tilesetCanvasContainer.offsetWidth,
+      tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
     renderTileHighlightInvertedSolid({
       context: tilesetContext,
-      x: mappoState.tilesetHoverTileX * mappoState.tileset.tileWidth,
-      y: mappoState.tilesetHoverTileY * mappoState.tileset.tileHeight,
-      width: mappoState.tileset.tileWidth,
-      height: mappoState.tileset.tileHeight,
+      x: mappoState.tilesetHoverTileX * tileWidth,
+      y: mappoState.tilesetHoverTileY * tileHeight,
+      width: tileWidth,
+      height: tileHeight,
     })
     renderTileHighlightColorOutline({
       context: tilesetContext,
-      x: mappoState.tilesetSelectedTileX * mappoState.tileset.tileWidth,
-      y: mappoState.tilesetSelectedTileY * mappoState.tileset.tileHeight,
+      x: mappoState.tilesetSelectedTileX * tileWidth,
+      y: mappoState.tilesetSelectedTileY * tileHeight,
       color: 'white',
-      width: mappoState.tileset.tileWidth,
-      height: mappoState.tileset.tileHeight,
+      width: tileWidth,
+      height: tileHeight,
     })
 
     renderTile({
