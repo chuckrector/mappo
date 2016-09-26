@@ -19,3 +19,49 @@ Output:
 ![alt text](/img/STAN.PCX.png?raw=true "a sample of pcx2png cli output")
 ![alt text](/img/VERGE1.PCX.png?raw=true "a sample of pcx2png cli output")
 ![alt text](/img/VERGE320.PCX.png?raw=true "a sample of pcx2png cli output")
+
+## map2tmx
+
+Converts any VERGE map into a Tiled TMX file. It is assumed that you have already generated a PNG file for the map's VSP (e.g. with `v3vsp2png` or similar).
+
+Usage:
+
+- `node src/cli/map2tmx.js data/v3/bumville2.map`
+
+Output:
+
+- `data/v3/bumville2.map.tmx`
+
+**Note:** Output here is abbreviated for readability.
+
+```xml
+<?xml version='1.0'?>
+<map version='1.0' orientation='orthogonal' width='150' height='250' tilewidth='16' tileheight='16'>
+    <tileset firstgid='1' name='grue0030.vsp' tilewidth='16' tileheight='16' spacing='0' margin='0' tilecount='1120' columns='20'>
+        <image source='grue0030.vsp.png' width='320' height='896'/>
+    </tileset>
+    <layer name='Background' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+    <layer name='Back Parallax' width='150' height='250'>
+        <data encoding='csv'>163,163,163,...</data>
+    </layer>
+    <layer name='Background Extra' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+    <layer name='Foreground' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+    <layer name='Foreground Extra' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+    <layer name='Switch Layer' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+    <layer name='Background Extra 2' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+    <layer name='Water' width='150' height='250'>
+        <data encoding='csv'>1,1,1,...</data>
+    </layer>
+</map>```
