@@ -181,12 +181,18 @@ const loadMap = mapFilename => {
   }
 }
 
-const renderLayer = (layer, x, y, transparent=false) => {
+const renderLayer = ({
+  tileset,
+  layer,
+  x,
+  y,
+  transparent=false,
+}) => {
   x = ~~x
   y = ~~y
 
-  const tileWidth = mappoState.tileset.tileWidth
-  const tileHeight = mappoState.tileset.tileHeight
+  const tileWidth = tileset.tileWidth
+  const tileHeight = tileset.tileHeight
   const tileStartX = Math.floor(x / tileWidth)
   const tileStartY = Math.floor(y / tileHeight)
   const subTileX = x % tileWidth
@@ -219,7 +225,7 @@ const renderLayer = (layer, x, y, transparent=false) => {
       if (tileIndex || !transparent) {
         renderTile({
           context,
-          tileset: mappoState.tileset,
+          tileset,
           tileIndex,
           x: pixelX,
           y: pixelY,
@@ -387,12 +393,13 @@ const tick = () => {
     mappoState.map.mapLayerOrder.forEach(layerIndex => {
       const tileLayer = mappoState.map.tileLayers[layerIndex]
       if (!tileLayer.isHidden) {
-        renderLayer(
-          tileLayer,
-          mappoState.cameraX * tileLayer.parallax.x,
-          mappoState.cameraY * tileLayer.parallax.y,
-          layerIndex > 0 // transparent
-        )
+        renderLayer({
+          tileset: mappoState.tileset,
+          layer: tileLayer,
+          x: mappoState.cameraX * tileLayer.parallax.x,
+          y: mappoState.cameraY * tileLayer.parallax.y,
+          transparent: layerIndex > 0,
+        })
       }
     })
 
