@@ -74,6 +74,7 @@ const defaultMappoState = {
   cameraScrollAmount: 1,
   keyPressed: {},
   mouseDown: false,
+  mouseInViewport: false,
   autoScroll: {},
 }
 let mappoState = Object.assign({}, defaultMappoState)
@@ -142,7 +143,6 @@ const keyboard = setupKeyboard({
   keyPressed: mappoState.keyPressed,
 })
 
-let mousein = false
 middlePanel.addEventListener('mousedown', event => {
   mappoState.mouseDown = true
 })
@@ -162,7 +162,7 @@ middlePanel.addEventListener('mousemove', event => {
   }
 
   mappoState.autoScroll = {}
-  if (mousein) {
+  if (mappoState.mouseInViewport) {
     mappoState.autoScroll = calcAutoScroll({
       scale,
       threshold: (mappoState.map.tileset.tileWidth + mappoState.map.tileset.tileHeight) / 2,
@@ -238,11 +238,11 @@ middlePanel.addEventListener('mouseup', event => {
 })
 
 middlePanel.addEventListener('mouseenter', event => {
-  mousein = true
+  mappoState.mouseInViewport = true
 })
 
 middlePanel.addEventListener('mouseout', event => {
-  mousein = false
+  mappoState.mouseInViewport = false
   mappoState.camera.move = {x: 0, y: 0}
   mappoState.autoScroll = {}
   mapLayerTileHighlightCoord = null
