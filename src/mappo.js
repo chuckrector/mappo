@@ -181,10 +181,6 @@ const loadMap = mapFilename => {
   }
 }
 
-const getTileIndex = (layer, tileX, tileY) => {
-  return layer.tileIndexGrid[(tileY * layer.width) + tileX]
-}
-
 const renderLayer = (layer, x, y, transparent=false) => {
   x = ~~x
   y = ~~y
@@ -218,7 +214,7 @@ const renderLayer = (layer, x, y, transparent=false) => {
     let pixelX = pixelStartX
     let tileX = tileStartX
     while (pixelX < pixelEndX) {
-      const tileIndex = getTileIndex(layer, tileX, tileY)
+      const tileIndex = layer.tileIndexGrid[(tileY * layer.width) + tileX]
 
       if (tileIndex || !transparent) {
         renderTile({
