@@ -1,10 +1,10 @@
 "use strict"
 
-const expect = require('expect')
-const createPcxLoader = require('./createPcxLoader')
-const filler = require('../filler')
-const palette = require('../dummyPalette')
-const {makeBuffer, B} = require('../makeBuffer')
+const expect = require(`expect`)
+const createPcxLoader = require(`./createPcxLoader`)
+const filler = require(`../filler`)
+const palette = require(`../dummyPalette`)
+const {makeBuffer, B} = require(`../makeBuffer`)
 
 const tileWidth = 4
 const tileHeight = 4

@@ -1,7 +1,7 @@
 "use strict"
 
-const expect = require('expect')
-const createVerge1EquipDatLoader = require('./createVerge1EquipDatLoader')
+const expect = require(`expect`)
+const createVerge1EquipDatLoader = require(`./createVerge1EquipDatLoader`)
 
 const equipDat = `
 3
@@ -45,7 +45,7 @@ EQABLE 3 4
 
   expect(data.numitems).toEqual(3)
   expect(data.equip).toEqual([{
-      comments: ['// Dagger'],
+      comments: [`// Dagger`],
       str: 9,
       end: 8,
       mag: 7,
@@ -59,11 +59,11 @@ EQABLE 3 4
       onequip: 99,
       ondeequip: 88,
     }, {
-      comments: ['// Short Sword'],
+      comments: [`// Short Sword`],
       str: 22,
       equipable: [1, 5],
     }, {
-      comments: ['// Wand'],
+      comments: [`// Wand`],
       str: 3,
       mag: 5,
       equipable: [3, 4],
