@@ -35,4 +35,5 @@ set -e
 "node src/cli/v3chr2pnglist.js data/v3/sully.chr" \
 "node src/cli/v3map2json.js data/v3/undersea.map" \
 "node src/cli/v3vsp2png.js data/v3/intro.vsp" \
-"node src/cli/v3vspob2png.js data/v3/HAHN01.VSP"
+"node src/cli/v3vspob2png.js data/v3/HAHN01.VSP" \
+"node src/cli/map2tmx.js data/v3/bumville.map"

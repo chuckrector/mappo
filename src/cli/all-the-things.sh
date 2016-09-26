@@ -32,4 +32,7 @@
 "src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2pnglist.js " \
 "src/cli/cli-all-x.sh data/v3 *.map src/cli/v3map2json.js " \
 "src/cli/cli-all-x.sh data/v3 *.vsp src/cli/v3vsp2png.js " \
-"src/cli/cli-all-x.sh data/v3 *.vsp src/cli/v3vspob2png.js"
+"src/cli/cli-all-x.sh data/v3 *.vsp src/cli/v3vspob2png.js" \
+"src/cli/cli-all-x.sh data/v1 *.map src/cli/map2tmx.js" \
+"src/cli/cli-all-x.sh data/v2 *.map src/cli/map2tmx.js" \
+"src/cli/cli-all-x.sh data/v3 *.map src/cli/map2tmx.js"
