@@ -73,6 +73,7 @@ const defaultMappoState = {
   },
   cameraScrollAmount: 1,
   keyPressed: {},
+  mouseDown: false,
   autoScroll: {},
 }
 let mappoState = Object.assign({}, defaultMappoState)
@@ -141,10 +142,9 @@ const keyboard = setupKeyboard({
   keyPressed: mappoState.keyPressed,
 })
 
-let mousedown = false
 let mousein = false
 middlePanel.addEventListener('mousedown', event => {
-  mousedown = true
+  mappoState.mouseDown = true
 })
 
 let mapLayerTileHighlightCoord = null
@@ -154,7 +154,7 @@ middlePanel.addEventListener('mousemove', event => {
   }
 
   const scale = getScale()
-  if (mousedown) {
+  if (mappoState.mouseDown) {
     moveCamera(
       -event.movementX / scale,
       -event.movementY / scale
@@ -234,7 +234,7 @@ tilesetCanvasContainer.addEventListener('click', event => {
 })
 
 middlePanel.addEventListener('mouseup', event => {
-  mousedown = false
+  mappoState.mouseDown = false
 })
 
 middlePanel.addEventListener('mouseenter', event => {
