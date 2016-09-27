@@ -17,7 +17,7 @@ const plotTile = ({map, layerIndex, x, y, tileIndex}) => {
 }
 
 module.exports = (state={}, action) => {
-  const newState = cloneDeep(state)
+  const newState = state
 
   const addUndo = info => {
     if (!newState.undo) {

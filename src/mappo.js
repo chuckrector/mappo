@@ -134,6 +134,7 @@ const refreshMapLayerList = () => {
         layer.isHidden = !layer.isHidden
       }
       globalMappoState.mapLayerSelected = layer
+      globalMappoState.mapLayerSelectedIndex = store.getState().map.tileLayers.indexOf(layer)
       const layerListItems = document.querySelectorAll(`.layer-list .layer-list-item`)
       layerListItems.forEach(layerListItem => {
         layerListItem.classList.remove(`selected`)
@@ -151,6 +152,38 @@ const keyboard = setupKeyboard({
 
 middlePanel.addEventListener(`mousedown`, event => {
   globalMappoState.mouseDown = true
+})
+
+middlePanel.addEventListener(`click`, event => {
+  if (globalMappoState.isLoading) {
+    return
+  }
+
+  const tilesetTileSelected = globalMappoState.tilesetTileSelected
+  const mapLayerSelected = globalMappoState.mapLayerSelected
+  if (tilesetTileSelected && mapLayerSelected) {
+    const scale = getScale()
+    const tileWidth = store.getState().map.tileset.tileWidth
+    const tileHeight = store.getState().map.tileset.tileHeight
+    const scaleX = ~~(event.offsetX / scale)
+    const scaleY = ~~(event.offsetY / scale)
+    const parallaxX = ~~(globalMappoState.camera.x * mapLayerSelected.parallax.x)
+    const parallaxY = ~~(globalMappoState.camera.y * mapLayerSelected.parallax.y)
+    const pixelX = scaleX - ((parallaxX + scaleX) % tileWidth)
+    const pixelY = scaleY - ((parallaxY + scaleY) % tileHeight)
+    const tileX = ~~((globalMappoState.camera.x + pixelX) / tileWidth)
+    const tileY = ~~((globalMappoState.camera.y + pixelY) / tileHeight)
+
+    store.dispatch({
+      type: `PLOT_TILE`,
+      layerIndex: globalMappoState.mapLayerSelectedIndex,
+      x: tileX,
+      y: tileY,
+      tileIndex: tilesetTileSelected.tileIndex,
+    })
+  } else {
+    console.log(`*warning* no tile selected, not plotting anything...`)
+  }
 })
 
 middlePanel.addEventListener(`mousemove`, event => {
