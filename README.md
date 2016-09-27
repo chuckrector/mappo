@@ -107,7 +107,7 @@ What does support mean? Currently, at least one loader. Optionally, one or more 
 
 Tool | Description
 --- | ---
-[map2tmx](https://github.com/chuckrector/mappo/tree/master/doc#user-content-map2tmx) | Convert any VERGE map to [Tiled](http://www.mapeditor.org/) .TMX
+[map2tmx](https://github.com/chuckrector/mappo/tree/master/doc#user-content-map2tmx) | Convert any VERGE map to [Tiled](http://www.mapeditor.org/) `.TMX`
 [pcx2png](https://github.com/chuckrector/mappo/tree/master/doc#user-content-pcx2png) | Convert any PCX image to 32-bit PNG
 [v1boxraw2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1boxraw2png) | Convert VERGE1 `BOX.RAW` to 32-bit PNG
 [v1chr2gif](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2gif) | Convert VERGE1 character animation frames to animated GIF
