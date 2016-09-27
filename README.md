@@ -47,8 +47,8 @@ Click any V1/V2/V3 map to load it | ✅
 Save maps | 😭
 Auto-save | 😭
 Tile selector | ✅
-Plot tiles | 🛠
-Undo/redo | 🛠
+Plot tiles | 💥🛠💥
+Undo/redo | 💥🛠💥
 Fill region with tiles | 😭
 Auto-tiling | 😭
 Draw map layers in correct order | ✅
