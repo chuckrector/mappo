@@ -282,6 +282,8 @@ const tick = () => {
       const tileLayer = mappoState.map.tileLayers[layerIndex]
       if (!tileLayer.isHidden) {
         renderLayer({
+          context,
+          canvas,
           tileset,
           layer: tileLayer,
           x: mappoState.camera.x * tileLayer.parallax.x,
