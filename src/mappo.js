@@ -160,10 +160,12 @@ middlePanel.addEventListener(`mousemove`, event => {
 
   const scale = getScale()
   if (globalMappoState.mouseDown) {
-    moveCamera(
-      -event.movementX / scale,
-      -event.movementY / scale
-    )
+    if (keyboard.isPressed(`altKey`)) {
+      moveCamera(
+        -event.movementX / scale,
+        -event.movementY / scale
+      )
+    }
   }
 
   globalMappoState.autoScroll = {}

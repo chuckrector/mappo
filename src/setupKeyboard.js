@@ -2,6 +2,7 @@
 
 module.exports = ({addEventListener, keyPressed}) => {
   const keyboard = {
+    KEYCODE_SHIFT: 16,
     KEYCODE_UP: 38,
     KEYCODE_DOWN: 40,
     KEYCODE_LEFT: 37,
