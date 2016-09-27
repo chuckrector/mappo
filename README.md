@@ -39,6 +39,7 @@ Emoji | What does it mean?
 ✅ | I did it!
 😭 | I didn't do it yet.
 🛠 | I'm working on it!
+💥 | I've done some parts of it.
 
 Feature | Implemented?
 --- |:---:
