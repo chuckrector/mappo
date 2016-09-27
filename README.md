@@ -2,7 +2,7 @@
 
 ![alt text](/img/wip/mappo-wip-tileset-selected-and-hovering-tiles.png?raw=true "mappo work-in-progress screenshot of recently implemented display of which tile is currently selected and being hovered over in the tileset")
 
-Mappo is a *work in progress* 2D tile map editor for retro games. Currently, only [VERGE](http://verge-rpg.com/) file formats are supported for loading. A comprehensive set of command-line tools for loading and exporting all VERGE file formats (to PNG/GIF/JSON) are included. One of these can export any VERGE map to a [Tiled](http://www.mapeditor.org/) `.TMX` file.
+Mappo is a *work in progress* 2D tile map editor for retro games. Currently, only [VERGE](http://verge-rpg.com/) file formats are supported for loading. A comprehensive set of command-line tools for loading and exporting all VERGE file formats (to PNG/GIF/JSON) are included. [One of these](https://github.com/chuckrector/mappo/tree/master/doc#user-content-map2tmx) can export any VERGE map to a [Tiled](http://www.mapeditor.org/) `.TMX` file.
 
 # Why?
 
