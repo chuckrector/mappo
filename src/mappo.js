@@ -22,6 +22,8 @@ const createCheckerboardPattern = require(`./createCheckerboardPattern`)
 const calcAutoScroll = require(`./calcAutoScroll`)
 const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
+const createStore = require(`./createStore`)
+const mappoState = require(`./mappoState`)
 
 // DOM REFERENCES
 const pageTitle = document.querySelector(`title`)
@@ -42,6 +44,8 @@ const middlePanel = document.querySelector(`.middle-panel`)
 
 const checkerboardPattern = createCheckerboardPattern({document})
 
+const store = createStore(mappoState)
+
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
 const mapGlob = `**/*.map`
@@ -58,7 +62,6 @@ const DEFAULT_SCALE_INDEX = 4
 const defaultGlobalMappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
-  map: null,
   mapLayerOrder: null,
   mapLayerSelected: null,
   mapLayerTileHighlightCoord: null,
@@ -92,18 +95,19 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     globalMappoState = cloneDeep(defaultGlobalMappoState)
     globalMappoState.isLoading = true
 
-    globalMappoState.map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
+    const map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
+    store.dispatch({type: `SET_MAP`, map})
 
-    globalMappoState.mapLayerSelected = globalMappoState.map.tileLayers[globalMappoState.map.mapLayerOrder[0]]
+    globalMappoState.mapLayerSelected = store.getState().map.tileLayers[store.getState().map.mapLayerOrder[0]]
     refreshMapLayerList()
 
-    tilesetSelectedTileCanvas.width = globalMappoState.map.tileset.tileWidth
-    tilesetSelectedTileCanvas.height = globalMappoState.map.tileset.tileHeight
-    tilesetHoveringTileCanvas.width = globalMappoState.map.tileset.tileWidth
-    tilesetHoveringTileCanvas.height = globalMappoState.map.tileset.tileHeight
+    tilesetSelectedTileCanvas.width = store.getState().map.tileset.tileWidth
+    tilesetSelectedTileCanvas.height = store.getState().map.tileset.tileHeight
+    tilesetHoveringTileCanvas.width = store.getState().map.tileset.tileWidth
+    tilesetHoveringTileCanvas.height = store.getState().map.tileset.tileHeight
 
     // TODO(chuck): shorten this crazy chain
-    globalMappoState.map.tileset.imageBitmapPromise.then(() => {
+    store.getState().map.tileset.imageBitmapPromise.then(() => {
       globalMappoState.isLoading = false
       resizeCanvas()
     })
@@ -115,7 +119,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 const refreshMapLayerList = () => {
   layerList.innerHTML = ``
-  globalMappoState.map.tileLayers.forEach((layer, index) => {
+  store.getState().map.tileLayers.forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
@@ -166,7 +170,7 @@ middlePanel.addEventListener(`mousemove`, event => {
   if (globalMappoState.mouseInViewport) {
     globalMappoState.autoScroll = calcAutoScroll({
       scale,
-      threshold: (globalMappoState.map.tileset.tileWidth + globalMappoState.map.tileset.tileHeight) / 2,
+      threshold: (store.getState().map.tileset.tileWidth + store.getState().map.tileset.tileHeight) / 2,
       cursorX: event.offsetX,
       cursorY: event.offsetY,
       viewportWidth: middlePanel.offsetWidth,
@@ -176,8 +180,8 @@ middlePanel.addEventListener(`mousemove`, event => {
 
   const mapLayerSelected = globalMappoState.mapLayerSelected
   if (mapLayerSelected) {
-    const tileWidth = globalMappoState.map.tileset.tileWidth
-    const tileHeight = globalMappoState.map.tileset.tileHeight
+    const tileWidth = store.getState().map.tileset.tileWidth
+    const tileHeight = store.getState().map.tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
     const scaleY = ~~(event.offsetY / scale)
     const parallaxX = ~~(globalMappoState.camera.x * mapLayerSelected.parallax.x)
@@ -213,8 +217,8 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
     return
   }
 
-  globalMappoState.map.tilesetTileHovering = getTileCoordAndIndex({
-    tileset: globalMappoState.map.tileset,
+  store.getState().map.tilesetTileHovering = getTileCoordAndIndex({
+    tileset: store.getState().map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -227,7 +231,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
   }
 
   globalMappoState.tilesetTileSelected = getTileCoordAndIndex({
-    tileset: globalMappoState.map.tileset,
+    tileset: store.getState().map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -251,8 +255,8 @@ middlePanel.addEventListener(`mouseout`, event => {
 })
 
 const moveCamera = (moveX, moveY) => {
-  globalMappoState.camera.x = clamp(globalMappoState.camera.x + moveX, 0, (globalMappoState.map.tileLayers[0].width * globalMappoState.map.tileset.tileWidth) - canvas.width)
-  globalMappoState.camera.y = clamp(globalMappoState.camera.y + moveY, 0, (globalMappoState.map.tileLayers[0].height * globalMappoState.map.tileset.tileHeight) - canvas.height)
+  globalMappoState.camera.x = clamp(globalMappoState.camera.x + moveX, 0, (store.getState().map.tileLayers[0].width * store.getState().map.tileset.tileWidth) - canvas.width)
+  globalMappoState.camera.y = clamp(globalMappoState.camera.y + moveY, 0, (store.getState().map.tileLayers[0].height * store.getState().map.tileset.tileHeight) - canvas.height)
 }
 
 const getTilesetColumns = ({tileset, containerWidth}) => {
@@ -273,13 +277,13 @@ const tick = () => {
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
   if (!globalMappoState.isLoading) {
-    const tileset = globalMappoState.map.tileset
+    const tileset = store.getState().map.tileset
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
     const containerWidth = tilesetCanvasContainer.offsetWidth
 
-    globalMappoState.map.mapLayerOrder.forEach(layerIndex => {
-      const tileLayer = globalMappoState.map.tileLayers[layerIndex]
+    store.getState().map.mapLayerOrder.forEach(layerIndex => {
+      const tileLayer = store.getState().map.tileLayers[layerIndex]
       if (!tileLayer.isHidden) {
         renderLayer({
           context,
@@ -305,27 +309,27 @@ const tick = () => {
 
     renderTileset({
       context: tilesetContext,
-      tileset: globalMappoState.map.tileset,
+      tileset: store.getState().map.tileset,
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
-    if (globalMappoState.map.tilesetTileHovering) {
+    if (store.getState().map.tilesetTileHovering) {
       renderTileHighlightInvertedSolid({
         context: tilesetContext,
-        x: globalMappoState.map.tilesetTileHovering.tileX * tileWidth,
-        y: globalMappoState.map.tilesetTileHovering.tileY * tileHeight,
+        x: store.getState().map.tilesetTileHovering.tileX * tileWidth,
+        y: store.getState().map.tilesetTileHovering.tileY * tileHeight,
         width: tileWidth,
         height: tileHeight,
       })
       renderTile({
         context: tilesetHoveringTileContext,
-        tileset: globalMappoState.map.tileset,
-        tileIndex: globalMappoState.map.tilesetTileHovering.tileIndex,
+        tileset: store.getState().map.tileset,
+        tileIndex: store.getState().map.tilesetTileHovering.tileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetHoveringTileIndex.innerText = globalMappoState.map.tilesetTileHovering.tileIndex
+      tilesetHoveringTileIndex.innerText = store.getState().map.tilesetTileHovering.tileIndex
     }
 
     if (globalMappoState.tilesetTileSelected) {
@@ -339,7 +343,7 @@ const tick = () => {
       })
       renderTile({
         context: tilesetSelectedTileContext,
-        tileset: globalMappoState.map.tileset,
+        tileset: store.getState().map.tileset,
         tileIndex: globalMappoState.tilesetTileSelected.tileIndex,
         x: 0,
         y: 0,
@@ -392,7 +396,7 @@ const resizeCanvas = () => {
 
   if (!globalMappoState.isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
-    const tileset = globalMappoState.map.tileset
+    const tileset = store.getState().map.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
     tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
     tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + `px`
