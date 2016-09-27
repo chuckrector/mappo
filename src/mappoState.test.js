@@ -10,14 +10,15 @@ const mappoState = require(`./mappoState`)
   const store = createStore(mappoState)
   expect(store.getState()).toEqual({})
 
-  store.dispatch({type: `SET_MAP`, tileLayers: []})
+  store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
   expect(store.getState().map).toEqual({tileLayers: []})
 }
 
 {
   // can undo set map
   const store = createStore(mappoState)
-  store.dispatch({type: `SET_MAP`, tileLayers: [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]})
+  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
+  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
   store.dispatch({type: `UNDO`})
   expect(store.getState().map).toBe(undefined)
 }
@@ -26,7 +27,8 @@ const mappoState = require(`./mappoState`)
   // can plot a tile
   const store = createStore(mappoState)
 
-  store.dispatch({type: `SET_MAP`, tileLayers: [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]})
+  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
+  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
 
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, layerIndex: 0, tileIndex: 99})
@@ -37,7 +39,8 @@ const mappoState = require(`./mappoState`)
   // can undo a plotted tile
   const store = createStore(mappoState)
 
-  store.dispatch({type: `SET_MAP`, tileLayers: [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]})
+  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
+  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
 
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, layerIndex: 0, tileIndex: 99})
