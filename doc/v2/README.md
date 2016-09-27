@@ -6,7 +6,7 @@
 
 Usage:
 
-- `node src/cli/v2chr2gif.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
+- `node src/cli/v2chr2gif.js data/v1/VERGE.PAL data/v2/VECNA.CHR`
 
 Output:
 
@@ -98,7 +98,7 @@ Output:
 
 Usage:
 
-- `node src/cli/v2chr2json.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
+- `node src/cli/v2chr2json.js data/v1/VERGE.PAL data/v2/VECNA.CHR`
 
 Output:
 
@@ -138,13 +138,13 @@ Output:
 
 ## v2chr2png
 
-See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
+See `v2vsp2pal` for details on how to generate `VERGE.PAL`.
 
 **Support:** VERGE2 only (WxH, N tiles, 5 columns)
 
 Usage:
 
-- `node src/cli/v2chr2png.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
+- `node src/cli/v2chr2png.js data/v1/VERGE.PAL data/v2/VECNA.CHR`
 
 Output:
 
@@ -160,13 +160,13 @@ Output:
 
 ## v2chr2pnglist
 
-See `v2vsp2pal` for details on how to generate `VERGE2.PAL`.
+See `v2vsp2pal` for details on how to generate `VERGE.PAL`.
 
 **Support:** VERGE2 only (WxH, N tiles, 5 columns)
 
 Usage:
 
-- `node src/cli/v2chr2pnglist.js data/v2/VERGE2.PAL data/v2/VECNA.CHR`
+- `node src/cli/v2chr2pnglist.js data/v1/VERGE.PAL data/v2/VECNA.CHR`
 
 Output:
 
@@ -330,9 +330,7 @@ Output:
 
 ## v2vsp2pal
 
-This is a temporary helper for `v2chr2png`.
-
-**Support:** VERGE2 only
+This is a helper for `v2chr2png`.
 
 Usage:
 
@@ -340,7 +338,7 @@ Usage:
 
 Output:
 
-- `VERGE2.PAL`
+- `VERGE.PAL`
 
 ## v2vsp2png
 

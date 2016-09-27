@@ -86,11 +86,11 @@ Tool | Description
 [map2tmx](https://github.com/chuckrector/mappo/tree/master/doc#user-content-map2tmx) | Convert any VERGE map to [Tiled](http://www.mapeditor.org/) .TMX
 [pcx2png](https://github.com/chuckrector/mappo/tree/master/doc#user-content-pcx2png) | Convert any PCX image to 32-bit PNG
 [v1boxraw2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1boxraw2png) | Convert VERGE1 `BOX.RAW` to 32-bit PNG
-[v1chr2gif](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2gif) | Convert VERGE1 `.CHR` to animated GIF
-[v1chr2json](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2json) | Convert VERGE1 `.CHR` to JSON
-[v1chr2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2png) | Convert VERGE1 `.CHR` frames to a single 32-bit PNG sprite sheet
-[v1chr2pnglist](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2pnglist) | Convert VERGE1 `.CHR` frames to individual 32-bit PNG images
-[v1cr22png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1cr22png) | Convert VERGE1 `.CR2` to 32-bit PNG
+[v1chr2gif](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2gif) | Convert VERGE1 character animation frames to animated GIF
+[v1chr2json](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2json) | Convert VERGE1 character animation data to JSON
+[v1chr2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2png) | Convert VERGE1 character animation frames to a single 32-bit PNG sprite sheet
+[v1chr2pnglist](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1chr2pnglist) | Convert VERGE1 character animation frames to individual 32-bit PNG images
+[v1cr22png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1cr22png) | Convert VERGE1 character portrait cels to 32-bit PNG
 [v1equipdat2json](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1equipdat2json) | Convert VERGE1 `EQUIP.DAT` to JSON
 [v1itemicondat2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1itemicondat2png) | Convert VERGE1 `ITEMICON.DAT` to a single 32-bit PNG sprite sheet
 [v1itemsdat2json](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1itemsdat2json) | Convert VERGE1 `ITEMS.DAT` to JSON
@@ -102,6 +102,17 @@ Tool | Description
 [v1speechspc2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1speechspc2png) | Convert VERGE1 `SPEECH.SPC` cels to a single 32-bit PNG sprite sheet
 [v1transtbl2json](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1transtbl2json) | Convert VERGE1 `TRANS.TBL` to JSON
 [v1vsp2png](https://github.com/chuckrector/mappo/tree/master/doc/v1#user-content-v1vsp2png) | Convert VERGE1 tileset to a single 32-bit PNG sprite sheet
+[v2chr2gif](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2chr2gif) | Convert VERGE2 character animation frames to animated GIF
+[v2chr2json](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2chr2json) | Convert VERGE2 character animation frame data to JSON
+[v2chr2png](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2chr2png) | Convert VERGE2 character animation frames to a single 32-bit PNG sprite sheet
+[v2chr2pnglist](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2chr2pnglist) | Convert VERGE2 character animation frames to individual 32-bit PNG images
+[v2kjchr2gif](https://github.com/chuckrector/mappo/tree/master/doc/v2kj#user-content-v2kjchr2gif) | Convert VERGE2k+j character animation frames to a single 32-bit PNG sprite sheet
+[v2kjchr2json](https://github.com/chuckrector/mappo/tree/master/doc/v2kj#user-content-v2kjchr2json) | Convert VERGE2k+j character animation frame data to JSON
+[v2kjchr2png](https://github.com/chuckrector/mappo/tree/master/doc/v2kj#user-content-v2kjchr2png) | Convert VERGE2k+j character animation frames to a single 32-bit PNG sprite sheet
+[v2kjchr2pnglist](https://github.com/chuckrector/mappo/tree/master/doc/v2kj#user-content-v2kjchr2pnglist) | Convert VERGE2k+j character animation frames to individual 32-bit PNG images
+[v2map2json](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2map2json) | Convert VERGE2 map to JSON
+[v2vsp2pal](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2vsp2pal) | Convert VERGE2 tileset palette to `VERGE.PAL`
+[v2vsp2png](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2vsp2png) | Convert VERGE2 tileset to a single 32-bit PNG sprite sheet
 
 # Supported File Formats
 
