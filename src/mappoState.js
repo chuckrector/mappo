@@ -2,6 +2,20 @@
 
 const cloneDeep = require(`lodash/clonedeep`)
 
+const plotTile = ({map, layerIndex, x, y, tileIndex}) => {
+  const layer = map.tileLayers[layerIndex]
+  const layerOffset = (y * layer.width) + x
+  const overwrittenTileIndex = layer.tileIndexGrid[layerOffset]
+
+  layer.tileIndexGrid = [
+    ...layer.tileIndexGrid.slice(0, layerOffset),
+    tileIndex,
+    ...layer.tileIndexGrid.slice(layerOffset + 1),
+  ]
+
+  return overwrittenTileIndex
+}
+
 module.exports = (state={}, action) => {
   const newState = cloneDeep(state)
 
@@ -28,15 +42,13 @@ module.exports = (state={}, action) => {
     } break
 
     case `PLOT_TILE`: {
-      const layer = newState.map.tileLayers[action.layerIndex]
-      const layerOffset = (action.y * layer.width) + action.x
-      const overwrittenTileIndex = layer.tileIndexGrid[layerOffset]
-
-      layer.tileIndexGrid = [
-        ...layer.tileIndexGrid.slice(0, layerOffset),
-        action.tileIndex,
-        ...layer.tileIndexGrid.slice(layerOffset + 1),
-      ]
+      const overwrittenTileIndex = plotTile({
+        map: newState.map,
+        layerIndex: action.layerIndex,
+        x: action.x,
+        y: action.y,
+        tileIndex: action.tileIndex,
+      })
 
       addUndo({overwrittenTileIndex})
 
@@ -56,13 +68,13 @@ module.exports = (state={}, action) => {
         } break
 
         case `PLOT_TILE`: {
-          const layer = newState.map.tileLayers[undoInfo.originalAction.layerIndex]
-          const layerOffset = (undoInfo.originalAction.y * layer.width) + undoInfo.originalAction.x
-          layer.tileIndexGrid = [
-            ...layer.tileIndexGrid.slice(0, layerOffset),
-            undoInfo.overwrittenTileIndex,
-            ...layer.tileIndexGrid.slice(layerOffset + 1),
-          ]
+          plotTile({
+            map: newState.map,
+            layerIndex: undoInfo.originalAction.layerIndex,
+            x: undoInfo.originalAction.x,
+            y: undoInfo.originalAction.y,
+            tileIndex: undoInfo.overwrittenTileIndex,
+          })
         } break
       }
 
