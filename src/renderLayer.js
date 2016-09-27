@@ -1,6 +1,10 @@
 "use strict"
 
+const renderTile = require(`./renderTile`)
+
 module.exports = ({
+  context,
+  canvas,
   tileset,
   layer,
   x,
