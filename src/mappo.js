@@ -244,6 +244,7 @@ middlePanel.addEventListener(`mouseenter`, event => {
 
 middlePanel.addEventListener(`mouseout`, event => {
   mappoState.mouseInViewport = false
+  mappoState.mouseDown = false
   mappoState.camera.move = {x: 0, y: 0}
   mappoState.autoScroll = {}
   mappoState.mapLayerTileHighlightCoord = null
