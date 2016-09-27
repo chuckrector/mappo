@@ -28,6 +28,7 @@ const mappoState = require(`./mappoState`)
 // DOM REFERENCES
 const pageTitle = document.querySelector(`title`)
 const mapList = document.querySelector(`.map-list`)
+const undoList = document.querySelector(`.undo-list`)
 const layerList = document.querySelector(`.layer-list`)
 const canvas = document.querySelector(`.mappo-viewport`)
 const context = canvas.getContext(`2d`)
@@ -45,6 +46,34 @@ const middlePanel = document.querySelector(`.middle-panel`)
 const checkerboardPattern = createCheckerboardPattern({document})
 
 const store = createStore(mappoState)
+
+const refreshUndoList = () => {
+  undoList.innerHTML = ``
+
+  const undo = store.getState().undo
+  for (let index = undo.length - 1; index >= 0; index--) {
+    const undoInfo = undo[index]
+    const action = undoInfo.originalAction
+
+    let description = action.type
+    switch (action.type) {
+      case `SET_MAP`: {
+        description += ` ${action.map.tileLayers[0].width}x${action.map.tileLayers[0].height}`
+      } break
+
+      case `PLOT_TILE`: {
+        description += ` ${action.layerIndex},(${action.x},${action.y}),${action.tileIndex}`
+      } break
+    }
+
+    const li = document.createElement(`li`)
+    li.innerText = description
+    li.classList.add(`undo-list-item`)
+    undoList.appendChild(li)
+  }
+}
+
+store.subscribe(refreshUndoList)
 
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
