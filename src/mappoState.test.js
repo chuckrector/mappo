@@ -15,6 +15,16 @@ const mappoState = require(`./mappoState`)
 }
 
 {
+  // SET_MAP holds a direct reference to the map
+  const store = createStore(mappoState)
+  expect(store.getState()).toEqual({})
+
+  const map = {tileLayers: []}
+  store.dispatch({type: `SET_MAP`, map})
+  expect(store.getState().map).toBe(map)
+}
+
+{
   // can undo set map
   const store = createStore(mappoState)
   const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]

@@ -34,7 +34,7 @@ module.exports = (state={}, action) => {
     case `SET_MAP`: {
       const prevMap = newState.map
 
-      newState.map = cloneDeep(action.map)
+      newState.map = action.map
 
       addUndo({prevMap})
 
