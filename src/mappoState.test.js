@@ -8,12 +8,18 @@ const mappoState = require(`./mappoState`)
 {
   // can set map
   const store = createStore(mappoState)
-
   expect(store.getState()).toEqual({})
 
   store.dispatch({type: `SET_MAP`, tileLayers: []})
+  expect(store.getState().map).toEqual({tileLayers: []})
+}
 
-  expect(store.getState()).toEqual({map: {tileLayers: []}})
+{
+  // can undo set map
+  const store = createStore(mappoState)
+  store.dispatch({type: `SET_MAP`, tileLayers: [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]})
+  store.dispatch({type: `UNDO`})
+  expect(store.getState().map).toBe(undefined)
 }
 
 {

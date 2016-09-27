@@ -2,21 +2,32 @@
 
 const cloneDeep = require(`lodash/clonedeep`)
 
-const undo = []
-let undoCursor = 0
-
 module.exports = (state={}, action) => {
+  const newState = cloneDeep(state)
+
+  const addUndo = info => {
+    if (!newState.undo) {
+      newState.undo = []
+      newState.undoCursor = 0
+    }
+
+    const undoState = Object.assign({}, {originalAction: cloneDeep(action)}, info)
+    newState.undo.push(undoState)
+    newState.undoCursor++
+  }
+
   switch (action.type) {
     case `SET_MAP`: {
-      return {
-        map: {
-          tileLayers: action.tileLayers,
-        }
-      }
+      const prevMap = newState.map
+
+      newState.map = {tileLayers: action.tileLayers}
+
+      addUndo({prevMap})
+
+      return newState
     } break
 
     case `PLOT_TILE`: {
-      const newState = cloneDeep(state)
       const layer = newState.map.tileLayers[action.layerIndex]
       const layerOffset = (action.y * layer.width) + action.x
       const overwrittenTileIndex = layer.tileIndexGrid[layerOffset]
@@ -27,26 +38,33 @@ module.exports = (state={}, action) => {
         ...layer.tileIndexGrid.slice(layerOffset + 1),
       ]
 
-      undo.push({
-        originalAction: cloneDeep(action),
-        overwrittenTileIndex,
-      })
-      undoCursor++
+      addUndo({overwrittenTileIndex})
 
       return newState
     }
 
     case `UNDO`: {
-      const undoInfo = undo[--undoCursor]
-      const newState = cloneDeep(state)
-      const layer = newState.map.tileLayers[undoInfo.originalAction.layerIndex]
-      const layerOffset = (undoInfo.originalAction.y * layer.width) + undoInfo.originalAction.x
+      const undoInfo = state.undo[--state.undoCursor]
 
-      layer.tileIndexGrid = [
-        ...layer.tileIndexGrid.slice(0, layerOffset),
-        undoInfo.overwrittenTileIndex,
-        ...layer.tileIndexGrid.slice(layerOffset + 1),
-      ]
+      switch (undoInfo.originalAction.type) {
+        case `SET_MAP`: {
+          if (undoInfo.prevMap) {
+            newState.map = undoInfo.prevMap
+          } else {
+            delete newState.map
+          }
+        } break
+
+        case `PLOT_TILE`: {
+          const layer = newState.map.tileLayers[undoInfo.originalAction.layerIndex]
+          const layerOffset = (undoInfo.originalAction.y * layer.width) + undoInfo.originalAction.x
+          layer.tileIndexGrid = [
+            ...layer.tileIndexGrid.slice(0, layerOffset),
+            undoInfo.overwrittenTileIndex,
+            ...layer.tileIndexGrid.slice(layerOffset + 1),
+          ]
+        } break
+      }
 
       return newState
     } break
