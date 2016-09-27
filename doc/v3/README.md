@@ -252,6 +252,8 @@ Output:
 
 ## v3vsp2png
 
+Converts a VERGE3 tileset to a single 32-bit PNG sprite sheet.
+
 **Support:** VERGE3 only (16x16, N tiles, 20 columns)
 
 Usage:
