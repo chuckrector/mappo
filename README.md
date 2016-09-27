@@ -28,6 +28,30 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 3. npm install
 4. npm start
 
+# Supported File Formats
+
+ | VERGE1 | VERGE2 | VERGE2k+j | VERGE3
+--- |:---:|:---:|:---:|:---:
+PCX          | ✅ | ✅ | ✅ | ✅
+BOX.RAW      | ✅ | n/a | n/a | n/a
+CHR          | ✅ | ✅ | ✅ | ✅
+CR2          | ✅ | n/a | n/a | n/a
+EQUIP.DAT    | ✅ | n/a | n/a | n/a
+ITEMICON.DAT | ✅ | n/a | n/a | n/a
+ITEMS.DAT    | ✅ | n/a | n/a | n/a
+MAIN.FNT     | ✅ | n/a | n/a | n/a
+MAP          | ✅ | ✅ | ✅ | ✅
+MISCICON.DAT | ✅ | n/a | n/a | n/a
+PAL          | ✅ | n/a | n/a | n/a
+PARTY.DAT    | ✅ | n/a | n/a | n/a
+SMALL.FNT    | ✅ | n/a | n/a | n/a
+SPEECH.SPC   | ✅ | n/a | n/a | n/a
+TRANS.TBL    | ✅ | ✅ | ✅ | n/a
+VSP          | ✅ | ✅ | 😭 | ✅
+VC           | 😭 | 😭 | 😭 | 😭
+VCS          | 😭 | 😭 | 😭 | n/a
+save games   | 😭 | n/a | n/a | n/a
+
 # Planned Features
 
 [CHANGELOG](https://github.com/chuckrector/mappo/blob/master/CHANGELOG.md)
@@ -120,27 +144,3 @@ Tool | Description
 [v3map2json](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3map2json) | Convert VERGE3 map to JSON
 [v3vsp2png](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3vsp2png) | Convert VERGE3 tileset to a single 32-bit PNG sprite sheet
 [v3vspob2png](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3vspob2png) | Convert VERGE3 tile obstruction types to a single 32-bit PNG sprite sheet
-
-# Supported File Formats
-
- | VERGE1 | VERGE2 | VERGE2k+j | VERGE3
---- |:---:|:---:|:---:|:---:
-PCX          | ✅ | ✅ | ✅ | ✅
-BOX.RAW      | ✅ | n/a | n/a | n/a
-CHR          | ✅ | ✅ | ✅ | ✅
-CR2          | ✅ | n/a | n/a | n/a
-EQUIP.DAT    | ✅ | n/a | n/a | n/a
-ITEMICON.DAT | ✅ | n/a | n/a | n/a
-ITEMS.DAT    | ✅ | n/a | n/a | n/a
-MAIN.FNT     | ✅ | n/a | n/a | n/a
-MAP          | ✅ | ✅ | ✅ | ✅
-MISCICON.DAT | ✅ | n/a | n/a | n/a
-PAL          | ✅ | n/a | n/a | n/a
-PARTY.DAT    | ✅ | n/a | n/a | n/a
-SMALL.FNT    | ✅ | n/a | n/a | n/a
-SPEECH.SPC   | ✅ | n/a | n/a | n/a
-TRANS.TBL    | ✅ | ✅ | ✅ | n/a
-VSP          | ✅ | ✅ | 😭 | ✅
-VC           | 😭 | 😭 | 😭 | 😭
-VCS          | 😭 | 😭 | 😭 | n/a
-save games   | 😭 | n/a | n/a | n/a
