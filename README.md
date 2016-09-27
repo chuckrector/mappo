@@ -113,6 +113,13 @@ Tool | Description
 [v2map2json](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2map2json) | Convert VERGE2 map to JSON
 [v2vsp2pal](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2vsp2pal) | Convert VERGE2 tileset palette to `VERGE.PAL`
 [v2vsp2png](https://github.com/chuckrector/mappo/tree/master/doc/v2#user-content-v2vsp2png) | Convert VERGE2 tileset to a single 32-bit PNG sprite sheet
+[v3chr2gif](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3chr2gif) | Convert VERGE3 character animation frames to animated GIF
+[v3chr2json](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3chr2json) | Convert VERGE3 character animation frame data to JSON
+[v3chr2png](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3chr2png) | Convert VERGE3 character animation frames to a single 32-bit PNG sprite sheet
+[v3chr2pnglist](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3chr2pnglist) | Convert VERGE3 character animation frames to individual 32-bit PNG images
+[v3map2json](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3map2json) | Convert VERGE3 map to JSON
+[v3vsp2png](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3vsp2png) | Convert VERGE3 tileset to a single 32-bit PNG sprite sheet
+[v3vspob2png](https://github.com/chuckrector/mappo/tree/master/doc/v3#user-content-v3vspob2png) | Convert VERGE3 tile obstruction types to a single 32-bit PNG sprite sheet
 
 # Supported File Formats
 
