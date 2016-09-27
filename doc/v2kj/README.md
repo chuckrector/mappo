@@ -74,7 +74,7 @@ Output:
 
 ![alt text](/img/v2kj/bob.chr.png?raw=true "a sample of v2kjchr2png cli output")
 
-## v2chr2pnglist
+## v2kjchr2pnglist
 
 **Support:** VERGE2k+j only (WxH, N tiles, 5 columns)
 
