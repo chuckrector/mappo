@@ -55,7 +55,7 @@ const mappoSession = createMappoSession({
 
 const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const DEFAULT_SCALE_INDEX = 4
-const defaultMappoState = {
+const defaultGlobalMappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
   map: null,
@@ -79,9 +79,9 @@ const defaultMappoState = {
   mouseInViewport: false,
   autoScroll: {},
 }
-let mappoState = cloneDeep(defaultMappoState)
+let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
-const getScale = () => viewportScales[mappoState.scaleIndex]
+const getScale = () => viewportScales[globalMappoState.scaleIndex]
 
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement(`li`)
@@ -89,22 +89,22 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   li.innerText = mapFilename
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
   li.addEventListener(`click`, event => {
-    mappoState = cloneDeep(defaultMappoState)
-    mappoState.isLoading = true
+    globalMappoState = cloneDeep(defaultGlobalMappoState)
+    globalMappoState.isLoading = true
 
-    mappoState.map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
+    globalMappoState.map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
 
-    mappoState.mapLayerSelected = mappoState.map.tileLayers[mappoState.map.mapLayerOrder[0]]
+    globalMappoState.mapLayerSelected = globalMappoState.map.tileLayers[globalMappoState.map.mapLayerOrder[0]]
     refreshMapLayerList()
 
-    tilesetSelectedTileCanvas.width = mappoState.map.tileset.tileWidth
-    tilesetSelectedTileCanvas.height = mappoState.map.tileset.tileHeight
-    tilesetHoveringTileCanvas.width = mappoState.map.tileset.tileWidth
-    tilesetHoveringTileCanvas.height = mappoState.map.tileset.tileHeight
+    tilesetSelectedTileCanvas.width = globalMappoState.map.tileset.tileWidth
+    tilesetSelectedTileCanvas.height = globalMappoState.map.tileset.tileHeight
+    tilesetHoveringTileCanvas.width = globalMappoState.map.tileset.tileWidth
+    tilesetHoveringTileCanvas.height = globalMappoState.map.tileset.tileHeight
 
     // TODO(chuck): shorten this crazy chain
-    mappoState.map.tileset.imageBitmapPromise.then(() => {
-      mappoState.isLoading = false
+    globalMappoState.map.tileset.imageBitmapPromise.then(() => {
+      globalMappoState.isLoading = false
       resizeCanvas()
     })
 
@@ -115,12 +115,12 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 const refreshMapLayerList = () => {
   layerList.innerHTML = ``
-  mappoState.map.tileLayers.forEach((layer, index) => {
+  globalMappoState.map.tileLayers.forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
     li.classList.add(`layer-list-item`)
-    if (mappoState.mapLayerSelected === layer) {
+    if (globalMappoState.mapLayerSelected === layer) {
       li.classList.add(`selected`)
     }
     li.addEventListener(`click`, event => {
@@ -129,7 +129,7 @@ const refreshMapLayerList = () => {
         li.classList.toggle(`is-layer-hidden`)
         layer.isHidden = !layer.isHidden
       }
-      mappoState.mapLayerSelected = layer
+      globalMappoState.mapLayerSelected = layer
       const layerListItems = document.querySelectorAll(`.layer-list .layer-list-item`)
       layerListItems.forEach(layerListItem => {
         layerListItem.classList.remove(`selected`)
@@ -142,31 +142,31 @@ const refreshMapLayerList = () => {
 
 const keyboard = setupKeyboard({
   addEventListener: document.addEventListener,
-  keyPressed: mappoState.keyPressed,
+  keyPressed: globalMappoState.keyPressed,
 })
 
 middlePanel.addEventListener(`mousedown`, event => {
-  mappoState.mouseDown = true
+  globalMappoState.mouseDown = true
 })
 
 middlePanel.addEventListener(`mousemove`, event => {
-  if (mappoState.isLoading) {
+  if (globalMappoState.isLoading) {
     return
   }
 
   const scale = getScale()
-  if (mappoState.mouseDown) {
+  if (globalMappoState.mouseDown) {
     moveCamera(
       -event.movementX / scale,
       -event.movementY / scale
     )
   }
 
-  mappoState.autoScroll = {}
-  if (mappoState.mouseInViewport) {
-    mappoState.autoScroll = calcAutoScroll({
+  globalMappoState.autoScroll = {}
+  if (globalMappoState.mouseInViewport) {
+    globalMappoState.autoScroll = calcAutoScroll({
       scale,
-      threshold: (mappoState.map.tileset.tileWidth + mappoState.map.tileset.tileHeight) / 2,
+      threshold: (globalMappoState.map.tileset.tileWidth + globalMappoState.map.tileset.tileHeight) / 2,
       cursorX: event.offsetX,
       cursorY: event.offsetY,
       viewportWidth: middlePanel.offsetWidth,
@@ -174,18 +174,18 @@ middlePanel.addEventListener(`mousemove`, event => {
     })
   }
 
-  const mapLayerSelected = mappoState.mapLayerSelected
+  const mapLayerSelected = globalMappoState.mapLayerSelected
   if (mapLayerSelected) {
-    const tileWidth = mappoState.map.tileset.tileWidth
-    const tileHeight = mappoState.map.tileset.tileHeight
+    const tileWidth = globalMappoState.map.tileset.tileWidth
+    const tileHeight = globalMappoState.map.tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
     const scaleY = ~~(event.offsetY / scale)
-    const parallaxX = ~~(mappoState.camera.x * mapLayerSelected.parallax.x)
-    const parallaxY = ~~(mappoState.camera.y * mapLayerSelected.parallax.y)
+    const parallaxX = ~~(globalMappoState.camera.x * mapLayerSelected.parallax.x)
+    const parallaxY = ~~(globalMappoState.camera.y * mapLayerSelected.parallax.y)
     const x = scaleX - ((parallaxX + scaleX) % tileWidth)
     const y = scaleY - ((parallaxY + scaleY) % tileHeight)
 
-    mappoState.mapLayerTileHighlightCoord = {x, y}
+    globalMappoState.mapLayerTileHighlightCoord = {x, y}
   }
 })
 
@@ -209,12 +209,12 @@ const getTileCoordAndIndex = ({
 }
 
 tilesetCanvasContainer.addEventListener(`mousemove`, event => {
-  if (mappoState.isLoading) {
+  if (globalMappoState.isLoading) {
     return
   }
 
-  mappoState.map.tilesetTileHovering = getTileCoordAndIndex({
-    tileset: mappoState.map.tileset,
+  globalMappoState.map.tilesetTileHovering = getTileCoordAndIndex({
+    tileset: globalMappoState.map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -222,12 +222,12 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
 })
 
 tilesetCanvasContainer.addEventListener(`click`, event => {
-  if (mappoState.isLoading) {
+  if (globalMappoState.isLoading) {
     return
   }
 
-  mappoState.tilesetTileSelected = getTileCoordAndIndex({
-    tileset: mappoState.map.tileset,
+  globalMappoState.tilesetTileSelected = getTileCoordAndIndex({
+    tileset: globalMappoState.map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -235,24 +235,24 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
 })
 
 middlePanel.addEventListener(`mouseup`, event => {
-  mappoState.mouseDown = false
+  globalMappoState.mouseDown = false
 })
 
 middlePanel.addEventListener(`mouseenter`, event => {
-  mappoState.mouseInViewport = true
+  globalMappoState.mouseInViewport = true
 })
 
 middlePanel.addEventListener(`mouseout`, event => {
-  mappoState.mouseInViewport = false
-  mappoState.mouseDown = false
-  mappoState.camera.move = {x: 0, y: 0}
-  mappoState.autoScroll = {}
-  mappoState.mapLayerTileHighlightCoord = null
+  globalMappoState.mouseInViewport = false
+  globalMappoState.mouseDown = false
+  globalMappoState.camera.move = {x: 0, y: 0}
+  globalMappoState.autoScroll = {}
+  globalMappoState.mapLayerTileHighlightCoord = null
 })
 
 const moveCamera = (moveX, moveY) => {
-  mappoState.camera.x = clamp(mappoState.camera.x + moveX, 0, (mappoState.map.tileLayers[0].width * mappoState.map.tileset.tileWidth) - canvas.width)
-  mappoState.camera.y = clamp(mappoState.camera.y + moveY, 0, (mappoState.map.tileLayers[0].height * mappoState.map.tileset.tileHeight) - canvas.height)
+  globalMappoState.camera.x = clamp(globalMappoState.camera.x + moveX, 0, (globalMappoState.map.tileLayers[0].width * globalMappoState.map.tileset.tileWidth) - canvas.width)
+  globalMappoState.camera.y = clamp(globalMappoState.camera.y + moveY, 0, (globalMappoState.map.tileLayers[0].height * globalMappoState.map.tileset.tileHeight) - canvas.height)
 }
 
 const getTilesetColumns = ({tileset, containerWidth}) => {
@@ -272,32 +272,32 @@ const tick = () => {
   clearCanvas({canvas: tilesetSelectedTileCanvas, pattern: checkerboardPattern})
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
-  if (!mappoState.isLoading) {
-    const tileset = mappoState.map.tileset
+  if (!globalMappoState.isLoading) {
+    const tileset = globalMappoState.map.tileset
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
     const containerWidth = tilesetCanvasContainer.offsetWidth
 
-    mappoState.map.mapLayerOrder.forEach(layerIndex => {
-      const tileLayer = mappoState.map.tileLayers[layerIndex]
+    globalMappoState.map.mapLayerOrder.forEach(layerIndex => {
+      const tileLayer = globalMappoState.map.tileLayers[layerIndex]
       if (!tileLayer.isHidden) {
         renderLayer({
           context,
           canvas,
           tileset,
           layer: tileLayer,
-          x: mappoState.camera.x * tileLayer.parallax.x,
-          y: mappoState.camera.y * tileLayer.parallax.y,
+          x: globalMappoState.camera.x * tileLayer.parallax.x,
+          y: globalMappoState.camera.y * tileLayer.parallax.y,
           transparent: layerIndex > 0,
         })
       }
     })
 
-    if (mappoState.mapLayerTileHighlightCoord) {
+    if (globalMappoState.mapLayerTileHighlightCoord) {
       renderTileHighlightInvertedOutline({
         context,
-        x: mappoState.mapLayerTileHighlightCoord.x,
-        y: mappoState.mapLayerTileHighlightCoord.y,
+        x: globalMappoState.mapLayerTileHighlightCoord.x,
+        y: globalMappoState.mapLayerTileHighlightCoord.y,
         width: tileWidth,
         height: tileHeight,
       })
@@ -305,77 +305,77 @@ const tick = () => {
 
     renderTileset({
       context: tilesetContext,
-      tileset: mappoState.map.tileset,
+      tileset: globalMappoState.map.tileset,
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
-    if (mappoState.map.tilesetTileHovering) {
+    if (globalMappoState.map.tilesetTileHovering) {
       renderTileHighlightInvertedSolid({
         context: tilesetContext,
-        x: mappoState.map.tilesetTileHovering.tileX * tileWidth,
-        y: mappoState.map.tilesetTileHovering.tileY * tileHeight,
+        x: globalMappoState.map.tilesetTileHovering.tileX * tileWidth,
+        y: globalMappoState.map.tilesetTileHovering.tileY * tileHeight,
         width: tileWidth,
         height: tileHeight,
       })
       renderTile({
         context: tilesetHoveringTileContext,
-        tileset: mappoState.map.tileset,
-        tileIndex: mappoState.map.tilesetTileHovering.tileIndex,
+        tileset: globalMappoState.map.tileset,
+        tileIndex: globalMappoState.map.tilesetTileHovering.tileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetHoveringTileIndex.innerText = mappoState.map.tilesetTileHovering.tileIndex
+      tilesetHoveringTileIndex.innerText = globalMappoState.map.tilesetTileHovering.tileIndex
     }
 
-    if (mappoState.tilesetTileSelected) {
+    if (globalMappoState.tilesetTileSelected) {
       renderTileHighlightColorOutline({
         context: tilesetContext,
-        x: mappoState.tilesetTileSelected.tileX * tileWidth,
-        y: mappoState.tilesetTileSelected.tileY * tileHeight,
+        x: globalMappoState.tilesetTileSelected.tileX * tileWidth,
+        y: globalMappoState.tilesetTileSelected.tileY * tileHeight,
         color: `white`,
         width: tileWidth,
         height: tileHeight,
       })
       renderTile({
         context: tilesetSelectedTileContext,
-        tileset: mappoState.map.tileset,
-        tileIndex: mappoState.tilesetTileSelected.tileIndex,
+        tileset: globalMappoState.map.tileset,
+        tileIndex: globalMappoState.tilesetTileSelected.tileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetSelectedTileIndex.innerText = mappoState.tilesetTileSelected.tileIndex
+      tilesetSelectedTileIndex.innerText = globalMappoState.tilesetTileSelected.tileIndex
     }
 
-    mappoState.camera.move = {x: 0, y: 0}
-    const autoScroll = mappoState.autoScroll
+    globalMappoState.camera.move = {x: 0, y: 0}
+    const autoScroll = globalMappoState.autoScroll
     if (autoScroll) {
-      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (mappoState.camera.move.y = -mappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (mappoState.camera.move.y = +mappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (mappoState.camera.move.x = -mappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (mappoState.camera.move.x = +mappoState.cameraScrollAmount);
-      moveCamera(mappoState.camera.move.x, mappoState.camera.move.y)
+      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (globalMappoState.camera.move.y = -globalMappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (globalMappoState.camera.move.y = +globalMappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (globalMappoState.camera.move.x = -globalMappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (globalMappoState.camera.move.x = +globalMappoState.cameraScrollAmount);
+      moveCamera(globalMappoState.camera.move.x, globalMappoState.camera.move.y)
     }
 
     // map zooming
     if (keyboard.isPressed(`ctrlKey`)) {
-      const prevScaleIndex = mappoState.scaleIndex
+      const prevScaleIndex = globalMappoState.scaleIndex
       if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
         keyboard.release(keyboard.KEYCODE_PLUS)
-        mappoState.scaleIndex++
+        globalMappoState.scaleIndex++
       }
       if (keyboard.isPressed(keyboard.KEYCODE_MINUS)) {
         keyboard.release(keyboard.KEYCODE_MINUS)
-        mappoState.scaleIndex--
+        globalMappoState.scaleIndex--
       }
       if (keyboard.isPressed(keyboard.KEYCODE_0)) {
         keyboard.release(keyboard.KEYCODE_0)
-        mappoState.scaleIndex = DEFAULT_SCALE_INDEX
+        globalMappoState.scaleIndex = DEFAULT_SCALE_INDEX
       }
-      mappoState.scaleIndex = clamp(mappoState.scaleIndex, 0, viewportScales.length - 1)
+      globalMappoState.scaleIndex = clamp(globalMappoState.scaleIndex, 0, viewportScales.length - 1)
       // TODO(chuck): redux-ify?
-      if (prevScaleIndex !== mappoState.scaleIndex) {
+      if (prevScaleIndex !== globalMappoState.scaleIndex) {
         resizeCanvas()
       }
     }
@@ -390,9 +390,9 @@ const resizeCanvas = () => {
   canvas.style.width = middlePanel.offsetWidth + `px`
   canvas.style.height = middlePanel.offsetHeight + `px`
 
-  if (!mappoState.isLoading) {
+  if (!globalMappoState.isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
-    const tileset = mappoState.map.tileset
+    const tileset = globalMappoState.map.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
     tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
     tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + `px`
