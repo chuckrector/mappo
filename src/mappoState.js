@@ -2,57 +2,60 @@
 
 const cloneDeep = require(`lodash/clonedeep`)
 
-const plotTile = ({map, layerIndex, x, y, tileIndex}) => {
-  const layer = map.tileLayers[layerIndex]
-  const layerOffset = (y * layer.width) + x
-  const overwrittenTileIndex = layer.tileIndexGrid[layerOffset]
-
-  layer.tileIndexGrid = [
-    ...layer.tileIndexGrid.slice(0, layerOffset),
-    tileIndex,
-    ...layer.tileIndexGrid.slice(layerOffset + 1),
-  ]
-
-  return overwrittenTileIndex
-}
-
 module.exports = (state={}, action) => {
-  const newState = state
+  const plotTile = ({tileIndexGrid, layerWidth, x, y, tileIndex, layerIndex}) => {
+    const layerOffset = (y * layerWidth) + x
+    const overwrittenTileIndex = tileIndexGrid[layerOffset]
+
+    tileIndexGrid[layerOffset] = tileIndex
+
+    addUndo({overwrittenTileIndex})
+
+    const tileLayers = state.map.tileLayers
+    const newTileLayers = [
+      ...tileLayers.slice(0, layerIndex),
+      Object.assign({}, tileLayers[layerIndex], {
+        tileIndexGrid,
+      }),
+      ...tileLayers.slice(layerIndex + 1),
+    ]
+
+    return Object.assign({}, state, {
+      map: Object.assign({}, state.map, {
+        tileLayers: newTileLayers,
+      })
+    })
+  }
 
   const addUndo = info => {
-    if (!newState.undo) {
-      newState.undo = []
-      newState.undoCursor = 0
+    if (!state.undo) {
+      state.undo = []
+      state.undoCursor = 0
     }
 
     const undoState = Object.assign({}, {originalAction: cloneDeep(action)}, info)
-    newState.undo.push(undoState)
-    newState.undoCursor++
+    state.undo.push(undoState)
+    state.undoCursor++
   }
 
   switch (action.type) {
     case `SET_MAP`: {
-      const prevMap = newState.map
-
-      newState.map = action.map
-
-      addUndo({prevMap})
-
-      return newState
+      addUndo({prevMap: state.map})
+      return Object.assign({}, state, {
+        map: action.map,
+      })
     } break
 
     case `PLOT_TILE`: {
-      const overwrittenTileIndex = plotTile({
-        map: newState.map,
+      const layer = state.map.tileLayers[action.layerIndex]
+      return plotTile({
         layerIndex: action.layerIndex,
+        tileIndexGrid: layer.tileIndexGrid.slice(),
+        layerWidth: layer.width,
         x: action.x,
         y: action.y,
         tileIndex: action.tileIndex,
       })
-
-      addUndo({overwrittenTileIndex})
-
-      return newState
     }
 
     case `UNDO`: {
@@ -60,17 +63,19 @@ module.exports = (state={}, action) => {
 
       switch (undoInfo.originalAction.type) {
         case `SET_MAP`: {
-          if (undoInfo.prevMap) {
-            newState.map = undoInfo.prevMap
-          } else {
-            delete newState.map
+          let map
+          if (undoInfo.originalAction.prevMap) {
+            map = undoInfo.originalAction.prevMap
           }
+          return Object.assign({}, state, {map})
         } break
 
         case `PLOT_TILE`: {
-          plotTile({
-            map: newState.map,
+          const layer = state.map.tileLayers[undoInfo.originalAction.layerIndex]
+          return plotTile({
             layerIndex: undoInfo.originalAction.layerIndex,
+            tileIndexGrid: layer.tileIndexGrid.slice(),
+            layerWidth: layer.width,
             x: undoInfo.originalAction.x,
             y: undoInfo.originalAction.y,
             tileIndex: undoInfo.overwrittenTileIndex,

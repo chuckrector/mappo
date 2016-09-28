@@ -1,6 +1,7 @@
 "use strict"
 
 const expect = require(`expect`)
+const deepFreeze = require(`deep-freeze`)
 const filler = require(`./filler`)
 const createStore = require(`./createStore`)
 const mappoState = require(`./mappoState`)
@@ -28,6 +29,7 @@ const mappoState = require(`./mappoState`)
   // can undo set map
   const store = createStore(mappoState)
   const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
+  deepFreeze(tileLayers)
   store.dispatch({type: `SET_MAP`, map: {tileLayers}})
   store.dispatch({type: `UNDO`})
   expect(store.getState().map).toBe(undefined)
@@ -38,6 +40,7 @@ const mappoState = require(`./mappoState`)
   const store = createStore(mappoState)
 
   const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
+  deepFreeze(tileLayers)
   store.dispatch({type: `SET_MAP`, map: {tileLayers}})
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
 

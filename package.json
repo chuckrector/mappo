@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "concurrently": "^2.2.0",
+    "deep-freeze": "0.0.1",
     "expect": "^1.20.2"
   },
   "//": "node 5.10.0 is required for the new Buffer API (Buffer.from, etc.)",
