@@ -1,7 +1,7 @@
 "use strict"
 
 const expect = require(`expect`)
-const createDataReader = require(`./createDataReader`)
+const createBufferReader = require(`./createBufferReader`)
 const {readFormat, T} = require(`./readFormat`)
 const {makeBuffer, B} = require(`./makeBuffer`)
 const filler = require(`./filler`)
@@ -23,7 +23,7 @@ const range = require(`lodash/range`)
       b: T.u16,
       c: T.u32,
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({a: 0xff, b: 0xffff, c: 0xffffffff})
@@ -44,7 +44,7 @@ const range = require(`lodash/range`)
       b: T.list(T.f64, 2),
       c: T.list(T.f64, () => 3),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({a: 1, b: [1.5, -1], c: [-1.5, 0.003, 0]})
@@ -70,7 +70,7 @@ const range = require(`lodash/range`)
       b: T.stringU16,
       c: T.stringU32,
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -102,7 +102,7 @@ const range = require(`lodash/range`)
       a: T.compressedU8(16 * 16),
       b: T.compressedU16(16 * 16),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data.a.decompressed).toEqual(expandedA)
@@ -127,7 +127,7 @@ const range = require(`lodash/range`)
       tiledatabuf: T.zlibU8(16 * 16),
       zonelayer: T.zlibU16(16 * 16),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data.tiledatabuf.compressed.length).toBe(compressedU8.length)
@@ -148,7 +148,7 @@ const range = require(`lodash/range`)
     B.u8([0xff, 0xff]),
     B.u16([0xffff, 0xffff]),
     B.u32([0xffffffff, 0xffffffff]),
-    // Note: createDataReader.readString always reads whitespace after.
+    // Note: createBufferReader.readString always reads whitespace after.
     // Without the whitespace after "Kittens", readString will read
     // "KittensBacon" due to the null-terminated strings which
     // immediately follow. 🐱🔥
@@ -166,7 +166,7 @@ const range = require(`lodash/range`)
       e: T.list(T.stringNullTerminated, 2),
       f: T.list(T.stringFixed(20), 2),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({

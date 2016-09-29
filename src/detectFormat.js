@@ -1,6 +1,6 @@
 "use strict"
 
-const createDataReader = require(`./createDataReader`)
+const createBufferReader = require(`./createBufferReader`)
 const asset = require(`./asset`)
 const isEqual = require(`lodash/isequal`)
 
@@ -57,14 +57,14 @@ module.exports = (buffer) => {
   }
 
   if (buffer.length >= 6) {
-    const reader = createDataReader({data: buffer})
+    const reader = createBufferReader({data: buffer})
     if (isEqual(reader.readByteArray(6), [77, 65, 80, 249, 53, 0])) {
       return `v2map`
     }
   }
 
   if (buffer.length > 0) {
-    const reader = createDataReader({data: buffer})
+    const reader = createBufferReader({data: buffer})
     const version = reader.readByte()
     if (version === 3 || version === 4) {
       const vspName = reader.readStringFixed(13)
@@ -93,7 +93,7 @@ module.exports = (buffer) => {
   }
 
   if (buffer.length >= 6) {
-    const reader = createDataReader({data: buffer})
+    const reader = createBufferReader({data: buffer})
     const signature = reader.readStringFixed(6)
     if (signature === `V3MAP`) {
       return `v3map`

@@ -1,6 +1,6 @@
 "use strict"
 
-const createDataReader = require(`./createDataReader`)
+const createBufferReader = require(`./createBufferReader`)
 
 const T = {}
 
@@ -100,7 +100,7 @@ const readFormat = ({format, reader, listIndex}) => {
 }
 
 const readFormatData = ({format, data}) => {
-  const reader = createDataReader({data})
+  const reader = createBufferReader({data})
 
   return readFormat({format, reader})
 }

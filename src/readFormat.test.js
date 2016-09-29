@@ -1,7 +1,7 @@
 "use strict"
 
 const expect = require(`expect`)
-const createDataReader = require(`./createDataReader`)
+const createBufferReader = require(`./createBufferReader`)
 const {makeBuffer, B} = require(`./makeBuffer`)
 const {readFormat, readFormatData, T} = require(`./readFormat`)
 const filler = require(`./filler`)
@@ -44,7 +44,7 @@ const range = require(`lodash/range`)
       b: T.u16,
       c: T.u32,
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({a: 0xff, b: 0xffff, c: 0xffffffff})
@@ -63,7 +63,7 @@ const range = require(`lodash/range`)
       b: T.list(T.f64, 2),
       c: T.list(T.f64, () => 3),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({a: 1, b: [1.5, -1], c: [-1.5, 0.003, 0]})
@@ -88,7 +88,7 @@ const range = require(`lodash/range`)
       b: T.stringU16,
       c: T.stringU32,
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -129,7 +129,7 @@ const range = require(`lodash/range`)
       adjectiveLength: T.u8,
       adjective: T.stringFixed(({record}) => record.adjectiveLength),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -151,7 +151,7 @@ const range = require(`lodash/range`)
         b: T.list(T.u8, 3),
       }, 2)
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -177,7 +177,7 @@ const range = require(`lodash/range`)
       a: T.compressedU8(16 * 16),
       b: T.compressedU16(16 * 16),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   const expandedA = filler(16 * 16, 2)
@@ -200,7 +200,7 @@ const range = require(`lodash/range`)
 
   const data = readFormat({
     format: {tiledatabuf: T.zlibU8(16 * 16)},
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data.tiledatabuf.mysize).toBe(raw.length)
@@ -221,7 +221,7 @@ const range = require(`lodash/range`)
 
   const data = readFormat({
     format: {zonelayer: T.zlibU16(16 * 16)},
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data.zonelayer.mysize).toBe(raw.length * 2)
@@ -248,7 +248,7 @@ const range = require(`lodash/range`)
       a: T.compressedU8(({record}) => record.lengthA),
       b: T.compressedU16(({record}) => record.lengthB),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   const expandedA = filler(16 * 16, 2)
@@ -274,7 +274,7 @@ const range = require(`lodash/range`)
       b: T.list(T.u16, 2),
       c: T.list(T.u32, 2),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -307,7 +307,7 @@ const range = require(`lodash/range`)
         d: T.u32,
       },
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -337,7 +337,7 @@ const range = require(`lodash/range`)
         c: T.u32,
       }, 2)
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -361,7 +361,7 @@ const range = require(`lodash/range`)
       h: T.u8,
       grid: T.list(T.u8, ({record}) => record.w * record.h),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -417,7 +417,7 @@ const range = require(`lodash/range`)
         ({record}) => record.numlayers
       )
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data.numlayers).toBe(2)
@@ -442,7 +442,7 @@ const range = require(`lodash/range`)
     format: {
       grid: T.list(T.u8, ({reader}) => reader.remaining),
     },
-    reader: createDataReader({data: buffer})
+    reader: createBufferReader({data: buffer})
   })
 
   expect(data).toEqual({
@@ -466,7 +466,7 @@ const range = require(`lodash/range`)
     format: {
       palette: T.palette6bit
     },
-    reader: createDataReader({data: Buffer.from(_6bit)})
+    reader: createBufferReader({data: Buffer.from(_6bit)})
   })
 
   expect(data).toEqual({

@@ -1,14 +1,14 @@
 "use strict"
 
 const expect = require(`expect`)
-const createDataReader = require(`./createDataReader.js`)
+const createBufferReader = require(`./createBufferReader.js`)
 const filler = require(`./filler`)
 const zlib = require(`zlib`)
 const {makeBuffer, B} = require(`./makeBuffer`)
 
 {
   // empty buffer is at end
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(``)
   })
 
@@ -17,7 +17,7 @@ const {makeBuffer, B} = require(`./makeBuffer`)
 
 {
   // at end after whitespace
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(` `)
   })
 
@@ -28,7 +28,7 @@ const {makeBuffer, B} = require(`./makeBuffer`)
 
 {
   // at end after string
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`This`)
   })
 
@@ -39,7 +39,7 @@ const {makeBuffer, B} = require(`./makeBuffer`)
 
 {
   // can read bytes
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from([3, 2, 1])
   })
 
@@ -50,7 +50,7 @@ const {makeBuffer, B} = require(`./makeBuffer`)
 
 {
   // can read byte array
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from([3, 2, 1])
   })
 
@@ -61,7 +61,7 @@ const wordArray = [65535, 1, 256]
 
 {
   // can read words
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.u16(wordArray)
   })
 
@@ -72,7 +72,7 @@ const wordArray = [65535, 1, 256]
 
 {
   // can read word array
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.u16(wordArray)
   })
 
@@ -83,7 +83,7 @@ const quadArray = [90000, 1, 65536]
 
 {
   // can read quads
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.u32(quadArray)
   })
 
@@ -94,7 +94,7 @@ const quadArray = [90000, 1, 65536]
 
 {
   // can read quad array
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.u32(quadArray)
   })
 
@@ -105,7 +105,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read doubles
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.f64(doubleArray)
   })
 
@@ -119,7 +119,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read double array
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.f64([1, 1.5, -1, -1.5, 0.003, 0])
   })
 
@@ -128,7 +128,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read strings
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`tic tac toe`)
   })
 
@@ -139,7 +139,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read null terminated strings
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`Cute\0Cuddly\0Kittens`)
   })
 
@@ -150,7 +150,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // reading a string should ignore garbage after null terminator
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`HAHN01.VSP\0he`)
   })
 
@@ -159,7 +159,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can get length
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(filler(13, 0))
   })
 
@@ -171,7 +171,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
   data[data.length - 1] = 88
 
   // can set position
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(data)
   })
 
@@ -181,7 +181,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read whitespace
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(` \n\r\tThis n that`)
   })
 
@@ -190,7 +190,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read whitespace at end of data
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(` \n\r\t`)
   })
 
@@ -199,7 +199,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read variable length string up to space
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`This n that`)
   })
 
@@ -211,7 +211,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read variable length string as byte
   const doubleNegMax = -256 * 2
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`255 256 -1 ` + doubleNegMax)
   })
 
@@ -224,7 +224,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read variable length string as word
   const doubleNegMax = -65536 * 2
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`65535 65536 -1 ` + doubleNegMax)
   })
 
@@ -236,7 +236,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // can read variable length string as quad
   const doubleNegMax = -4294967296 * 2
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`4294967295 4294967296 -1 ` + doubleNegMax)
   })
 
@@ -248,7 +248,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read line to end of data
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`Attention:`)
   })
 
@@ -257,7 +257,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read line to newline
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`Attention:\nBacon`)
   })
 
@@ -266,7 +266,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read line to carriage return
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`Attention:\rBacon`)
   })
 
@@ -275,7 +275,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can read empty line
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`\nBacon`)
   })
 
@@ -284,7 +284,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // at match
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from(`// Attention: Bacon`)
   })
 
@@ -302,7 +302,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
     B.u32([4 * 2]),
     B.u16([1, ((16 * 16) - 2) | 0xff00, 2, 3]),
   ])
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: buffer
   })
 
@@ -321,7 +321,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
     B.u32(5),
     B.u8([1, 0xff, ((16 * 16) - 2), 2, 3]),
   ])
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: buffer
   })
 
@@ -336,7 +336,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // can get remaining # bytes
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: Buffer.from([1, 2])
   })
 
@@ -355,7 +355,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
     B.u32([raw.length, compressedBuffer.length]),
     compressedBuffer
   ])
-  const reader = createDataReader({data: buffer})
+  const reader = createBufferReader({data: buffer})
   const data = reader.readZlibU8(16 * 16)
 
   expect(data.mysize).toBe(raw.length)
@@ -374,7 +374,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
     B.u32([raw.length * 2, compressedBuffer.length]),
     compressedBuffer
   ])
-  const reader = createDataReader({data: buffer})
+  const reader = createBufferReader({data: buffer})
   const data = reader.readZlibU16(16 * 16)
 
   expect(data.mysize).toBe(raw.length * 2)
@@ -387,7 +387,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 
 {
   // throw on zlibU8 size mismatch
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.u32(16 * 16 * 3),
   })
 
@@ -399,7 +399,7 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 {
   // throw on zlibU16 size mismatch
   const howManyWords = 3
-  const reader = createDataReader({
+  const reader = createBufferReader({
     data: B.u32((howManyWords * 2) + 1),
   })
 

@@ -4,7 +4,7 @@ const assert = require(`assert`)
 const zlib =  require(`zlib`)
 const {makeBuffer, B} = require(`./makeBuffer`)
 
-const createDataReader = (args) => {
+const createBufferReader = (args) => {
   const buffer = Buffer.from(args.data)
   const END_OF_DATA = null
   let position = 0
@@ -29,7 +29,7 @@ const createDataReader = (args) => {
   const readByteArrayCompressed = (length) => {
     const bufsize = readQuad()
     const compressed = readByteArray(bufsize)
-    const compressedReader = createDataReader({data: compressed})
+    const compressedReader = createBufferReader({data: compressed})
     const decompressed = []
 
     do {
@@ -149,7 +149,7 @@ const createDataReader = (args) => {
     assert.equal(bufsize % 2, 0, `expected compressed word array size to be divisible by two but got ` + bufsize)
 
     const compressed = readByteArray(bufsize)
-    const compressedReader = createDataReader({data: compressed})
+    const compressedReader = createBufferReader({data: compressed})
     const decompressed = []
 
     do {
@@ -241,7 +241,7 @@ const createDataReader = (args) => {
     const comprLen = readQuad()
     const compressed = readByteArray(comprLen)
     const decompressedU8 = B.u8([...zlib.inflateSync(B.u8(compressed))]) // perf?
-    const reader = createDataReader({data: decompressedU8})
+    const reader = createBufferReader({data: decompressedU8})
     const decompressed = reader.readWordArray(length)
 
     return {
@@ -291,4 +291,4 @@ const createDataReader = (args) => {
   }
 }
 
-module.exports = createDataReader
+module.exports = createBufferReader

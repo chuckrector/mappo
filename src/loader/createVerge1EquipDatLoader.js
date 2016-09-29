@@ -1,9 +1,9 @@
 "use strict"
 
-const createDataReader = require(`../createDataReader`)
+const createBufferReader = require(`../createBufferReader`)
 
 module.exports = (args) => {
-  const reader = createDataReader(args)
+  const reader = createBufferReader(args)
 
   const load = () => {
     reader.readWhitespace()
