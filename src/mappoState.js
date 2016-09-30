@@ -1,6 +1,7 @@
 "use strict"
 
 const cloneDeep = require(`lodash/clonedeep`)
+const assert = require(`assert`)
 
 module.exports = (state={}, action) => {
   const plotTile = ({tileIndexGrid, layerWidth, x, y, tileIndex, layerIndex}) => {
@@ -58,6 +59,12 @@ module.exports = (state={}, action) => {
       })
     }
 
+    case `PLOT_GROUP_BEGIN`:
+    case `PLOT_GROUP_END`: {
+      addUndo(action)
+      return state
+    } break
+
     case `UNDO`: {
       const undoInfo = state.undo[--state.undoCursor]
 
@@ -80,6 +87,34 @@ module.exports = (state={}, action) => {
             y: undoInfo.originalAction.y,
             tileIndex: undoInfo.overwrittenTileIndex,
           })
+        } break
+
+        case `PLOT_GROUP_END`: {
+          // seek backward to start of group
+          while (state.undo[state.undoCursor].originalAction.type !== `PLOT_GROUP_BEGIN`) {
+            state.undoCursor--
+          }
+          // we keep reassigning state below, so save this for after
+          const savedUndoTail = state.undoCursor
+
+          let groupCursor = state.undoCursor + 1
+          while (state.undo[groupCursor].originalAction.type === `PLOT_TILE`) {
+            const currentUndoInfo = state.undo[groupCursor]
+            const currentLayer = state.map.tileLayers[currentUndoInfo.originalAction.layerIndex]
+            state = plotTile({
+              layerIndex: currentUndoInfo.originalAction.layerIndex,
+              tileIndexGrid: currentLayer.tileIndexGrid.slice(),
+              layerWidth: currentLayer.width,
+              x: currentUndoInfo.originalAction.x,
+              y: currentUndoInfo.originalAction.y,
+              tileIndex: currentUndoInfo.overwrittenTileIndex,
+            })
+            groupCursor++
+          }
+          assert.equal(state.undo[groupCursor].type, `PLOT_GROUP_END`)
+          // state is repeatedly reset above, so reset tail to save spot
+          state.undoCursor = savedUndoTail
+          return state
         } break
       }
 
