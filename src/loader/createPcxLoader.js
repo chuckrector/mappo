@@ -1,10 +1,10 @@
 "use strict"
 
-const createDataReader = require(`../createDataReader`)
+const createBufferReader = require(`../createBufferReader`)
 const {readFormat, T} = require(`../readFormat`)
 
 module.exports = (args) => {
-  const reader = createDataReader(args)
+  const reader = createBufferReader(args)
 
   let header
   let width = 0
