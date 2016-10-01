@@ -234,6 +234,27 @@ const range = require(`lodash/range`)
 }
 
 {
+  // can read zlibU32 buffers
+
+  const raw = filler(16 * 16, 0xdead)
+  const compressedBuffer = [...zlib.deflateSync(B.u32(raw))]
+  const buffer = makeBuffer([
+    B.u32([raw.length * 4, compressedBuffer.length]),
+    B.u8(compressedBuffer)
+  ])
+
+  const data = readFormat({
+    format: {zonelayer: T.zlibU32(16 * 16)},
+    reader: createBufferReader({data: buffer})
+  })
+
+  expect(data.zonelayer.mysize).toBe(raw.length * 4)
+  expect(data.zonelayer.comprLen).toBe(compressedBuffer.length)
+  expect(data.zonelayer.decompressed.length).toBe(raw.length)
+  expect(data.zonelayer.decompressed).toEqual(raw)
+}
+
+{
   // can read dynamic length compressed buffers
 
   const buffer = makeBuffer([

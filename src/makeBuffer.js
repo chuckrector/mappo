@@ -65,6 +65,15 @@ B.zlibU16 = (valueList) => {
   ])
 }
 
+B.zlibU32 = (valueList) => {
+  const compressed = zlib.deflateSync(B.u32(valueList))
+  return makeBuffer([
+    B.u32(valueList.length * 4),
+    B.u32(compressed.length),
+    compressed,
+  ])
+}
+
 B.zlib = B.zlibU8
 
 B.list = (bufferMaker, valueList) => {
