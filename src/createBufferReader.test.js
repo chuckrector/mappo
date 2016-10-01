@@ -138,6 +138,19 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 }
 
 {
+  // can read length-encoded strings
+  const cuteCuddlyKitten = 'Cute Cuddly Kitten'
+  const reader = createBufferReader({
+    data: makeBuffer([
+      B.u32(cuteCuddlyKitten.length),
+      Buffer.from(cuteCuddlyKitten),
+    ])
+  })
+
+  expect(reader.readStringLengthEncoded()).toBe(cuteCuddlyKitten)
+}
+
+{
   // can read null terminated strings
   const reader = createBufferReader({
     data: Buffer.from(`Cute\0Cuddly\0Kittens`)

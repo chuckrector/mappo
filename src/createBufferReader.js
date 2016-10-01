@@ -52,6 +52,12 @@ const createBufferReader = (args) => {
     }
   }
 
+  const readStringLengthEncoded = () => {
+    const length = readQuad()
+
+    return readStringFixed(length)
+  }
+
   const readStringFixed = (length) => {
     let s = buffer.toString(`utf-8`, position, position + length)
 
@@ -266,6 +272,7 @@ const createBufferReader = (args) => {
     readDouble,
     readDoubleArray,
     readWhitespace,
+    readStringLengthEncoded,
     readStringFixed,
     readStringNullTerminated,
     readString,
