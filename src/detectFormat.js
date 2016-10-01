@@ -42,10 +42,6 @@ module.exports = (buffer) => {
     return `v1speechspc`
   }
 
-  if (buffer.length > 1 && buffer.length % (16 * 16) === 1) {
-    return `v1itemicondat`
-  }
-
   if (buffer.length >= 2 + (3 * 256) + 2 + 16 * 16) {
     const numtilesOffset = 2 + (3 * 256)
     const numtiles = buffer.readUInt16LE(numtilesOffset)
@@ -98,6 +94,10 @@ module.exports = (buffer) => {
     if (signature === `V3MAP`) {
       return `v3map`
     }
+  }
+
+  if (buffer.length > 1 && buffer.length % (16 * 16) === 1) {
+    return `v1itemicondat`
   }
 
   return `unknown`

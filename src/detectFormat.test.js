@@ -83,7 +83,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v1 ITEMICON.DAT
-  const isItemIconDat = {length: 1 + (16 * 16 * 5)}
+  const isItemIconDat = dummyBuffer(1 + (16 * 16 * 5))
   const isNotItemIconDat = dummyBuffer(16 * 16 * 5)
 
   expect(detectFormat(isItemIconDat)).toBe(`v1itemicondat`)
