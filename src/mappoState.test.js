@@ -26,16 +26,6 @@ const mappoState = require(`./mappoState`)
 }
 
 {
-  // can undo set map
-  const store = createStore(mappoState)
-  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
-  deepFreeze(tileLayers)
-  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  store.dispatch({type: `UNDO`})
-  expect(store.getState().map).toBe(undefined)
-}
-
-{
   // can plot a tile
   const store = createStore(mappoState)
 
@@ -47,42 +37,3 @@ const mappoState = require(`./mappoState`)
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, layerIndex: 0, tileIndex: 99})
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
 }
-
-{
-  // can undo a plotted tile
-  const store = createStore(mappoState)
-
-  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
-  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
-
-  store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, layerIndex: 0, tileIndex: 99})
-  store.dispatch({type: `UNDO`})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
-}
-
-{
-  // can undo a group of plotted tiles
-  const store = createStore(mappoState)
-
-  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
-  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
-
-  store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, layerIndex: 0, tileIndex: 99})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
-
-  store.dispatch({type: `PLOT_GROUP_BEGIN`})
-  store.dispatch({type: `PLOT_TILE`, x: 0, y: 0, layerIndex: 0, tileIndex: 88})
-  store.dispatch({type: `PLOT_TILE`, x: 1, y: 0, layerIndex: 0, tileIndex: 88})
-  store.dispatch({type: `PLOT_TILE`, x: 1, y: 1, layerIndex: 0, tileIndex: 88})
-  store.dispatch({type: `PLOT_GROUP_END`})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([88, 88, 99, 88])
-
-  store.dispatch({type: `UNDO`})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
-
-  store.dispatch({type: `UNDO`})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 0, 0])
-}
-
