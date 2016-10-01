@@ -349,7 +349,9 @@ const tick = () => {
 
     store.getState().map.mapLayerOrder.forEach(layerIndex => {
       const tileLayer = store.getState().map.tileLayers[layerIndex]
-      if (!tileLayer.isHidden) {
+      // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
+      //              to a map layer which doesn't exist
+      if (tileLayer && !tileLayer.isHidden) {
         renderLayer({
           context,
           canvas,
