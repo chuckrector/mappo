@@ -20,10 +20,10 @@
 "src/cli/cli-all-x.sh data/v1 speech.spc src/cli/v1speechspc2png.js data/v1/VERGE.PAL " \
 "src/cli/cli-all-x.sh data/v1 trans.tbl src/cli/v1transtbl2json.js " \
 "src/cli/cli-all-x.sh data/v1 *.vsp src/cli/v1vsp2png.js " \
-"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2gif.js data/v2/VERGE2.PAL " \
-"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2json.js data/v2/VERGE2.PAL " \
-"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2png.js data/v2/VERGE2.PAL " \
-"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2pnglist.js data/v2/VERGE2.PAL " \
+"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2gif.js data/v1/VERGE.PAL " \
+"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2json.js data/v1/VERGE.PAL " \
+"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2png.js data/v1/VERGE.PAL " \
+"src/cli/cli-all-x.sh data/v2 *.chr src/cli/v2chr2pnglist.js data/v1/VERGE.PAL " \
 "src/cli/cli-all-x.sh data/v2 *.map src/cli/v2map2json.js " \
 "src/cli/cli-all-x.sh data/v2 *.vsp src/cli/v2vsp2png.js " \
 "src/cli/cli-all-x.sh data/v3 *.chr src/cli/v3chr2gif.js data/v1/VERGE.PAL " \
