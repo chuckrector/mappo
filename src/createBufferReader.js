@@ -258,6 +258,26 @@ const createBufferReader = (args) => {
     }
   }
 
+  const readZlibU32 = (length) => {
+    const mysize = readQuad()
+    if (mysize !== (length * 4)) {
+      throw new Error(`expected an uncompressed byte length of ` + (length * 4) + ` but got ` + mysize)
+    }
+
+    const comprLen = readQuad()
+    const compressed = readByteArray(comprLen)
+    const decompressedU8 = B.u8([...zlib.inflateSync(B.u8(compressed))]) // perf?
+    const reader = createBufferReader({data: decompressedU8})
+    const decompressed = reader.readQuadArray(length)
+
+    return {
+      mysize,
+      comprLen,
+      compressed,
+      decompressed,
+    }
+  }
+
   return {
     atEnd,
     atMatch,
@@ -283,6 +303,7 @@ const createBufferReader = (args) => {
     readZlib: readZlibU8,
     readZlibU8,
     readZlibU16,
+    readZlibU32,
     get position() {
       return position
     },

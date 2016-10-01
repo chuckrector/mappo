@@ -399,6 +399,25 @@ const doubleArray = [1, 1.5, -1, -1.5, 0.003, 0]
 }
 
 {
+  // can read zlibU32 buffers
+  const raw = filler(16 * 16, 0xbeef)
+  const compressedBuffer = zlib.deflateSync(B.u32(raw))
+  const buffer = makeBuffer([
+    B.u32([raw.length * 4, compressedBuffer.length]),
+    compressedBuffer
+  ])
+  const reader = createBufferReader({data: buffer})
+  const data = reader.readZlibU32(16 * 16)
+
+  expect(data.mysize).toBe(raw.length * 4)
+  expect(data.comprLen).toBe(compressedBuffer.length)
+  expect(data.compressed.length).toBe(compressedBuffer.length)
+  expect(data.compressed).toEqual(Array.from(compressedBuffer))
+  expect(data.decompressed.length).toBe(raw.length)
+  expect(data.decompressed).toEqual(raw)
+}
+
+{
   // throw on zlibU8 size mismatch
   const reader = createBufferReader({
     data: B.u32(16 * 16 * 3),
