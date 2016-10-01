@@ -205,10 +205,11 @@ middlePanel.addEventListener(`click`, event => {
 
     store.dispatch({
       type: `PLOT_TILE`,
-      layerIndex: globalMappoState.mapLayerSelectedIndex,
+      tileLayerIndex: globalMappoState.mapLayerSelectedIndex,
+      tileIndexGridWidth: mapLayerSelected.width,
       x: tileX,
       y: tileY,
-      tileIndex: tilesetTileSelected.tileIndex,
+      tileIndexToPlot: tilesetTileSelected.tileIndex,
     })
   } else {
     console.log(`*warning* no tile selected, not plotting anything...`)
