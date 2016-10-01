@@ -4,7 +4,7 @@ const cloneDeep = require(`lodash/clonedeep`)
 const assert = require(`assert`)
 const map = require(`./reducers/map`)
 
-module.exports = (state={}, action) => {
+module.exports = (state={undo: []}, action) => {
   const plotTile = ({tileIndexGrid, layerWidth, x, y, tileIndex, layerIndex}) => {
     const layerOffset = (y * layerWidth) + x
     const overwrittenTileIndex = tileIndexGrid[layerOffset]
