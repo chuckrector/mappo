@@ -56,6 +56,7 @@ const range = require(`lodash/range`)
   const buffer = makeBuffer([
     B.string(` \n\t\r`),
     B.stringFixed(20, `Cute`),
+    B.stringLengthEncoded(`Blessed Bacon`),
     B.stringNullTerminated(`Cuddly`),
     B.string(`Kittens 255 65535 4294967295`),
   ])
@@ -64,6 +65,7 @@ const range = require(`lodash/range`)
     format: {
       _: T.whitespace,
       adjective: T.stringFixed(20),
+      food: T.stringLengthEncoded,
       type: T.stringNullTerminated,
       animal: T.string,
       a: T.stringU8,
@@ -76,6 +78,7 @@ const range = require(`lodash/range`)
   expect(data).toEqual({
     _: ` \n\t\r`,
     adjective: `Cute`,
+    food: `Blessed Bacon`,
     type: `Cuddly`,
     animal: `Kittens`,
     a: 255,

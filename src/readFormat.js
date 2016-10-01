@@ -14,6 +14,7 @@ T.stringU8 = ({reader}) => reader.readStringAsByte()
 T.stringU16 = ({reader}) => reader.readStringAsWord()
 T.stringU32 = ({reader}) => reader.readStringAsQuad()
 T.stringNullTerminated = ({reader}) => reader.readStringNullTerminated()
+T.stringLengthEncoded = ({reader}) => reader.readStringLengthEncoded()
 T.stringFixed = (length) => {
   return ({reader, record, listIndex}) => {
     return reader.readStringFixed(lengthCalculator(length, {reader, record, listIndex}))

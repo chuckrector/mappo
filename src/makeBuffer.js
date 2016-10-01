@@ -22,10 +22,15 @@ B.string = (value) => Buffer.from(arrMatey(value).join(``))
 B.stringNullTerminated = (value) => {
   return B.string(arrMatey(value).map(v => v + `\0`))
 }
+B.stringLengthEncoded = (value) => {
+  return makeBuffer([
+    B.u32(value.length),
+    B.string(value),
+  ])
+}
 B.stringFixed = (length, value) => {
   return B.string(arrMatey(value).map(v => padEnd(v, length, `\0`)))
 }
-
 B.compressedU8 = (valueList) => {
   const compressed = compressU8(valueList)
   return makeBuffer([
