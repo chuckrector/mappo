@@ -12,7 +12,16 @@ module.exports = ({
   mapFilename,
   map,
 }) => {
-  const vspFilename = path.join(path.dirname(mapFilename), map.tilesetFilename)
+  let vspFilename = path.join(path.dirname(mapFilename), map.tilesetFilename)
+
+  try {
+    fs.accesSync(vspFilename, fs.F_OK)
+  } catch (exception) {
+    const uppercaseTilesetFilename = map.tilesetFilename.toUpperCase()
+    const uppercaseVspFilename = path.join(path.dirname(mapFilename), uppercaseTilesetFilename)
+    console.log(vspFilename, `not found. trying`, uppercaseVspFilename)
+    vspFilename = uppercaseVspFilename
+  }
   const vspBuffer = fs.readFileSync(vspFilename)
   const vspFormat = detectFormat(vspBuffer)
   console.log(`vspFormat`, vspFormat)
