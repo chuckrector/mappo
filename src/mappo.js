@@ -181,28 +181,40 @@ const keyboard = setupKeyboard({
 
 middlePanel.addEventListener(`mousedown`, event => {
   globalMappoState.mouseDown = true
+
+  plot(event)
 })
+
+const getPlotCoord = ({viewportX, viewportY}) => {
+  const scale = getScale()
+  const tileWidth = store.getState().map.tileset.tileWidth
+  const tileHeight = store.getState().map.tileset.tileHeight
+  const scaleX = ~~(viewportX / scale)
+  const scaleY = ~~(viewportY / scale)
+  const parallaxX = ~~(globalMappoState.camera.x * globalMappoState.mapLayerSelected.parallax.x)
+  const parallaxY = ~~(globalMappoState.camera.y * globalMappoState.mapLayerSelected.parallax.y)
+  const pixelX = scaleX - ((parallaxX + scaleX) % tileWidth)
+  const pixelY = scaleY - ((parallaxY + scaleY) % tileHeight)
+  const tileX = ~~((globalMappoState.camera.x + pixelX) / tileWidth)
+  const tileY = ~~((globalMappoState.camera.y + pixelY) / tileHeight)
+
+  return {tileX, tileY}
+}
 
 middlePanel.addEventListener(`click`, event => {
   if (globalMappoState.isLoading) {
     return
   }
+})
 
+const plot = (event) => {
   const tilesetTileSelected = globalMappoState.tilesetTileSelected
   const mapLayerSelected = globalMappoState.mapLayerSelected
   if (tilesetTileSelected && mapLayerSelected) {
-    const scale = getScale()
-    const tileWidth = store.getState().map.tileset.tileWidth
-    const tileHeight = store.getState().map.tileset.tileHeight
-    const scaleX = ~~(event.offsetX / scale)
-    const scaleY = ~~(event.offsetY / scale)
-    const parallaxX = ~~(globalMappoState.camera.x * mapLayerSelected.parallax.x)
-    const parallaxY = ~~(globalMappoState.camera.y * mapLayerSelected.parallax.y)
-    const pixelX = scaleX - ((parallaxX + scaleX) % tileWidth)
-    const pixelY = scaleY - ((parallaxY + scaleY) % tileHeight)
-    const tileX = ~~((globalMappoState.camera.x + pixelX) / tileWidth)
-    const tileY = ~~((globalMappoState.camera.y + pixelY) / tileHeight)
-
+    const {tileX, tileY} = getPlotCoord({
+      viewportX: event.offsetX,
+      viewportY: event.offsetY,
+    })
     store.dispatch({
       type: `PLOT_TILE`,
       tileLayerIndex: globalMappoState.mapLayerSelectedIndex,
@@ -214,7 +226,7 @@ middlePanel.addEventListener(`click`, event => {
   } else {
     console.log(`*warning* no tile selected, not plotting anything...`)
   }
-})
+}
 
 middlePanel.addEventListener(`mousemove`, event => {
   if (globalMappoState.isLoading) {
@@ -228,6 +240,8 @@ middlePanel.addEventListener(`mousemove`, event => {
         -event.movementX / scale,
         -event.movementY / scale
       )
+    } else {
+      plot(event)
     }
   }
 
