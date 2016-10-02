@@ -17,6 +17,7 @@ const renderTileHighlightInvertedSolid = require(`./renderTileHighlightInvertedS
 const renderTileHighlightColorOutline = require(`./renderTileHighlightColorOutline`)
 const renderTile = require(`./renderTile`)
 const renderLayer = require(`./renderLayer`)
+const renderMap = require(`./renderMap`)
 const renderTileset = require(`./renderTileset`)
 const createCheckerboardPattern = require(`./createCheckerboardPattern`)
 const calcAutoScroll = require(`./calcAutoScroll`)
@@ -45,7 +46,10 @@ const middlePanel = document.querySelector(`.middle-panel`)
 
 const checkerboardPattern = createCheckerboardPattern({document})
 
+// TODO(chuck): move into default state?
 const store = createStore(mappoState)
+store.dispatch({type: `SELECTED_LAYER`, index: -1})
+store.dispatch({type: `SELECTED_TILE`, index: -1})
 
 const refreshUndoList = () => {
   undoList.innerHTML = ``
@@ -92,11 +96,10 @@ const defaultGlobalMappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
   mapLayerOrder: null,
-  mapLayerSelected: null,
   mapLayerTileHighlightCoord: null,
   tileset: null,
   tilesetTileHovering: null,
-  tilesetTileSelected: null,
+  tilesetTileSelected: {},
   camera: {
     x: 0,
     y: 0,
@@ -126,8 +129,9 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
     const map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
     store.dispatch({type: `SET_MAP`, map})
+    store.dispatch({type: `SELECT_LAYER`, index: 0})
+    store.dispatch({type: `SELECT_TILE`, index: 0})
 
-    globalMappoState.mapLayerSelected = store.getState().map.tileLayers[store.getState().map.mapLayerOrder[0]]
     refreshMapLayerList()
 
     tilesetSelectedTileCanvas.width = store.getState().map.tileset.tileWidth
@@ -148,12 +152,13 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
 const refreshMapLayerList = () => {
   layerList.innerHTML = ``
+  store.dispatch({type: `SELECT_LAYER`, index: 0})
   store.getState().map.tileLayers.forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
     li.classList.add(`layer-list-item`)
-    if (globalMappoState.mapLayerSelected === layer) {
+    if (store.getState().selectedTileLayerIndex === index) {
       li.classList.add(`selected`)
     }
     li.addEventListener(`click`, event => {
@@ -162,13 +167,12 @@ const refreshMapLayerList = () => {
         li.classList.toggle(`is-layer-hidden`)
         layer.isHidden = !layer.isHidden
       }
-      globalMappoState.mapLayerSelected = layer
-      globalMappoState.mapLayerSelectedIndex = store.getState().map.tileLayers.indexOf(layer)
       const layerListItems = document.querySelectorAll(`.layer-list .layer-list-item`)
       layerListItems.forEach(layerListItem => {
         layerListItem.classList.remove(`selected`)
       })
       li.classList.add(`selected`)
+      store.dispatch({type: `SELECT_LAYER`, index})
     })
     layerList.appendChild(li)
   })
@@ -182,24 +186,10 @@ const keyboard = setupKeyboard({
 middlePanel.addEventListener(`mousedown`, event => {
   globalMappoState.mouseDown = true
 
-  plot(event)
+  if (!keyboard.isPressed(`altKey`)) {
+    plot(event)
+  }
 })
-
-const getPlotCoord = ({viewportX, viewportY}) => {
-  const scale = getScale()
-  const tileWidth = store.getState().map.tileset.tileWidth
-  const tileHeight = store.getState().map.tileset.tileHeight
-  const scaleX = ~~(viewportX / scale)
-  const scaleY = ~~(viewportY / scale)
-  const parallaxX = ~~(globalMappoState.camera.x * globalMappoState.mapLayerSelected.parallax.x)
-  const parallaxY = ~~(globalMappoState.camera.y * globalMappoState.mapLayerSelected.parallax.y)
-  const pixelX = scaleX - ((parallaxX + scaleX) % tileWidth)
-  const pixelY = scaleY - ((parallaxY + scaleY) % tileHeight)
-  const tileX = ~~((globalMappoState.camera.x + pixelX) / tileWidth)
-  const tileY = ~~((globalMappoState.camera.y + pixelY) / tileHeight)
-
-  return {tileX, tileY}
-}
 
 middlePanel.addEventListener(`click`, event => {
   if (globalMappoState.isLoading) {
@@ -207,21 +197,43 @@ middlePanel.addEventListener(`click`, event => {
   }
 })
 
+const getPlotCoord = ({viewportX, viewportY}) => {
+  const scale = getScale()
+  const state = store.getState()
+  const camera = globalMappoState.camera
+  const map = state.map
+  const tileWidth = map.tileset.tileWidth
+  const tileHeight = map.tileset.tileHeight
+  const viewportScaleX = ~~(viewportX / scale)
+  const viewportScaleY = ~~(viewportY / scale)
+  const layer = map.tileLayers[state.selectedTileLayerIndex]
+  const parallaxX = ~~(globalMappoState.camera.x * layer.parallax.x)
+  const parallaxY = ~~(globalMappoState.camera.y * layer.parallax.y)
+  const mapX = parallaxX + viewportScaleX
+  const mapY = parallaxY + viewportScaleY
+  const pixelX = mapX - (mapX % tileWidth)
+  const pixelY = mapY - (mapY % tileHeight)
+  const tileX = ~~(pixelX / tileWidth)
+  const tileY = ~~(pixelY / tileHeight)
+
+  return {tileX, tileY}
+}
+
 const plot = (event) => {
-  const tilesetTileSelected = globalMappoState.tilesetTileSelected
-  const mapLayerSelected = globalMappoState.mapLayerSelected
-  if (tilesetTileSelected && mapLayerSelected) {
+  const state = store.getState()
+  if (state.seletedTileIndex !== -1 && state.selectedTileLayerIndex !== -1) {
     const {tileX, tileY} = getPlotCoord({
       viewportX: event.offsetX,
       viewportY: event.offsetY,
     })
+    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
     store.dispatch({
       type: `PLOT_TILE`,
-      tileLayerIndex: globalMappoState.mapLayerSelectedIndex,
-      tileIndexGridWidth: mapLayerSelected.width,
+      tileLayerIndex: state.selectedTileLayerIndex,
+      tileIndexGridWidth: layer.width,
+      tileIndexToPlot: state.selectedTileIndex,
       x: tileX,
       y: tileY,
-      tileIndexToPlot: tilesetTileSelected.tileIndex,
     })
   } else {
     console.log(`*warning* no tile selected, not plotting anything...`)
@@ -257,14 +269,15 @@ middlePanel.addEventListener(`mousemove`, event => {
     })
   }
 
-  const mapLayerSelected = globalMappoState.mapLayerSelected
-  if (mapLayerSelected) {
-    const tileWidth = store.getState().map.tileset.tileWidth
-    const tileHeight = store.getState().map.tileset.tileHeight
+  const state = store.getState()
+  if (state.selectedTileLayerIndex !== -1) {
+    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
+    const tileWidth = state.map.tileset.tileWidth
+    const tileHeight = state.map.tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
     const scaleY = ~~(event.offsetY / scale)
-    const parallaxX = ~~(globalMappoState.camera.x * mapLayerSelected.parallax.x)
-    const parallaxY = ~~(globalMappoState.camera.y * mapLayerSelected.parallax.y)
+    const parallaxX = ~~(globalMappoState.camera.x * layer.parallax.x)
+    const parallaxY = ~~(globalMappoState.camera.y * layer.parallax.y)
     const x = scaleX - ((parallaxX + scaleX) % tileWidth)
     const y = scaleY - ((parallaxY + scaleY) % tileHeight)
 
@@ -309,12 +322,15 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
     return
   }
 
-  globalMappoState.tilesetTileSelected = getTileCoordAndIndex({
+  const info = getTileCoordAndIndex({
     tileset: store.getState().map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
   })
+  globalMappoState.tilesetTileSelected.tileX = info.tileX
+  globalMappoState.tilesetTileSelected.tileY = info.tileY
+  store.dispatch({type: `SELECT_TILE`, index: info.tileIndex})
 })
 
 middlePanel.addEventListener(`mouseup`, event => {
@@ -356,26 +372,18 @@ const tick = () => {
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
   if (!globalMappoState.isLoading) {
-    const tileset = store.getState().map.tileset
+    const map = store.getState().map
+    const tileset = map.tileset
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
     const containerWidth = tilesetCanvasContainer.offsetWidth
 
-    store.getState().map.mapLayerOrder.forEach(layerIndex => {
-      const tileLayer = store.getState().map.tileLayers[layerIndex]
-      // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
-      //              to a map layer which doesn't exist
-      if (tileLayer && !tileLayer.isHidden) {
-        renderLayer({
-          context,
-          canvas,
-          tileset,
-          layer: tileLayer,
-          x: globalMappoState.camera.x * tileLayer.parallax.x,
-          y: globalMappoState.camera.y * tileLayer.parallax.y,
-          transparent: layerIndex > 0,
-        })
-      }
+    renderMap({
+      map,
+      tileset,
+      camera: globalMappoState.camera,
+      canvas,
+      context,
     })
 
     if (globalMappoState.mapLayerTileHighlightCoord) {
@@ -413,7 +421,8 @@ const tick = () => {
       tilesetHoveringTileIndex.innerText = store.getState().map.tilesetTileHovering.tileIndex
     }
 
-    if (globalMappoState.tilesetTileSelected) {
+    const state = store.getState()
+    if (state.selectedTileIndex !== -1) {
       renderTileHighlightColorOutline({
         context: tilesetContext,
         x: globalMappoState.tilesetTileSelected.tileX * tileWidth,
@@ -425,12 +434,12 @@ const tick = () => {
       renderTile({
         context: tilesetSelectedTileContext,
         tileset: store.getState().map.tileset,
-        tileIndex: globalMappoState.tilesetTileSelected.tileIndex,
+        tileIndex: state.selectedTileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetSelectedTileIndex.innerText = globalMappoState.tilesetTileSelected.tileIndex
+      tilesetSelectedTileIndex.innerText = state.selectedTileIndex
     }
 
     globalMappoState.camera.move = {x: 0, y: 0}

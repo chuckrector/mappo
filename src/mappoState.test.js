@@ -20,10 +20,10 @@ const mappoState = require(`./mappoState`)
   const store = createStore(mappoState)
 
   store.dispatch({type: `SELECT_LAYER`, index: 1})
-  expect(store.getState().selectedMapLayerIndex).toBe(1)
+  expect(store.getState().selectedTileLayerIndex).toBe(1)
 
   store.dispatch({type: `SELECT_LAYER`, index: 0})
-  expect(store.getState().selectedMapLayerIndex).toBe(0)
+  expect(store.getState().selectedTileLayerIndex).toBe(0)
 }
 
 {

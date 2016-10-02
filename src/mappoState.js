@@ -13,7 +13,7 @@ module.exports = (state={undo: []}, action) => {
 
     case `SELECT_LAYER`: {
       return Object.assign({}, state, {
-        selectedMapLayerIndex: action.index,
+        selectedTileLayerIndex: action.index,
       })
     } break
 
