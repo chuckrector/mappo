@@ -2,4 +2,4 @@
 
 const fill = require(`lodash/fill`)
 
-module.exports = (howMany, value) => fill(new Array(howMany), value)
+module.exports = (howMany, value=0) => fill(new Array(howMany), value)
