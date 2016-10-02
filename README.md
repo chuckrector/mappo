@@ -31,7 +31,7 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 # Supported File Formats
 
  | VERGE1 | VERGE2 | VERGE2.7 (ika) | VERGE2k+j | VERGE3
---- |:---:|:---:|:---:|:---:
+--- |:---:|:---:|:---:|:---:|:---:
 PCX          | ✅ | ✅ | ✅ | ✅ | ✅
 BOX.RAW      | ✅ | n/a | n/a | n/a | n/a
 CHR          | ✅ | ✅ | ? | ✅ | ✅
