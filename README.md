@@ -34,7 +34,7 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 --- |:---:|:---:|:---:|:---:|:---:
 PCX          | ✅ | ✅ | ✅ | ✅ | ✅
 BOX.RAW      | ✅ | n/a | n/a | n/a | n/a
-CHR          | ✅ | ✅ | ? | ✅ | ✅
+CHR          | ✅ | ✅ | ❓ | ✅ | ✅
 CR2          | ✅ | n/a | n/a | n/a | n/a
 EQUIP.DAT    | ✅ | n/a | n/a | n/a | n/a
 ITEMICON.DAT | ✅ | n/a | n/a | n/a | n/a
