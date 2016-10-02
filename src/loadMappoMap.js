@@ -12,6 +12,7 @@ module.exports = ({context, mapFilename}) => {
     console.group = console.groupEnd = () => {}
   }
   console.group()
+  console.log(`loading`, mapFilename)
   try {
     const mapBuffer = fs.readFileSync(mapFilename)
     const mapFormat = detectFormat(mapBuffer)
