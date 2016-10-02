@@ -70,6 +70,7 @@ const allFormats = {
   v2entity: require(`./formats/v2entity`),
   v2layerinfo: require(`./formats/v2layerinfo`),
   v2map: require(`./formats/v2map`),
+  v27map: require(`./formats/v27map`),
   v2kjchr: require(`./formats/v2kjchr`),
   v3chranim: require(`./formats/v3chranim`),
   v3chr: require(`./formats/v3chr`),

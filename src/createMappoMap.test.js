@@ -140,6 +140,77 @@ const createMappoMap = require(`./createMappoMap`)
 }
 
 {
+  // can create from v2.7 (ika) maps
+  const numLayers = 2
+  const width = 2
+  const height = 3
+  const v27layerinfo = makeBuffer([
+    B.u32([1, 1, 1, 1]),
+  ])
+  const v27zone = makeBuffer([
+    B.stringLengthEncoded(`zone: name`),
+    B.stringLengthEncoded(`zone: description`),
+    B.stringLengthEncoded(`zone: action script`),
+    B.stringLengthEncoded(`zone: entity action script`),
+    B.u32([0, 0]), // action chance, action delay
+    B.u8(0), // adjacent activation
+  ])
+  const v27entity = makeBuffer([
+    B.stringLengthEncoded(`entity: name`),
+    B.u32([0, 0, 0, 0]), // x, y, direction, speed
+    B.u8([0, 0, 0]), // obs map, obs ent, is obs
+    B.stringLengthEncoded(`entity: chr filename`),
+    B.u8(0), // adj act
+    B.stringLengthEncoded(`entity: action script`),
+    B.u32(0), // state
+    B.stringLengthEncoded(`entity: move script`),
+    B.u32([0, 0, 0, 0, 0, 0]), // wander: steps, delay, left, top, right, bot
+    B.stringLengthEncoded(`entity: zone`),
+    B.stringLengthEncoded(`entity: chase target`),
+    B.u32(0), // chase distance
+  ])
+  const buffer = makeBuffer([
+    B.u8(filler(6)),
+    B.stringLengthEncoded(`HAHN01.VSP`),
+    B.stringLengthEncoded(`music`),
+    B.stringLengthEncoded(`13er2`),
+    B.u32([width, height, 0, 0]), // startX, startY
+    B.u8(0), // wrap
+    B.u32(numLayers),
+    makeBuffer(filler(numLayers, v27layerinfo)),
+    B.ikaZlibU32(filler(width * height, 77)),
+    B.ikaZlibU32(filler(width * height, 88)),
+    B.ikaZlibU8(filler(width * height)),
+    B.ikaZlibU32(filler(width * height)),
+    B.u32(1), // numZones
+    v27zone,
+    B.u32(1), // numEntities
+    v27entity,
+  ])
+
+  const v27map = asset.fromBuffer(buffer, asset.v27map)
+  const mappoMap = createMappoMap({
+    map: v27map
+  })
+
+  expect(mappoMap.tilesetFilename).toBe(`HAHN01.VSP`)
+  expect(mappoMap.tileLayers.length).toBe(numLayers)
+  expect(mappoMap.mapLayerOrder).toEqual([0, 2, 1])
+
+  expect(mappoMap.tileLayers[0].width).toBe(width)
+  expect(mappoMap.tileLayers[0].height).toBe(height)
+  expect(mappoMap.tileLayers[0].description).toBe(`Layer #0`)
+  expect(mappoMap.tileLayers[0].tileIndexGrid).toEqual(filler(width * height, 77))
+  expect(mappoMap.tileLayers[0].parallax).toEqual({x: 1.0, y: 1.0})
+
+  expect(mappoMap.tileLayers[1].width).toBe(width)
+  expect(mappoMap.tileLayers[1].height).toBe(height)
+  expect(mappoMap.tileLayers[1].description).toBe(`Layer #1`)
+  expect(mappoMap.tileLayers[1].tileIndexGrid).toEqual(filler(width * height, 88))
+  expect(mappoMap.tileLayers[1].parallax).toEqual({x: 1.0, y: 1.0})
+}
+
+{
   // can create from v3 maps
   const v3layerinfo = (name, fillWith) => (
     makeBuffer([

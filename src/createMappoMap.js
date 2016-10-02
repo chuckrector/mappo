@@ -51,6 +51,23 @@ module.exports = ({map}) => {
         }
       })
     } break;
+    case `v27map`: {
+      mappoMap.mapLayerOrder = parseRenderString(map.renderString)
+      mappoMap.tilesetFilename = map.vspFilename
+      mappoMap.tileLayers = map.layers.map((tileIndexGrid, index) => {
+        const layerInfo = map.layerInfo[index]
+        return {
+          description: `Layer #` + index,
+          width: map.width,
+          height: map.height,
+          tileIndexGrid: tileIndexGrid.decompressed,
+          parallax: {
+            x: layerInfo.pmultx / layerInfo.pdivx,
+            y: layerInfo.pmulty / layerInfo.pdivy,
+          },
+        }
+      })
+    } break
     case `v3map`: {
       mappoMap.mapLayerOrder = parseRenderString(map.renderstring, `,`)
       mappoMap.tilesetFilename = map.vspname
