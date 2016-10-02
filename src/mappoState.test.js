@@ -16,6 +16,17 @@ const mappoState = require(`./mappoState`)
 }
 
 {
+  // can select layer
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `SELECT_LAYER`, index: 1})
+  expect(store.getState().selectedMapLayerIndex).toBe(1)
+
+  store.dispatch({type: `SELECT_LAYER`, index: 0})
+  expect(store.getState().selectedMapLayerIndex).toBe(0)
+}
+
+{
   // SET_MAP holds a direct reference to the map
   const store = createStore(mappoState)
   expect(store.getState()).toEqual({undo: []})
@@ -37,3 +48,4 @@ const mappoState = require(`./mappoState`)
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexGridWidth: 2, tileLayerIndex: 0, tileIndexToPlot: 99})
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
 }
+
