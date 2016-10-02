@@ -167,6 +167,13 @@ const dummyBuffer = totes => B.u8(filler(totes))
 }
 
 {
+  // can detect v2.7 (ika) MAP
+  const isMap = B.u8([77, 65, 80, 249, 54, 0])
+
+  expect(detectFormat(isMap)).toBe(`v27map`)
+}
+
+{
   // can detect v2kj CHR
   const totalframes = 1
   const isChr = makeBuffer([

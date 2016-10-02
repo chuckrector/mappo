@@ -47,6 +47,8 @@ module.exports = (buffer) => {
     const signature = reader.readByteArray(6)
     if (isEqual(signature, [77, 65, 80, 249, 53, 0])) {
       return `v2map`
+    } else if (isEqual(signature, [77, 65, 80, 249, 54, 0])) {
+      return `v27map`
     }
   }
 
