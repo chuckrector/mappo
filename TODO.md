@@ -6,7 +6,7 @@
 - handle file read errors, e.g. file doesn't exist (`readFileSync`, etc.)
 - time for react/redux? ui updates getting complex. undo/redo may be easiest with redux
 - remove T.zlib & B.zlib
-
+- cool
 ```
    SDHawk | I sure do wish people would spend more time making sweet game data editors instead of just map editors but what can you do
   kildorf | "game data editors"?
@@ -36,10 +36,7 @@
 
 # TASKS
 
-- loading mappo for first time should find all maps recursively in launch folder
-- show all those maps to the user
-- thumbnails of each map would be awesome
+- thumbnails of each recursively loaded map would be awesome
 - a small summary of info next to each map would also be great
-- clicking any map immediately loads it
 - some messaging that drag & drop can load a map too
 - drag & drop to load maps
