@@ -125,14 +125,16 @@ const range = require(`lodash/range`)
   const buffer = makeBuffer([
     B.zlibU8(rawU8),
     B.zlibU16(rawU16),
-    B.zlibU32(rawU32),
+    B.ikaZlibU8(rawU8),
+    B.ikaZlibU32(rawU32),
   ])
 
   const data = readFormat({
     format: {
       tiledatabuf: T.zlibU8(16 * 16),
       zonelayer: T.zlibU16(16 * 16),
-      ikaTileLayer: T.zlibU32(16 * 16),
+      ikaObstructionLayer: T.ikaZlibU8(16 * 16),
+      ikaTileLayer: T.ikaZlibU32(16 * 16),
     },
     reader: createBufferReader({data: buffer})
   })
@@ -146,6 +148,11 @@ const range = require(`lodash/range`)
   expect(data.zonelayer.compressed).toEqual(compressedU16)
   expect(data.zonelayer.decompressed.length).toBe(rawU8.length)
   expect(data.zonelayer.decompressed).toEqual(rawU16)
+
+  expect(data.ikaObstructionLayer.compressed.length).toBe(compressedU8.length)
+  expect(data.ikaObstructionLayer.compressed).toEqual(compressedU8)
+  expect(data.ikaObstructionLayer.decompressed.length).toBe(rawU8.length)
+  expect(data.ikaObstructionLayer.decompressed).toEqual(rawU8)
 
   expect(data.ikaTileLayer.compressed.length).toBe(compressedU32.length)
   expect(data.ikaTileLayer.compressed).toEqual(compressedU32)

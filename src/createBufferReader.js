@@ -258,20 +258,30 @@ const createBufferReader = (args) => {
     }
   }
 
-  const readZlibU32 = (length) => {
-    const mysize = readQuad()
-    if (mysize !== (length * 4)) {
-      throw new Error(`expected an uncompressed byte length of ` + (length * 4) + ` but got ` + mysize)
-    }
-
+  const readIkaZlibU8 = (length) => {
     const comprLen = readQuad()
     const compressed = readByteArray(comprLen)
-    const decompressedU8 = B.u8([...zlib.inflateSync(B.u8(compressed))]) // perf?
+    const decompressed = [...zlib.inflateSync(B.u8(compressed), {finishFlush: zlib.Z_SYNC_FLUSH})] // perf?
+
+    return {
+      comprLen,
+      compressed,
+      decompressed,
+    }
+  }
+
+  // TODO(chuck): This was added for reading VERGE 2.7 (a.k.a. ika) maps, which
+  // do not store the uncompressed size like all the other VERGE engines do.
+  // Need to rename this to something better, to help indicate that it does
+  // not have the same header format as the rest.
+  const readIkaZlibU32 = (length) => {
+    const comprLen = readQuad()
+    const compressed = readByteArray(comprLen)
+    const decompressedU8 = B.u8([...zlib.inflateSync(B.u8(compressed), {finishFlush: zlib.Z_SYNC_FLUSH})]) // perf?
     const reader = createBufferReader({data: decompressedU8})
     const decompressed = reader.readQuadArray(length)
 
     return {
-      mysize,
       comprLen,
       compressed,
       decompressed,
@@ -303,7 +313,8 @@ const createBufferReader = (args) => {
     readZlib: readZlibU8,
     readZlibU8,
     readZlibU16,
-    readZlibU32,
+    readIkaZlibU8,
+    readIkaZlibU32,
     get position() {
       return position
     },

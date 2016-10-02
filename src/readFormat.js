@@ -45,9 +45,15 @@ T.zlibU16 = (length) => {
   }
 }
 
-T.zlibU32 = (length) => {
+T.ikaZlibU8 = (length) => {
   return ({reader, record, listIndex}) => {
-    return reader.readZlibU32(lengthCalculator(length, {reader, record, listIndex}))
+    return reader.readIkaZlibU8(lengthCalculator(length, {reader, record, listIndex}))
+  }
+}
+
+T.ikaZlibU32 = (length) => {
+  return ({reader, record, listIndex}) => {
+    return reader.readIkaZlibU32(lengthCalculator(length, {reader, record, listIndex}))
   }
 }
 
@@ -98,11 +104,8 @@ const resolve = (formatOrFunction, {reader, record, listIndex}) => {
 
 const readFormat = ({format, reader, listIndex}) => {
   const record = {}
-
   Object.keys(format).forEach((key) => {
-    // console.log(`key`, key)
     record[key] = resolve(format[key], {reader, record, listIndex})
-    // console.log(` -->`, record[key])
   })
 
   return record
