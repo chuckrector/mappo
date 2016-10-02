@@ -42,19 +42,10 @@ module.exports = (buffer) => {
     return `v1speechspc`
   }
 
-  if (buffer.length >= 2 + (3 * 256) + 2 + 16 * 16) {
-    const numtilesOffset = 2 + (3 * 256)
-    const numtiles = buffer.readUInt16LE(numtilesOffset)
-    const animsize = 2 * 4 * 100
-    const tilesize = buffer.length - (numtilesOffset + 2) - animsize
-    if (tilesize % (16 * 16) === 0) {
-      return `v1vsp`
-    }
-  }
-
   if (buffer.length >= 6) {
     const reader = createBufferReader({data: buffer})
-    if (isEqual(reader.readByteArray(6), [77, 65, 80, 249, 53, 0])) {
+    const signature = reader.readByteArray(6)
+    if (isEqual(signature, [77, 65, 80, 249, 53, 0])) {
       return `v2map`
     }
   }
@@ -74,8 +65,13 @@ module.exports = (buffer) => {
           return `v2kjchr`
         }
       }
-    } else if (version === 2) {
-      return `v2chr`
+    } else {
+      const fxsize = reader.readWord()
+      const fysize = reader.readWord()
+      // TODO(chuck): Need a better heuristic here
+      if (version === 2 && fxsize === 16 && fysize === 32) {
+        return `v2chr`
+      }
     }
   }
 
@@ -93,6 +89,16 @@ module.exports = (buffer) => {
     const signature = reader.readStringFixed(6)
     if (signature === `V3MAP`) {
       return `v3map`
+    }
+  }
+
+  if (buffer.length >= 2 + (3 * 256) + 2 + 16 * 16) {
+    const numtilesOffset = 2 + (3 * 256)
+    const numtiles = buffer.readUInt16LE(numtilesOffset)
+    const animsize = 2 * 4 * 100
+    const tilesize = buffer.length - (numtilesOffset + 2) - animsize
+    if (tilesize % (16 * 16) === 0) {
+      return `v1vsp`
     }
   }
 

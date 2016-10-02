@@ -9,8 +9,8 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v1 BOX.RAW
-  const isBoxRaw = {length: 320 * 66}
-  const isNotBoxRaw = dummyBuffer(1)
+  const isBoxRaw = dummyBuffer(320 * 66)
+  const isNotBoxRaw = dummyBuffer(255)
 
   expect(detectFormat(isBoxRaw)).toBe(`v1boxraw`)
   expect(detectFormat(isNotBoxRaw)).toBe(`unknown`)
@@ -20,7 +20,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
   // can detect v1 CHR
   const isV1Chr = {length: 16 * 32 * 30}
   const isAlsoV1Chr = {length: 16 * 32 * 20}
-  const isNotV1Chr = dummyBuffer(1)
+  const isNotV1Chr = dummyBuffer((16 * 32) + 2)
 
   expect(detectFormat(isV1Chr)).toBe(`v1chr`)
   expect(detectFormat(isAlsoV1Chr)).toBe(`v1chr`)
@@ -30,7 +30,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 {
   // can detect v1 VERGE.PAL
   const isPalette = {length: 3 * 256}
-  const isNotPalette = dummyBuffer(1)
+  const isNotPalette = dummyBuffer(255)
 
   expect(detectFormat(isPalette)).toBe(`v1pal`)
   expect(detectFormat(isNotPalette)).toBe(`unknown`)
@@ -39,7 +39,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 {
   // can detect v1 CR2
   const isCr2 = {length: 96 * 96}
-  const isNotCr2 = dummyBuffer(1)
+  const isNotCr2 = dummyBuffer(255)
 
   expect(detectFormat(isCr2)).toBe(`v1cr2`)
   expect(detectFormat(isNotCr2)).toBe(`unknown`)
@@ -48,7 +48,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 {
   // can detect v1 MAIN.FNT
   const isMainFnt = {length: 9 * 16 * 95}
-  const isNotMainFnt = dummyBuffer(1)
+  const isNotMainFnt = dummyBuffer(255)
 
   expect(detectFormat(isMainFnt)).toBe(`v1mainfnt`)
   expect(detectFormat(isNotMainFnt)).toBe(`unknown`)
@@ -57,7 +57,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 {
   // can detect v1 SMALL.FNT
   const isSmallFnt = {length: 7 * 9 * 95}
-  const isNotSmallFnt = dummyBuffer(1)
+  const isNotSmallFnt = dummyBuffer(255)
 
   expect(detectFormat(isSmallFnt)).toBe(`v1smallfnt`)
   expect(detectFormat(isNotSmallFnt)).toBe(`unknown`)
@@ -66,7 +66,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 {
   // can detect v1 TRANS.TBL
   const isTransTbl = {length: 256 * 256}
-  const isNotTransTbl = dummyBuffer(1)
+  const isNotTransTbl = dummyBuffer(255)
 
   expect(detectFormat(isTransTbl)).toBe(`v1transtbl`)
   expect(detectFormat(isNotTransTbl)).toBe(`unknown`)
@@ -125,7 +125,12 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v2 CHR
-  expect(detectFormat(B.u8(2))).toBe(`v2chr`)
+  const isChr = makeBuffer([
+    B.u8(2),
+    B.u16([16, 32]),
+  ])
+
+  expect(detectFormat(isChr)).toBe(`v2chr`)
 }
 
 {
@@ -185,12 +190,12 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v3 CHR
-  expect(detectFormat(B.u32(5392451))).toBe(`v3chr`)
+  expect(detectFormat(B.u32([5392451, 0]))).toBe(`v3chr`)
 }
 
 {
   // can detect v3 VSP
-  expect(detectFormat(B.u32(5264214))).toBe(`v3vsp`)
+  expect(detectFormat(B.u32([5264214, 0]))).toBe(`v3vsp`)
 }
 
 {
