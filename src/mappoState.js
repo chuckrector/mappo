@@ -17,6 +17,12 @@ module.exports = (state={undo: []}, action) => {
       })
     } break
 
+    case `SELECT_TILE`: {
+      return Object.assign({}, state, {
+        selectedTileIndex: action.index,
+      })
+    } break
+
     case `PLOT_TILE`: {
       return Object.assign({}, state, {
         map: map(state.map, action)
