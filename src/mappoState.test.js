@@ -38,6 +38,17 @@ const mappoState = require(`./mappoState`)
 }
 
 {
+  // can highlight map tile
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 1, y: 2})
+  expect(store.getState().highlightedMapTile).toEqual({x: 1, y: 2})
+
+  store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 3, y: 4})
+  expect(store.getState().highlightedMapTile).toEqual({x: 3, y: 4})
+}
+
+{
   // SET_MAP holds a direct reference to the map
   const store = createStore(mappoState)
   expect(store.getState()).toEqual({undo: []})

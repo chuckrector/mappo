@@ -29,6 +29,15 @@ module.exports = (state={undo: []}, action) => {
       })
     } break
 
+    case `HIGHLIGHT_MAP_TILE`: {
+      return Object.assign({}, state, {
+        highlightedMapTile: {
+          x: action.x,
+          y: action.y,
+        },
+      })
+    } break
+
     case `MOVE_CAMERA`: {
       return Object.assign({}, state, {
         camera: {
