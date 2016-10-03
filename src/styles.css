@@ -91,6 +91,7 @@ canvas {
 /* UNDO LIST */
 
 .undo-list-container {
+  display: none;
   flex: 1 0;
   max-height: 50%;
   overflow: hidden;
