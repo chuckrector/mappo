@@ -173,7 +173,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u8(filler(6)),
     B.stringLengthEncoded(`HAHN01.VSP`),
     B.stringLengthEncoded(`music`),
-    B.stringLengthEncoded(`13er2`),
+    B.stringLengthEncoded(`1er2`),
     B.u32([width, height, 0, 0]), // startX, startY
     B.u8(0), // wrap
     B.u32(numLayers),
@@ -195,7 +195,7 @@ const createMappoMap = require(`./createMappoMap`)
 
   expect(mappoMap.tilesetFilename).toBe(`HAHN01.VSP`)
   expect(mappoMap.tileLayers.length).toBe(numLayers)
-  expect(mappoMap.mapLayerOrder).toEqual([0, 2, 1])
+  expect(mappoMap.mapLayerOrder).toEqual([0, 1])
 
   expect(mappoMap.tileLayers[0].width).toBe(width)
   expect(mappoMap.tileLayers[0].height).toBe(height)
