@@ -38,15 +38,15 @@ module.exports = ({map}) => {
       mappoMap.mapLayerOrder = parseRenderString(map.rstring)
       mappoMap.tilesetFilename = map.vspname
       mappoMap.tileLayers = map.layers.map((tileIndexGrid, index) => {
-        const layer = map.layerInfo[index]
+        const layerInfo = map.layerInfo[index]
         return {
           description: `Layer #` + index,
-          width: layer.sizex,
-          height: layer.sizey,
+          width: layerInfo.sizex,
+          height: layerInfo.sizey,
           tileIndexGrid: tileIndexGrid.decompressed,
           parallax: {
-            x: layer.pmultx / layer.pdivx,
-            y: layer.pmulty / layer.pdivy,
+            x: layerInfo.pmultx / layerInfo.pdivx,
+            y: layerInfo.pmulty / layerInfo.pdivy,
           },
         }
       })
