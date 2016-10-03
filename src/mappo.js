@@ -77,8 +77,6 @@ const refreshUndoList = () => {
   }
 }
 
-store.subscribe(refreshUndoList)
-
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
 const mapGlob = `**/*.map`
@@ -143,28 +141,29 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 })
 
 const refreshMapLayerList = () => {
+  const state = store.getState()
+  if (!state.map) {
+    return
+  }
   layerList.innerHTML = ``
-  store.dispatch({type: `SELECT_LAYER`, index: 0})
-  store.getState().map.tileLayers.forEach((layer, index) => {
+  state.map.tileLayers.forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
     li.classList.add(`layer-list-item`)
-    if (store.getState().selectedTileLayerIndex === index) {
+    if (state.layerHidden && state.layerHidden[index]) {
+      li.classList.add(`is-layer-hidden`)
+    }
+    if (state.selectedTileLayerIndex === index) {
       li.classList.add(`selected`)
     }
     li.addEventListener(`click`, event => {
       // TODO(chuck): use a proper element?
       if (event.offsetX < 35) {
-        li.classList.toggle(`is-layer-hidden`)
-        layer.isHidden = !layer.isHidden
+        store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index})
+      } else {
+        store.dispatch({type: `SELECT_LAYER`, index})
       }
-      const layerListItems = document.querySelectorAll(`.layer-list .layer-list-item`)
-      layerListItems.forEach(layerListItem => {
-        layerListItem.classList.remove(`selected`)
-      })
-      li.classList.add(`selected`)
-      store.dispatch({type: `SELECT_LAYER`, index})
     })
     layerList.appendChild(li)
   })
@@ -392,6 +391,7 @@ const tick = () => {
       camera: state.camera,
       canvas,
       context,
+      layerHidden: state.layerHidden,
     })
 
     renderTileHighlightInvertedOutline({
@@ -519,3 +519,5 @@ resizeCanvas()
 
 tick()
 
+store.subscribe(refreshUndoList)
+store.subscribe(refreshMapLayerList)
