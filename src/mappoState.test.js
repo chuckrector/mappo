@@ -27,6 +27,17 @@ const mappoState = require(`./mappoState`)
 }
 
 {
+  // can toggle layer visibility
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
+  expect(store.getState().layerHidden[0]).toBe(true)
+
+  store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
+  expect(store.getState().layerHidden[0]).toBe(false)
+}
+
+{
   // can select tile
   const store = createStore(mappoState)
 

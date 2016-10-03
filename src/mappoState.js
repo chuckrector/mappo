@@ -2,6 +2,8 @@
 
 const assert = require(`assert`)
 const map = require(`./reducers/map`)
+const immutableArraySet = require(`./immutableArraySet`)
+const filler = require(`./filler`)
 
 module.exports = (state={undo: []}, action) => {
   switch (action.type) {
@@ -35,6 +37,21 @@ module.exports = (state={undo: []}, action) => {
           x: action.x,
           y: action.y,
         },
+      })
+    } break
+
+    case `TOGGLE_LAYER_VISIBILITY`: {
+      let layerHidden = state.layerHidden
+      if (!layerHidden) {
+        layerHidden = filler(20)
+      }
+      let isHidden = !layerHidden[action.index]
+      return Object.assign({}, state, {
+        layerHidden: immutableArraySet({
+          array: layerHidden,
+          index: action.index,
+          newValue: isHidden,
+        })
       })
     } break
 
