@@ -100,14 +100,6 @@ const defaultGlobalMappoState = {
   tileset: null,
   tilesetTileHovering: null,
   tilesetTileSelected: {},
-  camera: {
-    x: 0,
-    y: 0,
-    move: {
-      x: 0,
-      y: 0,
-    },
-  },
   cameraScrollAmount: 1,
   keyPressed: {},
   mouseDown: false,
@@ -128,6 +120,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     globalMappoState.isLoading = true
 
     const map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
+    store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})
     store.dispatch({type: `SET_MAP`, map})
     store.dispatch({type: `SELECT_LAYER`, index: 0})
     store.dispatch({type: `SELECT_TILE`, index: 0})
@@ -200,15 +193,14 @@ middlePanel.addEventListener(`click`, event => {
 const getPlotCoord = ({viewportX, viewportY}) => {
   const scale = getScale()
   const state = store.getState()
-  const camera = globalMappoState.camera
   const map = state.map
   const tileWidth = map.tileset.tileWidth
   const tileHeight = map.tileset.tileHeight
   const viewportScaleX = ~~(viewportX / scale)
   const viewportScaleY = ~~(viewportY / scale)
   const layer = map.tileLayers[state.selectedTileLayerIndex]
-  const parallaxX = ~~(globalMappoState.camera.x * layer.parallax.x)
-  const parallaxY = ~~(globalMappoState.camera.y * layer.parallax.y)
+  const parallaxX = ~~(state.camera.x * layer.parallax.x)
+  const parallaxY = ~~(state.camera.y * layer.parallax.y)
   const mapX = parallaxX + viewportScaleX
   const mapY = parallaxY + viewportScaleY
   const pixelX = mapX - (mapX % tileWidth)
@@ -227,6 +219,9 @@ const plot = (event) => {
       viewportY: event.offsetY,
     })
     const layer = state.map.tileLayers[state.selectedTileLayerIndex]
+    if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.selectedTileIndex) {
+      return
+    }
     store.dispatch({
       type: `PLOT_TILE`,
       tileLayerIndex: state.selectedTileLayerIndex,
@@ -276,8 +271,8 @@ middlePanel.addEventListener(`mousemove`, event => {
     const tileHeight = state.map.tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
     const scaleY = ~~(event.offsetY / scale)
-    const parallaxX = ~~(globalMappoState.camera.x * layer.parallax.x)
-    const parallaxY = ~~(globalMappoState.camera.y * layer.parallax.y)
+    const parallaxX = ~~(state.camera.x * layer.parallax.x)
+    const parallaxY = ~~(state.camera.y * layer.parallax.y)
     const x = scaleX - ((parallaxX + scaleX) % tileWidth)
     const y = scaleY - ((parallaxY + scaleY) % tileHeight)
 
@@ -344,14 +339,25 @@ middlePanel.addEventListener(`mouseenter`, event => {
 middlePanel.addEventListener(`mouseout`, event => {
   globalMappoState.mouseInViewport = false
   globalMappoState.mouseDown = false
-  globalMappoState.camera.move = {x: 0, y: 0}
   globalMappoState.autoScroll = {}
   globalMappoState.mapLayerTileHighlightCoord = null
 })
 
 const moveCamera = (moveX, moveY) => {
-  globalMappoState.camera.x = clamp(globalMappoState.camera.x + moveX, 0, (store.getState().map.tileLayers[0].width * store.getState().map.tileset.tileWidth) - canvas.width)
-  globalMappoState.camera.y = clamp(globalMappoState.camera.y + moveY, 0, (store.getState().map.tileLayers[0].height * store.getState().map.tileset.tileHeight) - canvas.height)
+  const state = store.getState()
+  const map = state.map
+  const mapWidth = map.tileLayers[0].width
+  const mapHeight = map.tileLayers[0].height
+  const tileWidth = map.tileset.tileWidth
+  const tileHeight = map.tileset.tileHeight
+  const maxX = mapWidth * tileWidth - canvas.width
+  const maxY = mapHeight * tileHeight - canvas.height
+  const newX = clamp(state.camera.x + moveX, 0, maxX)
+  const newY = clamp(state.camera.y + moveY, 0, maxY)
+
+  if (newX !== state.camera.x || newY !== state.camera.y) {
+    store.dispatch({type: `MOVE_CAMERA`, x: newX, y: newY})
+  }
 }
 
 const getTilesetColumns = ({tileset, containerWidth}) => {
@@ -372,7 +378,8 @@ const tick = () => {
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
   if (!globalMappoState.isLoading) {
-    const map = store.getState().map
+    const state = store.getState()
+    const map = state.map
     const tileset = map.tileset
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
@@ -381,7 +388,7 @@ const tick = () => {
     renderMap({
       map,
       tileset,
-      camera: globalMappoState.camera,
+      camera: state.camera,
       canvas,
       context,
     })
@@ -421,7 +428,6 @@ const tick = () => {
       tilesetHoveringTileIndex.innerText = store.getState().map.tilesetTileHovering.tileIndex
     }
 
-    const state = store.getState()
     if (state.selectedTileIndex !== -1) {
       renderTileHighlightColorOutline({
         context: tilesetContext,
@@ -442,14 +448,15 @@ const tick = () => {
       tilesetSelectedTileIndex.innerText = state.selectedTileIndex
     }
 
-    globalMappoState.camera.move = {x: 0, y: 0}
     const autoScroll = globalMappoState.autoScroll
     if (autoScroll) {
-      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (globalMappoState.camera.move.y = -globalMappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (globalMappoState.camera.move.y = +globalMappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (globalMappoState.camera.move.x = -globalMappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (globalMappoState.camera.move.x = +globalMappoState.cameraScrollAmount);
-      moveCamera(globalMappoState.camera.move.x, globalMappoState.camera.move.y)
+      let moveX = 0
+      let moveY = 0;
+      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (moveY = -globalMappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (moveY = +globalMappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (moveX = -globalMappoState.cameraScrollAmount);
+      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (moveX = +globalMappoState.cameraScrollAmount);
+      moveCamera(moveX, moveY)
     }
 
     // map zooming

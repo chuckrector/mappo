@@ -29,6 +29,15 @@ module.exports = (state={undo: []}, action) => {
       })
     } break
 
+    case `MOVE_CAMERA`: {
+      return Object.assign({}, state, {
+        camera: {
+          x: action.x,
+          y: action.y,
+        },
+      })
+    } break
+
     default: {
       return state
     }

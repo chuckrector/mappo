@@ -60,3 +60,13 @@ const mappoState = require(`./mappoState`)
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
 }
 
+{
+  // can move camera
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `MOVE_CAMERA`, x: 2, y: 3})
+  expect(store.getState().camera).toEqual({x: 2, y: 3})
+
+  store.dispatch({type: `MOVE_CAMERA`, x: 4, y: 5})
+  expect(store.getState().camera).toEqual({x: 4, y: 5})
+}
