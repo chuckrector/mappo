@@ -96,7 +96,6 @@ const defaultGlobalMappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
   isLoading: true,
   mapLayerOrder: null,
-  mapLayerTileHighlightCoord: null,
   tileset: null,
   tilesetTileHovering: null,
   tilesetTileSelected: {},
@@ -123,6 +122,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     store.dispatch({type: `SET_MAP`, map})
     store.dispatch({type: `SELECT_LAYER`, index: 0})
     store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
+    store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 0, y: 0})
 
     refreshMapLayerList()
 
@@ -275,7 +275,9 @@ middlePanel.addEventListener(`mousemove`, event => {
     const x = scaleX - ((parallaxX + scaleX) % tileWidth)
     const y = scaleY - ((parallaxY + scaleY) % tileHeight)
 
-    globalMappoState.mapLayerTileHighlightCoord = {x, y}
+    if (x !== state.highlightedMapTile.x || y !== state.highlightedMapTile.y) {
+      store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x, y})
+    }
   }
 })
 
@@ -392,39 +394,37 @@ const tick = () => {
       context,
     })
 
-    if (globalMappoState.mapLayerTileHighlightCoord) {
-      renderTileHighlightInvertedOutline({
-        context,
-        x: globalMappoState.mapLayerTileHighlightCoord.x,
-        y: globalMappoState.mapLayerTileHighlightCoord.y,
-        width: tileWidth,
-        height: tileHeight,
-      })
-    }
+    renderTileHighlightInvertedOutline({
+      context,
+      x: state.highlightedMapTile.x,
+      y: state.highlightedMapTile.y,
+      width: tileWidth,
+      height: tileHeight,
+    })
 
     renderTileset({
       context: tilesetContext,
-      tileset: store.getState().map.tileset,
+      tileset: state.map.tileset,
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
-    if (store.getState().map.tilesetTileHovering) {
+    if (state.map.tilesetTileHovering) {
       renderTileHighlightInvertedSolid({
         context: tilesetContext,
-        x: store.getState().map.tilesetTileHovering.tileX * tileWidth,
-        y: store.getState().map.tilesetTileHovering.tileY * tileHeight,
+        x: state.map.tilesetTileHovering.tileX * tileWidth,
+        y: state.map.tilesetTileHovering.tileY * tileHeight,
         width: tileWidth,
         height: tileHeight,
       })
       renderTile({
         context: tilesetHoveringTileContext,
-        tileset: store.getState().map.tileset,
-        tileIndex: store.getState().map.tilesetTileHovering.tileIndex,
+        tileset: state.map.tileset,
+        tileIndex: state.map.tilesetTileHovering.tileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetHoveringTileIndex.innerText = store.getState().map.tilesetTileHovering.tileIndex
+      tilesetHoveringTileIndex.innerText = state.map.tilesetTileHovering.tileIndex
     }
 
     if (state.selectedTileIndex !== -1) {
@@ -438,7 +438,7 @@ const tick = () => {
       })
       renderTile({
         context: tilesetSelectedTileContext,
-        tileset: store.getState().map.tileset,
+        tileset: state.map.tileset,
         tileIndex: state.selectedTileIndex,
         x: 0,
         y: 0,
