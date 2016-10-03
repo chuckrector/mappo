@@ -196,6 +196,33 @@ const dummyBuffer = totes => B.u8(filler(totes))
 }
 
 {
+  // can detect v2kj v4 vsp
+  const numTiles = 1
+  const isVsp = makeBuffer([
+    B.u16(4),
+    B.u16(numTiles),
+    B.u16(filler(16 * 16 * numTiles)),
+    B.u16(filler(4 * 100)),
+  ])
+
+  expect(detectFormat(isVsp)).toBe(`v2kj4vsp`)
+}
+
+{
+  // can detect v2kj v5 vsp
+  const numTiles = 1
+  const isVsp = makeBuffer([
+    B.u16(5),
+    B.u16(numTiles),
+    B.u32(27),
+    B.u8(filler(27)),
+    B.u16(filler(4 * 100)),
+  ])
+
+  expect(detectFormat(isVsp)).toBe(`v2kj5vsp`)
+}
+
+{
   // can detect v3 CHR
   expect(detectFormat(B.u32([5392451, 0]))).toBe(`v3chr`)
 }

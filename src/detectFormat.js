@@ -52,6 +52,25 @@ module.exports = (buffer) => {
     }
   }
 
+  const VSP_ANIMATIONS_SIZE = 4 * 2 * 100
+  if (buffer.length >= 2 + 2 + VSP_ANIMATIONS_SIZE) {
+    const reader = createBufferReader({data: buffer})
+    const version = reader.readWord()
+    if (version === 4 || version === 5) {
+      const numTiles = reader.readWord()
+      if (version === 4) {
+        if (buffer.length === 2 + 2 + (16 * 16 * numTiles * 2) + VSP_ANIMATIONS_SIZE) {
+          return 'v2kj4vsp'
+        }
+      } else {
+        const compressedBufferLength = reader.readQuad()
+        if (buffer.length === 2 + 2 + 4 + compressedBufferLength + VSP_ANIMATIONS_SIZE) {
+          return 'v2kj5vsp'
+        }
+      }
+    }
+  }
+
   if (buffer.length > 0) {
     const reader = createBufferReader({data: buffer})
     const version = reader.readByte()
