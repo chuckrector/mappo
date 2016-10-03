@@ -68,6 +68,28 @@ module.exports = (buffer) => {
           return 'v2kj5vsp'
         }
       }
+    } else if (version === 6) {
+      if (buffer.length >= 2 + 1 + 2 + 2 + 4 + 64 + (3 * 256) + 1 + 4 + VSP_ANIMATIONS_SIZE) {
+        const bytesPerPixel = reader.readByte()
+        if (bytesPerPixel === 1) {
+          const tileWidth = reader.readWord()
+          const tileHeight = reader.readWord()
+          const numTiles = reader.readQuad()
+          const description = reader.readStringFixed(64)
+          const palette = reader.readByteArray(3 * 256)
+          const transparentIndex = reader.readByte()
+          const compressedBufferLength = reader.readQuad()
+          if (
+            bytesPerPixel === 1 &&
+            buffer.length === (
+              2 + 1 + 2 + 2 + 4 + 64 + (256 * 3) + 1 + 4 +
+              compressedBufferLength + VSP_ANIMATIONS_SIZE
+            )
+          ) {
+            return `v27vsp8bit`
+          }
+        }
+      }
     }
   }
 

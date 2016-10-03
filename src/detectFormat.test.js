@@ -223,6 +223,28 @@ const dummyBuffer = totes => B.u8(filler(totes))
 }
 
 {
+  // can detect v27/ika v6 8-bit vsp
+  const numTiles = 1
+  const bytesPerPixel = 1
+  const tileWidth = 24
+  const tileHeight = 24
+  const transparentIndex = 0
+  const isVsp = makeBuffer([
+    B.u16(6),
+    B.u8(bytesPerPixel),
+    B.u16([tileWidth, tileHeight]),
+    B.u32(numTiles),
+    B.stringFixed(64, `v27/ika v6 8-bit vsp`),
+    B.u8(filler(256 * 3)),
+    B.u8(transparentIndex),
+    B.ikaZlibU8(filler(tileWidth * tileHeight, 99)),
+    B.u16(filler(4 * 100)),
+  ])
+
+  expect(detectFormat(isVsp)).toBe(`v27vsp8bit`)
+}
+
+{
   // can detect v3 CHR
   expect(detectFormat(B.u32([5392451, 0]))).toBe(`v3chr`)
 }
