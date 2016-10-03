@@ -237,11 +237,32 @@ const dummyBuffer = totes => B.u8(filler(totes))
     B.stringFixed(64, `v27/ika v6 8-bit vsp`),
     B.u8(filler(256 * 3)),
     B.u8(transparentIndex),
-    B.ikaZlibU8(filler(tileWidth * tileHeight, 99)),
+    B.ikaZlibU8(filler(tileWidth * tileHeight * numTiles, 99)),
     B.u16(filler(4 * 100)),
   ])
 
   expect(detectFormat(isVsp)).toBe(`v27vsp8bit`)
+}
+
+{
+  // can detect v27/ika v6 32-bit vsp
+  const numTiles = 1
+  const bytesPerPixel = 4
+  const tileWidth = 24
+  const tileHeight = 24
+  const transparentIndex = 0
+  const isVsp = makeBuffer([
+    B.u16(6),
+    B.u8(bytesPerPixel),
+    B.u16([tileWidth, tileHeight]),
+    B.u32(numTiles),
+    B.stringFixed(64, `v27/ika v6 32-bit vsp`),
+    B.ikaZlibU8(filler(tileWidth * tileHeight * numTiles * 4, 99)),
+    B.u16(filler(4 * 100)),
+    B.u8(filler(400)), // TODO(chuck): figure out wtf this 💩 is for
+  ])
+
+  expect(detectFormat(isVsp)).toBe(`v27vsp32bit`)
 }
 
 {

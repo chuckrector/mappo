@@ -69,7 +69,7 @@ module.exports = (buffer) => {
         }
       }
     } else if (version === 6) {
-      if (buffer.length >= 2 + 1 + 2 + 2 + 4 + 64 + (3 * 256) + 1 + 4 + VSP_ANIMATIONS_SIZE) {
+      if (buffer.length >= 2 + 1 + 2 + 2 + 4 + 64 + 4 + VSP_ANIMATIONS_SIZE) {
         const bytesPerPixel = reader.readByte()
         if (bytesPerPixel === 1) {
           const tileWidth = reader.readWord()
@@ -80,7 +80,6 @@ module.exports = (buffer) => {
           const transparentIndex = reader.readByte()
           const compressedBufferLength = reader.readQuad()
           if (
-            bytesPerPixel === 1 &&
             buffer.length === (
               2 + 1 + 2 + 2 + 4 + 64 + (256 * 3) + 1 + 4 +
               compressedBufferLength + VSP_ANIMATIONS_SIZE
@@ -88,6 +87,22 @@ module.exports = (buffer) => {
           ) {
             return `v27vsp8bit`
           }
+        } else if (bytesPerPixel === 4) {
+          const tileWidth = reader.readWord()
+          const tileHeight = reader.readWord()
+          const numTiles = reader.readQuad()
+          const description = reader.readStringFixed(64)
+          const compressedBufferLength = reader.readQuad()
+          if (
+            buffer.length === (
+              2 + 1 + 2 + 2 + 4 + 64 + 4 +
+              compressedBufferLength + VSP_ANIMATIONS_SIZE + 400
+            )
+          ) {
+            return `v27vsp32bit`
+          }
+          reader.readByteArray(compressedBufferLength)
+          reader.readWordArray(4 * 100)
         }
       }
     }

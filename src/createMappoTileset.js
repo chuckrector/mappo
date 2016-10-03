@@ -25,6 +25,24 @@ module.exports = ({context, tileset}) => {
         raw8bitData: tileset.imagedata.decompressed,
       })
     } break;
+
+    case `v27vsp8bit`: {
+      mappoTileset.tileWidth = tileset.tileWidth
+      mappoTileset.tileHeight = tileset.tileHeight
+      mappoTileset.numTiles = tileset.numTiles
+      mappoTileset.raw32bitData = colorDepth.convert8to32({
+        palette: tileset.palette,
+        raw8bitData: tileset.imageData.decompressed,
+      })
+    } break
+
+    case `v27vsp32bit`: {
+      mappoTileset.tileWidth = tileset.tileWidth
+      mappoTileset.tileHeight = tileset.tileHeight
+      mappoTileset.numTiles = tileset.numTiles
+      mappoTileset.raw32bitData = tileset.imageData.decompressed
+    } break
+
     case `v3vsp`: {
       mappoTileset.tileWidth = tileset.tilesize
       mappoTileset.tileHeight = tileset.tilesize

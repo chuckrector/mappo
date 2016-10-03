@@ -71,6 +71,8 @@ const allFormats = {
   v2layerinfo: require(`./formats/v2layerinfo`),
   v2map: require(`./formats/v2map`),
   v27map: require(`./formats/v27map`),
+  v27vsp8bit: require(`./formats/v27vsp8bit`),
+  v27vsp32bit: require(`./formats/v27vsp32bit`),
   v2kjchr: require(`./formats/v2kjchr`),
   v3chranim: require(`./formats/v3chranim`),
   v3chr: require(`./formats/v3chr`),
