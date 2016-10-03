@@ -1,3 +1,23 @@
+## 0.30.0 (Oct 1, 2016)
+
+- fix false positives on v1itemicondat file format detection
+- if loading .VSP tileset fails, attempt with uppercase filename
+- fix broken rendering due to some maps referencing non-existent layers
+
+## 0.29.0 (Sep 27, 2016)
+
+- hold ALT and drag mouse to scroll viewport
+- click map viewport to plot tile
+
+## 0.28.0 (Sep 26, 2016)
+
+- map2tmx cli
+
+## 0.27.0 (Sep 25, 2016)
+
+- zoom tileset in sync with map viewport
+- show tile highlight over hovered tiles in map viewport & tile selector
+
 ## 0.26.0 (Sep 24, 2016)
 
 - draw map layers in correct order

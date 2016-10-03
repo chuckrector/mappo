@@ -1,4 +1,4 @@
-# ![alt text](/img/v1/CRYSTAL.CHR-down.gif?raw=true "a sample of v2chr2gif cli output") mappo v0.26.0 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
+# ![alt text](/img/v1/CRYSTAL.CHR-down.gif?raw=true "a sample of v2chr2gif cli output") mappo v0.30.0 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
 
 ![alt text](/img/wip/mappo-wip-tileset-selected-and-hovering-tiles.png?raw=true "mappo work-in-progress screenshot of recently implemented display of which tile is currently selected and being hovered over in the tileset")
 
