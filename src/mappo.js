@@ -122,7 +122,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})
     store.dispatch({type: `SET_MAP`, map})
     store.dispatch({type: `SELECT_LAYER`, index: 0})
-    store.dispatch({type: `SELECT_TILE`, index: 0})
+    store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
 
     refreshMapLayerList()
 
@@ -324,7 +324,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
   })
   globalMappoState.tilesetTileSelected.tileX = info.tileX
   globalMappoState.tilesetTileSelected.tileY = info.tileY
-  store.dispatch({type: `SELECT_TILE`, index: info.tileIndex})
+  store.dispatch({type: `SELECT_TILESET_TILE`, index: info.tileIndex})
 })
 
 middlePanel.addEventListener(`mouseup`, event => {

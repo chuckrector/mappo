@@ -17,7 +17,7 @@ module.exports = (state={undo: []}, action) => {
       })
     } break
 
-    case `SELECT_TILE`: {
+    case `SELECT_TILESET_TILE`: {
       return Object.assign({}, state, {
         selectedTileIndex: action.index,
       })

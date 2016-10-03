@@ -30,10 +30,10 @@ const mappoState = require(`./mappoState`)
   // can select tile
   const store = createStore(mappoState)
 
-  store.dispatch({type: `SELECT_TILE`, index: 1})
+  store.dispatch({type: `SELECT_TILESET_TILE`, index: 1})
   expect(store.getState().selectedTileIndex).toBe(1)
 
-  store.dispatch({type: `SELECT_TILE`, index: 0})
+  store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
   expect(store.getState().selectedTileIndex).toBe(0)
 }
 
