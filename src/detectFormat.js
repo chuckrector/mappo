@@ -93,11 +93,15 @@ module.exports = (buffer) => {
           const numTiles = reader.readQuad()
           const description = reader.readStringFixed(64)
           const compressedBufferLength = reader.readQuad()
-          if (
-            buffer.length === (
+          const expectedLength = (
               2 + 1 + 2 + 2 + 4 + 64 + 4 +
-              compressedBufferLength + VSP_ANIMATIONS_SIZE + 400
+              compressedBufferLength + VSP_ANIMATIONS_SIZE
             )
+          if (
+            // experiment/MRDOUGH/town.vsp is A-OK
+            buffer.length === expectedLength ||
+            // TODO(chuck): why 400 extra? experiment/DEFLATOR/tehvsp.vsp has it
+            buffer.length === expectedLength + 400
           ) {
             return `v27vsp32bit`
           }

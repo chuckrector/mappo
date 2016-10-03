@@ -106,6 +106,9 @@ let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
 const getScale = () => viewportScales[globalMappoState.scaleIndex]
 
+let maxMapWidth = 0
+let maxMapHeight = 0
+
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement(`li`)
   li.setAttribute(`title`, mapFilename)
@@ -117,6 +120,10 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
     const map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
     store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})
+    // TODO(chuck): map contains ImageBitmaps, which is not good for redux.
+    //              figure out a better way to store this so that the full
+    //              state can be written to disk and reloaded later without
+    //              problems.
     store.dispatch({type: `SET_MAP`, map})
     store.dispatch({type: `SELECT_LAYER`, index: 0})
     store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
@@ -128,6 +135,17 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     tilesetSelectedTileCanvas.height = store.getState().map.tileset.tileHeight
     tilesetHoveringTileCanvas.width = store.getState().map.tileset.tileWidth
     tilesetHoveringTileCanvas.height = store.getState().map.tileset.tileHeight
+
+    maxMapWidth = 0
+    maxMapHeight = 0
+    map.tileLayers.forEach(layer => {
+      if (maxMapWidth < layer.width) {
+        maxMapWidth = layer.width
+      }
+      if (maxMapHeight < layer.height) {
+        maxMapHeight = layer.height
+      }
+    })
 
     // TODO(chuck): shorten this crazy chain
     store.getState().map.tileset.imageBitmapPromise.then(() => {
@@ -346,8 +364,8 @@ middlePanel.addEventListener(`mouseout`, event => {
 const moveCamera = (moveX, moveY) => {
   const state = store.getState()
   const map = state.map
-  const mapWidth = map.tileLayers[0].width
-  const mapHeight = map.tileLayers[0].height
+  const mapWidth = maxMapWidth
+  const mapHeight = maxMapHeight
   const tileWidth = map.tileset.tileWidth
   const tileHeight = map.tileset.tileHeight
   const maxX = mapWidth * tileWidth - canvas.width

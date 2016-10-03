@@ -55,7 +55,9 @@ module.exports = ({map}) => {
       mappoMap.mapLayerOrder = parseRenderString(map.renderString)
       mappoMap.tilesetFilename = map.vspFilename
       mappoMap.tileLayers = map.layers.map((tileIndexGrid, index) => {
-        const layerInfo = map.layerInfo[index]
+        // TODO(chuck): this seems entirely wrong, yet it fixes the parallax
+        //              for experiment/DEFLATOR/*.map
+        const layerInfo = map.layerInfo[mappoMap.mapLayerOrder[index]]
         return {
           description: `Layer #` + index,
           width: map.width,
