@@ -445,14 +445,14 @@ const range = require(`lodash/range`)
   const data = readFormat({
     format: {
       numlayers: T.u8,
-      layer: T.list({
+      layerInfo: T.list({
         sizex: T.u8,
         sizey: T.u8,
       }, ({record}) => record.numlayers),
       layers: T.list(
         T.compressedU16(({record, listIndex}) => {
-          const sizex = record.layer[listIndex].sizex
-          const sizey = record.layer[listIndex].sizey
+          const sizex = record.layerInfo[listIndex].sizex
+          const sizey = record.layerInfo[listIndex].sizey
           const size = sizex * sizey
           return size
         }),
@@ -463,7 +463,7 @@ const range = require(`lodash/range`)
   })
 
   expect(data.numlayers).toBe(2)
-  expect(data.layer.length).toBe(2)
+  expect(data.layerInfo.length).toBe(2)
   expect(data.layers.length).toBe(2)
   expect(data.layers[0].decompressed).toEqual(
     filler(firstLayerWidth * firstLayerHeight, firstLayerFill)

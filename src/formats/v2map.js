@@ -16,18 +16,18 @@ module.exports = {
   wrap: T.u8,
   padding: T.list(T.u8, 50),
   numlayers: T.u8,
-  layer: T.list(V2_LAYERINFO, ({record}) => record.numlayers),
+  layerInfo: T.list(V2_LAYERINFO, ({record}) => record.numlayers),
   layers: T.list(
     T.compressedU16(({record, listIndex}) => {
-      return record.layer[listIndex].sizex * record.layer[listIndex].sizey
+      return record.layerInfo[listIndex].sizex * record.layerInfo[listIndex].sizey
     }),
     ({record}) => record.numlayers
   ),
   obstruct: T.compressedU8(({record}) => (
-    record.layer[0].sizex * record.layer[0].sizey
+    record.layerInfo[0].sizex * record.layerInfo[0].sizey
   )),
   zone: T.compressedU8(({record}) => (
-    record.layer[0].sizex * record.layer[0].sizey
+    record.layerInfo[0].sizex * record.layerInfo[0].sizey
   )),
   numzones: T.u32,
   zones: T.list(V2_ZONE, ({record}) => record.numzones),
