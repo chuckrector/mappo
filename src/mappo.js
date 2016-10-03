@@ -100,7 +100,6 @@ const defaultGlobalMappoState = {
   tileset: null,
   tilesetTileHovering: null,
   tilesetTileSelected: {},
-  cameraScrollAmount: 1,
   keyPressed: {},
   mouseDown: false,
   mouseInViewport: false,
@@ -451,11 +450,25 @@ const tick = () => {
     const autoScroll = globalMappoState.autoScroll
     if (autoScroll) {
       let moveX = 0
-      let moveY = 0;
-      (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) && (moveY = -globalMappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) && (moveY = +globalMappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) && (moveX = -globalMappoState.cameraScrollAmount);
-      (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) && (moveX = +globalMappoState.cameraScrollAmount);
+      let moveY = 0
+      const cameraScrollAmount = 1
+
+      if (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) {
+        moveY = -cameraScrollAmount
+      }
+
+      if (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) {
+        moveY = +cameraScrollAmount
+      }
+
+      if (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) {
+        moveX = -cameraScrollAmount
+      }
+
+      if (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) {
+        moveX = +cameraScrollAmount
+      }
+
       moveCamera(moveX, moveY)
     }
 
