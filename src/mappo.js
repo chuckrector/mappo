@@ -6,8 +6,6 @@ const clamp = require(`lodash/clamp`)
 const cloneDeep = require(`lodash/clonedeep`)
 const glob = require(`glob`)
 const createMappoSession = require(`./createMappoSession`)
-const createMappoMap = require(`./createMappoMap`)
-const createMappoTileset = require(`./createMappoTileset`)
 const detectFormat = require(`./detectFormat`)
 const path = require(`path`)
 const fs = require(`fs`)
@@ -406,6 +404,7 @@ const tick = () => {
     renderMap({
       map,
       tileset,
+      tilesetImageBitmap: tileset.imageBitmap,
       camera: state.camera,
       canvas,
       context,
@@ -422,27 +421,29 @@ const tick = () => {
 
     renderTileset({
       context: tilesetContext,
-      tileset: state.map.tileset,
+      tileset,
+      tilesetImageBitmap: tileset.imageBitmap,
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
-    if (state.map.tilesetTileHovering) {
+    if (map.tilesetTileHovering) {
       renderTileHighlightInvertedSolid({
         context: tilesetContext,
-        x: state.map.tilesetTileHovering.tileX * tileWidth,
-        y: state.map.tilesetTileHovering.tileY * tileHeight,
+        x: map.tilesetTileHovering.tileX * tileWidth,
+        y: map.tilesetTileHovering.tileY * tileHeight,
         width: tileWidth,
         height: tileHeight,
       })
       renderTile({
         context: tilesetHoveringTileContext,
-        tileset: state.map.tileset,
-        tileIndex: state.map.tilesetTileHovering.tileIndex,
+        tileset,
+        tilesetImageBitmap: tileset.imageBitmap,
+        tileIndex: map.tilesetTileHovering.tileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetHoveringTileIndex.innerText = state.map.tilesetTileHovering.tileIndex
+      tilesetHoveringTileIndex.innerText = map.tilesetTileHovering.tileIndex
     }
 
     if (state.selectedTileIndex !== -1) {
@@ -456,7 +457,8 @@ const tick = () => {
       })
       renderTile({
         context: tilesetSelectedTileContext,
-        tileset: state.map.tileset,
+        tileset,
+        tilesetImageBitmap: tileset.imageBitmap,
         tileIndex: state.selectedTileIndex,
         x: 0,
         y: 0,

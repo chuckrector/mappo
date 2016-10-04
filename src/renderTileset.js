@@ -5,6 +5,7 @@ const renderTile = require(`./renderTile`)
 module.exports = ({
   context,
   tileset,
+  tilesetImageBitmap,
   tilesetColumns,
 }) => {
   for (let tileIndex = 0; tileIndex < tileset.numTiles; tileIndex++) {
@@ -14,6 +15,7 @@ module.exports = ({
     renderTile({
       context,
       tileset,
+      tilesetImageBitmap,
       tileIndex,
       x: tileX * tileset.tileWidth,
       y: tileY * tileset.tileHeight,

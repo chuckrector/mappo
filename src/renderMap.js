@@ -1,6 +1,14 @@
 "use strict"
 
-module.exports = ({map, tileset, camera, canvas, context, layerHidden}) => {
+module.exports = ({
+  map,
+  tileset,
+  tilesetImageBitmap,
+  camera,
+  canvas,
+  context,
+  layerHidden,
+}) => {
   map.mapLayerOrder.forEach(layerIndex => {
     // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
     //              to a map layer which doesn't exist
@@ -11,6 +19,7 @@ module.exports = ({map, tileset, camera, canvas, context, layerHidden}) => {
         context,
         canvas,
         tileset,
+        tilesetImageBitmap,
         layer: tileLayer,
         x: camera.x * tileLayer.parallax.x,
         y: camera.y * tileLayer.parallax.y,

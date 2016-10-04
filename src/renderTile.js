@@ -3,6 +3,7 @@
 module.exports = ({
   context,
   tileset,
+  tilesetImageBitmap,
   tileIndex,
   x,
   y,
@@ -10,7 +11,7 @@ module.exports = ({
   scaleHeight=tileset.tileHeight,
 }) => {
   context.drawImage(
-    tileset.imageBitmap,
+    tilesetImageBitmap,
     0, tileIndex * tileset.tileHeight,
     tileset.tileWidth,
     tileset.tileHeight,

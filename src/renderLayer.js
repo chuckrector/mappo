@@ -6,6 +6,7 @@ module.exports = ({
   context,
   canvas,
   tileset,
+  tilesetImageBitmap,
   layer,
   x,
   y,
@@ -54,6 +55,7 @@ module.exports = ({
         renderTile({
           context,
           tileset,
+          tilesetImageBitmap,
           tileIndex,
           x: pixelX,
           y: pixelY,
