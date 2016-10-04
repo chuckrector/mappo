@@ -1,7 +1,6 @@
 "use strict"
 
 const colorDepth = require(`./converter/colorDepth`)
-const convertRaw32bitDataToImageBitmap = require(`./convertRaw32bitDataToImageBitmap`)
 
 module.exports = ({context, tileset}) => {
   const mappoTileset = {}
@@ -51,20 +50,6 @@ module.exports = ({context, tileset}) => {
         raw24bitData: tileset.tiledatabuf.decompressed,
       })
     } break;
-  }
-
-  mappoTileset.imageBitmapPromise = convertRaw32bitDataToImageBitmap({
-    context,
-    raw32bitData: mappoTileset.raw32bitData,
-    width: mappoTileset.tileWidth,
-    height: mappoTileset.tileHeight,
-    numTiles: mappoTileset.numTiles,
-  })
-  // TODO(chuck): not sure how i feel about this. appeasing createMappoTileset.test.js
-  if (mappoTileset.imageBitmapPromise) {
-    mappoTileset.imageBitmapPromise.then(imageBitmap => {
-      mappoTileset.imageBitmap = imageBitmap
-    })
   }
 
   return mappoTileset

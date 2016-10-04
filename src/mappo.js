@@ -10,6 +10,7 @@ const detectFormat = require(`./detectFormat`)
 const path = require(`path`)
 const fs = require(`fs`)
 const setupKeyboard = require(`./setupKeyboard`)
+const convertRaw32bitDataToImageBitmap = require(`./convertRaw32bitDataToImageBitmap`)
 const renderTileHighlightInvertedOutline = require(`./renderTileHighlightInvertedOutline`)
 const renderTileHighlightInvertedSolid = require(`./renderTileHighlightInvertedSolid`)
 const renderTileHighlightColorOutline = require(`./renderTileHighlightColorOutline`)
@@ -43,6 +44,8 @@ const tilesetHoveringTileIndex = document.querySelector(`.tileset-hovering-tile-
 const middlePanel = document.querySelector(`.middle-panel`)
 
 const checkerboardPattern = createCheckerboardPattern({document})
+
+let tilesetImageBitmap
 
 // TODO(chuck): move into default state?
 const store = createStore(mappoState)
@@ -143,12 +146,6 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
       if (maxMapHeight < layer.height) {
         maxMapHeight = layer.height
       }
-    })
-
-    // TODO(chuck): shorten this crazy chain
-    store.getState().map.tileset.imageBitmapPromise.then(() => {
-      globalMappoState.isLoading = false
-      resizeCanvas()
     })
 
     pageTitle.innerText = `Mappo - ` + mapFilename
@@ -404,7 +401,7 @@ const tick = () => {
     renderMap({
       map,
       tileset,
-      tilesetImageBitmap: tileset.imageBitmap,
+      tilesetImageBitmap,
       camera: state.camera,
       canvas,
       context,
@@ -422,7 +419,7 @@ const tick = () => {
     renderTileset({
       context: tilesetContext,
       tileset,
-      tilesetImageBitmap: tileset.imageBitmap,
+      tilesetImageBitmap,
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
@@ -437,7 +434,7 @@ const tick = () => {
       renderTile({
         context: tilesetHoveringTileContext,
         tileset,
-        tilesetImageBitmap: tileset.imageBitmap,
+        tilesetImageBitmap,
         tileIndex: map.tilesetTileHovering.tileIndex,
         x: 0,
         y: 0,
@@ -458,7 +455,7 @@ const tick = () => {
       renderTile({
         context: tilesetSelectedTileContext,
         tileset,
-        tilesetImageBitmap: tileset.imageBitmap,
+        tilesetImageBitmap,
         tileIndex: state.selectedTileIndex,
         x: 0,
         y: 0,
@@ -539,5 +536,27 @@ resizeCanvas()
 
 tick()
 
+const rebuildTilesetImageBitmap = () => {
+  const state = store.getState()
+  if (!state.isDirtyTilesetImageBitmap) {
+    return
+  }
+
+  const tileset = state.map.tileset
+  convertRaw32bitDataToImageBitmap({
+    context,
+    raw32bitData: tileset.raw32bitData,
+    width: tileset.tileWidth,
+    height: tileset.tileHeight,
+    numTiles: tileset.numTiles,
+  }).then(imageBitmap => {
+    tilesetImageBitmap = imageBitmap
+    store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
+    globalMappoState.isLoading = false
+    resizeCanvas()
+  })
+}
+
 store.subscribe(refreshUndoList)
 store.subscribe(refreshMapLayerList)
+store.subscribe(rebuildTilesetImageBitmap)
