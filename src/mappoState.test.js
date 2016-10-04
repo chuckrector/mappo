@@ -9,7 +9,7 @@ const mappoState = require(`./mappoState`)
 {
   // can set map
   const store = createStore(mappoState)
-  expect(store.getState()).toEqual({undo: []})
+  expect(store.getState()).toEqual({})
 
   store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
   expect(store.getState().map).toEqual({tileLayers: []})
@@ -80,7 +80,7 @@ const mappoState = require(`./mappoState`)
 {
   // SET_MAP holds a direct reference to the map
   const store = createStore(mappoState)
-  expect(store.getState()).toEqual({undo: []})
+  expect(store.getState()).toEqual({})
 
   const map = {tileLayers: []}
   store.dispatch({type: `SET_MAP`, map})

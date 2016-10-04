@@ -5,7 +5,7 @@ const map = require(`./reducers/map`)
 const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
 
-module.exports = (state={undo: []}, action) => {
+module.exports = (state={}, action) => {
   switch (action.type) {
     case `SET_MAP`: {
       return Object.assign({}, state, {
