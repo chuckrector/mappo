@@ -105,10 +105,12 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
     refreshMapLayerList()
 
-    tilesetSelectedTileCanvas.width = store.getState().map.tileset.tileWidth
-    tilesetSelectedTileCanvas.height = store.getState().map.tileset.tileHeight
-    tilesetHoveringTileCanvas.width = store.getState().map.tileset.tileWidth
-    tilesetHoveringTileCanvas.height = store.getState().map.tileset.tileHeight
+    const state = store.getState()
+    const tileset = state.map.present.tileset
+    tilesetSelectedTileCanvas.width = tileset.tileWidth
+    tilesetSelectedTileCanvas.height = tileset.tileHeight
+    tilesetHoveringTileCanvas.width = tileset.tileWidth
+    tilesetHoveringTileCanvas.height = tileset.tileHeight
 
     maxMapWidth = 0
     maxMapHeight = 0
@@ -132,7 +134,7 @@ const refreshMapLayerList = () => {
     return
   }
   layerList.innerHTML = ``
-  state.map.tileLayers.forEach((layer, index) => {
+  state.map.present.tileLayers.forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
@@ -177,7 +179,7 @@ middlePanel.addEventListener(`click`, event => {
 const getPlotCoord = ({viewportX, viewportY}) => {
   const scale = getScale()
   const state = store.getState()
-  const map = state.map
+  const map = state.map.present
   const tileWidth = map.tileset.tileWidth
   const tileHeight = map.tileset.tileHeight
   const viewportScaleX = ~~(viewportX / scale)
@@ -202,7 +204,7 @@ const plot = (event) => {
       viewportX: event.offsetX,
       viewportY: event.offsetY,
     })
-    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
+    const layer = state.map.present.tileLayers[state.selectedTileLayerIndex]
     if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.selectedTileIndex) {
       return
     }
@@ -225,6 +227,10 @@ middlePanel.addEventListener(`mousemove`, event => {
   }
 
   const scale = getScale()
+  const state = store.getState()
+  const map = state.map.present
+  const tileset = map.tileset
+
   if (globalMappoState.mouseDown) {
     if (keyboard.isPressed(`altKey`)) {
       moveCamera(
@@ -240,7 +246,7 @@ middlePanel.addEventListener(`mousemove`, event => {
   if (globalMappoState.mouseInViewport) {
     globalMappoState.autoScroll = calcAutoScroll({
       scale,
-      threshold: (store.getState().map.tileset.tileWidth + store.getState().map.tileset.tileHeight) / 2,
+      threshold: (tileset.tileWidth + tileset.tileHeight) / 2,
       cursorX: event.offsetX,
       cursorY: event.offsetY,
       viewportWidth: middlePanel.offsetWidth,
@@ -248,11 +254,10 @@ middlePanel.addEventListener(`mousemove`, event => {
     })
   }
 
-  const state = store.getState()
   if (state.selectedTileLayerIndex !== -1) {
-    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
-    const tileWidth = state.map.tileset.tileWidth
-    const tileHeight = state.map.tileset.tileHeight
+    const layer = state.map.present.tileLayers[state.selectedTileLayerIndex]
+    const tileWidth = tileset.tileWidth
+    const tileHeight = tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
     const scaleY = ~~(event.offsetY / scale)
     const parallaxX = ~~(state.camera.x * layer.parallax.x)
@@ -290,8 +295,9 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
     return
   }
 
-  store.getState().map.tilesetTileHovering = getTileCoordAndIndex({
-    tileset: store.getState().map.tileset,
+  const map = store.getState().map.present
+  map.tilesetTileHovering = getTileCoordAndIndex({
+    tileset: map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -304,7 +310,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
   }
 
   const info = getTileCoordAndIndex({
-    tileset: store.getState().map.tileset,
+    tileset: store.getState().map.present.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -331,7 +337,7 @@ middlePanel.addEventListener(`mouseout`, event => {
 
 const moveCamera = (moveX, moveY) => {
   const state = store.getState()
-  const map = state.map
+  const map = state.map.present
   const mapWidth = maxMapWidth
   const mapHeight = maxMapHeight
   const tileWidth = map.tileset.tileWidth
@@ -365,7 +371,7 @@ const tick = () => {
 
   if (!globalMappoState.isLoading) {
     const state = store.getState()
-    const map = state.map
+    const map = state.map.present
     const tileset = map.tileset
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
@@ -462,6 +468,20 @@ const tick = () => {
       moveCamera(moveX, moveY)
     }
 
+    if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {
+      if (keyboard.isPressed(keyboard.KEYCODE_Z)) {
+        keyboard.release(keyboard.KEYCODE_Z)
+        if (state.map.past.length) {
+          store.dispatch({type: `UNDO`})
+        }
+      } else if (keyboard.isPressed(keyboard.KEYCODE_Y)) {
+        keyboard.release(keyboard.KEYCODE_Y)
+        if (state.map.future.length) {
+          store.dispatch({type: `REDO`})
+        }
+      }
+    }
+
     // map zooming
     if (keyboard.isPressed(`ctrlKey`)) {
       const prevScaleIndex = globalMappoState.scaleIndex
@@ -496,7 +516,7 @@ const resizeCanvas = () => {
 
   if (!globalMappoState.isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
-    const tileset = store.getState().map.tileset
+    const tileset = store.getState().map.present.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
     tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
     tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + `px`
@@ -515,7 +535,7 @@ const rebuildTilesetImageBitmap = () => {
     return
   }
 
-  const tileset = state.map.tileset
+  const tileset = state.map.present.tileset
   convertRaw32bitDataToImageBitmap({
     context,
     raw32bitData: tileset.raw32bitData,

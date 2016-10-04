@@ -4,12 +4,25 @@ const assert = require(`assert`)
 const map = require(`./reducers/map`)
 const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
+const undoable = require(`./undoable`)
+const undoableMap = undoable(map)
 
 module.exports = (state={}, action) => {
   switch (action.type) {
+    case `UNDO`:
+    case `REDO`: {
+      return Object.assign({}, state, {
+        map: undoableMap(state.map, action),
+      })
+    } break
+
     case `SET_MAP`: {
       return Object.assign({}, state, {
-        map: action.map,
+        map: {
+          past: [],
+          present: action.map,
+          future: [],
+        },
         isDirtyTilesetImageBitmap: true,
       })
     } break
@@ -34,7 +47,7 @@ module.exports = (state={}, action) => {
 
     case `PLOT_TILE`: {
       return Object.assign({}, state, {
-        map: map(state.map, action)
+        map: undoableMap(state.map, action)
       })
     } break
 

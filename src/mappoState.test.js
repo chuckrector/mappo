@@ -12,7 +12,7 @@ const mappoState = require(`./mappoState`)
   expect(store.getState()).toEqual({})
 
   store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
-  expect(store.getState().map).toEqual({tileLayers: []})
+  expect(store.getState().map.present).toEqual({tileLayers: []})
 }
 
 {
@@ -84,7 +84,7 @@ const mappoState = require(`./mappoState`)
 
   const map = {tileLayers: []}
   store.dispatch({type: `SET_MAP`, map})
-  expect(store.getState().map).toBe(map)
+  expect(store.getState().map.present).toBe(map)
 }
 
 {
@@ -94,10 +94,10 @@ const mappoState = require(`./mappoState`)
   const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
   deepFreeze(tileLayers)
   store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
+  expect(store.getState().map.present.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
 
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexGridWidth: 2, tileLayerIndex: 0, tileIndexToPlot: 99})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
+  expect(store.getState().map.present.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
 }
 
 {
