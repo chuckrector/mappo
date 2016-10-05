@@ -119,3 +119,11 @@ const mappoState = require(`./mappoState`)
   expect(store.getState().editor.width).toEqual(200)
   expect(store.getState().editor.height).toEqual(300)
 }
+
+{
+  // can set loading state
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `SET_LOADING`, isLoading: true})
+  expect(store.getState().isLoading).toBe(true)
+}
