@@ -81,8 +81,6 @@ B.ikaZlibU32 = (valueList) => {
   ])
 }
 
-B.zlib = B.zlibU8
-
 B.list = (bufferMaker, valueList) => {
   if (typeof valueList === `undefined`) {
     throw new Error(`B.list valueList must be defined`)

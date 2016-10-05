@@ -57,8 +57,6 @@ T.ikaZlibU32 = (length) => {
   }
 }
 
-T.zlib = T.zlibU8
-
 T.palette6bit = ({reader}) => {
   const _6bit = reader.readByteArray(256 * 3)
   const _8bit = _6bit.map(v => v * 4)
