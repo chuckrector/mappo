@@ -49,16 +49,19 @@ const createWindow = () => {
   }
 
   let mappoConfig = loadMappoConfig()
-  if (mappoConfig.width && mappoConfig.height) {
-    console.log(`setting editor window size: ${mappoConfig.width}x${mappoConfig.height}`)
-    windowBounds.width = mappoConfig.width
-    windowBounds.height = mappoConfig.height
-  }
+  const {editor} = mappoConfig
+  if (editor) {
+    if (editor.width && editor.height) {
+      console.log(`setting editor window size: ${editor.width}x${editor.height}`)
+      windowBounds.width = editor.width
+      windowBounds.height = editor.height
+    }
 
-  if (mappoConfig.x && mappoConfig.y) {
-    console.log(`setting editor window position: ${mappoConfig.x},${mappoConfig.y}`)
-    windowBounds.x = mappoConfig.x
-    windowBounds.y = mappoConfig.y
+    if (editor.x && editor.y) {
+      console.log(`setting editor window position: ${editor.x},${editor.y}`)
+      windowBounds.x = editor.x
+      windowBounds.y = editor.y
+    }
   }
 
   win = new BrowserWindow(windowBounds)
@@ -72,10 +75,14 @@ const createWindow = () => {
     const config = loadMappoConfig()
     const bounds = win.getBounds()
     console.log(`saving editor bounds: ${JSON.stringify(bounds)}`)
-    config.x = bounds.x
-    config.y = bounds.y
-    config.width = bounds.width
-    config.height = bounds.height
+    if (!config.editor) {
+      config.editor = {}
+    }
+    const editor = config.editor
+    editor.x = bounds.x
+    editor.y = bounds.y
+    editor.width = bounds.width
+    editor.height = bounds.height
     saveMappoConfig(config)
   }
 
