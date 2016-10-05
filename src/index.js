@@ -6,41 +6,10 @@
 const electron = require(`electron`)
 const {app, BrowserWindow} = require(`electron`)
 const fs = require(`fs`)
+const loadMappoConfig = require(`./loadMappoConfig`)
+const saveMappoConfig = require(`./saveMappoConfig`)
 
 let win
-
-const loadMappoConfig = () => {
-  try {
-    const mappoConfigText = fs.readFileSync(`mappo.json`)
-
-    try {
-      return JSON.parse(mappoConfigText)
-    } catch (exc) {
-      console.log(`bad config file, using defaults. [error: ${exc.message}]`)
-    }
-  } catch (exc) {
-    console.log(`no mappo.json found, using defaults. [error: ${exc.message}]`)
-  }
-
-  return {}
-}
-
-const saveMappoConfig = config => {
-  let mappoConfigText
-  try {
-    mappoConfigText = JSON.stringify(config)
-  } catch (exc) {
-    console.log(`bad config object, not saving config. [error: ${exc.message}]`)
-    return
-  }
-
-  try {
-    fs.writeFileSync(`mappo.json`, mappoConfigText)
-    console.log(`editor state successfully saved`)
-  } catch (exc) {
-    console.log(`unable to write config to disk. [error: ${exc.message}]`)
-  }
-}
 
 const createWindow = () => {
   let windowBounds = {
