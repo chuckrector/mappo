@@ -593,3 +593,26 @@ const refreshUndoRedo = () => {
 store.subscribe(refreshMapLayerList)
 store.subscribe(rebuildTilesetImageBitmap)
 store.subscribe(refreshUndoRedo)
+
+store.dispatch({
+  type: `SET_EDITOR_WINDOW_SIZE`,
+  width: window.outerWidth,
+  height: window.outerHeight,
+})
+
+window.addEventListener(`resize`, event => {
+  store.dispatch({
+    type: `SET_EDITOR_WINDOW_SIZE`,
+    width: window.outerWidth,
+    height: window.outerHeight,
+  })
+
+  const state = store.getState()
+  try {
+    const mappoConfigText = JSON.stringify(state.editor)
+    fs.writeFileSync(`mappo.json`, mappoConfigText)
+    console.log(`saved new editor state: ${mappoConfigText}`)
+  } catch (exc) {
+    console.log(`unable to save editor state. error:`, exc.message)
+  }
+})

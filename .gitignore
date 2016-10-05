@@ -1,5 +1,6 @@
 node_modules
 *.sublime*
+mappo.json
 data/v1/*.gif
 data/v1/*.png
 data/v1/*.json
