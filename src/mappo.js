@@ -41,6 +41,8 @@ const tilesetHoveringTileCanvas = document.querySelector(`.tileset-hovering-tile
 const tilesetHoveringTileContext = tilesetHoveringTileCanvas.getContext(`2d`)
 const tilesetHoveringTileIndex = document.querySelector(`.tileset-hovering-tile-index`)
 const middlePanel = document.querySelector(`.middle-panel`)
+const undoButton = document.querySelector(`.undo`)
+const redoButton = document.querySelector(`.redo`)
 
 const checkerboardPattern = createCheckerboardPattern({document})
 
@@ -471,14 +473,10 @@ const tick = () => {
     if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {
       if (keyboard.isPressed(keyboard.KEYCODE_Z)) {
         keyboard.release(keyboard.KEYCODE_Z)
-        if (state.map.past.length) {
-          store.dispatch({type: `UNDO`})
-        }
+        undo()
       } else if (keyboard.isPressed(keyboard.KEYCODE_Y)) {
         keyboard.release(keyboard.KEYCODE_Y)
-        if (state.map.future.length) {
-          store.dispatch({type: `REDO`})
-        }
+        redo()
       }
     }
 
@@ -550,5 +548,48 @@ const rebuildTilesetImageBitmap = () => {
   })
 }
 
+const undo = () => {
+  const state = store.getState()
+  if (state.map.past.length) {
+    store.dispatch({type: `UNDO`})
+  }
+}
+
+const redo = () => {
+  const state = store.getState()
+  if (state.map.future.length) {
+    store.dispatch({type: `REDO`})
+  }
+}
+
+undoButton.addEventListener(`click`, undo)
+redoButton.addEventListener(`click`, redo)
+
+const refreshUndoRedo = () => {
+  console.log(`refreshUndoRedo`)
+  if (globalMappoState.isLoading) {
+    undoButton.disabled = true
+    redoButton.disabled = true
+    console.log(`both disabled`)
+    return
+  }
+
+  const state = store.getState()
+  console.log(`past?`, state.map.past.length)
+  console.log(`future?`, state.map.future.length)
+  if (state.map.past.length > 0) {
+    undoButton.removeAttribute(`disabled`)
+  } else {
+    undoButton.disabled = true
+  }
+
+  if (state.map.future.length > 0) {
+    redoButton.removeAttribute(`disabled`)
+  } else {
+    redoButton.disabled = true
+  }
+}
+
 store.subscribe(refreshMapLayerList)
 store.subscribe(rebuildTilesetImageBitmap)
+store.subscribe(refreshUndoRedo)

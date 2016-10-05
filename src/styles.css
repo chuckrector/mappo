@@ -91,11 +91,30 @@ canvas {
 /* UNDO LIST */
 
 .undo-list-container {
-  display: none;
+  display: flex;
   flex: 1 0;
   max-height: 50%;
   overflow: hidden;
   overflow-y: auto;
+}
+
+.icon-redo {
+  transform: scaleX(-1);
+}
+
+.undo-container {
+  margin: 0 10px 0;
+}
+
+.undo,
+.redo {
+  padding: 5px;
+}
+
+.undo[disabled],
+.redo[disabled] {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 /* VIEWPORT */
