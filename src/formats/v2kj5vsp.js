@@ -7,6 +7,6 @@ module.exports = {
   version: T.u16,
   palette: T.list(T.u8, 3 * 256),
   numtiles: T.u16,
-  imagedata: T.compressedU16(({record}) => 16 * 16 * record.numtiles),
+  imagedata: T.compressedU16(({o}) => 16 * 16 * o.numtiles),
   vspanim: T.list(V1_VSPANIM, 100),
 }

@@ -9,5 +9,5 @@ module.exports = {
   width: T.u16,
   height: T.u16,
   lucent: T.u8,
-  tiledata: T.zlibU16(({record}) => record.width * record.height),
+  tiledata: T.zlibU16(({o}) => o.width * o.height),
 }

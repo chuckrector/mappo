@@ -9,5 +9,5 @@ module.exports = {
     chr: T.string,
     cr2: T.string,
     dat: T.string,
-  }, ({record}) => record.tchars)
+  }, ({o}) => o.tchars)
 }

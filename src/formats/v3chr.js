@@ -23,7 +23,7 @@ module.exports = {
   anims: T.list(V3_CHRANIM, 8),
   customscripts: T.u32,
   compression: T.u32,
-  imagedata: T.zlibU8(({record}) => {
-    return record.totalframes * record.fxsize * record.fysize * (record.bpp / 8)
+  imagedata: T.zlibU8(({o}) => {
+    return o.totalframes * o.fxsize * o.fysize * (o.bpp / 8)
   }),
 }
