@@ -110,3 +110,12 @@ const mappoState = require(`./mappoState`)
   store.dispatch({type: `MOVE_CAMERA`, x: 4, y: 5})
   expect(store.getState().camera).toEqual({x: 4, y: 5})
 }
+
+{
+  // can set editor window size
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `SET_EDITOR_WINDOW_SIZE`, width: 200, height: 300})
+  expect(store.getState().editor.width).toEqual(200)
+  expect(store.getState().editor.height).toEqual(300)
+}

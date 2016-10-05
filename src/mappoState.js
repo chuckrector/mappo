@@ -2,6 +2,7 @@
 
 const assert = require(`assert`)
 const map = require(`./reducers/map`)
+const editor = require(`./reducers/editor`)
 const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
 const undoable = require(`./undoable`)
@@ -13,6 +14,12 @@ module.exports = (state={}, action) => {
     case `REDO`: {
       return Object.assign({}, state, {
         map: undoableMap(state.map, action),
+      })
+    } break
+
+    case `SET_EDITOR_WINDOW_SIZE`: {
+      return Object.assign({}, state, {
+        editor: editor(state.editor, action),
       })
     } break
 
