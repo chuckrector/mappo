@@ -1,6 +1,6 @@
 # ![alt text](/img/v1/CRYSTAL.CHR-down.gif?raw=true "a sample of v2chr2gif cli output") mappo v0.30.0 ![alt text](/img/v1/DARIN.CHR-down.gif?raw=true "a sample of v2chr2gif cli output")
 
-![alt text](/img/wip/mappo-wip-tile-plotting.png?raw=true "mappo work-in-progress screenshot of recently implemented display of which tile is currently selected and being hovered over in the tileset")
+![alt text](/img/wip/mappo-wip-undo-redo.png?raw=true "mappo work-in-progress screenshot of recently implemented undo and redo functionality")
 
 Mappo is a *work in progress* 2D tile map editor for retro games. Currently, only [VERGE](http://verge-rpg.com/) file formats are supported for loading. A comprehensive set of command-line tools for loading and exporting all VERGE file formats (to PNG/GIF/JSON) are included. [One of these](https://github.com/chuckrector/mappo/tree/master/doc#user-content-map2tmx) can export any VERGE map to a [Tiled](http://www.mapeditor.org/) `.TMX` file.
 
