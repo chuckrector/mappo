@@ -93,7 +93,7 @@ Zoom map (ctrl +/-) | ✅
 Multi-tile brushes | 😭
 Multi-tile templates w/ zones & obstructions | 😭
 On launch, load previous map | 😭
-On launch, remember previous window size & position | 😭
+On launch, remember previous window size & position | ✅
 On launch, remember previous session undo history | 😭
 Drag & drop maps to load them | 😭
 Drag & drop tilesets to load them | 😭
