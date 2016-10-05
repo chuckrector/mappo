@@ -7,21 +7,19 @@ const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
 const undoable = require(`./undoable`)
 const undoableMap = undoable(map)
-const loadMappoConfig = require(`./loadMappoConfig`)
 
-const mappoConfigFromDisk = loadMappoConfig()
-// TODO(chuck): how to handle this more naturally? with no special priming
-if (mappoConfigFromDisk.map) {
-  mappoConfigFromDisk.isDirtyTilesetImageBitmap = true
-}
-
-module.exports = (state=mappoConfigFromDisk, action) => {
+module.exports = (state={}, action) => {
   switch (action.type) {
     case `UNDO`:
     case `REDO`: {
       return Object.assign({}, state, {
         map: undoableMap(state.map, action),
+        isMapDirty: true,
       })
+    } break
+
+    case `RELOAD_STORE`: {
+      return Object.assign({}, state, action.state)
     } break
 
     case `SET_LOADING`: {
@@ -33,6 +31,12 @@ module.exports = (state=mappoConfigFromDisk, action) => {
     case `SET_EDITOR_WINDOW_SIZE`: {
       return Object.assign({}, state, {
         editor: editor(state.editor, action),
+      })
+    } break
+
+    case `SET_MAP_DIRTY`: {
+      return Object.assign({}, state, {
+        isMapDirty: action.isMapDirty,
       })
     } break
 
@@ -67,7 +71,8 @@ module.exports = (state=mappoConfigFromDisk, action) => {
 
     case `PLOT_TILE`: {
       return Object.assign({}, state, {
-        map: undoableMap(state.map, action)
+        map: undoableMap(state.map, action),
+        isMapDirty: true,
       })
     } break
 

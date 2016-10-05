@@ -24,6 +24,7 @@ const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
 const createStore = require(`./createStore`)
 const mappoState = require(`./mappoState`)
+const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
 
 // DOM REFERENCES
@@ -51,9 +52,20 @@ let tilesetImageBitmap
 
 // TODO(chuck): move into default state?
 const store = createStore(mappoState)
+
+const mappoConfigFromDisk = loadMappoConfig()
+// TODO(chuck): how to handle this more naturally? with no special priming
+if (mappoConfigFromDisk.map) {
+  mappoConfigFromDisk.isDirtyTilesetImageBitmap = true
+}
+
+store.dispatch({type: `RELOAD_STORE`, state: mappoConfigFromDisk})
 store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
 store.dispatch({type: `SET_LOADING`, isLoading: true})
+
+let lastSaveTimestamp = new Date()
+let isAutoSaving = false
 
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
@@ -594,6 +606,36 @@ const recalcMaxMapSize = () => {
   })
 }
 
+const autoSave = () => {
+  if (isAutoSaving) {
+    console.log(`isAutoSaving, early out...`)
+    return
+  }
+
+  const currentTime = new Date()
+  const timeSinceLastSave = currentTime - lastSaveTimestamp
+
+  let shouldSave = false
+  if (!store.getState().isMapDirty) {
+    console.log(`not dirty, checking 1min limit...`)
+    if (timeSinceLastSave > 60 * 1000) {
+      console.log(`one minute elapsed. auto-saving session...`)
+      shouldSave = true
+    }
+  } else if (timeSinceLastSave > 10 * 1000) {
+    console.log(`5 seconds passed since last edit. auto-saving session...`)
+    shouldSave = true
+  }
+
+  if (shouldSave) {
+    isAutoSaving = true
+    saveMappoConfig(store.getState())
+    store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: false})
+    lastSaveTimestamp = new Date()
+    isAutoSaving = false
+  }
+}
+
 store.subscribe(recalcMaxMapSize)
 store.subscribe(refreshMapLayerList)
 store.subscribe(rebuildTilesetImageBitmap)
@@ -604,3 +646,5 @@ store.dispatch({
   width: window.outerWidth,
   height: window.outerHeight,
 })
+
+setInterval(autoSave, 5 * 1000)

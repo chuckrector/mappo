@@ -98,6 +98,7 @@ const mappoState = require(`./mappoState`)
 
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexGridWidth: 2, tileLayerIndex: 0, tileIndexToPlot: 99})
   expect(store.getState().map.present.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
+  expect(store.getState().isMapDirty).toBe(true)
 }
 
 {
@@ -126,4 +127,23 @@ const mappoState = require(`./mappoState`)
 
   store.dispatch({type: `SET_LOADING`, isLoading: true})
   expect(store.getState().isLoading).toBe(true)
+}
+
+{
+  // can load state
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `RELOAD_STORE`, state: {herp: `derp`}})
+  expect(store.getState()).toEqual({herp: `derp`})
+}
+
+{
+  // can set map dirty state
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: true})
+  expect(store.getState().isMapDirty).toEqual(true)
+
+  store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: false})
+  expect(store.getState().isMapDirty).toEqual(false)
 }
