@@ -52,6 +52,7 @@ let tilesetImageBitmap
 const store = createStore(mappoState)
 store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
+store.dispatch({type: `SET_LOADING`, isLoading: true})
 
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
@@ -68,7 +69,6 @@ const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const DEFAULT_SCALE_INDEX = 4
 const defaultGlobalMappoState = {
   scaleIndex: DEFAULT_SCALE_INDEX,
-  isLoading: true,
   mapLayerOrder: null,
   tileset: null,
   tilesetTileHovering: null,
@@ -92,7 +92,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
   li.addEventListener(`click`, event => {
     globalMappoState = cloneDeep(defaultGlobalMappoState)
-    globalMappoState.isLoading = true
+    store.dispatch({type: `SET_LOADING`, isLoading: true})
 
     const map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
     store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})
@@ -106,24 +106,6 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 0, y: 0})
 
     refreshMapLayerList()
-
-    const state = store.getState()
-    const tileset = state.map.present.tileset
-    tilesetSelectedTileCanvas.width = tileset.tileWidth
-    tilesetSelectedTileCanvas.height = tileset.tileHeight
-    tilesetHoveringTileCanvas.width = tileset.tileWidth
-    tilesetHoveringTileCanvas.height = tileset.tileHeight
-
-    maxMapWidth = 0
-    maxMapHeight = 0
-    map.tileLayers.forEach(layer => {
-      if (maxMapWidth < layer.width) {
-        maxMapWidth = layer.width
-      }
-      if (maxMapHeight < layer.height) {
-        maxMapHeight = layer.height
-      }
-    })
 
     pageTitle.innerText = `Mappo - ` + mapFilename
   })
@@ -173,7 +155,7 @@ middlePanel.addEventListener(`mousedown`, event => {
 })
 
 middlePanel.addEventListener(`click`, event => {
-  if (globalMappoState.isLoading) {
+  if (store.getState().isLoading) {
     return
   }
 })
@@ -224,7 +206,7 @@ const plot = (event) => {
 }
 
 middlePanel.addEventListener(`mousemove`, event => {
-  if (globalMappoState.isLoading) {
+  if (store.getState().isLoading) {
     return
   }
 
@@ -293,7 +275,7 @@ const getTileCoordAndIndex = ({
 }
 
 tilesetCanvasContainer.addEventListener(`mousemove`, event => {
-  if (globalMappoState.isLoading) {
+  if (store.getState().isLoading) {
     return
   }
 
@@ -307,7 +289,7 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
 })
 
 tilesetCanvasContainer.addEventListener(`click`, event => {
-  if (globalMappoState.isLoading) {
+  if (store.getState().isLoading) {
     return
   }
 
@@ -371,7 +353,7 @@ const tick = () => {
   clearCanvas({canvas: tilesetSelectedTileCanvas, pattern: checkerboardPattern})
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
-  if (!globalMappoState.isLoading) {
+  if (!store.getState().isLoading) {
     const state = store.getState()
     const map = state.map.present
     const tileset = map.tileset
@@ -512,7 +494,7 @@ const resizeCanvas = () => {
   canvas.style.width = middlePanel.offsetWidth + `px`
   canvas.style.height = middlePanel.offsetHeight + `px`
 
-  if (!globalMappoState.isLoading) {
+  if (!store.getState().isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
     const tileset = store.getState().map.present.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
@@ -543,8 +525,13 @@ const rebuildTilesetImageBitmap = () => {
   }).then(imageBitmap => {
     tilesetImageBitmap = imageBitmap
     store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
-    globalMappoState.isLoading = false
+    store.dispatch({type: `SET_LOADING`, isLoading: false})
     resizeCanvas()
+
+    tilesetSelectedTileCanvas.width = tileset.tileWidth
+    tilesetSelectedTileCanvas.height = tileset.tileHeight
+    tilesetHoveringTileCanvas.width = tileset.tileWidth
+    tilesetHoveringTileCanvas.height = tileset.tileHeight
   })
 }
 
@@ -567,7 +554,7 @@ redoButton.addEventListener(`click`, redo)
 
 const refreshUndoRedo = () => {
   console.log(`refreshUndoRedo`)
-  if (globalMappoState.isLoading) {
+  if (store.getState().isLoading) {
     undoButton.disabled = true
     redoButton.disabled = true
     console.log(`both disabled`)
@@ -590,6 +577,26 @@ const refreshUndoRedo = () => {
   }
 }
 
+const recalcMaxMapSize = () => {
+  const state = store.getState()
+  if (!state.map) {
+    return
+  }
+  const map = state.map.present
+
+  maxMapWidth = 0
+  maxMapHeight = 0
+  map.tileLayers.forEach(layer => {
+    if (maxMapWidth < layer.width) {
+      maxMapWidth = layer.width
+    }
+    if (maxMapHeight < layer.height) {
+      maxMapHeight = layer.height
+    }
+  })
+}
+
+store.subscribe(recalcMaxMapSize)
 store.subscribe(refreshMapLayerList)
 store.subscribe(rebuildTilesetImageBitmap)
 store.subscribe(refreshUndoRedo)
