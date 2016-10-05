@@ -1,3 +1,20 @@
+## 0.33.0 (Oct 4, 2016)
+
+- add undo/redo ui
+
+## 0.32.0 (Oct 3, 2016)
+
+- fix incorrect v27/ika map layer parallax
+- fix a bug preventing detection of v27 32-bit vsps
+- allow viewport to scroll to size of largest map layer (rather than first layer)
+
+## 0.31.0 (Oct 2, 2016)
+
+- detect v2kj vsps (4.0, 5.0)
+- detect and load v27 (ika) maps
+- detect and load v27 8-bit and 32-bit vsps (6.0)
+- drag mouse to plot tiles
+
 ## 0.30.0 (Oct 1, 2016)
 
 - fix false positives on v1itemicondat file format detection
