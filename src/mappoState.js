@@ -7,8 +7,15 @@ const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
 const undoable = require(`./undoable`)
 const undoableMap = undoable(map)
+const loadMappoConfig = require(`./loadMappoConfig`)
 
-module.exports = (state={}, action) => {
+const mappoConfigFromDisk = loadMappoConfig()
+// TODO(chuck): how to handle this more naturally? with no special priming
+if (mappoConfigFromDisk.map) {
+  mappoConfigFromDisk.isDirtyTilesetImageBitmap = true
+}
+
+module.exports = (state=mappoConfigFromDisk, action) => {
   switch (action.type) {
     case `UNDO`:
     case `REDO`: {

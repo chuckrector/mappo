@@ -24,6 +24,7 @@ const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
 const createStore = require(`./createStore`)
 const mappoState = require(`./mappoState`)
+const saveMappoConfig = require(`./saveMappoConfig`)
 
 // DOM REFERENCES
 const pageTitle = document.querySelector(`title`)
@@ -526,6 +527,7 @@ const rebuildTilesetImageBitmap = () => {
     tilesetImageBitmap = imageBitmap
     store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
     store.dispatch({type: `SET_LOADING`, isLoading: false})
+    saveMappoConfig(store.getState())
     resizeCanvas()
 
     tilesetSelectedTileCanvas.width = tileset.tileWidth
@@ -553,17 +555,13 @@ undoButton.addEventListener(`click`, undo)
 redoButton.addEventListener(`click`, redo)
 
 const refreshUndoRedo = () => {
-  console.log(`refreshUndoRedo`)
   if (store.getState().isLoading) {
     undoButton.disabled = true
     redoButton.disabled = true
-    console.log(`both disabled`)
     return
   }
 
   const state = store.getState()
-  console.log(`past?`, state.map.past.length)
-  console.log(`future?`, state.map.future.length)
   if (state.map.past.length > 0) {
     undoButton.removeAttribute(`disabled`)
   } else {
