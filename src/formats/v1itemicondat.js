@@ -4,5 +4,5 @@ const {T} = require(`../readFormat`)
 
 module.exports = {
   numtiles: T.u8,
-  itemicons: ({o}) => 16 * 16 * o.numtiles
+  itemicons: ({record}) => 16 * 16 * record.numtiles
 }
