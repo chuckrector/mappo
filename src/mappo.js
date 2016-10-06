@@ -64,6 +64,47 @@ store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
 store.dispatch({type: `SET_LOADING`, isLoading: true})
 
+let maxMapWidth = 0
+let maxMapHeight = 0
+
+const recalcMaxMapSize = () => {
+  const state = store.getState()
+  if (!state.map) {
+    return
+  }
+  const map = state.map
+
+  maxMapWidth = 0
+  maxMapHeight = 0
+  map.tileLayers.forEach(layer => {
+    if (maxMapWidth < layer.width) {
+      maxMapWidth = layer.width
+    }
+    if (maxMapHeight < layer.height) {
+      maxMapHeight = layer.height
+    }
+  })
+}
+
+recalcMaxMapSize()
+
+const moveCamera = (moveX, moveY) => {
+  const state = store.getState()
+  const map = state.map
+  const mapWidth = maxMapWidth
+  const mapHeight = maxMapHeight
+  const tileWidth = map.tileset.tileWidth
+  const tileHeight = map.tileset.tileHeight
+  const maxX = mapWidth * tileWidth - canvas.width
+  const maxY = mapHeight * tileHeight - canvas.height
+  const newX = clamp(state.camera.x + moveX, 0, maxX)
+  const newY = clamp(state.camera.y + moveY, 0, maxY)
+
+  if (newX !== state.camera.x || newY !== state.camera.y) {
+    store.dispatch({type: `MOVE_CAMERA`, x: newX, y: newY})
+  }
+}
+
 let lastSaveTimestamp = new Date()
 let isAutoSaving = false
 
@@ -94,9 +135,6 @@ const defaultGlobalMappoState = {
 let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
 const getScale = () => viewportScales[globalMappoState.scaleIndex]
-
-let maxMapWidth = 0
-let maxMapHeight = 0
 
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement(`li`)
@@ -332,23 +370,6 @@ middlePanel.addEventListener(`mouseout`, event => {
   globalMappoState.autoScroll = {}
   globalMappoState.mapLayerTileHighlightCoord = null
 })
-
-const moveCamera = (moveX, moveY) => {
-  const state = store.getState()
-  const map = state.map
-  const mapWidth = maxMapWidth
-  const mapHeight = maxMapHeight
-  const tileWidth = map.tileset.tileWidth
-  const tileHeight = map.tileset.tileHeight
-  const maxX = mapWidth * tileWidth - canvas.width
-  const maxY = mapHeight * tileHeight - canvas.height
-  const newX = clamp(state.camera.x + moveX, 0, maxX)
-  const newY = clamp(state.camera.y + moveY, 0, maxY)
-
-  if (newX !== state.camera.x || newY !== state.camera.y) {
-    store.dispatch({type: `MOVE_CAMERA`, x: newX, y: newY})
-  }
-}
 
 const getTilesetColumns = ({tileset, containerWidth}) => {
   const scaledTileWidth = tileset.tileWidth * getScale()
@@ -586,25 +607,6 @@ const refreshUndoRedo = () => {
   } else {
     redoButton.disabled = true
   }
-}
-
-const recalcMaxMapSize = () => {
-  const state = store.getState()
-  if (!state.map) {
-    return
-  }
-  const map = state.map
-
-  maxMapWidth = 0
-  maxMapHeight = 0
-  map.tileLayers.forEach(layer => {
-    if (maxMapWidth < layer.width) {
-      maxMapWidth = layer.width
-    }
-    if (maxMapHeight < layer.height) {
-      maxMapHeight = layer.height
-    }
-  })
 }
 
 const autoSave = () => {

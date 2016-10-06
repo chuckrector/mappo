@@ -126,6 +126,7 @@ module.exports = (state={}, action) => {
           x: action.x,
           y: action.y,
         },
+        isMapDirty: true,
       })
     } break
 
