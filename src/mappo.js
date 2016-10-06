@@ -648,4 +648,4 @@ store.dispatch({
   height: window.outerHeight,
 })
 
-// setInterval(autoSave, 5 * 1000)
+setInterval(autoSave, 5 * 1000)
