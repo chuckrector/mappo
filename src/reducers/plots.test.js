@@ -1,7 +1,7 @@
 "use strict"
 
 const expect = require(`expect`)
-const createStore = require(`./createStore`)
+const createStore = require(`../createStore`)
 const plots = require(`./plots`)
 
 {
@@ -20,7 +20,7 @@ const plots = require(`./plots`)
     y: 1,
     tileIndexToPlot: 99,
     tileIndexGridWidth: 2,
-    layerIndex: 1,
+    tileLayerIndex: 1,
     tileLayers,
   })
 
@@ -29,7 +29,7 @@ const plots = require(`./plots`)
     y: 1,
     tileIndexToPlot: 99,
     tileIndexGridWidth: 2,
-    layerIndex: 1,
+    tileLayerIndex: 1,
     overwritingTileIndex: 1,
   }])
 }
