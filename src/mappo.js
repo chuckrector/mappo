@@ -131,7 +131,7 @@ const refreshMapLayerList = () => {
     return
   }
   layerList.innerHTML = ``
-  state.map.present.tileLayers.forEach((layer, index) => {
+  state.map.tileLayers.forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
@@ -176,7 +176,7 @@ middlePanel.addEventListener(`click`, event => {
 const getPlotCoord = ({viewportX, viewportY}) => {
   const scale = getScale()
   const state = store.getState()
-  const map = state.map.present
+  const map = state.map
   const tileWidth = map.tileset.tileWidth
   const tileHeight = map.tileset.tileHeight
   const viewportScaleX = ~~(viewportX / scale)
@@ -201,13 +201,14 @@ const plot = (event) => {
       viewportX: event.offsetX,
       viewportY: event.offsetY,
     })
-    const layer = state.map.present.tileLayers[state.selectedTileLayerIndex]
+    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
     if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.selectedTileIndex) {
       return
     }
     store.dispatch({
       type: `PLOT_TILE`,
       tileLayerIndex: state.selectedTileLayerIndex,
+      tileLayers: state.map.tileLayers,
       tileIndexGridWidth: layer.width,
       tileIndexToPlot: state.selectedTileIndex,
       x: tileX,
@@ -225,7 +226,7 @@ middlePanel.addEventListener(`mousemove`, event => {
 
   const scale = getScale()
   const state = store.getState()
-  const map = state.map.present
+  const map = state.map
   const tileset = map.tileset
 
   if (globalMappoState.mouseDown) {
@@ -252,7 +253,7 @@ middlePanel.addEventListener(`mousemove`, event => {
   }
 
   if (state.selectedTileLayerIndex !== -1) {
-    const layer = state.map.present.tileLayers[state.selectedTileLayerIndex]
+    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
     const scaleX = ~~(event.offsetX / scale)
@@ -292,7 +293,7 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
     return
   }
 
-  const map = store.getState().map.present
+  const map = store.getState().map
   map.tilesetTileHovering = getTileCoordAndIndex({
     tileset: map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
@@ -307,7 +308,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
   }
 
   const info = getTileCoordAndIndex({
-    tileset: store.getState().map.present.tileset,
+    tileset: store.getState().map.tileset,
     containerWidth: tilesetCanvasContainer.offsetWidth,
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -334,7 +335,7 @@ middlePanel.addEventListener(`mouseout`, event => {
 
 const moveCamera = (moveX, moveY) => {
   const state = store.getState()
-  const map = state.map.present
+  const map = state.map
   const mapWidth = maxMapWidth
   const mapHeight = maxMapHeight
   const tileWidth = map.tileset.tileWidth
@@ -368,7 +369,7 @@ const tick = () => {
 
   if (!store.getState().isLoading) {
     const state = store.getState()
-    const map = state.map.present
+    const map = state.map
     const tileset = map.tileset
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
@@ -509,7 +510,7 @@ const resizeCanvas = () => {
 
   if (!store.getState().isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
-    const tileset = store.getState().map.present.tileset
+    const tileset = store.getState().map.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
     tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
     tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + `px`
@@ -528,7 +529,7 @@ const rebuildTilesetImageBitmap = () => {
     return
   }
 
-  const tileset = state.map.present.tileset
+  const tileset = state.map.tileset
   convertRaw32bitDataToImageBitmap({
     context,
     raw32bitData: tileset.raw32bitData,
@@ -551,14 +552,14 @@ const rebuildTilesetImageBitmap = () => {
 
 const undo = () => {
   const state = store.getState()
-  if (state.map.past.length) {
+  if (state.plots.past.length) {
     store.dispatch({type: `UNDO`})
   }
 }
 
 const redo = () => {
   const state = store.getState()
-  if (state.map.future.length) {
+  if (state.plots.future.length) {
     store.dispatch({type: `REDO`})
   }
 }
@@ -574,13 +575,13 @@ const refreshUndoRedo = () => {
   }
 
   const state = store.getState()
-  if (state.map.past.length > 0) {
+  if (state.plots && state.plots.past.length > 0) {
     undoButton.removeAttribute(`disabled`)
   } else {
     undoButton.disabled = true
   }
 
-  if (state.map.future.length > 0) {
+  if (state.plots && state.plots.future.length > 0) {
     redoButton.removeAttribute(`disabled`)
   } else {
     redoButton.disabled = true
@@ -592,7 +593,7 @@ const recalcMaxMapSize = () => {
   if (!state.map) {
     return
   }
-  const map = state.map.present
+  const map = state.map
 
   maxMapWidth = 0
   maxMapHeight = 0
@@ -647,4 +648,4 @@ store.dispatch({
   height: window.outerHeight,
 })
 
-setInterval(autoSave, 5 * 1000)
+// setInterval(autoSave, 5 * 1000)

@@ -12,7 +12,7 @@ const mappoState = require(`./mappoState`)
   expect(store.getState()).toEqual({})
 
   store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
-  expect(store.getState().map.present).toEqual({tileLayers: []})
+  expect(store.getState().map).toEqual({tileLayers: []})
 }
 
 {
@@ -84,20 +84,36 @@ const mappoState = require(`./mappoState`)
 
   const map = {tileLayers: []}
   store.dispatch({type: `SET_MAP`, map})
-  expect(store.getState().map.present).toBe(map)
+  expect(store.getState().map).toBe(map)
 }
 
 {
   // can plot a tile
   const store = createStore(mappoState)
 
-  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 0)}]
+  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 77)}]
   deepFreeze(tileLayers)
   store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  expect(store.getState().map.present.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 0))
+  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 77))
 
-  store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexGridWidth: 2, tileLayerIndex: 0, tileIndexToPlot: 99})
-  expect(store.getState().map.present.tileLayers[0].tileIndexGrid).toEqual([0, 0, 99, 0])
+  const plotInfo = {
+    x: 0,
+    y: 1,
+    tileIndexGridWidth: 2,
+    tileLayerIndex: 0,
+    tileLayers,
+    tileIndexToPlot: 99,
+  }
+  store.dispatch(Object.assign({type: `PLOT_TILE`}, plotInfo))
+  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([77, 77, 99, 77])
+  expect(store.getState().plots.present).toEqual([{
+    x: 0,
+    y: 1,
+    tileIndexGridWidth: 2,
+    tileLayerIndex: 0,
+    tileIndexToPlot: 99,
+    overwritingTileIndex: 77,
+  }])
   expect(store.getState().isMapDirty).toBe(true)
 }
 
