@@ -130,6 +130,12 @@ module.exports = (state={}, action) => {
       })
     } break
 
+    case `SET_ZOOM`: {
+      return Object.assign({}, state, {
+        zoom: action.zoom,
+      })
+    } break
+
     default: {
       return state
     }

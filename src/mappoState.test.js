@@ -163,3 +163,14 @@ const mappoState = require(`./mappoState`)
   store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: false})
   expect(store.getState().isMapDirty).toEqual(false)
 }
+
+{
+  // can set zoom level
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `SET_ZOOM`, zoom: 0.25})
+  expect(store.getState().zoom).toBe(0.25)
+
+  store.dispatch({type: `SET_ZOOM`, zoom: 2})
+  expect(store.getState().zoom).toBe(2)
+}
