@@ -1,6 +1,6 @@
 "use strict"
 
-const immutableArraySet = require(`./immutableArraySet`)
+const immutableArraySet = require(`../immutableArraySet`)
 
 module.exports = (state=[], action) => {
   switch (action.type) {
