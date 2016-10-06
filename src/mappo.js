@@ -19,7 +19,6 @@ const renderLayer = require(`./renderLayer`)
 const renderMap = require(`./renderMap`)
 const renderTileset = require(`./renderTileset`)
 const createCheckerboardPattern = require(`./createCheckerboardPattern`)
-const calcAutoScroll = require(`./calcAutoScroll`)
 const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
 const createStore = require(`./createStore`)
@@ -133,7 +132,6 @@ const defaultGlobalMappoState = {
   keyPressed: {},
   mouseDown: false,
   mouseInViewport: false,
-  autoScroll: {},
 }
 let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
@@ -281,18 +279,6 @@ middlePanel.addEventListener(`mousemove`, event => {
     }
   }
 
-  globalMappoState.autoScroll = {}
-  if (globalMappoState.mouseInViewport) {
-    globalMappoState.autoScroll = calcAutoScroll({
-      scale,
-      threshold: (tileset.tileWidth + tileset.tileHeight) / 2,
-      cursorX: event.offsetX,
-      cursorY: event.offsetY,
-      viewportWidth: middlePanel.offsetWidth,
-      viewportHeight: middlePanel.offsetHeight,
-    })
-  }
-
   if (state.selectedTileLayerIndex !== -1) {
     const layer = state.map.tileLayers[state.selectedTileLayerIndex]
     const tileWidth = tileset.tileWidth
@@ -370,7 +356,6 @@ middlePanel.addEventListener(`mouseenter`, event => {
 middlePanel.addEventListener(`mouseout`, event => {
   globalMappoState.mouseInViewport = false
   globalMappoState.mouseDown = false
-  globalMappoState.autoScroll = {}
   globalMappoState.mapLayerTileHighlightCoord = null
 })
 
@@ -463,31 +448,6 @@ const tick = () => {
       })
 
       tilesetSelectedTileIndex.innerText = state.selectedTileIndex
-    }
-
-    const autoScroll = globalMappoState.autoScroll
-    if (autoScroll) {
-      let moveX = 0
-      let moveY = 0
-      const cameraScrollAmount = 1
-
-      if (keyboard.isPressed(keyboard.KEYCODE_UP) || autoScroll.x < 0) {
-        moveY = -cameraScrollAmount
-      }
-
-      if (keyboard.isPressed(keyboard.KEYCODE_DOWN) || autoScroll.y > 0) {
-        moveY = +cameraScrollAmount
-      }
-
-      if (keyboard.isPressed(keyboard.KEYCODE_LEFT) || autoScroll.x < 0) {
-        moveX = -cameraScrollAmount
-      }
-
-      if (keyboard.isPressed(keyboard.KEYCODE_RIGHT) || autoScroll.x > 0) {
-        moveX = +cameraScrollAmount
-      }
-
-      moveCamera(moveX, moveY)
     }
 
     if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {
