@@ -132,12 +132,9 @@ module.exports = (state={}, action) => {
     } break
 
     case `SET_ZOOM_LEVEL`: {
-      console.log(`SET_ZOOM_LEVEL`)
-      const result = Object.assign({}, state, {
+      return Object.assign({}, state, {
         zoomLevel: zoomLevel(state.zoomLevel, action),
       })
-      console.log(`zoom now`, state.zoomLevel)
-      return result
     } break
 
     default: {
