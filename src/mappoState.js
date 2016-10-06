@@ -4,6 +4,7 @@ const assert = require(`assert`)
 const map = require(`./reducers/map`)
 const editor = require(`./reducers/editor`)
 const plots = require(`./reducers/plots`)
+const zoomLevel = require(`./reducers/zoomLevel`)
 const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
 const undoable = require(`./undoable`)
@@ -130,10 +131,13 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `SET_ZOOM`: {
-      return Object.assign({}, state, {
-        zoom: action.zoom,
+    case `SET_ZOOM_LEVEL`: {
+      console.log(`SET_ZOOM_LEVEL`)
+      const result = Object.assign({}, state, {
+        zoomLevel: zoomLevel(state.zoomLevel, action),
       })
+      console.log(`zoom now`, state.zoomLevel)
+      return result
     } break
 
     default: {

@@ -26,6 +26,8 @@ const createStore = require(`./createStore`)
 const mappoState = require(`./mappoState`)
 const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
+const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
+const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 
 // DOM REFERENCES
 const pageTitle = document.querySelector(`title`)
@@ -63,6 +65,10 @@ store.dispatch({type: `RELOAD_STORE`, state: mappoConfigFromDisk})
 store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
 store.dispatch({type: `SET_LOADING`, isLoading: true})
+
+if (store.getState().zoomLevel === undefined) {
+  store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
+}
 
 let maxMapWidth = 0
 let maxMapHeight = 0
@@ -119,10 +125,7 @@ const mappoSession = createMappoSession({
   launchFolder
 })
 
-const viewportScales = [0.25, 0.5, 0.75, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-const DEFAULT_SCALE_INDEX = 4
 const defaultGlobalMappoState = {
-  scaleIndex: DEFAULT_SCALE_INDEX,
   mapLayerOrder: null,
   tileset: null,
   tilesetTileHovering: null,
@@ -134,7 +137,7 @@ const defaultGlobalMappoState = {
 }
 let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
-const getScale = () => viewportScales[globalMappoState.scaleIndex]
+const getScale = () => ZOOM_LEVELS[store.getState().zoomLevel]
 
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement(`li`)
@@ -498,23 +501,27 @@ const tick = () => {
     }
 
     // map zooming
+    const prevZoomLevel = state.zoomLevel
     if (keyboard.isPressed(`ctrlKey`)) {
-      const prevScaleIndex = globalMappoState.scaleIndex
       if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
         keyboard.release(keyboard.KEYCODE_PLUS)
-        globalMappoState.scaleIndex++
+        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.zoomLevel + 1})
       }
+
       if (keyboard.isPressed(keyboard.KEYCODE_MINUS)) {
         keyboard.release(keyboard.KEYCODE_MINUS)
-        globalMappoState.scaleIndex--
+        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.zoomLevel - 1})
       }
+
       if (keyboard.isPressed(keyboard.KEYCODE_0)) {
         keyboard.release(keyboard.KEYCODE_0)
-        globalMappoState.scaleIndex = DEFAULT_SCALE_INDEX
+        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
       }
-      globalMappoState.scaleIndex = clamp(globalMappoState.scaleIndex, 0, viewportScales.length - 1)
-      // TODO(chuck): redux-ify?
-      if (prevScaleIndex !== globalMappoState.scaleIndex) {
+
+      // TODO(chuck): hmm, tricky. dispatching to store generates new state
+      // and therefore state.zoomLevel will still point to stale state (?)
+      // look at this more closely soon and fully understand what's going on.
+      if (prevZoomLevel !== store.getState().zoomLevel) {
         resizeCanvas()
       }
     }
@@ -611,7 +618,6 @@ const refreshUndoRedo = () => {
 
 const autoSave = () => {
   if (isAutoSaving) {
-    console.log(`isAutoSaving, early out...`)
     return
   }
 
