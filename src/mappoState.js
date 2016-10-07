@@ -108,14 +108,14 @@ module.exports = (state={}, action) => {
 
     case `RESET_LAYER_VISIBILITIES`: {
       return Object.assign({}, state, {
-        layerHidden: [],
+        layerHidden: filler(20, false),
       })
     } break
 
     case `TOGGLE_LAYER_VISIBILITY`: {
       let layerHidden = state.layerHidden
       if (!layerHidden) {
-        layerHidden = filler(20)
+        layerHidden = filler(20, false)
       }
       let isHidden = !layerHidden[action.index]
       return Object.assign({}, state, {

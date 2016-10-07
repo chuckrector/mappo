@@ -180,7 +180,8 @@ const mappoState = require(`./mappoState`)
   const store = createStore(mappoState)
 
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
-  store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
+  store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 1})
+  expect(store.getState().layerHidden.slice(0, 2)).toEqual([true, true])
   store.dispatch({type: `RESET_LAYER_VISIBILITIES`})
-  expect(store.getState().layerHidden).toEqual([])
+  expect(store.getState().layerHidden.slice(0, 2)).toEqual([false, false])
 }
