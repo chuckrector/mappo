@@ -502,19 +502,22 @@ const tick = () => {
   window.requestAnimationFrame(tick)
 }
 
+const stretchCanvasByZoom = canvas => {
+  canvas.style.width = (canvas.width * getScale()) + `px`
+  canvas.style.height = (canvas.height * getScale()) + `px`
+}
+
 const resizeCanvas = () => {
   canvas.width = roundedUpUnits(middlePanel.offsetWidth, getScale())
   canvas.height = roundedUpUnits(middlePanel.offsetHeight, getScale())
-  canvas.style.width = middlePanel.offsetWidth + `px`
-  canvas.style.height = middlePanel.offsetHeight + `px`
+  stretchCanvasByZoom(canvas)
 
   if (!store.getState().isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
     const tileset = store.getState().map.tileset
     tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
     tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
-    tilesetCanvas.style.width = (tilesetCanvas.width * getScale()) + `px`
-    tilesetCanvas.style.height = (tilesetCanvas.height * getScale()) + `px`
+    stretchCanvasByZoom(tilesetCanvas)
   }
 }
 
