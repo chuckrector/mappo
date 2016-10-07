@@ -3,6 +3,8 @@
 :root {
   --left-panel-width: 250px;
   --right-panel-width: 250px;
+  --bg-color: #444a53;
+  --dark-bg-color: rgb(35, 37, 42);
 }
 
 *,
@@ -12,10 +14,33 @@
   -webkit-user-select: none;
 }
 
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,.1);
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background: silver;
+  margin: 2px;
+  width: 10px;
+  background-clip: content-box;
+  border: solid 3px transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: none;
+}
+
 body {
   margin: 0;
   overflow: hidden;
   font: normal 14px / 1.6 sans-serif;
+  color: rgb(254, 255, 255);
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -39,6 +64,7 @@ canvas {
   flex-grow: 1;
   background: url(mappo.png) 50% calc(50% + 25px) no-repeat;
   background-size: 200px;
+  -webkit-filter: invert(100%);
 }
 
 body:not(.is-loading) .loading-screen {
@@ -54,7 +80,7 @@ body:not(.is-loading) .loading-screen {
 .left-panel {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--bg-color);
   width: var(--left-panel-width);
 }
 

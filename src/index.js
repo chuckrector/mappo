@@ -33,7 +33,9 @@ const createWindow = () => {
     }
   }
 
-  win = new BrowserWindow(windowBounds)
+  win = new BrowserWindow(Object.assign(windowBounds, {
+    backgroundColor: '#444a53',
+  }))
 
   win.loadURL(`file://${__dirname}/index.html`)
 
