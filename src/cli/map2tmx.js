@@ -16,7 +16,7 @@ console.log(abbrevJson(mappoMap))
 const tileset = mappoMap.tileset
 const tileWidth = tileset.tileWidth
 const tileHeight = tileset.tileHeight
-const vspFilename = path.basename(tileset.vspFilename)
+const vspFilename = path.basename(tileset.imageFilename)
 const tileColumns = 20
 const tileRows = ~~((tileset.numTiles + 19) / 20)
 const vspPngWidth = tileWidth * tileColumns

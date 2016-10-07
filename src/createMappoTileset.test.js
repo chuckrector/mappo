@@ -5,6 +5,7 @@ const asset = require(`./asset`)
 const {makeBuffer, B} = require(`./makeBuffer`)
 const filler = require(`./filler`)
 const createMappoTileset = require(`./createMappoTileset`)
+const createMappoTilesetRaw32bitData = require(`./createMappoTilesetRaw32bitData`)
 
 {
   // can create from v1 vsp
@@ -23,7 +24,7 @@ const createMappoTileset = require(`./createMappoTileset`)
   expect(mappoTileset.tileWidth).toBe(16)
   expect(mappoTileset.tileHeight).toBe(16)
   expect(mappoTileset.numTiles).toBe(numtiles)
-  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numtiles)
+  expect(createMappoTilesetRaw32bitData(v1vsp).length).toBe(16 * 16 * 4 * numtiles)
 }
 
 {
@@ -43,7 +44,7 @@ const createMappoTileset = require(`./createMappoTileset`)
   expect(mappoTileset.tileWidth).toBe(16)
   expect(mappoTileset.tileHeight).toBe(16)
   expect(mappoTileset.numTiles).toBe(numTiles)
-  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numTiles)
+  expect(createMappoTilesetRaw32bitData(v2vsp).length).toBe(16 * 16 * 4 * numTiles)
 }
 
 {
@@ -67,5 +68,5 @@ const createMappoTileset = require(`./createMappoTileset`)
   expect(mappoTileset.tileWidth).toBe(tileSize)
   expect(mappoTileset.tileHeight).toBe(tileSize)
   expect(mappoTileset.numTiles).toBe(numTiles)
-  expect(mappoTileset.raw32bitData.length).toBe(tileSize * tileSize * 4 * numTiles)
+  expect(createMappoTilesetRaw32bitData(v3vsp).length).toBe(tileSize * tileSize * 4 * numTiles)
 }

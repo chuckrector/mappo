@@ -13,6 +13,7 @@ module.exports = ({context, mapFilename}) => {
   }
   console.group()
   console.log(`loading`, mapFilename)
+  let map
   try {
     const mapBuffer = fs.readFileSync(mapFilename)
     const mapFormat = detectFormat(mapBuffer)
@@ -29,12 +30,12 @@ module.exports = ({context, mapFilename}) => {
       return
     }
     console.log(mapFilename, abbrevJson(mapData))
-    const map = createMappoMap({map: mapData})
-    map.tileset = loadMappoTileset({context, mapFilename, map})
-    return map
+    map = createMappoMap({map: mapData})
   } catch (exception) {
     console.error(`ack!`, exception)
   } finally {
     console.groupEnd()
   }
+  map.tileset = loadMappoTileset({context, mapFilename, map})
+  return map
 }

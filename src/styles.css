@@ -185,8 +185,7 @@ body.is-loading .right-panel {
 
 .tileset-canvas-container {
   flex: 1 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
 .tileset-selected-tile {

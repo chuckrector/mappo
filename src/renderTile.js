@@ -10,9 +10,12 @@ module.exports = ({
   scaleWidth=tileset.tileWidth,
   scaleHeight=tileset.tileHeight,
 }) => {
+  const tileX = tileIndex % tileset.tileColumns
+  const tileY = ~~(tileIndex / tileset.tileColumns)
   context.drawImage(
     tilesetImageBitmap,
-    0, tileIndex * tileset.tileHeight,
+    tileX * tileset.tileWidth,
+    tileY * tileset.tileHeight,
     tileset.tileWidth,
     tileset.tileHeight,
     x, y,

@@ -8,17 +8,5 @@ module.exports = ({
   tilesetImageBitmap,
   tilesetColumns,
 }) => {
-  for (let tileIndex = 0; tileIndex < tileset.numTiles; tileIndex++) {
-    const tileX = tileIndex % tilesetColumns
-    const tileY = ~~(tileIndex / tilesetColumns)
-
-    renderTile({
-      context,
-      tileset,
-      tilesetImageBitmap,
-      tileIndex,
-      x: tileX * tileset.tileWidth,
-      y: tileY * tileset.tileHeight,
-    })
-  }
+  context.drawImage(tilesetImageBitmap, 0, 0)
 }

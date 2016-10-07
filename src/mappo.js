@@ -21,6 +21,7 @@ const renderTileset = require(`./renderTileset`)
 const createCheckerboardPattern = require(`./createCheckerboardPattern`)
 const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
+const createMappoTilesetRaw32bitData = require(`./createMappoTilesetRaw32bitData`)
 const createStore = require(`./createStore`)
 const mappoState = require(`./mappoState`)
 const loadMappoConfig = require(`./loadMappoConfig`)
@@ -28,6 +29,7 @@ const saveMappoConfig = require(`./saveMappoConfig`)
 const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 const roundedUpUnits = require(`./roundedUpUnits`)
+const createTileGridConverter = require(`./converter/createTileGridConverter`)
 
 // DOM REFERENCES
 const pageTitle = document.querySelector(`title`)
@@ -287,10 +289,10 @@ middlePanel.addEventListener(`mousemove`, event => {
     const tileHeight = tileset.tileHeight
     const scaleX = event.offsetX / scale
     const scaleY = event.offsetY / scale
-    const parallaxX = (state.camera.x + scaleX) * layer.parallax.x
-    const parallaxY = (state.camera.y + scaleY) * layer.parallax.y
-    const tileX = ~~(parallaxX / tileWidth)
-    const tileY = ~~(parallaxY / tileHeight)
+    const parallaxX = state.camera.x * layer.parallax.x
+    const parallaxY = state.camera.y * layer.parallax.y
+    const tileX = ~~((parallaxX + scaleX) / tileWidth)
+    const tileY = ~~((parallaxY + scaleY) / tileHeight)
 
     if (tileX !== state.highlightedMapTile.tileX || tileY !== state.highlightedMapTile.tileY) {
       store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX, tileY})
@@ -305,7 +307,7 @@ const getTileCoordAndIndex = ({
   pixelY,
 }) => {
   const scale = getScale()
-  const tilesetColumns = getTilesetColumns({tileset, containerWidth})
+  const tilesetColumns = tileset.tileColumns
   const tileX = ~~(pixelX / (tileset.tileWidth * scale))
   const tileY = ~~(pixelY / (tileset.tileHeight * scale))
   const tileIndex = (tileY * tilesetColumns) + tileX
@@ -325,7 +327,7 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
   const map = store.getState().map
   map.tilesetTileHovering = getTileCoordAndIndex({
     tileset: map.tileset,
-    containerWidth: tilesetCanvasContainer.offsetWidth,
+    containerWidth: tilesetCanvas.width * getScale(),
     pixelX: event.offsetX,
     pixelY: event.offsetY,
   })
@@ -338,7 +340,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
 
   const info = getTileCoordAndIndex({
     tileset: store.getState().map.tileset,
-    containerWidth: tilesetCanvasContainer.offsetWidth,
+    containerWidth: tilesetCanvas.width * getScale(),
     pixelX: event.offsetX,
     pixelY: event.offsetY,
   })
@@ -515,8 +517,8 @@ const resizeCanvas = () => {
   if (!store.getState().isLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
     const tileset = store.getState().map.tileset
-    tilesetCanvas.width = getTilesetColumns({tileset, containerWidth}) * tileset.tileWidth
-    tilesetCanvas.height = getTilesetRows({tileset, containerWidth}) * tileset.tileHeight
+    tilesetCanvas.width = tilesetImageBitmap.width
+    tilesetCanvas.height = tilesetImageBitmap.height
     stretchCanvasByZoom(tilesetCanvas)
   }
 }
@@ -526,30 +528,68 @@ resizeCanvas()
 
 tick()
 
+let tilesetImageLoading
+
 const rebuildTilesetImageBitmap = () => {
   const state = store.getState()
   if (!state.isDirtyTilesetImageBitmap) {
     return
   }
 
-  const tileset = state.map.tileset
-  convertRaw32bitDataToImageBitmap({
-    context,
-    raw32bitData: tileset.raw32bitData,
-    width: tileset.tileWidth,
-    height: tileset.tileHeight,
-    numTiles: tileset.numTiles,
-  }).then(imageBitmap => {
-    tilesetImageBitmap = imageBitmap
-    store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
-    store.dispatch({type: `SET_LOADING`, isLoading: false})
-    saveMappoConfig(store.getState())
-    resizeCanvas()
+  if (tilesetImageLoading) {
+    return
+  }
 
-    tilesetSelectedTileCanvas.width = tileset.tileWidth
-    tilesetSelectedTileCanvas.height = tileset.tileHeight
-    tilesetHoveringTileCanvas.width = tileset.tileWidth
-    tilesetHoveringTileCanvas.height = tileset.tileHeight
+  const {map} = state
+  const {tileset} = map
+  // auto-convert tileset to PNG if it doesn't already exist
+  const vspImageExists = fs.existsSync(tileset.imageFilename)
+
+  let tilesetResolve
+  const tilesetPromise = new Promise((resolve, reject) => {
+    tilesetResolve = resolve
+  })
+
+  if (!vspImageExists) {
+    console.log(`generating`, tileset.imageFilename, `...`)
+
+    const raw32bitData = createMappoTilesetRaw32bitData(tileset)
+    const converter = createTileGridConverter({
+      tileWidth: tileset.tileWidth,
+      tileHeight: tileset.tileHeight,
+      columns: tileset.tileColumns,
+      numtiles: tileset.numTiles,
+      raw32bitData,
+    })
+
+    const png = converter.convertToPng()
+    const writer = fs.createWriteStream(tileset.imageFilename)
+    png.pack().pipe(writer)
+    writer.on(`finish`, tilesetResolve)
+  } else {
+    tilesetResolve()
+  }
+
+  tilesetPromise.then(() => {
+    const tileset = state.map.tileset
+    const tilesetImage = new Image()
+    tilesetImageLoading = true
+    tilesetImage.addEventListener(`load`, () => {
+      tilesetImageBitmap = tilesetImage
+      store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
+      store.dispatch({type: `SET_LOADING`, isLoading: false})
+      saveMappoConfig(store.getState())
+      resizeCanvas()
+
+      tilesetSelectedTileCanvas.width = tileset.tileWidth
+      tilesetSelectedTileCanvas.height = tileset.tileHeight
+      tilesetHoveringTileCanvas.width = tileset.tileWidth
+      tilesetHoveringTileCanvas.height = tileset.tileHeight
+      tilesetImageLoading = false
+    })
+
+    const relativePath = path.resolve(`.`, tileset.imageFilename)
+    tilesetImage.src = relativePath
   })
 }
 

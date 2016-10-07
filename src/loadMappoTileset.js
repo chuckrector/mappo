@@ -38,8 +38,9 @@ module.exports = ({
 
   console.log(vspFilename, abbrevJson(vspData))
 
-  const tileset = createMappoTileset({context, tileset: vspData})
-  tileset.vspFilename = vspFilename
-
-  return tileset
+  return createMappoTileset({
+    context,
+    tileset: vspData,
+    imageFilename: vspFilename + `.png`,
+  })
 }
