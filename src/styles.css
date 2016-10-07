@@ -28,7 +28,21 @@ canvas {
 
 #mappo {
   display: flex;
+  flex: 0;
+  align-items: stretch;
+  justify-content: flex-start;
   height: 100vh;
+  max-width: 100%;
+}
+
+.loading-screen {
+  flex-grow: 1;
+  background: url(mappo.png) 50% calc(50% + 25px) no-repeat;
+  background-size: 200px;
+}
+
+body:not(.is-loading) .loading-screen {
+  display: none;
 }
 
 .horz-split {
@@ -40,22 +54,29 @@ canvas {
 .left-panel {
   display: flex;
   flex-direction: column;
-  flex: 0 0 var(--left-panel-width);
+  background: #fff;
+  width: var(--left-panel-width);
 }
 
 .middle-panel {
-  width: calc(100% - var(--right-panel-width) - var(--left-panel-width));
+  width: calc(100% - var(--left-panel-width) - var(--right-panel-width));
 }
 
 .right-panel {
   display: flex;
   flex-direction: column;
-  flex: 0 0 var(--right-panel-width);
+  width: var(--right-panel-width);
 }
 
 .left-panel,
 .right-panel {
   padding: 5px;
+}
+
+body.is-loading .undo-list-container,
+body.is-loading .middle-panel,
+body.is-loading .right-panel {
+  display: none;
 }
 
 /* PADDED LIST */

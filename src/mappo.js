@@ -160,7 +160,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
 
     refreshMapLayerList()
 
-    pageTitle.innerText = `Mappo - ` + mapFilename
+    pageTitle.innerText = `mappo - ` + mapFilename
   })
   mapList.appendChild(li)
 })
@@ -616,10 +616,20 @@ const autoSave = () => {
   }
 }
 
+const refreshLoadingStatus = () => {
+  const state = store.getState()
+  if (state.isLoading) {
+    document.body.classList.add(`is-loading`)
+  } else {
+    document.body.classList.remove(`is-loading`)
+  }
+}
+
 store.subscribe(recalcMaxMapSize)
 store.subscribe(refreshMapLayerList)
 store.subscribe(rebuildTilesetImageBitmap)
 store.subscribe(refreshUndoRedo)
+store.subscribe(refreshLoadingStatus)
 
 store.dispatch({
   type: `SET_EDITOR_WINDOW_SIZE`,
