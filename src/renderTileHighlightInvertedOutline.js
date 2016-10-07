@@ -10,5 +10,5 @@ module.exports = ({
   context.strokeStyle = `white`
   context.globalCompositeOperation = `exclusion`
   context.lineWidth = 2
-  context.strokeRect(~~x, ~~y, width, height)
+  context.strokeRect(~~x + 1, ~~y + 1, width - 2, height - 2)
 }
