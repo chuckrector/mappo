@@ -69,4 +69,11 @@ module.exports = ({
     pixelY += tileHeight
     tileY++
   }
+
+  return {
+    tileStartX,
+    tileStartY,
+    pixelStartX,
+    pixelStartY,
+  }
 }

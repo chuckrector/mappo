@@ -70,11 +70,11 @@ const mappoState = require(`./mappoState`)
   // can highlight map tile
   const store = createStore(mappoState)
 
-  store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 1, y: 2})
-  expect(store.getState().highlightedMapTile).toEqual({x: 1, y: 2})
+  store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX: 1, tileY: 2})
+  expect(store.getState().highlightedMapTile).toEqual({tileX: 1, tileY: 2})
 
-  store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 3, y: 4})
-  expect(store.getState().highlightedMapTile).toEqual({x: 3, y: 4})
+  store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX: 3, tileY: 4})
+  expect(store.getState().highlightedMapTile).toEqual({tileX: 3, tileY: 4})
 }
 
 {

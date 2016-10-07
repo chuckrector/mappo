@@ -100,8 +100,8 @@ module.exports = (state={}, action) => {
     case `HIGHLIGHT_MAP_TILE`: {
       return Object.assign({}, state, {
         highlightedMapTile: {
-          x: action.x,
-          y: action.y,
+          tileX: action.tileX,
+          tileY: action.tileY,
         },
       })
     } break

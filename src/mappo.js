@@ -283,15 +283,15 @@ middlePanel.addEventListener(`mousemove`, event => {
     const layer = state.map.tileLayers[state.selectedTileLayerIndex]
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
-    const scaleX = ~~(event.offsetX / scale)
-    const scaleY = ~~(event.offsetY / scale)
-    const parallaxX = ~~(state.camera.x * layer.parallax.x)
-    const parallaxY = ~~(state.camera.y * layer.parallax.y)
-    const x = scaleX - ((parallaxX + scaleX) % tileWidth)
-    const y = scaleY - ((parallaxY + scaleY) % tileHeight)
+    const scaleX = event.offsetX / scale
+    const scaleY = event.offsetY / scale
+    const parallaxX = (state.camera.x + scaleX) * layer.parallax.x
+    const parallaxY = (state.camera.y + scaleY) * layer.parallax.y
+    const tileX = ~~(parallaxX / tileWidth)
+    const tileY = ~~(parallaxY / tileHeight)
 
-    if (x !== state.highlightedMapTile.x || y !== state.highlightedMapTile.y) {
-      store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x, y})
+    if (tileX !== state.highlightedMapTile.tileX || tileY !== state.highlightedMapTile.tileY) {
+      store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX, tileY})
     }
   }
 })
@@ -384,7 +384,7 @@ const tick = () => {
     const tileHeight = tileset.tileHeight
     const containerWidth = tilesetCanvasContainer.offsetWidth
 
-    renderMap({
+    const tileStartList = renderMap({
       map,
       tileset,
       tilesetImageBitmap,
@@ -394,13 +394,23 @@ const tick = () => {
       layerHidden: state.layerHidden,
     })
 
-    renderTileHighlightInvertedOutline({
-      context,
-      x: state.highlightedMapTile.x,
-      y: state.highlightedMapTile.y,
-      width: tileWidth,
-      height: tileHeight,
-    })
+    // TODO(chuck): find a simpler way, this seems rather excessive
+    // fixes #1: map tile highlight "jiggles" during fine movements
+    const tileStartLayer = tileStartList[state.selectedTileLayerIndex]
+    if (tileStartLayer) {
+      const highlightTileX = state.highlightedMapTile.tileX
+      const highlightTileY = state.highlightedMapTile.tileY
+      const {pixelStartX, pixelStartY, tileStartX, tileStartY} = tileStartLayer
+      const x = ((highlightTileX - tileStartX) * tileWidth) + pixelStartX
+      const y = ((highlightTileY - tileStartY) * tileHeight) + pixelStartY
+      renderTileHighlightInvertedOutline({
+        context,
+        x,
+        y,
+        width: tileWidth,
+        height: tileHeight,
+      })
+    }
 
     renderTileset({
       context: tilesetContext,

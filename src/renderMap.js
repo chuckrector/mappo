@@ -9,13 +9,15 @@ module.exports = ({
   context,
   layerHidden,
 }) => {
+  const tileStartList = []
+
   map.mapLayerOrder.forEach(layerIndex => {
     // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
     //              to a map layer which doesn't exist
     const tileLayer = map.tileLayers[layerIndex]
     const isHidden = layerHidden && layerHidden[layerIndex]
     if (tileLayer && !isHidden) {
-      renderLayer({
+      tileStartList[layerIndex] = renderLayer({
         context,
         canvas,
         tileset,
@@ -27,4 +29,6 @@ module.exports = ({
       })
     }
   })
+
+  return tileStartList
 }
