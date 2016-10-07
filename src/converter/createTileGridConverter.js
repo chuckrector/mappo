@@ -2,6 +2,7 @@
 
 const {PNG} = require(`pngJS`)
 const colorDepth = require(`./colorDepth`)
+const roundedUpUnits = require(`../roundedUpUnits`)
 
 module.exports = ({
   tileWidth,
@@ -10,7 +11,7 @@ module.exports = ({
   numtiles,
   raw32bitData,
 }) => {
-  const rows = Math.floor((numtiles + (columns - 1)) / columns)
+  const rows = roundedUpUnits(numtiles, columns)
   const pngWidth = columns * tileWidth
   const pngHeight = rows * tileHeight
 

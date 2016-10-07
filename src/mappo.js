@@ -27,6 +27,7 @@ const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
 const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
+const roundedUpUnits = require(`./roundedUpUnits`)
 
 // DOM REFERENCES
 const pageTitle = document.querySelector(`title`)
@@ -367,7 +368,7 @@ const getTilesetColumns = ({tileset, containerWidth}) => {
 
 const getTilesetRows = ({tileset, containerWidth}) => {
   const tilesetColumns = getTilesetColumns({tileset, containerWidth})
-  const roundedUpRows = ~~((tileset.numTiles + (tilesetColumns - 1)) / tilesetColumns)
+  const roundedUpRows = roundedUpUnits(tileset.numTiles, tilesetColumns)
   return roundedUpRows
 }
 
@@ -502,8 +503,8 @@ const tick = () => {
 }
 
 const resizeCanvas = () => {
-  canvas.width = ~~((middlePanel.offsetWidth + (getScale() - 1)) / getScale())
-  canvas.height = ~~((middlePanel.offsetHeight + (getScale() - 1)) / getScale())
+  canvas.width = roundedUpUnits(middlePanel.offsetWidth, getScale())
+  canvas.height = roundedUpUnits(middlePanel.offsetHeight, getScale())
   canvas.style.width = middlePanel.offsetWidth + `px`
   canvas.style.height = middlePanel.offsetHeight + `px`
 
