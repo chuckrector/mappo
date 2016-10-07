@@ -106,6 +106,12 @@ module.exports = (state={}, action) => {
       })
     } break
 
+    case `RESET_LAYER_VISIBILITIES`: {
+      return Object.assign({}, state, {
+        layerHidden: [],
+      })
+    } break
+
     case `TOGGLE_LAYER_VISIBILITY`: {
       let layerHidden = state.layerHidden
       if (!layerHidden) {

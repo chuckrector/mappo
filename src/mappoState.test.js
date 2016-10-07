@@ -174,3 +174,13 @@ const mappoState = require(`./mappoState`)
   store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: 4})
   expect(store.getState().zoomLevel).toBe(4)
 }
+
+{
+  // can reset layer visibilities
+  const store = createStore(mappoState)
+
+  store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
+  store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
+  store.dispatch({type: `RESET_LAYER_VISIBILITIES`})
+  expect(store.getState().layerHidden).toEqual([])
+}
