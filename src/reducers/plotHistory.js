@@ -1,6 +1,7 @@
 "use strict"
 
 // adapted from redux undo's undoable()
+// TODO(chuck): prolly doesn't need to be a reducer enhancer now?
 module.exports = reducer => {
   const initialState = {
     plotHistory: [],
@@ -26,18 +27,18 @@ module.exports = reducer => {
       } break
 
       default: {
-        let newplotHistory = plotHistory
+        let newPlotHistory = plotHistory
         if (undoIndex < plotHistory.length) {
-          newplotHistory = plotHistory.slice(plotHistory, undoIndex)
+          newPlotHistory = plotHistory.slice(plotHistory, undoIndex)
         }
 
-        newplotHistory = reducer(newplotHistory, action)
-        if (newplotHistory === plotHistory) {
+        newPlotHistory = reducer(newPlotHistory, action)
+        if (newPlotHistory === plotHistory) {
           return state
         }
 
         return {
-          plotHistory: newplotHistory,
+          plotHistory: newPlotHistory,
           undoIndex: undoIndex + 1,
         }
       }

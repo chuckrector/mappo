@@ -105,13 +105,14 @@ const mappoState = require(`./mappoState`)
   }
   store.dispatch(Object.assign({type: `PLOT_TILE`}, plotInfo))
   expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([77, 77, 99, 77])
-  expect(store.getState().plots.present).toEqual([{
+  const {plotHistory, undoIndex} = store.getState().plots
+  expect(plotHistory[undoIndex - 1]).toEqual({
     x: 0,
     y: 1,
     tileLayerIndex: 0,
     tileIndexToPlot: 99,
     overwritingTileIndex: 77,
-  }])
+  })
   expect(store.getState().isMapDirty).toBe(true)
 }
 

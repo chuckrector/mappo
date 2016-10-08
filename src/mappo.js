@@ -594,14 +594,14 @@ const rebuildTilesetImageBitmap = () => {
 
 const undo = () => {
   const state = store.getState()
-  if (state.plots.past.length) {
+  if (state.plots.undoIndex > 0) {
     store.dispatch({type: `UNDO`})
   }
 }
 
 const redo = () => {
   const state = store.getState()
-  if (state.plots.future.length) {
+  if (state.plots.undoIndex < state.plots.plotHistory.length) {
     store.dispatch({type: `REDO`})
   }
 }
@@ -617,13 +617,13 @@ const refreshUndoRedo = () => {
   }
 
   const state = store.getState()
-  if (state.plots && state.plots.past.length > 0) {
+  if (state.plots && state.plots.undoIndex > 0) {
     undoButton.removeAttribute(`disabled`)
   } else {
     undoButton.disabled = true
   }
 
-  if (state.plots && state.plots.future.length > 0) {
+  if (state.plots && state.plots.undoIndex < state.plots.plotHistory.length) {
     redoButton.removeAttribute(`disabled`)
   } else {
     redoButton.disabled = true

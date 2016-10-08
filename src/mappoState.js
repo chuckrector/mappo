@@ -5,15 +5,16 @@ const map = require(`./reducers/map`)
 const editor = require(`./reducers/editor`)
 const plots = require(`./reducers/plots`)
 const zoomLevel = require(`./reducers/zoomLevel`)
+const plotHistory = require(`./reducers/plotHistory`)
 const immutableArraySet = require(`./immutableArraySet`)
 const filler = require(`./filler`)
-const undoable = require(`./undoable`)
-const undoablePlots = undoable(plots)
+const undoablePlots = plotHistory(plots)
 
 module.exports = (state={}, action) => {
   switch (action.type) {
     case `UNDO`: {
-      const plotToUndo = state.plots.present.slice(-1)[0]
+      const {plotHistory, undoIndex} = state.plots
+      const plotToUndo = plotHistory[undoIndex - 1]
       // this will overwrite plotToUndo's tileIndexToPlot with its
       // overwritingTileIndex. it's fine that the old overwritingTileIndex
       // comes along for the ride, since PLOT_TILE in map reducer will ignore it
@@ -30,7 +31,8 @@ module.exports = (state={}, action) => {
     } break
 
     case `REDO`: {
-      const plotToRedo = state.plots.future[0].slice(-1)[0]
+      const {plotHistory, undoIndex} = state.plots
+      const plotToRedo = plotHistory[undoIndex]
       const redoAction = Object.assign({}, plotToRedo, {
         type: `PLOT_TILE`,
         tileLayers: state.map.tileLayers,
