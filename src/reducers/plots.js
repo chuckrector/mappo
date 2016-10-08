@@ -21,9 +21,9 @@ module.exports = (state=[], action) => {
         newValue: {
           x: action.x,
           y: action.y,
-          tileIndexToPlot: action.tileIndexToPlot,
-          tileLayerIndex: action.tileLayerIndex,
-          overwritingTileIndex,
+          v: action.tileIndexToPlot,
+          l: action.tileLayerIndex,
+          o: overwritingTileIndex,
         },
       })
     } break

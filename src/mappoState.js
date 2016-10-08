@@ -20,7 +20,8 @@ module.exports = (state={}, action) => {
       // comes along for the ride, since PLOT_TILE in map reducer will ignore it
       const undoAction = Object.assign({}, plotToUndo, {
         type: `PLOT_TILE`,
-        tileIndexToPlot: plotToUndo.overwritingTileIndex,
+        tileIndexToPlot: plotToUndo.o,
+        tileLayerIndex: plotToUndo.l,
         tileLayers: state.map.tileLayers,
       })
       return Object.assign({}, state, {
@@ -36,6 +37,8 @@ module.exports = (state={}, action) => {
       const redoAction = Object.assign({}, plotToRedo, {
         type: `PLOT_TILE`,
         tileLayers: state.map.tileLayers,
+        tileIndexToPlot: plotToRedo.v,
+        tileLayerIndex: plotToRedo.l,
       })
       return Object.assign({}, state, {
         map: map(state.map, redoAction),

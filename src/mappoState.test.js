@@ -109,9 +109,9 @@ const mappoState = require(`./mappoState`)
   expect(plotHistory[undoIndex - 1]).toEqual({
     x: 0,
     y: 1,
-    tileLayerIndex: 0,
-    tileIndexToPlot: 99,
-    overwritingTileIndex: 77,
+    l: 0,
+    v: 99,
+    o: 77,
   })
   expect(store.getState().isMapDirty).toBe(true)
 }

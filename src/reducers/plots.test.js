@@ -26,8 +26,8 @@ const plots = require(`./plots`)
   expect(store.getState()).toEqual([{
     x: 0,
     y: 1,
-    tileIndexToPlot: 99,
-    tileLayerIndex: 1,
-    overwritingTileIndex: 1,
+    v: 99,
+    l: 1,
+    o: 1,
   }])
 }
