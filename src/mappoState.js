@@ -15,9 +15,6 @@ module.exports = (state={}, action) => {
     case `UNDO`: {
       const {plotHistory, undoIndex} = state.plots
       const plotToUndo = plotHistory[undoIndex - 1]
-      // this will overwrite plotToUndo's tileIndexToPlot with its
-      // overwritingTileIndex. it's fine that the old overwritingTileIndex
-      // comes along for the ride, since PLOT_TILE in map reducer will ignore it
       const undoAction = Object.assign({}, plotToUndo, {
         type: `PLOT_TILE`,
         tileIndexToPlot: plotToUndo.o,
