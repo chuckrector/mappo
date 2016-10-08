@@ -252,7 +252,6 @@ const plot = (event) => {
       type: `PLOT_TILE`,
       tileLayerIndex: state.selectedTileLayerIndex,
       tileLayers: state.map.tileLayers,
-      tileIndexGridWidth: layer.width,
       tileIndexToPlot: state.selectedTileIndex,
       x: tileX,
       y: tileY,

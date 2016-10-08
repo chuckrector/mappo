@@ -10,8 +10,8 @@ const plots = require(`./plots`)
   expect(store.getState()).toEqual([])
 
   const tileLayers = [
-    {tileIndexGrid: [0, 0, 0, 0]},
-    {tileIndexGrid: [1, 1, 1, 1]},
+    {width: 2, tileIndexGrid: [0, 0, 0, 0]},
+    {width: 2, tileIndexGrid: [1, 1, 1, 1]},
   ]
 
   store.dispatch({
@@ -19,7 +19,6 @@ const plots = require(`./plots`)
     x: 0,
     y: 1,
     tileIndexToPlot: 99,
-    tileIndexGridWidth: 2,
     tileLayerIndex: 1,
     tileLayers,
   })
@@ -28,7 +27,6 @@ const plots = require(`./plots`)
     x: 0,
     y: 1,
     tileIndexToPlot: 99,
-    tileIndexGridWidth: 2,
     tileLayerIndex: 1,
     overwritingTileIndex: 1,
   }])

@@ -9,12 +9,11 @@ module.exports = (state=[], action) => {
         x,
         y,
         tileIndexToPlot,
-        tileIndexGridWidth,
         tileLayerIndex,
         tileLayers,
       } = action
       const layer = tileLayers[tileLayerIndex]
-      const tileIndexGridOffset = (y * tileIndexGridWidth) + x
+      const tileIndexGridOffset = (y * layer.width) + x
       const overwritingTileIndex = layer.tileIndexGrid[tileIndexGridOffset]
       return immutableArraySet({
         array: state,
@@ -24,7 +23,6 @@ module.exports = (state=[], action) => {
           y: action.y,
           tileIndexToPlot: action.tileIndexToPlot,
           tileLayerIndex: action.tileLayerIndex,
-          tileIndexGridWidth: action.tileIndexGridWidth,
           overwritingTileIndex,
         },
       })

@@ -99,7 +99,6 @@ const mappoState = require(`./mappoState`)
   const plotInfo = {
     x: 0,
     y: 1,
-    tileIndexGridWidth: 2,
     tileLayerIndex: 0,
     tileLayers,
     tileIndexToPlot: 99,
@@ -109,7 +108,6 @@ const mappoState = require(`./mappoState`)
   expect(store.getState().plots.present).toEqual([{
     x: 0,
     y: 1,
-    tileIndexGridWidth: 2,
     tileLayerIndex: 0,
     tileIndexToPlot: 99,
     overwritingTileIndex: 77,
