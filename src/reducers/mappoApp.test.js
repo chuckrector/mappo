@@ -15,24 +15,6 @@ const mappoApp = require(`./mappoApp`)
 }
 
 {
-  // setting map marks tileset image bitmap as needing rebuilt
-  const store = createStore(mappoApp)
-
-  expect(store.getState().isDirtyTilesetImageBitmap).toBe(undefined)
-  store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
-  expect(store.getState().isDirtyTilesetImageBitmap).toBe(true)
-}
-
-{
-  // can mark tileset image bitmap as built
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SET_MAP`, map: {}})
-  store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
-  expect(store.getState().isDirtyTilesetImageBitmap).toBe(false)
-}
-
-{
   // SET_MAP holds a direct reference to the map
   const store = createStore(mappoApp)
 

@@ -51,13 +51,6 @@ module.exports = (state={}, action) => {
     case `SET_MAP`: {
       return Object.assign({}, state, {
         map: action.map,
-        isDirtyTilesetImageBitmap: true,
-      })
-    } break
-
-    case `BUILT_TILESET_IMAGE_BITMAP`: {
-      return Object.assign({}, state, {
-        isDirtyTilesetImageBitmap: false,
       })
     } break
 

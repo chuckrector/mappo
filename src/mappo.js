@@ -58,15 +58,74 @@ const checkerboardPattern = createCheckerboardPattern({document})
 let tilesetImageBitmap
 
 const mappoConfigFromDisk = loadMappoConfig()
-// TODO(chuck): how to handle this more naturally? with no special priming
-if (mappoConfigFromDisk.map) {
-  mappoConfigFromDisk.isDirtyTilesetImageBitmap = true
+
+let tilesetImageLoading
+
+const rebuildTilesetImageBitmap = () => {
+  const state = store.getState()
+
+  if (tilesetImageLoading) {
+    return
+  }
+
+  const {map} = state
+  const {tileset} = map
+  // auto-convert tileset to PNG if it doesn't already exist
+  const vspImageExists = fs.existsSync(tileset.imageFilename)
+
+  let tilesetResolve
+  const tilesetPromise = new Promise((resolve, reject) => {
+    tilesetResolve = resolve
+  })
+
+  if (!vspImageExists) {
+    console.log(`generating`, tileset.imageFilename, `...`)
+
+    const raw32bitData = createMappoTilesetRaw32bitData(tileset)
+    const converter = createTileGridConverter({
+      tileWidth: tileset.tileWidth,
+      tileHeight: tileset.tileHeight,
+      columns: tileset.tileColumns,
+      numtiles: tileset.numTiles,
+      raw32bitData,
+    })
+
+    const png = converter.convertToPng()
+    const writer = fs.createWriteStream(tileset.imageFilename)
+    png.pack().pipe(writer)
+    writer.on(`finish`, tilesetResolve)
+  } else {
+    tilesetResolve()
+  }
+
+  tilesetPromise.then(() => {
+    const tileset = state.map.tileset
+    const tilesetImage = new Image()
+    tilesetImageLoading = true
+    tilesetImage.addEventListener(`load`, () => {
+      tilesetImageBitmap = tilesetImage
+      store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
+      store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: false})
+      saveMappoConfig(store.getState())
+      resizeCanvas()
+
+      tilesetSelectedTileCanvas.width = tileset.tileWidth
+      tilesetSelectedTileCanvas.height = tileset.tileHeight
+      tilesetHoveringTileCanvas.width = tileset.tileWidth
+      tilesetHoveringTileCanvas.height = tileset.tileHeight
+      tilesetImageLoading = false
+    })
+
+    const relativePath = path.resolve(`.`, tileset.imageFilename)
+    tilesetImage.src = relativePath
+  })
 }
 
 const store = createStore(mappoApp, mappoConfigFromDisk)
+if (store.getState().map) {
+  rebuildTilesetImageBitmap()
+}
 
-store.dispatch({type: `SELECTED_LAYER`, index: -1})
-store.dispatch({type: `SELECTED_TILE`, index: -1})
 store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})
 
 if (store.getState().ui.zoomLevel === undefined) {
@@ -526,71 +585,6 @@ resizeCanvas()
 
 tick()
 
-let tilesetImageLoading
-
-const rebuildTilesetImageBitmap = () => {
-  const state = store.getState()
-  if (!state.isDirtyTilesetImageBitmap) {
-    return
-  }
-
-  if (tilesetImageLoading) {
-    return
-  }
-
-  const {map} = state
-  const {tileset} = map
-  // auto-convert tileset to PNG if it doesn't already exist
-  const vspImageExists = fs.existsSync(tileset.imageFilename)
-
-  let tilesetResolve
-  const tilesetPromise = new Promise((resolve, reject) => {
-    tilesetResolve = resolve
-  })
-
-  if (!vspImageExists) {
-    console.log(`generating`, tileset.imageFilename, `...`)
-
-    const raw32bitData = createMappoTilesetRaw32bitData(tileset)
-    const converter = createTileGridConverter({
-      tileWidth: tileset.tileWidth,
-      tileHeight: tileset.tileHeight,
-      columns: tileset.tileColumns,
-      numtiles: tileset.numTiles,
-      raw32bitData,
-    })
-
-    const png = converter.convertToPng()
-    const writer = fs.createWriteStream(tileset.imageFilename)
-    png.pack().pipe(writer)
-    writer.on(`finish`, tilesetResolve)
-  } else {
-    tilesetResolve()
-  }
-
-  tilesetPromise.then(() => {
-    const tileset = state.map.tileset
-    const tilesetImage = new Image()
-    tilesetImageLoading = true
-    tilesetImage.addEventListener(`load`, () => {
-      tilesetImageBitmap = tilesetImage
-      store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
-      store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: false})
-      saveMappoConfig(store.getState())
-      resizeCanvas()
-
-      tilesetSelectedTileCanvas.width = tileset.tileWidth
-      tilesetSelectedTileCanvas.height = tileset.tileHeight
-      tilesetHoveringTileCanvas.width = tileset.tileWidth
-      tilesetHoveringTileCanvas.height = tileset.tileHeight
-      tilesetImageLoading = false
-    })
-
-    const relativePath = path.resolve(`.`, tileset.imageFilename)
-    tilesetImage.src = relativePath
-  })
-}
-
 const undo = () => {
   const state = store.getState()
   if (state.plots.undoIndex > 0) {
@@ -639,6 +633,11 @@ const reactToChanges = stateWatcher((newValue, oldValue, objectPath) => {
 })
 store.subscribe(reactToChanges)
 
+const tilesetWatcher = reduxWatch(store.getState, `map.tileset`)
+store.subscribe(tilesetWatcher((newValue, oldValue, objectPath) => {
+  rebuildTilesetImageBitmap()
+}))
+
 const refreshLoadingStatus = () => {
   const state = store.getState()
   if (state.ui.isMapLoading) {
@@ -650,7 +649,6 @@ const refreshLoadingStatus = () => {
 
 store.subscribe(recalcMaxMapSize)
 store.subscribe(refreshMapLayerList)
-store.subscribe(rebuildTilesetImageBitmap)
 store.subscribe(refreshUndoRedo)
 store.subscribe(refreshLoadingStatus)
 
