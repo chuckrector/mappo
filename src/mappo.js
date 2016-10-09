@@ -122,6 +122,7 @@ const rebuildTilesetImageBitmap = () => {
 }
 
 const store = createStore(mappoApp, mappoConfigFromDisk)
+// TODO(chuck): any way for this to happen as part of initial hydration?
 if (store.getState().map) {
   rebuildTilesetImageBitmap()
 }
