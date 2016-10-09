@@ -49,7 +49,7 @@ module.exports = ({
     let tileX = tileStartX
 
     while (pixelX < pixelEndX) {
-      const tileIndex = layer.tileIndexGrid[(tileY * layer.width) + tileX]
+      const tileIndex = layer.tileIndexGrid.get((tileY * layer.width) + tileX)
 
       if (tileIndex || !transparent) {
         renderTile({

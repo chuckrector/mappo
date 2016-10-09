@@ -1,13 +1,14 @@
 "use strict"
 
+const {List} = require(`immutable`)
 const expect = require(`expect`)
 const tileLayers = require(`./tileLayers`)
 
 {
   // can plot tile to specific layers
   const layers = [
-    {width:2, height: 2, tileIndexGrid: [1, 1, 1, 1]},
-    {width:2, height: 2, tileIndexGrid: [2, 2, 2, 2]},
+    {width:2, height: 2, tileIndexGrid: List([1, 1, 1, 1])},
+    {width:2, height: 2, tileIndexGrid: List([2, 2, 2, 2])},
   ]
   let newTileLayers = tileLayers(layers, {
     type: `PLOT_TILE`,
@@ -18,8 +19,8 @@ const tileLayers = require(`./tileLayers`)
     tileLayers: layers,
   })
   expect(newTileLayers).toEqual([
-    {width:2, height: 2, tileIndexGrid: [1, 1, 1, 1]},
-    {width:2, height: 2, tileIndexGrid: [2, 2, 99, 2]},
+    {width:2, height: 2, tileIndexGrid: List([1, 1, 1, 1])},
+    {width:2, height: 2, tileIndexGrid: List([2, 2, 99, 2])},
   ])
 
   newTileLayers = tileLayers(newTileLayers, {
@@ -31,8 +32,8 @@ const tileLayers = require(`./tileLayers`)
     tileLayers: layers,
   })
   expect(newTileLayers).toEqual([
-    {width:2, height: 2, tileIndexGrid: [1, 1, 1, 88]},
-    {width:2, height: 2, tileIndexGrid: [2, 2, 99, 2]},
+    {width:2, height: 2, tileIndexGrid: List([1, 1, 1, 88])},
+    {width:2, height: 2, tileIndexGrid: List([2, 2, 99, 2])},
   ])
 }
 

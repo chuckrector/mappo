@@ -14,7 +14,7 @@ module.exports = (state=[], action) => {
       } = action
       const layer = tileLayers[tileLayerIndex]
       const tileIndexGridOffset = (y * layer.width) + x
-      const overwritingTileIndex = layer.tileIndexGrid[tileIndexGridOffset]
+      const overwritingTileIndex = layer.tileIndexGrid.get(tileIndexGridOffset)
       return immutableArraySet({
         array: state,
         index: state.length,

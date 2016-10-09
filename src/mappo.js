@@ -130,6 +130,11 @@ if (mappoConfigFromDisk.ui) {
   if (mappoConfigFromDisk.ui.layerHidden) {
     mappoConfigFromDisk.ui.layerHidden = List(mappoConfigFromDisk.ui.layerHidden)
   }
+  if (mappoConfigFromDisk.map) {
+    for (let i = 0; i < mappoConfigFromDisk.map.tileLayers.length; i++) {
+      mappoConfigFromDisk.map.tileLayers[i].tileIndexGrid = List(mappoConfigFromDisk.map.tileLayers[i].tileIndexGrid)
+    }
+  }
 }
 
 const store = createStore(mappoApp, mappoConfigFromDisk)
@@ -315,7 +320,7 @@ const plot = (event) => {
       viewportY: event.offsetY,
     })
     const layer = state.map.tileLayers[state.ui.selectedTileLayerIndex]
-    if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.ui.selectedTileIndex) {
+    if (layer.tileIndexGrid.get((tileY * layer.width) + tileX) === state.ui.selectedTileIndex) {
       return
     }
     store.dispatch({

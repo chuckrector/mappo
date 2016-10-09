@@ -1,17 +1,13 @@
 "use strict"
 
-const immutableArraySet = require(`../immutableArraySet`)
+const {List} = require(`immutable`)
 
-module.exports = (state=[], action) => {
+module.exports = (state=List(), action) => {
   switch (action.type) {
     case `PLOT_TILE`: {
       const {x, y, tileIndexToPlot, tileLayers, tileLayerIndex} = action
       const layer = tileLayers[tileLayerIndex]
-      return immutableArraySet({
-        array: state,
-        index: (y * layer.width) + x,
-        newValue: tileIndexToPlot,
-      })
+      return state.set((y * layer.width) + x, tileIndexToPlot)
     } break
 
     default: {

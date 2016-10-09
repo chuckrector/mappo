@@ -1,5 +1,6 @@
 "use strict"
 
+const {List} = require(`immutable`)
 const expect = require(`expect`)
 const plotHistory = require(`./plotHistory`)
 const {createStore} = require(`redux`)
@@ -9,8 +10,8 @@ const plots = require(`./plots`)
   // can undo & redo tile plots
   const store = createStore(plotHistory(plots))
   const tileLayers = [
-    {width: 2, tileIndexGrid: [77, 77, 77, 77]},
-    {width: 2, tileIndexGrid: [88, 88, 88, 88]},
+    {width: 2, tileIndexGrid: List([77, 77, 77, 77])},
+    {width: 2, tileIndexGrid: List([88, 88, 88, 88])},
   ]
 
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers})
@@ -33,8 +34,8 @@ const plots = require(`./plots`)
   // redo in middle of undo list truncates it
   const store = createStore(plotHistory(plots))
   const tileLayers = [
-    {width: 2, tileIndexGrid: [77, 77, 77, 77]},
-    {width: 2, tileIndexGrid: [88, 88, 88, 88]},
+    {width: 2, tileIndexGrid: List([77, 77, 77, 77])},
+    {width: 2, tileIndexGrid: List([88, 88, 88, 88])},
   ]
 
   store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers})

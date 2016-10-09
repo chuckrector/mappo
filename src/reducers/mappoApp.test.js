@@ -1,5 +1,6 @@
 "use strict"
 
+const {List} = require(`immutable`)
 const expect = require(`expect`)
 const deepFreeze = require(`deep-freeze`)
 const filler = require(`../filler`)
@@ -27,20 +28,20 @@ const mappoApp = require(`./mappoApp`)
   // can plot a tile
   const store = createStore(mappoApp)
 
-  const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 77)}]
+  const tileLayers = [{width: 2, height: 2, tileIndexGrid: List(filler(2 * 2, 77))}]
   deepFreeze(tileLayers)
   store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(filler(2 * 2, 77))
+  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(List(filler(2 * 2, 77)))
 
-  const plotInfo = {
+  store.dispatch({
+    type: `PLOT_TILE`,
     x: 0,
     y: 1,
     tileLayerIndex: 0,
     tileLayers,
     tileIndexToPlot: 99,
-  }
-  store.dispatch(Object.assign({type: `PLOT_TILE`}, plotInfo))
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual([77, 77, 99, 77])
+  })
+  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(List([77, 77, 99, 77]))
   const {plotHistory, undoIndex} = store.getState().plots
   expect(plotHistory[undoIndex - 1]).toEqual({
     x: 0,
