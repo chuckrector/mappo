@@ -13,7 +13,6 @@ module.exports = config => {
 
   try {
     fs.writeFileSync(`mappo.json`, mappoConfigText)
-    console.log(`editor state successfully saved`)
   } catch (exc) {
     console.log(`unable to write config to disk. [error: ${exc.message}]`)
   }

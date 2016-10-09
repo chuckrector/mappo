@@ -24,7 +24,6 @@ module.exports = (state={}, action) => {
       return Object.assign({}, state, {
         map: map(state.map, undoAction),
         plots: undoablePlots(state.plots, action),
-        isMapDirty: true,
       })
     } break
 
@@ -40,19 +39,12 @@ module.exports = (state={}, action) => {
       return Object.assign({}, state, {
         map: map(state.map, redoAction),
         plots: undoablePlots(state.plots, action),
-        isMapDirty: true,
       })
     } break
 
     case `SET_EDITOR_WINDOW_SIZE`: {
       return Object.assign({}, state, {
         editor: editor(state.editor, action),
-      })
-    } break
-
-    case `SET_MAP_DIRTY`: {
-      return Object.assign({}, state, {
-        isMapDirty: action.isMapDirty,
       })
     } break
 
@@ -73,7 +65,6 @@ module.exports = (state={}, action) => {
       return Object.assign({}, state, {
         map: map(state.map, action),
         plots: undoablePlots(state.plots, action),
-        isMapDirty: true,
       })
     } break
 

@@ -1,8 +1,12 @@
 "use strict"
 
+const {createStore} = require(`redux`)
+const reduxWatch = require(`redux-watch`)
+
 const asset = require(`./asset`)
 const colorDepth = require(`./converter/colorDepth`)
 const clamp = require(`lodash/clamp`)
+const debounce = require(`lodash/debounce`)
 const cloneDeep = require(`lodash/clonedeep`)
 const glob = require(`glob`)
 const createMappoSession = require(`./createMappoSession`)
@@ -22,7 +26,6 @@ const createCheckerboardPattern = require(`./createCheckerboardPattern`)
 const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
 const createMappoTilesetRaw32bitData = require(`./createMappoTilesetRaw32bitData`)
-const {createStore} = require(`redux`)
 const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
 const mappoApp = require(`./reducers/mappoApp`)
@@ -112,8 +115,6 @@ const moveCamera = (moveX, moveY) => {
 }
 
 let lastSaveTimestamp = new Date()
-let isAutoSaving = false
-
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
 const mapGlob = `**/*.map`
@@ -628,34 +629,15 @@ const refreshUndoRedo = () => {
   }
 }
 
-const autoSave = () => {
-  if (isAutoSaving) {
-    return
-  }
+const saveChanges = debounce(() => {
+  saveMappoConfig(store.getState())
+}, 250)
 
-  const currentTime = new Date()
-  const timeSinceLastSave = currentTime - lastSaveTimestamp
-
-  let shouldSave = false
-  if (!store.getState().isMapDirty) {
-    console.log(`not dirty, checking 1min limit...`)
-    if (timeSinceLastSave > 60 * 1000) {
-      console.log(`one minute elapsed. auto-saving session...`)
-      shouldSave = true
-    }
-  } else if (timeSinceLastSave > 10 * 1000) {
-    console.log(`5 seconds passed since last edit. auto-saving session...`)
-    shouldSave = true
-  }
-
-  if (shouldSave) {
-    isAutoSaving = true
-    saveMappoConfig(store.getState())
-    store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: false})
-    lastSaveTimestamp = new Date()
-    isAutoSaving = false
-  }
-}
+const stateWatcher = reduxWatch(store.getState)
+const reactToChanges = stateWatcher((newValue, oldValue, objectPath) => {
+  saveChanges()
+})
+store.subscribe(reactToChanges)
 
 const refreshLoadingStatus = () => {
   const state = store.getState()
@@ -678,4 +660,3 @@ store.dispatch({
   height: window.outerHeight,
 })
 
-setInterval(autoSave, 5 * 1000)

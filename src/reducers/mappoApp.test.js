@@ -67,7 +67,6 @@ const mappoApp = require(`./mappoApp`)
     v: 99,
     o: 77,
   })
-  expect(store.getState().isMapDirty).toBe(true)
 }
 
 {
@@ -77,16 +76,5 @@ const mappoApp = require(`./mappoApp`)
   store.dispatch({type: `SET_EDITOR_WINDOW_SIZE`, width: 200, height: 300})
   expect(store.getState().editor.width).toEqual(200)
   expect(store.getState().editor.height).toEqual(300)
-}
-
-{
-  // can set map dirty state
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: true})
-  expect(store.getState().isMapDirty).toEqual(true)
-
-  store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: false})
-  expect(store.getState().isMapDirty).toEqual(false)
 }
 
