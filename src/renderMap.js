@@ -10,7 +10,6 @@ module.exports = ({
   layerHidden,
 }) => {
   const tileStartList = []
-
   map.mapLayerOrder.forEach(layerIndex => {
     // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
     //              to a map layer which doesn't exist
@@ -23,8 +22,8 @@ module.exports = ({
         tileset,
         tilesetImageBitmap,
         layer: tileLayer,
-        x: camera.x * tileLayer.parallax.x,
-        y: camera.y * tileLayer.parallax.y,
+        x: camera.get(`x`) * tileLayer.parallax.x,
+        y: camera.get(`y`) * tileLayer.parallax.y,
         transparent: layerIndex > 0,
       })
     }

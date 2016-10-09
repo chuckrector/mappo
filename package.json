@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "electron": "^1.3.4",
+    "immutable": "^3.8.1",
     "js2xmlparser": "^2.0.2",
     "lodash": "^4.15.0",
     "pngjs": "^3.0.0",
