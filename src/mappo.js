@@ -54,16 +54,14 @@ const checkerboardPattern = createCheckerboardPattern({document})
 
 let tilesetImageBitmap
 
-// TODO(chuck): move into default state?
-const store = createStore(mappoApp)
-
 const mappoConfigFromDisk = loadMappoConfig()
 // TODO(chuck): how to handle this more naturally? with no special priming
 if (mappoConfigFromDisk.map) {
   mappoConfigFromDisk.isDirtyTilesetImageBitmap = true
 }
 
-store.dispatch({type: `RELOAD_STORE`, state: mappoConfigFromDisk})
+const store = createStore(mappoApp, mappoConfigFromDisk)
+
 store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
 store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})

@@ -44,10 +44,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `RELOAD_STORE`: {
-      return Object.assign({}, state, action.state)
-    } break
-
     case `SET_EDITOR_WINDOW_SIZE`: {
       return Object.assign({}, state, {
         editor: editor(state.editor, action),
