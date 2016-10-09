@@ -51,12 +51,4 @@ const mappoApp = require(`./mappoApp`)
   })
 }
 
-{
-  // can set editor window size
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SET_EDITOR_WINDOW_SIZE`, width: 200, height: 300})
-  expect(store.getState().editor.width).toEqual(200)
-  expect(store.getState().editor.height).toEqual(300)
-}
 

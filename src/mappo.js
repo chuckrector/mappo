@@ -654,7 +654,7 @@ store.subscribe(refreshUndoRedo)
 store.subscribe(refreshLoadingStatus)
 
 store.dispatch({
-  type: `SET_EDITOR_WINDOW_SIZE`,
+  type: `SET_WINDOW_SIZE`,
   width: window.outerWidth,
   height: window.outerHeight,
 })
