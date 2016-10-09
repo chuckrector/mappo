@@ -42,6 +42,7 @@ module.exports = (state={}, action) => {
       })
     } break
 
+    case `SET_MAP`: {
       return Object.assign({}, state, {
         map: action.map,
       })
