@@ -1,13 +1,13 @@
 "use strict"
 
 const assert = require(`assert`)
-const map = require(`./reducers/map`)
-const editor = require(`./reducers/editor`)
-const plots = require(`./reducers/plots`)
-const zoomLevel = require(`./reducers/zoomLevel`)
-const plotHistory = require(`./reducers/plotHistory`)
-const immutableArraySet = require(`./immutableArraySet`)
-const filler = require(`./filler`)
+const map = require(`./map`)
+const editor = require(`./editor`)
+const plots = require(`./plots`)
+const zoomLevel = require(`./zoomLevel`)
+const plotHistory = require(`./plotHistory`)
+const immutableArraySet = require(`../immutableArraySet`)
+const filler = require(`../filler`)
 const undoablePlots = plotHistory(plots)
 
 module.exports = (state={}, action) => {

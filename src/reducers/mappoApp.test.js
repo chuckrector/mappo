@@ -2,13 +2,13 @@
 
 const expect = require(`expect`)
 const deepFreeze = require(`deep-freeze`)
-const filler = require(`./filler`)
+const filler = require(`../filler`)
 const {createStore} = require(`redux`)
-const mappoState = require(`./mappoState`)
+const mappoApp = require(`./mappoApp`)
 
 {
   // can set map
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
   expect(store.getState()).toEqual({})
 
   store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
@@ -17,7 +17,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // setting map marks tileset image bitmap as needing rebuilt
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   expect(store.getState().isDirtyTilesetImageBitmap).toBe(undefined)
   store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
@@ -26,7 +26,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can mark tileset image bitmap as built
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SET_MAP`, map: {}})
   store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
@@ -35,7 +35,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can select layer
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SELECT_LAYER`, index: 1})
   expect(store.getState().selectedTileLayerIndex).toBe(1)
@@ -46,7 +46,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can toggle layer visibility
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
   expect(store.getState().layerHidden[0]).toBe(true)
@@ -57,7 +57,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can select tile
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SELECT_TILESET_TILE`, index: 1})
   expect(store.getState().selectedTileIndex).toBe(1)
@@ -68,7 +68,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can highlight map tile
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX: 1, tileY: 2})
   expect(store.getState().highlightedMapTile).toEqual({tileX: 1, tileY: 2})
@@ -79,7 +79,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // SET_MAP holds a direct reference to the map
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
   expect(store.getState()).toEqual({})
 
   const map = {tileLayers: []}
@@ -89,7 +89,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can plot a tile
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   const tileLayers = [{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 77)}]
   deepFreeze(tileLayers)
@@ -118,7 +118,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can move camera
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `MOVE_CAMERA`, x: 2, y: 3})
   expect(store.getState().camera).toEqual({x: 2, y: 3})
@@ -129,7 +129,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can set editor window size
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SET_EDITOR_WINDOW_SIZE`, width: 200, height: 300})
   expect(store.getState().editor.width).toEqual(200)
@@ -138,7 +138,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can set loading state
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SET_LOADING`, isLoading: true})
   expect(store.getState().isLoading).toBe(true)
@@ -146,7 +146,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can load state
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `RELOAD_STORE`, state: {herp: `derp`}})
   expect(store.getState()).toEqual({herp: `derp`})
@@ -154,7 +154,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can set map dirty state
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: true})
   expect(store.getState().isMapDirty).toEqual(true)
@@ -165,7 +165,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can set zoom level
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: 0})
   expect(store.getState().zoomLevel).toBe(0)
@@ -176,7 +176,7 @@ const mappoState = require(`./mappoState`)
 
 {
   // can reset layer visibilities
-  const store = createStore(mappoState)
+  const store = createStore(mappoApp)
 
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 1})

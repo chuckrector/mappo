@@ -23,7 +23,7 @@ const clearCanvas = require(`./clearCanvas`)
 const loadMappoMap = require(`./loadMappoMap`)
 const createMappoTilesetRaw32bitData = require(`./createMappoTilesetRaw32bitData`)
 const {createStore} = require(`redux`)
-const mappoState = require(`./mappoState`)
+const mappoApp = require(`./mappoApp`)
 const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
 const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
@@ -55,7 +55,7 @@ const checkerboardPattern = createCheckerboardPattern({document})
 let tilesetImageBitmap
 
 // TODO(chuck): move into default state?
-const store = createStore(mappoState)
+const store = createStore(mappoApp)
 
 const mappoConfigFromDisk = loadMappoConfig()
 // TODO(chuck): how to handle this more naturally? with no special priming
