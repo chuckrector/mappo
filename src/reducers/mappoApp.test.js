@@ -80,14 +80,6 @@ const mappoApp = require(`./mappoApp`)
 }
 
 {
-  // can load state
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `RELOAD_STORE`, state: {herp: `derp`}})
-  expect(store.getState().herp).toEqual(`derp`)
-}
-
-{
   // can set map dirty state
   const store = createStore(mappoApp)
 
