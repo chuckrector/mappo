@@ -4,11 +4,11 @@ const assert = require(`assert`)
 const map = require(`./map`)
 const editor = require(`./editor`)
 const plots = require(`./plots`)
-const zoomLevel = require(`./zoomLevel`)
 const plotHistory = require(`./plotHistory`)
 const immutableArraySet = require(`../immutableArraySet`)
 const filler = require(`../filler`)
 const undoablePlots = plotHistory(plots)
+const ui = require(`./ui`)
 
 module.exports = (state={}, action) => {
   switch (action.type) {
@@ -139,14 +139,10 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `SET_ZOOM_LEVEL`: {
-      return Object.assign({}, state, {
-        zoomLevel: zoomLevel(state.zoomLevel, action),
-      })
-    } break
-
     default: {
-      return state
+      return Object.assign({}, state, {
+        ui: ui(state.ui, action),        
+      })
     }
   }
 }

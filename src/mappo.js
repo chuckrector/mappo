@@ -68,7 +68,7 @@ store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
 store.dispatch({type: `SET_LOADING`, isLoading: true})
 
-if (store.getState().zoomLevel === undefined) {
+if (store.getState().ui.zoomLevel === undefined) {
   store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
 }
 
@@ -138,7 +138,7 @@ const defaultGlobalMappoState = {
 }
 let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
-const getScale = () => ZOOM_LEVELS[store.getState().zoomLevel]
+const getScale = () => ZOOM_LEVELS[store.getState().ui.zoomLevel]
 
 mappoSession.getMapFilenames().forEach(mapFilename => {
   const li = document.createElement(`li`)
@@ -474,16 +474,16 @@ const tick = () => {
     }
 
     // map zooming
-    const prevZoomLevel = state.zoomLevel
+    const prevZoomLevel = state.ui.zoomLevel
     if (keyboard.isPressed(`ctrlKey`)) {
       if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
         keyboard.release(keyboard.KEYCODE_PLUS)
-        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.zoomLevel + 1})
+        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.ui.zoomLevel + 1})
       }
 
       if (keyboard.isPressed(keyboard.KEYCODE_MINUS)) {
         keyboard.release(keyboard.KEYCODE_MINUS)
-        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.zoomLevel - 1})
+        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.ui.zoomLevel - 1})
       }
 
       if (keyboard.isPressed(keyboard.KEYCODE_0)) {
@@ -494,7 +494,7 @@ const tick = () => {
       // TODO(chuck): hmm, tricky. dispatching to store generates new state
       // and therefore state.zoomLevel will still point to stale state (?)
       // look at this more closely soon and fully understand what's going on.
-      if (prevZoomLevel !== store.getState().zoomLevel) {
+      if (prevZoomLevel !== store.getState().ui.zoomLevel) {
         resizeCanvas()
       }
     }

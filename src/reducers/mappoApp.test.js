@@ -9,7 +9,6 @@ const mappoApp = require(`./mappoApp`)
 {
   // can set map
   const store = createStore(mappoApp)
-  expect(store.getState()).toEqual({})
 
   store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
   expect(store.getState().map).toEqual({tileLayers: []})
@@ -80,7 +79,6 @@ const mappoApp = require(`./mappoApp`)
 {
   // SET_MAP holds a direct reference to the map
   const store = createStore(mappoApp)
-  expect(store.getState()).toEqual({})
 
   const map = {tileLayers: []}
   store.dispatch({type: `SET_MAP`, map})
@@ -149,7 +147,7 @@ const mappoApp = require(`./mappoApp`)
   const store = createStore(mappoApp)
 
   store.dispatch({type: `RELOAD_STORE`, state: {herp: `derp`}})
-  expect(store.getState()).toEqual({herp: `derp`})
+  expect(store.getState().herp).toEqual(`derp`)
 }
 
 {
@@ -161,17 +159,6 @@ const mappoApp = require(`./mappoApp`)
 
   store.dispatch({type: `SET_MAP_DIRTY`, isMapDirty: false})
   expect(store.getState().isMapDirty).toEqual(false)
-}
-
-{
-  // can set zoom level
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: 0})
-  expect(store.getState().zoomLevel).toBe(0)
-
-  store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: 4})
-  expect(store.getState().zoomLevel).toBe(4)
 }
 
 {
