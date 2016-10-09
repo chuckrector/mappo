@@ -293,7 +293,7 @@ middlePanel.addEventListener(`mousemove`, event => {
     const tileX = ~~((parallaxX + scaleX) / tileWidth)
     const tileY = ~~((parallaxY + scaleY) / tileHeight)
 
-    if (tileX !== state.highlightedMapTile.tileX || tileY !== state.highlightedMapTile.tileY) {
+    if (tileX !== state.ui.highlightedMapTile.tileX || tileY !== state.ui.highlightedMapTile.tileY) {
       store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX, tileY})
     }
   }
@@ -401,8 +401,8 @@ const tick = () => {
     // fixes #1: map tile highlight "jiggles" during fine movements
     const tileStartLayer = tileStartList[state.ui.selectedTileLayerIndex]
     if (tileStartLayer) {
-      const highlightTileX = state.highlightedMapTile.tileX
-      const highlightTileY = state.highlightedMapTile.tileY
+      const highlightTileX = state.ui.highlightedMapTile.tileX
+      const highlightTileY = state.ui.highlightedMapTile.tileY
       const {pixelStartX, pixelStartY, tileStartX, tileStartY} = tileStartLayer
       const x = ((highlightTileX - tileStartX) * tileWidth) + pixelStartX
       const y = ((highlightTileY - tileStartY) * tileHeight) + pixelStartY

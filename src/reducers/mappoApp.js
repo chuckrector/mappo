@@ -87,15 +87,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `HIGHLIGHT_MAP_TILE`: {
-      return Object.assign({}, state, {
-        highlightedMapTile: {
-          tileX: action.tileX,
-          tileY: action.tileY,
-        },
-      })
-    } break
-
     case `MOVE_CAMERA`: {
       return Object.assign({}, state, {
         camera: {
