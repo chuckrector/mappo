@@ -14,7 +14,7 @@ module.exports = ({
     // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
     //              to a map layer which doesn't exist
     const tileLayer = map.tileLayers[layerIndex]
-    const isHidden = layerHidden && layerHidden[layerIndex]
+    const isHidden = layerHidden && layerHidden.get(layerIndex)
     if (tileLayer && !isHidden) {
       tileStartList[layerIndex] = renderLayer({
         context,

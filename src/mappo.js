@@ -2,7 +2,7 @@
 
 const {createStore} = require(`redux`)
 const reduxWatch = require(`redux-watch`)
-const {Map} = require(`immutable`)
+const {List, Map} = require(`immutable`)
 
 const asset = require(`./asset`)
 const colorDepth = require(`./converter/colorDepth`)
@@ -123,8 +123,13 @@ const rebuildTilesetImageBitmap = () => {
 }
 
 // TODO(chuck): remove once fully converted to immutable.js stuff
-if (mappoConfigFromDisk.ui && mappoConfigFromDisk.ui.camera) {
-  mappoConfigFromDisk.ui.camera = Map(mappoConfigFromDisk.ui.camera)
+if (mappoConfigFromDisk.ui) {
+  if (mappoConfigFromDisk.ui.camera) {
+    mappoConfigFromDisk.ui.camera = Map(mappoConfigFromDisk.ui.camera)
+  }
+  if (mappoConfigFromDisk.ui.layerHidden) {
+    mappoConfigFromDisk.ui.layerHidden = List(mappoConfigFromDisk.ui.layerHidden)
+  }
 }
 
 const store = createStore(mappoApp, mappoConfigFromDisk)
@@ -244,7 +249,7 @@ const refreshMapLayerList = () => {
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
     li.classList.add(`layer-list-item`)
-    if (state.ui.layerHidden && state.ui.layerHidden[index]) {
+    if (state.ui.layerHidden && state.ui.layerHidden.get(index)) {
       li.classList.add(`is-layer-hidden`)
     }
     if (state.ui.selectedTileLayerIndex === index) {

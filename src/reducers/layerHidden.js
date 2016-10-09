@@ -1,9 +1,9 @@
 "use strict"
 
+const {List} = require(`immutable`)
 const filler = require(`../filler`)
 
-const initialState = filler(20, false)
-const immutableArraySet = require(`../immutableArraySet`)
+const initialState = List(filler(20, false))
 
 module.exports = (state=initialState, action) => {
   switch (action.type) {
@@ -12,11 +12,7 @@ module.exports = (state=initialState, action) => {
     } break
 
     case `TOGGLE_LAYER_VISIBILITY`: {
-      return immutableArraySet({
-        array: state,
-        index: action.index,
-        newValue: !state[action.index],
-      })
+      return state.set(action.index, !state.get(action.index))
     } break
 
     default: {

@@ -1,5 +1,6 @@
 "use strict"
 
+const {List} = require(`immutable`)
 const {createStore} = require(`redux`)
 const expect = require(`expect`)
 const layerHidden = require(`./layerHidden`)
@@ -9,10 +10,10 @@ const layerHidden = require(`./layerHidden`)
   const store = createStore(layerHidden)
 
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
-  expect(store.getState()[0]).toBe(true)
+  expect(store.getState().get(0)).toBe(true)
 
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
-  expect(store.getState()[0]).toBe(false)
+  expect(store.getState().get(0)).toBe(false)
 }
 
 {
@@ -21,7 +22,7 @@ const layerHidden = require(`./layerHidden`)
 
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 1})
-  expect(store.getState().slice(0, 2)).toEqual([true, true])
+  expect(store.getState().slice(0, 2)).toEqual(List([true, true]))
   store.dispatch({type: `RESET_LAYER_VISIBILITIES`})
-  expect(store.getState().slice(0, 2)).toEqual([false, false])
+  expect(store.getState().slice(0, 2)).toEqual(List([false, false]))
 }
