@@ -1,7 +1,7 @@
 "use strict"
 
 const expect = require(`expect`)
-const createStore = require(`../createStore`)
+const {createStore} = require(`redux`)
 const plots = require(`./plots`)
 
 {

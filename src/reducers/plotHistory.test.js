@@ -2,7 +2,7 @@
 
 const expect = require(`expect`)
 const plotHistory = require(`./plotHistory`)
-const createStore = require(`../createStore`)
+const {createStore} = require(`redux`)
 const plots = require(`./plots`)
 
 {

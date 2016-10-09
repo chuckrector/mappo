@@ -3,7 +3,7 @@
 const expect = require(`expect`)
 const deepFreeze = require(`deep-freeze`)
 const filler = require(`./filler`)
-const createStore = require(`./createStore`)
+const {createStore} = require(`redux`)
 const mappoState = require(`./mappoState`)
 
 {
