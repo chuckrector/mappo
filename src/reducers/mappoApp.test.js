@@ -71,17 +71,6 @@ const mappoApp = require(`./mappoApp`)
 }
 
 {
-  // can move camera
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `MOVE_CAMERA`, x: 2, y: 3})
-  expect(store.getState().camera).toEqual({x: 2, y: 3})
-
-  store.dispatch({type: `MOVE_CAMERA`, x: 4, y: 5})
-  expect(store.getState().camera).toEqual({x: 4, y: 5})
-}
-
-{
   // can set editor window size
   const store = createStore(mappoApp)
 

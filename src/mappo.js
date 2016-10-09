@@ -105,10 +105,10 @@ const moveCamera = (moveX, moveY) => {
   const tileHeight = map.tileset.tileHeight
   const maxX = mapWidth * tileWidth - canvas.width
   const maxY = mapHeight * tileHeight - canvas.height
-  const newX = clamp(state.camera.x + moveX, 0, maxX)
-  const newY = clamp(state.camera.y + moveY, 0, maxY)
+  const newX = clamp(state.ui.camera.x + moveX, 0, maxX)
+  const newY = clamp(state.ui.camera.y + moveY, 0, maxY)
 
-  if (newX !== state.camera.x || newY !== state.camera.y) {
+  if (newX !== state.ui.camera.x || newY !== state.ui.camera.y) {
     store.dispatch({type: `MOVE_CAMERA`, x: newX, y: newY})
   }
 }
@@ -225,8 +225,8 @@ const getPlotCoord = ({viewportX, viewportY}) => {
   const viewportScaleX = ~~(viewportX / scale)
   const viewportScaleY = ~~(viewportY / scale)
   const layer = map.tileLayers[state.ui.selectedTileLayerIndex]
-  const parallaxX = ~~(state.camera.x * layer.parallax.x)
-  const parallaxY = ~~(state.camera.y * layer.parallax.y)
+  const parallaxX = ~~(state.ui.camera.x * layer.parallax.x)
+  const parallaxY = ~~(state.ui.camera.y * layer.parallax.y)
   const mapX = parallaxX + viewportScaleX
   const mapY = parallaxY + viewportScaleY
   const pixelX = mapX - (mapX % tileWidth)
@@ -288,8 +288,8 @@ middlePanel.addEventListener(`mousemove`, event => {
     const tileHeight = tileset.tileHeight
     const scaleX = event.offsetX / scale
     const scaleY = event.offsetY / scale
-    const parallaxX = state.camera.x * layer.parallax.x
-    const parallaxY = state.camera.y * layer.parallax.y
+    const parallaxX = state.ui.camera.x * layer.parallax.x
+    const parallaxY = state.ui.camera.y * layer.parallax.y
     const tileX = ~~((parallaxX + scaleX) / tileWidth)
     const tileY = ~~((parallaxY + scaleY) / tileHeight)
 
@@ -391,7 +391,7 @@ const tick = () => {
       map,
       tileset,
       tilesetImageBitmap,
-      camera: state.camera,
+      camera: state.ui.camera,
       canvas,
       context,
       layerHidden: state.ui.layerHidden,

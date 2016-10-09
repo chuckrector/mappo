@@ -81,16 +81,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `MOVE_CAMERA`: {
-      return Object.assign({}, state, {
-        camera: {
-          x: action.x,
-          y: action.y,
-        },
-        isMapDirty: true,
-      })
-    } break
-
     default: {
       return Object.assign({}, state, {
         ui: ui(state.ui, action),
