@@ -656,12 +656,7 @@ const reactToChanges = stateWatcher((newValue, oldValue, objectPath) => {
 store.subscribe(reactToChanges)
 
 const refreshLoadingStatus = () => {
-  const state = store.getState()
-  if (state.ui.isMapLoading) {
-    document.body.classList.add(`is-loading`)
-  } else {
-    document.body.classList.remove(`is-loading`)
-  }
+  document.body.classList.toggle(`is-loading`, store.getState().ui.isMapLoading)
 }
 
 store.subscribe(recalcMaxMapSize)
