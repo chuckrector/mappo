@@ -1,16 +1,16 @@
 "use strict"
 
-const {List} = require(`immutable`)
+const {fromJS, Map} = require(`immutable`)
 const expect = require(`expect`)
 const map = require(`./map`)
 
 {
   // can plot to layer in map
-  const tileLayers = [
-    {width: 2, height: 2, tileIndexGrid: List([1, 1, 1, 1])},
-    {width: 2, height: 2, tileIndexGrid: List([2, 2, 2, 2])},
-  ]
-  let newMap = map({tileLayers}, {
+  const tileLayers = fromJS([
+    {width: 2, height: 2, tileIndexGrid: [1, 1, 1, 1]},
+    {width: 2, height: 2, tileIndexGrid: [2, 2, 2, 2]},
+  ])
+  let newMap = map(Map({tileLayers}), {
     type: `PLOT_TILE`,
     x: 0,
     y: 1,
@@ -18,12 +18,12 @@ const map = require(`./map`)
     tileLayerIndex: 1,
     tileLayers,
   })
-  expect(newMap).toEqual({
+  expect(newMap).toEqual(fromJS({
     tileLayers: [
-      {width: 2, height: 2, tileIndexGrid: List([1, 1, 1, 1])},
-      {width: 2, height: 2, tileIndexGrid: List([2, 2, 99, 2])},
+      {width: 2, height: 2, tileIndexGrid: [1, 1, 1, 1]},
+      {width: 2, height: 2, tileIndexGrid: [2, 2, 99, 2]},
     ],
-  })
+  }))
 
   newMap = map(newMap, {
     type: `PLOT_TILE`,
@@ -33,10 +33,10 @@ const map = require(`./map`)
     tileLayerIndex: 0,
     tileLayers,
   })
-  expect(newMap).toEqual({
+  expect(newMap).toEqual(fromJS({
     tileLayers: [
-      {width: 2, height: 2, tileIndexGrid: List([1, 1, 1, 88])},
-      {width: 2, height: 2, tileIndexGrid: List([2, 2, 99, 2])},
+      {width: 2, height: 2, tileIndexGrid: [1, 1, 1, 88]},
+      {width: 2, height: 2, tileIndexGrid: [2, 2, 99, 2]},
     ],
-  })
+  }))
 }

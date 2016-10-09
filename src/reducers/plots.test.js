@@ -1,6 +1,6 @@
 "use strict"
 
-const {List} = require(`immutable`)
+const {fromJS, List, Map} = require(`immutable`)
 const expect = require(`expect`)
 const {createStore} = require(`redux`)
 const plots = require(`./plots`)
@@ -8,12 +8,12 @@ const plots = require(`./plots`)
 {
   // can add plot
   const store = createStore(plots)
-  expect(store.getState()).toEqual([])
+  expect(store.getState()).toEqual(List([]))
 
-  const tileLayers = [
-    {width: 2, tileIndexGrid: List([0, 0, 0, 0])},
-    {width: 2, tileIndexGrid: List([1, 1, 1, 1])},
-  ]
+  const tileLayers = fromJS([
+    {width: 2, tileIndexGrid: [0, 0, 0, 0]},
+    {width: 2, tileIndexGrid: [1, 1, 1, 1]},
+  ])
 
   store.dispatch({
     type: `PLOT_TILE`,
@@ -24,11 +24,7 @@ const plots = require(`./plots`)
     tileLayers,
   })
 
-  expect(store.getState()).toEqual([{
-    x: 0,
-    y: 1,
-    v: 99,
-    l: 1,
-    o: 1,
-  }])
+  const expectedPlot = Map({x: 0, y: 1, v: 99, l: 1, o: 1})
+  const expectedPlots = List([expectedPlot])
+  expect(store.getState()).toEqual(expectedPlots)
 }

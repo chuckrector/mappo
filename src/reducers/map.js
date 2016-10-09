@@ -1,17 +1,18 @@
 "use strict"
 
+const {Map} = require(`immutable`)
 const tileLayers = require(`./tileLayers`)
 
-module.exports = (state={}, action) => {
+module.exports = (state=Map({}), action) => {
   switch (action.type) {
     case `SET_MAP`: {
       return action.map
     } break
 
     case `PLOT_TILE`: {
-      return Object.assign({}, state, {
-        tileLayers: tileLayers(state.tileLayers, action),
-      })
+      const newTileLayers = tileLayers(state.get(`tileLayers`), action)
+      const result = state.set(`tileLayers`, newTileLayers)
+      return result
     } break
 
     default: {

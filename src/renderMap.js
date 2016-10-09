@@ -1,5 +1,7 @@
 "use strict"
 
+const {List} = require(`immutable`)
+
 module.exports = ({
   map,
   tileset,
@@ -10,10 +12,10 @@ module.exports = ({
   layerHidden,
 }) => {
   const tileStartList = []
-  map.mapLayerOrder.forEach(layerIndex => {
+  map.get(`mapLayerOrder`).forEach(layerIndex => {
     // TODO(chuck): more holistic mapLayerOrder vetting? v2/pyramid.map refers
     //              to a map layer which doesn't exist
-    const tileLayer = map.tileLayers[layerIndex]
+    const tileLayer = map.getIn([`tileLayers`, `${layerIndex}`])
     const isHidden = layerHidden && layerHidden.get(layerIndex)
     if (tileLayer && !isHidden) {
       tileStartList[layerIndex] = renderLayer({
@@ -22,12 +24,12 @@ module.exports = ({
         tileset,
         tilesetImageBitmap,
         layer: tileLayer,
-        x: camera.get(`x`) * tileLayer.parallax.x,
-        y: camera.get(`y`) * tileLayer.parallax.y,
+        x: camera.get(`x`) * tileLayer.getIn([`parallax`, `x`]),
+        y: camera.get(`y`) * tileLayer.getIn([`parallax`, `y`]),
         transparent: layerIndex > 0,
       })
     }
   })
 
-  return tileStartList
+  return List(tileStartList)
 }

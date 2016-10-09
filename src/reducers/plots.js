@@ -1,8 +1,8 @@
 "use strict"
 
-const immutableArraySet = require(`../immutableArraySet`)
+const {List, Map} = require(`immutable`)
 
-module.exports = (state=[], action) => {
+module.exports = (state=List(), action) => {
   switch (action.type) {
     case `PLOT_TILE`: {
       const {
@@ -12,20 +12,16 @@ module.exports = (state=[], action) => {
         tileLayerIndex,
         tileLayers,
       } = action
-      const layer = tileLayers[tileLayerIndex]
-      const tileIndexGridOffset = (y * layer.width) + x
-      const overwritingTileIndex = layer.tileIndexGrid.get(tileIndexGridOffset)
-      return immutableArraySet({
-        array: state,
-        index: state.length,
-        newValue: {
-          x: action.x,
-          y: action.y,
-          v: action.tileIndexToPlot,
-          l: action.tileLayerIndex,
-          o: overwritingTileIndex,
-        },
-      })
+      const layer = tileLayers.get(tileLayerIndex)
+      const tileIndexGridOffset = (y * layer.get(`width`)) + x
+      const overwritingTileIndex = layer.get(`tileIndexGrid`).get(tileIndexGridOffset)
+      return state.push(Map({
+        x: action.x,
+        y: action.y,
+        v: action.tileIndexToPlot,
+        l: action.tileLayerIndex,
+        o: overwritingTileIndex,
+      }))
     } break
 
     default: {

@@ -7,54 +7,74 @@ const undoablePlots = plotHistory(plots)
 const ui = require(`./ui`)
 
 module.exports = (state={}, action) => {
+  let newState = state
+
   switch (action.type) {
     case `UNDO`: {
-      const {plotHistory, undoIndex} = state.plots
-      const plotToUndo = plotHistory[undoIndex - 1]
-      const undoAction = Object.assign({}, plotToUndo, {
+      const plots = state.plots
+      const plotHistory = plots.get(`plotHistory`)
+      const undoIndex = plots.get(`undoIndex`)
+      const plotToUndo = plotHistory.get(undoIndex - 1)
+      const undoAction = {
         type: `PLOT_TILE`,
-        tileIndexToPlot: plotToUndo.o,
-        tileLayerIndex: plotToUndo.l,
-        tileLayers: state.map.tileLayers,
-      })
-      return Object.assign({}, state, {
+        x: plotToUndo.get(`x`),
+        y: plotToUndo.get(`y`),
+        tileIndexToPlot: plotToUndo.get(`o`),
+        tileLayerIndex: plotToUndo.get(`l`),
+        tileLayers: state.map.get(`tileLayers`),
+      }
+      newState = Object.assign({}, state, {
         map: map(state.map, undoAction),
-        plots: undoablePlots(state.plots, action),
       })
     } break
 
     case `REDO`: {
-      const {plotHistory, undoIndex} = state.plots
-      const plotToRedo = plotHistory[undoIndex]
-      const redoAction = Object.assign({}, plotToRedo, {
+      const plots = state.plots
+      const plotHistory = plots.get(`plotHistory`)
+      const undoIndex = plots.get(`undoIndex`)
+      const plotToRedo = plotHistory.get(undoIndex)
+      const redoAction = {
         type: `PLOT_TILE`,
-        tileLayers: state.map.tileLayers,
-        tileIndexToPlot: plotToRedo.v,
-        tileLayerIndex: plotToRedo.l,
-      })
-      return Object.assign({}, state, {
+        x: plotToRedo.get(`x`),
+        y: plotToRedo.get(`y`),
+        tileIndexToPlot: plotToRedo.get(`v`),
+        tileLayerIndex: plotToRedo.get(`l`),
+        tileLayers: state.map.get(`tileLayers`),
+      }
+      newState = Object.assign({}, state, {
         map: map(state.map, redoAction),
-        plots: undoablePlots(state.plots, action),
       })
     } break
 
     case `SET_MAP`: {
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         map: action.map,
       })
     } break
 
     case `PLOT_TILE`: {
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         map: map(state.map, action),
-        plots: undoablePlots(state.plots, action),
       })
     } break
 
     default: {
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         ui: ui(state.ui, action),
       })
     }
   }
+
+  // TODO(chuck): this crazy 💩 will all go away once i reach combineReducers()
+  if (
+    action.type === `UNDO` ||
+    action.type === `REDO` ||
+    action.type === `PLOT_TILE`
+  ) {
+    newState = Object.assign({}, newState, {
+      plots: undoablePlots(newState.plots, action),
+    })
+  }
+
+  return newState
 }

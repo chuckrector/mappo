@@ -1,7 +1,5 @@
 "use strict"
 
-const {List} = require(`immutable`)
-
 module.exports = ({map}) => {
   const mappoMap = {}
 
@@ -20,7 +18,7 @@ module.exports = ({map}) => {
         description: `Background`,
         width: map.xsize,
         height: map.ysize,
-        tileIndexGrid: List(map.map0),
+        tileIndexGrid: map.map0,
         parallax: {
           x: 1.0,
           y: 1.0,
@@ -29,7 +27,7 @@ module.exports = ({map}) => {
         description: `Foreground`,
         width: map.xsize,
         height: map.ysize,
-        tileIndexGrid: List(map.map1),
+        tileIndexGrid: map.map1,
         parallax: {
           x: map.pmultx / map.pdivx,
           y: map.pmultx / map.pdivx,
@@ -45,7 +43,7 @@ module.exports = ({map}) => {
           description: `Layer #` + index,
           width: layerInfo.sizex,
           height: layerInfo.sizey,
-          tileIndexGrid: List(tileIndexGrid.decompressed),
+          tileIndexGrid: tileIndexGrid.decompressed,
           parallax: {
             x: layerInfo.pmultx / layerInfo.pdivx,
             y: layerInfo.pmulty / layerInfo.pdivy,
@@ -64,7 +62,7 @@ module.exports = ({map}) => {
           description: `Layer #` + index,
           width: map.width,
           height: map.height,
-          tileIndexGrid: List(tileIndexGrid.decompressed),
+          tileIndexGrid: tileIndexGrid.decompressed,
           parallax: {
             x: layerInfo.pmultx / layerInfo.pdivx,
             y: layerInfo.pmulty / layerInfo.pdivy,
@@ -79,7 +77,7 @@ module.exports = ({map}) => {
         description: layerInfo.layername,
         width: layerInfo.width,
         height: layerInfo.height,
-        tileIndexGrid: List(layerInfo.tiledata.decompressed),
+        tileIndexGrid: layerInfo.tiledata.decompressed,
         parallax: {
           x: layerInfo.parallax_x,
           y: layerInfo.parallax_y,

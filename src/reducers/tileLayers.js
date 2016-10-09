@@ -1,20 +1,15 @@
 "use strict"
 
-const immutableArraySet = require(`../immutableArraySet`)
+const {List} = require(`immutable`)
 const tileIndexGrid = require(`./tileIndexGrid`)
 
-module.exports = (state=[], action) => {
+module.exports = (state=List(), action) => {
   switch (action.type) {
     case `PLOT_TILE`: {
-      const tileLayer = state[action.tileLayerIndex]
-
-      return immutableArraySet({
-        array: state,
-        index: action.tileLayerIndex,
-        newValue: Object.assign({}, tileLayer, {
-          tileIndexGrid: tileIndexGrid(tileLayer.tileIndexGrid, action),
-        }),
-      })
+      const tileLayer = state.get(action.tileLayerIndex)
+      const newTileIndexGrid = tileIndexGrid(tileLayer.get(`tileIndexGrid`), action)
+      const result = state.setIn([`${action.tileLayerIndex}`, `tileIndexGrid`], newTileIndexGrid)
+      return result
     } break
 
     default: {
@@ -22,4 +17,5 @@ module.exports = (state=[], action) => {
     }
   }
 }
+
 

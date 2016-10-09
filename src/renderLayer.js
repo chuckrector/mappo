@@ -15,8 +15,8 @@ module.exports = ({
   x = ~~x
   y = ~~y
 
-  const tileWidth = tileset.tileWidth
-  const tileHeight = tileset.tileHeight
+  const tileWidth = tileset.get(`tileWidth`)
+  const tileHeight = tileset.get(`tileHeight`)
   const tileStartX = Math.floor(x / tileWidth)
   const tileStartY = Math.floor(y / tileHeight)
   const subTileX = x % tileWidth
@@ -29,17 +29,19 @@ module.exports = ({
   let tileEndX = Math.floor(pixelEndX / tileWidth)
   let tileEndY = Math.floor(pixelEndX / tileHeight)
 
-  if (tileEndX > layer.width) {
-    const tileOverflow = tileEndX - layer.width
-    tileEndX = layer.width
+  if (tileEndX > layer.get(`width`)) {
+    const tileOverflow = tileEndX - layer.get(`width`)
+    tileEndX = layer.get(`width`)
     pixelEndX -= tileOverflow * tileWidth
   }
 
-  if (tileEndY > layer.height) {
+  if (tileEndY > layer.get(`height`)) {
     const tileOverflow = tileEndY - tileHeight
-    tileEndY = layer.height
+    tileEndY = layer.get(`height`)
     pixelEndY -= tileOverflow * tileHeight
   }
+
+  const tileIndexGrid = layer.get(`tileIndexGrid`)
 
   let pixelY = pixelStartY
   let tileY = tileStartY
@@ -49,7 +51,7 @@ module.exports = ({
     let tileX = tileStartX
 
     while (pixelX < pixelEndX) {
-      const tileIndex = layer.tileIndexGrid.get((tileY * layer.width) + tileX)
+      const tileIndex = tileIndexGrid.get((tileY * layer.get(`width`)) + tileX)
 
       if (tileIndex || !transparent) {
         renderTile({

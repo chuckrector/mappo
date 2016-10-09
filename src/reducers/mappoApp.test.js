@@ -1,6 +1,6 @@
 "use strict"
 
-const {List} = require(`immutable`)
+const {fromJS, List, Map} = require(`immutable`)
 const expect = require(`expect`)
 const deepFreeze = require(`deep-freeze`)
 const filler = require(`../filler`)
@@ -11,15 +11,15 @@ const mappoApp = require(`./mappoApp`)
   // can set map
   const store = createStore(mappoApp)
 
-  store.dispatch({type: `SET_MAP`, map: {tileLayers: []}})
-  expect(store.getState().map).toEqual({tileLayers: []})
+  store.dispatch({type: `SET_MAP`, map: Map({tileLayers: []})})
+  expect(store.getState().map).toEqual(Map({tileLayers: []}))
 }
 
 {
   // SET_MAP holds a direct reference to the map
   const store = createStore(mappoApp)
 
-  const map = {tileLayers: []}
+  const map = Map({tileLayers: []})
   store.dispatch({type: `SET_MAP`, map})
   expect(store.getState().map).toBe(map)
 }
@@ -28,10 +28,10 @@ const mappoApp = require(`./mappoApp`)
   // can plot a tile
   const store = createStore(mappoApp)
 
-  const tileLayers = [{width: 2, height: 2, tileIndexGrid: List(filler(2 * 2, 77))}]
+  const tileLayers = fromJS([{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 77)}])
   deepFreeze(tileLayers)
-  store.dispatch({type: `SET_MAP`, map: {tileLayers}})
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(List(filler(2 * 2, 77)))
+  store.dispatch({type: `SET_MAP`, map: Map({tileLayers})})
+  expect(store.getState().map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List(filler(2 * 2, 77)))
 
   store.dispatch({
     type: `PLOT_TILE`,
@@ -41,15 +41,21 @@ const mappoApp = require(`./mappoApp`)
     tileLayers,
     tileIndexToPlot: 99,
   })
-  expect(store.getState().map.tileLayers[0].tileIndexGrid).toEqual(List([77, 77, 99, 77]))
-  const {plotHistory, undoIndex} = store.getState().plots
-  expect(plotHistory[undoIndex - 1]).toEqual({
+  expect(store.getState().map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List([77, 77, 99, 77]))
+  const plots = store.getState().plots
+  const plotHistory = plots.get(`plotHistory`)
+  const undoIndex = plots.get(`undoIndex`)
+  const expectedPlot = Map({
     x: 0,
     y: 1,
     l: 0,
     v: 99,
     o: 77,
   })
+  // TODO(chuck): figure out what's up here. they are identical, but expect()
+  // fails and the JSON output shows the "l" and "v" keys in a swapped order.
+  // isn't immutable.js supposed to be smart about this?
+  expect(plotHistory.get(undoIndex - 1).equals(expectedPlot)).toBe(true)
 }
 
 
