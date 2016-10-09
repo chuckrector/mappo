@@ -2,7 +2,6 @@
 
 const assert = require(`assert`)
 const map = require(`./map`)
-const editor = require(`./editor`)
 const plots = require(`./plots`)
 const plotHistory = require(`./plotHistory`)
 const immutableArraySet = require(`../immutableArraySet`)
