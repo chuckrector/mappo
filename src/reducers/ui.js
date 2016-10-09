@@ -6,6 +6,7 @@ const layerHidden = require(`./layerHidden`)
 const selectedTileLayerIndex = require(`./selectedTileLayerIndex`)
 const selectedTileIndex = require(`./selectedTileIndex`)
 const highlightedMapTile = require(`./highlightedMapTile`)
+const isMapLoading = require(`./isMapLoading`)
 
 module.exports = combineReducers({
   zoomLevel,
@@ -13,4 +14,5 @@ module.exports = combineReducers({
   selectedTileLayerIndex,
   selectedTileIndex,
   highlightedMapTile,
+  isMapLoading,
 })

@@ -66,7 +66,7 @@ if (mappoConfigFromDisk.map) {
 store.dispatch({type: `RELOAD_STORE`, state: mappoConfigFromDisk})
 store.dispatch({type: `SELECTED_LAYER`, index: -1})
 store.dispatch({type: `SELECTED_TILE`, index: -1})
-store.dispatch({type: `SET_LOADING`, isLoading: true})
+store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})
 
 if (store.getState().ui.zoomLevel === undefined) {
   store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
@@ -147,7 +147,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
   li.addEventListener(`click`, event => {
     globalMappoState = cloneDeep(defaultGlobalMappoState)
-    store.dispatch({type: `SET_LOADING`, isLoading: true})
+    store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})
 
     const map = loadMappoMap({context, mapFilename: `data/` + mapFilename})
     store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})
@@ -211,7 +211,7 @@ middlePanel.addEventListener(`mousedown`, event => {
 })
 
 middlePanel.addEventListener(`click`, event => {
-  if (store.getState().isLoading) {
+  if (store.getState().ui.isMapLoading) {
     return
   }
 })
@@ -262,7 +262,7 @@ const plot = (event) => {
 }
 
 middlePanel.addEventListener(`mousemove`, event => {
-  if (store.getState().isLoading) {
+  if (store.getState().ui.isMapLoading) {
     return
   }
 
@@ -319,7 +319,7 @@ const getTileCoordAndIndex = ({
 }
 
 tilesetCanvasContainer.addEventListener(`mousemove`, event => {
-  if (store.getState().isLoading) {
+  if (store.getState().ui.isMapLoading) {
     return
   }
 
@@ -333,7 +333,7 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
 })
 
 tilesetCanvasContainer.addEventListener(`click`, event => {
-  if (store.getState().isLoading) {
+  if (store.getState().ui.isMapLoading) {
     return
   }
 
@@ -379,7 +379,7 @@ const tick = () => {
   clearCanvas({canvas: tilesetSelectedTileCanvas, pattern: checkerboardPattern})
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
-  if (!store.getState().isLoading) {
+  if (!store.getState().ui.isMapLoading) {
     const state = store.getState()
     const map = state.map
     const tileset = map.tileset
@@ -513,7 +513,7 @@ const resizeCanvas = () => {
   canvas.height = roundedUpUnits(middlePanel.offsetHeight, getScale())
   stretchCanvasByZoom(canvas)
 
-  if (!store.getState().isLoading) {
+  if (!store.getState().ui.isMapLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
     const tileset = store.getState().map.tileset
     tilesetCanvas.width = tilesetImageBitmap.width
@@ -576,7 +576,7 @@ const rebuildTilesetImageBitmap = () => {
     tilesetImage.addEventListener(`load`, () => {
       tilesetImageBitmap = tilesetImage
       store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
-      store.dispatch({type: `SET_LOADING`, isLoading: false})
+      store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: false})
       saveMappoConfig(store.getState())
       resizeCanvas()
 
@@ -610,7 +610,7 @@ undoButton.addEventListener(`click`, undo)
 redoButton.addEventListener(`click`, redo)
 
 const refreshUndoRedo = () => {
-  if (store.getState().isLoading) {
+  if (store.getState().ui.isMapLoading) {
     undoButton.disabled = true
     redoButton.disabled = true
     return
@@ -661,7 +661,7 @@ const autoSave = () => {
 
 const refreshLoadingStatus = () => {
   const state = store.getState()
-  if (state.isLoading) {
+  if (state.ui.isMapLoading) {
     document.body.classList.add(`is-loading`)
   } else {
     document.body.classList.remove(`is-loading`)

@@ -91,14 +91,6 @@ const mappoApp = require(`./mappoApp`)
 }
 
 {
-  // can set loading state
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SET_LOADING`, isLoading: true})
-  expect(store.getState().isLoading).toBe(true)
-}
-
-{
   // can load state
   const store = createStore(mappoApp)
 

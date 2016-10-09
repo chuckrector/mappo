@@ -48,12 +48,6 @@ module.exports = (state={}, action) => {
       return Object.assign({}, state, action.state)
     } break
 
-    case `SET_LOADING`: {
-      return Object.assign({}, state, {
-        isLoading: action.isLoading,
-      })
-    } break
-
     case `SET_EDITOR_WINDOW_SIZE`: {
       return Object.assign({}, state, {
         editor: editor(state.editor, action),
