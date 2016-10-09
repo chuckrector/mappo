@@ -42,13 +42,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `SET_EDITOR_WINDOW_SIZE`: {
-      return Object.assign({}, state, {
-        editor: editor(state.editor, action),
-      })
-    } break
-
-    case `SET_MAP`: {
       return Object.assign({}, state, {
         map: action.map,
       })
