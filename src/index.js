@@ -39,31 +39,19 @@ const createWindow = () => {
 
   win.loadURL(`file://${__dirname}/index.html`)
 
-  win.webContents.on(`devtools-opened`, win.webContents.focus)
-  win.webContents.openDevTools()
-
-  const saveEditorBounds = () => {
-    const config = loadMappoConfig()
-    const bounds = win.getBounds()
-    console.log(`saving editor bounds: ${JSON.stringify(bounds)}`)
-    if (!config.ui) {
-      config.ui = {}
-    }
-    if (!config.ui.windowSize) {
-      config.ui.windowSize = {}
-    }
-    if (!config.ui.windowPosition) {
-      config.ui.windowPosition = {}
-    }
-    config.ui.windowSize.width = bounds.width
-    config.ui.windowSize.height = bounds.height
-    config.ui.windowPosition.x = bounds.x
-    config.ui.windowPosition.y = bounds.y
-    saveMappoConfig(config)
+  const sendWindowBounds = () => {
+    // sent to renderer process (mappo.js)
+    win.webContents.send(`windowBounds`, win.getBounds())
   }
 
-  win.on(`moved`, saveEditorBounds)
-  win.on(`resize`, saveEditorBounds)
+  win.webContents.on(`devtools-opened`, win.webContents.focus)
+  win.webContents.on(`dom-ready`, () => {
+    sendWindowBounds()
+  })
+  win.webContents.openDevTools()
+
+  win.on(`moved`, sendWindowBounds)
+  win.on(`resize`, sendWindowBounds)
 
   win.on(`closed`, () => {
     win = null

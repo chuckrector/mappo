@@ -1,5 +1,6 @@
 "use strict"
 
+const {ipcRenderer} = require(`electron`)
 const {createStore} = require(`redux`)
 const reduxWatch = require(`redux-watch`)
 const {List, Map, fromJS} = require(`immutable`)
@@ -668,9 +669,28 @@ store.subscribe(refreshMapLayerList)
 store.subscribe(refreshUndoRedo)
 store.subscribe(refreshLoadingStatus)
 
-store.dispatch({
-  type: `SET_WINDOW_SIZE`,
-  width: window.outerWidth,
-  height: window.outerHeight,
-})
+// sent from main process (index.js)
+ipcRenderer.on(`windowBounds`, (event, bounds) => {
+  const state = store.getState()
+  if (
+    bounds.width !== state.ui.windowSize.width ||
+    bounds.height !== state.ui.windowSize.height
+  ) {
+    store.dispatch({
+      type: `SET_WINDOW_SIZE`,
+      width: bounds.width,
+      height: bounds.height,
+    })
+  }
 
+  if (
+    bounds.x !== state.ui.windowSize.x ||
+    bounds.y !== state.ui.windowSize.y
+  ) {
+    store.dispatch({
+      type: `SET_WINDOW_POSITION`,
+      x: bounds.x,
+      y: bounds.y,
+    })
+  }
+})
