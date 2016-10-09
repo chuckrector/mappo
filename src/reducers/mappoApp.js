@@ -108,27 +108,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `RESET_LAYER_VISIBILITIES`: {
-      return Object.assign({}, state, {
-        layerHidden: filler(20, false),
-      })
-    } break
-
-    case `TOGGLE_LAYER_VISIBILITY`: {
-      let layerHidden = state.layerHidden
-      if (!layerHidden) {
-        layerHidden = filler(20, false)
-      }
-      let isHidden = !layerHidden[action.index]
-      return Object.assign({}, state, {
-        layerHidden: immutableArraySet({
-          array: layerHidden,
-          index: action.index,
-          newValue: isHidden,
-        })
-      })
-    } break
-
     case `MOVE_CAMERA`: {
       return Object.assign({}, state, {
         camera: {
@@ -141,7 +120,7 @@ module.exports = (state={}, action) => {
 
     default: {
       return Object.assign({}, state, {
-        ui: ui(state.ui, action),        
+        ui: ui(state.ui, action),
       })
     }
   }

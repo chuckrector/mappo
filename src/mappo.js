@@ -179,7 +179,7 @@ const refreshMapLayerList = () => {
     li.setAttribute(`title`, layer.description)
     li.innerText = layer.description
     li.classList.add(`layer-list-item`)
-    if (state.layerHidden && state.layerHidden[index]) {
+    if (state.ui.layerHidden && state.ui.layerHidden[index]) {
       li.classList.add(`is-layer-hidden`)
     }
     if (state.selectedTileLayerIndex === index) {
@@ -394,7 +394,7 @@ const tick = () => {
       camera: state.camera,
       canvas,
       context,
-      layerHidden: state.layerHidden,
+      layerHidden: state.ui.layerHidden,
     })
 
     // TODO(chuck): find a simpler way, this seems rather excessive
