@@ -33,17 +33,6 @@ const mappoApp = require(`./mappoApp`)
 }
 
 {
-  // can select layer
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SELECT_LAYER`, index: 1})
-  expect(store.getState().selectedTileLayerIndex).toBe(1)
-
-  store.dispatch({type: `SELECT_LAYER`, index: 0})
-  expect(store.getState().selectedTileLayerIndex).toBe(0)
-}
-
-{
   // can select tile
   const store = createStore(mappoApp)
 

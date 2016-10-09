@@ -79,12 +79,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `SELECT_LAYER`: {
-      return Object.assign({}, state, {
-        selectedTileLayerIndex: action.index,
-      })
-    } break
-
     case `SELECT_TILESET_TILE`: {
       return Object.assign({}, state, {
         selectedTileIndex: action.index,

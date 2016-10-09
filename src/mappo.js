@@ -182,7 +182,7 @@ const refreshMapLayerList = () => {
     if (state.ui.layerHidden && state.ui.layerHidden[index]) {
       li.classList.add(`is-layer-hidden`)
     }
-    if (state.selectedTileLayerIndex === index) {
+    if (state.ui.selectedTileLayerIndex === index) {
       li.classList.add(`selected`)
     }
     li.addEventListener(`click`, event => {
@@ -224,7 +224,7 @@ const getPlotCoord = ({viewportX, viewportY}) => {
   const tileHeight = map.tileset.tileHeight
   const viewportScaleX = ~~(viewportX / scale)
   const viewportScaleY = ~~(viewportY / scale)
-  const layer = map.tileLayers[state.selectedTileLayerIndex]
+  const layer = map.tileLayers[state.ui.selectedTileLayerIndex]
   const parallaxX = ~~(state.camera.x * layer.parallax.x)
   const parallaxY = ~~(state.camera.y * layer.parallax.y)
   const mapX = parallaxX + viewportScaleX
@@ -239,18 +239,18 @@ const getPlotCoord = ({viewportX, viewportY}) => {
 
 const plot = (event) => {
   const state = store.getState()
-  if (state.seletedTileIndex !== -1 && state.selectedTileLayerIndex !== -1) {
+  if (state.seletedTileIndex !== -1 && state.ui.selectedTileLayerIndex !== -1) {
     const {tileX, tileY} = getPlotCoord({
       viewportX: event.offsetX,
       viewportY: event.offsetY,
     })
-    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
+    const layer = state.map.tileLayers[state.ui.selectedTileLayerIndex]
     if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.selectedTileIndex) {
       return
     }
     store.dispatch({
       type: `PLOT_TILE`,
-      tileLayerIndex: state.selectedTileLayerIndex,
+      tileLayerIndex: state.ui.selectedTileLayerIndex,
       tileLayers: state.map.tileLayers,
       tileIndexToPlot: state.selectedTileIndex,
       x: tileX,
@@ -282,8 +282,8 @@ middlePanel.addEventListener(`mousemove`, event => {
     }
   }
 
-  if (state.selectedTileLayerIndex !== -1) {
-    const layer = state.map.tileLayers[state.selectedTileLayerIndex]
+  if (state.ui.selectedTileLayerIndex !== -1) {
+    const layer = state.map.tileLayers[state.ui.selectedTileLayerIndex]
     const tileWidth = tileset.tileWidth
     const tileHeight = tileset.tileHeight
     const scaleX = event.offsetX / scale
@@ -399,7 +399,7 @@ const tick = () => {
 
     // TODO(chuck): find a simpler way, this seems rather excessive
     // fixes #1: map tile highlight "jiggles" during fine movements
-    const tileStartLayer = tileStartList[state.selectedTileLayerIndex]
+    const tileStartLayer = tileStartList[state.ui.selectedTileLayerIndex]
     if (tileStartLayer) {
       const highlightTileX = state.highlightedMapTile.tileX
       const highlightTileY = state.highlightedMapTile.tileY
