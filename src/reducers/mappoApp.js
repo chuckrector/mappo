@@ -1,11 +1,8 @@
 "use strict"
 
-const assert = require(`assert`)
 const map = require(`./map`)
 const plots = require(`./plots`)
 const plotHistory = require(`./plotHistory`)
-const immutableArraySet = require(`../immutableArraySet`)
-const filler = require(`../filler`)
 const undoablePlots = plotHistory(plots)
 const ui = require(`./ui`)
 
