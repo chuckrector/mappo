@@ -2,6 +2,7 @@
 
 const {createStore} = require(`redux`)
 const reduxWatch = require(`redux-watch`)
+const {Map} = require(`immutable`)
 
 const asset = require(`./asset`)
 const colorDepth = require(`./converter/colorDepth`)
@@ -121,7 +122,12 @@ const rebuildTilesetImageBitmap = () => {
   })
 }
 
-const store = createStore(mappoApp)//, mappoConfigFromDisk)
+// TODO(chuck): remove once fully converted to immutable.js stuff
+if (mappoConfigFromDisk.ui && mappoConfigFromDisk.ui.camera) {
+  mappoConfigFromDisk.ui.camera = Map(mappoConfigFromDisk.ui.camera)
+}
+
+const store = createStore(mappoApp, mappoConfigFromDisk)
 // TODO(chuck): any way for this to happen as part of initial hydration?
 if (store.getState().map) {
   rebuildTilesetImageBitmap()
