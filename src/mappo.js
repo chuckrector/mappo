@@ -245,14 +245,14 @@ const plot = (event) => {
       viewportY: event.offsetY,
     })
     const layer = state.map.tileLayers[state.ui.selectedTileLayerIndex]
-    if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.selectedTileIndex) {
+    if (layer.tileIndexGrid[(tileY * layer.width) + tileX] === state.ui.selectedTileIndex) {
       return
     }
     store.dispatch({
       type: `PLOT_TILE`,
       tileLayerIndex: state.ui.selectedTileLayerIndex,
       tileLayers: state.map.tileLayers,
-      tileIndexToPlot: state.selectedTileIndex,
+      tileIndexToPlot: state.ui.selectedTileIndex,
       x: tileX,
       y: tileY,
     })
@@ -442,7 +442,7 @@ const tick = () => {
       tilesetHoveringTileIndex.innerText = map.tilesetTileHovering.tileIndex
     }
 
-    if (state.selectedTileIndex !== -1) {
+    if (state.ui.selectedTileIndex !== -1) {
       renderTileHighlightColorOutline({
         context: tilesetContext,
         x: globalMappoState.tilesetTileSelected.tileX * tileWidth,
@@ -455,12 +455,12 @@ const tick = () => {
         context: tilesetSelectedTileContext,
         tileset,
         tilesetImageBitmap,
-        tileIndex: state.selectedTileIndex,
+        tileIndex: state.ui.selectedTileIndex,
         x: 0,
         y: 0,
       })
 
-      tilesetSelectedTileIndex.innerText = state.selectedTileIndex
+      tilesetSelectedTileIndex.innerText = state.ui.selectedTileIndex
     }
 
     if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {

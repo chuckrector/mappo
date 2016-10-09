@@ -33,17 +33,6 @@ const mappoApp = require(`./mappoApp`)
 }
 
 {
-  // can select tile
-  const store = createStore(mappoApp)
-
-  store.dispatch({type: `SELECT_TILESET_TILE`, index: 1})
-  expect(store.getState().selectedTileIndex).toBe(1)
-
-  store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
-  expect(store.getState().selectedTileIndex).toBe(0)
-}
-
-{
   // can highlight map tile
   const store = createStore(mappoApp)
 

@@ -79,12 +79,6 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `SELECT_TILESET_TILE`: {
-      return Object.assign({}, state, {
-        selectedTileIndex: action.index,
-      })
-    } break
-
     case `PLOT_TILE`: {
       return Object.assign({}, state, {
         map: map(state.map, action),
