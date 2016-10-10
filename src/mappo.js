@@ -45,6 +45,8 @@ const {
   selectTilesetTile,
   setMap,
   setMapLoading,
+  setWindowPosition,
+  setWindowSize,
   setZoomLevel,
   undo,
 } = require(`./actions/index`)
@@ -685,21 +687,19 @@ ipcRenderer.on(`windowBounds`, (event, bounds) => {
     bounds.width !== state.ui.windowSize.width ||
     bounds.height !== state.ui.windowSize.height
   ) {
-    store.dispatch({
-      type: `SET_WINDOW_SIZE`,
+    store.dispatch(setWindowSize({
       width: bounds.width,
       height: bounds.height,
-    })
+    }))
   }
 
   if (
     bounds.x !== state.ui.windowSize.x ||
     bounds.y !== state.ui.windowSize.y
   ) {
-    store.dispatch({
-      type: `SET_WINDOW_POSITION`,
+    store.dispatch(setWindowPosition({
       x: bounds.x,
       y: bounds.y,
-    })
+    }))
   }
 })

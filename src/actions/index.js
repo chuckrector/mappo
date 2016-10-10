@@ -10,6 +10,8 @@ const SELECT_LAYER = `SELECT_LAYER`
 const SELECT_TILESET_TILE = `SELECT_TILESET_TILE`
 const SET_MAP = `SET_MAP`
 const SET_MAP_LOADING = `SET_MAP_LOADING`
+const SET_WINDOW_POSITION = `SET_WINDOW_POSITION`
+const SET_WINDOW_SIZE = `SET_WINDOW_SIZE`
 const SET_ZOOM_LEVEL = `SET_ZOOM_LEVEL`
 const UNDO = `UNDO`
 
@@ -23,6 +25,8 @@ exports.SELECT_LAYER = SELECT_LAYER
 exports.SELECT_TILESET_TILE = SELECT_TILESET_TILE
 exports.SET_MAP = SET_MAP
 exports.SET_MAP_LOADING = SET_MAP_LOADING
+exports.SET_WINDOW_POSITION = SET_WINDOW_POSITION
+exports.SET_WINDOW_SIZE = SET_WINDOW_SIZE
 exports.SET_ZOOM_LEVEL = SET_ZOOM_LEVEL
 exports.UNDO = UNDO
 
@@ -96,6 +100,22 @@ exports.setMapLoading = flag => {
   return {
     type: SET_MAP_LOADING,
     isMapLoading: flag,
+  }
+}
+
+exports.setWindowPosition = where => {
+  return {
+    type: SET_WINDOW_POSITION,
+    x: where.x,
+    y: where.y,
+  }
+}
+
+exports.setWindowSize = size => {
+  return {
+    type: SET_WINDOW_SIZE,
+    width: size.width,
+    height: size.height,
   }
 }
 
