@@ -1,10 +1,11 @@
 "use strict"
 
 const {List, Map} = require(`immutable`)
+const {PLOT_TILE} = require(`../actions/index`)
 
 module.exports = (state=List(), action) => {
   switch (action.type) {
-    case `PLOT_TILE`: {
+    case PLOT_TILE: {
       const {
         x,
         y,

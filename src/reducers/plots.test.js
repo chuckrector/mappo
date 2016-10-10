@@ -4,6 +4,7 @@ const {fromJS, List, Map} = require(`immutable`)
 const expect = require(`expect`)
 const {createStore} = require(`redux`)
 const plots = require(`./plots`)
+const {plotTile} = require(`../actions/index`)
 
 {
   // can add plot
@@ -15,14 +16,13 @@ const plots = require(`./plots`)
     {width: 2, tileIndexGrid: [1, 1, 1, 1]},
   ])
 
-  store.dispatch({
-    type: `PLOT_TILE`,
+  store.dispatch(plotTile({
     x: 0,
     y: 1,
     tileIndexToPlot: 99,
     tileLayerIndex: 1,
     tileLayers,
-  })
+  }))
 
   const expectedPlot = Map({x: 0, y: 1, v: 99, l: 1, o: 1})
   const expectedPlots = List([expectedPlot])

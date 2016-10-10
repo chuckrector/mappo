@@ -5,7 +5,7 @@ const plots = require(`./plots`)
 const plotHistory = require(`./plotHistory`)
 const undoablePlots = plotHistory(plots)
 const ui = require(`./ui`)
-const {plotTile} = require(`../actions/index`)
+const {plotTile, PLOT_TILE} = require(`../actions/index`)
 
 module.exports = (state={}, action) => {
   let newState = state
@@ -51,7 +51,7 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `PLOT_TILE`: {
+    case PLOT_TILE: {
       newState = Object.assign({}, state, {
         map: map(state.map, action),
       })
@@ -68,7 +68,7 @@ module.exports = (state={}, action) => {
   if (
     action.type === `UNDO` ||
     action.type === `REDO` ||
-    action.type === `PLOT_TILE`
+    action.type === PLOT_TILE
   ) {
     newState = Object.assign({}, newState, {
       plots: undoablePlots(newState.plots, action),

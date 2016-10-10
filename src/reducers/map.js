@@ -2,6 +2,7 @@
 
 const {Map} = require(`immutable`)
 const tileLayers = require(`./tileLayers`)
+const {PLOT_TILE} = require(`../actions/index`)
 
 module.exports = (state=Map({}), action) => {
   switch (action.type) {
@@ -9,7 +10,7 @@ module.exports = (state=Map({}), action) => {
       return action.map
     } break
 
-    case `PLOT_TILE`: {
+    case PLOT_TILE: {
       const newTileLayers = tileLayers(state.get(`tileLayers`), action)
       const result = state.set(`tileLayers`, newTileLayers)
       return result

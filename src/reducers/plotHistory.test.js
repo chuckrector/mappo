@@ -5,6 +5,7 @@ const expect = require(`expect`)
 const plotHistory = require(`./plotHistory`)
 const {createStore} = require(`redux`)
 const plots = require(`./plots`)
+const {plotTile} = require(`../actions/index`)
 
 {
   // can undo & redo tile plots
@@ -15,8 +16,8 @@ const plots = require(`./plots`)
     {width: 2, tileIndexGrid: [88, 88, 88, 88]},
   ])
 
-  store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers})
-  store.dispatch({type: `PLOT_TILE`, x: 1, y: 1, tileIndexToPlot: 66, tileLayerIndex: 1, tileLayers})
+  store.dispatch(plotTile({x: 0, y: 1, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers}))
+  store.dispatch(plotTile({x: 1, y: 1, tileIndexToPlot: 66, tileLayerIndex: 1, tileLayers}))
 
   const expectedPlotList = fromJS([
     {x: 0, y: 1, v: 99, l: 0, o: 77},
@@ -39,8 +40,8 @@ const plots = require(`./plots`)
     {width: 2, tileIndexGrid: [88, 88, 88, 88]},
   ])
 
-  store.dispatch({type: `PLOT_TILE`, x: 0, y: 1, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers})
-  store.dispatch({type: `PLOT_TILE`, x: 1, y: 1, tileIndexToPlot: 66, tileLayerIndex: 1, tileLayers})
+  store.dispatch(plotTile({x: 0, y: 1, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers}))
+  store.dispatch(plotTile({x: 1, y: 1, tileIndexToPlot: 66, tileLayerIndex: 1, tileLayers}))
 
   const expectedPlotList = fromJS([
     {x: 0, y: 1, v: 99, l: 0, o: 77},
@@ -51,7 +52,7 @@ const plots = require(`./plots`)
   store.dispatch({type: `UNDO`})
   expect(store.getState()).toEqual(Map({plotHistory: expectedPlotList, undoIndex: 1}))
 
-  store.dispatch({type: `PLOT_TILE`, x: 1, y: 0, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers})
+  store.dispatch(plotTile({x: 1, y: 0, tileIndexToPlot: 99, tileLayerIndex: 0, tileLayers}))
 
   const expectedState = fromJS({
     plotHistory: [
