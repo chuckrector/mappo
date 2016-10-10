@@ -37,6 +37,7 @@ const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 const {
   builtTilesetImageBitmap,
   plotTile,
+  setMapLoading,
 } = require(`./actions/index`)
 const roundedUpUnits = require(`./roundedUpUnits`)
 const createTileGridConverter = require(`./converter/createTileGridConverter`)
@@ -112,7 +113,7 @@ const rebuildTilesetImageBitmap = () => {
     tilesetImage.addEventListener(`load`, () => {
       tilesetImageBitmap = tilesetImage
       store.dispatch(builtTilesetImageBitmap())
-      store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: false})
+      store.dispatch(setMapLoading(false))
       saveMappoConfig(store.getState())
       resizeCanvas()
 
@@ -151,7 +152,7 @@ if (store.getState().map) {
   rebuildTilesetImageBitmap()
 }
 
-store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})
+store.dispatch(setMapLoading(true))
 
 if (store.getState().ui.zoomLevel === undefined) {
   store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
@@ -230,7 +231,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
   // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
   li.addEventListener(`click`, event => {
     globalMappoState = cloneDeep(defaultGlobalMappoState)
-    store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})
+    store.dispatch(setMapLoading(true))
 
     const map = fromJS(loadMappoMap({context, mapFilename: `data/` + mapFilename}))
     store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})

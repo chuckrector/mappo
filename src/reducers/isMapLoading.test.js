@@ -3,14 +3,15 @@
 const {createStore} = require(`redux`)
 const expect = require(`expect`)
 const isMapLoading = require(`./isMapLoading`)
+const {setMapLoading} = require(`../actions/index`)
 
 {
   // can set loading state
   const store = createStore(isMapLoading)
 
-  store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: true})
+  store.dispatch(setMapLoading(true))
   expect(store.getState()).toBe(true)
 
-  store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: false})
+  store.dispatch(setMapLoading(false))
   expect(store.getState()).toBe(false)
 }

@@ -2,13 +2,15 @@
 
 const BUILT_TILESET_IMAGE_BITMAP = `BUILT_TILESET_IMAGE_BITMAP`
 const PLOT_TILE = `PLOT_TILE`
+const SET_MAP_LOADING = `SET_MAP_LOADING`
 
 exports.BUILT_TILESET_IMAGE_BITMAP = BUILT_TILESET_IMAGE_BITMAP
 exports.PLOT_TILE = PLOT_TILE
+exports.SET_MAP_LOADING = SET_MAP_LOADING
 
-exports.buildTilesetImageBitmap = () => {
+exports.builtTilesetImageBitmap = () => {
   return {
-    type: BUILT_TILESETIMAGE_BITMAP
+    type: BUILT_TILESET_IMAGE_BITMAP
   }
 }
 
@@ -23,3 +25,9 @@ exports.plotTile = (where) => {
   }
 }
 
+exports.setMapLoading = flag => {
+  return {
+    type: SET_MAP_LOADING,
+    isMapLoading: flag,
+  }
+}
