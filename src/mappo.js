@@ -34,6 +34,7 @@ const saveMappoConfig = require(`./saveMappoConfig`)
 const mappoApp = require(`./reducers/mappoApp`)
 const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
+const {plotTile} = require(`./actions/index`)
 const roundedUpUnits = require(`./roundedUpUnits`)
 const createTileGridConverter = require(`./converter/createTileGridConverter`)
 
@@ -328,14 +329,13 @@ const plot = (event) => {
     if (layer.get(`tileIndexGrid`).get((tileY * layer.get(`width`)) + tileX) === state.ui.selectedTileIndex) {
       return
     }
-    store.dispatch({
-      type: `PLOT_TILE`,
+    store.dispatch(plotTile({
       tileLayerIndex: state.ui.selectedTileLayerIndex,
       tileLayers: state.map.get(`tileLayers`),
       tileIndexToPlot: state.ui.selectedTileIndex,
       x: tileX,
       y: tileY,
-    })
+    }))
   } else {
     console.log(`*warning* no tile selected, not plotting anything...`)
   }
