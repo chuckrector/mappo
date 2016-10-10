@@ -39,6 +39,7 @@ const {
   moveCamera,
   plotTile,
   resetLayerVisibilities,
+  selectLayer,
   setMap,
   setMapLoading,
   setZoomLevel,
@@ -245,7 +246,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     //              problems.
     store.dispatch(setMap(map))
     store.dispatch(resetLayerVisibilities())
-    store.dispatch({type: `SELECT_LAYER`, index: 0})
+    store.dispatch(selectLayer(0))
     store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
     store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 0, y: 0})
 
@@ -279,7 +280,7 @@ const refreshMapLayerList = () => {
       if (event.offsetX < 35) {
         store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index})
       } else {
-        store.dispatch({type: `SELECT_LAYER`, index})
+        store.dispatch(selectLayer(index))
       }
     })
     layerList.appendChild(li)
