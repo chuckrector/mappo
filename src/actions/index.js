@@ -5,6 +5,7 @@ const MOVE_CAMERA = `MOVE_CAMERA`
 const PLOT_TILE = `PLOT_TILE`
 const RESET_LAYER_VISIBILITIES = `RESET_LAYER_VISIBILITIES`
 const SELECT_LAYER = `SELECT_LAYER`
+const SELECT_TILESET_TILE = `SELECT_TILESET_TILE`
 const SET_MAP = `SET_MAP`
 const SET_MAP_LOADING = `SET_MAP_LOADING`
 const SET_ZOOM_LEVEL = `SET_ZOOM_LEVEL`
@@ -14,6 +15,7 @@ exports.MOVE_CAMERA = MOVE_CAMERA
 exports.PLOT_TILE = PLOT_TILE
 exports.RESET_LAYER_VISIBILITIES = RESET_LAYER_VISIBILITIES
 exports.SELECT_LAYER = SELECT_LAYER
+exports.SELECT_TILESET_TILE = SELECT_TILESET_TILE
 exports.SET_MAP = SET_MAP
 exports.SET_MAP_LOADING = SET_MAP_LOADING
 exports.SET_ZOOM_LEVEL = SET_ZOOM_LEVEL
@@ -52,6 +54,13 @@ exports.resetLayerVisibilities = () => {
 exports.selectLayer = index => {
   return {
     type: SELECT_LAYER,
+    index,
+  }
+}
+
+exports.selectTilesetTile = index => {
+  return {
+    type: SELECT_TILESET_TILE,
     index,
   }
 }

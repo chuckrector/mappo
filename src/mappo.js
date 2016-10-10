@@ -40,6 +40,7 @@ const {
   plotTile,
   resetLayerVisibilities,
   selectLayer,
+  selectTilesetTile,
   setMap,
   setMapLoading,
   setZoomLevel,
@@ -247,7 +248,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     store.dispatch(setMap(map))
     store.dispatch(resetLayerVisibilities())
     store.dispatch(selectLayer(0))
-    store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
+    store.dispatch(selectTilesetTile(0))
     store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 0, y: 0})
 
     rebuildTilesetImageBitmap()
@@ -435,7 +436,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
   })
   globalMappoState.tilesetTileSelected.tileX = info.tileX
   globalMappoState.tilesetTileSelected.tileY = info.tileY
-  store.dispatch({type: `SELECT_TILESET_TILE`, index: info.tileIndex})
+  store.dispatch(selectTilesetTile(info.tileIndex))
 })
 
 middlePanel.addEventListener(`mouseup`, event => {
