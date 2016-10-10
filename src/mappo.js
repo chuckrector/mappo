@@ -38,6 +38,7 @@ const {
   builtTilesetImageBitmap,
   moveCamera,
   plotTile,
+  resetLayerVisibilities,
   setMap,
   setMapLoading,
   setZoomLevel,
@@ -243,7 +244,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     //              state can be written to disk and reloaded later without
     //              problems.
     store.dispatch(setMap(map))
-    store.dispatch({type: `RESET_LAYER_VISIBILITIES`})
+    store.dispatch(resetLayerVisibilities())
     store.dispatch({type: `SELECT_LAYER`, index: 0})
     store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
     store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 0, y: 0})

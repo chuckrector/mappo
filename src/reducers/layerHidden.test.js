@@ -4,6 +4,7 @@ const {List} = require(`immutable`)
 const {createStore} = require(`redux`)
 const expect = require(`expect`)
 const layerHidden = require(`./layerHidden`)
+const {resetLayerVisibilities} = require(`../actions/index`)
 
 {
   // can toggle layer visibility
@@ -23,6 +24,6 @@ const layerHidden = require(`./layerHidden`)
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 0})
   store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index: 1})
   expect(store.getState().slice(0, 2)).toEqual(List([true, true]))
-  store.dispatch({type: `RESET_LAYER_VISIBILITIES`})
+  store.dispatch(resetLayerVisibilities())
   expect(store.getState().slice(0, 2)).toEqual(List([false, false]))
 }
