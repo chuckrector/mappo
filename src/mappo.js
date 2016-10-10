@@ -36,6 +36,7 @@ const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 const {
   builtTilesetImageBitmap,
+  highlightMapTile,
   moveCamera,
   plotTile,
   resetLayerVisibilities,
@@ -249,7 +250,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     store.dispatch(resetLayerVisibilities())
     store.dispatch(selectLayer(0))
     store.dispatch(selectTilesetTile(0))
-    store.dispatch({type: `HIGHLIGHT_MAP_TILE`, x: 0, y: 0})
+    store.dispatch(highlightMapTile({x: 0, y: 0}))
 
     rebuildTilesetImageBitmap()
     refreshMapLayerList()
@@ -383,8 +384,8 @@ middlePanel.addEventListener(`mousemove`, event => {
     const tileX = ~~((parallaxX + scaleX) / tileWidth)
     const tileY = ~~((parallaxY + scaleY) / tileHeight)
 
-    if (tileX !== state.ui.highlightedMapTile.tileX || tileY !== state.ui.highlightedMapTile.tileY) {
-      store.dispatch({type: `HIGHLIGHT_MAP_TILE`, tileX, tileY})
+    if (tileX !== state.ui.highlightedMapTile.x || tileY !== state.ui.highlightedMapTile.y) {
+      store.dispatch(highlightMapTile({x: tileX, y: tileY}))
     }
   }
 })
@@ -492,8 +493,8 @@ const tick = () => {
     // fixes #1: map tile highlight "jiggles" during fine movements
     const tileStartLayer = tileStartList.get(state.ui.selectedTileLayerIndex)
     if (tileStartLayer) {
-      const highlightTileX = state.ui.highlightedMapTile.tileX
-      const highlightTileY = state.ui.highlightedMapTile.tileY
+      const highlightTileX = state.ui.highlightedMapTile.x
+      const highlightTileY = state.ui.highlightedMapTile.y
       const {pixelStartX, pixelStartY, tileStartX, tileStartY} = tileStartLayer
       const x = ((highlightTileX - tileStartX) * tileWidth) + pixelStartX
       const y = ((highlightTileY - tileStartY) * tileHeight) + pixelStartY

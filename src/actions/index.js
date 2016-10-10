@@ -1,6 +1,7 @@
 "use strict"
 
 const BUILT_TILESET_IMAGE_BITMAP = `BUILT_TILESET_IMAGE_BITMAP`
+const HIGHLIGHT_MAP_TILE = `HIGHLIGHT_MAP_TILE`
 const MOVE_CAMERA = `MOVE_CAMERA`
 const PLOT_TILE = `PLOT_TILE`
 const RESET_LAYER_VISIBILITIES = `RESET_LAYER_VISIBILITIES`
@@ -11,6 +12,7 @@ const SET_MAP_LOADING = `SET_MAP_LOADING`
 const SET_ZOOM_LEVEL = `SET_ZOOM_LEVEL`
 
 exports.BUILT_TILESET_IMAGE_BITMAP = BUILT_TILESET_IMAGE_BITMAP
+exports.HIGHLIGHT_MAP_TILE = HIGHLIGHT_MAP_TILE
 exports.MOVE_CAMERA = MOVE_CAMERA
 exports.PLOT_TILE = PLOT_TILE
 exports.RESET_LAYER_VISIBILITIES = RESET_LAYER_VISIBILITIES
@@ -23,6 +25,14 @@ exports.SET_ZOOM_LEVEL = SET_ZOOM_LEVEL
 exports.builtTilesetImageBitmap = () => {
   return {
     type: BUILT_TILESET_IMAGE_BITMAP
+  }
+}
+
+exports.highlightMapTile = where => {
+  return {
+    type: HIGHLIGHT_MAP_TILE,
+    x: where.x,
+    y: where.y,
   }
 }
 
