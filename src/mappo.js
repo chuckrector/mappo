@@ -1,7 +1,8 @@
 "use strict"
 
 const {ipcRenderer} = require(`electron`)
-const {createStore} = require(`redux`)
+const {createStore, applyMiddleware} = require(`redux`)
+const thunk = require(`redux-thunk`).default
 const reduxWatch = require(`redux-watch`)
 const {List, Map, fromJS} = require(`immutable`)
 
@@ -140,7 +141,7 @@ if (mappoConfigFromDisk.map) {
   mappoConfigFromDisk.map = fromJS(mappoConfigFromDisk.map)
 }
 
-const store = createStore(mappoApp, mappoConfigFromDisk)
+const store = createStore(mappoApp, mappoConfigFromDisk, applyMiddleware(thunk))
 // TODO(chuck): any way for this to happen as part of initial hydration?
 if (store.getState().map) {
   rebuildTilesetImageBitmap()
