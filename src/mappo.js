@@ -34,7 +34,10 @@ const saveMappoConfig = require(`./saveMappoConfig`)
 const mappoApp = require(`./reducers/mappoApp`)
 const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
-const {plotTile} = require(`./actions/index`)
+const {
+  builtTilesetImageBitmap,
+  plotTile,
+} = require(`./actions/index`)
 const roundedUpUnits = require(`./roundedUpUnits`)
 const createTileGridConverter = require(`./converter/createTileGridConverter`)
 
@@ -108,7 +111,7 @@ const rebuildTilesetImageBitmap = () => {
     tilesetImageLoading = true
     tilesetImage.addEventListener(`load`, () => {
       tilesetImageBitmap = tilesetImage
-      store.dispatch({type: `BUILT_TILESET_IMAGE_BITMAP`})
+      store.dispatch(builtTilesetImageBitmap())
       store.dispatch({type: `SET_MAP_LOADING`, isMapLoading: false})
       saveMappoConfig(store.getState())
       resizeCanvas()
