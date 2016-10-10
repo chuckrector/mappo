@@ -38,6 +38,7 @@ const {
   builtTilesetImageBitmap,
   plotTile,
   setMapLoading,
+  setZoomLevel,
 } = require(`./actions/index`)
 const roundedUpUnits = require(`./roundedUpUnits`)
 const createTileGridConverter = require(`./converter/createTileGridConverter`)
@@ -155,7 +156,7 @@ if (store.getState().map) {
 store.dispatch(setMapLoading(true))
 
 if (store.getState().ui.zoomLevel === undefined) {
-  store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
+  store.dispatch(setZoomLevel(DEFAULT_ZOOM_LEVEL))
 }
 
 let maxMapWidth = 0
@@ -563,17 +564,17 @@ const tick = () => {
     if (keyboard.isPressed(`ctrlKey`)) {
       if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
         keyboard.release(keyboard.KEYCODE_PLUS)
-        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.ui.zoomLevel + 1})
+        store.dispatch(setZoomLevel(state.ui.zoomLevel + 1))
       }
 
       if (keyboard.isPressed(keyboard.KEYCODE_MINUS)) {
         keyboard.release(keyboard.KEYCODE_MINUS)
-        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: state.ui.zoomLevel - 1})
+        store.dispatch(setZoomLevel(state.ui.zoomLevel - 1))
       }
 
       if (keyboard.isPressed(keyboard.KEYCODE_0)) {
         keyboard.release(keyboard.KEYCODE_0)
-        store.dispatch({type: `SET_ZOOM_LEVEL`, zoomLevel: DEFAULT_ZOOM_LEVEL})
+        store.dispatch(setZoomLevel(DEFAULT_ZOOM_LEVEL))
       }
 
       // TODO(chuck): hmm, tricky. dispatching to store generates new state
