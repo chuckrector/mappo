@@ -1,6 +1,7 @@
 "use strict"
 
 const {Map} = require(`immutable`)
+const {MOVE_CAMERA} = require(`../actions/index`)
 
 const initialState = Map({
   x: 0,
@@ -9,7 +10,7 @@ const initialState = Map({
 
 module.exports = (state=initialState, action) => {
   switch (action.type) {
-    case `MOVE_CAMERA`: {
+    case MOVE_CAMERA: {
       return Map({
         x: action.x,
         y: action.y,

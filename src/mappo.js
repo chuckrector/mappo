@@ -36,6 +36,7 @@ const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 const {
   builtTilesetImageBitmap,
+  moveCamera,
   plotTile,
   setMapLoading,
   setZoomLevel,
@@ -183,7 +184,7 @@ const recalcMaxMapSize = () => {
 
 recalcMaxMapSize()
 
-const moveCamera = (moveX, moveY) => {
+const moveCameraRelatively = (moveX, moveY) => {
   const state = store.getState()
   const map = state.map
   const mapWidth = maxMapWidth
@@ -196,7 +197,7 @@ const moveCamera = (moveX, moveY) => {
   const newY = clamp(state.ui.camera.get(`y`) + moveY, 0, maxY)
 
   if (newX !== state.ui.camera.get(`x`) || newY !== state.ui.camera.get(`y`)) {
-    store.dispatch({type: `MOVE_CAMERA`, x: newX, y: newY})
+    store.dispatch(moveCamera({x: newX, y: newY}))
   }
 }
 
@@ -235,7 +236,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     store.dispatch(setMapLoading(true))
 
     const map = fromJS(loadMappoMap({context, mapFilename: `data/` + mapFilename}))
-    store.dispatch({type: `MOVE_CAMERA`, x: 0, y: 0})
+    store.dispatch(moveCamera({x: 0, y: 0}))
     // TODO(chuck): map contains ImageBitmaps, which is not good for redux.
     //              figure out a better way to store this so that the full
     //              state can be written to disk and reloaded later without
@@ -358,7 +359,7 @@ middlePanel.addEventListener(`mousemove`, event => {
 
   if (globalMappoState.mouseDown) {
     if (keyboard.isPressed(`altKey`)) {
-      moveCamera(
+      moveCameraRelatively(
         -event.movementX / scale,
         -event.movementY / scale
       )
