@@ -1,5 +1,7 @@
 "use strict"
 
+const {REDO, UNDO} = require(`./actions/index`)
+
 module.exports = reducer => {
   // Call the reducer with empty action to populate the initial state
   const initialState = {
@@ -13,7 +15,7 @@ module.exports = reducer => {
     const {past, present, future} = state
 
     switch (action.type) {
-      case `UNDO`: {
+      case UNDO: {
         const previous = past[past.length - 1]
         const newPast = past.slice(0, past.length - 1)
 
@@ -24,7 +26,7 @@ module.exports = reducer => {
         }
       } break
 
-      case `REDO`: {
+      case REDO: {
         const next = future[0]
         const newFuture = future.slice(1)
 

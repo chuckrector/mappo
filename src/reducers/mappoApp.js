@@ -5,13 +5,19 @@ const plots = require(`./plots`)
 const plotHistory = require(`./plotHistory`)
 const undoablePlots = plotHistory(plots)
 const ui = require(`./ui`)
-const {plotTile, PLOT_TILE} = require(`../actions/index`)
+const {
+  plotTile,
+  PLOT_TILE,
+  REDO,
+  SET_MAP,
+  UNDO,
+} = require(`../actions/index`)
 
 module.exports = (state={}, action) => {
   let newState = state
 
   switch (action.type) {
-    case `UNDO`: {
+    case UNDO: {
       const plots = state.plots
       const plotHistory = plots.get(`plotHistory`)
       const undoIndex = plots.get(`undoIndex`)
@@ -28,7 +34,7 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `REDO`: {
+    case REDO: {
       const plots = state.plots
       const plotHistory = plots.get(`plotHistory`)
       const undoIndex = plots.get(`undoIndex`)
@@ -45,7 +51,7 @@ module.exports = (state={}, action) => {
       })
     } break
 
-    case `SET_MAP`: {
+    case SET_MAP: {
       newState = Object.assign({}, state, {
         map: action.map,
       })
@@ -66,8 +72,8 @@ module.exports = (state={}, action) => {
 
   // TODO(chuck): this crazy 💩 will all go away once i reach combineReducers()
   if (
-    action.type === `UNDO` ||
-    action.type === `REDO` ||
+    action.type === UNDO ||
+    action.type === REDO ||
     action.type === PLOT_TILE
   ) {
     newState = Object.assign({}, newState, {

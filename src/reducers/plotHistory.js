@@ -1,6 +1,7 @@
 "use strict"
 
 const {fromJS, List, Map} = require(`immutable`)
+const {REDO, UNDO} = require(`../actions/index`)
 
 // adapted from redux undo's undoable()
 // TODO(chuck): prolly doesn't need to be a reducer enhancer now?
@@ -15,14 +16,14 @@ module.exports = reducer => {
     const undoIndex = state.get(`undoIndex`)
 
     switch (action.type) {
-      case `UNDO`: {
+      case UNDO: {
         return Map({
           plotHistory,
           undoIndex: undoIndex - 1,
         })
       } break
 
-      case `REDO`: {
+      case REDO: {
         return Map({
           plotHistory,
           undoIndex: undoIndex + 1,

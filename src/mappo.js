@@ -39,12 +39,14 @@ const {
   highlightMapTile,
   moveCamera,
   plotTile,
+  redo,
   resetLayerVisibilities,
   selectLayer,
   selectTilesetTile,
   setMap,
   setMapLoading,
   setZoomLevel,
+  undo,
 } = require(`./actions/index`)
 const roundedUpUnits = require(`./roundedUpUnits`)
 const createTileGridConverter = require(`./converter/createTileGridConverter`)
@@ -558,10 +560,10 @@ const tick = () => {
     if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {
       if (keyboard.isPressed(keyboard.KEYCODE_Z)) {
         keyboard.release(keyboard.KEYCODE_Z)
-        undo()
+        uiUndo()
       } else if (keyboard.isPressed(keyboard.KEYCODE_Y)) {
         keyboard.release(keyboard.KEYCODE_Y)
-        redo()
+        uiRedo()
       }
     }
 
@@ -619,22 +621,22 @@ resizeCanvas()
 
 tick()
 
-const undo = () => {
+const uiUndo = () => {
   const state = store.getState()
   if (state.plots.get(`undoIndex`) > 0) {
-    store.dispatch({type: `UNDO`})
+    store.dispatch(undo())
   }
 }
 
-const redo = () => {
+const uiRedo = () => {
   const state = store.getState()
   if (state.plots.get(`undoIndex`) < state.plots.get(`plotHistory`).size) {
-    store.dispatch({type: `REDO`})
+    store.dispatch(redo())
   }
 }
 
-undoButton.addEventListener(`click`, undo)
-redoButton.addEventListener(`click`, redo)
+undoButton.addEventListener(`click`, uiUndo)
+redoButton.addEventListener(`click`, uiRedo)
 
 const refreshUndoRedo = () => {
   if (store.getState().ui.isMapLoading) {
