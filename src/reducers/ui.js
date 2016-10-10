@@ -4,7 +4,7 @@ const {combineReducers} = require(`redux`)
 const zoomLevel = require(`./zoomLevel`)
 const layerHidden = require(`./layerHidden`)
 const selectedTileLayerIndex = require(`./selectedTileLayerIndex`)
-const selectedTileIndex = require(`./selectedTileIndex`)
+const selectedTilesetTile = require(`./selectedTilesetTile`)
 const highlightedMapTile = require(`./highlightedMapTile`)
 const highlightedTilesetTile = require(`./highlightedTilesetTile`)
 const isMapLoading = require(`./isMapLoading`)
@@ -16,7 +16,7 @@ module.exports = combineReducers({
   zoomLevel,
   layerHidden,
   selectedTileLayerIndex,
-  selectedTileIndex,
+  selectedTilesetTile,
   highlightedMapTile,
   highlightedTilesetTile,
   isMapLoading,

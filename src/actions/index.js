@@ -95,10 +95,12 @@ exports.selectLayer = index => {
   }
 }
 
-exports.selectTilesetTile = index => {
+exports.selectTilesetTile = where => {
   return {
     type: SELECT_TILESET_TILE,
-    index,
+    x: where.x,
+    y: where.y,
+    index: where.index,
   }
 }
 

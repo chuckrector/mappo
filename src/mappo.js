@@ -228,7 +228,6 @@ const defaultGlobalMappoState = {
   mapLayerOrder: null,
   tileset: null,
   tilesetTileHovering: null,
-  tilesetTileSelected: {},
   keyPressed: {},
   mouseDown: false,
   mouseInViewport: false,
@@ -343,13 +342,13 @@ const plot = (event) => {
       viewportY: event.offsetY,
     })
     const layer = state.map.getIn([`tileLayers`, `${state.ui.selectedTileLayerIndex}`])
-    if (layer.get(`tileIndexGrid`).get((tileY * layer.get(`width`)) + tileX) === state.ui.selectedTileIndex) {
+    if (layer.get(`tileIndexGrid`).get((tileY * layer.get(`width`)) + tileX) === state.ui.selectedTilesetTile.index) {
       return
     }
     store.dispatch(plotTile({
       tileLayerIndex: state.ui.selectedTileLayerIndex,
       tileLayers: state.map.get(`tileLayers`),
-      tileIndexToPlot: state.ui.selectedTileIndex,
+      tileIndexToPlot: state.ui.selectedTilesetTile.index,
       x: tileX,
       y: tileY,
     }))
@@ -440,9 +439,7 @@ tilesetCanvasContainer.addEventListener(`click`, event => {
     pixelX: event.offsetX,
     pixelY: event.offsetY,
   })
-  globalMappoState.tilesetTileSelected.tileX = info.tileX
-  globalMappoState.tilesetTileSelected.tileY = info.tileY
-  store.dispatch(selectTilesetTile(info.tileIndex))
+  store.dispatch(selectTilesetTile({x: info.tileX, y: info.tileY, index: info.tileIndex}))
 })
 
 middlePanel.addEventListener(`mouseup`, event => {
@@ -537,26 +534,23 @@ const tick = () => {
     })
     tilesetHoveringTileIndex.innerText = ui.highlightedTilesetTile.index
 
-    if (state.ui.selectedTileIndex !== -1) {
-      renderTileHighlightColorOutline({
-        context: tilesetContext,
-        x: globalMappoState.tilesetTileSelected.tileX * tileWidth,
-        y: globalMappoState.tilesetTileSelected.tileY * tileHeight,
-        color: `white`,
-        width: tileWidth,
-        height: tileHeight,
-      })
-      renderTile({
-        context: tilesetSelectedTileContext,
-        tileset,
-        tilesetImageBitmap,
-        tileIndex: state.ui.selectedTileIndex,
-        x: 0,
-        y: 0,
-      })
-
-      tilesetSelectedTileIndex.innerText = state.ui.selectedTileIndex
-    }
+    renderTileHighlightColorOutline({
+      context: tilesetContext,
+      x: ui.selectedTilesetTile.x * tileWidth,
+      y: ui.selectedTilesetTile.y * tileHeight,
+      color: `white`,
+      width: tileWidth,
+      height: tileHeight,
+    })
+    renderTile({
+      context: tilesetSelectedTileContext,
+      tileset,
+      tilesetImageBitmap,
+      tileIndex: state.ui.selectedTilesetTile.index,
+      x: 0,
+      y: 0,
+    })
+    tilesetSelectedTileIndex.innerText = state.ui.selectedTilesetTile.index
 
     if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {
       if (keyboard.isPressed(keyboard.KEYCODE_Z)) {
