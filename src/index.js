@@ -4,12 +4,17 @@
 // Electron binary -> index.js -> index.html -> mappo.js
 
 const electron = require(`electron`)
-const {app, BrowserWindow} = require(`electron`)
+const {app, BrowserWindow, globalShortcut, Menu} = require(`electron`)
 const fs = require(`fs`)
 const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
 
 let win
+
+// the desired effect being to kill the Edit menu which installs
+// keyboard shortcuts for undo/redo which interferes with (slows down)
+// cmd+z on OS X (super annoying)
+Menu.setApplicationMenu(Menu.buildFromTemplate([]))
 
 const createWindow = () => {
   let windowBounds = {
