@@ -48,6 +48,7 @@ const {
   setWindowPosition,
   setWindowSize,
   setZoomLevel,
+  toggleLayerVisibility,
   undo,
 } = require(`./actions/index`)
 const roundedUpUnits = require(`./roundedUpUnits`)
@@ -284,7 +285,7 @@ const refreshMapLayerList = () => {
     li.addEventListener(`click`, event => {
       // TODO(chuck): use a proper element?
       if (event.offsetX < 35) {
-        store.dispatch({type: `TOGGLE_LAYER_VISIBILITY`, index})
+        store.dispatch(toggleLayerVisibility(index))
       } else {
         store.dispatch(selectLayer(index))
       }

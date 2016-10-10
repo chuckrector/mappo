@@ -13,6 +13,7 @@ const SET_MAP_LOADING = `SET_MAP_LOADING`
 const SET_WINDOW_POSITION = `SET_WINDOW_POSITION`
 const SET_WINDOW_SIZE = `SET_WINDOW_SIZE`
 const SET_ZOOM_LEVEL = `SET_ZOOM_LEVEL`
+const TOGGLE_LAYER_VISIBILITY = `TOGGLE_LAYER_VISIBILITY`
 const UNDO = `UNDO`
 
 exports.BUILT_TILESET_IMAGE_BITMAP = BUILT_TILESET_IMAGE_BITMAP
@@ -28,6 +29,7 @@ exports.SET_MAP_LOADING = SET_MAP_LOADING
 exports.SET_WINDOW_POSITION = SET_WINDOW_POSITION
 exports.SET_WINDOW_SIZE = SET_WINDOW_SIZE
 exports.SET_ZOOM_LEVEL = SET_ZOOM_LEVEL
+exports.TOGGLE_LAYER_VISIBILITY = TOGGLE_LAYER_VISIBILITY
 exports.UNDO = UNDO
 
 exports.builtTilesetImageBitmap = () => {
@@ -123,6 +125,13 @@ exports.setZoomLevel = zoomLevel => {
   return {
     type: SET_ZOOM_LEVEL,
     zoomLevel,
+  }
+}
+
+exports.toggleLayerVisibility = index => {
+  return {
+    type: TOGGLE_LAYER_VISIBILITY,
+    index,
   }
 }
 
