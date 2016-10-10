@@ -6,13 +6,13 @@ const deepFreeze = require(`deep-freeze`)
 const filler = require(`../filler`)
 const {createStore} = require(`redux`)
 const mappoApp = require(`./mappoApp`)
-const {plotTile} = require(`../actions/index`)
+const {plotTile, setMap} = require(`../actions/index`)
 
 {
   // can set map
   const store = createStore(mappoApp)
 
-  store.dispatch({type: `SET_MAP`, map: Map({tileLayers: []})})
+  store.dispatch(setMap(Map({tileLayers: []})))
   expect(store.getState().map).toEqual(Map({tileLayers: []}))
 }
 
@@ -21,7 +21,7 @@ const {plotTile} = require(`../actions/index`)
   const store = createStore(mappoApp)
 
   const map = Map({tileLayers: []})
-  store.dispatch({type: `SET_MAP`, map})
+  store.dispatch(setMap(map))
   expect(store.getState().map).toBe(map)
 }
 
@@ -31,7 +31,7 @@ const {plotTile} = require(`../actions/index`)
 
   const tileLayers = fromJS([{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 77)}])
   deepFreeze(tileLayers)
-  store.dispatch({type: `SET_MAP`, map: Map({tileLayers})})
+  store.dispatch(setMap(Map({tileLayers})))
   expect(store.getState().map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List(filler(2 * 2, 77)))
 
   store.dispatch(plotTile({

@@ -2,11 +2,11 @@
 
 const {Map} = require(`immutable`)
 const tileLayers = require(`./tileLayers`)
-const {PLOT_TILE} = require(`../actions/index`)
+const {PLOT_TILE, SET_MAP} = require(`../actions/index`)
 
 module.exports = (state=Map({}), action) => {
   switch (action.type) {
-    case `SET_MAP`: {
+    case SET_MAP: {
       return action.map
     } break
 

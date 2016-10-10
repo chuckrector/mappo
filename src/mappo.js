@@ -38,6 +38,7 @@ const {
   builtTilesetImageBitmap,
   moveCamera,
   plotTile,
+  setMap,
   setMapLoading,
   setZoomLevel,
 } = require(`./actions/index`)
@@ -241,7 +242,7 @@ mappoSession.getMapFilenames().forEach(mapFilename => {
     //              figure out a better way to store this so that the full
     //              state can be written to disk and reloaded later without
     //              problems.
-    store.dispatch({type: `SET_MAP`, map})
+    store.dispatch(setMap(map))
     store.dispatch({type: `RESET_LAYER_VISIBILITIES`})
     store.dispatch({type: `SELECT_LAYER`, index: 0})
     store.dispatch({type: `SELECT_TILESET_TILE`, index: 0})
