@@ -37,6 +37,7 @@ const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 const {
   builtTilesetImageBitmap,
   highlightMapTile,
+  hoverTilesetTile,
   moveCamera,
   plotTile,
   redo,
@@ -419,14 +420,13 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
     return
   }
 
-  let map = store.getState().map
-  // TODO(chuck): no bueno. create a proper redux action
-  map = map.set(`tilesetTileHovering`, getTileCoordAndIndex({
-    tileset: map.get(`tileset`),
+  const info = getTileCoordAndIndex({
+    tileset: store.getState().map.get(`tileset`),
     containerWidth: tilesetCanvas.width * getScale(),
     pixelX: event.offsetX,
     pixelY: event.offsetY,
-  }))
+  })
+  store.dispatch(hoverTilesetTile({x: info.tileX, y: info.tileY, index: info.tileIndex}))
 })
 
 tilesetCanvasContainer.addEventListener(`click`, event => {
@@ -519,25 +519,23 @@ const tick = () => {
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
-    if (map.tilesetTileHovering) {
-      renderTileHighlightInvertedSolid({
-        context: tilesetContext,
-        x: map.getIn([`tilesetTileHovering`, `tileX`]) * tileWidth,
-        y: map.getIn([`tilesetTileHovering`, `tileY`]) * tileHeight,
-        width: tileWidth,
-        height: tileHeight,
-      })
-      renderTile({
-        context: tilesetHoveringTileContext,
-        tileset,
-        tilesetImageBitmap,
-        tileIndex: map.getIn([`tilesetTileHovering`, `tileIndex`]),
-        x: 0,
-        y: 0,
-      })
-
-      tilesetHoveringTileIndex.innerText = map.getIn([`tilesetTileHovering`, `tileIndex`])
-    }
+    const {ui} = state
+    renderTileHighlightInvertedSolid({
+      context: tilesetContext,
+      x: ui.highlightedTilesetTile.x * tileWidth,
+      y: ui.highlightedTilesetTile.y * tileHeight,
+      width: tileWidth,
+      height: tileHeight,
+    })
+    renderTile({
+      context: tilesetHoveringTileContext,
+      tileset,
+      tilesetImageBitmap,
+      tileIndex: ui.highlightedTilesetTile.index,
+      x: 0,
+      y: 0,
+    })
+    tilesetHoveringTileIndex.innerText = ui.highlightedTilesetTile.index
 
     if (state.ui.selectedTileIndex !== -1) {
       renderTileHighlightColorOutline({

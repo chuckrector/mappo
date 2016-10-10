@@ -2,6 +2,7 @@
 
 const BUILT_TILESET_IMAGE_BITMAP = `BUILT_TILESET_IMAGE_BITMAP`
 const HIGHLIGHT_MAP_TILE = `HIGHLIGHT_MAP_TILE`
+const HOVER_TILESET_TILE = `HOVER_TILESET_TILE`
 const MOVE_CAMERA = `MOVE_CAMERA`
 const PLOT_TILE = `PLOT_TILE`
 const REDO = `REDO`
@@ -18,6 +19,7 @@ const UNDO = `UNDO`
 
 exports.BUILT_TILESET_IMAGE_BITMAP = BUILT_TILESET_IMAGE_BITMAP
 exports.HIGHLIGHT_MAP_TILE = HIGHLIGHT_MAP_TILE
+exports.HOVER_TILESET_TILE = HOVER_TILESET_TILE
 exports.MOVE_CAMERA = MOVE_CAMERA
 exports.PLOT_TILE = PLOT_TILE
 exports.REDO = REDO
@@ -43,6 +45,15 @@ exports.highlightMapTile = where => {
     type: HIGHLIGHT_MAP_TILE,
     x: where.x,
     y: where.y,
+  }
+}
+
+exports.hoverTilesetTile = where => {
+  return {
+    type: HOVER_TILESET_TILE,
+    x: where.x,
+    y: where.y,
+    index: where.index,
   }
 }
 

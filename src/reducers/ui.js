@@ -6,6 +6,7 @@ const layerHidden = require(`./layerHidden`)
 const selectedTileLayerIndex = require(`./selectedTileLayerIndex`)
 const selectedTileIndex = require(`./selectedTileIndex`)
 const highlightedMapTile = require(`./highlightedMapTile`)
+const highlightedTilesetTile = require(`./highlightedTilesetTile`)
 const isMapLoading = require(`./isMapLoading`)
 const camera = require(`./camera`)
 const windowSize = require(`./windowSize`)
@@ -17,6 +18,7 @@ module.exports = combineReducers({
   selectedTileLayerIndex,
   selectedTileIndex,
   highlightedMapTile,
+  highlightedTilesetTile,
   isMapLoading,
   camera,
   windowSize,
