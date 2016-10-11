@@ -34,6 +34,7 @@ module.exports = ({data, expectedFormat}) => {
       const detectedFormat = detectFormat(data)
       if (detectedFormat !== `mappotileset`) {
         addError(`detected format is ${detectedFormat}`)
+        break
       }
 
       if (json.signature.version === `0.1.0`) {
@@ -52,6 +53,7 @@ module.exports = ({data, expectedFormat}) => {
       const detectedFormat = detectFormat(data)
       if (detectedFormat !== `mappomap`) {
         addError(`detected format is ${detectedFormat}`)
+        break
       }
 
       if (json.signature.version === `0.1.0`) {

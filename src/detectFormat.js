@@ -12,15 +12,17 @@ module.exports = (buffer) => {
     // ignore
   }
 
-  if (json) {
-    if (
-      json.signature &&
-      json.signature.name &&
-      typeof json.signature.version === `string`
-    ) {
-      switch (json.signature.name) {
-        case `mappo tileset`: return `mappotileset`
-        case `mappo map`: return `mappomap`
+  if (typeof json !== `undefined`) {
+    if (typeof json === `object`) {
+      if (
+        json.signature &&
+        json.signature.name &&
+        typeof json.signature.version === `string`
+      ) {
+        switch (json.signature.name) {
+          case `mappo tileset`: return `mappotileset`
+          case `mappo map`: return `mappomap`
+        }
       }
     }
 
