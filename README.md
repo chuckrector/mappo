@@ -19,14 +19,15 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 # Requirements
 
+- [Yarn](https://yarnpkg.com/) (an alternative to npm)
 - Node >= 5.10.0 (`Buffer.from`)
 
 # Installation
 
 1. git clone https://github.com/chuckrector/mappo.git
 2. cd mappo
-3. npm install
-4. npm start
+3. yarn
+4. yarn start
 
 # Supported File Formats
 
