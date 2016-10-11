@@ -5,6 +5,27 @@ const asset = require(`./asset`)
 const isEqual = require(`lodash/isequal`)
 
 module.exports = (buffer) => {
+  let json
+  try {
+    json = JSON.parse(buffer)
+  } catch (err) {
+    // ignore
+  }
+
+  if (json) {
+    if (
+      json.signature &&
+      json.signature.name &&
+      typeof json.signature.version === `string`
+    ) {
+      switch (json.signature.name) {
+        case `mappo tileset`: return `mappotileset`
+      }
+    }
+
+    return `unknown`
+  }
+
   switch (buffer.length) {
   // could be a CHR with 64 frames; CHR usually <=5
   // 65536

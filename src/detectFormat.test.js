@@ -279,3 +279,24 @@ const dummyBuffer = totes => B.u8(filler(totes))
   // can detect v3 MAP
   expect(detectFormat(B.string(`V3MAP\0`))).toBe(`v3map`)
 }
+
+{
+  // can detect mappo tileset
+  const isMappoTileset = B.string(JSON.stringify({
+    signature: {
+      name: `mappo tileset`,
+      version: `0.1.0`,
+    },
+  }))
+  const theseAreNotMappoTilesets = [
+    B.string(JSON.stringify([])),
+    B.string(JSON.stringify({})),
+    B.string(JSON.stringify({signature: {}})),
+    B.string(JSON.stringify({signature: {name: `mappo tileset`}})),
+    B.string(JSON.stringify({signature: {name: `mappo map`, version: `0.1.0`}})),
+  ]
+  expect(detectFormat(isMappoTileset)).toBe(`mappotileset`)
+  theseAreNotMappoTilesets.forEach(isNot => {
+    expect(detectFormat(isNot)).toBe(`unknown`)
+  })
+}
