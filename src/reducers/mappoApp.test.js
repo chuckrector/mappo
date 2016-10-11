@@ -13,7 +13,7 @@ const {plotTile, setMap} = require(`../actions/index`)
   const store = createStore(mappoApp)
 
   store.dispatch(setMap(Map({tileLayers: []})))
-  expect(store.getState().map).toEqual(Map({tileLayers: []}))
+  expect(store.getState().session.map).toEqual(Map({tileLayers: []}))
 }
 
 {
@@ -22,7 +22,7 @@ const {plotTile, setMap} = require(`../actions/index`)
 
   const map = Map({tileLayers: []})
   store.dispatch(setMap(map))
-  expect(store.getState().map).toBe(map)
+  expect(store.getState().session.map).toBe(map)
 }
 
 {
@@ -32,7 +32,7 @@ const {plotTile, setMap} = require(`../actions/index`)
   const tileLayers = fromJS([{width: 2, height: 2, tileIndexGrid: filler(2 * 2, 77)}])
   deepFreeze(tileLayers)
   store.dispatch(setMap(Map({tileLayers})))
-  expect(store.getState().map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List(filler(2 * 2, 77)))
+  expect(store.getState().session.map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List(filler(2 * 2, 77)))
 
   store.dispatch(plotTile({
     x: 0,
@@ -41,8 +41,8 @@ const {plotTile, setMap} = require(`../actions/index`)
     tileLayers,
     tileIndexToPlot: 99,
   }))
-  expect(store.getState().map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List([77, 77, 99, 77]))
-  const plots = store.getState().plots
+  expect(store.getState().session.map.getIn([`tileLayers`, `0`, `tileIndexGrid`])).toEqual(List([77, 77, 99, 77]))
+  const plots = store.getState().session.plots
   const plotHistory = plots.get(`plotHistory`)
   const undoIndex = plots.get(`undoIndex`)
   const expectedPlot = Map({

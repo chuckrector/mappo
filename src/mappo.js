@@ -81,26 +81,28 @@ let tilesetImageBitmap
 
 const mappoConfigFromDisk = loadMappoConfig()
 
+let plainMap
 // TODO(chuck): remove once fully converted to immutable.js stuff
-if (mappoConfigFromDisk.ui) {
-  if (mappoConfigFromDisk.ui.camera) {
-    mappoConfigFromDisk.ui.camera = Map(mappoConfigFromDisk.ui.camera)
+if (mappoConfigFromDisk.session) {
+  if (mappoConfigFromDisk.session.ui) {
+    if (mappoConfigFromDisk.session.ui.camera) {
+      mappoConfigFromDisk.session.ui.camera = Map(mappoConfigFromDisk.session.ui.camera)
+    }
+    if (mappoConfigFromDisk.session.ui.layerHidden) {
+      mappoConfigFromDisk.session.ui.layerHidden = List(mappoConfigFromDisk.session.ui.layerHidden)
+    }
   }
-  if (mappoConfigFromDisk.ui.layerHidden) {
-    mappoConfigFromDisk.ui.layerHidden = List(mappoConfigFromDisk.ui.layerHidden)
+
+  if (mappoConfigFromDisk.session.plots) {
+    mappoConfigFromDisk.session.plots = fromJS(mappoConfigFromDisk.session.plots)
+  }
+  plainMap = mappoConfigFromDisk.session.map
+  if (mappoConfigFromDisk.session.map) {
+    mappoConfigFromDisk.session.map = fromJS(mappoConfigFromDisk.session.map)
   }
 }
 
-if (mappoConfigFromDisk.plots) {
-  mappoConfigFromDisk.plots = fromJS(mappoConfigFromDisk.plots)
-}
-const plainMap = mappoConfigFromDisk.map
-if (mappoConfigFromDisk.map) {
-  mappoConfigFromDisk.map = fromJS(mappoConfigFromDisk.map)
-}
-
-
-const store = createStore(mappoApp, mappoConfigFromDisk, applyMiddleware(thunk))
+const store = createStore(mappoApp, applyMiddleware(thunk))
 
 store.dispatch(setMapLoading(true))
 
@@ -109,7 +111,7 @@ if (plainMap) {
   rebuildTilesetImageBitmap(
     plainMap.tileset
   ).then(tilesetImage => {
-    //store.dispatch(setMap(store.getState().map))
+    //store.dispatch(setMap(store.getState().session.map))
     tilesetImageBitmap = tilesetImage
 
     const {tileWidth, tileHeight} = plainMap.tileset
@@ -123,7 +125,7 @@ if (plainMap) {
   })
 }
 
-if (store.getState().ui.zoomLevel === undefined) {
+if (store.getState().session.ui.zoomLevel === undefined) {
   store.dispatch(setZoomLevel(DEFAULT_ZOOM_LEVEL))
 }
 
@@ -132,10 +134,10 @@ let maxMapHeight = 0
 
 const recalcMaxMapSize = () => {
   const state = store.getState()
-  if (!state.map) {
+  if (!state.session.map) {
     return
   }
-  const map = state.map
+  const map = state.session.map
 
   maxMapWidth = 0
   maxMapHeight = 0
@@ -153,17 +155,17 @@ recalcMaxMapSize()
 
 const moveCameraRelatively = (moveX, moveY) => {
   const state = store.getState()
-  const map = state.map
+  const map = state.session.map
   const mapWidth = maxMapWidth
   const mapHeight = maxMapHeight
   const tileWidth = map.getIn([`tileset`, `tileWidth`])
   const tileHeight = map.getIn([`tileset`, `tileHeight`])
   const maxX = mapWidth * tileWidth - canvas.width
   const maxY = mapHeight * tileHeight - canvas.height
-  const newX = clamp(state.ui.camera.get(`x`) + moveX, 0, maxX)
-  const newY = clamp(state.ui.camera.get(`y`) + moveY, 0, maxY)
+  const newX = clamp(state.session.ui.camera.get(`x`) + moveX, 0, maxX)
+  const newY = clamp(state.session.ui.camera.get(`y`) + moveY, 0, maxY)
 
-  if (newX !== state.ui.camera.get(`x`) || newY !== state.ui.camera.get(`y`)) {
+  if (newX !== state.session.ui.camera.get(`x`) || newY !== state.session.ui.camera.get(`y`)) {
     store.dispatch(moveCamera({x: newX, y: newY}))
   }
 }
@@ -190,7 +192,7 @@ const defaultGlobalMappoState = {
 }
 let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
-const getScale = () => ZOOM_LEVELS[store.getState().ui.zoomLevel]
+const getScale = () => ZOOM_LEVELS[store.getState().session.ui.zoomLevel]
 
 const clickMapFilename = mapFilename => {
   console.log(`clickMapFilename`, mapFilename)
@@ -204,7 +206,7 @@ const clickMapFilename = mapFilename => {
   ).then(tilesetImage => {
     tilesetImageBitmap = tilesetImage
 
-    const tileset = store.getState().map.get(`tileset`)
+    const tileset = store.getState().session.map.get(`tileset`)
     tilesetSelectedTileCanvas.width = tileset.get(`tileWidth`)
     tilesetSelectedTileCanvas.height = tileset.get(`tileHeight`)
     tilesetHoveringTileCanvas.width = tileset.get(`tileWidth`)
@@ -223,19 +225,19 @@ startReact({
 
 const refreshMapLayerList = () => {
   const state = store.getState()
-  if (!state.map) {
+  if (!state.session.map) {
     return
   }
   layerList.innerHTML = ``
-  state.map.get(`tileLayers`).forEach((layer, index) => {
+  state.session.map.get(`tileLayers`).forEach((layer, index) => {
     const li = document.createElement(`li`)
     li.setAttribute(`title`, layer.get(`description`))
     li.innerText = layer.get(`description`)
     li.classList.add(`layer-list-item`)
-    if (state.ui.layerHidden && state.ui.layerHidden.get(index)) {
+    if (state.session.ui.layerHidden && state.session.ui.layerHidden.get(index)) {
       li.classList.add(`is-layer-hidden`)
     }
-    if (state.ui.selectedTileLayerIndex === index) {
+    if (state.session.ui.selectedTileLayerIndex === index) {
       li.classList.add(`selected`)
     }
     li.addEventListener(`click`, event => {
@@ -264,7 +266,7 @@ middlePanel.addEventListener(`mousedown`, event => {
 })
 
 middlePanel.addEventListener(`click`, event => {
-  if (store.getState().ui.isMapLoading) {
+  if (store.getState().session.ui.isMapLoading) {
     return
   }
 })
@@ -272,14 +274,14 @@ middlePanel.addEventListener(`click`, event => {
 const getPlotCoord = ({viewportX, viewportY}) => {
   const scale = getScale()
   const state = store.getState()
-  const map = state.map
+  const map = state.session.map
   const tileWidth = map.getIn([`tileset`, `tileWidth`])
   const tileHeight = map.getIn([`tileset`, `tileHeight`])
   const viewportScaleX = ~~(viewportX / scale)
   const viewportScaleY = ~~(viewportY / scale)
-  const layer = map.getIn([`tileLayers`, `${state.ui.selectedTileLayerIndex}`])
-  const parallaxX = ~~(state.ui.camera.get(`x`) * layer.getIn([`parallax`, `x`]))
-  const parallaxY = ~~(state.ui.camera.get(`y`) * layer.getIn([`parallax`, `y`]))
+  const layer = map.getIn([`tileLayers`, `${state.session.ui.selectedTileLayerIndex}`])
+  const parallaxX = ~~(state.session.ui.camera.get(`x`) * layer.getIn([`parallax`, `x`]))
+  const parallaxY = ~~(state.session.ui.camera.get(`y`) * layer.getIn([`parallax`, `y`]))
   const mapX = parallaxX + viewportScaleX
   const mapY = parallaxY + viewportScaleY
   const pixelX = mapX - (mapX % tileWidth)
@@ -292,19 +294,19 @@ const getPlotCoord = ({viewportX, viewportY}) => {
 
 const plot = (event) => {
   const state = store.getState()
-  if (state.seletedTileIndex !== -1 && state.ui.selectedTileLayerIndex !== -1) {
+  if (state.session.ui.selectedTilesetTile.index !== -1 && state.session.ui.selectedTileLayerIndex !== -1) {
     const {tileX, tileY} = getPlotCoord({
       viewportX: event.offsetX,
       viewportY: event.offsetY,
     })
-    const layer = state.map.getIn([`tileLayers`, `${state.ui.selectedTileLayerIndex}`])
-    if (layer.get(`tileIndexGrid`).get((tileY * layer.get(`width`)) + tileX) === state.ui.selectedTilesetTile.index) {
+    const layer = state.session.map.getIn([`tileLayers`, `${state.session.ui.selectedTileLayerIndex}`])
+    if (layer.get(`tileIndexGrid`).get((tileY * layer.get(`width`)) + tileX) === state.session.ui.selectedTilesetTile.index) {
       return
     }
     store.dispatch(plotTile({
-      tileLayerIndex: state.ui.selectedTileLayerIndex,
-      tileLayers: state.map.get(`tileLayers`),
-      tileIndexToPlot: state.ui.selectedTilesetTile.index,
+      tileLayerIndex: state.session.ui.selectedTileLayerIndex,
+      tileLayers: state.session.map.get(`tileLayers`),
+      tileIndexToPlot: state.session.ui.selectedTilesetTile.index,
       x: tileX,
       y: tileY,
     }))
@@ -314,13 +316,13 @@ const plot = (event) => {
 }
 
 middlePanel.addEventListener(`mousemove`, event => {
-  if (store.getState().ui.isMapLoading) {
+  if (store.getState().session.ui.isMapLoading) {
     return
   }
 
   const scale = getScale()
   const state = store.getState()
-  const map = state.map
+  const map = state.session.map
   const tileset = map.get(`tileset`)
 
   if (globalMappoState.mouseDown) {
@@ -334,18 +336,18 @@ middlePanel.addEventListener(`mousemove`, event => {
     }
   }
 
-  if (state.ui.selectedTileLayerIndex !== -1) {
-    const layer = state.map.getIn([`tileLayers`, state.ui.selectedTileLayerIndex])
+  if (state.session.ui.selectedTileLayerIndex !== -1) {
+    const layer = state.session.map.getIn([`tileLayers`, state.session.ui.selectedTileLayerIndex])
     const tileWidth = tileset.get(`tileWidth`)
     const tileHeight = tileset.get(`tileHeight`)
     const scaleX = event.offsetX / scale
     const scaleY = event.offsetY / scale
-    const parallaxX = state.ui.camera.get(`x`) * layer.getIn([`parallax`, `x`])
-    const parallaxY = state.ui.camera.get(`y`) * layer.getIn([`parallax`, `y`])
+    const parallaxX = state.session.ui.camera.get(`x`) * layer.getIn([`parallax`, `x`])
+    const parallaxY = state.session.ui.camera.get(`y`) * layer.getIn([`parallax`, `y`])
     const tileX = ~~((parallaxX + scaleX) / tileWidth)
     const tileY = ~~((parallaxY + scaleY) / tileHeight)
 
-    if (tileX !== state.ui.highlightedMapTile.x || tileY !== state.ui.highlightedMapTile.y) {
+    if (tileX !== state.session.ui.highlightedMapTile.x || tileY !== state.session.ui.highlightedMapTile.y) {
       store.dispatch(highlightMapTile({x: tileX, y: tileY}))
     }
   }
@@ -371,12 +373,12 @@ const getTileCoordAndIndex = ({
 }
 
 tilesetCanvasContainer.addEventListener(`mousemove`, event => {
-  if (store.getState().ui.isMapLoading) {
+  if (store.getState().session.ui.isMapLoading) {
     return
   }
 
   const info = getTileCoordAndIndex({
-    tileset: store.getState().map.get(`tileset`),
+    tileset: store.getState().session.map.get(`tileset`),
     containerWidth: tilesetCanvas.width * getScale(),
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -385,12 +387,12 @@ tilesetCanvasContainer.addEventListener(`mousemove`, event => {
 })
 
 tilesetCanvasContainer.addEventListener(`click`, event => {
-  if (store.getState().ui.isMapLoading) {
+  if (store.getState().session.ui.isMapLoading) {
     return
   }
 
   const info = getTileCoordAndIndex({
-    tileset: store.getState().map.get(`tileset`),
+    tileset: store.getState().session.map.get(`tileset`),
     containerWidth: tilesetCanvas.width * getScale(),
     pixelX: event.offsetX,
     pixelY: event.offsetY,
@@ -429,9 +431,9 @@ const tick = () => {
   clearCanvas({canvas: tilesetSelectedTileCanvas, pattern: checkerboardPattern})
   clearCanvas({canvas: tilesetHoveringTileCanvas, pattern: checkerboardPattern})
 
-  if (!store.getState().ui.isMapLoading) {
+  if (!store.getState().session.ui.isMapLoading) {
     const state = store.getState()
-    const map = state.map
+    const map = state.session.map
     const tileset = map.get(`tileset`)
     const tileWidth = tileset.get(`tileWidth`)
     const tileHeight = tileset.get(`tileHeight`)
@@ -441,18 +443,18 @@ const tick = () => {
       map,
       tileset,
       tilesetImageBitmap,
-      camera: state.ui.camera,
+      camera: state.session.ui.camera,
       canvas,
       context,
-      layerHidden: state.ui.layerHidden,
+      layerHidden: state.session.ui.layerHidden,
     })
 
     // TODO(chuck): find a simpler way, this seems rather excessive
     // fixes #1: map tile highlight "jiggles" during fine movements
-    const tileStartLayer = tileStartList.get(state.ui.selectedTileLayerIndex)
+    const tileStartLayer = tileStartList.get(state.session.ui.selectedTileLayerIndex)
     if (tileStartLayer) {
-      const highlightTileX = state.ui.highlightedMapTile.x
-      const highlightTileY = state.ui.highlightedMapTile.y
+      const highlightTileX = state.session.ui.highlightedMapTile.x
+      const highlightTileY = state.session.ui.highlightedMapTile.y
       const {pixelStartX, pixelStartY, tileStartX, tileStartY} = tileStartLayer
       const x = ((highlightTileX - tileStartX) * tileWidth) + pixelStartX
       const y = ((highlightTileY - tileStartY) * tileHeight) + pixelStartY
@@ -472,7 +474,7 @@ const tick = () => {
       tilesetColumns: getTilesetColumns({tileset, containerWidth})
     })
 
-    const {ui} = state
+    const {ui} = state.session
     renderTileHighlightInvertedSolid({
       context: tilesetContext,
       x: ui.highlightedTilesetTile.x * tileWidth,
@@ -502,11 +504,11 @@ const tick = () => {
       context: tilesetSelectedTileContext,
       tileset,
       tilesetImageBitmap,
-      tileIndex: state.ui.selectedTilesetTile.index,
+      tileIndex: state.session.ui.selectedTilesetTile.index,
       x: 0,
       y: 0,
     })
-    tilesetSelectedTileIndex.innerText = state.ui.selectedTilesetTile.index
+    tilesetSelectedTileIndex.innerText = state.session.ui.selectedTilesetTile.index
 
     if (keyboard.isPressed(keyboard.KEYCODE_CMD)) {
       if (keyboard.isPressed(keyboard.KEYCODE_Z)) {
@@ -519,16 +521,16 @@ const tick = () => {
     }
 
     // map zooming
-    const prevZoomLevel = state.ui.zoomLevel
+    const prevZoomLevel = state.session.ui.zoomLevel
     if (keyboard.isPressed(`ctrlKey`)) {
       if (keyboard.isPressed(keyboard.KEYCODE_PLUS)) {
         keyboard.release(keyboard.KEYCODE_PLUS)
-        store.dispatch(setZoomLevel(state.ui.zoomLevel + 1))
+        store.dispatch(setZoomLevel(state.session.ui.zoomLevel + 1))
       }
 
       if (keyboard.isPressed(keyboard.KEYCODE_MINUS)) {
         keyboard.release(keyboard.KEYCODE_MINUS)
-        store.dispatch(setZoomLevel(state.ui.zoomLevel - 1))
+        store.dispatch(setZoomLevel(state.session.ui.zoomLevel - 1))
       }
 
       if (keyboard.isPressed(keyboard.KEYCODE_0)) {
@@ -539,7 +541,7 @@ const tick = () => {
       // TODO(chuck): hmm, tricky. dispatching to store generates new state
       // and therefore state.zoomLevel will still point to stale state (?)
       // look at this more closely soon and fully understand what's going on.
-      if (prevZoomLevel !== store.getState().ui.zoomLevel) {
+      if (prevZoomLevel !== store.getState().session.ui.zoomLevel) {
         resizeCanvas()
       }
     }
@@ -558,9 +560,9 @@ const resizeCanvas = () => {
   canvas.height = roundedUpUnits(middlePanel.offsetHeight, getScale())
   stretchCanvasByZoom(canvas)
 
-  if (!store.getState().ui.isMapLoading) {
+  if (!store.getState().session.ui.isMapLoading) {
     const containerWidth = tilesetCanvasContainer.offsetWidth
-    const tileset = store.getState().map.get(`tileset`)
+    const tileset = store.getState().session.map.get(`tileset`)
     tilesetCanvas.width = tilesetImageBitmap.width
     tilesetCanvas.height = tilesetImageBitmap.height
     stretchCanvasByZoom(tilesetCanvas)
@@ -574,14 +576,14 @@ tick()
 
 const uiUndo = () => {
   const state = store.getState()
-  if (state.plots.get(`undoIndex`) > 0) {
+  if (state.session.plots.get(`undoIndex`) > 0) {
     store.dispatch(undo())
   }
 }
 
 const uiRedo = () => {
   const state = store.getState()
-  if (state.plots.get(`undoIndex`) < state.plots.get(`plotHistory`).size) {
+  if (state.session.plots.get(`undoIndex`) < state.session.plots.get(`plotHistory`).size) {
     store.dispatch(redo())
   }
 }
@@ -590,20 +592,20 @@ undoButton.addEventListener(`click`, uiUndo)
 redoButton.addEventListener(`click`, uiRedo)
 
 const refreshUndoRedo = () => {
-  if (store.getState().ui.isMapLoading) {
+  if (store.getState().session.ui.isMapLoading) {
     undoButton.disabled = true
     redoButton.disabled = true
     return
   }
 
   const state = store.getState()
-  if (state.plots && state.plots.get(`undoIndex`) > 0) {
+  if (state.session.plots && state.session.plots.get(`undoIndex`) > 0) {
     undoButton.removeAttribute(`disabled`)
   } else {
     undoButton.disabled = true
   }
 
-  if (state.plots && state.plots.get(`undoIndex`) < state.plots.get(`plotHistory`).size) {
+  if (state.session.plots && state.session.plots.get(`undoIndex`) < state.session.plots.get(`plotHistory`).size) {
     redoButton.removeAttribute(`disabled`)
   } else {
     redoButton.disabled = true
@@ -621,7 +623,7 @@ const reactToChanges = stateWatcher((newValue, oldValue, objectPath) => {
 store.subscribe(reactToChanges)
 
 const refreshLoadingStatus = () => {
-  mappoEl.classList.toggle(`is-loading`, store.getState().ui.isMapLoading)
+  mappoEl.classList.toggle(`is-loading`, store.getState().session.ui.isMapLoading)
 }
 
 store.subscribe(recalcMaxMapSize)
