@@ -282,21 +282,42 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect mappo tileset
-  const isMappoTileset = B.string(JSON.stringify({
+  const thisIs = B.string(JSON.stringify({
     signature: {
       name: `mappo tileset`,
       version: `0.1.0`,
     },
   }))
-  const theseAreNotMappoTilesets = [
+  const theseAreNot = [
     B.string(JSON.stringify([])),
     B.string(JSON.stringify({})),
     B.string(JSON.stringify({signature: {}})),
     B.string(JSON.stringify({signature: {name: `mappo tileset`}})),
     B.string(JSON.stringify({signature: {name: `mappo map`, version: `0.1.0`}})),
   ]
-  expect(detectFormat(isMappoTileset)).toBe(`mappotileset`)
-  theseAreNotMappoTilesets.forEach(isNot => {
-    expect(detectFormat(isNot)).toBe(`unknown`)
+  expect(detectFormat(thisIs)).toBe(`mappotileset`)
+  theseAreNot.forEach(isNot => {
+    expect(detectFormat(isNot)).toNotBe(`mappo tileset`)
+  })
+}
+
+{
+  // can detect mappo map
+  const thisIs = B.string(JSON.stringify({
+    signature: {
+      name: `mappo map`,
+      version: `0.1.0`,
+    },
+  }))
+  const theseAreNot = [
+    B.string(JSON.stringify([])),
+    B.string(JSON.stringify({})),
+    B.string(JSON.stringify({signature: {}})),
+    B.string(JSON.stringify({signature: {name: `mappo map`}})),
+    B.string(JSON.stringify({signature: {name: `mappo tileset`, version: `0.1.0`}})),
+  ]
+  expect(detectFormat(thisIs)).toBe(`mappomap`)
+  theseAreNot.forEach(isNot => {
+    expect(detectFormat(isNot)).toNotBe(`mappomap`)
   })
 }

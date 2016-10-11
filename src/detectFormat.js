@@ -20,6 +20,7 @@ module.exports = (buffer) => {
     ) {
       switch (json.signature.name) {
         case `mappo tileset`: return `mappotileset`
+        case `mappo map`: return `mappomap`
       }
     }
 
