@@ -5,6 +5,7 @@ const {createStore, applyMiddleware} = require(`redux`)
 const thunk = require(`redux-thunk`).default
 const reduxWatch = require(`redux-watch`)
 const {List, Map, fromJS} = require(`immutable`)
+const startReact = require(`./react/startReact.js.compiled`)
 
 const asset = require(`./asset`)
 const colorDepth = require(`./converter/colorDepth`)
@@ -27,17 +28,15 @@ const renderMap = require(`./renderMap`)
 const renderTileset = require(`./renderTileset`)
 const createCheckerboardPattern = require(`./createCheckerboardPattern`)
 const clearCanvas = require(`./clearCanvas`)
-const loadMappoMap = require(`./loadMappoMap`)
-const createMappoTilesetRaw32bitData = require(`./createMappoTilesetRaw32bitData`)
 const loadMappoConfig = require(`./loadMappoConfig`)
 const saveMappoConfig = require(`./saveMappoConfig`)
 const mappoApp = require(`./reducers/mappoApp`)
 const ZOOM_LEVELS = require(`./reducers/zoomLevels`)
 const DEFAULT_ZOOM_LEVEL = require(`./reducers/defaultZoomLevel`)
 const {
-  builtTilesetImageBitmap,
   highlightMapTile,
   hoverTilesetTile,
+  loadMap,
   moveCamera,
   plotTile,
   redo,
@@ -52,10 +51,11 @@ const {
   toggleLayerVisibility,
   undo,
 } = require(`./actions/index`)
+const rebuildTilesetImageBitmap = require(`./rebuildTilesetImageBitmap`)
 const roundedUpUnits = require(`./roundedUpUnits`)
-const createTileGridConverter = require(`./converter/createTileGridConverter`)
 
 // DOM REFERENCES
+const mappoEl = document.getElementById(`mappo`)
 const pageTitle = document.querySelector(`title`)
 const mapList = document.querySelector(`.map-list`)
 const layerList = document.querySelector(`.layer-list`)
@@ -73,74 +73,13 @@ const tilesetHoveringTileIndex = document.querySelector(`.tileset-hovering-tile-
 const middlePanel = document.querySelector(`.middle-panel`)
 const undoButton = document.querySelector(`.undo`)
 const redoButton = document.querySelector(`.redo`)
+const mapListContainer = document.querySelector(`.map-list-container`)
 
 const checkerboardPattern = createCheckerboardPattern({document})
 
 let tilesetImageBitmap
 
 const mappoConfigFromDisk = loadMappoConfig()
-
-let tilesetImageLoading
-
-const rebuildTilesetImageBitmap = () => {
-  const state = store.getState()
-
-  if (tilesetImageLoading) {
-    return
-  }
-
-  const {map} = state
-  const tileset = map.get(`tileset`)
-  // auto-convert tileset to PNG if it doesn't already exist
-  const vspImageExists = fs.existsSync(tileset.get(`imageFilename`))
-
-  let tilesetResolve
-  const tilesetPromise = new Promise((resolve, reject) => {
-    tilesetResolve = resolve
-  })
-
-  if (!vspImageExists) {
-    console.log(`generating`, tileset.get(`imageFilename`), `...`)
-
-    const raw32bitData = createMappoTilesetRaw32bitData(tileset)
-    const converter = createTileGridConverter({
-      tileWidth: tileset.get(`tileWidth`),
-      tileHeight: tileset.get(`tileHeight`),
-      columns: tileset.get(`tileColumns`),
-      numtiles: tileset.get(`numTiles`),
-      raw32bitData,
-    })
-
-    const png = converter.convertToPng()
-    const writer = fs.createWriteStream(tileset.get(`imageFilename`))
-    png.pack().pipe(writer)
-    writer.on(`finish`, tilesetResolve)
-  } else {
-    tilesetResolve()
-  }
-
-  tilesetPromise.then(() => {
-    const tileset = state.map.get(`tileset`)
-    const tilesetImage = new Image()
-    tilesetImageLoading = true
-    tilesetImage.addEventListener(`load`, () => {
-      tilesetImageBitmap = tilesetImage
-      store.dispatch(builtTilesetImageBitmap())
-      store.dispatch(setMapLoading(false))
-      saveMappoConfig(store.getState())
-      resizeCanvas()
-
-      tilesetSelectedTileCanvas.width = tileset.get(`tileWidth`)
-      tilesetSelectedTileCanvas.height = tileset.get(`tileHeight`)
-      tilesetHoveringTileCanvas.width = tileset.get(`tileWidth`)
-      tilesetHoveringTileCanvas.height = tileset.get(`tileHeight`)
-      tilesetImageLoading = false
-    })
-
-    const relativePath = path.resolve(`.`, tileset.get(`imageFilename`))
-    tilesetImage.src = relativePath
-  })
-}
 
 // TODO(chuck): remove once fully converted to immutable.js stuff
 if (mappoConfigFromDisk.ui) {
@@ -155,17 +94,34 @@ if (mappoConfigFromDisk.ui) {
 if (mappoConfigFromDisk.plots) {
   mappoConfigFromDisk.plots = fromJS(mappoConfigFromDisk.plots)
 }
+const plainMap = mappoConfigFromDisk.map
 if (mappoConfigFromDisk.map) {
   mappoConfigFromDisk.map = fromJS(mappoConfigFromDisk.map)
 }
 
+
 const store = createStore(mappoApp, mappoConfigFromDisk, applyMiddleware(thunk))
-// TODO(chuck): any way for this to happen as part of initial hydration?
-if (store.getState().map) {
-  rebuildTilesetImageBitmap()
-}
 
 store.dispatch(setMapLoading(true))
+
+// TODO(chuck): any way for this to happen as part of initial hydration?
+if (plainMap) {
+  rebuildTilesetImageBitmap(
+    plainMap.tileset
+  ).then(tilesetImage => {
+    //store.dispatch(setMap(store.getState().map))
+    tilesetImageBitmap = tilesetImage
+
+    const {tileWidth, tileHeight} = plainMap.tileset
+    tilesetSelectedTileCanvas.width = tileWidth
+    tilesetSelectedTileCanvas.height = tileHeight
+    tilesetHoveringTileCanvas.width = tileWidth
+    tilesetHoveringTileCanvas.height = tileHeight
+
+    store.dispatch(setMapLoading(false))
+    resizeCanvas()
+  })
+}
 
 if (store.getState().ui.zoomLevel === undefined) {
   store.dispatch(setZoomLevel(DEFAULT_ZOOM_LEVEL))
@@ -236,33 +192,33 @@ let globalMappoState = cloneDeep(defaultGlobalMappoState)
 
 const getScale = () => ZOOM_LEVELS[store.getState().ui.zoomLevel]
 
-mappoSession.getMapFilenames().forEach(mapFilename => {
-  const li = document.createElement(`li`)
-  li.setAttribute(`title`, mapFilename)
-  li.innerText = mapFilename
-  // TODO(chuck): temp hack for windows. figure out better launchFolder shenanigans
-  li.addEventListener(`click`, event => {
-    globalMappoState = cloneDeep(defaultGlobalMappoState)
-    store.dispatch(setMapLoading(true))
+const clickMapFilename = mapFilename => {
+  console.log(`clickMapFilename`, mapFilename)
 
-    const map = fromJS(loadMappoMap({context, mapFilename: `data/` + mapFilename}))
-    store.dispatch(moveCamera({x: 0, y: 0}))
-    // TODO(chuck): map contains ImageBitmaps, which is not good for redux.
-    //              figure out a better way to store this so that the full
-    //              state can be written to disk and reloaded later without
-    //              problems.
-    store.dispatch(setMap(map))
-    store.dispatch(resetLayerVisibilities())
-    store.dispatch(selectLayer(0))
-    store.dispatch(selectTilesetTile(0))
-    store.dispatch(highlightMapTile({x: 0, y: 0}))
+  globalMappoState = cloneDeep(defaultGlobalMappoState)
+  pageTitle.innerText = `mappo - ` + mapFilename
 
-    rebuildTilesetImageBitmap()
-    refreshMapLayerList()
+  store.dispatch(setMapLoading(true))
+  store.dispatch(
+    loadMap({context, mapFilename: `data/` + mapFilename})
+  ).then(tilesetImage => {
+    tilesetImageBitmap = tilesetImage
 
-    pageTitle.innerText = `mappo - ` + mapFilename
+    const tileset = store.getState().map.get(`tileset`)
+    tilesetSelectedTileCanvas.width = tileset.get(`tileWidth`)
+    tilesetSelectedTileCanvas.height = tileset.get(`tileHeight`)
+    tilesetHoveringTileCanvas.width = tileset.get(`tileWidth`)
+    tilesetHoveringTileCanvas.height = tileset.get(`tileHeight`)
+
+    store.dispatch(setMapLoading(false))
+    resizeCanvas()
   })
-  mapList.appendChild(li)
+}
+
+startReact({
+  mapFilenames: mappoSession.getMapFilenames(),
+  mapListContainer,
+  clickMapFilename,
 })
 
 const refreshMapLayerList = () => {
@@ -665,7 +621,7 @@ const reactToChanges = stateWatcher((newValue, oldValue, objectPath) => {
 store.subscribe(reactToChanges)
 
 const refreshLoadingStatus = () => {
-  document.body.classList.toggle(`is-loading`, store.getState().ui.isMapLoading)
+  mappoEl.classList.toggle(`is-loading`, store.getState().ui.isMapLoading)
 }
 
 store.subscribe(recalcMaxMapSize)

@@ -2,12 +2,17 @@
   "name": "mappo",
   "version": "0.33.0",
   "description": "mappo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chuckrector/mappo"
+  },
   "main": "src/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/electron .",
+    "start": "npm run jsx && ./node_modules/.bin/electron .",
     "test": "./node_modules/.bin/concurrently --raw --kill-others \"node runtests.js\" \"./runtests-cli.sh\"",
     "all": "time ./src/cli/all-the-things.sh",
-    "clean": "./src/cli/clean.sh"
+    "clean": "./src/cli/clean.sh",
+    "jsx": "find src/react -iname '*.js' ! -iname '*.compiled.js' -print0 | xargs -0 -I {} ./node_modules/.bin/babel {} -o {}.compiled.js"
   },
   "keywords": [
     "mappo"
@@ -16,17 +21,34 @@
   "license": "MIT",
   "dependencies": {
     "electron": "^1.3.4",
-    "immutable": "^3.8.1",
-    "js2xmlparser": "^2.0.2",
     "lodash": "^4.15.0",
-    "pngjs": "^3.0.0",
+
+    "//": "for map2tmx",
+    "js2xmlparser": "^2.0.2",
+
+    "//": "react stuff",
+    "babel-core": "^6.17.0",
+    "babel-preset-react": "^6.16.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+
+    "//": "redux-related stuff",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "redux-watch": "^1.1.1",
+    "immutable": "^3.8.1",
+
+    "pngjs": "^3.0.0",
     "rgbquant": "^1.1.2"
   },
   "devDependencies": {
+    "//": "for compiling my jsx",
+    "babel-cli": "^6.16.0",
+
+    "//": "for running cli tests faster",
     "concurrently": "^2.2.0",
+
+    "//": "for tests",
     "deep-freeze": "0.0.1",
     "expect": "^1.20.2"
   },

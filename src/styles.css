@@ -67,7 +67,7 @@ canvas {
   -webkit-filter: invert(100%);
 }
 
-body:not(.is-loading) .loading-screen {
+#mappo:not(.is-loading) .loading-screen {
   display: none;
 }
 
@@ -99,9 +99,9 @@ body:not(.is-loading) .loading-screen {
   padding: 5px;
 }
 
-body.is-loading .undo-list-container,
-body.is-loading .middle-panel,
-body.is-loading .right-panel {
+#mappo.is-loading .undo-list-container,
+#mappo.is-loading .middle-panel,
+#mappo.is-loading .right-panel {
   display: none;
 }
 

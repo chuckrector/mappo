@@ -1,8 +1,13 @@
 "use strict"
 
+const loadMappoMap = require(`../loadMappoMap`)
+const rebuildTilesetImageBitmap = require(`../rebuildTilesetImageBitmap`)
+const {fromJS} = require(`immutable`)
+
 const BUILT_TILESET_IMAGE_BITMAP = `BUILT_TILESET_IMAGE_BITMAP`
 const HIGHLIGHT_MAP_TILE = `HIGHLIGHT_MAP_TILE`
 const HOVER_TILESET_TILE = `HOVER_TILESET_TILE`
+const LOAD_MAP = `LOAD_MAP`
 const MOVE_CAMERA = `MOVE_CAMERA`
 const PLOT_TILE = `PLOT_TILE`
 const REDO = `REDO`
@@ -20,6 +25,7 @@ const UNDO = `UNDO`
 exports.BUILT_TILESET_IMAGE_BITMAP = BUILT_TILESET_IMAGE_BITMAP
 exports.HIGHLIGHT_MAP_TILE = HIGHLIGHT_MAP_TILE
 exports.HOVER_TILESET_TILE = HOVER_TILESET_TILE
+exports.LOAD_MAP = LOAD_MAP
 exports.MOVE_CAMERA = MOVE_CAMERA
 exports.PLOT_TILE = PLOT_TILE
 exports.REDO = REDO
@@ -54,6 +60,26 @@ exports.hoverTilesetTile = where => {
     x: where.x,
     y: where.y,
     index: where.index,
+  }
+}
+
+exports.loadMap = ({context, mapFilename}) => {
+  return dispatch => {
+    console.log(`loadMap`, context, mapFilename)
+    dispatch(moveCamera({x: 0, y: 0}))
+    dispatch(resetLayerVisibilities())
+    dispatch(selectLayer(0))
+    dispatch(selectTilesetTile(0))
+    dispatch(highlightMapTile({x: 0, y: 0}))
+
+    const map = loadMappoMap({context, mapFilename})
+    return rebuildTilesetImageBitmap(map.tileset).then(tilesetImage => {
+      // now that all the low-level image data conversion stuff is finished,
+      // immutable.js-ify everything for the higher-level app
+      dispatch(setMap(fromJS(map)))
+
+      return tilesetImage
+    })
   }
 }
 
