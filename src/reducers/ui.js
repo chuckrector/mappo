@@ -9,8 +9,6 @@ const highlightedMapTile = require(`./highlightedMapTile`)
 const highlightedTilesetTile = require(`./highlightedTilesetTile`)
 const isMapLoading = require(`./isMapLoading`)
 const camera = require(`./camera`)
-const windowSize = require(`./windowSize`)
-const windowPosition = require(`./windowPosition`)
 
 module.exports = combineReducers({
   zoomLevel,
@@ -21,6 +19,4 @@ module.exports = combineReducers({
   highlightedTilesetTile,
   isMapLoading,
   camera,
-  windowSize,
-  windowPosition,
 })

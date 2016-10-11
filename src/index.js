@@ -18,28 +18,21 @@ const createWindow = () => {
   // cmd+z on OS X (super annoying)
   Menu.setApplicationMenu(buildApplicationMenu())
 
-  let windowBounds = {
-    width: 1440,
-    height: 900,
+  const cfg = loadMappoConfig()
+  const options = {
+    width: (cfg.window && cfg.window.width) || 1440,
+    height: (cfg.window && cfg.window.height) || 900,
   }
 
-  let mappoConfig = loadMappoConfig()
-  const {ui} = mappoConfig
-  if (ui) {
-    if (ui.windowSize && ui.windowSize.width && ui.windowSize.height) {
-      console.log(`setting editor window size: ${ui.windowSize.width}x${ui.windowSize.height}`)
-      windowBounds.width = ui.windowSize.width
-      windowBounds.height = ui.windowSize.height
-    }
-
-    if (ui.windowPosition && ui.windowPosition.x && ui.windowPosition.y) {
-      console.log(`setting editor window position: ${ui.windowPosition.x},${ui.windowPosition.y}`)
-      windowBounds.x = ui.windowPosition.x
-      windowBounds.y = ui.windowPosition.y
-    }
+  if (cfg.window && cfg.window.x) {
+    options.x = cfg.window.x
   }
 
-  win = new BrowserWindow(Object.assign(windowBounds, {
+  if (cfg.window && cfg.window.y) {
+    options.y = cfg.window.y
+  }
+
+  win = new BrowserWindow(Object.assign(options, {
     backgroundColor: '#444a53',
   }))
 

@@ -5,6 +5,7 @@ const plots = require(`./plots`)
 const plotHistory = require(`./plotHistory`)
 const undoablePlots = plotHistory(plots)
 const ui = require(`./ui`)
+const config = require(`./config`)
 const {
   plotTile,
   PLOT_TILE,
@@ -66,6 +67,7 @@ module.exports = (state={}, action) => {
     default: {
       newState = Object.assign({}, state, {
         ui: ui(state.ui, action),
+        config: config(state.config, action),
       })
     }
   }

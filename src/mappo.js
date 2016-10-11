@@ -611,7 +611,7 @@ const refreshUndoRedo = () => {
 }
 
 const saveChanges = debounce(() => {
-  saveMappoConfig(store.getState())
+  saveMappoConfig(store.getState().config)
 }, 250)
 
 const stateWatcher = reduxWatch(store.getState)
@@ -632,9 +632,10 @@ store.subscribe(refreshLoadingStatus)
 // sent from main process (index.js)
 ipcRenderer.on(`windowBounds`, (event, bounds) => {
   const state = store.getState()
+
   if (
-    bounds.width !== state.ui.windowSize.width ||
-    bounds.height !== state.ui.windowSize.height
+    bounds.width !== state.config.window.width ||
+    bounds.height !== state.config.window.height
   ) {
     store.dispatch(setWindowSize({
       width: bounds.width,
@@ -643,8 +644,8 @@ ipcRenderer.on(`windowBounds`, (event, bounds) => {
   }
 
   if (
-    bounds.x !== state.ui.windowSize.x ||
-    bounds.y !== state.ui.windowSize.y
+    bounds.x !== state.config.window.x ||
+    bounds.y !== state.config.window.y
   ) {
     store.dispatch(setWindowPosition({
       x: bounds.x,
