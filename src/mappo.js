@@ -325,15 +325,13 @@ middlePanel.addEventListener(`mousemove`, event => {
   const map = state.session.map
   const tileset = map.get(`tileset`)
 
-  if (globalMappoState.mouseDown) {
-    if (keyboard.isPressed(`altKey`)) {
-      moveCameraRelatively(
-        -event.movementX / scale,
-        -event.movementY / scale
-      )
-    } else {
-      plot(event)
-    }
+  if (keyboard.isPressed(`altKey`)) {
+    moveCameraRelatively(
+      -event.movementX / scale,
+      -event.movementY / scale
+    )
+  } else if (globalMappoState.mouseDown) {
+    plot(event)
   }
 
   if (state.session.ui.selectedTileLayerIndex !== -1) {

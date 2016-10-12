@@ -10,6 +10,7 @@ module.exports = ({addEventListener, keyPressed}) => {
     KEYCODE_PLUS: 187,
     KEYCODE_MINUS: 189,
     KEYCODE_0: 48,
+    KEYCODE_S: 83,
     KEYCODE_Y: 89,
     KEYCODE_Z: 90,
     KEYCODE_CMD: 91,
