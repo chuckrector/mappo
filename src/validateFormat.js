@@ -1,7 +1,5 @@
 "use strict"
 
-const detectFormat = require(`./detectFormat`)
-
 module.exports = ({data, expectedFormat}) => {
   let json
   try {
@@ -16,27 +14,39 @@ module.exports = ({data, expectedFormat}) => {
   }
 
   const expectField = (key, type) => {
-    if (!(key in json)) {
+    let o = json
+    if (key.indexOf(`.`) !== -1) {
+      const parts = key.split(`.`)
+      o = json[parts[0]]
+      key = parts[1]
+    }
+    if (!(key in o)) {
       addError(`missing "${key}" field`)
     } else {
       if (type === `array`) {
-        if (!Array.isArray(json[key])) {
-          addError(`expected "${key}" to be a list but found "${typeof json[key]}": ${json[key]}`)
+        if (!Array.isArray(o[key])) {
+          addError(`expected "${key}" to be a list but found "${typeof o[key]}": ${o[key]}`)
         }
-      } else if (typeof json[key] !== type) {
-        addError(`expected "${key}" to be a "${type}" but found "${typeof json[key]}": ${json[key]}`)
+      } else if (typeof o[key] !== type) {
+        addError(`expected "${key}" to be a "${type}" but found "${typeof o[key]}": ${o[key]}`)
       }
     }
   }
 
+  if (typeof json !== `object`) {
+    addError(`unrecognized json format, expected object but got ${typeof json}`)
+    return {
+      ok: false,
+      errors,
+    }
+  }
+
+  expectField(`signature`, `object`)
+  expectField(`signature.name`, `string`)
+  expectField(`signature.version`, `string`)
+
   switch (expectedFormat) {
     case `mappotileset`: {
-      const detectedFormat = detectFormat(data)
-      if (detectedFormat !== `mappotileset`) {
-        addError(`detected format is ${detectedFormat}`)
-        break
-      }
-
       if (json.signature.version === `0.1.0`) {
         expectField(`description`, `string`)
         expectField(`imageFilename`, `string`)
@@ -50,12 +60,6 @@ module.exports = ({data, expectedFormat}) => {
     } break
 
     case `mappomap`: {
-      const detectedFormat = detectFormat(data)
-      if (detectedFormat !== `mappomap`) {
-        addError(`detected format is ${detectedFormat}`)
-        break
-      }
-
       if (json.signature.version === `0.1.0`) {
         expectField(`description`, `string`)
         expectField(`tilesetFilename`, `string`)

@@ -41,6 +41,7 @@ const {
   plotTile,
   redo,
   resetLayerVisibilities,
+  saveRecentMapFilename,
   selectLayer,
   selectTilesetTile,
   setMap,
@@ -79,50 +80,60 @@ const checkerboardPattern = createCheckerboardPattern({document})
 
 let tilesetImageBitmap
 
-const mappoConfigFromDisk = loadMappoConfig()
+const config = loadMappoConfig()
 
 let plainMap
-// TODO(chuck): remove once fully converted to immutable.js stuff
-if (mappoConfigFromDisk.session) {
-  if (mappoConfigFromDisk.session.ui) {
-    if (mappoConfigFromDisk.session.ui.camera) {
-      mappoConfigFromDisk.session.ui.camera = Map(mappoConfigFromDisk.session.ui.camera)
-    }
-    if (mappoConfigFromDisk.session.ui.layerHidden) {
-      mappoConfigFromDisk.session.ui.layerHidden = List(mappoConfigFromDisk.session.ui.layerHidden)
-    }
-  }
+let session = {}
+if (config.recentMapFilename) {
+  if (config.recentMapFilename.length > 0) {
+    session = JSON.parse(fs.readFileSync(config.recentMapFilename))
+    console.log(`loaded session from`, config.recentMapFilename)
 
-  if (mappoConfigFromDisk.session.plots) {
-    mappoConfigFromDisk.session.plots = fromJS(mappoConfigFromDisk.session.plots)
-  }
-  plainMap = mappoConfigFromDisk.session.map
-  if (mappoConfigFromDisk.session.map) {
-    mappoConfigFromDisk.session.map = fromJS(mappoConfigFromDisk.session.map)
+    if (session.ui) {
+      if (session.ui.camera) {
+        session.ui.camera = Map(session.ui.camera)
+      }
+      if (session.ui.layerHidden) {
+        session.ui.layerHidden = List(session.ui.layerHidden)
+      }
+    }
+
+    if (session.plots) {
+      session.plots = fromJS(session.plots)
+    }
+    plainMap = session.map
+    if (session.map) {
+      session.map = fromJS(session.map)
+    }
   }
 }
 
-const store = createStore(mappoApp, applyMiddleware(thunk))
+const store = createStore(
+  mappoApp,
+  {config, session},
+  applyMiddleware(thunk)
+)
 
 store.dispatch(setMapLoading(true))
+
+const setTilesetImageBitmap = tilesetImage => {
+  tilesetImageBitmap = tilesetImage
+
+  const tileset = store.getState().session.map.get(`tileset`)
+  tilesetSelectedTileCanvas.width = tileset.get(`tileWidth`)
+  tilesetSelectedTileCanvas.height = tileset.get(`tileHeight`)
+  tilesetHoveringTileCanvas.width = tileset.get(`tileWidth`)
+  tilesetHoveringTileCanvas.height = tileset.get(`tileHeight`)
+
+  store.dispatch(setMapLoading(false))
+  resizeCanvas()
+}
 
 // TODO(chuck): any way for this to happen as part of initial hydration?
 if (plainMap) {
   rebuildTilesetImageBitmap(
     plainMap.tileset
-  ).then(tilesetImage => {
-    //store.dispatch(setMap(store.getState().session.map))
-    tilesetImageBitmap = tilesetImage
-
-    const {tileWidth, tileHeight} = plainMap.tileset
-    tilesetSelectedTileCanvas.width = tileWidth
-    tilesetSelectedTileCanvas.height = tileHeight
-    tilesetHoveringTileCanvas.width = tileWidth
-    tilesetHoveringTileCanvas.height = tileHeight
-
-    store.dispatch(setMapLoading(false))
-    resizeCanvas()
-  })
+  ).then(setTilesetImageBitmap)
 }
 
 if (store.getState().session.ui.zoomLevel === undefined) {
@@ -173,7 +184,7 @@ const moveCameraRelatively = (moveX, moveY) => {
 let lastSaveTimestamp = new Date()
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
-const mapGlob = `**/*.map`
+const mapGlob = `**/*`
 const mapFilenames = glob.sync(mapGlob, {nocase: true})
 const mappoSession = createMappoSession({
   fileSystem: {
@@ -203,18 +214,7 @@ const clickMapFilename = mapFilename => {
   store.dispatch(setMapLoading(true))
   store.dispatch(
     loadMap({context, mapFilename: `data/` + mapFilename})
-  ).then(tilesetImage => {
-    tilesetImageBitmap = tilesetImage
-
-    const tileset = store.getState().session.map.get(`tileset`)
-    tilesetSelectedTileCanvas.width = tileset.get(`tileWidth`)
-    tilesetSelectedTileCanvas.height = tileset.get(`tileHeight`)
-    tilesetHoveringTileCanvas.width = tileset.get(`tileWidth`)
-    tilesetHoveringTileCanvas.height = tileset.get(`tileHeight`)
-
-    store.dispatch(setMapLoading(false))
-    resizeCanvas()
-  })
+  ).then(setTilesetImageBitmap)
 }
 
 startReact({
@@ -613,7 +613,11 @@ const refreshUndoRedo = () => {
 }
 
 const saveChanges = debounce(() => {
-  saveMappoConfig(store.getState().config)
+  const state = store.getState()
+  saveMappoConfig(state.config)
+  if (state.config.recentMapFilename && state.config.recentMapFilename.length > 0) {
+    fs.writeFileSync(state.config.recentMapFilename, JSON.stringify(state.session))
+  }
 }, 250)
 
 const stateWatcher = reduxWatch(store.getState)

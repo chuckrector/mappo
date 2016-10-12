@@ -8,6 +8,7 @@ const {
   PLOT_TILE,
   REDO,
   SET_MAP,
+  SET_SESSION,
   UNDO,
 } = require(`../actions/index`)
 
@@ -53,6 +54,10 @@ module.exports = (state={}, action) => {
       newState = Object.assign({}, state, {
         map: action.map,
       })
+    } break
+
+    case SET_SESSION: {
+      newState = action.session
     } break
 
     case PLOT_TILE: {

@@ -31,7 +31,7 @@ const validateFormat = require(`./validateFormat`)
   })
   expect(wrongFormatResult).toEqual({
     ok: false,
-    errors: [`*error* mappotileset: detected format is unknown`],
+    errors: [`*error* mappotileset: unrecognized json format, expected object but got string`],
   })
 
   const missingRequiredFields = JSON.stringify({

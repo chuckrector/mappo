@@ -9,11 +9,11 @@ module.exports = tileset => {
     pngResolver = resolve
   })
 
-  const raw32bitData = tileset.raw32bitData
-  delete tileset.raw32bitData // don't want this saved to the json
-
   if (!fs.existsSync(tileset.imageFilename)) {
     console.log(`generating`, tileset.imageFilename, `...`)
+
+    const raw32bitData = tileset.raw32bitData
+    delete tileset.raw32bitData // don't want this saved to the json
 
     const converter = createTileGridConverter({
       tileWidth: tileset.tileWidth,

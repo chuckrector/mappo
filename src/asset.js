@@ -2,6 +2,7 @@
 
 const fs = require(`fs`)
 const {readFormatData} = require(`./readFormat`)
+const validateFormat = require(`./validateFormat`)
 
 const fromBuffer = (buffer, formatMetadata, rethrow=false) => {
   const {format, formatName} = formatMetadata
@@ -12,10 +13,14 @@ const fromBuffer = (buffer, formatMetadata, rethrow=false) => {
 
   let diskData
   try {
-    diskData = readFormatData({
-      format,
-      data: buffer,
-    })
+    if (format === `json`) {
+      diskData = JSON.parse(buffer)
+    } else {
+      diskData = readFormatData({
+        format,
+        data: buffer,
+      })
+    }
     diskData.formatName = formatName
   } catch (e) {
     if (rethrow) {
@@ -82,6 +87,8 @@ const allFormats = {
   v3entity: require(`./formats/v3entity`),
   v3layerinfo: require(`./formats/v3layerinfo`),
   v3map: require(`./formats/v3map`),
+  mappomap: `json`,
+  mappotileset: `json`,
 }
 
 const exportMe = {
