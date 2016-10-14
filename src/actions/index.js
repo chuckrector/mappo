@@ -4,6 +4,7 @@ const loadMappoMap = require(`../loadMappoMap`)
 const rebuildTilesetImageBitmap = require(`../rebuildTilesetImageBitmap`)
 const {fromJS, List, Map} = require(`immutable`)
 const fs = require(`fs`)
+const sessionWithImmutables = require(`../sessionWithImmutables`)
 
 const BUILT_TILESET_IMAGE_BITMAP = `BUILT_TILESET_IMAGE_BITMAP`
 const HIGHLIGHT_MAP_TILE = `HIGHLIGHT_MAP_TILE`
@@ -102,22 +103,7 @@ exports.loadMap = ({context, mapFilename}) => {
       // now that all the low-level image data conversion stuff is finished,
       // immutable.js-ify everything for the higher-level app
       if (session) {
-        if (session.ui) {
-          if (session.ui.camera) {
-            session.ui.camera = Map(session.ui.camera)
-          }
-          if (session.ui.layerHidden) {
-            session.ui.layerHidden = List(session.ui.layerHidden)
-          }
-        }
-
-        if (session.plots) {
-          session.plots = fromJS(session.plots)
-        }
-        if (session.map) {
-          session.map = fromJS(session.map)
-        }
-        dispatch(setSession(session))
+        dispatch(setSession(sessionWithImmutables(session)))
       } else {
         dispatch(setMap(fromJS(map)))
       }

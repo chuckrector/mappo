@@ -54,6 +54,7 @@ const {
 } = require(`./actions/index`)
 const rebuildTilesetImageBitmap = require(`./rebuildTilesetImageBitmap`)
 const roundedUpUnits = require(`./roundedUpUnits`)
+const sessionWithImmutables = require(`./sessionWithImmutables`)
 
 // DOM REFERENCES
 const mappoEl = document.getElementById(`mappo`)
@@ -89,22 +90,8 @@ if (config.recentMapFilename) {
     session = JSON.parse(fs.readFileSync(config.recentMapFilename))
     console.log(`loaded session from`, config.recentMapFilename)
 
-    if (session.ui) {
-      if (session.ui.camera) {
-        session.ui.camera = Map(session.ui.camera)
-      }
-      if (session.ui.layerHidden) {
-        session.ui.layerHidden = List(session.ui.layerHidden)
-      }
-    }
-
-    if (session.plots) {
-      session.plots = fromJS(session.plots)
-    }
     plainMap = session.map
-    if (session.map) {
-      session.map = fromJS(session.map)
-    }
+    session = sessionWithImmutables(session)
   }
 }
 
