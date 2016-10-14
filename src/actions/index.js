@@ -87,7 +87,7 @@ exports.loadMap = ({context, mapFilename}) => {
     dispatch(moveCamera({x: 0, y: 0}))
     dispatch(resetLayerVisibilities())
     dispatch(selectLayer(0))
-    dispatch(selectTilesetTile(0))
+    dispatch(selectTilesetTile({x: 0, y: 0, index: 0}))
     dispatch(highlightMapTile({x: 0, y: 0}))
 
     let map
