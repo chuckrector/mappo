@@ -6,6 +6,7 @@
 - handle file read errors, e.g. file doesn't exist (`readFileSync`, etc.)
 - time for react/redux? ui updates getting complex. undo/redo may be easiest with redux
 - blog about reduxification efforts
+- try out SAM
 
 ```
    SDHawk | I sure do wish people would spend more time making sweet game data editors instead of just map editors but what can you do
