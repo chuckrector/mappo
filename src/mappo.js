@@ -13,7 +13,7 @@ const clamp = require(`lodash/clamp`)
 const debounce = require(`lodash/debounce`)
 const cloneDeep = require(`lodash/clonedeep`)
 const glob = require(`glob`)
-const createMappoSession = require(`./createMappoSession`)
+const getMapFilenames = require(`./getMapFilenames`)
 const detectFormat = require(`./detectFormat`)
 const path = require(`path`)
 const fs = require(`fs`)
@@ -171,14 +171,6 @@ const moveCameraRelatively = (moveX, moveY) => {
 let lastSaveTimestamp = new Date()
 const launchFolder = `data` // TODO(chuck): temp hack for windows. empty string dunna work
 console.log(`launchFolder`, launchFolder)
-const mapGlob = `**/*`
-const mapFilenames = glob.sync(mapGlob, {nocase: true})
-const mappoSession = createMappoSession({
-  fileSystem: {
-    files: mapFilenames
-  },
-  launchFolder
-})
 
 const defaultGlobalMappoState = {
   mapLayerOrder: null,
@@ -204,8 +196,15 @@ const clickMapFilename = mapFilename => {
   ).then(setTilesetImageBitmap)
 }
 
+const mapFilenames = getMapFilenames({
+  fileSystem: {
+    files: glob.sync(`**/*`, {nocase: true})
+  },
+  launchFolder
+})
+
 startReact({
-  mapFilenames: mappoSession.getMapFilenames(),
+  mapFilenames,
   mapListContainer,
   clickMapFilename,
 })

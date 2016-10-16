@@ -1,7 +1,7 @@
 "use strict"
 
 const expect = require(`expect`)
-const createMappoSession = require(`./createMappoSession`)
+const getMapFilenames = require(`./getMapFilenames`)
 const path = require(`path`)
 
 {
@@ -19,12 +19,10 @@ const path = require(`path`)
     ]
   }
 
-  const session = createMappoSession({
+  expect(getMapFilenames({
     fileSystem,
     launchFolder: `/game`,
-  })
-
-  expect(session.getMapFilenames()).toEqual([
+  })).toEqual([
     `foo.map`,
     `DOOM.MAP`,
     `subfolder` + path.sep + `bar.map`,

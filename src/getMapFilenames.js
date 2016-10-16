@@ -12,14 +12,9 @@ module.exports = ({
     const isIt = basename.endsWith(`.map`) || basename.endsWith(`.map.json`)
     return isIt
   }
-  const getMapFilenames = () => {
-    const mapFilenames = fileSystem.files.filter(filename => {
-      return inLaunchFolder(filename) && isMap(filename)
-    })
-    return mapFilenames.map(filename => path.relative(launchFolder, filename))
-  }
+  const mapFilenames = fileSystem.files.filter(filename => {
+    return inLaunchFolder(filename) && isMap(filename)
+  })
 
-  return {
-    getMapFilenames,
-  }
+  return mapFilenames.map(filename => path.relative(launchFolder, filename))
 }
