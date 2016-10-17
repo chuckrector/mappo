@@ -308,7 +308,7 @@ Output:
 ```json
 {
   "version": 4,
-  "vsp0name": "HAHN01.VSP",
+  "vspFilename": "HAHN01.VSP",
   "musname": "MEDIOEVA.MOD",
   "layerc": 0,
   "pmultx": 1,

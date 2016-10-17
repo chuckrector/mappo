@@ -13,7 +13,7 @@ module.exports = ({map}) => {
   switch (map.formatName) {
     case `v1map`: {
       mappoMap.mapLayerOrder = [0, 1]
-      mappoMap.tilesetFilename = map.vsp0name
+      mappoMap.tilesetFilename = map.vspFilename
       mappoMap.tileLayers = [{
         description: `Background`,
         width: map.xsize,
