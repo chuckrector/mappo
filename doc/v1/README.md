@@ -309,7 +309,7 @@ Output:
 {
   "version": 4,
   "vspFilename": "HAHN01.VSP",
-  "musname": "MEDIOEVA.MOD",
+  "musicFilename": "MEDIOEVA.MOD",
   "layerc": 0,
   "pmultx": 1,
   "pdivx": 1,

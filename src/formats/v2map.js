@@ -9,7 +9,7 @@ module.exports = {
   version: T.list(T.u8, 6),
   mapEventsOffset: T.u32,
   vspname: T.stringFixed(60),
-  musname: T.stringFixed(60),
+  musicFilename: T.stringFixed(60),
   rstring: T.stringFixed(20),
   xstart: T.u16,
   ystart: T.u16,

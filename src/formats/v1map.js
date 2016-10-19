@@ -7,7 +7,7 @@ const V1_ENTITY = require(`./v1entity`)
 module.exports = {
   version: T.u8,
   vspFilename: T.stringFixed(13),
-  musname: T.stringFixed(13),
+  musicFilename: T.stringFixed(13),
   layerc: T.u8,
   pmultx: T.u8,
   pdivx: T.u8,

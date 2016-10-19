@@ -12,7 +12,7 @@ const mapHeader = makeBuffer([
   B.u32(12345),
   // vspname
   B.stringFixed(60, `grue0040.vsp`),
-  // musname
+  // musicFilename
   B.stringFixed(60, `VANGELIS.MOD`),
   // rstring
   B.stringFixed(20, `12E`),
