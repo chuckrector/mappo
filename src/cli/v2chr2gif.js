@@ -30,7 +30,7 @@ const writeAnimatedGif = (anim, direction) => {
   console.log(`converted`, chrFilename, `to`, targetFilename)
 }
 
-writeAnimatedGif(chrData.danim, `down`)
-writeAnimatedGif(chrData.uanim, `up`)
-writeAnimatedGif(chrData.ranim, `right`)
-writeAnimatedGif(chrData.lanim, `left`)
+writeAnimatedGif(chrData.downAnimationString, `down`)
+writeAnimatedGif(chrData.upAnimationString, `up`)
+writeAnimatedGif(chrData.rightAnimationString, `right`)
+writeAnimatedGif(chrData.leftAnimationString, `left`)
