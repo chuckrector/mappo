@@ -82,7 +82,7 @@ const mapEntities = makeBuffer(
 )
 
 const scripts = makeBuffer([
-  // nummovescripts
+  // movementScriptCount
   B.u8(5),
   // msbufsize
   B.u32(50),

@@ -37,7 +37,7 @@ const createMappoMap = require(`./createMappoMap`)
     makeBuffer(filler(100, B.stringFixed(13, `chr`))),
     B.u32(1), // entities
     B.u8(filler(88)), // one entity
-    B.u8(1), // nummovescripts
+    B.u8(1), // movementScriptCount
     B.u32(1), // msbufsize
     B.u32(0), // msofstbl, one offset
     B.u8(0), // msbuf, msbufsize bytes
@@ -102,7 +102,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u8(1), // entities
     B.u8(filler(80)),
     B.stringFixed(20, `the entity`),
-    B.u8(1), // nummovescripts
+    B.u8(1), // movementScriptCount
     B.u32(0), // msofstbl
     B.u32(0), // # things
     B.u32(1), // map events

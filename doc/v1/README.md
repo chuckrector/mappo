@@ -382,7 +382,7 @@ Output:
     "expand": 0,
     "entitydesc": "Crystal"
   }],
-  "nummovescripts": 1,
+  "movementScriptCount": 1,
   "msbufsize": 23,
   "msofstbl": [0],
   "msbuf": [89, 51, 87, ...],
