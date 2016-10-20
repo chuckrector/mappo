@@ -76,7 +76,7 @@ const entity = {
 
 const mapScript = [1, 2, 3]
 const mapScriptsize = mapScript.length
-const mapentities = 2
+const entityCount = 2
 const mapEntity = makeBuffer([
   B.u16([entity.x1, entity.y1]),
   B.u8([
@@ -116,7 +116,7 @@ const map = makeBuffer([
   B.zlibU16(zonelayerData),
   B.u32(zoneCount),
   makeBuffer(filler(zoneCount, mapZone)),
-  B.u32(mapentities),
+  B.u32(entityCount),
   makeBuffer([mapEntity, mapEntity]),
   // Buffer.from(new Uint32Array([mapScriptsize]).buffer),
   B.u8(mapScript),
@@ -140,7 +140,7 @@ module.exports = {
   layerWidth,
   layerHeight,
   mapZone,
-  mapentities,
+  entityCount,
   mapEntity,
   mapScriptsize,
   mapScript,

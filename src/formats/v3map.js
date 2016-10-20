@@ -22,8 +22,8 @@ module.exports = {
   zonelayer: T.zlibU16(({record}) => record.layers[0].width * record.layers[0].height),
   zoneCount: T.u32,
   zones: T.list(V3_ZONE, ({record}) => record.zoneCount),
-  mapentities: T.u32,
-  entity: T.list(V3_ENTITY, ({record}) => record.mapentities),
+  entityCount: T.u32,
+  entity: T.list(V3_ENTITY, ({record}) => record.entityCount),
   // scriptsize: T.u32, // lua stuff? seems to get huge-normous values
   script: T.list(T.u8, ({reader}) => reader.remaining),//record.scriptsize),
 }

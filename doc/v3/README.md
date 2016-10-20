@@ -224,7 +224,7 @@ Output:
     "delay": 8,
     "method": 0
   }, ...],
-  "mapentities": 0,
+  "entityCount": 0,
   "entity": [{
     "x1": 23,
     "y1": 11,
