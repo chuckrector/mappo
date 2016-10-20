@@ -132,7 +132,7 @@ const range = require(`lodash/range`)
   const data = readFormat({
     format: {
       tiledatabuf: T.zlibU8(16 * 16),
-      zonelayer: T.zlibU16(16 * 16),
+      zoneLayer: T.zlibU16(16 * 16),
       ikaObstructionLayer: T.ikaZlibU8(16 * 16),
       ikaTileLayer: T.ikaZlibU32(16 * 16),
     },
@@ -144,10 +144,10 @@ const range = require(`lodash/range`)
   expect(data.tiledatabuf.decompressed.length).toBe(rawU8.length)
   expect(data.tiledatabuf.decompressed).toEqual(rawU8)
 
-  expect(data.zonelayer.compressed.length).toBe(compressedU16.length)
-  expect(data.zonelayer.compressed).toEqual(compressedU16)
-  expect(data.zonelayer.decompressed.length).toBe(rawU8.length)
-  expect(data.zonelayer.decompressed).toEqual(rawU16)
+  expect(data.zoneLayer.compressed.length).toBe(compressedU16.length)
+  expect(data.zoneLayer.compressed).toEqual(compressedU16)
+  expect(data.zoneLayer.decompressed.length).toBe(rawU8.length)
+  expect(data.zoneLayer.decompressed).toEqual(rawU16)
 
   expect(data.ikaObstructionLayer.compressed.length).toBe(compressedU8.length)
   expect(data.ikaObstructionLayer.compressed).toEqual(compressedU8)

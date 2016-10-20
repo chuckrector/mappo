@@ -28,8 +28,8 @@ const layerData = filler(layerWidth * layerHeight, 0xdead)
 const layerDataCompressed = [...zlib.deflateSync(B.u16(layerData))]
 const obsData = filler(layerWidth * layerHeight, 88)
 const obsDataCompressed = [...zlib.deflateSync(B.u8(obsData))]
-const zonelayerData = filler(layerWidth * layerHeight, 0xbeef)
-const zonelayerDataCompressed = [...zlib.deflateSync(B.u16(zonelayerData))]
+const zoneLayerData = filler(layerWidth * layerHeight, 0xbeef)
+const zoneLayerDataCompressed = [...zlib.deflateSync(B.u16(zoneLayerData))]
 
 const zoneCount = 2
 const zoneName = `My Zone Name`
@@ -113,7 +113,7 @@ const map = makeBuffer([
   B.u32(layerCount),
   makeBuffer(filler(layerCount, mapLayer)),
   B.zlibU8(obsData),
-  B.zlibU16(zonelayerData),
+  B.zlibU16(zoneLayerData),
   B.u32(zoneCount),
   makeBuffer(filler(zoneCount, mapZone)),
   B.u32(entityCount),
@@ -154,8 +154,8 @@ module.exports = {
   layerDataCompressed,
   obsData,
   obsDataCompressed,
-  zonelayerData,
-  zonelayerDataCompressed,
+  zoneLayerData,
+  zoneLayerDataCompressed,
   zoneCount,
   zoneName,
   zoneScript,

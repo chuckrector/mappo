@@ -210,7 +210,7 @@ Output:
     "compressed": [120, 156, 237, ...],
     "decompressed": [2, 2, 2, ...],
   },
-  "zonelayer": {
+  "zoneLayer": {
     "mysize": 4176,
     "comprLen": 102,
     "compressed": [120, 156, 237, ...],

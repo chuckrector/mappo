@@ -223,14 +223,14 @@ const range = require(`lodash/range`)
   ])
 
   const data = readFormat({
-    format: {zonelayer: T.zlibU16(16 * 16)},
+    format: {zoneLayer: T.zlibU16(16 * 16)},
     reader: createBufferReader({data: buffer})
   })
 
-  expect(data.zonelayer.mysize).toBe(raw.length * 2)
-  expect(data.zonelayer.comprLen).toBe(compressedBuffer.length)
-  expect(data.zonelayer.decompressed.length).toBe(raw.length)
-  expect(data.zonelayer.decompressed).toEqual(raw)
+  expect(data.zoneLayer.mysize).toBe(raw.length * 2)
+  expect(data.zoneLayer.comprLen).toBe(compressedBuffer.length)
+  expect(data.zoneLayer.decompressed.length).toBe(raw.length)
+  expect(data.zoneLayer.decompressed).toEqual(raw)
 }
 
 {
@@ -263,13 +263,13 @@ const range = require(`lodash/range`)
   ])
 
   const data = readFormat({
-    format: {zonelayer: T.ikaZlibU32(16 * 16)},
+    format: {zoneLayer: T.ikaZlibU32(16 * 16)},
     reader: createBufferReader({data: buffer})
   })
 
-  expect(data.zonelayer.comprLen).toBe(compressedBuffer.length)
-  expect(data.zonelayer.decompressed.length).toBe(raw.length)
-  expect(data.zonelayer.decompressed).toEqual(raw)
+  expect(data.zoneLayer.comprLen).toBe(compressedBuffer.length)
+  expect(data.zoneLayer.decompressed.length).toBe(raw.length)
+  expect(data.zoneLayer.decompressed).toEqual(raw)
 }
 
 {
