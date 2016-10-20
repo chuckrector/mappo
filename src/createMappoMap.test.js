@@ -107,7 +107,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u32(0), // # things
     B.u32(1), // map events
     B.u32(0), // scriptOffsets
-    B.u32(1), // codesize
+    B.u32(1), // scriptBufferSize
     B.u8(0), // scriptBuffer
   ])
 

@@ -323,7 +323,7 @@ Output:
   "numthings": 0,
   "mapevents": 58,
   "scriptOffsets": [0, 4, 40, ...],
-  "codesize": 11044,
+  "scriptBufferSize": 11044,
   "scriptBuffer": [3, 233, 1, ...]
 }
 ```

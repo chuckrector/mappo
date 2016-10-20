@@ -42,6 +42,6 @@ module.exports = {
   numthings: T.u32,
   mapevents: T.u32,
   scriptOffsets: T.list(T.u32, ({record}) => record.mapevents), // event offsets
-  codesize: T.u32,
-  scriptBuffer: T.list(T.u8, ({record}) => record.codesize),
+  scriptBufferSize: T.u32,
+  scriptBuffer: T.list(T.u8, ({record}) => record.scriptBufferSize),
 }

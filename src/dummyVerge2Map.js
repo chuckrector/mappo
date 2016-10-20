@@ -125,7 +125,7 @@ const scripts = makeBuffer([
   B.u32(2),
   // scriptOffsets
   B.u32([0, 10]),
-  // codesize
+  // scriptBufferSize
   B.u32(20),
   // scriptBuffer
   B.u8(filler(20, 88)),
