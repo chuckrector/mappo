@@ -121,7 +121,7 @@ const scripts = makeBuffer([
   // numthings
   B.u32(0),
 
-  // mapevents
+  // scriptCount
   B.u32(2),
   // scriptOffsets
   B.u32([0, 10]),

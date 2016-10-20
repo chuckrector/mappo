@@ -321,7 +321,7 @@ Output:
   "movementScriptOffsets": [0, 1],
   "movementScriptBuffer": [0, 68, 52, ...],
   "numthings": 0,
-  "mapevents": 58,
+  "scriptCount": 58,
   "scriptOffsets": [0, 4, 40, ...],
   "scriptBufferSize": 11044,
   "scriptBuffer": [3, 233, 1, ...]
