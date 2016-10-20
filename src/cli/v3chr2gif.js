@@ -45,4 +45,4 @@ const writeAnimatedGif = (anim, index) => {
   console.log(`converted`, chrFilename, `to`, targetFilename)
 }
 
-chrData.anims.forEach((anim, index) => writeAnimatedGif(anim.animbuf, index))
+chrData.animations.forEach((anim, index) => writeAnimatedGif(anim.animbuf, index))

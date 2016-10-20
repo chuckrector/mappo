@@ -85,7 +85,7 @@ Output:
   "upIdleFrameIndex": 6,
   "leftIdleFrameIndex": 0,
   "rightIdleFrameIndex": 2,
-  "anims": [{
+  "animations": [{
     "length": 32,
     "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
   }, {

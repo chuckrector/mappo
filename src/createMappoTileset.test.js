@@ -14,7 +14,7 @@ const createMappoTileset = require(`./createMappoTileset`)
     B.u8(filler(3 * 256)),
     B.u16(numtiles),
     B.u8(filler(16 * 16 * numtiles, 99)),
-    B.u8(filler(2 * 4 * 100, 88)), // 100 vsp anims
+    B.u8(filler(2 * 4 * 100, 88)), // 100 vsp animations
   ])
 
   const v1vsp = asset.fromBuffer(buffer, asset.v1vsp)
@@ -34,7 +34,7 @@ const createMappoTileset = require(`./createMappoTileset`)
     B.u8(filler(3 * 256)),
     B.u16(numTiles),
     B.compressedU8(filler(16 * 16 * numTiles, 99)),
-    B.u8(filler(2 * 4 * 100, 88)), // 100 vsp anims
+    B.u8(filler(2 * 4 * 100, 88)), // 100 vsp animations
   ])
 
   const v2vsp = asset.fromBuffer(buffer, asset.v2vsp)
@@ -54,7 +54,7 @@ const createMappoTileset = require(`./createMappoTileset`)
     // sig/version/tilesize/format/#tiles/compression
     B.u32([0, 0, tileSize, 0, numTiles, 1]),
     B.zlibU8(filler(tileSize * tileSize * 3 * numTiles)),
-    B.u32(1), // #anims
+    B.u32(1), // #animations
     B.stringFixed(256, `vsp anim name`),
     B.u32([0, 0, 0, 0]), // start/finish/delay/mode
     B.u32(1), // #obs

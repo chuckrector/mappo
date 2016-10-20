@@ -11,8 +11,8 @@ module.exports = {
   numtiles: T.u32,
   compression: T.u32,
   tiledatabuf: T.zlibU8(({record}) => record.tilesize * record.tilesize * 3 * record.numtiles),
-  numanims: T.u32,
-  anims: T.list(V3_VSPANIM, ({record}) => record.numanims),
+  animationCount: T.u32,
+  animations: T.list(V3_VSPANIM, ({record}) => record.animationCount),
   numobs: T.u32,
   obs: T.zlibU8(({record}) => record.tilesize * record.tilesize * record.numobs),
 }

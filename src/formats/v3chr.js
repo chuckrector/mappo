@@ -20,7 +20,7 @@ module.exports = {
   upIdleFrameIndex: T.u32,
   leftIdleFrameIndex: T.u32,
   rightIdleFrameIndex: T.u32,
-  anims: T.list(V3_CHRANIM, 8),
+  animations: T.list(V3_CHRANIM, 8),
   customscripts: T.u32,
   compression: T.u32,
   frames: T.zlibU8(({record}) => {
