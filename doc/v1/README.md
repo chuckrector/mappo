@@ -383,7 +383,7 @@ Output:
     "entitydesc": "Crystal"
   }],
   "movementScriptCount": 1,
-  "msbufsize": 23,
+  "movementScriptBufferSize": 23,
   "msofstbl": [0],
   "msbuf": [89, 51, 87, ...],
   "numscripts": 11,

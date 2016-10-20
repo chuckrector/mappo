@@ -84,7 +84,7 @@ const mapEntities = makeBuffer(
 const scripts = makeBuffer([
   // movementScriptCount
   B.u8(5),
-  // msbufsize
+  // movementScriptBufferSize
   B.u32(50),
   // msofstbl
   B.u32([0, 10, 20, 30, 40]),

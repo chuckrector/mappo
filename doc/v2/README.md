@@ -317,7 +317,7 @@ Output:
     "desc": ""
   }, ...],
   "movementScriptCount": 2,
-  "msbufsize": 14,
+  "movementScriptBufferSize": 14,
   "msofstbl": [0, 1],
   "msbuf": [0, 68, 52, ...],
   "numthings": 0,
