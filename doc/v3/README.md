@@ -81,10 +81,10 @@ Output:
   "frameWidth": 16,
   "frameHeight": 16,
   "frameCount": 8,
-  "didle": 1,
-  "uidle": 6,
-  "lidle": 0,
-  "ridle": 2,
+  "downIdleFrameIndex": 1,
+  "upIdleFrameIndex": 6,
+  "leftIdleFrameIndex": 0,
+  "rightIdleFrameIndex": 2,
   "anims": [{
     "length": 32,
     "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"

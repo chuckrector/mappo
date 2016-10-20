@@ -120,10 +120,10 @@ Output:
     "compressed": [255, 5, 0, ...],
     "decompressed": [0, 0, 0, ...]
   }
-  "lidle": 15,
-  "ridle": 10,
-  "uidle": 5,
-  "didle": 0,
+  "leftIdleFrameIndex": 15,
+  "rightIdleFrameIndex": 10,
+  "upIdleFrameIndex": 5,
+  "downIdleFrameIndex": 0,
   "lanimLength": 49,
   "lanim": "F16W10F17W10F16W10F15W10F18W10F19W10F18W10F15W10",
   "ranimLength": 49,
