@@ -18,7 +18,7 @@ module.exports = {
   startY: T.u16,
   layerCount: T.u32,
   layers: T.list(V3_LAYERINFO, ({record}) => record.layerCount),
-  obslayer: T.zlibU8(({record}) => record.layers[0].width * record.layers[0].height),
+  obstructionLayer: T.zlibU8(({record}) => record.layers[0].width * record.layers[0].height),
   zonelayer: T.zlibU16(({record}) => record.layers[0].width * record.layers[0].height),
   zoneCount: T.u32,
   zones: T.list(V3_ZONE, ({record}) => record.zoneCount),

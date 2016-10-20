@@ -204,7 +204,7 @@ Output:
       "decompressed": [48, 0, 48, ...],
     }
   }, ...],
-  "obslayer": {
+  "obstructionLayer": {
     "mysize": 2088,
     "comprLen": 284,
     "compressed": [120, 156, 237, ...],
