@@ -85,7 +85,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.stringFixed(60, `HAHN01.VSP`),
     B.stringFixed(60, `music`),
     B.stringFixed(20, `13er2`),
-    B.u16([2, 3]), // xstart/ystart
+    B.u16([2, 3]), // startX/startY
     B.u8(filler(51, 4)),
     B.u8(layerCount), // layerCount
     makeBuffer(filler(3, v2layerinfo)),

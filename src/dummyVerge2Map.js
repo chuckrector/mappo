@@ -16,7 +16,7 @@ const mapHeader = makeBuffer([
   B.stringFixed(60, `VANGELIS.MOD`),
   // renderString
   B.stringFixed(20, `12E`),
-  // xstart, ystart
+  // startX, startY
   B.u16([1 ,2]),
   // wrap
   B.u8(1),
