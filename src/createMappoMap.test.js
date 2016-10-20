@@ -41,7 +41,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u32(1), // movementScriptBufferSize
     B.u32(0), // movementScriptOffsets, one offset
     B.u8(0), // movementScriptBuffer, movementScriptBufferSize bytes
-    B.u32(1), // numscripts
+    B.u32(1), // scriptCount
     B.u32(0), // scriptofstbl, one script
     B.u8(0), // mapvc
   ])

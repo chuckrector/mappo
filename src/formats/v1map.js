@@ -32,7 +32,7 @@ module.exports = {
   movementScriptBufferSize: T.u32,
   movementScriptOffsets: T.list(T.u32, ({record}) => record.movementScriptCount),
   movementScriptBuffer: T.list(T.u8, ({record}) => record.movementScriptBufferSize),
-  numscripts: T.u32,
-  scriptofstbl: T.list(T.u32, ({record}) => record.numscripts),
+  scriptCount: T.u32,
+  scriptofstbl: T.list(T.u32, ({record}) => record.scriptCount),
   mapvc: T.list(T.u8, ({reader}) => reader.remaining),
 }

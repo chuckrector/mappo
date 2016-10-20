@@ -386,7 +386,7 @@ Output:
   "movementScriptBufferSize": 23,
   "movementScriptOffsets": [0],
   "movementScriptBuffer": [89, 51, 87, ...],
-  "numscripts": 11,
+  "scriptCount": 11,
   "scriptofstbl": [0, 728, 3118, ...],
   "mapvc": [3, 0, 1, 151, 0, 0, 0, 255, ...],
 }

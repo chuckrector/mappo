@@ -90,7 +90,7 @@ const scripts = makeBuffer([
   B.u32([0, 10, 20, 30, 40]),
   // movementScriptBuffer
   B.u8(filler(50, 99)),
-  // numscripts, scriptofstb,
+  // scriptCount, scriptofstb,
   B.u32([3, 0, 10, 20]),
   // mapvc
   B.u8(filler(30, 88)),
