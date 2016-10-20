@@ -86,7 +86,7 @@ const scripts = makeBuffer([
   B.u8(5),
   // movementScriptBufferSize
   B.u32(50),
-  // msofstbl
+  // movementScriptOffsets
   B.u32([0, 10, 20, 30, 40]),
   // msbuf
   B.u8(filler(50, 99)),

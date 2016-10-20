@@ -384,7 +384,7 @@ Output:
   }],
   "movementScriptCount": 1,
   "movementScriptBufferSize": 23,
-  "msofstbl": [0],
+  "movementScriptOffsets": [0],
   "msbuf": [89, 51, 87, ...],
   "numscripts": 11,
   "scriptofstbl": [0, 728, 3118, ...],

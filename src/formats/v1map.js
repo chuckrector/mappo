@@ -30,7 +30,7 @@ module.exports = {
   entities: T.list(V1_ENTITY, ({record}) => record.entityCount),
   movementScriptCount: T.u8,
   movementScriptBufferSize: T.u32,
-  msofstbl: T.list(T.u32, ({record}) => record.movementScriptCount),
+  movementScriptOffsets: T.list(T.u32, ({record}) => record.movementScriptCount),
   msbuf: T.list(T.u8, ({record}) => record.movementScriptBufferSize),
   numscripts: T.u32,
   scriptofstbl: T.list(T.u32, ({record}) => record.numscripts),
