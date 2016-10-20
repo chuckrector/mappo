@@ -12,7 +12,7 @@ const chrConverter = createVerge3ChrConverter({
   bpp: chrData.bpp,
   frameWidth: chrData.frameWidth,
   frameHeight: chrData.frameHeight,
-  totalframes: chrData.totalframes,
+  frameCount: chrData.frameCount,
   imagedata: chrData.imagedata.decompressed,
 })
 

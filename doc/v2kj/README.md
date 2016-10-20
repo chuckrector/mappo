@@ -44,7 +44,7 @@ Output:
   "ridle": 15,
   "uidle": 5,
   "didle": 0,
-  "totalframes": 20,
+  "frameCount": 20,
   "lanimLength": 48,
   "lanim": "F10W10F11W10F12W10F11W10F10W10F13W10F14W10F13W10",
   "ranimLength": 48,

@@ -8,14 +8,14 @@ const filler = require(`../filler`)
   // can convert 24-bit chr image data to png
   const frameWidth = 2
   const frameHeight = 3
-  const totalframes = 2
-  const imagedata = filler(frameWidth * frameHeight * totalframes * 3, 99)
+  const frameCount = 2
+  const imagedata = filler(frameWidth * frameHeight * frameCount * 3, 99)
 
   const converter = createVerge3ChrConverter({
     bpp: 24,
     frameWidth,
     frameHeight,
-    totalframes,
+    frameCount,
     imagedata,
   })
 
@@ -29,14 +29,14 @@ const filler = require(`../filler`)
   // can convert 32-bit chr image data to png
   const frameWidth = 2
   const frameHeight = 3
-  const totalframes = 2
-  const imagedata = filler(frameWidth * frameHeight * totalframes * 4, 99)
+  const frameCount = 2
+  const imagedata = filler(frameWidth * frameHeight * frameCount * 4, 99)
 
   const converter = createVerge3ChrConverter({
     bpp: 32,
     frameWidth,
     frameHeight,
-    totalframes,
+    frameCount,
     imagedata,
   })
 

@@ -114,7 +114,7 @@ Output:
   "hotSpotY": 16,
   "hotSpotWidth": 16,
   "hotSpotHeight": 16,
-  "totalframes": 30,
+  "frameCount": 30,
   "imagedata": {
     "bufsize": 12494,
     "compressed": [255, 5, 0, ...],

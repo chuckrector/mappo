@@ -12,7 +12,7 @@ const chrData = asset.fromDisk(chrFilename, asset.v2kjchr)
 const chrConverter = createVerge2kjChrConverter({
   frameWidth: chrData.frameWidth,
   frameHeight: chrData.frameHeight,
-  totalframes: chrData.totalframes,
+  frameCount: chrData.frameCount,
   imagedata: chrData.imagedata.decompressed,
 })
 

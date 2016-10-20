@@ -80,7 +80,7 @@ Output:
   "hotSpotHeight": 10,
   "frameWidth": 16,
   "frameHeight": 16,
-  "totalframes": 8,
+  "frameCount": 8,
   "didle": 1,
   "uidle": 6,
   "lidle": 0,

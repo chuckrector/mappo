@@ -14,7 +14,7 @@ module.exports = {
   ridle: T.u16,
   uidle: T.u16,
   didle: T.u16,
-  totalframes: T.u16,
+  frameCount: T.u16,
   lanimLength: T.u32,
   lanim: T.stringFixed(({record}) => record.lanimLength),
   ranimLength: T.u32,
@@ -23,5 +23,5 @@ module.exports = {
   uanim: T.stringFixed(({record}) => record.uanimLength),
   danimLength: T.u32,
   danim: T.stringFixed(({record}) => record.danimLength),
-  imagedata: T.compressedU16(({record}) => record.frameWidth * record.frameHeight * record.totalframes),
+  imagedata: T.compressedU16(({record}) => record.frameWidth * record.frameHeight * record.frameCount),
 }

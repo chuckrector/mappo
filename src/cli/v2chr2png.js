@@ -15,7 +15,7 @@ const chrConverter = createVerge2ChrConverter({
   palette: palData.pal,
   frameWidth: chrData.frameWidth,
   frameHeight: chrData.frameHeight,
-  totalframes: chrData.totalframes,
+  frameCount: chrData.frameCount,
   imagedata: chrData.imagedata.decompressed,
 })
 

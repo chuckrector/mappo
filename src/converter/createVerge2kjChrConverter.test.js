@@ -8,13 +8,13 @@ const filler = require(`../filler`)
   // can convert chr image data to png
   const frameWidth = 2
   const frameHeight = 3
-  const totalframes = 6
-  const imagedata = filler(frameWidth * frameHeight * totalframes, 99)
+  const frameCount = 6
+  const imagedata = filler(frameWidth * frameHeight * frameCount, 99)
 
   const converter = createVerge2kjChrConverter({
     frameWidth,
     frameHeight,
-    totalframes,
+    frameCount,
     imagedata,
   })
 

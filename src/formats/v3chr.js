@@ -15,7 +15,7 @@ module.exports = {
   hotSpotHeight: T.u32,
   frameWidth: T.u32,
   frameHeight: T.u32,
-  totalframes: T.u32,
+  frameCount: T.u32,
   didle: T.u32,
   uidle: T.u32,
   lidle: T.u32,
@@ -24,6 +24,6 @@ module.exports = {
   customscripts: T.u32,
   compression: T.u32,
   imagedata: T.zlibU8(({record}) => {
-    return record.totalframes * record.frameWidth * record.frameHeight * (record.bpp / 8)
+    return record.frameCount * record.frameWidth * record.frameHeight * (record.bpp / 8)
   }),
 }

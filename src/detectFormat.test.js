@@ -175,12 +175,12 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v2kj CHR
-  const totalframes = 1
+  const frameCount = 1
   const isChr = makeBuffer([
     B.u8(4),
     B.u16([16, 32]),
     B.u16(filler(8)),
-    B.u16(totalframes),
+    B.u16(frameCount),
     B.u32(2),
     B.string(`F0`),
     B.u32(2),
@@ -189,7 +189,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
     B.string(`F0`),
     B.u32(2),
     B.string(`F0`),
-    B.compressedU16(filler(16 * 32 * totalframes))
+    B.compressedU16(filler(16 * 32 * frameCount))
   ])
 
   expect(detectFormat(isChr)).toBe(`v2kjchr`)

@@ -22,12 +22,12 @@ const tileHeight = chrData.frameHeight
 const tileList = ripTiles({
   raw32BitData,
   raw32BitDataWidth: tileWidth,
-  raw32BitDataHeight: tileHeight * chrData.totalframes,
+  raw32BitDataHeight: tileHeight * chrData.frameCount,
   ripFromX: 0,
   ripFromY: 0,
   tileWidth: tileWidth,
   tileHeight: tileHeight,
-  numTiles: chrData.totalframes,
+  numTiles: chrData.frameCount,
   numColumns: 1,
 })
 
