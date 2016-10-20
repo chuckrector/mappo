@@ -11,7 +11,7 @@ module.exports = {
   layerc: T.u8,
   pmultx: T.u8,
   pdivx: T.u8,
-  levelname: T.stringFixed(30),
+  description: T.stringFixed(30),
   showname: T.u8,
   saveflag: T.u8,
   startX: T.u16,

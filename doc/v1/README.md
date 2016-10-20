@@ -313,7 +313,7 @@ Output:
   "layerc": 0,
   "pmultx": 1,
   "pdivx": 1,
-  "levelname": "Paradise Isle",
+  "description": "Paradise Isle",
   "showname": 1,
   "saveflag": 1,
   "startX": 9,
