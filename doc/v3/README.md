@@ -182,7 +182,7 @@ Output:
   "signature": "V3MAP",
   "version": 2,
   "scriptOffset": 11864,
-  "mapname": "Undersea",
+  "description": "Undersea",
   "vspFilename": "HAHN01.VSP",
   "musicname": "",
   "renderString": "1,E,2,R",
