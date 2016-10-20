@@ -18,7 +18,7 @@ module.exports = ({map}) => {
         description: `Background`,
         width: map.xsize,
         height: map.ysize,
-        tileIndexGrid: map.map0,
+        tileIndexGrid: map.layers[0],
         parallax: {
           x: 1.0,
           y: 1.0,
@@ -27,7 +27,7 @@ module.exports = ({map}) => {
         description: `Foreground`,
         width: map.xsize,
         height: map.ysize,
-        tileIndexGrid: map.map1,
+        tileIndexGrid: map.layers[1],
         parallax: {
           x: map.pmultx / map.pdivx,
           y: map.pmultx / map.pdivx,

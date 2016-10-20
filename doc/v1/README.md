@@ -303,7 +303,7 @@ Output:
 
 - `data/v1/ISLAND.MAP.json`
 
-**Note:** Output here is abbreviated and pretty-printed for readability.
+**Note:** Output here is abbreviated, pretty-printed, and annotated for readability.
 
 ```json
 {
@@ -324,8 +324,10 @@ Output:
   "ysize": 50,
   "b": 0,
   "padding": [...],
-  "map0": [...],
-  "map1": [...],
+  "layers": [ // exactly 2
+    [...],
+    [...],
+  ],
   "mapp": [...],
   "zone": [{
     "zonename": "Default",
