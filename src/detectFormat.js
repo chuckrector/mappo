@@ -152,10 +152,10 @@ module.exports = (buffer) => {
         }
       }
     } else {
-      const fxsize = reader.readWord()
-      const fysize = reader.readWord()
+      const frameWidth = reader.readWord()
+      const frameHeight = reader.readWord()
       // TODO(chuck): Need a better heuristic here
-      if (version === 2 && fxsize === 16 && fysize === 32) {
+      if (version === 2 && frameWidth === 16 && frameHeight === 32) {
         return `v2chr`
       }
     }

@@ -28,17 +28,17 @@ const writeAnimatedGif = (anim, index) => {
   const paletteTriplets = chunk(palette, 3)
   const rgbQuant = new RgbQuant({palette: paletteTriplets})
 
-  rgbQuant.sample(raw32bitData, chrData.fxsize)
+  rgbQuant.sample(raw32bitData, chrData.frameWidth)
 
   const raw8bitData = rgbQuant.reduce(raw32bitData, 2/*indexed*/)
-  const frameList = chunk(raw8bitData, chrData.fxsize * chrData.fysize)
+  const frameList = chunk(raw8bitData, chrData.frameWidth * chrData.frameHeight)
   const frameDescriptorList = parseChrAnim(anim)
 
   fs.writeFileSync(targetFilename, animatedGif({
     palette,
     raw8bitFrames: frameList,
-    width: chrData.fxsize,
-    height: chrData.fysize,
+    width: chrData.frameWidth,
+    height: chrData.frameHeight,
     frameDescriptorList,
   }))
 

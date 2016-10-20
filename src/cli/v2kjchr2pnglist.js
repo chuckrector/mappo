@@ -14,8 +14,8 @@ const raw32BitData = colorDepth.convert16to32({
   raw16bitData: chrData.imagedata.decompressed,
 })
 
-const tileWidth = chrData.fxsize
-const tileHeight = chrData.fysize
+const tileWidth = chrData.frameWidth
+const tileHeight = chrData.frameHeight
 const tileList = ripTiles({
   raw32BitData,
   raw32BitDataWidth: tileWidth,

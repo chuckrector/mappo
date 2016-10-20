@@ -108,8 +108,8 @@ Output:
 
 {
   "version": 2,
-  "fxsize": 16,
-  "fysize": 32,
+  "frameWidth": 16,
+  "frameHeight": 32,
   "hx": 0,
   "hy": 16,
   "hw": 16,

@@ -10,8 +10,8 @@ const chrFilename = process.argv[2]
 
 const chrData = asset.fromDisk(chrFilename, asset.v2kjchr)
 const chrConverter = createVerge2kjChrConverter({
-  fxsize: chrData.fxsize,
-  fysize: chrData.fysize,
+  frameWidth: chrData.frameWidth,
+  frameHeight: chrData.frameHeight,
   totalframes: chrData.totalframes,
   imagedata: chrData.imagedata.decompressed,
 })

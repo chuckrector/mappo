@@ -4,8 +4,8 @@ const {T} = require(`../readFormat`)
 
 module.exports = {
   version: T.u8,
-  fxsize: T.u16,
-  fysize: T.u16,
+  frameWidth: T.u16,
+  frameHeight: T.u16,
   hx: T.u16,
   hy: T.u16,
   hw: T.u16,
@@ -23,5 +23,5 @@ module.exports = {
   uanim: T.stringFixed(({record}) => record.uanimLength),
   danimLength: T.u32,
   danim: T.stringFixed(({record}) => record.danimLength),
-  imagedata: T.compressedU16(({record}) => record.fxsize * record.fysize * record.totalframes),
+  imagedata: T.compressedU16(({record}) => record.frameWidth * record.frameHeight * record.totalframes),
 }

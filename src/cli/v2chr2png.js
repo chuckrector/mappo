@@ -13,8 +13,8 @@ const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v2chr)
 const chrConverter = createVerge2ChrConverter({
   palette: palData.pal,
-  fxsize: chrData.fxsize,
-  fysize: chrData.fysize,
+  frameWidth: chrData.frameWidth,
+  frameHeight: chrData.frameHeight,
   totalframes: chrData.totalframes,
   imagedata: chrData.imagedata.decompressed,
 })

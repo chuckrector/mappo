@@ -16,14 +16,14 @@ const chrData = asset.fromDisk(chrFilename, asset.v2chr)
 
 const writeAnimatedGif = (anim, direction) => {
   const targetFilename = `${chrFilename}-${direction}.gif`
-  const frameList = chunk(chrData.imagedata.decompressed, chrData.fxsize * chrData.fysize)
+  const frameList = chunk(chrData.imagedata.decompressed, chrData.frameWidth * chrData.frameHeight)
   const frameDescriptorList = parseChrAnim(anim)
 
   fs.writeFileSync(targetFilename, animatedGif({
     palette: palData.pal.map(v => v * 4),
     raw8bitFrames: frameList,
-    width: chrData.fxsize,
-    height: chrData.fysize,
+    width: chrData.frameWidth,
+    height: chrData.frameHeight,
     frameDescriptorList,
   }))
 

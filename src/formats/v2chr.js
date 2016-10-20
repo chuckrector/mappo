@@ -4,14 +4,14 @@ const {T} = require(`../readFormat`)
 
 module.exports = {
   version: T.u8,
-  fxsize: T.u16,
-  fysize: T.u16,
+  frameWidth: T.u16,
+  frameHeight: T.u16,
   hx: T.u16,
   hy: T.u16,
   hw: T.u16,
   hh: T.u16,
   totalframes: T.u16,
-  imagedata: T.compressedU8(({record}) => record.fxsize * record.fysize * record.totalframes),
+  imagedata: T.compressedU8(({record}) => record.frameWidth * record.frameHeight * record.totalframes),
   lidle: T.u32,
   ridle: T.u32,
   uidle: T.u32,
