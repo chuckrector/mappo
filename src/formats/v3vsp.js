@@ -14,5 +14,5 @@ module.exports = {
   animationCount: T.u32,
   animations: T.list(V3_VSPANIM, ({record}) => record.animationCount),
   obstructionCount: T.u32,
-  obs: T.zlibU8(({record}) => record.tilesize * record.tilesize * record.obstructionCount),
+  obstructions: T.zlibU8(({record}) => record.tilesize * record.tilesize * record.obstructionCount),
 }

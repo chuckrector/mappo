@@ -11,7 +11,7 @@ const palette = require(`../dummyPalette`)
   const converter = createVerge3VspObConverter({
     palette,
     obstructionCount: 21,
-    obs: filler(16 * 16 * 3 * 12),
+    obstructions: filler(16 * 16 * 3 * 12),
   })
 
   const png = converter.convertToPng()

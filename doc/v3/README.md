@@ -73,7 +73,7 @@ Output:
   "version": 5,
   "bpp": 24,
   "flags": 0,
-  "tcol": 16711935,
+  "transparentColor": 16711935,
   "hotSpotX": 0,
   "hotSpotY": 7,
   "hotSpotWidth": 15,

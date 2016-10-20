@@ -8,7 +8,7 @@ module.exports = {
   version: T.u32,
   bpp: T.u32,
   flags: T.u32,
-  tcol: T.u32,
+  transparentColor: T.u32,
   hotSpotX: T.u32,
   hotSpotY: T.u32,
   hotSpotWidth: T.u32,

@@ -13,7 +13,7 @@ const palette = filler(256 * 3, 128)
 const converter = createVerge3VspObConverter({
   palette,
   obstructionCount: vsp.obstructionCount,
-  obs: vsp.obs.decompressed,
+  obstructions: vsp.obstructions.decompressed,
 })
 const png = converter.convertToPng()
 const targetFilename = vspFilename + `-obstructions.png`
