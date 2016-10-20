@@ -115,7 +115,7 @@ const scripts = makeBuffer([
   B.u32(50),
   // movementScriptOffsets
   B.u32([0, 10, 20, 30, 40]),
-  // msbuf
+  // movementScriptBuffer
   B.u8(filler(50, 99)),
 
   // numthings

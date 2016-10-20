@@ -319,7 +319,7 @@ Output:
   "movementScriptCount": 2,
   "movementScriptBufferSize": 14,
   "movementScriptOffsets": [0, 1],
-  "msbuf": [0, 68, 52, ...],
+  "movementScriptBuffer": [0, 68, 52, ...],
   "numthings": 0,
   "mapevents": 58,
   "mapvctbl": [0, 4, 40, ...],

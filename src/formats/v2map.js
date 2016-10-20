@@ -38,7 +38,7 @@ module.exports = {
   movementScriptCount: T.u8,
   movementScriptBufferSize: T.u32,
   movementScriptOffsets: T.list(T.u32, ({record}) => record.movementScriptCount),
-  msbuf: T.list(T.u8, ({record}) => record.movementScriptBufferSize),
+  movementScriptBuffer: T.list(T.u8, ({record}) => record.movementScriptBufferSize),
   numthings: T.u32,
   mapevents: T.u32,
   mapvctbl: T.list(T.u32, ({record}) => record.mapevents), // event offsets
