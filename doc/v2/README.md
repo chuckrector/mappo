@@ -255,7 +255,7 @@ Output:
     "compressed": [255, 254, 0, ...],
     "decompressed": [0, 0, 0, ...]
   },
-  "numzones": 25,
+  "zoneCount": 25,
   "zones": [{
     "name": "",
     "script": 0,

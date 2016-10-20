@@ -72,7 +72,7 @@ const zone = makeBuffer([
 ])
 
 const mapZones = makeBuffer([
-  // numzones
+  // zoneCount
   B.u32(2),
   makeBuffer(filler(2, zone)),
 ])

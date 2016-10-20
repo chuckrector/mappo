@@ -20,8 +20,8 @@ module.exports = {
   layers: T.list(V3_LAYERINFO, ({record}) => record.layerCount),
   obslayer: T.zlibU8(({record}) => record.layers[0].width * record.layers[0].height),
   zonelayer: T.zlibU16(({record}) => record.layers[0].width * record.layers[0].height),
-  numzones: T.u32,
-  zones: T.list(V3_ZONE, ({record}) => record.numzones),
+  zoneCount: T.u32,
+  zones: T.list(V3_ZONE, ({record}) => record.zoneCount),
   mapentities: T.u32,
   entity: T.list(V3_ENTITY, ({record}) => record.mapentities),
   // scriptsize: T.u32, // lua stuff? seems to get huge-normous values

@@ -29,8 +29,8 @@ module.exports = {
   zone: T.compressedU8(({record}) => (
     record.layerInfo[0].sizex * record.layerInfo[0].sizey
   )),
-  numzones: T.u32,
-  zones: T.list(V2_ZONE, ({record}) => record.numzones),
+  zoneCount: T.u32,
+  zones: T.list(V2_ZONE, ({record}) => record.zoneCount),
   nmchr: T.u8,
   chrlist: T.list(T.stringFixed(60), ({record}) => record.nmchr),
   entities: T.u8,

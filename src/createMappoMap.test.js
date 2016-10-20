@@ -94,7 +94,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.compressedU16(filler(width * height, 99)),
     B.compressedU8(filler(width * height, 66)),
     B.compressedU8(filler(width * height, 55)),
-    B.u32(1), // numzones
+    B.u32(1), // zoneCount
     B.stringFixed(40, `zone`),
     B.u16(filler(5, 6)),
     B.u8(1), // nmchr

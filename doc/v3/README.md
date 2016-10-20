@@ -216,7 +216,7 @@ Output:
     "compressed": [120, 156, 237, ...],
     "decompressed": [0, 0, 0, ...],
   },
-  "numzones": 17,
+  "zoneCount": 17,
   "zones": [{
     "name": "Default",
     "script": "",
