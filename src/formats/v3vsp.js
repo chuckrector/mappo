@@ -13,6 +13,6 @@ module.exports = {
   tiledatabuf: T.zlibU8(({record}) => record.tilesize * record.tilesize * 3 * record.numtiles),
   animationCount: T.u32,
   animations: T.list(V3_VSPANIM, ({record}) => record.animationCount),
-  numobs: T.u32,
-  obs: T.zlibU8(({record}) => record.tilesize * record.tilesize * record.numobs),
+  obstructionCount: T.u32,
+  obs: T.zlibU8(({record}) => record.tilesize * record.tilesize * record.obstructionCount),
 }

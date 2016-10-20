@@ -12,7 +12,7 @@ const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
 const palette = filler(256 * 3, 128)
 const converter = createVerge3VspObConverter({
   palette,
-  numobs: vsp.numobs,
+  obstructionCount: vsp.obstructionCount,
   obs: vsp.obs.decompressed,
 })
 const png = converter.convertToPng()
