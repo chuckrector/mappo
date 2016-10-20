@@ -186,7 +186,7 @@ Output:
   "vspFilename": "HAHN01.VSP",
   "musicname": "",
   "renderString": "1,E,2,R",
-  "startupscript": "start",
+  "startupScript": "start",
   "startx": 13,
   "starty": 2,
   "numlayers": 2,
