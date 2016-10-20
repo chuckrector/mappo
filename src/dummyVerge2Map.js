@@ -78,7 +78,7 @@ const mapZones = makeBuffer([
 ])
 
 const chrList = makeBuffer([
-  // nmchr
+  // characterFilenameCount
   B.u8(3),
   makeBuffer(filler(3, B.stringFixed(60, `DARIN.CHR`))),
 ])

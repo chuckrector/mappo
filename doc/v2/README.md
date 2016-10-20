@@ -264,7 +264,7 @@ Output:
     "aaa": 0,
     "entityscript": 0
   }, ...],
-  "nmchr": 5,
+  "characterFilenameCount": 5,
   "characterFilenames": [
     "DESMAN1.CHR",
     "DESMAN2.CHR",

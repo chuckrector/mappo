@@ -97,7 +97,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u32(1), // zoneCount
     B.stringFixed(40, `zone`),
     B.u16(filler(5, 6)),
-    B.u8(1), // nmchr
+    B.u8(1), // characterFilenameCount
     B.stringFixed(60, `chr`),
     B.u8(1), // entities
     B.u8(filler(80)),
