@@ -118,7 +118,7 @@ const scripts = makeBuffer([
   // movementScriptBuffer
   B.u8(filler(50, 99)),
 
-  // numthings
+  // thingCount
   B.u32(0),
 
   // scriptCount
