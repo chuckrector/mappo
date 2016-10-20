@@ -44,7 +44,7 @@ const palette = require(`../dummyPalette`)
 
   const converter = createVerge1ChrConverter({
     palette,
-    chrs: Array.prototype.concat(...filler(30, oneChr)),
+    frames: Array.prototype.concat(...filler(30, oneChr)),
   })
 
   const png = converter.convertToPng()

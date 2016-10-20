@@ -10,7 +10,7 @@ const palFilename = process.argv[2]
 const chrFilename = process.argv[3]
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v1chr)
-const tileList = chunk(chrData.chrs, 16 * 32)
+const tileList = chunk(chrData.frames, 16 * 32)
 
 const writeAnimatedGif = (frameOffset, direction) => {
   const targetFilename = `${chrFilename}-${direction}.gif`

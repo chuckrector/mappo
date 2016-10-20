@@ -13,7 +13,7 @@ const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v1chr)
 const chrConverter = createVerge1ChrConverter({
   palette: palData.pal,
-  chrs: chrData.chrs,
+  frames: chrData.frames,
 })
 
 const png = chrConverter.convertToPng()
