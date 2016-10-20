@@ -8,7 +8,7 @@ const mapWidth = 2
 const mapHeight = 3
 const signature = `V3MAP\0`
 const version = 2
-const scriptoffset = 66
+const scriptOffset = 66
 const mapname = `My Map Name`
 const vspFilename = `intro.vsp`
 const musicname = `VANGELIS.MOD`
@@ -103,7 +103,7 @@ const mapEntity = makeBuffer([
 
 const map = makeBuffer([
   B.string(signature),
-  B.u32([version, scriptoffset]),
+  B.u32([version, scriptOffset]),
   B.stringFixed(256, mapname),
   B.stringFixed(256, vspFilename),
   B.stringFixed(256, musicname),
@@ -127,7 +127,7 @@ module.exports = {
   mapHeight,
   signature,
   version,
-  scriptoffset,
+  scriptOffset,
   mapname,
   vspFilename,
   musicname,

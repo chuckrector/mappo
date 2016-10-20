@@ -8,7 +8,7 @@ const V3_ENTITY = require(`./v3entity`)
 module.exports = {
   signature: T.stringFixed(6),
   version: T.u32,
-  scriptoffset: T.u32,
+  scriptOffset: T.u32,
   mapname: T.stringFixed(256),
   vspFilename: T.stringFixed(256),
   musicname: T.stringFixed(256),
