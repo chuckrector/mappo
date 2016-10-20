@@ -19,7 +19,7 @@ const chrData = asset.fromDisk(chrFilename, asset.v3chr)
 const writeAnimatedGif = (anim, index) => {
   const targetFilename = `${chrFilename}-anim${index}.gif`
 
-  let raw32bitData = chrData.imagedata.decompressed
+  let raw32bitData = chrData.frames.decompressed
   if (chrData.bpp === 24) {
     raw32bitData = colorDepth.convert24to32({raw24bitData: raw32bitData})
   }

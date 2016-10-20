@@ -16,7 +16,7 @@ const chrData = asset.fromDisk(chrFilename, asset.v2chr)
 
 const writeAnimatedGif = (anim, direction) => {
   const targetFilename = `${chrFilename}-${direction}.gif`
-  const frameList = chunk(chrData.imagedata.decompressed, chrData.frameWidth * chrData.frameHeight)
+  const frameList = chunk(chrData.frames.decompressed, chrData.frameWidth * chrData.frameHeight)
   const frameDescriptorList = parseChrAnim(anim)
 
   fs.writeFileSync(targetFilename, animatedGif({

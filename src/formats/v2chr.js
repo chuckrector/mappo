@@ -11,7 +11,7 @@ module.exports = {
   hotSpotWidth: T.u16,
   hotSpotHeight: T.u16,
   frameCount: T.u16,
-  imagedata: T.compressedU8(({record}) => record.frameWidth * record.frameHeight * record.frameCount),
+  frames: T.compressedU8(({record}) => record.frameWidth * record.frameHeight * record.frameCount),
   lidle: T.u32,
   ridle: T.u32,
   uidle: T.u32,

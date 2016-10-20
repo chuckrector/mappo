@@ -10,14 +10,14 @@ const palette = require(`../dummyPalette`)
   const frameWidth = 2
   const frameHeight = 3
   const frameCount = 2
-  const imagedata = filler(frameWidth * frameHeight * 2, 99)
+  const frames = filler(frameWidth * frameHeight * 2, 99)
 
   const converter = createVerge2ChrConverter({
     palette,
     frameWidth,
     frameHeight,
     frameCount,
-    imagedata,
+    frames,
   })
 
   const png = converter.convertToPng()

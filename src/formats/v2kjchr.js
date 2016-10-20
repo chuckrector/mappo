@@ -23,5 +23,5 @@ module.exports = {
   uanim: T.stringFixed(({record}) => record.uanimLength),
   danimLength: T.u32,
   danim: T.stringFixed(({record}) => record.danimLength),
-  imagedata: T.compressedU16(({record}) => record.frameWidth * record.frameHeight * record.frameCount),
+  frames: T.compressedU16(({record}) => record.frameWidth * record.frameHeight * record.frameCount),
 }

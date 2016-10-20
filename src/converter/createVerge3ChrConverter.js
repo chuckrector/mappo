@@ -3,9 +3,9 @@
 const createTileGridConverter = require(`./createTileGridConverter`)
 const colorDepth = require(`./colorDepth`)
 
-module.exports = ({bpp, frameWidth, frameHeight, frameCount, imagedata}) => {
+module.exports = ({bpp, frameWidth, frameHeight, frameCount, frames}) => {
   if (bpp === 24) {
-    imagedata = colorDepth.convert24to32({raw24bitData: imagedata})
+    frames = colorDepth.convert24to32({raw24bitData: frames})
   }
 
   const converter = createTileGridConverter({
@@ -13,7 +13,7 @@ module.exports = ({bpp, frameWidth, frameHeight, frameCount, imagedata}) => {
     tileHeight: frameHeight,
     columns: 5,
     numtiles: frameCount,
-    raw32bitData: imagedata,
+    raw32bitData: frames,
   })
 
   return {

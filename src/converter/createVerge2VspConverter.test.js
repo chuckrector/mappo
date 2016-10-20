@@ -29,7 +29,7 @@ const palette = require(`../dummyPalette`)
   const converter = createVerge2VspConverter({
     palette,
     numtiles: 21,
-    imagedata: Array.prototype.concat(...filler(21, oneTile)),
+    frames: Array.prototype.concat(...filler(21, oneTile)),
   })
 
   const png = converter.convertToPng()

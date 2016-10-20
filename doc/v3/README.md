@@ -97,7 +97,7 @@ Output:
   }, ...],
   "customscripts": 0,
   "compression": 1,
-  "imagedata": {
+  "frames": {
     "mysize": 6144,
     "comprLen": 425,
     "compressed": [120, 156, 237, ...],

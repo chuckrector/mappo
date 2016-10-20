@@ -24,7 +24,7 @@ module.exports = ({context, tileset, imageFilename}) => {
       mappoTileset.numTiles = tileset.numtiles
       mappoTileset.raw32bitData = colorDepth.convert8to32({
         palette: tileset.palette.map(v => v * 4),
-        raw8bitData: tileset.imagedata.decompressed,
+        raw8bitData: tileset.frames.decompressed,
       })
     } break;
 

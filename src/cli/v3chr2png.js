@@ -13,7 +13,7 @@ const chrConverter = createVerge3ChrConverter({
   frameWidth: chrData.frameWidth,
   frameHeight: chrData.frameHeight,
   frameCount: chrData.frameCount,
-  imagedata: chrData.imagedata.decompressed,
+  frames: chrData.frames.decompressed,
 })
 
 const png = chrConverter.convertToPng()

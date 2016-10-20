@@ -16,7 +16,7 @@ const chrData = asset.fromDisk(chrFilename, asset.v2chr)
 
 const raw32BitData = colorDepth.convert8to32({
   palette: palData.pal.map(v => v * 4),
-  raw8bitData: chrData.imagedata.decompressed,
+  raw8bitData: chrData.frames.decompressed,
 })
 
 const tileWidth = chrData.frameWidth

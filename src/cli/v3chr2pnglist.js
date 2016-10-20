@@ -12,9 +12,9 @@ const asset = require(`../asset`)
 const chrFilename = process.argv[2]
 const chrData = asset.fromDisk(chrFilename, asset.v3chr)
 
-let raw32BitData = chrData.imagedata.decompressed
+let raw32BitData = chrData.frames.decompressed
 if (chrData.bpp === 24) {
-    raw32BitData = colorDepth.convert24to32({raw24bitData: chrData.imagedata.decompressed})
+    raw32BitData = colorDepth.convert24to32({raw24bitData: chrData.frames.decompressed})
 }
 
 const tileWidth = chrData.frameWidth

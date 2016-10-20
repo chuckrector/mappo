@@ -11,7 +11,7 @@ const asset = require(`../asset`)
 const chrFilename = process.argv[2]
 const chrData = asset.fromDisk(chrFilename, asset.v2kjchr)
 const raw32BitData = colorDepth.convert16to32({
-  raw16bitData: chrData.imagedata.decompressed,
+  raw16bitData: chrData.frames.decompressed,
 })
 
 const tileWidth = chrData.frameWidth

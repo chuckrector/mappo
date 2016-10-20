@@ -19,7 +19,7 @@ const chrData = asset.fromDisk(chrFilename, asset.v2kjchr)
 const writeAnimatedGif = (anim, direction) => {
   const targetFilename = `${chrFilename}-${direction}.gif`
 
-  const raw16bitData = chrData.imagedata.decompressed
+  const raw16bitData = chrData.frames.decompressed
   const raw32bitData = colorDepth.convert16to32({raw16bitData})
 
   const palette = palData.pal

@@ -53,7 +53,7 @@ Output:
   "uanim": "F5W10F6W10F7W10F6W10F5W10F8W10F9W10F8W10",
   "danimLength": 40,
   "danim": "F0W10F1W10F2W10F2W10F0W10F3W10F4W10F3W10",
-  "imagedata": {
+  "frames": {
     "bufsize": 10322,
     "compressed": [36, 255, 0, ...],
     "decompressed": [0, 0, 0, ...],

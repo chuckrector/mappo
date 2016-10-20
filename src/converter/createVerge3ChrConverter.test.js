@@ -9,14 +9,14 @@ const filler = require(`../filler`)
   const frameWidth = 2
   const frameHeight = 3
   const frameCount = 2
-  const imagedata = filler(frameWidth * frameHeight * frameCount * 3, 99)
+  const frames = filler(frameWidth * frameHeight * frameCount * 3, 99)
 
   const converter = createVerge3ChrConverter({
     bpp: 24,
     frameWidth,
     frameHeight,
     frameCount,
-    imagedata,
+    frames,
   })
 
   const png = converter.convertToPng()
@@ -30,14 +30,14 @@ const filler = require(`../filler`)
   const frameWidth = 2
   const frameHeight = 3
   const frameCount = 2
-  const imagedata = filler(frameWidth * frameHeight * frameCount * 4, 99)
+  const frames = filler(frameWidth * frameHeight * frameCount * 4, 99)
 
   const converter = createVerge3ChrConverter({
     bpp: 32,
     frameWidth,
     frameHeight,
     frameCount,
-    imagedata,
+    frames,
   })
 
   const png = converter.convertToPng()
