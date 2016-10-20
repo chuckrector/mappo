@@ -225,7 +225,7 @@ Output:
     "method": 0
   }, ...],
   "entityCount": 0,
-  "entity": [{
+  "entities": [{
     "x1": 23,
     "y1": 11,
     "face": 2,

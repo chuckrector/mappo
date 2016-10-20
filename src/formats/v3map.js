@@ -23,7 +23,7 @@ module.exports = {
   zoneCount: T.u32,
   zones: T.list(V3_ZONE, ({record}) => record.zoneCount),
   entityCount: T.u32,
-  entity: T.list(V3_ENTITY, ({record}) => record.entityCount),
+  entities: T.list(V3_ENTITY, ({record}) => record.entityCount),
   // scriptsize: T.u32, // lua stuff? seems to get huge-normous values
   script: T.list(T.u8, ({reader}) => reader.remaining),//record.scriptsize),
 }
