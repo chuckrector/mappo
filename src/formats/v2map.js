@@ -15,13 +15,13 @@ module.exports = {
   ystart: T.u16,
   wrap: T.u8,
   padding: T.list(T.u8, 50),
-  numlayers: T.u8,
-  layerInfo: T.list(V2_LAYERINFO, ({record}) => record.numlayers),
+  layerCount: T.u8,
+  layerInfo: T.list(V2_LAYERINFO, ({record}) => record.layerCount),
   layers: T.list(
     T.compressedU16(({record, listIndex}) => {
       return record.layerInfo[listIndex].sizex * record.layerInfo[listIndex].sizey
     }),
-    ({record}) => record.numlayers
+    ({record}) => record.layerCount
   ),
   obstruct: T.compressedU8(({record}) => (
     record.layerInfo[0].sizex * record.layerInfo[0].sizey

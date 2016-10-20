@@ -228,7 +228,7 @@ Output:
   "ystart": 1,
   "wrap": 0,
   "padding": [77, 65, 80, ...],
-  "numlayers": 2,
+  "layerCount": 2,
   "layer": [{
     "pmultx": 1,
     "pdivx": 1,

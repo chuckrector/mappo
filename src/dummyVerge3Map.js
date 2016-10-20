@@ -16,7 +16,7 @@ const renderString = `12E`
 const startupScript = `startup script`
 const startX = 1
 const startY = 2
-const numlayers = 3
+const layerCount = 3
 
 const layerName = `My Layer Name`
 const parallaxX = 1.2
@@ -110,8 +110,8 @@ const map = makeBuffer([
   B.stringFixed(256, renderString),
   B.stringFixed(256, startupScript),
   B.u16([startX, startY]),
-  B.u32(numlayers),
-  makeBuffer(filler(numlayers, mapLayer)),
+  B.u32(layerCount),
+  makeBuffer(filler(layerCount, mapLayer)),
   B.zlibU8(obsData),
   B.zlibU16(zonelayerData),
   B.u32(numzones),
@@ -135,7 +135,7 @@ module.exports = {
   startupScript,
   startX,
   startY,
-  numlayers,
+  layerCount,
   mapLayer,
   layerWidth,
   layerHeight,

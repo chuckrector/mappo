@@ -189,7 +189,7 @@ Output:
   "startupScript": "start",
   "startX": 13,
   "startY": 2,
-  "numlayers": 2,
+  "layerCount": 2,
   "layers": [{
     "layername": "Layer 0",
     "parallax_x": 1,

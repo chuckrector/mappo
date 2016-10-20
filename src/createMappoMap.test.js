@@ -70,7 +70,7 @@ const createMappoMap = require(`./createMappoMap`)
 
 {
   // can create from v2 map
-  const numlayers = 3
+  const layerCount = 3
   const width = 2
   const height = 3
   const v2layerinfo = makeBuffer([
@@ -87,7 +87,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.stringFixed(20, `13er2`),
     B.u16([2, 3]), // xstart/ystart
     B.u8(filler(51, 4)),
-    B.u8(numlayers), // numlayers
+    B.u8(layerCount), // layerCount
     makeBuffer(filler(3, v2layerinfo)),
     B.compressedU16(filler(width * height, 77)),
     B.compressedU16(filler(width * height, 88)),
@@ -117,7 +117,7 @@ const createMappoMap = require(`./createMappoMap`)
   })
 
   expect(mappoMap.tilesetFilename).toBe(`HAHN01.VSP`)
-  expect(mappoMap.tileLayers.length).toBe(numlayers)
+  expect(mappoMap.tileLayers.length).toBe(layerCount)
   expect(mappoMap.mapLayerOrder).toEqual([0, 2, 1])
 
   expect(mappoMap.tileLayers[0].width).toBe(width)
@@ -222,7 +222,7 @@ const createMappoMap = require(`./createMappoMap`)
     ])
   )
 
-  const numlayers = 3
+  const layerCount = 3
   const width = 2
   const height = 3
   const buffer = makeBuffer([
@@ -235,7 +235,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.stringFixed(256, `3,E,2,R,1`),
     B.stringFixed(256, `startup script`),
     B.u16([0, 0]), // startX,startY
-    B.u32(numlayers),
+    B.u32(layerCount),
     v3layerinfo(`Back`, 77),
     v3layerinfo(`Fore`, 88),
     v3layerinfo(`Clouds`, 99),
@@ -258,7 +258,7 @@ const createMappoMap = require(`./createMappoMap`)
   const mappoMap = createMappoMap({map: v3map})
 
   expect(mappoMap.tilesetFilename).toBe(`grue0040.vsp`)
-  expect(mappoMap.tileLayers.length).toBe(numlayers)
+  expect(mappoMap.tileLayers.length).toBe(layerCount)
   expect(mappoMap.mapLayerOrder).toEqual([2, 1, 0])
 
   expect(mappoMap.tileLayers[0].width).toBe(width)

@@ -26,7 +26,7 @@ const mapHeader = makeBuffer([
 
 const rawLayer = [1, ...filler((2 * 3) - 2, 2), 3]
 const mapLayers = makeBuffer([
-  // numlayers
+  // layerCount
   B.u8(2),
 
   // -- first layer info --
