@@ -16,8 +16,8 @@ module.exports = ({map}) => {
       mappoMap.tilesetFilename = map.vspFilename
       mappoMap.tileLayers = [{
         description: `Background`,
-        width: map.xsize,
-        height: map.ysize,
+        width: map.width,
+        height: map.height,
         tileIndexGrid: map.layers[0],
         parallax: {
           x: 1.0,
@@ -25,8 +25,8 @@ module.exports = ({map}) => {
         },
       }, {
         description: `Foreground`,
-        width: map.xsize,
-        height: map.ysize,
+        width: map.width,
+        height: map.height,
         tileIndexGrid: map.layers[1],
         parallax: {
           x: map.pmultx / map.pdivx,
