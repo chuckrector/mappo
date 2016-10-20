@@ -10,7 +10,7 @@ const mapHeader = makeBuffer([
   B.u8([77, 65, 80, 249, 53, 0]),
   // mapEventsOffset
   B.u32(12345),
-  // vspname
+  // vspFilename
   B.stringFixed(60, `grue0040.vsp`),
   // musicFilename
   B.stringFixed(60, `VANGELIS.MOD`),

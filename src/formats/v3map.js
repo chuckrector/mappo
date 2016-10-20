@@ -10,7 +10,7 @@ module.exports = {
   version: T.u32,
   scriptoffset: T.u32,
   mapname: T.stringFixed(256),
-  vspname: T.stringFixed(256),
+  vspFilename: T.stringFixed(256),
   musicname: T.stringFixed(256),
   renderstring: T.stringFixed(256),
   startupscript: T.stringFixed(256),

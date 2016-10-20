@@ -10,7 +10,7 @@ const signature = `V3MAP\0`
 const version = 2
 const scriptoffset = 66
 const mapname = `My Map Name`
-const vspname = `intro.vsp`
+const vspFilename = `intro.vsp`
 const musicname = `VANGELIS.MOD`
 const renderstring = `12E`
 const startupscript = `startup script`
@@ -105,7 +105,7 @@ const map = makeBuffer([
   B.string(signature),
   B.u32([version, scriptoffset]),
   B.stringFixed(256, mapname),
-  B.stringFixed(256, vspname),
+  B.stringFixed(256, vspFilename),
   B.stringFixed(256, musicname),
   B.stringFixed(256, renderstring),
   B.stringFixed(256, startupscript),
@@ -129,7 +129,7 @@ module.exports = {
   version,
   scriptoffset,
   mapname,
-  vspname,
+  vspFilename,
   musicname,
   renderstring,
   startupscript,

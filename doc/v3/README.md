@@ -183,7 +183,7 @@ Output:
   "version": 2,
   "scriptoffset": 11864,
   "mapname": "Undersea",
-  "vspname": "HAHN01.VSP",
+  "vspFilename": "HAHN01.VSP",
   "musicname": "",
   "renderstring": "1,E,2,R",
   "startupscript": "start",

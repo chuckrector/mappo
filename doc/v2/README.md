@@ -221,7 +221,7 @@ Output:
 {
   "version": [77, 65, 80, 249, 53, 0],
   "mapEventsOffset": 23233,
-  "vspname": "grue0041.vsp",
+  "vspFilename": "grue0041.vsp",
   "musicFilename": "",
   "rstring": "1E2",
   "xstart": 1,
