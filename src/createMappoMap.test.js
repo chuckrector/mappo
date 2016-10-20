@@ -26,7 +26,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u8([1, mul, div]),
     B.stringFixed(30, `level name`),
     B.u8([0, 0]),
-    B.u16([0, 0]), // startx/starty
+    B.u16([0, 0]), // startX/startY
     B.u8([0, 0]),
     B.u16([2, 3]),
     B.u8(filler(28)),
@@ -234,7 +234,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.stringFixed(256, `music name`),
     B.stringFixed(256, `3,E,2,R,1`),
     B.stringFixed(256, `startup script`),
-    B.u16([0, 0]), // startx,starty
+    B.u16([0, 0]), // startX,startY
     B.u32(numlayers),
     v3layerinfo(`Back`, 77),
     v3layerinfo(`Fore`, 88),
