@@ -27,7 +27,7 @@ module.exports = {
   zone: T.list(V1_ZONE, 128),
   characterFilenames: T.list(T.stringFixed(13), 100),
   entityCount: T.u32,
-  party: T.list(V1_ENTITY, ({record}) => record.entityCount),
+  entities: T.list(V1_ENTITY, ({record}) => record.entityCount),
   nummovescripts: T.u8,
   msbufsize: T.u32,
   msofstbl: T.list(T.u32, ({record}) => record.nummovescripts),

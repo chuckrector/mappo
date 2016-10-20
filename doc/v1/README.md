@@ -340,8 +340,8 @@ Output:
     "savedescPadding": 0
   }, ...],
   "characterFilenames": ["Crystal.chr", ...],
-  "entities": 1,
-  "party": [{
+  "entityCount": 1,
+  "entities": [{
     "x": 46,
     "y": 26,
     "facing": 0,
