@@ -124,13 +124,13 @@ Output:
   "rightIdleFrameIndex": 10,
   "upIdleFrameIndex": 5,
   "downIdleFrameIndex": 0,
-  "lanimLength": 49,
+  "leftAnimationStringSize": 49,
   "lanim": "F16W10F17W10F16W10F15W10F18W10F19W10F18W10F15W10",
-  "ranimLength": 49,
+  "rightAnimationStringSize": 49,
   "ranim": "F11W10F12W10F11W10F10W10F13W10F14W10F13W10F10W10",
-  "uanimLength": 41,
+  "upAnimationStringSize": 41,
   "uanim": "F6W10F7W10F6W10F5W10F8W10F9W10F8W10F5W10",
-  "danimLength": 41,
+  "downAnimationStringSize": 41,
   "danim": "F1W10F2W10F1W10F0W10F3W10F4W10F3W10F0W10",
   "palette": [0, 0, 0, 3, 3, 3, 7, 7, 7, ...]
 }
