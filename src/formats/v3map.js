@@ -12,7 +12,7 @@ module.exports = {
   mapname: T.stringFixed(256),
   vspFilename: T.stringFixed(256),
   musicname: T.stringFixed(256),
-  renderstring: T.stringFixed(256),
+  renderString: T.stringFixed(256),
   startupscript: T.stringFixed(256),
   startx: T.u16,
   starty: T.u16,

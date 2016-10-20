@@ -185,7 +185,7 @@ Output:
   "mapname": "Undersea",
   "vspFilename": "HAHN01.VSP",
   "musicname": "",
-  "renderstring": "1,E,2,R",
+  "renderString": "1,E,2,R",
   "startupscript": "start",
   "startx": 13,
   "starty": 2,

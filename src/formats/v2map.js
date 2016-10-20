@@ -10,7 +10,7 @@ module.exports = {
   mapEventsOffset: T.u32,
   vspFilename: T.stringFixed(60),
   musicFilename: T.stringFixed(60),
-  rstring: T.stringFixed(20),
+  renderString: T.stringFixed(20),
   xstart: T.u16,
   ystart: T.u16,
   wrap: T.u8,

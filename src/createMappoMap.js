@@ -35,7 +35,7 @@ module.exports = ({map}) => {
       }]
     } break;
     case `v2map`: {
-      mappoMap.mapLayerOrder = parseRenderString(map.rstring)
+      mappoMap.mapLayerOrder = parseRenderString(map.renderString)
       mappoMap.tilesetFilename = map.vspFilename
       mappoMap.tileLayers = map.layers.map((tileIndexGrid, index) => {
         const layerInfo = map.layerInfo[index]
@@ -71,7 +71,7 @@ module.exports = ({map}) => {
       })
     } break
     case `v3map`: {
-      mappoMap.mapLayerOrder = parseRenderString(map.renderstring, `,`)
+      mappoMap.mapLayerOrder = parseRenderString(map.renderString, `,`)
       mappoMap.tilesetFilename = map.vspFilename
       mappoMap.tileLayers = map.layers.map(layerInfo => ({
         description: layerInfo.layername,

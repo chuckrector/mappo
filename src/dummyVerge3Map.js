@@ -12,7 +12,7 @@ const scriptoffset = 66
 const mapname = `My Map Name`
 const vspFilename = `intro.vsp`
 const musicname = `VANGELIS.MOD`
-const renderstring = `12E`
+const renderString = `12E`
 const startupscript = `startup script`
 const startx = 1
 const starty = 2
@@ -107,7 +107,7 @@ const map = makeBuffer([
   B.stringFixed(256, mapname),
   B.stringFixed(256, vspFilename),
   B.stringFixed(256, musicname),
-  B.stringFixed(256, renderstring),
+  B.stringFixed(256, renderString),
   B.stringFixed(256, startupscript),
   B.u16([startx, starty]),
   B.u32(numlayers),
@@ -131,7 +131,7 @@ module.exports = {
   mapname,
   vspFilename,
   musicname,
-  renderstring,
+  renderString,
   startupscript,
   startx,
   starty,

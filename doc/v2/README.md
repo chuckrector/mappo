@@ -223,7 +223,7 @@ Output:
   "mapEventsOffset": 23233,
   "vspFilename": "grue0041.vsp",
   "musicFilename": "",
-  "rstring": "1E2",
+  "renderString": "1E2",
   "xstart": 1,
   "ystart": 1,
   "wrap": 0,

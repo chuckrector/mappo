@@ -14,7 +14,7 @@ const mapHeader = makeBuffer([
   B.stringFixed(60, `grue0040.vsp`),
   // musicFilename
   B.stringFixed(60, `VANGELIS.MOD`),
-  // rstring
+  // renderString
   B.stringFixed(20, `12E`),
   // xstart, ystart
   B.u16([1 ,2]),
