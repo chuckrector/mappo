@@ -265,7 +265,7 @@ Output:
     "entityscript": 0
   }, ...],
   "nmchr": 5,
-  "chrlist": [
+  "characterFilenames": [
     "DESMAN1.CHR",
     "DESMAN2.CHR",
     "DESWOM1.CHR",

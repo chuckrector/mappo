@@ -339,7 +339,7 @@ Output:
     "savedesc": "Paradise Isle",
     "savedescPadding": 0
   }, ...],
-  "chrlist": ["Crystal.chr", ...],
+  "characterFilenames": ["Crystal.chr", ...],
   "entities": 1,
   "party": [{
     "x": 46,

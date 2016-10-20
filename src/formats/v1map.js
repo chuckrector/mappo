@@ -25,7 +25,7 @@ module.exports = {
   layers: T.list(T.list(T.u16, ({record}) => record.width * record.height), 2),
   mapp: T.list(T.u8, ({record}) => record.width * record.height),
   zone: T.list(V1_ZONE, 128),
-  chrlist: T.list(T.stringFixed(13), 100),
+  characterFilenames: T.list(T.stringFixed(13), 100),
   entities: T.u32,
   party: T.list(V1_ENTITY, ({record}) => record.entities),
   nummovescripts: T.u8,

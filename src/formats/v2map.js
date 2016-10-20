@@ -32,7 +32,7 @@ module.exports = {
   zoneCount: T.u32,
   zones: T.list(V2_ZONE, ({record}) => record.zoneCount),
   nmchr: T.u8,
-  chrlist: T.list(T.stringFixed(60), ({record}) => record.nmchr),
+  characterFilenames: T.list(T.stringFixed(60), ({record}) => record.nmchr),
   entities: T.u8,
   entity: T.list(V2_ENTITY, ({record}) => record.entities),
   nummovescripts: T.u8,
