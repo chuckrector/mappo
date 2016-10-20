@@ -11,7 +11,7 @@ module.exports = {
   scriptOffset: T.u32,
   description: T.stringFixed(256),
   vspFilename: T.stringFixed(256),
-  musicname: T.stringFixed(256),
+  musicFilename: T.stringFixed(256),
   renderString: T.stringFixed(256),
   startupScript: T.stringFixed(256),
   startX: T.u16,

@@ -184,7 +184,7 @@ Output:
   "scriptOffset": 11864,
   "description": "Undersea",
   "vspFilename": "HAHN01.VSP",
-  "musicname": "",
+  "musicFilename": "",
   "renderString": "1,E,2,R",
   "startupScript": "start",
   "startX": 13,
