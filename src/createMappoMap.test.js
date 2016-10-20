@@ -43,7 +43,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u8(0), // movementScriptBuffer, movementScriptBufferSize bytes
     B.u32(1), // scriptCount
     B.u32(0), // scriptOffsets, one script
-    B.u8(0), // mapvc
+    B.u8(0), // scriptBuffer
   ])
 
   const v1map = asset.fromBuffer(buffer, asset.v1map)
@@ -106,9 +106,9 @@ const createMappoMap = require(`./createMappoMap`)
     B.u32(0), // movementScriptOffsets
     B.u32(0), // # things
     B.u32(1), // map events
-    B.u32(0), // mapvctbl
+    B.u32(0), // scriptOffsets
     B.u32(1), // codesize
-    B.u8(0), // mapvc
+    B.u8(0), // scriptBuffer
   ])
 
   const v2map = asset.fromBuffer(buffer, asset.v2map)

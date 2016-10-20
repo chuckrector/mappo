@@ -388,7 +388,7 @@ Output:
   "movementScriptBuffer": [89, 51, 87, ...],
   "scriptCount": 11,
   "scriptOffsets": [0, 728, 3118, ...],
-  "mapvc": [3, 0, 1, 151, 0, 0, 0, 255, ...],
+  "scriptBuffer": [3, 0, 1, 151, 0, 0, 0, 255, ...],
 }
 ```
 

@@ -123,11 +123,11 @@ const scripts = makeBuffer([
 
   // mapevents
   B.u32(2),
-  // mapvctbl
+  // scriptOffsets
   B.u32([0, 10]),
   // codesize
   B.u32(20),
-  // mapvc
+  // scriptBuffer
   B.u8(filler(20, 88)),
 ])
 

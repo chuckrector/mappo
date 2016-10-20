@@ -92,7 +92,7 @@ const scripts = makeBuffer([
   B.u8(filler(50, 99)),
   // scriptCount, scriptofstb,
   B.u32([3, 0, 10, 20]),
-  // mapvc
+  // scriptBuffer
   B.u8(filler(30, 88)),
 ])
 

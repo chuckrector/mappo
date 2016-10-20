@@ -322,9 +322,9 @@ Output:
   "movementScriptBuffer": [0, 68, 52, ...],
   "numthings": 0,
   "mapevents": 58,
-  "mapvctbl": [0, 4, 40, ...],
+  "scriptOffsets": [0, 4, 40, ...],
   "codesize": 11044,
-  "mapvc": [3, 233, 1, ...]
+  "scriptBuffer": [3, 233, 1, ...]
 }
 ```
 
