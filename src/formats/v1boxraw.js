@@ -3,5 +3,5 @@
 const {T} = require(`../readFormat`)
 
 module.exports = {
-  tbox: T.list(T.u8, 320 * 66)
+  transparentBox: T.list(T.u8, 320 * 66)
 }

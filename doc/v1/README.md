@@ -3,7 +3,7 @@
 ## v1boxraw2png
 
 `BOX.RAW` is raw 8-bit image data which typically contains only the border of
-the textbox displayed during dialogue. The middle region is filled by VERGE with
+the textransparentBox displayed during dialogue. The middle region is filled by VERGE with
 a translucent blue color by default.
 
 The image data is 320x66 pixels.

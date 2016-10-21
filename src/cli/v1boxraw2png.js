@@ -13,7 +13,7 @@ const palData = asset.fromDisk(palFilename, asset.v1pal)
 const boxRawData = asset.fromDisk(boxRawFilename, asset.v1boxraw)
 const boxRawConverter = createVerge1BoxRawConverter({
   palette: palData.pal,
-  tbox: boxRawData.tbox,
+  transparentBox: boxRawData.transparentBox,
 })
 
 const png = boxRawConverter.convertToPng()
