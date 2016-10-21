@@ -24,5 +24,5 @@ module.exports = {
   wanderBottom: T.u32,
   zone: T.stringLengthEncoded,
   chaseTarget: T.stringLengthEncoded,
-  chaseDist: T.u32,
+  chaseDistance: T.u32,
 }
