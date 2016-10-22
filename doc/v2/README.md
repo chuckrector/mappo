@@ -274,8 +274,8 @@ Output:
   ],
   "entities": 34,
   "entity": [{
-    "x": 37,
-    "y": 48,
+    "worldPixelX": 37,
+    "worldPIxelY": 48,
     "tx": 0,
     "ty": 0,
     "facing": 0,

@@ -342,8 +342,8 @@ Output:
   "characterFilenames": ["Crystal.chr", ...],
   "entityCount": 1,
   "entities": [{
-    "x": 46,
-    "y": 26,
+    "worldPixelX": 46,
+    "worldPixelY": 26,
     "facing": 0,
     "moving": 0,
     "movementCounter": 0,
