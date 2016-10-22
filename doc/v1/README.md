@@ -371,7 +371,7 @@ Output:
     "x2": 0,
     "y2": 0,
     "currentCommandCode": 0,
-    "cmdarg": 0,
+    "currentCommandArgument": 0,
     "scriptofs": 0,
     "face": 1,
     "chasing": 0,
