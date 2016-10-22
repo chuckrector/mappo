@@ -295,7 +295,7 @@ Output:
     "face": 1,
     "actm": 0,
     "movementPatternCode": 2,
-    "movescript": 0,
+    "movementScript": 0,
     "ctr": 0,
     "mode": 0,
     "modePadding": [1, 0],

@@ -241,7 +241,7 @@ Output:
     "wy2": 0,
     "wdelay": 0,
     "maybeOffset": 0,
-    "movescript": "",
+    "movementScript": "",
     "chrname": "res\\chrs\\Vorn.chr",
     "description": "Villager A",
     "script": "ent0"

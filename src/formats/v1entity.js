@@ -16,7 +16,7 @@ module.exports = {
   cannotBeObstructed: T.u8,
   padding: T.list(T.u8, 3),
   activationScript: T.u32,
-  movescript: T.u32,
+  movementScript: T.u32,
   speed: T.u8,
   speedct: T.u8,
   step: T.u16,

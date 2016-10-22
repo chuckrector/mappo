@@ -24,7 +24,7 @@ module.exports = {
   face: T.u8,
   actm: T.u8,
   movementPatternCode: T.u8,
-  movescript: T.u8,
+  movementScript: T.u8,
   ctr: T.u8,
   mode: T.u8,
   modePadding: T.list(T.u8, 2),

@@ -18,7 +18,7 @@ module.exports = {
   wy2: T.u16,
   wdelay: T.u16,
   maybeOffset: T.u32,
-  movescript: T.stringFixed(256),
+  movementScript: T.stringFixed(256),
   chrname: T.stringFixed(256),
   description: T.stringFixed(256),
   script: T.stringFixed(256),

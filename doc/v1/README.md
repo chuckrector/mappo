@@ -355,7 +355,7 @@ Output:
     "cannotBeObstructed": 1,
     "padding": [0, 0, 0],
     "activationScript": 2,
-    "movescript": 0,
+    "movementScript": 0,
     "speed": 2,
     "speedct": 0,
     "step": 0,

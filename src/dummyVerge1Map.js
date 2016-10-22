@@ -56,7 +56,7 @@ const entity = makeBuffer([
   B.u16([2, 1]),
   // facing, moving, movementCounter, frameCounter, specialFrame, characterIndex, movementPatternCode, canBeActivated, cannotBeObstructed
   B.u8([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0]),
-  // activationScript, movescript
+  // activationScript, movementScript
   B.u32([2, 1]),
   // speed, speedct
   B.u8([2, 1]),
