@@ -86,7 +86,7 @@ const chrList = makeBuffer([
 const entity = makeBuffer([
   // x, y
   B.u32([2, 1]),
-  // tx, ty
+  // tileX, tileY
   B.u16([4, 3]),
   // facing, moving, movementCounter, frame, specialFrame, characterIndex, reset, obsmode1, obsmode2, speed, speedCounter, delayCounter
   B.u8(filler(12, 99)),

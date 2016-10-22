@@ -276,8 +276,8 @@ Output:
   "entity": [{
     "worldPixelX": 37,
     "worldPixelY": 48,
-    "tx": 0,
-    "ty": 0,
+    "tileX": 0,
+    "tileY": 0,
     "facing": 0,
     "moving": 0,
     "movementCounter": 0,

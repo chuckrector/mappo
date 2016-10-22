@@ -5,8 +5,8 @@ const {T} = require(`../readFormat`)
 module.exports = {
   worldPixelX: T.u32,
   worldPixelY: T.u32,
-  tx: T.u16,
-  ty: T.u16,
+  tileX: T.u16,
+  tileY: T.u16,
   facing: T.u8,
   moving: T.u8,
   movementCounter: T.u8,
