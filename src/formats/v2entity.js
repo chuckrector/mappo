@@ -39,9 +39,9 @@ module.exports = {
   data5: T.u16,
   data6: T.u16,
   activationScript: T.u32,
-  expand1: T.u32,
-  expand2: T.u32,
-  expand3: T.u32,
-  expand4: T.u32,
+  futureExpansion1: T.u32,
+  futureExpansion2: T.u32,
+  futureExpansion3: T.u32,
+  futureExpansion4: T.u32,
   desc: T.stringFixed(20),
 }

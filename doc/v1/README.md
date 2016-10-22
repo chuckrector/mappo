@@ -379,7 +379,7 @@ Output:
     "chaseDistance": 0,
     "cx": 0,
     "cy": 0,
-    "expand": 0,
+    "futureExpansion": 0,
     "description": "Crystal"
   }],
   "movementScriptCount": 1,

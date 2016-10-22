@@ -40,6 +40,6 @@ module.exports = {
   chaseDistance: T.u8,
   cx: T.u16,
   cy: T.u16,
-  expand: T.u32,
+  futureExpansion: T.u32,
   description: T.stringFixed(20),
 }

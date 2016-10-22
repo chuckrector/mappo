@@ -96,7 +96,7 @@ const entity = makeBuffer([
   B.u8(filler(6 + 2, 88)),
   // step, delay, stepctr, delayCounter, data1..data6
   B.u16(filler(10, 77)),
-  // activationScript, expand1..expand4
+  // activationScript, futureExpansion1..futureExpansion4
   B.u32(filler(5, 66)),
   // desc
   B.stringFixed(20, `Description`),

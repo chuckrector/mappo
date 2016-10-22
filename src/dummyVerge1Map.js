@@ -70,7 +70,7 @@ const entity = makeBuffer([
   B.u8([4, 3, 2, 1]),
   // cx, cy
   B.u16([2, 1]),
-  // expand
+  // futureExpansion
   B.u32(1),
   // description
   B.stringFixed(20, `Description`),
