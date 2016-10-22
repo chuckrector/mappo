@@ -90,7 +90,7 @@ const entity = makeBuffer([
   B.u16([4, 3]),
   // facing, moving, movementCounter, frame, specialFrame, characterIndex, reset, obsmode1, obsmode2, speed, speedCounter, delayCounter
   B.u8(filler(12, 99)),
-  // animofs, scriptParsingOffset
+  // animationOffset, scriptParsingOffset
   B.u32([2, 1]),
   // face, actm, movementPatternCode, movementScript, ctr, mode, modePadding (2 bytes)
   B.u8(filler(6 + 2, 88)),

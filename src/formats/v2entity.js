@@ -19,7 +19,7 @@ module.exports = {
   speed: T.u8,
   speedCounter: T.u8,
   delayCounter: T.u8,
-  animofs: T.u32,
+  animationOffset: T.u32,
   scriptParsingOffset: T.u32,
   face: T.u8,
   actm: T.u8,

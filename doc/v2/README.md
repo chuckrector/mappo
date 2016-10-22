@@ -290,7 +290,7 @@ Output:
     "speed": 0,
     "speedCounter": 0,
     "delayCounter": 0,
-    "animofs": 0,
+    "animationOffset": 0,
     "scriptParsingOffset": 0,
     "face": 1,
     "actm": 0,
