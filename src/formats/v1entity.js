@@ -8,7 +8,7 @@ module.exports = {
   facing: T.u8,
   moving: T.u8,
   movementCounter: T.u8,
-  framectr: T.u8,
+  frameCounter: T.u8,
   specframe: T.u8,
   chrindex: T.u8,
   movecode: T.u8,

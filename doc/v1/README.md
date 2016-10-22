@@ -347,7 +347,7 @@ Output:
     "facing": 0,
     "moving": 0,
     "movementCounter": 0,
-    "framectr": 0,
+    "frameCounter": 0,
     "specframe": 0,
     "chrindex": 5,
     "movecode": 0,
