@@ -68,7 +68,7 @@ const entity = makeBuffer([
   B.u32(1),
   // face, chasing, chaseSpeed, chaseDistance
   B.u8([4, 3, 2, 1]),
-  // cx, cy
+  // currentTileX, currentTileY
   B.u16([2, 1]),
   // futureExpansion
   B.u32(1),

@@ -377,8 +377,8 @@ Output:
     "chasing": 0,
     "chaseSpeed": 0,
     "chaseDistance": 0,
-    "cx": 0,
-    "cy": 0,
+    "currentTileX": 0,
+    "currentTileY": 0,
     "futureExpansion": 0,
     "description": "Crystal"
   }],

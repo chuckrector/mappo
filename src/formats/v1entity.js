@@ -38,8 +38,8 @@ module.exports = {
   chasing: T.u8,
   chaseSpeed: T.u8,
   chaseDistance: T.u8,
-  cx: T.u16,
-  cy: T.u16,
+  currentTileX: T.u16,
+  currentTileY: T.u16,
   futureExpansion: T.u32,
   description: T.stringFixed(20),
 }
