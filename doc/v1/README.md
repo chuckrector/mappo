@@ -364,7 +364,7 @@ Output:
     "data2": 0,
     "data3": 0,
     "data4": 0,
-    "delayct": 0,
+    "delayCounter": 0,
     "adjactv": 0,
     "x1": 0,
     "y1": 0,

@@ -25,7 +25,7 @@ module.exports = {
   data2: T.u16,
   data3: T.u16,
   data4: T.u16,
-  delayct: T.u16,
+  delayCounter: T.u16,
   adjactv: T.u16,
   x1: T.u16,
   y1: T.u16,

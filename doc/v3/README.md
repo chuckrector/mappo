@@ -234,7 +234,7 @@ Output:
     "autoface": 1,
     "speed": 100,
     "speedCounter": 0,
-    "delayct": 0,
+    "delayCounter": 0,
     "wx1": 0,
     "wy1": 0,
     "wx2": 0,

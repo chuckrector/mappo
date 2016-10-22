@@ -61,7 +61,7 @@ const entity = {
   autoface: 6,
   speed: 7,
   speedCounter: 8, // pulled from v2. ignored by v3. what is this?
-  delayct: 9, // pulled from v2. ignored by v3. what is this?
+  delayCounter: 9, // pulled from v2. ignored by v3. what is this?
   wx1: 10,
   wy1: 11,
   wx2: 12,
@@ -86,7 +86,7 @@ const mapEntity = makeBuffer([
     entity.autoface,
   ]),
   B.u16(entity.speed),
-  B.u8([entity.speedCounter, entity.delayct]),
+  B.u8([entity.speedCounter, entity.delayCounter]),
   B.u16([
     entity.wx1,
     entity.wy1,

@@ -11,7 +11,7 @@ module.exports = {
   autoface: T.u8,
   speed: T.u16,
   speedCounter: T.u8,
-  delayct: T.u8,
+  delayCounter: T.u8,
   wx1: T.u16,
   wy1: T.u16,
   wx2: T.u16,
