@@ -376,7 +376,7 @@ Output:
     "face": 1,
     "chasing": 0,
     "chaseSpeed": 0,
-    "chasedist": 0,
+    "chaseDistance": 0,
     "cx": 0,
     "cy": 0,
     "expand": 0,

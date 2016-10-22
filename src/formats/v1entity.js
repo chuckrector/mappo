@@ -37,7 +37,7 @@ module.exports = {
   face: T.u8,
   chasing: T.u8,
   chaseSpeed: T.u8,
-  chasedist: T.u8,
+  chaseDistance: T.u8,
   cx: T.u16,
   cy: T.u16,
   expand: T.u32,
