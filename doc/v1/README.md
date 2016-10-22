@@ -336,8 +336,8 @@ Output:
     "percent": 0,
     "delay": 0,
     "aaa": 0,
-    "savedesc": "Paradise Isle",
-    "savedescPadding": 0
+    "saveDescription": "Paradise Isle",
+    "saveDescriptionPadding": 0
   }, ...],
   "characterFilenames": ["Crystal.chr", ...],
   "entityCount": 1,

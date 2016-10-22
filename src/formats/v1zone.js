@@ -9,6 +9,6 @@ module.exports = {
   percent: T.u8,
   delay: T.u8,
   aaa: T.u8,
-  savedesc: T.stringFixed(30),
-  savedescPadding: T.u8,
+  saveDescription: T.stringFixed(30),
+  saveDescriptionPadding: T.u8,
 }

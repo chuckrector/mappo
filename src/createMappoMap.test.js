@@ -13,7 +13,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.u8(0),
     B.u16(0),
     B.u8([0, 0, 0]),
-    B.stringFixed(30, `savedesc`),
+    B.stringFixed(30, `saveDescription`),
     B.u8(0),
   ])
 

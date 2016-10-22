@@ -37,7 +37,7 @@ const zone = makeBuffer([
   B.u16(1),
   // percent, delay, aaa
   B.u8([255, 0, 1]),
-  // savedesc
+  // saveDescription
   B.stringFixed(30, `Rodne`),
   // padding
   B.u8(0),
