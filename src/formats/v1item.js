@@ -5,7 +5,7 @@ const {T} = require(`../readFormat`)
 module.exports = {
   name: T.string,
   icon: T.stringU16,
-  desc: T.string,
+  description: T.string,
   useflag: T.stringU8,
   useeffect: T.stringU16,
   itemtype: T.stringU8,

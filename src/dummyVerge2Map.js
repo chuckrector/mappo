@@ -98,7 +98,7 @@ const entity = makeBuffer([
   B.u16(filler(10, 77)),
   // activationScript, futureExpansion1..futureExpansion4
   B.u32(filler(5, 66)),
-  // desc
+  // description
   B.stringFixed(20, `Description`),
 ])
 

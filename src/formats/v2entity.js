@@ -43,5 +43,5 @@ module.exports = {
   futureExpansion2: T.u32,
   futureExpansion3: T.u32,
   futureExpansion4: T.u32,
-  desc: T.stringFixed(20),
+  description: T.stringFixed(20),
 }

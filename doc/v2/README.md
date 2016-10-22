@@ -314,7 +314,7 @@ Output:
     "futureExpansion2": 0,
     "futureExpansion3": 0,
     "futureExpansion4": 0,
-    "desc": ""
+    "description": ""
   }, ...],
   "movementScriptCount": 2,
   "movementScriptBufferSize": 14,
