@@ -370,7 +370,7 @@ Output:
     "y1": 0,
     "x2": 0,
     "y2": 0,
-    "curcmd": 0,
+    "currentCommandCode": 0,
     "cmdarg": 0,
     "scriptofs": 0,
     "face": 1,

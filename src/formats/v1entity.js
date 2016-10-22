@@ -31,7 +31,7 @@ module.exports = {
   y1: T.u16,
   x2: T.u16,
   y2: T.u16,
-  curcmd: T.u8,
+  currentCommandCode: T.u8,
   cmdarg: T.u8,
   scriptofs: T.u32,
   face: T.u8,

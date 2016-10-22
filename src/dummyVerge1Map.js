@@ -62,7 +62,7 @@ const entity = makeBuffer([
   B.u8([2, 1]),
   // step..y2
   B.u16([12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),
-  // curcmd, cmdarg
+  // currentCommandCode, cmdarg
   B.u8([2, 1]),
   // scriptofs
   B.u32(1),
