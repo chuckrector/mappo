@@ -17,7 +17,7 @@ module.exports = {
   obsmode1: T.u8,
   obsmode2: T.u8,
   speed: T.u8,
-  speedct: T.u8,
+  speedCounter: T.u8,
   delayct: T.u8,
   animofs: T.u32,
   scriptofs: T.u32,

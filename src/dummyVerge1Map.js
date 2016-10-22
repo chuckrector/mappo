@@ -58,7 +58,7 @@ const entity = makeBuffer([
   B.u8([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0]),
   // activationScript, movementScript
   B.u32([2, 1]),
-  // speed, speedct
+  // speed, speedCounter
   B.u8([2, 1]),
   // step..y2
   B.u16([12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),

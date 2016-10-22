@@ -233,7 +233,7 @@ Output:
     "obstruction": 1,
     "autoface": 1,
     "speed": 100,
-    "speedct": 0,
+    "speedCounter": 0,
     "delayct": 0,
     "wx1": 0,
     "wy1": 0,

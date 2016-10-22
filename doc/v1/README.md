@@ -357,7 +357,7 @@ Output:
     "activationScript": 2,
     "movementScript": 0,
     "speed": 2,
-    "speedct": 0,
+    "speedCounter": 0,
     "step": 0,
     "delay": 0,
     "data1": 0,

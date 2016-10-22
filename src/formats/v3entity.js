@@ -10,7 +10,7 @@ module.exports = {
   obstruction: T.u8,
   autoface: T.u8,
   speed: T.u16,
-  speedct: T.u8,
+  speedCounter: T.u8,
   delayct: T.u8,
   wx1: T.u16,
   wy1: T.u16,

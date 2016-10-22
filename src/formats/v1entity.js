@@ -18,7 +18,7 @@ module.exports = {
   activationScript: T.u32,
   movementScript: T.u32,
   speed: T.u8,
-  speedct: T.u8,
+  speedCounter: T.u8,
   step: T.u16,
   delay: T.u16,
   data1: T.u16,

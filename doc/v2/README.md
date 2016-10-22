@@ -288,7 +288,7 @@ Output:
     "obsmode1": 1,
     "obsmode2": 1,
     "speed": 0,
-    "speedct": 0,
+    "speedCounter": 0,
     "delayct": 0,
     "animofs": 0,
     "scriptofs": 0,
