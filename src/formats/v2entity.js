@@ -38,7 +38,7 @@ module.exports = {
   data4: T.u16,
   data5: T.u16,
   data6: T.u16,
-  actscript: T.u32,
+  activationScript: T.u32,
   expand1: T.u32,
   expand2: T.u32,
   expand3: T.u32,

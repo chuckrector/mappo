@@ -309,7 +309,7 @@ Output:
     "data4": 0,
     "data5": 0,
     "data6": 0,
-    "actscript": 25,
+    "activationScript": 25,
     "expand1": 0,
     "expand2": 0,
     "expand3": 0,
