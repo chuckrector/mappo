@@ -280,7 +280,7 @@ Output:
     "ty": 0,
     "facing": 0,
     "moving": 0,
-    "movcnt": 0,
+    "movementCounter": 0,
     "frame": 0,
     "specframe": 0,
     "chrindex": 0,

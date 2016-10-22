@@ -346,7 +346,7 @@ Output:
     "y": 26,
     "facing": 0,
     "moving": 0,
-    "movcnt": 0,
+    "movementCounter": 0,
     "framectr": 0,
     "specframe": 0,
     "chrindex": 5,
