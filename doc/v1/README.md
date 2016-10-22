@@ -351,7 +351,7 @@ Output:
     "specialFrame": 0,
     "characterIndex": 5,
     "movementPatternCode": 0,
-    "activmode": 0,
+    "canBeActivated": 0,
     "obsmode": 1,
     "padding": [0, 0, 0],
     "actscript": 2,

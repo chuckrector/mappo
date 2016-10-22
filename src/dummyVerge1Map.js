@@ -54,7 +54,7 @@ const chrList = makeBuffer(
 const entity = makeBuffer([
   // x, y
   B.u16([2, 1]),
-  // facing, moving, movementCounter, frameCounter, specialFrame, characterIndex, movementPatternCode, activmode, obsmode
+  // facing, moving, movementCounter, frameCounter, specialFrame, characterIndex, movementPatternCode, canBeActivated, obsmode
   B.u8([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 0, 0]),
   // actscript, movescript
   B.u32([2, 1]),
