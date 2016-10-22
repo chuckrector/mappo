@@ -30,7 +30,7 @@ module.exports = {
   modePadding: T.list(T.u8, 2),
   step: T.u16,
   delay: T.u16,
-  stepctr: T.u16,
+  stepCounter: T.u16,
   delayCounter: T.u16,
   data1: T.u16,
   data2: T.u16,

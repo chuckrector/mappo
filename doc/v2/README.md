@@ -301,7 +301,7 @@ Output:
     "modePadding": [1, 0],
     "step": 100,
     "delay": 0,
-    "stepctr": 0,
+    "stepCounter": 0,
     "delayCounter": 0,
     "data1": 0,
     "data2": 0,
