@@ -13,7 +13,7 @@ module.exports = {
   characterIndex: T.u8,
   movementPatternCode: T.u8,
   canBeActivated: T.u8,
-  obsmode: T.u8,
+  cannotBeObstructed: T.u8,
   padding: T.list(T.u8, 3),
   actscript: T.u32,
   movescript: T.u32,

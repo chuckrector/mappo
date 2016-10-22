@@ -352,7 +352,7 @@ Output:
     "characterIndex": 5,
     "movementPatternCode": 0,
     "canBeActivated": 0,
-    "obsmode": 1,
+    "cannotBeObstructed": 1,
     "padding": [0, 0, 0],
     "actscript": 2,
     "movescript": 0,
