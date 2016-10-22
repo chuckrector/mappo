@@ -348,7 +348,7 @@ Output:
     "moving": 0,
     "movementCounter": 0,
     "frameCounter": 0,
-    "specframe": 0,
+    "specialFrame": 0,
     "chrindex": 5,
     "movecode": 0,
     "activmode": 0,

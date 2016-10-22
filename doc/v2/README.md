@@ -282,7 +282,7 @@ Output:
     "moving": 0,
     "movementCounter": 0,
     "frame": 0,
-    "specframe": 0,
+    "specialFrame": 0,
     "chrindex": 0,
     "reset": 0,
     "obsmode1": 1,
