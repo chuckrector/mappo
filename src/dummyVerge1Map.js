@@ -66,7 +66,7 @@ const entity = makeBuffer([
   B.u8([2, 1]),
   // scriptParsingOffset
   B.u32(1),
-  // face, chasing, chasespeed, chasedist
+  // face, chasing, chaseSpeed, chasedist
   B.u8([4, 3, 2, 1]),
   // cx, cy
   B.u16([2, 1]),

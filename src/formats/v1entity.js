@@ -36,7 +36,7 @@ module.exports = {
   scriptParsingOffset: T.u32,
   face: T.u8,
   chasing: T.u8,
-  chasespeed: T.u8,
+  chaseSpeed: T.u8,
   chasedist: T.u8,
   cx: T.u16,
   cy: T.u16,

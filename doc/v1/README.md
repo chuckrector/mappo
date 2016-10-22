@@ -375,7 +375,7 @@ Output:
     "scriptParsingOffset": 0,
     "face": 1,
     "chasing": 0,
-    "chasespeed": 0,
+    "chaseSpeed": 0,
     "chasedist": 0,
     "cx": 0,
     "cy": 0,
