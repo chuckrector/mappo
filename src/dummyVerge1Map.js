@@ -64,7 +64,7 @@ const entity = makeBuffer([
   B.u16([12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1]),
   // currentCommandCode, currentCommandArgument
   B.u8([2, 1]),
-  // scriptofs
+  // scriptParsingOffset
   B.u32(1),
   // face, chasing, chasespeed, chasedist
   B.u8([4, 3, 2, 1]),
@@ -90,7 +90,7 @@ const scripts = makeBuffer([
   B.u32([0, 10, 20, 30, 40]),
   // movementScriptBuffer
   B.u8(filler(50, 99)),
-  // scriptCount, scriptofstb,
+  // scriptCount, scriptParsingOffsettb,
   B.u32([3, 0, 10, 20]),
   // scriptBuffer
   B.u8(filler(30, 88)),

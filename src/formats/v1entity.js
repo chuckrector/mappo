@@ -33,7 +33,7 @@ module.exports = {
   y2: T.u16,
   currentCommandCode: T.u8,
   currentCommandArgument: T.u8,
-  scriptofs: T.u32,
+  scriptParsingOffset: T.u32,
   face: T.u8,
   chasing: T.u8,
   chasespeed: T.u8,

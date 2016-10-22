@@ -372,7 +372,7 @@ Output:
     "y2": 0,
     "currentCommandCode": 0,
     "currentCommandArgument": 0,
-    "scriptofs": 0,
+    "scriptParsingOffset": 0,
     "face": 1,
     "chasing": 0,
     "chasespeed": 0,
