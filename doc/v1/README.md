@@ -380,7 +380,7 @@ Output:
     "cx": 0,
     "cy": 0,
     "expand": 0,
-    "entitydesc": "Crystal"
+    "description": "Crystal"
   }],
   "movementScriptCount": 1,
   "movementScriptBufferSize": 23,

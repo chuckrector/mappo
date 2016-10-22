@@ -72,7 +72,7 @@ const entity = makeBuffer([
   B.u16([2, 1]),
   // expand
   B.u32(1),
-  // entitydesc
+  // description
   B.stringFixed(20, `Description`),
 ])
 

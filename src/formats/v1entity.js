@@ -41,5 +41,5 @@ module.exports = {
   cx: T.u16,
   cy: T.u16,
   expand: T.u32,
-  entitydesc: T.stringFixed(20),
+  description: T.stringFixed(20),
 }
