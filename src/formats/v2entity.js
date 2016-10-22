@@ -12,7 +12,7 @@ module.exports = {
   movementCounter: T.u8,
   frame: T.u8,
   specialFrame: T.u8,
-  chrindex: T.u8,
+  characterIndex: T.u8,
   reset: T.u8,
   obsmode1: T.u8,
   obsmode2: T.u8,

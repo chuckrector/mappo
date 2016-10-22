@@ -10,7 +10,7 @@ module.exports = {
   movementCounter: T.u8,
   frameCounter: T.u8,
   specialFrame: T.u8,
-  chrindex: T.u8,
+  characterIndex: T.u8,
   movecode: T.u8,
   activmode: T.u8,
   obsmode: T.u8,

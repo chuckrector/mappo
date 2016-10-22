@@ -349,7 +349,7 @@ Output:
     "movementCounter": 0,
     "frameCounter": 0,
     "specialFrame": 0,
-    "chrindex": 5,
+    "characterIndex": 5,
     "movecode": 0,
     "activmode": 0,
     "obsmode": 1,
