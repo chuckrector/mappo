@@ -294,7 +294,7 @@ Output:
     "scriptofs": 0,
     "face": 1,
     "actm": 0,
-    "movecode": 2,
+    "movementPatternCode": 2,
     "movescript": 0,
     "ctr": 0,
     "mode": 0,

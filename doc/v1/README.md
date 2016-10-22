@@ -350,7 +350,7 @@ Output:
     "frameCounter": 0,
     "specialFrame": 0,
     "characterIndex": 5,
-    "movecode": 0,
+    "movementPatternCode": 0,
     "activmode": 0,
     "obsmode": 1,
     "padding": [0, 0, 0],

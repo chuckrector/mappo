@@ -11,7 +11,7 @@ module.exports = {
   frameCounter: T.u8,
   specialFrame: T.u8,
   characterIndex: T.u8,
-  movecode: T.u8,
+  movementPatternCode: T.u8,
   activmode: T.u8,
   obsmode: T.u8,
   padding: T.list(T.u8, 3),

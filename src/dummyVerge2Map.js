@@ -92,7 +92,7 @@ const entity = makeBuffer([
   B.u8(filler(12, 99)),
   // animofs, scriptofs
   B.u32([2, 1]),
-  // face, actm, movecode, movescript, ctr, mode, modePadding (2 bytes)
+  // face, actm, movementPatternCode, movescript, ctr, mode, modePadding (2 bytes)
   B.u8(filler(6 + 2, 88)),
   // step, delay, stepctr, delayctr, data1..data6
   B.u16(filler(10, 77)),

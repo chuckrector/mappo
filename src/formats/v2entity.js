@@ -23,7 +23,7 @@ module.exports = {
   scriptofs: T.u32,
   face: T.u8,
   actm: T.u8,
-  movecode: T.u8,
+  movementPatternCode: T.u8,
   movescript: T.u8,
   ctr: T.u8,
   mode: T.u8,
