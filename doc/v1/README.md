@@ -213,7 +213,7 @@ Output:
 
 ```json
 {
-  "numitems": 33,
+  "itemCount": 33,
   "equip": [{
     "comments": ["// Dagger"],
     "str": 5,
@@ -261,7 +261,7 @@ Output:
 
 ```json
 {
-  "numitems": 48,
+  "itemCount": 48,
   "items": [{
     "name": "Starlight",
     "icon": 0,

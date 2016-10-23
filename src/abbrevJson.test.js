@@ -18,7 +18,7 @@ const abbrevJson = require(`./abbrevJson`)
 {
   // can keep open curlies on previous line
   const data = {
-    numitems: 33,
+    itemCount: 33,
     equip: [{
       comments: [`// Dagger`],
       str: 5,
@@ -40,7 +40,7 @@ const abbrevJson = require(`./abbrevJson`)
   }
 
   expect(abbrevJson(data)).toBe(`{
-  "numitems": 33,
+  "itemCount": 33,
   "equip": [{
       "comments": [
         "// Dagger"

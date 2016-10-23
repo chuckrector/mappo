@@ -7,10 +7,10 @@ module.exports = (args) => {
 
   const load = () => {
     reader.readWhitespace()
-    const numitems = reader.readStringAsByte()
+    const itemCount = reader.readStringAsByte()
 
     let equip = []
-    for (let i = 0; i < numitems; i++) {
+    for (let i = 0; i < itemCount; i++) {
       let blob = {}
 
       while (!reader.atEnd() && !reader.atMatch(`-`)) {
@@ -73,7 +73,7 @@ module.exports = (args) => {
     }
 
     return {
-      numitems,
+      itemCount,
       equip
     }
   }

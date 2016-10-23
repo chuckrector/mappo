@@ -43,7 +43,7 @@ EQABLE 3 4
   //   char onequip, ondeequip;
   // };
 
-  expect(data.numitems).toEqual(3)
+  expect(data.itemCount).toEqual(3)
   expect(data.equip).toEqual([{
       comments: [`// Dagger`],
       str: 9,
