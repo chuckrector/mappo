@@ -10,11 +10,11 @@ const palette = require(`../dummyPalette`)
   const tileWidth = 16
   const tileHeight = 16
   const tileCount = 21
-  const itemicons = filler(tileWidth * tileHeight * tileCount, 99)
+  const tiles = filler(tileWidth * tileHeight * tileCount, 99)
   const converter = createVerge1ItemIconDatConverter({
     palette,
     tileCount,
-    itemicons
+    tiles
   })
 
   const png = converter.convertToPng()

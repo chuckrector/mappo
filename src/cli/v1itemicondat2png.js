@@ -14,7 +14,7 @@ const itemIconDatData = asset.fromDisk(itemIconDatFilename, asset.v1itemicondat)
 const itemIconDatConverter = createVerge1ItemIconDatConverter({
   palette: palData.pal,
   tileCount: itemIconDatData.tileCount,
-  itemicons: itemIconDatData.itemicons,
+  tiles: itemIconDatData.tiles,
 })
 
 const png = itemIconDatConverter.convertToPng()
