@@ -16,7 +16,7 @@ const miscIconDatConverter = createVerge1MiscIconDatConverter({
   tileCount: miscIconDatData.tileCount,
   menuPointer: miscIconDatData.menuPointer,
   itemPointer: miscIconDatData.itemPointer,
-  charptr: miscIconDatData.charptr,
+  characterPointer: miscIconDatData.characterPointer,
 })
 
 const png = miscIconDatConverter.convertToPng()

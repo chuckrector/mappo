@@ -11,22 +11,22 @@ const palette = require(`../dummyPalette`)
   const menuPointerTileHeight = 16
   const itemPointerTileWidth = 24
   const itemPointerTileHeight = 24
-  const charptrTileWidth = 24
-  const charptrTileHeight = 40
+  const characterPointerTileWidth = 24
+  const characterPointerTileHeight = 40
   const tileCount = 3
   const menuPointer = filler(menuPointerTileWidth * menuPointerTileHeight, 77)
   const itemPointer = filler(itemPointerTileWidth * itemPointerTileHeight, 88)
-  const charptr = filler(charptrTileWidth * charptrTileHeight, 99)
+  const characterPointer = filler(characterPointerTileWidth * characterPointerTileHeight, 99)
   const converter = createVerge1MiscIconDatConverter({
     palette,
     tileCount,
     menuPointer,
     itemPointer,
-    charptr,
+    characterPointer,
   })
 
   const png = converter.convertToPng()
 
-  expect(png.width).toBe(menuPointerTileWidth + itemPointerTileWidth + charptrTileWidth)
-  expect(png.height).toBe(charptrTileHeight)
+  expect(png.width).toBe(menuPointerTileWidth + itemPointerTileWidth + characterPointerTileWidth)
+  expect(png.height).toBe(characterPointerTileHeight)
 }

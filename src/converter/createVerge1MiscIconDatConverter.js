@@ -9,16 +9,16 @@ module.exports = ({
   tileCount,
   menuPointer,
   itemPointer,
-  charptr,
+  characterPointer,
 }) => {
   const menuPointerTileWidth = 16
   const menuPointerTileHeight = 16
   const itemPointerTileWidth = 24
   const itemPointerTileHeight = 24
-  const charptrTileWidth = 24
-  const charptrTileHeight = 40
-  const pngWidth = menuPointerTileWidth + itemPointerTileWidth + charptrTileWidth
-  const pngHeight = charptrTileHeight
+  const characterPointerTileWidth = 24
+  const characterPointerTileHeight = 40
+  const pngWidth = menuPointerTileWidth + itemPointerTileWidth + characterPointerTileWidth
+  const pngHeight = characterPointerTileHeight
   const raw8bitData = filler(pngWidth * pngHeight)
 
   const converter = createTileGridConverter({
@@ -74,16 +74,16 @@ module.exports = ({
     })
 
     converter.blitRawToPng({
-      rawData: charptr,
+      rawData: characterPointer,
       rawRect: {
-        width: charptrTileWidth,
-        height: charptrTileHeight,
+        width: characterPointerTileWidth,
+        height: characterPointerTileHeight,
       },
       rawTileRect: {
         x: 0,
         y: 0,
-        width: charptrTileWidth,
-        height: charptrTileHeight,
+        width: characterPointerTileWidth,
+        height: characterPointerTileHeight,
       },
       pngData,
       pngRect,
