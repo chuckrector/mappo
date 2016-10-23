@@ -14,7 +14,7 @@ const miscIconDatData = asset.fromDisk(miscIconDatFilename, asset.v1miscicondat)
 const miscIconDatConverter = createVerge1MiscIconDatConverter({
   palette: palData.pal,
   tileCount: miscIconDatData.tileCount,
-  menuptr: miscIconDatData.menuptr,
+  menuPointer: miscIconDatData.menuPointer,
   itmptr: miscIconDatData.itmptr,
   charptr: miscIconDatData.charptr,
 })

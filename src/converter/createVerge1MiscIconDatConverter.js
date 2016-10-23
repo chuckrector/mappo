@@ -7,17 +7,17 @@ const colorDepth = require(`./colorDepth`)
 module.exports = ({
   palette,
   tileCount,
-  menuptr,
+  menuPointer,
   itmptr,
   charptr,
 }) => {
-  const menuptrTileWidth = 16
-  const menuptrTileHeight = 16
+  const menuPointerTileWidth = 16
+  const menuPointerTileHeight = 16
   const itmptrTileWidth = 24
   const itmptrTileHeight = 24
   const charptrTileWidth = 24
   const charptrTileHeight = 40
-  const pngWidth = menuptrTileWidth + itmptrTileWidth + charptrTileWidth
+  const pngWidth = menuPointerTileWidth + itmptrTileWidth + charptrTileWidth
   const pngHeight = charptrTileHeight
   const raw8bitData = filler(pngWidth * pngHeight)
 
@@ -34,16 +34,16 @@ module.exports = ({
     const pngRect = converter.png
 
     converter.blitRawToPng({
-      rawData: menuptr,
+      rawData: menuPointer,
       rawRect: {
-        width: menuptrTileWidth,
-        height: menuptrTileHeight,
+        width: menuPointerTileWidth,
+        height: menuPointerTileHeight,
       },
       rawTileRect: {
         x: 0,
         y: 0,
-        width: menuptrTileWidth,
-        height: menuptrTileHeight,
+        width: menuPointerTileWidth,
+        height: menuPointerTileHeight,
       },
       pngData,
       pngRect,
@@ -68,7 +68,7 @@ module.exports = ({
       pngData,
       pngRect,
       pngDestRect: {
-        x: menuptrTileWidth,
+        x: menuPointerTileWidth,
         y: 0,
       },
     })
@@ -88,7 +88,7 @@ module.exports = ({
       pngData,
       pngRect,
       pngDestRect: {
-        x: menuptrTileWidth + itmptrTileWidth,
+        x: menuPointerTileWidth + itmptrTileWidth,
         y: 0,
       },
     })
