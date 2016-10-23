@@ -10,7 +10,7 @@ module.exports = {
   useeffect: T.stringU16,
   itemType: T.stringU8,
   canEquip: T.stringU8,
-  equipidx: T.stringU8,
+  equipDatIndex: T.stringU8,
   itemPreviewCode: T.stringU8,
   price: T.stringU32,
 }

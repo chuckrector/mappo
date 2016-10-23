@@ -47,7 +47,7 @@ Sacred_Carrot 40 Item_of_Absolute_Power 0 0 0 0 0 0 0
 Pharaoh_Sceptre 41 ATK+15,_MAG+10 0 0 0 1 32 500 0
 Atlas_Scroll 42 Shows_position_on_map 2 4 0 0 0 0 0
 
-Item_Name <#icon> Item_Description <use> <useeffect> <type> <canEquip> <equipidx> <price>
+Item_Name <#icon> Item_Description <use> <useeffect> <type> <canEquip> <equipDatIndex> <price>
 
 <use>: 0 for nonusable.
        1 for usable once, then it goes away.
@@ -70,7 +70,7 @@ Item_Name <#icon> Item_Description <use> <useeffect> <type> <canEquip> <equipidx
              4 Equipment is helmet
              5 Equipment is acc1
              6 Equipment is acc2
-<equipidx> is a pointer to EQUIP.DAT when necessary.
+<equipDatIndex> is a pointer to EQUIP.DAT when necessary.
 <price>: Is the cost to buy the item in a store. It can be sold for half the
          cost. Note that it might not necessarily appear in any stores for
          sale, such as Althena's sword, but you can still sell it or something.
