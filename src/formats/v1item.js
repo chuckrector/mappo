@@ -11,6 +11,6 @@ module.exports = {
   itemType: T.stringU8,
   equipflag: T.stringU8,
   equipidx: T.stringU8,
-  itmprv: T.stringU8,
+  itemPreviewCode: T.stringU8,
   price: T.stringU32,
 }

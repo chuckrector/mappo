@@ -271,7 +271,7 @@ Output:
     "itemType": 1,
     "equipflag": 0,
     "equipidx": 0,
-    "itmprv": 0,
+    "itemPreviewCode": 0,
     "price": 300
   }, ...]
 }
