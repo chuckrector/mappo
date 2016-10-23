@@ -47,7 +47,7 @@ Sacred_Carrot 40 Item_of_Absolute_Power 0 0 0 0 0 0 0
 Pharaoh_Sceptre 41 ATK+15,_MAG+10 0 0 0 1 32 500 0
 Atlas_Scroll 42 Shows_position_on_map 2 4 0 0 0 0 0
 
-Item_Name <#icon> Item_Description <use> <useeffect> <type> <equipflag> <equipidx> <price>
+Item_Name <#icon> Item_Description <use> <useeffect> <type> <canEquip> <equipidx> <price>
 
 <use>: 0 for nonusable.
        1 for usable once, then it goes away.
@@ -63,7 +63,7 @@ Item_Name <#icon> Item_Description <use> <useeffect> <type> <equipflag> <equipid
         2 for AA. (All Allies)
         3 for 1E. (One Enemy)
         4 for AE. (All Enemy)
-<equipflag>: 0 if it is nonequipable by anyone.
+<canEquip>: 0 if it is nonequipable by anyone.
              1 Equipment is right-hand (weapon)
              2 Equipment is left-hand (shield)
              3 Equipment is armor

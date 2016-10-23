@@ -9,7 +9,7 @@ module.exports = {
   useflag: T.stringU8,
   useeffect: T.stringU16,
   itemType: T.stringU8,
-  equipflag: T.stringU8,
+  canEquip: T.stringU8,
   equipidx: T.stringU8,
   itemPreviewCode: T.stringU8,
   price: T.stringU32,
