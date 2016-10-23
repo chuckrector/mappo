@@ -47,7 +47,7 @@ Sacred_Carrot 40 Item_of_Absolute_Power 0 0 0 0 0 0 0
 Pharaoh_Sceptre 41 ATK+15,_MAG+10 0 0 0 1 32 500 0
 Atlas_Scroll 42 Shows_position_on_map 2 4 0 0 0 0 0
 
-Item_Name <#icon> Item_Description <use> <useeffect> <type> <canEquip> <equipDatIndex> <price>
+Item_Name <#icon> Item_Description <use> <usageEffectScriptIndex> <type> <canEquip> <equipDatIndex> <price>
 
 <use>: 0 for nonusable.
        1 for usable once, then it goes away.
@@ -56,7 +56,7 @@ Item_Name <#icon> Item_Description <use> <useeffect> <type> <canEquip> <equipDat
        4 for usable ONLY camped, infinitely
        5 for usable in combat only, once, then it goes away.
        6 for usable in combat only, indefinetly.
-<useeffect>: an index to EFFECTS.VC
+<usageEffectScriptIndex>: an index to EFFECTS.VC
 <type>: one of the following
         0 for OS. (Own Self)
         1 for 1A. (One Ally)

@@ -7,7 +7,7 @@ module.exports = {
   icon: T.stringU16,
   description: T.string,
   useflag: T.stringU8,
-  useeffect: T.stringU16,
+  usageEffectScriptIndex: T.stringU16,
   itemType: T.stringU8,
   canEquip: T.stringU8,
   equipDatIndex: T.stringU8,
