@@ -16,7 +16,7 @@ const writeAnimatedGif = (frameOffset, direction) => {
   const targetFilename = `${chrFilename}-${direction}.gif`
 
   fs.writeFileSync(targetFilename, animatedGif({
-    palette: palData.pal.map(v => v * 4),
+    palette: palData.palette.map(v => v * 4),
     raw8bitFrames: [0, 1, 2, 1, 3, 4, 3].map(index => tileList[frameOffset + index]),
     width: 16,
     height: 32,

@@ -15,7 +15,7 @@ const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v2chr)
 
 const raw32BitData = colorDepth.convert8to32({
-  palette: palData.pal.map(v => v * 4),
+  palette: palData.palette.map(v => v * 4),
   raw8bitData: chrData.frames.decompressed,
 })
 

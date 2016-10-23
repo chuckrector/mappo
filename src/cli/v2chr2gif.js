@@ -20,7 +20,7 @@ const writeAnimatedGif = (anim, direction) => {
   const frameDescriptorList = parseChrAnim(anim)
 
   fs.writeFileSync(targetFilename, animatedGif({
-    palette: palData.pal.map(v => v * 4),
+    palette: palData.palette.map(v => v * 4),
     raw8bitFrames: frameList,
     width: chrData.frameWidth,
     height: chrData.frameHeight,

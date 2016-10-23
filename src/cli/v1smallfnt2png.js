@@ -12,7 +12,7 @@ const smallFntFilename = process.argv[3]
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const smallFntData = asset.fromDisk(smallFntFilename, asset.v1smallfnt)
 const smallFntConverter = createVerge1SmallFntConverter({
-  palette: palData.pal,
+  palette: palData.palette,
   fnt: smallFntData.fnt,
 })
 

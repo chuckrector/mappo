@@ -12,7 +12,7 @@ const cr2Filename = process.argv[3]
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const cr2Data = asset.fromDisk(cr2Filename, asset.v1cr2)
 const cr2Converter = createVerge1Cr2Converter({
-  palette: palData.pal,
+  palette: palData.palette,
   images: cr2Data.images,
 })
 

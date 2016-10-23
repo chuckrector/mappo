@@ -24,7 +24,7 @@ const writeAnimatedGif = (anim, index) => {
     raw32bitData = colorDepth.convert24to32({raw24bitData: raw32bitData})
   }
 
-  const palette = palData.pal
+  const palette = palData.palette
   const paletteTriplets = chunk(palette, 3)
   const rgbQuant = new RgbQuant({palette: paletteTriplets})
 

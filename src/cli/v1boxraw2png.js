@@ -12,7 +12,7 @@ const boxRawFilename = process.argv[3]
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const boxRawData = asset.fromDisk(boxRawFilename, asset.v1boxraw)
 const boxRawConverter = createVerge1BoxRawConverter({
-  palette: palData.pal,
+  palette: palData.palette,
   transparentBox: boxRawData.transparentBox,
 })
 

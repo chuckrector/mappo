@@ -12,7 +12,7 @@ const speechSpcFilename = process.argv[3]
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const speechSpcData = asset.fromDisk(speechSpcFilename, asset.v1speechspc)
 const speechSpcConverter = createVerge1SpeechSpcConverter({
-  palette: palData.pal,
+  palette: palData.palette,
   tileCount: speechSpcData.tileCount,
   speech: speechSpcData.speech,
 })

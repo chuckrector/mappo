@@ -10,7 +10,7 @@ const chrFilename = process.argv[3]
 
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v1chr)
-chrData.palette = palData.pal
+chrData.palette = palData.palette
 
 const targetFilename = chrFilename + `.json`
 

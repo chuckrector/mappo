@@ -12,7 +12,7 @@ const chrFilename = process.argv[3]
 const palData = asset.fromDisk(palFilename, asset.v1pal)
 const chrData = asset.fromDisk(chrFilename, asset.v1chr)
 const chrConverter = createVerge1ChrConverter({
-  palette: palData.pal,
+  palette: palData.palette,
   frames: chrData.frames,
 })
 
