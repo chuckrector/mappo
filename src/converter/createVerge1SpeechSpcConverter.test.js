@@ -9,11 +9,11 @@ const palette = require(`../dummyPalette`)
   // can convert SPEECH.SPC character portrait to png
   const tileWidth = 32
   const tileHeight = 32
-  const numtiles = 11
-  const speech = filler(tileWidth * tileHeight * numtiles, 99)
+  const tileCount = 11
+  const speech = filler(tileWidth * tileHeight * tileCount, 99)
   const converter = createVerge1SpeechSpcConverter({
     palette,
-    numtiles,
+    tileCount,
     speech
   })
 

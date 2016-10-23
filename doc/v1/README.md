@@ -266,11 +266,11 @@ Output:
     "name": "Starlight",
     "icon": 0,
     "desc": "Restores_15_MP",
-    "useflag": 1,
-    "useeffect": 1,
+    "usageType": 1,
+    "usageEffectScriptIndex": 1,
     "itemType": 1,
-    "equipflag": 0,
-    "equipidx": 0,
+    "canEquip": 0,
+    "equipDatIndex": 0,
     "itemPreviewCode": 0,
     "price": 300
   }, ...]

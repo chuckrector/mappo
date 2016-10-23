@@ -8,12 +8,12 @@ const createMappoTileset = require(`./createMappoTileset`)
 
 {
   // can create from v1 vsp
-  const numtiles = 3
+  const tileCount = 3
   const buffer = makeBuffer([
     B.u16(0), // version
     B.u8(filler(3 * 256)),
-    B.u16(numtiles),
-    B.u8(filler(16 * 16 * numtiles, 99)),
+    B.u16(tileCount),
+    B.u8(filler(16 * 16 * tileCount, 99)),
     B.u8(filler(2 * 4 * 100, 88)), // 100 vsp animations
   ])
 
@@ -22,8 +22,8 @@ const createMappoTileset = require(`./createMappoTileset`)
 
   expect(mappoTileset.tileWidth).toBe(16)
   expect(mappoTileset.tileHeight).toBe(16)
-  expect(mappoTileset.numTiles).toBe(numtiles)
-  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numtiles)
+  expect(mappoTileset.numTiles).toBe(tileCount)
+  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * tileCount)
 }
 
 {

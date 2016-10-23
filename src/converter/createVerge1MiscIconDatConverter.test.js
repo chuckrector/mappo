@@ -13,13 +13,13 @@ const palette = require(`../dummyPalette`)
   const itmptrTileHeight = 24
   const charptrTileWidth = 24
   const charptrTileHeight = 40
-  const numtiles = 3
+  const tileCount = 3
   const menuptr = filler(menuptrTileWidth * menuptrTileHeight, 77)
   const itmptr = filler(itmptrTileWidth * itmptrTileHeight, 88)
   const charptr = filler(charptrTileWidth * charptrTileHeight, 99)
   const converter = createVerge1MiscIconDatConverter({
     palette,
-    numtiles,
+    tileCount,
     menuptr,
     itmptr,
     charptr,

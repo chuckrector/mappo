@@ -8,10 +8,10 @@ module.exports = ({
   tileWidth,
   tileHeight,
   columns,
-  numtiles,
+  tileCount,
   raw32bitData,
 }) => {
-  const rows = roundedUpUnits(numtiles, columns)
+  const rows = roundedUpUnits(tileCount, columns)
   const pngWidth = columns * tileWidth
   const pngHeight = rows * tileHeight
 
@@ -116,7 +116,7 @@ module.exports = ({
     const rawData = raw32bitData
     const rawRect = {
       width: tileWidth,
-      height: tileHeight * numtiles,
+      height: tileHeight * tileCount,
     }
     const pngData = api.png.data
     const pngRect = {

@@ -28,7 +28,7 @@ const palette = require(`../dummyPalette`)
 
   const converter = createVerge1VspConverter({
     palette,
-    numtiles: 21,
+    tileCount: 21,
     vsp0: Array.prototype.concat(...filler(21, oneTile)),
   })
 

@@ -21,7 +21,7 @@ const colorDepth = require(`./colorDepth`)
     99, 99, 99, 99, 99,
   ]
 
-  const numtiles = 3
+  const tileCount = 3
   const tileWidth = 5
   const tileHeight = 5
   const columns = 2
@@ -35,7 +35,7 @@ const colorDepth = require(`./colorDepth`)
     tileWidth,
     tileHeight,
     columns,
-    numtiles,
+    tileCount,
     raw32bitData,
   })
   const png = converter.convertToPng()
@@ -88,7 +88,7 @@ const colorDepth = require(`./colorDepth`)
     tileWidth,
     tileHeight,
     columns,
-    numtiles,
+    tileCount,
     raw32bitData,
   })
 

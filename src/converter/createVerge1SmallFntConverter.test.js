@@ -9,8 +9,8 @@ const palette = require(`../dummyPalette`)
   // can convert SMALL.FNT font to png
   const tileWidth = 7
   const tileHeight = 9
-  const numtiles = 95
-  const fnt = filler(tileWidth * tileHeight * numtiles)
+  const tileCount = 95
+  const fnt = filler(tileWidth * tileHeight * tileCount)
   const converter = createVerge1SmallFntConverter({
     palette,
     fnt: Buffer.from(fnt)

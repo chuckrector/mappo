@@ -9,8 +9,8 @@ const palette = require(`../dummyPalette`)
   // can convert MAIN.FNT font to png
   const tileWidth = 9
   const tileHeight = 16
-  const numtiles = 95
-  const fnt2 = filler(tileWidth * tileHeight * numtiles)
+  const tileCount = 95
+  const fnt2 = filler(tileWidth * tileHeight * tileCount)
   const converter = createVerge1MainFntConverter({
     palette,
     fnt2: Buffer.from(fnt2)

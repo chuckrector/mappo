@@ -3,12 +3,12 @@
 const createTileGridConverter = require(`./createTileGridConverter`)
 const colorDepth = require(`./colorDepth`)
 
-module.exports = ({palette, numtiles, speech}) => {
+module.exports = ({palette, tileCount, speech}) => {
   const converter = createTileGridConverter({
     tileWidth: 32,
     tileHeight: 32,
     columns: 10,
-    numtiles,
+    tileCount,
     raw32bitData: colorDepth.convert8to32({palette, raw8bitData: speech}),
   })
 

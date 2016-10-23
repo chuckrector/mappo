@@ -19,7 +19,7 @@ module.exports = tileset => {
       tileWidth: tileset.tileWidth,
       tileHeight: tileset.tileHeight,
       columns: tileset.tileColumns,
-      numtiles: tileset.numTiles,
+      tileCount: tileset.numTiles,
       raw32bitData,
     })
 

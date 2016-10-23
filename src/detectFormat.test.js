@@ -101,12 +101,12 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v1 VSP
-  const numtiles = 3
+  const tileCount = 3
   const isVsp = makeBuffer([
     B.u16(0), // version is ignored by v1
     B.u8(filler(3 * 256, 0)),
-    B.u16(numtiles),
-    B.u8(filler(16 * 16 * numtiles)),
+    B.u16(tileCount),
+    B.u8(filler(16 * 16 * tileCount)),
     B.u16(filler(4 * 100, 0)),
   ])
 

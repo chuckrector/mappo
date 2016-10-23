@@ -10,7 +10,7 @@ const vspFilename = process.argv[2]
 const vsp = asset.fromDisk(vspFilename, asset.v2vsp)
 const converter = createVerge2VspConverter({
   palette: vsp.palette,
-  numtiles: vsp.numtiles,
+  tileCount: vsp.tileCount,
   frames: vsp.frames.decompressed,
 })
 const png = converter.convertToPng()

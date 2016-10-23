@@ -9,7 +9,7 @@ const asset = require(`../asset`)
 const vspFilename = process.argv[2]
 const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
 const converter = createVerge3VspConverter({
-  numtiles: vsp.numtiles,
+  tileCount: vsp.tileCount,
   tiledatabuf: vsp.tiledatabuf.decompressed,
 })
 const png = converter.convertToPng()

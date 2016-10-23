@@ -12,7 +12,7 @@ module.exports = ({context, tileset, imageFilename}) => {
     case `v1vsp`: {
       mappoTileset.tileWidth = 16
       mappoTileset.tileHeight = 16
-      mappoTileset.numTiles = tileset.numtiles
+      mappoTileset.numTiles = tileset.tileCount
       mappoTileset.raw32bitData = colorDepth.convert8to32({
         palette: tileset.palette.map(v => v * 4),
         raw8bitData: tileset.vsp0,
@@ -21,7 +21,7 @@ module.exports = ({context, tileset, imageFilename}) => {
     case `v2vsp`: {
       mappoTileset.tileWidth = 16
       mappoTileset.tileHeight = 16
-      mappoTileset.numTiles = tileset.numtiles
+      mappoTileset.numTiles = tileset.tileCount
       mappoTileset.raw32bitData = colorDepth.convert8to32({
         palette: tileset.palette.map(v => v * 4),
         raw8bitData: tileset.frames.decompressed,
@@ -48,7 +48,7 @@ module.exports = ({context, tileset, imageFilename}) => {
     case `v3vsp`: {
       mappoTileset.tileWidth = tileset.tilesize
       mappoTileset.tileHeight = tileset.tilesize
-      mappoTileset.numTiles = tileset.numtiles
+      mappoTileset.numTiles = tileset.tileCount
       mappoTileset.raw32bitData = colorDepth.convert24to32({
         raw24bitData: tileset.tiledatabuf.decompressed,
       })

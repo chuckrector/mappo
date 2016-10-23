@@ -8,7 +8,7 @@ module.exports = ({palette, fnt}) => {
     tileWidth: 7,
     tileHeight: 9,
     columns: 19,
-    numtiles: 95,
+    tileCount: 95,
     raw32bitData: colorDepth.convert8to32({palette, raw8bitData: fnt}),
   })
 

@@ -9,11 +9,11 @@ const palette = require(`../dummyPalette`)
   // can convert ITEMICON.DAT to png
   const tileWidth = 16
   const tileHeight = 16
-  const numtiles = 21
-  const itemicons = filler(tileWidth * tileHeight * numtiles, 99)
+  const tileCount = 21
+  const itemicons = filler(tileWidth * tileHeight * tileCount, 99)
   const converter = createVerge1ItemIconDatConverter({
     palette,
-    numtiles,
+    tileCount,
     itemicons
   })
 

@@ -6,7 +6,7 @@ const colorDepth = require(`./colorDepth`)
 
 module.exports = ({
   palette,
-  numtiles,
+  tileCount,
   menuptr,
   itmptr,
   charptr,
@@ -25,7 +25,7 @@ module.exports = ({
     tileWidth: pngWidth,
     tileHeight: pngHeight,
     columns: 1,
-    numtiles: 1,
+    tileCount: 1,
     raw32bitData: colorDepth.convert8to32({palette, raw8bitData}),
   })
 

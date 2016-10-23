@@ -8,7 +8,7 @@ module.exports = ({palette, obstructionCount, obstructions}) => {
     tileWidth: 16,
     tileHeight: 16,
     columns: 20,
-    numtiles: obstructionCount,
+    tileCount: obstructionCount,
     raw32bitData: colorDepth.convert8to32({palette, raw8bitData: obstructions}),
   })
 
