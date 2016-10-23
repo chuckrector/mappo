@@ -268,7 +268,7 @@ Output:
     "desc": "Restores_15_MP",
     "useflag": 1,
     "useeffect": 1,
-    "itemtype": 1,
+    "itemType": 1,
     "equipflag": 0,
     "equipidx": 0,
     "itmprv": 0,

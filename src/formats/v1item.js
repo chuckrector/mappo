@@ -8,7 +8,7 @@ module.exports = {
   description: T.string,
   useflag: T.stringU8,
   useeffect: T.stringU16,
-  itemtype: T.stringU8,
+  itemType: T.stringU8,
   equipflag: T.stringU8,
   equipidx: T.stringU8,
   itmprv: T.stringU8,
