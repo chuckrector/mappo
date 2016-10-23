@@ -15,7 +15,7 @@ const miscIconDatConverter = createVerge1MiscIconDatConverter({
   palette: palData.pal,
   tileCount: miscIconDatData.tileCount,
   menuPointer: miscIconDatData.menuPointer,
-  itmptr: miscIconDatData.itmptr,
+  itemPointer: miscIconDatData.itemPointer,
   charptr: miscIconDatData.charptr,
 })
 

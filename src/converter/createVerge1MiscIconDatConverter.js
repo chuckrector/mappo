@@ -8,16 +8,16 @@ module.exports = ({
   palette,
   tileCount,
   menuPointer,
-  itmptr,
+  itemPointer,
   charptr,
 }) => {
   const menuPointerTileWidth = 16
   const menuPointerTileHeight = 16
-  const itmptrTileWidth = 24
-  const itmptrTileHeight = 24
+  const itemPointerTileWidth = 24
+  const itemPointerTileHeight = 24
   const charptrTileWidth = 24
   const charptrTileHeight = 40
-  const pngWidth = menuPointerTileWidth + itmptrTileWidth + charptrTileWidth
+  const pngWidth = menuPointerTileWidth + itemPointerTileWidth + charptrTileWidth
   const pngHeight = charptrTileHeight
   const raw8bitData = filler(pngWidth * pngHeight)
 
@@ -54,16 +54,16 @@ module.exports = ({
     })
 
     converter.blitRawToPng({
-      rawData: itmptr,
+      rawData: itemPointer,
       rawRect: {
-        width: itmptrTileWidth,
-        height: itmptrTileHeight,
+        width: itemPointerTileWidth,
+        height: itemPointerTileHeight,
       },
       rawTileRect: {
         x: 0,
         y: 0,
-        width: itmptrTileWidth,
-        height: itmptrTileHeight,
+        width: itemPointerTileWidth,
+        height: itemPointerTileHeight,
       },
       pngData,
       pngRect,
@@ -88,7 +88,7 @@ module.exports = ({
       pngData,
       pngRect,
       pngDestRect: {
-        x: menuPointerTileWidth + itmptrTileWidth,
+        x: menuPointerTileWidth + itemPointerTileWidth,
         y: 0,
       },
     })
