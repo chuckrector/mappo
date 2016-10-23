@@ -6,7 +6,7 @@ module.exports = {
   name: T.string,
   icon: T.stringU16,
   description: T.string,
-  useflag: T.stringU8,
+  usageType: T.stringU8,
   usageEffectScriptIndex: T.stringU16,
   itemType: T.stringU8,
   canEquip: T.stringU8,
