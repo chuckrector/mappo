@@ -13,7 +13,7 @@ const palData = asset.fromDisk(palFilename, asset.v1pal)
 const mainFntData = asset.fromDisk(mainFntFilename, asset.v1mainfnt)
 const mainFntConverter = createVerge1MainFntConverter({
   palette: palData.pal,
-  fnt2: mainFntData.fnt2,
+  images: mainFntData.images,
 })
 
 const png = mainFntConverter.convertToPng()
