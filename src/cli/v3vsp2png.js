@@ -10,7 +10,7 @@ const vspFilename = process.argv[2]
 const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
 const converter = createVerge3VspConverter({
   tileCount: vsp.tileCount,
-  tiledatabuf: vsp.tiledatabuf.decompressed,
+  tiles: vsp.tiles.decompressed,
 })
 const png = converter.convertToPng()
 const targetFilename = vspFilename + `.png`

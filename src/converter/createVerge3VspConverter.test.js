@@ -10,7 +10,7 @@ const palette = require(`../dummyPalette`)
   // can convert vsp tile data to png
   const converter = createVerge3VspConverter({
     tileCount: 21,
-    tiledatabuf: filler(16 * 16 * 3 * 12),
+    tiles: filler(16 * 16 * 3 * 12),
   })
 
   const png = converter.convertToPng()

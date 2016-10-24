@@ -10,7 +10,7 @@ module.exports = {
   format: T.u32,
   tileCount: T.u32,
   compression: T.u32,
-  tiledatabuf: T.zlibU8(({record}) => record.tileSize * record.tileSize * 3 * record.tileCount),
+  tiles: T.zlibU8(({record}) => record.tileSize * record.tileSize * 3 * record.tileCount),
   animationCount: T.u32,
   animations: T.list(V3_VSPANIM, ({record}) => record.animationCount),
   obstructionCount: T.u32,

@@ -50,7 +50,7 @@ module.exports = ({context, tileset, imageFilename}) => {
       mappoTileset.tileHeight = tileset.tileSize
       mappoTileset.numTiles = tileset.tileCount
       mappoTileset.raw32bitData = colorDepth.convert24to32({
-        raw24bitData: tileset.tiledatabuf.decompressed,
+        raw24bitData: tileset.tiles.decompressed,
       })
     } break;
   }

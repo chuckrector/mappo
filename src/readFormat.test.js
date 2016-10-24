@@ -202,14 +202,14 @@ const range = require(`lodash/range`)
   ])
 
   const data = readFormat({
-    format: {tiledatabuf: T.zlibU8(16 * 16)},
+    format: {tiles: T.zlibU8(16 * 16)},
     reader: createBufferReader({data: buffer})
   })
 
-  expect(data.tiledatabuf.mysize).toBe(raw.length)
-  expect(data.tiledatabuf.comprLen).toBe(compressedBuffer.length)
-  expect(data.tiledatabuf.decompressed.length).toBe(raw.length)
-  expect(data.tiledatabuf.decompressed).toEqual(raw)
+  expect(data.tiles.mysize).toBe(raw.length)
+  expect(data.tiles.comprLen).toBe(compressedBuffer.length)
+  expect(data.tiles.decompressed.length).toBe(raw.length)
+  expect(data.tiles.decompressed).toEqual(raw)
 }
 
 {
@@ -244,13 +244,13 @@ const range = require(`lodash/range`)
   ])
 
   const data = readFormat({
-    format: {tiledatabuf: T.ikaZlibU8(16 * 16)},
+    format: {tiles: T.ikaZlibU8(16 * 16)},
     reader: createBufferReader({data: buffer})
   })
 
-  expect(data.tiledatabuf.comprLen).toBe(compressedBuffer.length)
-  expect(data.tiledatabuf.decompressed.length).toBe(raw.length)
-  expect(data.tiledatabuf.decompressed).toEqual(raw)
+  expect(data.tiles.comprLen).toBe(compressedBuffer.length)
+  expect(data.tiles.decompressed.length).toBe(raw.length)
+  expect(data.tiles.decompressed).toEqual(raw)
 }
 {
   // can read ika zlibU32 buffers
