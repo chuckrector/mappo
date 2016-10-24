@@ -78,10 +78,7 @@ module.exports = ({map}) => {
         width: layerInfo.width,
         height: layerInfo.height,
         tileIndexGrid: layerInfo.tiledata.decompressed,
-        parallax: {
-          x: layerInfo.parallax_x,
-          y: layerInfo.parallax_y,
-        },
+        parallax: layerInfo.parallax,
       }))
     } break;
   }

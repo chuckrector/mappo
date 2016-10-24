@@ -192,8 +192,10 @@ Output:
   "layerCount": 2,
   "layers": [{
     "description": "Layer 0",
-    "parallax_x": 1,
-    "parallax_y": 1,
+    "parallax": {
+      "x": 1,
+      "y": 1,
+    },
     "width": 58,
     "height": 36,
     "lucent": 0,
