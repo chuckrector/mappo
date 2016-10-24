@@ -191,7 +191,7 @@ Output:
   "startY": 2,
   "layerCount": 2,
   "layers": [{
-    "layername": "Layer 0",
+    "description": "Layer 0",
     "parallax_x": 1,
     "parallax_y": 1,
     "width": 58,

@@ -74,7 +74,7 @@ module.exports = ({map}) => {
       mappoMap.mapLayerOrder = parseRenderString(map.renderString, `,`)
       mappoMap.tilesetFilename = map.vspFilename
       mappoMap.tileLayers = map.layers.map(layerInfo => ({
-        description: layerInfo.layername,
+        description: layerInfo.description,
         width: layerInfo.width,
         height: layerInfo.height,
         tileIndexGrid: layerInfo.tiledata.decompressed,

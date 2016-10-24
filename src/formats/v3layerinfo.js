@@ -3,7 +3,7 @@
 const {T} = require(`../readFormat`)
 
 module.exports = {
-  layername: T.stringFixed(256),
+  description: T.stringFixed(256),
   parallax_x: T.f64,
   parallax_y: T.f64,
   width: T.u16,
