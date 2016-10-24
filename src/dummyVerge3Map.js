@@ -62,10 +62,12 @@ const entity = {
   speed: 7,
   speedCounter: 8, // pulled from v2. ignored by v3. what is this?
   delayCounter: 9, // pulled from v2. ignored by v3. what is this?
-  wx1: 10,
-  wy1: 11,
-  wx2: 12,
-  wy2: 13,
+  wander: {
+    x1: 10,
+    y1: 11,
+    x2: 12,
+    y2: 13,
+  },
   wdelay: 14,
   maybeOffset: 15, // ignored by v3. what is this?
   movementScript: `move script`,
@@ -88,10 +90,10 @@ const mapEntity = makeBuffer([
   B.u16(entity.speed),
   B.u8([entity.speedCounter, entity.delayCounter]),
   B.u16([
-    entity.wx1,
-    entity.wy1,
-    entity.wx2,
-    entity.wy2,
+    entity.wander.x1,
+    entity.wander.y1,
+    entity.wander.x2,
+    entity.wander.y2,
     entity.wdelay,
   ]),
   B.u32(entity.maybeOffset),
