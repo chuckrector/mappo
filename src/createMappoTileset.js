@@ -46,8 +46,8 @@ module.exports = ({context, tileset, imageFilename}) => {
     } break
 
     case `v3vsp`: {
-      mappoTileset.tileWidth = tileset.tilesize
-      mappoTileset.tileHeight = tileset.tilesize
+      mappoTileset.tileWidth = tileset.tileSize
+      mappoTileset.tileHeight = tileset.tileSize
       mappoTileset.numTiles = tileset.tileCount
       mappoTileset.raw32bitData = colorDepth.convert24to32({
         raw24bitData: tileset.tiledatabuf.decompressed,

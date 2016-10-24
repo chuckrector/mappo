@@ -51,7 +51,7 @@ const createMappoTileset = require(`./createMappoTileset`)
   const numTiles = 3
   const tileSize = 32
   const buffer = makeBuffer([
-    // sig/version/tilesize/format/#tiles/compression
+    // sig/version/tileSize/format/#tiles/compression
     B.u32([0, 0, tileSize, 0, numTiles, 1]),
     B.zlibU8(filler(tileSize * tileSize * 3 * numTiles)),
     B.u32(1), // #animations

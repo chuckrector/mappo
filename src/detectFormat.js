@@ -182,8 +182,8 @@ module.exports = (buffer) => {
     const tileCountOffset = 2 + (3 * 256)
     const tileCount = buffer.readUInt16LE(tileCountOffset)
     const animationsize = 2 * 4 * 100
-    const tilesize = buffer.length - (tileCountOffset + 2) - animationsize
-    if (tilesize % (16 * 16) === 0) {
+    const tileSize = buffer.length - (tileCountOffset + 2) - animationsize
+    if (tileSize % (16 * 16) === 0) {
       return `v1vsp`
     }
   }
