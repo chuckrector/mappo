@@ -8,5 +8,5 @@ module.exports = {
   palette: T.list(T.u8, 3 * 256),
   tileCount: T.u16,
   frames: T.compressedU16(({record}) => 16 * 16 * record.tileCount),
-  vspanim: T.list(V1_VSPANIM, 100),
+  aniimations: T.list(V1_VSPANIM, 100),
 }
