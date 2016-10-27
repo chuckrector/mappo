@@ -8,7 +8,7 @@ module.exports = {
   version: T.u8,
   vspFilename: T.stringFixed(13),
   musicFilename: T.stringFixed(13),
-  layerc: T.u8,
+  layerControlFlag: T.u8,
   pmultx: T.u8,
   pdivx: T.u8,
   description: T.stringFixed(30),

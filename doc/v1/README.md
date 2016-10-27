@@ -310,7 +310,7 @@ Output:
   "version": 4,
   "vspFilename": "HAHN01.VSP",
   "musicFilename": "MEDIOEVA.MOD",
-  "layerc": 0,
+  "layerControlFlag": 0,
   "pmultx": 1,
   "pdivx": 1,
   "description": "Paradise Isle",
