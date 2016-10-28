@@ -23,7 +23,7 @@ module.exports = {
   b: T.u8,
   padding: T.list(T.u8, 27),
   layers: T.list(T.list(T.u16, ({record}) => record.width * record.height), 2),
-  mapp: T.list(T.u8, ({record}) => record.width * record.height),
+  obstructionLayer: T.list(T.u8, ({record}) => record.width * record.height),
   zone: T.list(V1_ZONE, 128),
   characterFilenames: T.list(T.stringFixed(13), 100),
   entityCount: T.u32,

@@ -328,7 +328,7 @@ Output:
     [...],
     [...],
   ],
-  "mapp": [...],
+  "obstructionLayer": [...],
   "zone": [{
     "zonename": "Default",
     "zonenamePadding": 0,
