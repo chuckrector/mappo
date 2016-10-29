@@ -422,7 +422,7 @@ Output:
 
 ```json
 {
-  "tchars": 5,
+  "characterCount": 5,
   "party": [
     {"chr": "DARIN.CHR", "cr2": "DARIN.CR2", "dat": "DARIN.DAT"},
     {"chr": "SARA.CHR", "cr2": "SARA.CR2", "dat": "SARA.DAT"},
