@@ -3,7 +3,7 @@
 const createTileGridConverter = require(`./createTileGridConverter`)
 const colorDepth = require(`./colorDepth`)
 
-module.exports = ({palette, tileCount, vsp0}) => {
+module.exports = ({palette, tileCount, tiles}) => {
   const converter = createTileGridConverter({
     tileWidth: 16,
     tileHeight: 16,
@@ -11,7 +11,7 @@ module.exports = ({palette, tileCount, vsp0}) => {
     tileCount,
     raw32bitData: colorDepth.convert8to32({
       palette: palette.map(v => v * 4),
-      raw8bitData: vsp0,
+      raw8bitData: tiles,
     }),
   })
 

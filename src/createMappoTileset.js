@@ -15,7 +15,7 @@ module.exports = ({context, tileset, imageFilename}) => {
       mappoTileset.numTiles = tileset.tileCount
       mappoTileset.raw32bitData = colorDepth.convert8to32({
         palette: tileset.palette.map(v => v * 4),
-        raw8bitData: tileset.vsp0,
+        raw8bitData: tileset.tiles,
       })
     } break;
     case `v2vsp`: {
