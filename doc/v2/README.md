@@ -285,7 +285,7 @@ Output:
     "specialFrame": 0,
     "characterIndex": 0,
     "reset": 0,
-    "obsmode1": 1,
+    "canBeObstructed": 1,
     "obsmode2": 1,
     "speed": 0,
     "speedCounter": 0,

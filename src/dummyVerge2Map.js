@@ -88,7 +88,7 @@ const entity = makeBuffer([
   B.u32([2, 1]),
   // tileX, tileY
   B.u16([4, 3]),
-  // facing, moving, movementCounter, frame, specialFrame, characterIndex, reset, obsmode1, obsmode2, speed, speedCounter, delayCounter
+  // facing, moving, movementCounter, frame, specialFrame, characterIndex, reset, canBeObstructed, obsmode2, speed, speedCounter, delayCounter
   B.u8(filler(12, 99)),
   // animationOffset, scriptParsingOffset
   B.u32([2, 1]),

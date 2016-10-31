@@ -14,7 +14,7 @@ module.exports = {
   specialFrame: T.u8,
   characterIndex: T.u8,
   reset: T.u8,
-  obsmode1: T.u8,
+  canBeObstructed: T.u8,
   obsmode2: T.u8,
   speed: T.u8,
   speedCounter: T.u8,
