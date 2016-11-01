@@ -15,7 +15,7 @@ module.exports = {
   characterIndex: T.u8,
   reset: T.u8,
   canBeObstructed: T.u8,
-  obsmode2: T.u8,
+  isAnObstruction: T.u8,
   speed: T.u8,
   speedCounter: T.u8,
   delayCounter: T.u8,

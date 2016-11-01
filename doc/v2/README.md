@@ -286,7 +286,7 @@ Output:
     "characterIndex": 0,
     "reset": 0,
     "canBeObstructed": 1,
-    "obsmode2": 1,
+    "isAnObstruction": 1,
     "speed": 0,
     "speedCounter": 0,
     "delayCounter": 0,
