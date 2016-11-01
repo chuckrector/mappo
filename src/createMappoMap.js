@@ -77,7 +77,7 @@ module.exports = ({map}) => {
         description: layerInfo.description,
         width: layerInfo.width,
         height: layerInfo.height,
-        tileIndexGrid: layerInfo.tiledata.decompressed,
+        tileIndexGrid: layerInfo.tileData.decompressed,
         parallax: layerInfo.parallax,
       }))
     } break;

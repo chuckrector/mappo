@@ -199,7 +199,7 @@ Output:
     "width": 58,
     "height": 36,
     "lucent": 0,
-    "tiledata": {
+    "tileData": {
       "mysize": 4176,
       "comprLen": 394,
       "compressed": [120, 156, 237, ...],
