@@ -67,8 +67,8 @@ const entity = {
     y1: 11,
     x2: 12,
     y2: 13,
+    delay: 14,
   },
-  wdelay: 14,
   maybeOffset: 15, // ignored by v3. what is this?
   movementScript: `move script`,
   chrname: `chr name`,
@@ -94,7 +94,7 @@ const mapEntity = makeBuffer([
     entity.wander.y1,
     entity.wander.x2,
     entity.wander.y2,
-    entity.wdelay,
+    entity.wabder.delay,
   ]),
   B.u32(entity.maybeOffset),
   B.stringFixed(256, entity.movementScript),
