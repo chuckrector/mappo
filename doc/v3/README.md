@@ -87,13 +87,13 @@ Output:
   "rightIdleFrameIndex": 2,
   "animations": [{
     "length": 32,
-    "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
+    "animationString": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
   }, {
     "length": 32,
-    "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
+    "animationString": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
   }, {
     "length": 32,
-    "animbuf": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
+    "animationString": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
   }, ...],
   "customscripts": 0,
   "compression": 1,

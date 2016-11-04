@@ -94,7 +94,7 @@ const mapEntity = makeBuffer([
     entity.wander.y1,
     entity.wander.x2,
     entity.wander.y2,
-    entity.wabder.delay,
+    entity.wander.delay,
   ]),
   B.u32(entity.maybeOffset),
   B.stringFixed(256, entity.movementScript),
