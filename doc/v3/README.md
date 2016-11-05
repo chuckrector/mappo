@@ -71,7 +71,7 @@ Output:
 {
   "signature": 5392451,
   "version": 5,
-  "bpp": 24,
+  "bitsPerPixel": 24,
   "flags": 0,
   "transparentColor": 16711935,
   "hotSpotX": 0,

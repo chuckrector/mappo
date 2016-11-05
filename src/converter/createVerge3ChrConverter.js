@@ -3,8 +3,8 @@
 const createTileGridConverter = require(`./createTileGridConverter`)
 const colorDepth = require(`./colorDepth`)
 
-module.exports = ({bpp, frameWidth, frameHeight, frameCount, frames}) => {
-  if (bpp === 24) {
+module.exports = ({bitsPerPixel, frameWidth, frameHeight, frameCount, frames}) => {
+  if (bitsPerPixel === 24) {
     frames = colorDepth.convert24to32({raw24bitData: frames})
   }
 

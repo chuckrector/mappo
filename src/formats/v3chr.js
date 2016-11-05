@@ -6,7 +6,7 @@ const V3_CHRANIM = require(`./v3chranim`)
 module.exports = {
   signature: T.u32,
   version: T.u32,
-  bpp: T.u32,
+  bitsPerPixel: T.u32,
   flags: T.u32,
   transparentColor: T.u32,
   hotSpotX: T.u32,
@@ -24,6 +24,8 @@ module.exports = {
   customscripts: T.u32,
   compression: T.u32,
   frames: T.zlibU8(({record}) => {
-    return record.frameCount * record.frameWidth * record.frameHeight * (record.bpp / 8)
+    // Math.ceil because 15/8 is 1.875
+    const bytesPerPixel = Math.ceil(record.bitsPerPixel / 8)
+    return record.frameCount * record.frameWidth * record.frameHeight * bytesPerPixel
   }),
 }

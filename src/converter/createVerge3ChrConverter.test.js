@@ -12,7 +12,7 @@ const filler = require(`../filler`)
   const frames = filler(frameWidth * frameHeight * frameCount * 3, 99)
 
   const converter = createVerge3ChrConverter({
-    bpp: 24,
+    bitsPerPixel: 24,
     frameWidth,
     frameHeight,
     frameCount,
@@ -33,7 +33,7 @@ const filler = require(`../filler`)
   const frames = filler(frameWidth * frameHeight * frameCount * 4, 99)
 
   const converter = createVerge3ChrConverter({
-    bpp: 32,
+    bitsPerPixel: 32,
     frameWidth,
     frameHeight,
     frameCount,

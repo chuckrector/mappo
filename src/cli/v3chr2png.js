@@ -9,7 +9,7 @@ const asset = require(`../asset`)
 const chrFilename = process.argv[2]
 const chrData = asset.fromDisk(chrFilename, asset.v3chr)
 const chrConverter = createVerge3ChrConverter({
-  bpp: chrData.bpp,
+  bitsPerPixel: chrData.bitsPerPixel,
   frameWidth: chrData.frameWidth,
   frameHeight: chrData.frameHeight,
   frameCount: chrData.frameCount,

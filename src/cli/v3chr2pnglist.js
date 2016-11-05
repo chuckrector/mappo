@@ -13,7 +13,7 @@ const chrFilename = process.argv[2]
 const chrData = asset.fromDisk(chrFilename, asset.v3chr)
 
 let raw32BitData = chrData.frames.decompressed
-if (chrData.bpp === 24) {
+if (chrData.bitsPerPixel === 24) {
     raw32BitData = colorDepth.convert24to32({raw24bitData: chrData.frames.decompressed})
 }
 
