@@ -95,7 +95,7 @@ Output:
     "length": 32,
     "animationString": "F0W5F1W5F2W5F3W5F4W5F5W5F6W5F7W5"
   }, ...],
-  "customscripts": 0,
+  "customScriptsIgnored": 0,
   "compression": 1,
   "frames": {
     "mysize": 6144,

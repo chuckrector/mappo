@@ -21,7 +21,7 @@ module.exports = {
   leftIdleFrameIndex: T.u32,
   rightIdleFrameIndex: T.u32,
   animations: T.list(V3_CHRANIM, 8),
-  customscripts: T.u32,
+  customScriptsIgnored: T.u32,
   compression: T.u32,
   frames: T.zlibU8(({record}) => {
     // Math.ceil because 15/8 is 1.875
