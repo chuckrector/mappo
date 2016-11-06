@@ -14,7 +14,7 @@ module.exports = {
     div: T.u8,
   },
   description: T.stringFixed(30),
-  showname: T.u8,
+  showName: T.u8,
   saveflag: T.u8,
   startX: T.u16,
   startY: T.u16,
