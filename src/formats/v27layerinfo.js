@@ -3,8 +3,14 @@
 const {T} = require(`../readFormat`)
 
 module.exports = {
-  pmultx: T.u32,
-  pdivx: T.u32,
-  pmulty: T.u32,
-  pdivy: T.u32,
+  parallax: {
+    x: {
+      mul: T.u32,
+      div: T.u32,
+    },
+    y: {
+      mul: T.u32,
+      div: T.u32,
+    }
+  }
 }

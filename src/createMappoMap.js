@@ -29,8 +29,8 @@ module.exports = ({map}) => {
         height: map.height,
         tileIndexGrid: map.layers[1],
         parallax: {
-          x: map.pmultx / map.pdivx,
-          y: map.pmultx / map.pdivx,
+          x: map.parallax.mul / map.parallax.div,
+          y: map.parallax.mul / map.parallax.div,
         },
       }]
     } break;
@@ -45,8 +45,8 @@ module.exports = ({map}) => {
           height: layerInfo.sizey,
           tileIndexGrid: tileIndexGrid.decompressed,
           parallax: {
-            x: layerInfo.pmultx / layerInfo.pdivx,
-            y: layerInfo.pmulty / layerInfo.pdivy,
+            x: layerInfo.parallax.x.mul / layerInfo.parallax.x.div,
+            y: layerInfo.parallax.y.mul / layerInfo.parallax.y.div,
           },
         }
       })
@@ -64,8 +64,8 @@ module.exports = ({map}) => {
           height: map.height,
           tileIndexGrid: tileIndexGrid.decompressed,
           parallax: {
-            x: layerInfo.pmultx / layerInfo.pdivx,
-            y: layerInfo.pmulty / layerInfo.pdivy,
+            x: layerInfo.parallax.x.mul / layerInfo.parallax.x.div,
+            y: layerInfo.parallax.y.mul / layerInfo.parallax.y.div,
           },
         }
       })

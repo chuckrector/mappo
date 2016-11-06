@@ -31,7 +31,7 @@ const mapLayers = makeBuffer([
 
   // -- first layer info --
 
-  // pmultx, pdivx, pmulty, pdivy
+  // parallax.x.mul, parallax.x.div, parallax.y.mul, parallax.y.div
   B.u8([1, 0, 1, 0]),
   // sizex, sizey
   B.u16([2, 3]),
@@ -40,7 +40,7 @@ const mapLayers = makeBuffer([
 
   // -- second layer info --
 
-  // pmultix, pdivx, pmulty, pdivy
+  // parallax.x.mul, parallax.x.div, parallax.y.mul, parallax.y.div
   B.u8([1, 0, 1, 0]),
   // sizex, sizey
   B.u16([2, 3]),

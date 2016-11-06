@@ -9,8 +9,10 @@ module.exports = {
   vspFilename: T.stringFixed(13),
   musicFilename: T.stringFixed(13),
   layerControlFlag: T.u8,
-  pmultx: T.u8,
-  pdivx: T.u8,
+  parallax: {
+    mul: T.u8,
+    div: T.u8,
+  },
   description: T.stringFixed(30),
   showname: T.u8,
   saveflag: T.u8,

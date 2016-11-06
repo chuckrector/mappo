@@ -230,10 +230,16 @@ Output:
   "padding": [77, 65, 80, ...],
   "layerCount": 2,
   "layer": [{
-    "pmultx": 1,
-    "pdivx": 1,
-    "pmulty": 1,
-    "pdivy": 1,
+    "parallax": {
+      "x": {
+        "mul": 1,
+        "div": 1
+      },
+      "y": {
+        "mul": 1,
+        "div": 1,
+      }
+    },
     "sizex": 200,
     "sizey": 200,
     "trans": 0,
