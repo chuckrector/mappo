@@ -296,7 +296,7 @@ Output:
     "activationMode": 0,
     "movementPatternCode": 2,
     "movementScript": 0,
-    "ctr": 0,
+    "subTileMovementCounter": 0,
     "mode": 0,
     "modePadding": [1, 0],
     "step": 100,

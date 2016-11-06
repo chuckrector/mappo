@@ -25,7 +25,7 @@ module.exports = {
   activationMode: T.u8,
   movementPatternCode: T.u8,
   movementScript: T.u8,
-  ctr: T.u8,
+  subTileMovementCounter: T.u8,
   mode: T.u8,
   modePadding: T.list(T.u8, 2),
   step: T.u16,
