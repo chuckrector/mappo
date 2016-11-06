@@ -184,7 +184,7 @@ const createMappoMap = require(`./createMappoMap`)
     B.ikaZlibU32(filler(width * height)),
     B.u32(1), // numZones
     v27zone,
-    B.u32(1), // numEntities
+    B.u32(1), // entityCount
     v27entity,
   ])
 

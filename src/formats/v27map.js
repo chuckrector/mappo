@@ -25,6 +25,6 @@ module.exports = {
   zoneLayers: T.ikaZlibU32(({record}) => record.width * record.height),
   numZones: T.u32,
   zones: T.list(V27_ZONE, ({record}) => record.numZones),
-  numEntities: T.u32,
-  entities: T.list(V27_ENTITY, ({record}) => record.numEntities),
+  entityCount: T.u32,
+  entities: T.list(V27_ENTITY, ({record}) => record.entityCount),
 }

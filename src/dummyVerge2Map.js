@@ -102,10 +102,10 @@ const entity = makeBuffer([
   B.stringFixed(20, `Description`),
 ])
 
-const numEntities = 3
+const entityCount = 3
 const mapEntities = makeBuffer([
-  Buffer.from([numEntities]),
-  makeBuffer(filler(numEntities, entity))
+  Buffer.from([entityCount]),
+  makeBuffer(filler(entityCount, entity))
 ])
 
 const scripts = makeBuffer([
@@ -149,7 +149,7 @@ module.exports = {
   mapZones,
   chrList,
   entity,
-  numEntities,
+  entityCount,
   mapEntities,
   scripts,
   map,
