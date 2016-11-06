@@ -405,7 +405,7 @@ const getTilesetColumns = ({tileset, containerWidth}) => {
 
 const getTilesetRows = ({tileset, containerWidth}) => {
   const tilesetColumns = getTilesetColumns({tileset, containerWidth})
-  const roundedUpRows = roundedUpUnits(tileset.get(`numTiles`), tilesetColumns)
+  const roundedUpRows = roundedUpUnits(tileset.get(`tileCount`), tilesetColumns)
   return roundedUpRows
 }
 

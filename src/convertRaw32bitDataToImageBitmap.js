@@ -13,7 +13,7 @@ module.exports = ({
   raw32bitData,
   width,
   height,
-  numTiles, // TODO(chuck): should prolly rename this file to something tileset-specific
+  tileCount, // TODO(chuck): should prolly rename this file to something tileset-specific
 }) => {
   // TODO(chuck): not sure how i feel about this. appeasing createMappoTileset.test.js
   if (!context) {
@@ -21,7 +21,7 @@ module.exports = ({
     return
   }
 
-  const imageData = context.createImageData(width, height * numTiles)
+  const imageData = context.createImageData(width, height * tileCount)
 
   imageData.data.set(raw32bitData)
 

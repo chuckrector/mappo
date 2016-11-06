@@ -18,7 +18,7 @@ const tileWidth = tileset.tileWidth
 const tileHeight = tileset.tileHeight
 const vspFilename = path.basename(tileset.imageFilename)
 const tileColumns = 20
-const tileRows = ~~((tileset.numTiles + 19) / 20)
+const tileRows = ~~((tileset.tileCount + 19) / 20)
 const vspPngWidth = tileWidth * tileColumns
 const vspPngHeight = tileHeight * tileRows
 const obj = {
@@ -38,7 +38,7 @@ const obj = {
       tileheight: tileHeight,
       spacing: 0,
       margin: 0,
-      tilecount: tileset.numTiles,
+      tilecount: tileset.tileCount,
       columns: tileColumns,
     },
     image: {

@@ -8,10 +8,10 @@ module.exports = {
   bytesPerPixel: T.u8,
   tileWidth: T.u16,
   tileHeight: T.u16,
-  numTiles: T.u32,
+  tileCount: T.u32,
   description: T.stringFixed(64),
   imageData: T.ikaZlibU8(({record}) => (
-    record.tileWidth * record.tileHeight * record.numTiles * record.bytesPerPixel
+    record.tileWidth * record.tileHeight * record.tileCount * record.bytesPerPixel
   )),
   animations: T.list(V1_VSPANIM, 100),
 }

@@ -29,7 +29,7 @@ const tileList = ripTiles({
   ripFromY: 0,
   tileWidth: tileWidth,
   tileHeight: tileHeight,
-  numTiles: chrData.frameCount,
+  tileCount: chrData.frameCount,
   numColumns: 1,
 })
 

@@ -197,11 +197,11 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v2kj v4 vsp
-  const numTiles = 1
+  const tileCount = 1
   const isVsp = makeBuffer([
     B.u16(4),
-    B.u16(numTiles),
-    B.u16(filler(16 * 16 * numTiles)),
+    B.u16(tileCount),
+    B.u16(filler(16 * 16 * tileCount)),
     B.u16(filler(4 * 100)),
   ])
 
@@ -210,10 +210,10 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v2kj v5 vsp
-  const numTiles = 1
+  const tileCount = 1
   const isVsp = makeBuffer([
     B.u16(5),
-    B.u16(numTiles),
+    B.u16(tileCount),
     B.u32(27),
     B.u8(filler(27)),
     B.u16(filler(4 * 100)),
@@ -224,7 +224,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v27/ika v6 8-bit vsp
-  const numTiles = 1
+  const tileCount = 1
   const bytesPerPixel = 1
   const tileWidth = 24
   const tileHeight = 24
@@ -233,11 +233,11 @@ const dummyBuffer = totes => B.u8(filler(totes))
     B.u16(6),
     B.u8(bytesPerPixel),
     B.u16([tileWidth, tileHeight]),
-    B.u32(numTiles),
+    B.u32(tileCount),
     B.stringFixed(64, `v27/ika v6 8-bit vsp`),
     B.u8(filler(256 * 3)),
     B.u8(transparentIndex),
-    B.ikaZlibU8(filler(tileWidth * tileHeight * numTiles, 99)),
+    B.ikaZlibU8(filler(tileWidth * tileHeight * tileCount, 99)),
     B.u16(filler(4 * 100)),
   ])
 
@@ -246,7 +246,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
 
 {
   // can detect v27/ika v6 32-bit vsp
-  const numTiles = 1
+  const tileCount = 1
   const bytesPerPixel = 4
   const tileWidth = 24
   const tileHeight = 24
@@ -255,9 +255,9 @@ const dummyBuffer = totes => B.u8(filler(totes))
     B.u16(6),
     B.u8(bytesPerPixel),
     B.u16([tileWidth, tileHeight]),
-    B.u32(numTiles),
+    B.u32(tileCount),
     B.stringFixed(64, `v27/ika v6 32-bit vsp`),
-    B.ikaZlibU8(filler(tileWidth * tileHeight * numTiles * 4, 99)),
+    B.ikaZlibU8(filler(tileWidth * tileHeight * tileCount * 4, 99)),
     B.u16(filler(4 * 100)),
     B.u8(filler(400)), // TODO(chuck): figure out wtf this 💩 is for
   ])

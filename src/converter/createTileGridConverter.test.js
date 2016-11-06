@@ -92,10 +92,10 @@ const colorDepth = require(`./colorDepth`)
     raw32bitData,
   })
 
-  let numTilesProcessed = 0
-  converter.tileProcessor = () => numTilesProcessed++
+  let tileCountProcessed = 0
+  converter.tileProcessor = () => tileCountProcessed++
 
   const png = converter.convertToPng()
 
-  expect(numTilesProcessed).toBe(columns * 2)
+  expect(tileCountProcessed).toBe(columns * 2)
 }

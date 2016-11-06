@@ -22,18 +22,18 @@ const createMappoTileset = require(`./createMappoTileset`)
 
   expect(mappoTileset.tileWidth).toBe(16)
   expect(mappoTileset.tileHeight).toBe(16)
-  expect(mappoTileset.numTiles).toBe(tileCount)
+  expect(mappoTileset.tileCount).toBe(tileCount)
   expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * tileCount)
 }
 
 {
   // can create from v2 vsp
-  const numTiles = 3
+  const tileCount = 3
   const buffer = makeBuffer([
     B.u16(0), // version
     B.u8(filler(3 * 256)),
-    B.u16(numTiles),
-    B.compressedU8(filler(16 * 16 * numTiles, 99)),
+    B.u16(tileCount),
+    B.compressedU8(filler(16 * 16 * tileCount, 99)),
     B.u8(filler(2 * 4 * 100, 88)), // 100 vsp animations
   ])
 
@@ -42,18 +42,18 @@ const createMappoTileset = require(`./createMappoTileset`)
 
   expect(mappoTileset.tileWidth).toBe(16)
   expect(mappoTileset.tileHeight).toBe(16)
-  expect(mappoTileset.numTiles).toBe(numTiles)
-  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * numTiles)
+  expect(mappoTileset.tileCount).toBe(tileCount)
+  expect(mappoTileset.raw32bitData.length).toBe(16 * 16 * 4 * tileCount)
 }
 
 {
   // can create from v3 vsp
-  const numTiles = 3
+  const tileCount = 3
   const tileSize = 32
   const buffer = makeBuffer([
     // sig/version/tileSize/format/#tiles/compression
-    B.u32([0, 0, tileSize, 0, numTiles, 1]),
-    B.zlibU8(filler(tileSize * tileSize * 3 * numTiles)),
+    B.u32([0, 0, tileSize, 0, tileCount, 1]),
+    B.zlibU8(filler(tileSize * tileSize * 3 * tileCount)),
     B.u32(1), // #animations
     B.stringFixed(256, `vsp anim name`),
     B.u32([0, 0, 0, 0]), // start/finish/delay/mode
@@ -66,6 +66,6 @@ const createMappoTileset = require(`./createMappoTileset`)
 
   expect(mappoTileset.tileWidth).toBe(tileSize)
   expect(mappoTileset.tileHeight).toBe(tileSize)
-  expect(mappoTileset.numTiles).toBe(numTiles)
-  expect(mappoTileset.raw32bitData.length).toBe(tileSize * tileSize * 4 * numTiles)
+  expect(mappoTileset.tileCount).toBe(tileCount)
+  expect(mappoTileset.raw32bitData.length).toBe(tileSize * tileSize * 4 * tileCount)
 }

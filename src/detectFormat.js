@@ -81,9 +81,9 @@ module.exports = (buffer) => {
     const reader = createBufferReader({data: buffer})
     const version = reader.readWord()
     if (version === 4 || version === 5) {
-      const numTiles = reader.readWord()
+      const tileCount = reader.readWord()
       if (version === 4) {
-        if (buffer.length === 2 + 2 + (16 * 16 * numTiles * 2) + VSP_ANIMATIONS_SIZE) {
+        if (buffer.length === 2 + 2 + (16 * 16 * tileCount * 2) + VSP_ANIMATIONS_SIZE) {
           return 'v2kj4vsp'
         }
       } else {
@@ -98,7 +98,7 @@ module.exports = (buffer) => {
         if (bytesPerPixel === 1) {
           const tileWidth = reader.readWord()
           const tileHeight = reader.readWord()
-          const numTiles = reader.readQuad()
+          const tileCount = reader.readQuad()
           const description = reader.readStringFixed(64)
           const palette = reader.readByteArray(3 * 256)
           const transparentIndex = reader.readByte()
@@ -114,7 +114,7 @@ module.exports = (buffer) => {
         } else if (bytesPerPixel === 4) {
           const tileWidth = reader.readWord()
           const tileHeight = reader.readWord()
-          const numTiles = reader.readQuad()
+          const tileCount = reader.readQuad()
           const description = reader.readStringFixed(64)
           const compressedBufferLength = reader.readQuad()
           const expectedLength = (

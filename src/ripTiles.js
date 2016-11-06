@@ -8,7 +8,7 @@ module.exports = ({
   ripFromY,
   tileWidth,
   tileHeight,
-  numTiles,
+  tileCount,
   numColumns,
 }) => {
   const tileList = []
@@ -33,7 +33,7 @@ module.exports = ({
     return tileData
   }
 
-  for (let tileIndex = 0; tileIndex < numTiles; tileIndex++) {
+  for (let tileIndex = 0; tileIndex < tileCount; tileIndex++) {
     const tileColumn = tileIndex % numColumns
     const tileRow = Math.floor(tileIndex / numColumns)
     const pixelX = ripFromX + (tileColumn * tileWidth)
