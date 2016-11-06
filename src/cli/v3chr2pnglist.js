@@ -28,7 +28,7 @@ const tileList = ripTiles({
   tileWidth: tileWidth,
   tileHeight: tileHeight,
   tileCount: chrData.frameCount,
-  numColumns: 1,
+  columnCount: 1,
 })
 
 console.log(`converting`, chrFilename)
