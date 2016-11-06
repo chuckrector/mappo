@@ -15,7 +15,7 @@ module.exports = {
   },
   description: T.stringFixed(30),
   showName: T.u8,
-  saveflag: T.u8,
+  saveFlag: T.u8,
   startX: T.u16,
   startY: T.u16,
   hide: T.u8,

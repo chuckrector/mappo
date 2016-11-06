@@ -315,7 +315,7 @@ Output:
   "pdivx": 1,
   "description": "Paradise Isle",
   "showName": 1,
-  "saveflag": 1,
+  "saveFlag": 1,
   "startX": 9,
   "startY": 1,
   "hide": 1,
