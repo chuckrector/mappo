@@ -424,11 +424,11 @@ Output:
 {
   "characterCount": 5,
   "party": [
-    {"chrFilename": "DARIN.CHR", "cr2Filename": "DARIN.CR2", "dat": "DARIN.DAT"},
-    {"chrFilename": "SARA.CHR", "cr2Filename": "SARA.CR2", "dat": "SARA.DAT"},
-    {"chrFilename": "DEXTER.CHR", "cr2Filename": "DEXTER.CR2", "dat": "DEXTER.DAT"},
-    {"chrFilename": "CRYSTAL.CHR", "cr2Filename": "CRYSTAL.CR2", "dat": "CRYSTAL.DAT"},
-    {"chrFilename": "GALFREY.CHR", "cr2Filename": "GALFREY.CR2", "dat": "GALFREY.DAT"}
+    {"chrFilename": "DARIN.CHR", "cr2Filename": "DARIN.CR2", "datFilename": "DARIN.DAT"},
+    {"chrFilename": "SARA.CHR", "cr2Filename": "SARA.CR2", "datFilename": "SARA.DAT"},
+    {"chrFilename": "DEXTER.CHR", "cr2Filename": "DEXTER.CR2", "datFilename": "DEXTER.DAT"},
+    {"chrFilename": "CRYSTAL.CHR", "cr2Filename": "CRYSTAL.CR2", "datFilename": "CRYSTAL.DAT"},
+    {"chrFilename": "GALFREY.CHR", "cr2Filename": "GALFREY.CR2", "datFilename": "GALFREY.DAT"}
   ]
 }
 ```

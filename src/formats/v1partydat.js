@@ -8,6 +8,6 @@ module.exports = {
   party: T.list({
     chrFilename: T.string,
     cr2Filename: T.string,
-    dat: T.string,
+    datFilename: T.string,
   }, ({record}) => record.characterCount)
 }
