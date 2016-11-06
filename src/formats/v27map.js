@@ -15,11 +15,11 @@ module.exports = {
   startX: T.u32,
   startY: T.u32,
   wrap: T.u8,
-  numLayers: T.u32,
-  layerInfo: T.list(V27_LAYERINFO, ({record}) => record.numLayers),
+  layerCount: T.u32,
+  layerInfo: T.list(V27_LAYERINFO, ({record}) => record.layerCount),
   layers: T.list(
     T.ikaZlibU32(({record}) => record.width * record.height),
-    ({record}) => record.numLayers
+    ({record}) => record.layerCount
   ),
   obstructionLayer: T.ikaZlibU8(({record}) => record.width * record.height),
   zoneLayers: T.ikaZlibU32(({record}) => record.width * record.height),

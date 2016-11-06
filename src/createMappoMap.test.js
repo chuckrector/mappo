@@ -141,7 +141,7 @@ const createMappoMap = require(`./createMappoMap`)
 
 {
   // can create from v2.7 (ika) maps
-  const numLayers = 2
+  const layerCount = 2
   const width = 2
   const height = 3
   const v27layerinfo = makeBuffer([
@@ -176,8 +176,8 @@ const createMappoMap = require(`./createMappoMap`)
     B.stringLengthEncoded(`1er2`),
     B.u32([width, height, 0, 0]), // startX, startY
     B.u8(0), // wrap
-    B.u32(numLayers),
-    makeBuffer(filler(numLayers, v27layerinfo)),
+    B.u32(layerCount),
+    makeBuffer(filler(layerCount, v27layerinfo)),
     B.ikaZlibU32(filler(width * height, 77)),
     B.ikaZlibU32(filler(width * height, 88)),
     B.ikaZlibU8(filler(width * height)),
@@ -194,7 +194,7 @@ const createMappoMap = require(`./createMappoMap`)
   })
 
   expect(mappoMap.tilesetFilename).toBe(`HAHN01.VSP`)
-  expect(mappoMap.tileLayers.length).toBe(numLayers)
+  expect(mappoMap.tileLayers.length).toBe(layerCount)
   expect(mappoMap.mapLayerOrder).toEqual([0, 1])
 
   expect(mappoMap.tileLayers[0].width).toBe(width)
