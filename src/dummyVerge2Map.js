@@ -92,7 +92,7 @@ const entity = makeBuffer([
   B.u8(filler(12, 99)),
   // animationOffset, scriptParsingOffset
   B.u32([2, 1]),
-  // face, actm, movementPatternCode, movementScript, ctr, mode, modePadding (2 bytes)
+  // face, activationMode, movementPatternCode, movementScript, ctr, mode, modePadding (2 bytes)
   B.u8(filler(6 + 2, 88)),
   // step, delay, stepCounter, delayCounter, data1..data6
   B.u16(filler(10, 77)),

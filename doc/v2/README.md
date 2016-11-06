@@ -293,7 +293,7 @@ Output:
     "animationOffset": 0,
     "scriptParsingOffset": 0,
     "face": 1,
-    "actm": 0,
+    "activationMode": 0,
     "movementPatternCode": 2,
     "movementScript": 0,
     "ctr": 0,

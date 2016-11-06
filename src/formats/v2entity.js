@@ -22,7 +22,7 @@ module.exports = {
   animationOffset: T.u32,
   scriptParsingOffset: T.u32,
   face: T.u8,
-  actm: T.u8,
+  activationMode: T.u8,
   movementPatternCode: T.u8,
   movementScript: T.u8,
   ctr: T.u8,
