@@ -261,7 +261,7 @@ Output:
     "script": 0,
     "percent": 0,
     "delay": 0,
-    "aaa": 0,
+    "acceptAdjacentActivation": 0,
     "entityscript": 0
   }, ...],
   "characterFilenameCount": 5,

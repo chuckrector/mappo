@@ -35,7 +35,7 @@ const zone = makeBuffer([
   B.u8(0),
   // callevent
   B.u16(1),
-  // percent, delay, aaa
+  // percent, delay, acceptAdjacentActivation
   B.u8([255, 0, 1]),
   // saveDescription
   B.stringFixed(30, `Rodne`),

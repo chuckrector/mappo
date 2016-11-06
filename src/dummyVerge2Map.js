@@ -67,7 +67,7 @@ const mapLayers = makeBuffer([
 const zone = makeBuffer([
   // zonename
   B.stringFixed(40, `Default`),
-  // script, percent, delay, aaa, entityscript
+  // script, percent, delay, acceptAdjacentActivation, entityscript
   B.u16([5, 4, 3, 2, 1]),
 ])
 

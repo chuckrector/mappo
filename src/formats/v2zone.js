@@ -7,6 +7,6 @@ module.exports = {
   script: T.u16,
   percent: T.u16,
   delay: T.u16,
-  aaa: T.u16,
+  acceptAdjacentActivation: T.u16,
   entityscript: T.u16,
 }

@@ -335,7 +335,7 @@ Output:
     "callevent": 0,
     "percent": 0,
     "delay": 0,
-    "aaa": 0,
+    "acceptAdjacentActivation": 0,
     "saveDescription": "Paradise Isle",
     "saveDescriptionPadding": 0
   }, ...],
