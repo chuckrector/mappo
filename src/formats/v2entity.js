@@ -21,7 +21,7 @@ module.exports = {
   delayCounter: T.u8,
   animationOffset: T.u32,
   scriptParsingOffset: T.u32,
-  face: T.u8,
+  autoFaceWhenActivated: T.u8,
   activationMode: T.u8,
   movementPatternCode: T.u8,
   movementScript: T.u8,

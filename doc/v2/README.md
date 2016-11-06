@@ -292,7 +292,7 @@ Output:
     "delayCounter": 0,
     "animationOffset": 0,
     "scriptParsingOffset": 0,
-    "face": 1,
+    "autoFaceWhenActivated": 1,
     "activationMode": 0,
     "movementPatternCode": 2,
     "movementScript": 0,
