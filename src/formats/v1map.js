@@ -22,7 +22,7 @@ module.exports = {
   warp: T.u8,
   width: T.u16,
   height: T.u16,
-  b: T.u8,
+  isCompressed: T.u8, // "not yet supported" in v1 source
   padding: T.list(T.u8, 27),
   layers: T.list(T.list(T.u16, ({record}) => record.width * record.height), 2),
   obstructionLayer: T.list(T.u8, ({record}) => record.width * record.height),

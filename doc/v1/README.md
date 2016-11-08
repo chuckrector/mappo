@@ -322,7 +322,7 @@ Output:
   "warp": 1,
   "xsize": 50,
   "ysize": 50,
-  "b": 0,
+  "isCompressed": 0,
   "padding": [...],
   "layers": [ // exactly 2
     [...],
