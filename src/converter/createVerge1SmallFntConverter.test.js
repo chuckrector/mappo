@@ -10,10 +10,10 @@ const palette = require(`../dummyPalette`)
   const tileWidth = 7
   const tileHeight = 9
   const tileCount = 95
-  const fnt = filler(tileWidth * tileHeight * tileCount)
+  const images = filler(tileWidth * tileHeight * tileCount)
   const converter = createVerge1SmallFntConverter({
     palette,
-    fnt: Buffer.from(fnt)
+    images: Buffer.from(images)
   })
 
   const png = converter.convertToPng()

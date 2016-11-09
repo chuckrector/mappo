@@ -3,6 +3,6 @@
 const {T} = require(`../readFormat`)
 
 module.exports = {
-  fnt: T.list(T.u8, 7 * 9 * 95)
+  images: T.list(T.u8, 7 * 9 * 95)
 }
 
