@@ -33,27 +33,27 @@ Triplefox | what is the plan for the loaders? just to have everything in json?
 
 # Supported File Formats
 
- | VERGE1 | VERGE2 | VERGE2.7 (ika) | VERGE2k+j | VERGE3
---- |:---:|:---:|:---:|:---:|:---:
-PCX          | ✅ | ✅ | ✅ | ✅ | ✅
-BOX.RAW      | ✅ | n/a | n/a | n/a | n/a
-CHR          | ✅ | ✅ | ❓ | ✅ | ✅
-CR2          | ✅ | n/a | n/a | n/a | n/a
-EQUIP.DAT    | ✅ | n/a | n/a | n/a | n/a
-ITEMICON.DAT | ✅ | n/a | n/a | n/a | n/a
-ITEMS.DAT    | ✅ | n/a | n/a | n/a | n/a
-MAIN.FNT     | ✅ | n/a | n/a | n/a | n/a
-MAP          | ✅ | ✅ | ✅ | ✅ | ✅
-MISCICON.DAT | ✅ | n/a | n/a | n/a | n/a
-PAL          | ✅ | n/a | n/a | n/a | n/a
-PARTY.DAT    | ✅ | n/a | n/a | n/a | n/a
-SMALL.FNT    | ✅ | n/a | n/a | n/a | n/a
-SPEECH.SPC   | ✅ | n/a | n/a | n/a | n/a
-TRANS.TBL    | ✅ | ✅ | n/a | ✅ | n/a | n/a
-VSP          | ✅ | ✅ | 😭 | 😭 | ✅
-VC           | 😭 | 😭 | n/a | 😭 | 😭
-VCS          | 😭 | 😭 | n/a | 😭 | n/a
-save games   | 😭 | n/a | n/a | n/a | n/a
+|  | VERGE1 | VERGE2 | VERGE2.7 (ika) | VERGE2k+j | VERGE3
+| --- |:---:|:---:|:---:|:---:|:---:
+| PCX          | ✅ | ✅ | ✅ | ✅ | ✅
+| BOX.RAW      | ✅ | n/a | n/a | n/a | n/a
+| CHR          | ✅ | ✅ | ❓ | ✅ | ✅
+| CR2          | ✅ | n/a | n/a | n/a | n/a
+| EQUIP.DAT    | ✅ | n/a | n/a | n/a | n/a
+| ITEMICON.DAT | ✅ | n/a | n/a | n/a | n/a
+| ITEMS.DAT    | ✅ | n/a | n/a | n/a | n/a
+| MAIN.FNT     | ✅ | n/a | n/a | n/a | n/a
+| MAP          | ✅ | ✅ | ✅ | ✅ | ✅
+| MISCICON.DAT | ✅ | n/a | n/a | n/a | n/a
+| PAL          | ✅ | n/a | n/a | n/a | n/a
+| PARTY.DAT    | ✅ | n/a | n/a | n/a | n/a
+| SMALL.FNT    | ✅ | n/a | n/a | n/a | n/a
+| SPEECH.SPC   | ✅ | n/a | n/a | n/a | n/a
+| TRANS.TBL    | ✅ | ✅ | n/a | ✅ | n/a | n/a
+| VSP          | ✅ | ✅ | 😭 | 😭 | ✅
+| VC           | 😭 | 😭 | n/a | 😭 | 😭
+| VCS          | 😭 | 😭 | n/a | 😭 | n/a
+| save games   | 😭 | n/a | n/a | n/a | n/a
 
 # Planned Features
 
