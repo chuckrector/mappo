@@ -297,7 +297,7 @@ const dummyBuffer = totes => B.u8(filler(totes))
   ]
   expect(detectFormat(thisIs)).toBe(`mappotileset`)
   theseAreNot.forEach(isNot => {
-    expect(detectFormat(isNot)).toNotBe(`mappo tileset`)
+    expect(detectFormat(isNot)).not.toBe(`mappo tileset`)
   })
 }
 
@@ -318,6 +318,6 @@ const dummyBuffer = totes => B.u8(filler(totes))
   ]
   expect(detectFormat(thisIs)).toBe(`mappomap`)
   theseAreNot.forEach(isNot => {
-    expect(detectFormat(isNot)).toNotBe(`mappomap`)
+    expect(detectFormat(isNot)).not.toBe(`mappomap`)
   })
 }
