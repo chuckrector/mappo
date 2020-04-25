@@ -207,6 +207,7 @@ canvas {
   flex-direction: column;
   flex: 1 0;
   max-width: var(--right-panel-width);
+  overflow: hidden;
 }
 
 .tileset-canvas-container {
