@@ -1,4 +1,0 @@
-#!/bin/bash
-./node_modules/.bin/concurrently -m 4 --raw --kill-others \
-"bash ./node_modules/.bin/babel src/react/MapList.js -o src/react/MapList.js.compiled.js " \
-"bash ./node_modules/.bin/babel src/react/startReact.js -o src/react/startReact.js.compiled.js "

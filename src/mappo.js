@@ -5,7 +5,6 @@ const {createStore, applyMiddleware} = require(`redux`)
 const thunk = require(`redux-thunk`).default
 const reduxWatch = require(`redux-watch`)
 const {List, Map, fromJS} = require(`immutable`)
-const startReact = require(`./react/startReact.js.compiled`)
 
 const asset = require(`./asset`)
 const colorDepth = require(`./converter/colorDepth`)
@@ -203,11 +202,12 @@ const mapFilenames = getMapFilenames({
   launchFolder
 })
 
-startReact({
-  mapFilenames,
-  mapListContainer,
-  clickMapFilename,
-})
+for (let filename of mapFilenames) {
+  let li = document.createElement('li');
+  li.textContent = filename;
+  li.onclick = () => clickMapFilename(filename);
+  mapList.appendChild(li);
+}
 
 const refreshMapLayerList = () => {
   const state = store.getState()
