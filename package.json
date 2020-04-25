@@ -35,7 +35,7 @@
     "rgbquant": "^1.1.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
+    "babel-cli": "^6.26.0",
     "concurrently": "^5.2.0",
     "deep-freeze": "0.0.1",
     "expect": "^25.4.0"
