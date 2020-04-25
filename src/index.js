@@ -22,6 +22,9 @@ const createWindow = () => {
   const options = {
     width: (cfg.window && cfg.window.width) || 1440,
     height: (cfg.window && cfg.window.height) || 900,
+    webPreferences: {
+      nodeIntegration: true
+    }
   }
 
   if (cfg.window && cfg.window.x) {
