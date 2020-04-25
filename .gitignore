@@ -4,9 +4,11 @@ mappo.json
 data/v1/*.gif
 data/v1/*.png
 data/v1/*.json
+data/v1/*.tmx
 data/v2/*.gif
 data/v2/*.json
 data/v2/*.png
+data/v2/*.tmx
 data/v2/VERGE.PAL
 data/v2kj/*.gif
 data/v2kj/*.json
@@ -15,5 +17,6 @@ data/v2kj/*.tmx
 data/v3/*.gif
 data/v3/*.json
 data/v3/*.png
+data/v3/*.tmx
 data/experiment
 src/react/*.compiled.js

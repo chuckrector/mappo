@@ -1,0 +1,3 @@
+#!/bin/bash
+npx babel src/react/MapList.js -o src/react/MapList.js.compiled.js
+npx babel src/react/startReact.js -o src/react/startReact.js.compiled.js

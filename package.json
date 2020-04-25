@@ -8,11 +8,11 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "start": "npm run jsx && ./node_modules/.bin/electron .",
-    "test": "./node_modules/.bin/concurrently --raw --kill-others \"node runtests.js\" \"./runtests-cli.sh\"",
-    "all": "time ./src/cli/all-the-things.sh",
-    "clean": "./src/cli/clean.sh",
-    "jsx": "find src/react -iname '*.js' ! -iname '*.compiled.js' -print0 | xargs -0 -I {} ./node_modules/.bin/babel {} -o {}.compiled.js"
+    "start": "npm run jsx && npx electron .",
+    "test": "node runtests.js && bash ./runtests-cli.sh",
+    "all": "bash ./src/cli/all-the-things.sh",
+    "clean": "bash ./src/cli/clean.sh",
+    "jsx": "bash ./s/build-jsx"
   },
   "keywords": [
     "mappo"
@@ -22,7 +22,7 @@
   "dependencies": {
     "babel-core": "^6.17.0",
     "babel-preset-react": "^6.16.0",
-    "electron": "^1.3.4",
+    "electron": "^1.8.8",
     "immutable": "^3.8.1",
     "js2xmlparser": "^2.0.2",
     "lodash": "^4.15.0",
