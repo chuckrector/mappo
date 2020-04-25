@@ -43,7 +43,7 @@ const obj = {
     },
     image: {
       '@': {
-        source: `${vspFilename}.png`,
+        source: vspFilename,
         width: vspPngWidth,
         height: vspPngHeight,
       }
