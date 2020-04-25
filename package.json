@@ -23,7 +23,7 @@
     "babel-core": "^6.17.0",
     "babel-preset-react": "^6.16.0",
     "electron": "^8.2.3",
-    "immutable": "^3.8.1",
+    "immutable": "^4.0.0-rc.12",
     "js2xmlparser": "^4.0.1",
     "lodash": "^4.15.0",
     "pngjs": "^5.0.0",
