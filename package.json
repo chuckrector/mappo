@@ -24,7 +24,7 @@
     "babel-preset-react": "^6.16.0",
     "electron": "^8.2.3",
     "immutable": "^3.8.1",
-    "js2xmlparser": "^2.0.2",
+    "js2xmlparser": "^4.0.1",
     "lodash": "^4.15.0",
     "pngjs": "^3.0.0",
     "react": "^15.3.2",
