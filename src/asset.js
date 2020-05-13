@@ -89,6 +89,12 @@ const allFormats = {
   v3map: require(`./formats/v3map`),
   mappomap: `json`,
   mappotileset: `json`,
+  ikavsp_v2: require(`./formats/ikavsp_v2`),
+  ikavsp_v3: require(`./formats/ikavsp_v3`),
+  ikavsp_v4: require(`./formats/ikavsp_v4`),
+  ikavsp_v5: require(`./formats/ikavsp_v5`),
+  ikavsp_v6: require(`./formats/ikavsp_v6`),
+  ikavsp_v26920: require(`./formats/ikavsp_v26920`),
 }
 
 const exportMe = {

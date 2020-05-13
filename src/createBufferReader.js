@@ -220,6 +220,23 @@ const createBufferReader = (args) => {
     return s
   }
 
+  const readLines = () => {
+    let a = []
+
+    while (!atEnd()) {
+      let s = ``
+      while (!atEnd() && peekByte() !== `\n` && peekByte() !== `\r`) {
+        s += String.fromCharCode(readByte())
+      }
+      a.push(s)
+      while (!atEnd() && (peekByte() === `\n` || peekByte() === `\r`)) {
+        readByte();
+      }
+    }
+
+    return a
+  }
+
   const readZlibU8 = (length) => {
     const mysize = readQuad()
     if (mysize !== length) {
@@ -310,6 +327,7 @@ const createBufferReader = (args) => {
     readStringAsWord,
     readStringAsQuad,
     readLine,
+    readLines,
     readZlib: readZlibU8,
     readZlibU8,
     readZlibU16,
