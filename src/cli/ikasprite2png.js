@@ -5,10 +5,6 @@ const fs = require(`fs`)
 const createBufferReader = require(`../createBufferReader`)
 const zlib = require(`zlib`)
 const createTileGridConverter = require(`../converter/createTileGridConverter`)
-// const colorDepth = require(`./colorDepth`)
-
-//const createVerge3VspConverter = require(`../converter/createVerge3VspConverter`)
-//const asset = require(`../asset`)
 
 const spriteFilename = process.argv[2]
 const data = fs.readFileSync(spriteFilename)
@@ -55,7 +51,6 @@ for (; i < lines.length; i++) {
 }
 const zlibBuffer = Buffer.from(zlibBase64, 'base64')
 const zlibDataDecompressed = [...zlib.inflateSync(zlibBuffer, {finishFlush: zlib.Z_SYNC_FLUSH})]
-//console.log(`Decompressed zlib data length: ${zlibDataDecompressed.length}`)
 
 const converter = createTileGridConverter({
     tileWidth,
@@ -66,11 +61,6 @@ const converter = createTileGridConverter({
 })
 
 console.log(`${tileCount} tiles, ${tileWidth}x${tileHeight}`)
-// const vsp = asset.fromDisk(vspFilename, asset.v3vsp)
-// const converter = createVerge3VspConverter({
-//   tileCount: vsp.tileCount,
-//   tiles: vsp.tiles.decompressed,
-// })
 const png = converter.convertToPng()
 const targetFilename = spriteFilename + `.png`
 
