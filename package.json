@@ -19,7 +19,7 @@
   "author": "Charles Rector <choosetheforce@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "electron": "^8.2.3",
+    "electron": "^15.5.5",
     "glob": "^7.1.6",
     "immutable": "^4.0.0-rc.12",
     "js2xmlparser": "^4.0.1",
